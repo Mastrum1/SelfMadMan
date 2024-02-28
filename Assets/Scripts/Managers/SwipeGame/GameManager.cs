@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private List<GameObject> listPeople;
 
+    [SerializeField]
+    private SwipeDetection swipe;
+
     private int swipeLeft = 0;
 
     private int swipeRight = 0;
@@ -24,27 +27,58 @@ public class GameManager : MonoBehaviour
 
     private GameObject actualProfile;
 
+    public string SwipeDir = "Horizontal";
+
     private void Awake()
     {
-       ShowProfile();
+        ShowProfile();
     }
 
-    public void Swipe(string dir)
+    private void OnEnable()
     {
-        if(dir == "Right" && isPub)
-        {
-            Debug.Log("Swipe droite pub");
-            Destroy(actualProfile);
-            ShowProfile();
-        }
-        else if (dir == "Right" && !isPub || dir == "Left" && isPub)
+        swipe.OnSwipeLeft += SwipeLeft;
+        swipe.OnSwipeRight += SwipeRight;
+    }
+
+    private void OnDisable()
+    {
+        swipe.OnSwipeLeft -= SwipeLeft;
+        swipe.OnSwipeRight -= SwipeRight;
+    }
+
+    public void SwipeLeft()
+    {
+        if (isPub)
         {
             Debug.Log("Game Over");
         }
-        else if(dir == "Left" && !isPub)
+        else
         {
-            Debug.Log("Swipe gauche personne");
+            Debug.Log("Swipe gauche people");
             Destroy(actualProfile);
+            swipeLeft++;
+            if (swipeLeft < totalNbSwipeLeft)
+            {
+                ShowProfile();
+            }
+            else
+            {
+                Debug.Log("Win Game");
+            }
+        }
+    }
+
+    public void SwipeRight()
+    {
+        if (!isPub)
+        {
+            Debug.Log("Game Over");
+        }
+        else
+        {
+            Debug.Log("Swipe Right pub");
+            Destroy(actualProfile);
+            swipeLeft++;
             ShowProfile();
         }
     }
@@ -52,16 +86,16 @@ public class GameManager : MonoBehaviour
     private void ShowProfile()
     {
         int pub = Random.Range(0, 100);
-        int index = Random.Range(0, listPeople.Count-1);
+        int index = Random.Range(0, listPeople.Count - 1);
         if (pub < 50)
         {
             actualProfile = Instantiate(listPeople[index], new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
-            if(isPub) isPub = false;
+            if (isPub) isPub = false;
         }
-        else
+        else if (swipeRight < totalNbSwipeRight)
         {
             actualProfile = Instantiate(listPub[index], new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
-            if(!isPub) isPub = true;
+            if (!isPub) isPub = true;
         }
 
     }

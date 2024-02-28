@@ -1,13 +1,26 @@
 using System.Collections;
 using UnityEngine;
+using static InputManager;
 
 public class SwipeDetection : MonoBehaviour
 {
+    #region Events
+    public delegate void SwipeLeft();
+    public event SwipeLeft OnSwipeLeft;
+    public delegate void SwipeRight();
+    public event SwipeRight OnSwipeRight;
+    public delegate void SwipeUp();
+    public event SwipeUp OnSwipeUp;
+    public delegate void SwipeDown();
+    public event SwipeDown OnSwipeDown;
+    #endregion
+
+
     [SerializeField]
-    private float minimumDist = .2f;
+    private float minimumDist = .1f;
     [SerializeField]
     private float maximumTime = 1f;
-    [SerializeField, Range(0f,1f)]
+    [SerializeField, Range(0f, 1f)]
     private float directionTreshold = .9f;
 
     private InputManager inputManager;
@@ -64,24 +77,21 @@ public class SwipeDetection : MonoBehaviour
 
     private void SwipeDirection(Vector2 dir)
     {
-        if (Vector2.Dot(Vector2.right, dir) > directionTreshold)
+        if (Vector2.Dot(Vector2.right, dir) > directionTreshold && gameManager.SwipeDir == "Horizontal" || Vector2.Dot(Vector2.right, dir) > directionTreshold && gameManager.SwipeDir == "AllDir")
         {
-            gameManager.Swipe("Right");
-            //Debug.Log("Swipe Right");
-
+            OnSwipeRight();
         }
-        else if (Vector2.Dot(Vector2.left, dir) > directionTreshold)
+        else if (Vector2.Dot(Vector2.left, dir) > directionTreshold && gameManager.SwipeDir == "Horizontal" || Vector2.Dot(Vector2.left, dir) > directionTreshold && gameManager.SwipeDir == "AllDir")
         {
-            gameManager.Swipe("Left");
-            //Debug.Log("Swipe Left");
+            OnSwipeLeft();
         }
-        //else if (Vector2.Dot(Vector2.up, dir) > directionTreshold)
-        //{
-        //    Debug.Log("Swipe Up");
-        //}
-        //else if (Vector2.Dot(Vector2.down, dir) > directionTreshold)
-        //{
-        //    Debug.Log("Swipe Down");
-        //}
+        else if (Vector2.Dot(Vector2.up, dir) > directionTreshold && gameManager.SwipeDir == "Vertical" || Vector2.Dot(Vector2.up, dir) > directionTreshold && gameManager.SwipeDir == "AllDir")
+        {
+            OnSwipeUp();    
+        }
+        else if (Vector2.Dot(Vector2.down, dir) > directionTreshold && gameManager.SwipeDir == "Vertical" || Vector2.Dot(Vector2.down, dir) > directionTreshold && gameManager.SwipeDir == "AllDir")
+        {
+            OnSwipeDown();
+        }
     }
 }
