@@ -8,5 +8,7 @@ public class MiniGameSO : ScriptableObject
 {
     Sprite MiniGameIcon;
     string MinigameName;
+
+
     //int Era;
 }

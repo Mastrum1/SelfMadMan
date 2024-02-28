@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MiniGameManager : MonoBehaviour
 {
     public delegate void MiniGameEndHandler(bool won, int score);
     public event MiniGameEndHandler OnMiniGameEnd;
 
+    [SerializeField] public Timer _mTimer;
+
     public int miniGameScore;
-    public bool win;
-    public bool end;
+
 
     public void EndMiniGame(bool won, int score)
     {
