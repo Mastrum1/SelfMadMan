@@ -10,11 +10,21 @@ public class GameManager : MonoBehaviour
     [SerializeField] int _mScore;
     [SerializeField] int _mHearts;
 
+    public static GameManager instance;
+    MiniGameManager _currentMinigameManager;
+
     // Start is called before the first frame update
     void Start()
     {
         _mHearts = 3;
         _mSpeed = 1;
+
+
+        if (instance == null)
+            instance = this;
+        else if (instance != this)
+            Destroy(gameObject);
+
 
         GameObject[] objs = GameObject.FindGameObjectsWithTag("GameManager");
 
@@ -27,6 +37,16 @@ public class GameManager : MonoBehaviour
     }
 
     // Update is called once per frame
+
+    public void SelectNewMiniGame(MiniGameManager myMinigame)
+    {
+        if(_currentMinigameManager !=null)
+        {
+            _currentMinigameManager.OnMiniGameEnd -= HandleMiniGameEnd;
+        }
+        _currentMinigameManager = myMinigame;
+        _currentMinigameManager.OnMiniGameEnd += HandleMiniGameEnd;
+    }
     void Update()
     {
         if (_mHearts <= 0)
@@ -60,4 +80,18 @@ public class GameManager : MonoBehaviour
         return _mScore.ToString();
     }
 
+    private void HandleMiniGameEnd(bool won, int score)
+    {
+        if (won == true)
+        {
+            _mScore += score;
+            SceneManager.LoadScene("WinScreen");
+        }
+        else if (won == false) 
+        {
+            _mScore += score;
+            _mHearts--;
+            SceneManager.LoadScene("WinScreen");
+        }
+    }
 }

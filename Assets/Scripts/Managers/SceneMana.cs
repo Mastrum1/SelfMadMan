@@ -7,14 +7,10 @@ public class ScaneMana : MonoBehaviour
 {
 
     [SerializeField] int _mCurrentGame;
-
-    GameObject _mGameManager;
     
     // Start is called before the first frame update
     void Start()
     {
-        _mGameManager = GameObject.Find("GameManager");
-
         GameObject[] objs = GameObject.FindGameObjectsWithTag("SceneManager");
 
         if (objs.Length > 1)
@@ -33,8 +29,8 @@ public class ScaneMana : MonoBehaviour
 
     public void NextGame()
     {
-        _mGameManager.GetComponent<GameManager>().AddCurrent();
-        _mCurrentGame = _mGameManager.GetComponent<GameManager>().GetCurrentGame();
+        GameManager.instance.AddCurrent();
+        _mCurrentGame = GameManager.instance.GetCurrentGame();
         SceneManager.LoadScene(_mCurrentGame);
     }
 }

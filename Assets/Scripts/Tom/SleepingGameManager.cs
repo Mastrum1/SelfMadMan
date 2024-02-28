@@ -12,6 +12,7 @@ public class SleepingGameManager : MiniGameManager
     {
         end = false;
         win = false;
+        GameManager.instance.SelectNewMiniGame(this);
     }
 
     public void OnClicked()
