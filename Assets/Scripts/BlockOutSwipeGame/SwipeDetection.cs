@@ -11,6 +11,8 @@ public class SwipeDetection : MonoBehaviour
     private float directionTreshold = .9f;
 
     private InputManager inputManager;
+    [SerializeField]
+    private GameManager gameManager;
 
     private Vector2 startPos;
     private float startTime;
@@ -64,11 +66,22 @@ public class SwipeDetection : MonoBehaviour
     {
         if (Vector2.Dot(Vector2.right, dir) > directionTreshold)
         {
-            Debug.Log("Swipe Right");
+            gameManager.Swipe("Right");
+            //Debug.Log("Swipe Right");
+
         }
         else if (Vector2.Dot(Vector2.left, dir) > directionTreshold)
         {
-            Debug.Log("Swipe Left");
+            gameManager.Swipe("Left");
+            //Debug.Log("Swipe Left");
         }
+        //else if (Vector2.Dot(Vector2.up, dir) > directionTreshold)
+        //{
+        //    Debug.Log("Swipe Up");
+        //}
+        //else if (Vector2.Dot(Vector2.down, dir) > directionTreshold)
+        //{
+        //    Debug.Log("Swipe Down");
+        //}
     }
 }
