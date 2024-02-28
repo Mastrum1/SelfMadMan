@@ -13,4 +13,9 @@ public class SleepingUIManager : MonoBehaviour
         Slider.value += 10; //value will change according to difficulty
     }
 
+    public void ReduceSlider(int value)
+    {
+        Slider.value -= value;
+    }
+
 }

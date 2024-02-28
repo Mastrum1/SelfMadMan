@@ -9,6 +9,6 @@ public class OnSleepClick : MonoBehaviour
     // Start is called before the first frame update
     private void OnMouseDown()
     {
-        Debug.Log("clicked");
+        gameManager.OnClicked();
     }
 }
