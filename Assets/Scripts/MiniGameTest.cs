@@ -11,7 +11,6 @@ public class MiniGameTest : MonoBehaviour
     {
         _mCurrentTime = 0;
         _mCurrentScore = 1;
-
         _scoring = new Scoring();
     }
     
