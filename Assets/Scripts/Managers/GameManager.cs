@@ -5,19 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+
     [SerializeField] int _mCurrentGame;
     [SerializeField] float _mSpeed;
     [SerializeField] float _mScore;
     [SerializeField] int _mHearts;
 
-    public static GameManager instance;
     MiniGameManager _currentMinigameManager;
     private Scoring _mScoring;
 
     // Start is called before the first frame update
     void Start()
     {
-        _mHearts = 3;
+        _mHearts = 1;
         _mSpeed = 1;
 
         _mScoring = new Scoring();
@@ -26,14 +27,6 @@ public class GameManager : MonoBehaviour
             instance = this;
         else if (instance != this)
             Destroy(gameObject);
-
-
-        GameObject[] objs = GameObject.FindGameObjectsWithTag("GameManager");
-
-        if (objs.Length > 1)
-        {
-            Destroy(gameObject);
-        }
 
         DontDestroyOnLoad(gameObject);
     }
@@ -51,10 +44,7 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
-        if (_mHearts <= 0)
-        {
-            SceneManager.LoadScene("LoseScreen");
-        }
+        
     }
 
     public void AddCurrent()
@@ -67,6 +57,12 @@ public class GameManager : MonoBehaviour
         return _mCurrentGame;
     }
 
+    public void ResetCurrentGame()
+    {
+        _mCurrentGame = 0;
+        _mHearts = 3;
+    }
+
     public float GetScore() 
     {
         return _mScore;
@@ -77,18 +73,41 @@ public class GameManager : MonoBehaviour
         return _mScore.ToString();
     }
 
+    public void Retry()
+    {
+
+    }
+
     private void HandleMiniGameEnd(bool won, int score)
     {
         if (won == true)
         {
             _mScore = _mScoring.ChangeScore(Scoring.Param.Add, _mScore, score);
-            SceneManager.LoadScene("WinScreen");
+            _mHearts--;
+
+            if (_mHearts <= 0)
+            {
+                SceneManager.LoadScene("LoseScreen");
+            }
+            else
+            {
+                SceneManager.LoadScene("WinScreen");
+            }
         }
         else if (won == false) 
         {
             _mScore = _mScoring.ChangeScore(Scoring.Param.Subtract, _mScore, score);
             _mHearts--;
             SceneManager.LoadScene("WinScreen");
+
+            if (_mHearts <= 0)
+            {
+                SceneManager.LoadScene("LoseScreen");
+            }
+            else
+            {
+                SceneManager.LoadScene("WinScreen");
+            }
         }
     }
 }

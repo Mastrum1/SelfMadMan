@@ -3,20 +3,19 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
-public class ScaneMana : MonoBehaviour
+public class SceneMana : MonoBehaviour
 {
+    public static SceneMana instance;
 
     [SerializeField] int _mCurrentGame;
     
     // Start is called before the first frame update
     void Start()
     {
-        GameObject[] objs = GameObject.FindGameObjectsWithTag("SceneManager");
-
-        if (objs.Length > 1)
-        {
+        if (instance == null)
+            instance = this;
+        else if (instance != this)
             Destroy(gameObject);
-        }
 
         DontDestroyOnLoad(gameObject);
     }
@@ -33,4 +32,21 @@ public class ScaneMana : MonoBehaviour
         _mCurrentGame = GameManager.instance.GetCurrentGame();
         SceneManager.LoadScene(_mCurrentGame);
     }
+
+    public void ReturnToHome()
+    {
+        GameManager.instance.ResetCurrentGame();
+        SceneManager.LoadScene("Clement");
+    }
+
+    public void Continue()
+    {
+        
+    }
+
+    public void Retry()
+    {
+
+    }
+
 }
