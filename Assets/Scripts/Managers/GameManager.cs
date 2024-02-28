@@ -6,12 +6,13 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] int _mCurrentGame;
-    [SerializeField] int _mSpeed;
-    [SerializeField] int _mScore;
+    [SerializeField] float _mSpeed;
+    [SerializeField] float _mScore;
     [SerializeField] int _mHearts;
 
     public static GameManager instance;
     MiniGameManager _currentMinigameManager;
+    private Scoring _mScoring;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
         _mHearts = 3;
         _mSpeed = 1;
 
+        _mScoring = new Scoring();
 
         if (instance == null)
             instance = this;
@@ -51,7 +53,7 @@ public class GameManager : MonoBehaviour
     {
         if (_mHearts <= 0)
         {
-            SceneManager.LoadScene("LoseScene");
+            SceneManager.LoadScene("LoseScreen");
         }
     }
 
@@ -65,12 +67,7 @@ public class GameManager : MonoBehaviour
         return _mCurrentGame;
     }
 
-    public void GainScore()
-    {
-
-    }
-
-    public int GetScore() 
+    public float GetScore() 
     {
         return _mScore;
     }
@@ -84,12 +81,12 @@ public class GameManager : MonoBehaviour
     {
         if (won == true)
         {
-            _mScore += score;
+            _mScore = _mScoring.ChangeScore(Scoring.Param.Add, _mScore, score);
             SceneManager.LoadScene("WinScreen");
         }
         else if (won == false) 
         {
-            _mScore += score;
+            _mScore = _mScoring.ChangeScore(Scoring.Param.Subtract, _mScore, score);
             _mHearts--;
             SceneManager.LoadScene("WinScreen");
         }
