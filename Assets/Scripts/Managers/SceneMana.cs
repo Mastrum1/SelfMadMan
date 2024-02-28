@@ -6,20 +6,20 @@ using UnityEngine;
 public class ScaneMana : MonoBehaviour
 {
 
-    [SerializeField] int CurrentGame;
+    [SerializeField] int _mCurrentGame;
 
-    public GameObject gameManager;
+    GameObject _mGameManager;
     
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameObject.Find("GameManager");
+        _mGameManager = GameObject.Find("GameManager");
 
         GameObject[] objs = GameObject.FindGameObjectsWithTag("SceneManager");
 
         if (objs.Length > 1)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
 
         DontDestroyOnLoad(gameObject);
@@ -33,8 +33,8 @@ public class ScaneMana : MonoBehaviour
 
     public void NextGame()
     {
-        gameManager.GetComponent<GameManager>().AddCurrent();
-        CurrentGame = gameManager.GetComponent<GameManager>().GetCurrentGame();
-        SceneManager.LoadScene(CurrentGame);
+        _mGameManager.GetComponent<GameManager>().AddCurrent();
+        _mCurrentGame = _mGameManager.GetComponent<GameManager>().GetCurrentGame();
+        SceneManager.LoadScene(_mCurrentGame);
     }
 }
