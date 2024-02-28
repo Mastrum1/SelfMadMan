@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SleepingGameManager : MonoBehaviour
+public class SleepingGameManager : MiniGameManager
 {
     [SerializeField] SleepingUIManager UIManager;
 
     int interval = 150;
-    bool win = false;
+   
+    public void Awake()
+    {
+        end = false;
+        win = false;
+    }
 
     public void OnClicked()
     {
@@ -19,6 +24,8 @@ public class SleepingGameManager : MonoBehaviour
         if (UIManager.Slider.value == 100)
         {
             win = true;
+            end = true;
+            EndMiniGame(win, miniGameScore);
         }
         else
         {
