@@ -12,25 +12,8 @@ public class SceneManaProxy : MonoBehaviour
         mySceneManager.instance.SetScene(SceneName);
     }
 
-    public void RandomGameChoice(int era)
+    public void RandomScene(int era)
     {
-        switch (era)
-        {
-            case 0:
-                SceneName = MiniGameSelector.GetRandomElement<string>(MiniGameSelector.instance.Era1);
-                ChangeScene();
-                break;
-            case 1:
-                SceneName = MiniGameSelector.GetRandomElement<string>(MiniGameSelector.instance.Era2);
-                ChangeScene();
-                break;
-            case 2:
-                SceneName = MiniGameSelector.GetRandomElement<string>(MiniGameSelector.instance.Era3);
-                ChangeScene();
-                break;
-            default:
-                Debug.Log("Choose 1, 2 or 3");
-                break;
-        }
+        mySceneManager.instance.RandomGameChoice(era);
     }
 }

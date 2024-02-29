@@ -69,7 +69,7 @@ public class MiniGameSelector : MonoBehaviour
         }
     }
 
-    public void GetMinigamesNameEra()
+    void GetMinigamesNameEra()
     {
         foreach (string minigameName in MinigameLists["Era1"])
         {
@@ -90,6 +90,7 @@ public class MiniGameSelector : MonoBehaviour
     public static T GetRandomElement<T>(List<T> list)
     {
         int index = UnityEngine.Random.Range(0, list.Count);
+        Debug.Log(index);
         return list[index];
     }
 }

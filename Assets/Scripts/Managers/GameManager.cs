@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    [SerializeField] int _mCurrentGame;
+    [SerializeField] string _mCurrentGame;
     [SerializeField] float _mSpeed;
     [SerializeField] float _mScore;
     [SerializeField] int _mHearts;
@@ -43,19 +43,14 @@ public class GameManager : MonoBehaviour
         _currentMinigameManager.OnMiniGameEnd += HandleMiniGameEnd;
     }
 
-    public void AddCurrent()
-    {
-        _mCurrentGame++;
-    }
-
-    public int GetCurrentGame()
+    public string GetCurrentGame()
     {
         return _mCurrentGame;
     }
 
     public void ResetGame()
     {
-        _mCurrentGame = 0;
+        _mCurrentGame = null;
         _mScore = 0;
         _mHearts = 3;
     }
