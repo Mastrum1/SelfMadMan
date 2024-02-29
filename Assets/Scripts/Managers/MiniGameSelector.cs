@@ -19,7 +19,6 @@ public class MiniGameSelector : MonoBehaviour
     {
         GetNamesScenes();
         GetMinigamesNameEra();
-        DontDestroyOnLoad(gameObject);
     }
 
     void GetNamesScenes()

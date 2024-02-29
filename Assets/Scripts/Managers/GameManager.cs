@@ -75,9 +75,9 @@ public class GameManager : MonoBehaviour
         return _mHearts;
     }
 
-    public void Retry()
+    public float GetSpeed()
     {
-
+        return _mSpeed;
     }
 
     private void HandleMiniGameEnd(bool won, int score)

@@ -34,6 +34,6 @@ public class PauseMenu : MonoBehaviour
 
     public void Quit()
     {
-        SceneMana.instance.ReturnToHome();
+        mySceneManager.instance.SetScene("Clement");
     }
 }
