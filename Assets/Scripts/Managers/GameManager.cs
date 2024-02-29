@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
         _currentMinigameManager = myMinigame;
         _currentMinigameManager.OnMiniGameEnd += HandleMiniGameEnd;
     }
+
     void Update()
     {
         
@@ -77,6 +78,11 @@ public class GameManager : MonoBehaviour
     public int GetHearts()
     {
         return _mHearts;
+    }
+
+    public float GetSpeed()
+    {
+        return _mSpeed;
     }
 
     public void Retry()

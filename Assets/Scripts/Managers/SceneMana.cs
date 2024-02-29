@@ -31,6 +31,11 @@ public class SceneMana : MonoBehaviour
 
     }
 
+    public void ChangeScene(string nameScene)
+    {
+        SceneManager.LoadScene(nameScene);
+    }
+
     public void NextGame()
     {
         GameManager.instance.AddCurrent();
