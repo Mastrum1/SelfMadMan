@@ -66,16 +66,33 @@ public class SwipeGameManager : MiniGameManager
 
     public void SwipeLeft()
     {
+        if (!_mIsPub)
+        {
+            Debug.Log("Game Over");
+        }
+        else
+        {
+            Debug.Log("Swipe gauche Pub");
+            _mActualProfile.SetActive(false);
+            _mSwipeLeft++;
+            ShowProfile();
+
+
+        }
+    }
+
+    public void SwipeRight()
+    {
         if (_mIsPub)
         {
             Debug.Log("Game Over");
         }
         else
         {
-            Debug.Log("Swipe gauche people");
+            Debug.Log("Swipe Right People");
             _mActualProfile.SetActive(false);
-            _mSwipeLeft++;
-            if (_mSwipeLeft < _mTotalNbSwipeLeft)
+            _mSwipeRight++;
+            if (_mSwipeRight < _mTotalNbSwipeRight)
             {
                 ShowProfile();
             }
@@ -83,21 +100,6 @@ public class SwipeGameManager : MiniGameManager
             {
                 Debug.Log("Win Game");
             }
-        }
-    }
-
-    public void SwipeRight()
-    {
-        if (!_mIsPub)
-        {
-            Debug.Log("Game Over");
-        }
-        else
-        {
-            Debug.Log("Swipe Right pub");
-            _mActualProfile.SetActive(false);
-            _mSwipeRight++;
-            ShowProfile();
         }
     }
 
