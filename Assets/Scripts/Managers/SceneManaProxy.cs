@@ -5,22 +5,10 @@ using UnityEngine;
 
 public class SceneManaProxy : MonoBehaviour
 {
+    [SerializeField] string SceneName;
 
-    [Scene] public string scenName;
-    // Start is called before the first frame update
-    void Start()
+    public void ChangeScene()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void Next()
-    {
-        SceneMana.instance.NextGame();
+        mySceneManager.instance.SetScene(SceneName);
     }
 }
