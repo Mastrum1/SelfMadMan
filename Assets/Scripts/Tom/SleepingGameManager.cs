@@ -10,8 +10,7 @@ public class SleepingGameManager : MiniGameManager
    
     public void Awake()
     {
-        end = false;
-        win = false;
+        _mTimer.ResetTimer(10f);
     }
 
     public void OnClicked()
@@ -21,14 +20,19 @@ public class SleepingGameManager : MiniGameManager
 
     private void Update()
     {
+       
+        if (_mTimer.CurrentTime == 0)
+        {
+            Debug.Log("Time's up");
+            EndMiniGame(false, miniGameScore);
+        }
         if (UIManager.Slider.value == 100)
         {
-            win = true;
-            end = true;
-            EndMiniGame(win, miniGameScore);
+            EndMiniGame(true, miniGameScore);
         }
         else
         {
+            _mTimer.UpdateTimer();
             if (interval == 0)
             {
                 if (UIManager.Slider.value != 0)
