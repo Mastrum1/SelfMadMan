@@ -10,7 +10,6 @@ public class SceneManaProxy : MonoBehaviour
     public void ChangeScene()
     {
         mySceneManager.instance.SetScene(SceneName);
-        Debug.Log(SceneName);
     }
 
     public void RandomGameChoice(int era)
