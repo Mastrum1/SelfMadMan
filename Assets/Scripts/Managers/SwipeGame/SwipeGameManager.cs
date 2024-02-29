@@ -17,6 +17,7 @@ public class SwipeGameManager : MiniGameManager
     [SerializeField]
     private List<GameObject> _mListPeople;
 
+    [SerializeField]
     private SwipeDetection _mSwipe;
 
     private int _mSwipeLeft = 0;
@@ -34,7 +35,6 @@ public class SwipeGameManager : MiniGameManager
     private void Awake()
     {
         _mTimer.ResetTimer(time);
-        _mSwipe = GetComponent<SwipeDetection>();
         ShowProfile();
     }
 

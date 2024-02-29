@@ -45,7 +45,7 @@ public class SwipeDetection : MonoBehaviour
     private float _mDiagonalDirectionTreshold = 0.45f;
 
     private InputManager _mInputManager;
-
+    [SerializeField]
     private SwipeGameManager _mGameManager;
 
     private Vector2 _mStartPos;
@@ -56,7 +56,6 @@ public class SwipeDetection : MonoBehaviour
     private void Awake()
     {
         _mInputManager = InputManager.Instance;
-        _mGameManager = GetComponent<SwipeGameManager>();
     }
 
     private void OnEnable()
