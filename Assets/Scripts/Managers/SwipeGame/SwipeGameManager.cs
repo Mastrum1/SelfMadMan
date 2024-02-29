@@ -108,7 +108,7 @@ public class SwipeGameManager : MiniGameManager
 
         foreach (GameObject obj in _mListPeople)
         {
-            GameObject tempObj = Instantiate(obj, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
+            GameObject tempObj = Instantiate(obj, new Vector3(0.0f, 0.0f, 10.0f), Quaternion.identity);
             tempObj.transform.SetParent(_mInteractables.transform);
             tempObj.SetActive(false);
             tempPeopleList.Add(tempObj);
@@ -120,7 +120,7 @@ public class SwipeGameManager : MiniGameManager
 
         foreach (GameObject obj in _mListPub)
         {
-            GameObject tempObj = Instantiate(obj, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
+            GameObject tempObj = Instantiate(obj, new Vector3(0.0f, 0.0f, 10.0f), Quaternion.identity);
             tempObj.transform.SetParent(_mInteractables.transform);
             tempObj.SetActive(false);
             tempPubList.Add(tempObj);
