@@ -5,7 +5,7 @@ using UnityEngine;
 public class OnSleepClick : MonoBehaviour
 {
 
-    [SerializeField] SleepingGameManager gameManager;
+    [SerializeField] FightingGame gameManager;
     // Start is called before the first frame update
     private void OnMouseDown()
     {
