@@ -25,7 +25,7 @@ public class SwipeDetection : MonoBehaviour
 
     private InputManager _mInputManager;
 
-    private GameManager _mGameManager;
+    private SwipeGameManager _mGameManager;
 
     private Vector2 _mStartPos;
     private float _mStartTime;
@@ -35,7 +35,7 @@ public class SwipeDetection : MonoBehaviour
     private void Awake()
     {
         _mInputManager = InputManager.Instance;
-        _mGameManager = GetComponent<GameManager>();
+        _mGameManager = GetComponent<SwipeGameManager>();
     }
 
     private void OnEnable()
@@ -88,11 +88,15 @@ public class SwipeDetection : MonoBehaviour
         }
         else if (Vector2.Dot(Vector2.up, dir) > _mDirectionTreshold && _mGameManager.SwipeDir == "Vertical" || Vector2.Dot(Vector2.up, dir) > _mDirectionTreshold && _mGameManager.SwipeDir == "AllDir")
         {
-            OnSwipeUp();    
+            OnSwipeUp();
         }
         else if (Vector2.Dot(Vector2.down, dir) > _mDirectionTreshold && _mGameManager.SwipeDir == "Vertical" || Vector2.Dot(Vector2.down, dir) > _mDirectionTreshold && _mGameManager.SwipeDir == "AllDir")
         {
             OnSwipeDown();
+        }
+        else if (dir == new Vector2(1f, 1f))
+        {
+
         }
     }
 }

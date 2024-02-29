@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class SwipeGameManager : MiniGameManager
 {
     [SerializeField]
     private int _mTotalNbSwipeLeft = 5;
@@ -29,8 +29,11 @@ public class GameManager : MonoBehaviour
 
     public string SwipeDir = "Horizontal";
 
+    public float time = 10f;
+
     private void Awake()
     {
+        _mTimer.ResetTimer(time);
         _mSwipe = GetComponent<SwipeDetection>();
         InstantiateAll();
         ShowProfile();
@@ -46,6 +49,19 @@ public class GameManager : MonoBehaviour
     {
         _mSwipe.OnSwipeLeft -= SwipeLeft;
         _mSwipe.OnSwipeRight -= SwipeRight;
+    }
+
+    private void Update()
+    {
+        if (_mTimer.CurrentTime == 0)
+        {
+            Debug.Log("Time's up");
+            EndMiniGame(false, miniGameScore);
+        }
+        else
+        {
+            _mTimer.UpdateTimer();
+        }
     }
 
     public void SwipeLeft()
