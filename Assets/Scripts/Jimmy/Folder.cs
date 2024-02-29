@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Folder : MonoBehaviour, IPointerDownHandler, IDragHandler, IEndDragHandler
+public class Folder : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    public void OnPointerDown(PointerEventData eventData)
+    public void OnBeginDrag(PointerEventData eventData)
     {
         Debug.Log("down");
     }

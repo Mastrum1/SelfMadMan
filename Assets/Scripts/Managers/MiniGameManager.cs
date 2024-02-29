@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,5 +20,4 @@ public class MiniGameManager : MonoBehaviour
         // Trigger the event
         OnMiniGameEnd?.Invoke(won, score);
     }
-
 }
