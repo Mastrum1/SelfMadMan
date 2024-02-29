@@ -35,7 +35,6 @@ public class SwipeGameManager : MiniGameManager
     {
         _mTimer.ResetTimer(time);
         _mSwipe = GetComponent<SwipeDetection>();
-        InstantiateAll();
         ShowProfile();
     }
 
@@ -101,35 +100,6 @@ public class SwipeGameManager : MiniGameManager
                 Debug.Log("Win Game");
             }
         }
-    }
-
-    private void InstantiateAll()
-    {
-
-        List<GameObject> tempPeopleList = new List<GameObject>();
-
-        foreach (GameObject obj in _mListPeople)
-        {
-            GameObject tempObj = Instantiate(obj, new Vector3(0.0f, 0.0f, 10.0f), Quaternion.identity);
-            tempObj.transform.SetParent(_mInteractables.transform);
-            tempObj.SetActive(false);
-            tempPeopleList.Add(tempObj);
-        }
-
-        _mListPeople = tempPeopleList;
-
-        List<GameObject> tempPubList = new List<GameObject>();
-
-        foreach (GameObject obj in _mListPub)
-        {
-            GameObject tempObj = Instantiate(obj, new Vector3(0.0f, 0.0f, 10.0f), Quaternion.identity);
-            tempObj.transform.SetParent(_mInteractables.transform);
-            tempObj.SetActive(false);
-            tempPubList.Add(tempObj);
-        }
-
-        _mListPub = tempPubList;
-
     }
 
     private void ShowProfile()
