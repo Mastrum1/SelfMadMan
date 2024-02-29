@@ -26,6 +26,11 @@ public class SceneMana : MonoBehaviour
         
     }
 
+    public void StartGame()
+    {
+
+    }
+
     public void NextGame()
     {
         GameManager.instance.AddCurrent();
@@ -35,18 +40,20 @@ public class SceneMana : MonoBehaviour
 
     public void ReturnToHome()
     {
-        GameManager.instance.ResetCurrentGame();
+        GameManager.instance.ResetGame();
         SceneManager.LoadScene("Clement");
     }
 
     public void Continue()
     {
-        
+
     }
 
     public void Retry()
     {
-
+        GameManager.instance.ResetGame();
+        GameManager.instance.AddCurrent();
+        _mCurrentGame = GameManager.instance.GetCurrentGame();
+        SceneManager.LoadScene(_mCurrentGame);
     }
-
 }

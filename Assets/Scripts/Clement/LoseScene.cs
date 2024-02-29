@@ -18,7 +18,7 @@ public class LoseScene : MonoBehaviour
     public void HomeButton()
     {
         SceneMana.instance.ReturnToHome();
-        GameManager.instance.ResetCurrentGame();
+        GameManager.instance.ResetGame();
     }
 
     public void CountinueButton()

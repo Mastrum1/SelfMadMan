@@ -57,9 +57,10 @@ public class GameManager : MonoBehaviour
         return _mCurrentGame;
     }
 
-    public void ResetCurrentGame()
+    public void ResetGame()
     {
         _mCurrentGame = 0;
+        _mScore = 0;
         _mHearts = 3;
     }
 
@@ -83,30 +84,19 @@ public class GameManager : MonoBehaviour
         if (won == true)
         {
             _mScore = _mScoring.ChangeScore(Scoring.Param.Add, _mScore, score);
-            _mHearts--;
-
-            if (_mHearts <= 0)
-            {
-                SceneManager.LoadScene("LoseScreen");
-            }
-            else
-            {
-                SceneManager.LoadScene("WinScreen");
-            }
+            
+            SceneManager.LoadScene("WinScreen");
+            
         }
         else if (won == false) 
         {
-            _mScore = _mScoring.ChangeScore(Scoring.Param.Subtract, _mScore, score);
+            _mScore = _mScoring.ChangeScore(Scoring.Param.Add, _mScore, score);
             _mHearts--;
             SceneManager.LoadScene("WinScreen");
 
             if (_mHearts <= 0)
             {
                 SceneManager.LoadScene("LoseScreen");
-            }
-            else
-            {
-                SceneManager.LoadScene("WinScreen");
             }
         }
     }
