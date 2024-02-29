@@ -28,6 +28,7 @@ public class FightingGame : MiniGameManager
         }
         if (UIManager.Slider.value == 100)
         {
+            Debug.Log("Game finished");
             EndMiniGame(true, miniGameScore);
         }
         else

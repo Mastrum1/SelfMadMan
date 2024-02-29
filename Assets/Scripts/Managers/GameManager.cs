@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _mHearts = 1;
+        _mHearts = 3;
         _mSpeed = 1;
 
         _mScoring = new Scoring();
@@ -41,11 +41,6 @@ public class GameManager : MonoBehaviour
         }
         _currentMinigameManager = myMinigame;
         _currentMinigameManager.OnMiniGameEnd += HandleMiniGameEnd;
-    }
-
-    void Update()
-    {
-        
     }
 
     public void AddCurrent()
@@ -80,11 +75,6 @@ public class GameManager : MonoBehaviour
         return _mHearts;
     }
 
-    public float GetSpeed()
-    {
-        return _mSpeed;
-    }
-
     public void Retry()
     {
 
@@ -92,23 +82,11 @@ public class GameManager : MonoBehaviour
 
     private void HandleMiniGameEnd(bool won, int score)
     {
-        if (won == true)
-        {
-            _mScore = _mScoring.ChangeScore(Scoring.Param.Add, _mScore, score);
-            
-            SceneManager.LoadScene("WinScreen");
-            
-        }
-        else if (won == false) 
-        {
-            _mScore = _mScoring.ChangeScore(Scoring.Param.Add, _mScore, score);
-            _mHearts--;
-            SceneManager.LoadScene("WinScreen");
-
-            if (_mHearts <= 0)
-            {
-                SceneManager.LoadScene("LoseScreen");
-            }
-        }
+        _mHearts -= won ? 0 : 1;
+        _mScore = _mScoring.ChangeScore(Scoring.Param.Add, _mScore, score);
+        if (_mHearts <= 0)
+            SceneManager.LoadScene("LoseScreen");
+        else    
+            SceneManager.LoadScene("WinScreen");   
     }
 }
