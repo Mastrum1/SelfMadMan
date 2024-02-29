@@ -68,6 +68,8 @@ public class SwipeGameManager : MiniGameManager
         if (!_mIsPub)
         {
             Debug.Log("Game Over");
+            EndMiniGame(false, miniGameScore);
+
         }
         else
         {
@@ -85,6 +87,8 @@ public class SwipeGameManager : MiniGameManager
         if (_mIsPub)
         {
             Debug.Log("Game Over");
+            EndMiniGame(false, miniGameScore);
+
         }
         else
         {
@@ -98,6 +102,8 @@ public class SwipeGameManager : MiniGameManager
             else
             {
                 Debug.Log("Win Game");
+                EndMiniGame(true, miniGameScore);
+
             }
         }
     }
