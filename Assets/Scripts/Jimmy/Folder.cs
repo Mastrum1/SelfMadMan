@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Folder : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class Folder : MonoBehaviour, IPointerDownHandler, IDragHandler, IEndDragHandler
 {
-    public void OnBeginDrag(PointerEventData eventData)
+    public void OnPointerDown(PointerEventData eventData)
     {
-
+        Debug.Log("down");
     }
     public void OnDrag(PointerEventData eventData)
     {
