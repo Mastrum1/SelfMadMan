@@ -9,6 +9,6 @@ public class HeartUI : MonoBehaviour
 
     public void ReduceSlider()
     {
-        slider.value--;
+        slider.value = GameManager.instance.GetHearts();
     }
 }

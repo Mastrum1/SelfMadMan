@@ -74,6 +74,11 @@ public class GameManager : MonoBehaviour
         return _mScore.ToString();
     }
 
+    public int GetHearts()
+    {
+        return _mHearts;
+    }
+
     public void Retry()
     {
 
