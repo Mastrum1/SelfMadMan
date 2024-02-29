@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SleepingUIManager : MonoBehaviour
+public class FightingUIManager : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] public Slider Slider;

@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SleepingGameManager : MiniGameManager
+public class FightingGame : MiniGameManager
 {
-    [SerializeField] SleepingUIManager UIManager;
+    [SerializeField] FightingUIManager UIManager;
 
     int interval = 150;
    
