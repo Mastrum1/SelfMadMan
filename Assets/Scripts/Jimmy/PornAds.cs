@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class PornAds : MonoBehaviour
@@ -19,10 +20,12 @@ public class PornAds : MonoBehaviour
         Move();
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnCollisionEnter2D(Collision2D col)
     {
-        // add collision check
+        if (col.gameObject.CompareTag("Player"))
+        {
+            SceneManager.LoadScene("Jimmy", LoadSceneMode.Single);
+        }
     }
 
     void Move()

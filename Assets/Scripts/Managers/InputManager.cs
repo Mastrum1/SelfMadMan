@@ -17,6 +17,7 @@ public class InputManager : MonoBehaviour
 
     private static InputManager instance = null;
     public static InputManager Instance => instance;
+    public bool isDragging;
 
     private void Awake()
     {
@@ -33,6 +34,7 @@ public class InputManager : MonoBehaviour
 
         _mPlayerController = new PlayerController();
         _mMainCam = Camera.main;
+        isDragging = false;
     }
 
     private void OnEnable()
@@ -54,6 +56,7 @@ public class InputManager : MonoBehaviour
 
     void StartTouchPrimary(InputAction.CallbackContext context)
     {
+        isDragging = true;
         if (OnStartTouch != null)
         {
             Vector3 position = _mPlayerController.Touch.PrimaryPos.ReadValue<Vector2>();
@@ -65,6 +68,7 @@ public class InputManager : MonoBehaviour
 
     void EndTouchPrimary(InputAction.CallbackContext context)
     {
+        isDragging = false;
         if (OnEndTouch != null)
         {
             Vector3 position = _mPlayerController.Touch.PrimaryPos.ReadValue<Vector2>();
