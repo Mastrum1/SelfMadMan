@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class MiniGameSelector : MonoBehaviour
 {
+    public static MiniGameSelector instance;
+
     public Dictionary<string, List<string>> MinigameLists = new Dictionary<string, List<string>>();
 
     public List<string> Era1 = new List<string>();
@@ -17,8 +19,14 @@ public class MiniGameSelector : MonoBehaviour
 
     private void Start()
     {
+        if (instance == null)
+            instance = this;
+        else if (instance != this)
+            Destroy(gameObject);
+
         GetNamesScenes();
         GetMinigamesNameEra();
+        DontDestroyOnLoad(gameObject);
     }
 
     void GetNamesScenes()
@@ -61,7 +69,7 @@ public class MiniGameSelector : MonoBehaviour
         }
     }
 
-    void GetMinigamesNameEra()
+    public void GetMinigamesNameEra()
     {
         foreach (string minigameName in MinigameLists["Era1"])
         {
@@ -77,5 +85,11 @@ public class MiniGameSelector : MonoBehaviour
         {
            Era3.Add(minigameName);
         }
+    }
+
+    public static T GetRandomElement<T>(List<T> list)
+    {
+        int index = UnityEngine.Random.Range(0, list.Count);
+        return list[index];
     }
 }

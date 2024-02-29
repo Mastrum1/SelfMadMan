@@ -11,4 +11,10 @@ public class SceneManaProxy : MonoBehaviour
     {
         mySceneManager.instance.SetScene(SceneName);
     }
+
+    public void RandomGameChoice()
+    {
+        SceneName  = MiniGameSelector.GetRandomElement<string>(MiniGameSelector.instance.Era1);
+        ChangeScene();
+    }
 }
