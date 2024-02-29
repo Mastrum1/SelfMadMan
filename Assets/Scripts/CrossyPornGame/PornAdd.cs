@@ -1,7 +1,7 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class PornAdds : MonoBehaviour
+public class PornAdd : MonoBehaviour
 {
     [SerializeField] private bool mRandForce;
     [SerializeField] private float mForceX;
@@ -13,14 +13,6 @@ public class PornAdds : MonoBehaviour
     void Start()
     {
         Move();
-    }
-
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.CompareTag("Player"))
-        {
-           //send event to gamemanager
-        }
     }
 
     void Move()

@@ -13,7 +13,6 @@ public class OnAddsCollide : MonoBehaviour
         if (col.gameObject.CompareTag("Player"))
         {
             OnCollided?.Invoke();
-            print("Collided");
         }
     }
 }
