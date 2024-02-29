@@ -1,19 +1,14 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class Folder : MonoBehaviour
 {
     private InputManager _mInput;
-    // Start is called before the first frame update
+
     void Start()
     {
         _mInput = InputManager.Instance;
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         OnDrag();

@@ -2,10 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class CrossyRoad : MiniGameManager
 {
-    [SerializeField] private GameObject _mPlayer;
+    [SerializeField] private GameObject mPlayer;
+    [SerializeField] private GameObject mPornAdds;
     public float miniGameTime;
     private void Awake()
     {
@@ -14,7 +16,7 @@ public class CrossyRoad : MiniGameManager
 
     void Start()
     {
-        
+        SpawnPornAdds(10);
     }
     
     void Update()
@@ -27,6 +29,14 @@ public class CrossyRoad : MiniGameManager
         else
         {
             _mTimer.UpdateTimer();
+        }
+    }
+
+    void SpawnPornAdds(float numOfAdds)
+    {
+        for (int i = 0; i < numOfAdds; i++)
+        {
+            Instantiate(mPornAdds, new Vector3(Random.Range(-2.0f, 2.0f), Random.Range(0.0f, 3.5f), 0.0f), Quaternion.identity);
         }
     }
 }
