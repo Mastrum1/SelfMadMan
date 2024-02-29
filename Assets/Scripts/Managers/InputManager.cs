@@ -12,29 +12,29 @@ public class InputManager : Singleton<InputManager>
     public event EndTouch OnEndTouch;
     #endregion
 
-    private PlayerController playerController;
-    private Camera mainCam;
+    private PlayerController _mPlayerController;
+    private Camera _mMainCam;
 
     private void Awake()
     {
-        playerController = new PlayerController();
-        mainCam = Camera.main;
+        _mPlayerController = new PlayerController();
+        _mMainCam = Camera.main;
     }
 
     private void OnEnable()
     {
-        playerController.Enable();
+        _mPlayerController.Enable();
     }
 
     private void OnDisable()
     {
-        playerController.Disable();
+        _mPlayerController.Disable();
     }
     // Start is called before the first frame update
     void Start()
     {
-        playerController.Touch.PrimaryTouch.started += ctx => StartTouchPrimary(ctx);
-        playerController.Touch.PrimaryTouch.canceled += ctx => EndTouchPrimary(ctx);
+        _mPlayerController.Touch.PrimaryTouch.started += ctx => StartTouchPrimary(ctx);
+        _mPlayerController.Touch.PrimaryTouch.canceled += ctx => EndTouchPrimary(ctx);
 
     }
 
@@ -42,9 +42,9 @@ public class InputManager : Singleton<InputManager>
     {
         if (OnStartTouch != null)
         {
-            Vector3 position = playerController.Touch.PrimaryPos.ReadValue<Vector2>();
-            position.z = mainCam.nearClipPlane;
-            Vector3 worldPos = mainCam.ScreenToWorldPoint(position);
+            Vector3 position = _mPlayerController.Touch.PrimaryPos.ReadValue<Vector2>();
+            position.z = _mMainCam.nearClipPlane;
+            Vector3 worldPos = _mMainCam.ScreenToWorldPoint(position);
             OnStartTouch(worldPos, (float)context.startTime);
         }
     }
@@ -53,18 +53,18 @@ public class InputManager : Singleton<InputManager>
     {
         if (OnEndTouch != null)
         {
-            Vector3 position = playerController.Touch.PrimaryPos.ReadValue<Vector2>();
-            position.z = mainCam.nearClipPlane;
-            Vector3 worldPos = mainCam.ScreenToWorldPoint(position);
+            Vector3 position = _mPlayerController.Touch.PrimaryPos.ReadValue<Vector2>();
+            position.z = _mMainCam.nearClipPlane;
+            Vector3 worldPos = _mMainCam.ScreenToWorldPoint(position);
             OnEndTouch(worldPos, (float)context.time);
         }
     }
 
     public Vector2 PrimaryPos()
     {
-        Vector3 position = playerController.Touch.PrimaryPos.ReadValue<Vector2>();
-        position.z = mainCam.nearClipPlane;
-        Vector2 worldPos = mainCam.ScreenToWorldPoint(position);
+        Vector3 position = _mPlayerController.Touch.PrimaryPos.ReadValue<Vector2>();
+        position.z = _mMainCam.nearClipPlane;
+        Vector2 worldPos = _mMainCam.ScreenToWorldPoint(position);
         return worldPos;
     }
 }
