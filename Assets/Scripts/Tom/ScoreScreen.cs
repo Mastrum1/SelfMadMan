@@ -13,6 +13,6 @@ public class ScoreScreen : MonoBehaviour
     IEnumerator Loading()
     {
         yield return new WaitForSeconds(3f);
-        mySceneManager.instance.SetScene("Tom"); //random
+        mySceneManager.instance.RandomGameChoice(0); //random
     }
 }
