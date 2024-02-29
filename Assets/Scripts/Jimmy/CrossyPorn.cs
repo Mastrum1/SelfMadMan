@@ -6,8 +6,8 @@ using Random = UnityEngine.Random;
 
 public class CrossyRoad : MiniGameManager
 {
-    [SerializeField] private GameObject mPlayer;
     [SerializeField] private GameObject mPornAdds;
+    [SerializeField] private int mNumOfAdds;
     public float miniGameTime;
     private void Awake()
     {
@@ -16,7 +16,7 @@ public class CrossyRoad : MiniGameManager
 
     void Start()
     {
-        SpawnPornAdds(10);
+        SpawnPornAdds(mNumOfAdds);
     }
     
     void Update()
@@ -32,7 +32,7 @@ public class CrossyRoad : MiniGameManager
         }
     }
 
-    void SpawnPornAdds(float numOfAdds)
+    void SpawnPornAdds(int numOfAdds)
     {
         for (int i = 0; i < numOfAdds; i++)
         {
