@@ -3,7 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputManager : Singleton<InputManager>
+public class InputManager : MonoBehaviour
 {
     #region Events
     public delegate void StartTouch(Vector2 position, float time);
@@ -15,8 +15,22 @@ public class InputManager : Singleton<InputManager>
     private PlayerController _mPlayerController;
     private Camera _mMainCam;
 
+    private static InputManager instance = null;
+    public static InputManager Instance => instance;
+
     private void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        else
+        {
+            instance = this;
+        }
+        DontDestroyOnLoad(this.gameObject);
+
         _mPlayerController = new PlayerController();
         _mMainCam = Camera.main;
     }
