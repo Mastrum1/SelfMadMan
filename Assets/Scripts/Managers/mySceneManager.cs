@@ -24,4 +24,26 @@ public class mySceneManager : MonoBehaviour
         _mScene = scene;
         SceneManager.LoadScene(_mScene, LoadSceneMode.Single);
     }
+
+    public void RandomGameChoice(int era)
+    {
+        switch (era)
+        {
+            case 0:
+                _mScene = MiniGameSelector.GetRandomElement<string>(MiniGameSelector.instance.Era1);
+                SetScene(_mScene);
+                break;
+            case 1:
+                _mScene = MiniGameSelector.GetRandomElement<string>(MiniGameSelector.instance.Era2);
+                SetScene(_mScene);
+                break;
+            case 2:
+                _mScene = MiniGameSelector.GetRandomElement<string>(MiniGameSelector.instance.Era3);
+                SetScene(_mScene);
+                break;
+            default:
+                Debug.Log("Choose 1, 2 or 3");
+                break;
+        }
+    }
 }

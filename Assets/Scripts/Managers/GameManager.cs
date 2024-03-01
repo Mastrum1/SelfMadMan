@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    [SerializeField] int _mCurrentGame;
     [SerializeField] float _mSpeed;
     [SerializeField] float _mScore;
     [SerializeField] int _mHearts;
@@ -35,32 +34,23 @@ public class GameManager : MonoBehaviour
 
     public void SelectNewMiniGame(MiniGameManager myMinigame)
     {
-        if(_currentMinigameManager !=null)
+        if (_currentMinigameManager != null)
         {
             _currentMinigameManager.OnMiniGameEnd -= HandleMiniGameEnd;
         }
         _currentMinigameManager = myMinigame;
         _currentMinigameManager.OnMiniGameEnd += HandleMiniGameEnd;
+
     }
 
-    public void AddCurrent()
-    {
-        _mCurrentGame++;
-    }
-
-    public int GetCurrentGame()
-    {
-        return _mCurrentGame;
-    }
 
     public void ResetGame()
     {
-        _mCurrentGame = 0;
         _mScore = 0;
         _mHearts = 3;
     }
 
-    public float GetScore() 
+    public float GetScore()
     {
         return _mScore;
     }
@@ -75,18 +65,24 @@ public class GameManager : MonoBehaviour
         return _mHearts;
     }
 
-    public void Retry()
+    public float GetSpeed()
     {
-
+        return _mSpeed;
     }
 
     private void HandleMiniGameEnd(bool won, int score)
     {
+        Debug.Log("is finished");
+       
         _mHearts -= won ? 0 : 1;
+        score += won ? 100 : 0;
         _mScore = _mScoring.ChangeScore(Scoring.Param.Add, _mScore, score);
         if (_mHearts <= 0)
+        {
             SceneManager.LoadScene("LoseScreen");
-        else    
-            SceneManager.LoadScene("WinScreen");   
+            ResetGame();
+        }
+        else
+            SceneManager.LoadScene("WinScreen");
     }
 }
