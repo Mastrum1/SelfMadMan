@@ -24,7 +24,7 @@ public class CrossyPornManager : MiniGameManager
         if (_mTimer.CurrentTime == 0)
         {
             Debug.Log("Time's up");
-            OnGameEnd();
+            OnGameEnd(false);
         }
         else
         {
@@ -32,10 +32,9 @@ public class CrossyPornManager : MiniGameManager
         }
     }
 
-    void OnGameEnd()
+    void OnGameEnd(bool win)
     {
-        Debug.Log("Loose");
-        EndMiniGame(false, miniGameScore);
+        EndMiniGame(win, miniGameScore);
     }
 
     void SpawnPornAdds(int numOfAdds)
