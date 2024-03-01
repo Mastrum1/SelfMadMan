@@ -19,7 +19,7 @@ public class Folder : MonoBehaviour
         if (_mInput.isDragging)
         {
             RaycastHit2D hit = Physics2D.Raycast(_mInput.PrimaryPos(), Vector2.zero);
-            if (hit.collider == gameObject.GetComponent<Collider2D>())
+            if (hit.collider == gameObject.transform.GetChild(0).GetComponent<Collider2D>())
             {
                 transform.position = _mInput.PrimaryPos();
             }
