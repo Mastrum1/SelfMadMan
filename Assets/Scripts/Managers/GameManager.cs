@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
 
     public void SelectNewMiniGame(MiniGameManager myMinigame)
     {
-        if(_currentMinigameManager !=null)
+        if (_currentMinigameManager != null)
         {
             _currentMinigameManager.OnMiniGameEnd -= HandleMiniGameEnd;
         }
@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
         _mHearts = 3;
     }
 
-    public float GetScore() 
+    public float GetScore()
     {
         return _mScore;
     }
@@ -82,8 +82,11 @@ public class GameManager : MonoBehaviour
         _mHearts -= won ? 0 : 1;
         _mScore = _mScoring.ChangeScore(Scoring.Param.Add, _mScore, score);
         if (_mHearts <= 0)
+        {
             SceneManager.LoadScene("LoseScreen");
-        else    
-            SceneManager.LoadScene("WinScreen");   
+            _mHearts = 3;
+        }
+        else
+            SceneManager.LoadScene("WinScreen");
     }
 }
