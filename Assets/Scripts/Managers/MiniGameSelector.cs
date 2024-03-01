@@ -9,11 +9,11 @@ public class MiniGameSelector : MonoBehaviour
 {
     public static MiniGameSelector instance;
 
-    public Dictionary<string, List<string>> MinigameLists = new Dictionary<string, List<string>>();
+    public List<MiniGameSO> AllMiniGamesSOs = new List<MiniGameSO>();
 
-    [SerializeField] public List<string> Era1 = new List<string>(); // TO DO : change to dictionnary if not unlocked
-    public List<string> Era2 = new List<string>();
-    public List<string> Era3 = new List<string>();
+    public List<string> MiniGameSOsEra1 = new List<string>();
+    public List<string> MiniGameSOsEra2 = new List<string>();
+    public List<string> MiniGameSOsEra3 = new List<string>();
 
     Regex regex = new Regex(@"([^/]*/)*([\w\d\-]*)\.unity");
 
@@ -24,66 +24,42 @@ public class MiniGameSelector : MonoBehaviour
         else if (instance != this)
             Destroy(gameObject);
 
-       // GetNamesScenes();
+        LoadMinigameSO();
+        CategorizeMiniSO();
+        //GetNamesScenes();
         //GetMinigamesNameEra();
         DontDestroyOnLoad(gameObject);
     }
 
-    void GetNamesScenes()
+    void LoadMinigameSO()
     {
-        string minigamesFolder = Application.dataPath + "/Scenes/Minigames";
-        string[] minigameFolders = Directory.GetDirectories(minigamesFolder);
+        MiniGameSO[] miniGameSOs = Resources.LoadAll<MiniGameSO>("");
 
-        foreach (string minigameFolder in minigameFolders)
+        foreach (MiniGameSO miniGameSO in miniGameSOs) 
+        { 
+            AllMiniGamesSOs.Add(miniGameSO);
+        }
+    }
+
+    void CategorizeMiniSO()
+    {
+        foreach (MiniGameSO miniGameSO in AllMiniGamesSOs) 
         {
-            List<string> sceneNames = new List<string>();
-
-            var dirInfo = new DirectoryInfo(minigameFolder);
-            var allFileInfos = dirInfo.GetFiles("*.unity", SearchOption.AllDirectories);
-
-            foreach (var fileInfo in allFileInfos)
+            switch (miniGameSO.MinigameEra) 
             {
-                string sceneName = ExtractSceneName(fileInfo.FullName);
-                sceneNames.Add(sceneName);
+                case 1:
+                    MiniGameSOsEra1.Add(miniGameSO.MinigameName);
+                    break;
+                case 2:
+                    MiniGameSOsEra2.Add(miniGameSO.MinigameName);
+                    break;
+                case 3:
+                    MiniGameSOsEra3.Add(miniGameSO.MinigameName);
+                    break;
+                default:
+                    Debug.Log("nop");
+                    break;
             }
-
-            // Add the list of scene names to the dictionary with the minigame folder name as the key
-            MinigameLists.Add(Path.GetFileName(minigameFolder), sceneNames);
-        }
-        // Now minigameLists contains a dictionary where keys are minigame folder names, and values are lists of scene names.
-        // You can access the lists using minigameLists["FolderName"].
-    }
-
-    string ExtractSceneName(string fullPath)
-    {
-        Match match = regex.Match(fullPath);
-        if (match.Success)
-        {
-            return match.Groups[2].Value; // Group 2 contains the scene name
-        }
-        else
-        {
-            // Handle the case where the match is not successful
-            Debug.LogWarning("Unable to extract scene name for: " + fullPath);
-            return fullPath;
-        }
-    }
-
-    void GetMinigamesNameEra()
-    {
-        foreach (string minigameName in MinigameLists["Era1"])
-        {
-           Era1.Add(minigameName);
-        }
-            
-        foreach (string minigameName in MinigameLists["Era2"])
-        {
-           Era2.Add(minigameName);
-        }
-              
-        foreach (string minigameName in MinigameLists["Era3"])
-        {
-           Era3.Add(minigameName);
         }
     }
 

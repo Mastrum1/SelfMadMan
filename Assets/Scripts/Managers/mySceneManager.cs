@@ -30,15 +30,15 @@ public class mySceneManager : MonoBehaviour
         switch (era)
         {
             case 0:
-                _mScene = MiniGameSelector.GetRandomElement<string>(MiniGameSelector.instance.Era1);
+                _mScene = MiniGameSelector.GetRandomElement(MiniGameSelector.instance.MiniGameSOsEra1);
                 SetScene(_mScene);
                 break;
             case 1:
-                _mScene = MiniGameSelector.GetRandomElement<string>(MiniGameSelector.instance.Era2);
+                _mScene = MiniGameSelector.GetRandomElement(MiniGameSelector.instance.MiniGameSOsEra2);
                 SetScene(_mScene);
                 break;
             case 2:
-                _mScene = MiniGameSelector.GetRandomElement<string>(MiniGameSelector.instance.Era3);
+                _mScene = MiniGameSelector.GetRandomElement(MiniGameSelector.instance.MiniGameSOsEra3);
                 SetScene(_mScene);
                 break;
             default:
