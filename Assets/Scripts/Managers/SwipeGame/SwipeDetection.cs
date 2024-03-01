@@ -121,10 +121,12 @@ public class SwipeDetection : MonoBehaviour
         if (Vector2.Dot(Vector2.right, dir) > _mDirectionTreshold && _mGameManager.SwipeDir == "Horizontal" || Vector2.Dot(Vector2.right, dir) > _mDirectionTreshold && _mGameManager.SwipeDir == "AllDir")
         {
             OnSwipeRight();
+            Debug.Log("Right");
         }
         else if (Vector2.Dot(Vector2.left, dir) > _mDirectionTreshold && _mGameManager.SwipeDir == "Horizontal" || Vector2.Dot(Vector2.left, dir) > _mDirectionTreshold && _mGameManager.SwipeDir == "AllDir")
         {
             OnSwipeLeft();
+            Debug.Log("Left");
         }
         else if (Vector2.Dot(Vector2.up, dir) > _mDirectionTreshold && _mGameManager.SwipeDir == "Vertical" || Vector2.Dot(Vector2.up, dir) > _mDirectionTreshold && _mGameManager.SwipeDir == "AllDir")
         {
