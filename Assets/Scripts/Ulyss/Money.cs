@@ -19,8 +19,6 @@ public class Money : MonoBehaviour
 
     void Update()
     {
-        // retirer pour merge
-        AddMoney(1);
         MoneyAmount.text = "Money: " + _mCurrentMoney;
     }
 
