@@ -4,9 +4,6 @@ using UnityEngine.UI;
 
 public class Money : MonoBehaviour
 {
-    // Public
-    public Text MoneyAmount;
-
     // Private
     private int _mCurrentMoney = 0;
     private string _mMoneyPlayerPrefsKey = "PlayerMoney";  // Key for PlayerPrefs
@@ -19,9 +16,6 @@ public class Money : MonoBehaviour
 
     void Update()
     {
-        SubtractMoney(10);
-        MoneyAmount.text = "Money: " + _mCurrentMoney;
-
         if (_mCurrentMoney < 0) { _mCurrentMoney = 0; }
     }
 
