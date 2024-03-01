@@ -69,7 +69,7 @@ public class NewBehaviourScript : MonoBehaviour
                 }
                 else if (_mTorus.transform.localScale.x < _mImmondeTiming && _mTorus.transform.localScale.x > _mMidTiming)
                 {
-                    Debug.Log("mid click");
+                    Debug.Log("Immonde click");
                 }
                 else
                 {

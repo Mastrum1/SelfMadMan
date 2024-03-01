@@ -8,6 +8,7 @@ public class InputManager : MonoBehaviour
     #region Events
     public delegate void StartTouch(Vector2 position, float time);
     public event StartTouch OnStartSlide;
+
     public delegate void EndTouch(Vector2 position, float time);
     public event EndTouch OnEndSlide;
     #endregion
