@@ -19,7 +19,10 @@ public class Money : MonoBehaviour
 
     void Update()
     {
+        SubtractMoney(10);
         MoneyAmount.text = "Money: " + _mCurrentMoney;
+
+        if (_mCurrentMoney < 0) { _mCurrentMoney = 0; }
     }
 
     public void AddMoney(int MoneyToAdd)
@@ -30,8 +33,16 @@ public class Money : MonoBehaviour
 
     public void SubtractMoney(int MoneyToRemove)
     {
-        _mCurrentMoney -= MoneyToRemove;
-        SaveMoney();
+        if (_mCurrentMoney - MoneyToRemove < 0)
+        {
+            Debug.Log("No Money");
+        }
+
+        else
+        {
+            _mCurrentMoney -= MoneyToRemove;
+            SaveMoney();
+        }
     }
 
     public int GetMoney()
