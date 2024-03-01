@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    [SerializeField] string _mCurrentGame;
     [SerializeField] float _mSpeed;
     [SerializeField] float _mScore;
     [SerializeField] int _mHearts;
@@ -44,14 +43,9 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public string GetCurrentGame()
-    {
-        return _mCurrentGame;
-    }
 
     public void ResetGame()
     {
-        _mCurrentGame = null;
         _mScore = 0;
         _mHearts = 3;
     }
@@ -86,7 +80,7 @@ public class GameManager : MonoBehaviour
         if (_mHearts <= 0)
         {
             SceneManager.LoadScene("LoseScreen");
-            _mHearts = 3;
+            ResetGame();
         }
         else
             SceneManager.LoadScene("WinScreen");
