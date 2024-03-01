@@ -13,6 +13,6 @@ public class LoadingScreen : MonoBehaviour
     IEnumerator Loading()
     {
         yield return new WaitForSeconds(3f);
-        mySceneManager.instance.SetScene("Clement");
+        mySceneManager.instance.SetScene("HomePage");
     }
 }

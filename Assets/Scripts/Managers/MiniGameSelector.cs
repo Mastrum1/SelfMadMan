@@ -11,7 +11,7 @@ public class MiniGameSelector : MonoBehaviour
 
     public Dictionary<string, List<string>> MinigameLists = new Dictionary<string, List<string>>();
 
-    public List<string> Era1 = new List<string>();
+    public List<string> Era1 = new List<string>(); // TO DO : change to dictionnary if not unlocked
     public List<string> Era2 = new List<string>();
     public List<string> Era3 = new List<string>();
 
