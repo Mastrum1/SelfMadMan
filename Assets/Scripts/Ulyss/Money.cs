@@ -7,16 +7,11 @@ public class Money : MonoBehaviour
     // Private
     private int _mCurrentMoney = 0;
     private string _mMoneyPlayerPrefsKey = "PlayerMoney";  // Key for PlayerPrefs
-    private string _mEncryptionKey = "SelfMadManAbsoluteEncryptionKeyMyBoy"; // Key code for encryption
+    private string _mEncryptionKey = "SelfMadManAbsoluteEncryptionKeyMyBoyLorIs<304112001200416hChineGuillaume"; // Key code for encryption
 
     void Start()
     {
         LoadMoney(); // Load PlayerPrefs
-    }
-
-    void Update()
-    {
-        if (_mCurrentMoney < 0) { _mCurrentMoney = 0; }
     }
 
     public void AddMoney(int MoneyToAdd)
