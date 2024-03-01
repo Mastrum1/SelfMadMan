@@ -17,6 +17,7 @@ public class SwipeGameManager : MiniGameManager
     [SerializeField]
     private List<GameObject> _mListPeople;
 
+    [SerializeField]
     private SwipeDetection _mSwipe;
 
     private int _mSwipeLeft = 0;
@@ -34,8 +35,6 @@ public class SwipeGameManager : MiniGameManager
     private void Awake()
     {
         _mTimer.ResetTimer(time);
-        _mSwipe = GetComponent<SwipeDetection>();
-        InstantiateAll();
         ShowProfile();
     }
 
@@ -66,68 +65,47 @@ public class SwipeGameManager : MiniGameManager
 
     public void SwipeLeft()
     {
-        if (_mIsPub)
+        if (!_mIsPub)
         {
             Debug.Log("Game Over");
+            EndMiniGame(false, miniGameScore);
+
         }
         else
         {
-            Debug.Log("Swipe gauche people");
+            Debug.Log("Swipe gauche Pub");
             _mActualProfile.SetActive(false);
             _mSwipeLeft++;
-            if (_mSwipeLeft < _mTotalNbSwipeLeft)
+            ShowProfile();
+
+
+        }
+    }
+
+    public void SwipeRight()
+    {
+        if (_mIsPub)
+        {
+            Debug.Log("Game Over");
+            EndMiniGame(false, miniGameScore);
+
+        }
+        else
+        {
+            Debug.Log("Swipe Right People");
+            _mActualProfile.SetActive(false);
+            _mSwipeRight++;
+            if (_mSwipeRight < _mTotalNbSwipeRight)
             {
                 ShowProfile();
             }
             else
             {
                 Debug.Log("Win Game");
+                EndMiniGame(true, miniGameScore);
+
             }
         }
-    }
-
-    public void SwipeRight()
-    {
-        if (!_mIsPub)
-        {
-            Debug.Log("Game Over");
-        }
-        else
-        {
-            Debug.Log("Swipe Right pub");
-            _mActualProfile.SetActive(false);
-            _mSwipeRight++;
-            ShowProfile();
-        }
-    }
-
-    private void InstantiateAll()
-    {
-
-        List<GameObject> tempPeopleList = new List<GameObject>();
-
-        foreach (GameObject obj in _mListPeople)
-        {
-            GameObject tempObj = Instantiate(obj, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
-            tempObj.transform.SetParent(_mInteractables.transform);
-            tempObj.SetActive(false);
-            tempPeopleList.Add(tempObj);
-        }
-
-        _mListPeople = tempPeopleList;
-
-        List<GameObject> tempPubList = new List<GameObject>();
-
-        foreach (GameObject obj in _mListPub)
-        {
-            GameObject tempObj = Instantiate(obj, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
-            tempObj.transform.SetParent(_mInteractables.transform);
-            tempObj.SetActive(false);
-            tempPubList.Add(tempObj);
-        }
-
-        _mListPub = tempPubList;
-
     }
 
     private void ShowProfile()
