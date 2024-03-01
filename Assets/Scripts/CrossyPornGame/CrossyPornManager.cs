@@ -13,13 +13,11 @@ public class CrossyPornManager : MiniGameManager
     private void Awake()
     {
         SpawnPornAdds(mNumOfAdds);
+        mInteractableManager.OnGameEnd += OnGameEnd;
         _mTimer.ResetTimer(miniGameTime);
     }
 
-    void Start()
-    {
-        mInteractableManager.OnGameEnd += OnGameEnd;
-    }
+
     
     void Update()
     {

@@ -37,6 +37,11 @@ public class InputManager : MonoBehaviour
         isDragging = false;
     }
 
+
+    public void SetCamera()
+    {
+        _mMainCam = Camera.main;
+    }
     private void OnEnable()
     {
         _mPlayerController.Enable();

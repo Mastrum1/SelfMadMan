@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
         }
         _currentMinigameManager = myMinigame;
         _currentMinigameManager.OnMiniGameEnd += HandleMiniGameEnd;
+
     }
 
     public string GetCurrentGame()
@@ -77,6 +78,7 @@ public class GameManager : MonoBehaviour
 
     private void HandleMiniGameEnd(bool won, int score)
     {
+        Debug.Log("is finished");
         _mHearts -= won ? 0 : 1;
         _mScore = _mScoring.ChangeScore(Scoring.Param.Add, _mScore, score);
         if (_mHearts <= 0)

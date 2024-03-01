@@ -16,6 +16,7 @@ public class MiniGameManager : MonoBehaviour
 
     public void Start()
     {
+        InputManager.Instance.SetCamera();
         GameManager.instance.SelectNewMiniGame(this);
     }
 
