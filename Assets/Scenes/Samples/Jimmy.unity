@@ -598,7 +598,7 @@ GameObject:
   - component: {fileID: 787821382}
   - component: {fileID: 787821381}
   m_Layer: 0
-  m_Name: PornFolder
+  m_Name: DirtyFolder
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -831,7 +831,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1049360982}
   m_Layer: 0
-  m_Name: PornAdds
+  m_Name: DirtyAdds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1054,7 +1054,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a36b0a54e7df6da49820bc6fd7b8a01c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pornAddParent: {fileID: 1049360981}
+  dirtyAddParent: {fileID: 0}
+  trashCan: {fileID: 0}
 --- !u!1001 &1709476850
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1312,7 +1313,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa9b56807f438c149b7f83a5829750a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mCurrentGame: 0
   _mSpeed: 0
   _mScore: 0
   _mHearts: 3
@@ -1342,7 +1342,7 @@ GameObject:
   - component: {fileID: 2065141817}
   - component: {fileID: 2065141816}
   m_Layer: 0
-  m_Name: CrossyPornManager
+  m_Name: DirtyRoadManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1362,7 +1362,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mTimer: {fileID: 920759061}
   miniGameScore: 0
-  mPornAdds: {fileID: 3240217342490733309, guid: 90c5848d24b5545c6b5627c0a0a54666, type: 3}
+  mDirtyAdds: {fileID: 0}
   mNumOfAdds: 10
   mInteractableManager: {fileID: 1430090451}
   miniGameTime: 10

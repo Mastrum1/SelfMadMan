@@ -5,18 +5,18 @@ using Unity.VisualScripting;
 using UnityEngine;
 using System;
 
-public class CrossyPornInteractableManager : MonoBehaviour
+public class DirtyRoadInteractableManager : MonoBehaviour
 {
     public event Action<bool> OnGameEnd;
     
-    public GameObject pornAddParent;
+    public GameObject dirtyAddParent;
     public GameObject trashCan;
         
     void Start()
     {
-        for (int i = 0; i < pornAddParent.transform.childCount; i++)
+        for (int i = 0; i < dirtyAddParent.transform.childCount; i++)
         {
-            var addChild = pornAddParent.transform.GetChild(i).GetComponent<OnAddsCollide>();
+            var addChild = dirtyAddParent.transform.GetChild(i).GetComponent<OnAddsCollide>();
             if (addChild != null)
             {
                 addChild.OnCollided += HandleEndGame;
@@ -34,9 +34,9 @@ public class CrossyPornInteractableManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        for (int i = 0; i < pornAddParent.transform.childCount; i++)
+        for (int i = 0; i < dirtyAddParent.transform.childCount; i++)
         {
-            var addChild = pornAddParent.transform.GetChild(i).GetComponent<OnAddsCollide>();
+            var addChild = dirtyAddParent.transform.GetChild(i).GetComponent<OnAddsCollide>();
             if (addChild != null)
             {
                 addChild.OnCollided -= HandleEndGame;

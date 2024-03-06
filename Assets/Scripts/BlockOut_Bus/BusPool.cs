@@ -28,12 +28,6 @@ public class BusPool : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public GameObject GetPooledBus()
     {
         for(int i = 0; i < amountToPool; i++)

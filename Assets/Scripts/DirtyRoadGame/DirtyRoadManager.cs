@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class CrossyPornManager : MiniGameManager
+public class DirtyRoadManager : MiniGameManager
 {
-    [SerializeField] private GameObject mPornAdds;
+    [SerializeField] private GameObject mDirtyAdds;
     [SerializeField] private int mNumOfAdds;
-    [SerializeField] private CrossyPornInteractableManager mInteractableManager;
+    [SerializeField] private DirtyRoadInteractableManager mInteractableManager;
     public float miniGameTime;
     private void Awake()
     {
@@ -41,8 +41,8 @@ public class CrossyPornManager : MiniGameManager
     {
         for (int i = 0; i < numOfAdds; i++)
         {
-            GameObject ad = Instantiate(mPornAdds, new Vector3(Random.Range(-2.0f, 2.0f), Random.Range(0.0f, 3.5f), 0.0f), Quaternion.identity);
-            ad.transform.SetParent(mInteractableManager.pornAddParent.transform);
+            GameObject ad = Instantiate(mDirtyAdds, new Vector3(Random.Range(-2.0f, 2.0f), Random.Range(0.0f, 3.5f), 0.0f), Quaternion.identity);
+            ad.transform.SetParent(mInteractableManager.dirtyAddParent.transform);
         }
     }
 
