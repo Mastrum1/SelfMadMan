@@ -7,9 +7,10 @@ public class InputManager : MonoBehaviour
 {
     #region Events
     public delegate void StartTouch(Vector2 position, float time);
-    public event StartTouch OnStartTouch;
+    public event StartTouch OnStartSlide;
+
     public delegate void EndTouch(Vector2 position, float time);
-    public event EndTouch OnEndTouch;
+    public event EndTouch OnEndSlide;
     #endregion
 
     private PlayerController _mPlayerController;
@@ -62,24 +63,20 @@ public class InputManager : MonoBehaviour
     void StartTouchPrimary(InputAction.CallbackContext context)
     {
         isDragging = true;
-        if (OnStartTouch != null)
+        if (OnStartSlide != null)
         {
-            Vector3 position = _mPlayerController.Touch.PrimaryPos.ReadValue<Vector2>();
-            position.z = _mMainCam.nearClipPlane;
-            Vector3 worldPos = _mMainCam.ScreenToWorldPoint(position);
-            OnStartTouch(worldPos, (float)context.startTime);
+            Vector3 worldPos = PrimaryPos();
+            OnStartSlide(worldPos, (float)context.startTime);
         }
     }
 
     void EndTouchPrimary(InputAction.CallbackContext context)
     {
         isDragging = false;
-        if (OnEndTouch != null)
+        if (OnEndSlide != null)
         {
-            Vector3 position = _mPlayerController.Touch.PrimaryPos.ReadValue<Vector2>();
-            position.z = _mMainCam.nearClipPlane;
-            Vector3 worldPos = _mMainCam.ScreenToWorldPoint(position);
-            OnEndTouch(worldPos, (float)context.time);
+            Vector3 worldPos = PrimaryPos();
+            OnEndSlide(worldPos, (float)context.time);
         }
     }
 
