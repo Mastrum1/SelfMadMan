@@ -1,7 +1,7 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class PornAdd : MonoBehaviour
+public class DirtyAdd : MonoBehaviour
 {
     [SerializeField] private bool mRandForce;
     [SerializeField] private float mForceX;
