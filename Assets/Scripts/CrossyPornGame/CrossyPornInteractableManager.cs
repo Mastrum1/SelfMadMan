@@ -7,9 +7,10 @@ using System;
 
 public class CrossyPornInteractableManager : MonoBehaviour
 {
-    public event Action OnGameEnd;
+    public event Action<bool> OnGameEnd;
     
     public GameObject pornAddParent;
+    public GameObject trashCan;
         
     void Start()
     {
@@ -21,11 +22,14 @@ public class CrossyPornInteractableManager : MonoBehaviour
                 addChild.OnCollided += HandleEndGame;
             }
         }
+
+        trashCan.GetComponent<OnAddsCollide>().OnCollided += HandleEndGame;
     }
 
-    void HandleEndGame()
+    void HandleEndGame(bool win)
     {
-        OnGameEnd?.Invoke();
+        Debug.Log("yes");
+        OnGameEnd?.Invoke(win);
     }
 
     private void OnDestroy()
@@ -38,5 +42,6 @@ public class CrossyPornInteractableManager : MonoBehaviour
                 addChild.OnCollided -= HandleEndGame;
             }
         }
+        trashCan.GetComponent<OnAddsCollide>().OnCollided -= HandleEndGame;
     }
 }

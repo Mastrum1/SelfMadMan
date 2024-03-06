@@ -5,10 +5,15 @@ using UnityEngine;
 
 public class SceneManaProxy : MonoBehaviour
 {
-    [SerializeField] string SceneName;
+    [Scene] public string SceneName;
 
     public void ChangeScene()
     {
         mySceneManager.instance.SetScene(SceneName);
+    }
+
+    public void RandomScene(int era)
+    {
+        mySceneManager.instance.RandomGameChoice(era);
     }
 }

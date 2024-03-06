@@ -16,6 +16,4 @@ public class WinScene : MonoBehaviour
     {
         slider.value = GameManager.instance.GetHearts();
     }
-
-    
 }

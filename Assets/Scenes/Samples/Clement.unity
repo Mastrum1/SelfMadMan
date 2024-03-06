@@ -157,8 +157,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1080, y: 1920}
+  m_AnchoredPosition: {x: 0, y: 0.0038223}
+  m_SizeDelta: {x: 1080, y: 2336.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &161435614
 MonoBehaviour:
@@ -416,8 +416,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1128004922}
         m_TargetAssemblyTypeName: SceneManaProxy, Assembly-CSharp
-        m_MethodName: ChangeScene
-        m_Mode: 1
+        m_MethodName: RandomScene
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -509,7 +509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f3f228cf55bcdb4790883e4d2a66b0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneName: Tom
+  SceneName: 
 --- !u!1 &1270756267
 GameObject:
   m_ObjectHideFlags: 0
@@ -704,8 +704,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -305, y: -269}
-  m_SizeDelta: {x: 291.95, y: 554.34}
+  m_AnchoredPosition: {x: 0.000091553, y: 75}
+  m_SizeDelta: {x: 1080, y: 1920}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1565419128
 MonoBehaviour:
@@ -727,7 +727,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f0e440259aac5464dbdc1b740f09d9da, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cfc9b38b566870a4eb888e38fd51e007, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

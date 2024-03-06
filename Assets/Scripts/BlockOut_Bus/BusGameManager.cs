@@ -28,6 +28,7 @@ public class BusGameManager : MiniGameManager
     // Start is called before the first frame update
     void Start()
     {
+        base.Start();
         BusStop.triggerEnter = BusStartOverride;
         BusStop.triggerExit = BusStopOverride;
     }
@@ -53,7 +54,7 @@ public class BusGameManager : MiniGameManager
         } else {
             _mTimer.UpdateTimer();
             if (Input.GetMouseButtonDown(0)) {
-                Time.timeScale = 0;
+
                 _mIsPaused = true;
             }
         }
