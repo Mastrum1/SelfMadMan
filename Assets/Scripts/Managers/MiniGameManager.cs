@@ -16,8 +16,7 @@ public class MiniGameManager : MonoBehaviour
 
     public void Start()
     {
-        InputManager.Instance.SetCamera(); // => Put this in comment when working on your mmini game only if you don't need inputs
-        GameManager.instance.SelectNewMiniGame(this);
+        //GameManager.instance.SelectNewMiniGame(this);
     }
 
     public void EndMiniGame(bool won, int score)

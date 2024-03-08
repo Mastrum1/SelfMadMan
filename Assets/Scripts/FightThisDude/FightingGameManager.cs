@@ -6,7 +6,10 @@ public class FightingGame : MiniGameManager
 {
     [SerializeField] FightingUIManager UIManager;
 
-    int interval = 150;
+
+
+
+    int interval = 0;
    
     public void Awake()
     {
@@ -15,7 +18,7 @@ public class FightingGame : MiniGameManager
 
     public void OnClicked()
     {
-        UIManager.ChangeSlider();
+        UIManager.ChangeSlider(150);
     }
 
     private void Update()
@@ -26,7 +29,7 @@ public class FightingGame : MiniGameManager
             Debug.Log("Time's up");
             EndMiniGame(false, miniGameScore);
         }
-        if (UIManager.Slider.value == 100)
+        if (UIManager.Panel.rect.width >= 725)
         {
             Debug.Log("Game finished");
             EndMiniGame(true, miniGameScore);
@@ -36,11 +39,11 @@ public class FightingGame : MiniGameManager
             _mTimer.UpdateTimer();
             if (interval == 0)
             {
-                if (UIManager.Slider.value != 0)
+                if (UIManager.Panel.rect.width >= 0)
                 {
-                    UIManager.ReduceSlider(2);
+                    UIManager.ReduceSlider(20);
                 }
-                interval = 60;
+                interval = 20;
             }
             else interval--;
         }
