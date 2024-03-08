@@ -7,48 +7,35 @@ public class FightingGame : MiniGameManager
     [SerializeField] FightingUIManager UIManager;
 
 
-
-
     int interval = 0;
    
     public void Awake()
     {
-        _mTimer.ResetTimer(10f);
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
+
+        _mTimer.ResetTimer(5f);
     }
 
     public void OnClicked()
     {
-        UIManager.ChangeSlider(150);
+        UIManager.Bar.AddValue(150);
+        Debug.Log("Clicked");
     }
 
     private void Update()
     {
        
-        if (_mTimer.CurrentTime == 0)
+        if (_mTimer.timerValue == 0 || UIManager.Bar.barValue <= 0)
         {
             Debug.Log("Time's up");
             EndMiniGame(false, miniGameScore);
         }
-        if (UIManager.Panel.rect.width >= 725)
+        if (UIManager.Bar.barValue >= UIManager.Bar.maxBarValue)
         {
             Debug.Log("Game finished");
             EndMiniGame(true, miniGameScore);
-        }
-        else
-        {
-            _mTimer.UpdateTimer();
-            if (interval == 0)
-            {
-                if (UIManager.Panel.rect.width >= 0)
-                {
-                    UIManager.ReduceSlider(20);
-                }
-                interval = 20;
-            }
-            else interval--;
-        }
-      
-     
+        } 
     }
 
 
