@@ -6,12 +6,12 @@ public class Folder : MonoBehaviour
 
     void Start()
     {
-        _mInput = InputManager.Instance;
+        //_mInput = InputManager.Instance;
     }
     
     void Update()
     {
-        OnDrag();
+       // OnDrag();
     }
 
     private void OnDrag()
