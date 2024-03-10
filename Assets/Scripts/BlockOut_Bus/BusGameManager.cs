@@ -37,7 +37,7 @@ public class BusGameManager : MiniGameManager
     void Update()
     {
         
-        if (_mTimer.CurrentTime == 0) {
+        if (_mTimer.timerValue == 0) {
             Debug.Log("Time's up");
             _mTimerIsRunning = false;
             EndMiniGame(false, miniGameScore);
@@ -52,9 +52,7 @@ public class BusGameManager : MiniGameManager
                 EndMiniGame(false, miniGameScore);
             }
         } else {
-            _mTimer.UpdateTimer();
             if (Input.GetMouseButtonDown(0)) {
-
                 _mIsPaused = true;
             }
         }

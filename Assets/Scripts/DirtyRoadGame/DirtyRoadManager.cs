@@ -21,14 +21,10 @@ public class DirtyRoadManager : MiniGameManager
     
     void Update()
     {
-        if (_mTimer.CurrentTime == 0)
+        if (_mTimer.timerValue == 0)
         {
             Debug.Log("Time's up");
             OnGameEnd(false);
-        }
-        else
-        {
-            _mTimer.UpdateTimer();
         }
     }
 

@@ -8,31 +8,35 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    public float CurrentTime;
-    private float _mMaxTime;
-    [SerializeField] private Slider _mTimerSlider;
+    float maxBarWidth = 114;
+    public float maxBarValue = 2000;
+    private float _mDepletionRate;
+    public float timerValue;
+    [SerializeField] public RectTransform Panel;
 
-    private void Update()
-    {
-        _mTimerSlider.value =  CurrentTime * _mTimerSlider.maxValue / _mMaxTime;
-    }
 
-    public void UpdateTimer()
-    {
-        if (CurrentTime > 0f)
-        {
-            CurrentTime -= Time.deltaTime;
-            if (CurrentTime <= 0f)
-            {
-                CurrentTime = 0f;
-            }
-        }
-    }
 
     public void ResetTimer(float time)
     {
-        _mMaxTime = time;
-        CurrentTime = time;
+        timerValue = maxBarValue;
+        _mDepletionRate = maxBarValue / time;
+        Panel.sizeDelta = new Vector2(maxBarWidth, Panel.sizeDelta.y);
+    }
 
+    void Update()
+    {
+        if (timerValue > 0)
+        {
+            float depletion = _mDepletionRate * Time.deltaTime;
+            timerValue -= depletion;
+            timerValue = Mathf.Clamp(timerValue, 0f, maxBarValue);
+            UpdateUI();
+        }
+    }
+
+    private void UpdateUI()
+    {
+        float newWidth = timerValue * maxBarWidth / maxBarValue;
+        Panel.sizeDelta = new Vector2(newWidth, Panel.sizeDelta.y);
     }
 }

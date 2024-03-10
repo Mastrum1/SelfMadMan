@@ -60,14 +60,14 @@ public class SwipeDetection : MonoBehaviour
 
     private void OnEnable()
     {
-        _mInputManager.OnStartTouch += SwipeStart;
-        _mInputManager.OnEndTouch += SwipeEnd;
+        _mInputManager.OnStartSlide += SwipeStart;
+        _mInputManager.OnEndSlide += SwipeEnd;
     }
 
     private void OnDisable()
     {
-        _mInputManager.OnStartTouch -= SwipeStart;
-        _mInputManager.OnEndTouch -= SwipeEnd;
+        _mInputManager.OnStartSlide -= SwipeStart;
+        _mInputManager.OnEndSlide -= SwipeEnd;
 
     }
 
@@ -98,26 +98,26 @@ public class SwipeDetection : MonoBehaviour
 
     private void SwipeDirection(Vector2 dir)
     {
-        //if (dir.x > _mDiagonalDirectionTreshold && dir.y > _mDiagonalDirectionTreshold && _mGameManager.SwipeDir == "Diagonal" || dir.x > _mDiagonalDirectionTreshold && dir.y > _mDiagonalDirectionTreshold && _mGameManager.SwipeDir == "AllDir")
-        //{
-        //    Debug.Log("Up Right");
-        //    OnSwipeRightUp();
-        //}
-        //else if (-dir.x > _mDiagonalDirectionTreshold && -dir.y > _mDiagonalDirectionTreshold && _mGameManager.SwipeDir == "Diagonal" || -dir.x > _mDiagonalDirectionTreshold && -dir.y > _mDiagonalDirectionTreshold && _mGameManager.SwipeDir == "AllDir")
-        //{
-        //    Debug.Log("Down Left");
-        //    OnSwipeLeftDown();
-        //}
-        //else if (-dir.x > _mDiagonalDirectionTreshold && dir.y > _mDiagonalDirectionTreshold && _mGameManager.SwipeDir == "Diagonal" || -dir.x > _mDiagonalDirectionTreshold && dir.y > _mDiagonalDirectionTreshold && _mGameManager.SwipeDir == "AllDir")
-        //{
-        //    Debug.Log("Up Left");
-        //    OnSwipeLeftUp();
-        //}
-        //else if (dir.x > _mDiagonalDirectionTreshold && -dir.y > _mDiagonalDirectionTreshold && _mGameManager.SwipeDir == "Diagonal" || dir.x > _mDiagonalDirectionTreshold && -dir.y > _mDiagonalDirectionTreshold && _mGameManager.SwipeDir == "AllDir")
-        //{
-        //    Debug.Log("Down Right");
-        //    OnSwipeRightDown();
-        //}
+        if (dir.x > _mDiagonalDirectionTreshold && dir.y > _mDiagonalDirectionTreshold && _mGameManager.SwipeDir == "Diagonal" || dir.x > _mDiagonalDirectionTreshold && dir.y > _mDiagonalDirectionTreshold && _mGameManager.SwipeDir == "AllDir")
+        {
+            Debug.Log("Up Right");
+            OnSwipeRightUp();
+        }
+        else if (-dir.x > _mDiagonalDirectionTreshold && -dir.y > _mDiagonalDirectionTreshold && _mGameManager.SwipeDir == "Diagonal" || -dir.x > _mDiagonalDirectionTreshold && -dir.y > _mDiagonalDirectionTreshold && _mGameManager.SwipeDir == "AllDir")
+        {
+            Debug.Log("Down Left");
+            OnSwipeLeftDown();
+        }
+        else if (-dir.x > _mDiagonalDirectionTreshold && dir.y > _mDiagonalDirectionTreshold && _mGameManager.SwipeDir == "Diagonal" || -dir.x > _mDiagonalDirectionTreshold && dir.y > _mDiagonalDirectionTreshold && _mGameManager.SwipeDir == "AllDir")
+        {
+            Debug.Log("Up Left");
+            OnSwipeLeftUp();
+        }
+        else if (dir.x > _mDiagonalDirectionTreshold && -dir.y > _mDiagonalDirectionTreshold && _mGameManager.SwipeDir == "Diagonal" || dir.x > _mDiagonalDirectionTreshold && -dir.y > _mDiagonalDirectionTreshold && _mGameManager.SwipeDir == "AllDir")
+        {
+            Debug.Log("Down Right");
+            OnSwipeRightDown();
+        }
         if (Vector2.Dot(Vector2.right, dir) > _mDirectionTreshold && _mGameManager.SwipeDir == "Horizontal" || Vector2.Dot(Vector2.right, dir) > _mDirectionTreshold && _mGameManager.SwipeDir == "AllDir")
         {
             OnSwipeRight();
