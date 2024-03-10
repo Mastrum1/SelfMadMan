@@ -15,14 +15,10 @@ public class CleanKitchenManager : MiniGameManager
     // Update is called once per frame
     void Update()
     {
-        if (_mTimer.CurrentTime == 0)
+        if (_mTimer.timerValue == 0)
         {
             Debug.Log("Time's up");
             EndMiniGame(false, miniGameScore);
-        }
-        else
-        {
-            _mTimer.UpdateTimer();
         }
     }
 }
