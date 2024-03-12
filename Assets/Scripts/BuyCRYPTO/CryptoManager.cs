@@ -34,6 +34,7 @@ public class CryptoManager : MiniGameManager
 
     public void CheckCryptoGraphPressed(Button button)
     {
+        print("clicked");
         for (int i = 0; i < cryptoGraphs.Length; i++)
         {
             if (button == cryptoGraphs[i])
