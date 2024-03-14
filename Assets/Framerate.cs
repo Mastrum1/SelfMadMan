@@ -6,7 +6,6 @@ public class Framerate : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
-
     {
         Debug.Log("ta grosse mere la pute");
         Application.targetFrameRate = 60;
