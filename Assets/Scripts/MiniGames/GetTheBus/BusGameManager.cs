@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BusGameManager : MiniGameManager
 {
-    [SerializeField] float TimeRemaining = 10.0f;
+    float TimeRemaining;
     bool _mTimerIsRunning = true;
     bool _mIsPaused = false;
 
@@ -20,7 +20,7 @@ public class BusGameManager : MiniGameManager
 
     public void Awake()
     {
-        _mTimer.ResetTimer(TimeRemaining);
+        TimeRemaining = GameManager.instance.Speed;
         _mAverageSpawnRate = TimeRemaining / 15;
         StartCoroutine(SpawnBus());
     }
