@@ -51,11 +51,12 @@ public class BusGameManager : MiniGameManager
                 Debug.Log("False");
                 EndMiniGame(false, miniGameScore);
             }
-        } else {
-            if (Input.GetMouseButtonDown(0)) {
-                _mIsPaused = true;
-            }
         }
+    }
+
+    public void OnClicked()
+    {
+        _mIsPaused = true;
     }
 
     IEnumerator  SpawnBus()

@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour
     {
 
         Application.targetFrameRate = 60;
-        QualitySettings.vSyncCount = 0;
         _mHearts = 3;
         _mSpeed = 1;
 

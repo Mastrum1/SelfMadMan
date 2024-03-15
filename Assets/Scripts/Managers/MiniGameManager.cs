@@ -16,7 +16,7 @@ public class MiniGameManager : MonoBehaviour
 
     public void Start()
     {
-        //GameManager.instance.SelectNewMiniGame(this);
+        GameManager.instance.SelectNewMiniGame(this);
     }
 
     public void EndMiniGame(bool won, int score)
