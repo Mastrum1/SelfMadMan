@@ -14,10 +14,7 @@ public class DirtyRoadManager : MiniGameManager
     {
         SpawnPornAdds(mNumOfAdds);
         mInteractableManager.OnGameEnd += OnGameEnd;
-        _mTimer.ResetTimer(miniGameTime);
     }
-
-
     
     void Update()
     {

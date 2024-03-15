@@ -5,13 +5,6 @@ using UnityEngine;
 
 public class CleanKitchenManager : MiniGameManager
 {
-    public float miniGameTime;
-    // Start is called before the first frame update
-    private void Awake()
-    {
-        _mTimer.ResetTimer(miniGameTime);
-    }
-
     // Update is called once per frame
     void Update()
     {

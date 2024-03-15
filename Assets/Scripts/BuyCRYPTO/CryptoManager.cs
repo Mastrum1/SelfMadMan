@@ -14,7 +14,6 @@ public class CryptoManager : MiniGameManager
     private int _buttonNum;
     void Awake()
     {
-        _mTimer.ResetTimer(miniGameTime);
         DrawGraph();
     }
     
