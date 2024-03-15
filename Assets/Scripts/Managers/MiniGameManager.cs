@@ -16,6 +16,7 @@ public class MiniGameManager : MonoBehaviour
 
     public void Start()
     {
+        _mTimer.ResetTimer(GameManager.instance.Speed);
         GameManager.instance.SelectNewMiniGame(this);
     }
 
