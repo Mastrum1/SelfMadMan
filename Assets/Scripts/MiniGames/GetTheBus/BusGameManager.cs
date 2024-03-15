@@ -28,6 +28,7 @@ public class BusGameManager : MiniGameManager
     // Start is called before the first frame update
     void Start()
     {
+        base.Start();
         BusStop.triggerEnter = BusStartOverride;
         BusStop.triggerExit = BusStopOverride;
     }
@@ -36,7 +37,7 @@ public class BusGameManager : MiniGameManager
     void Update()
     {
         
-        if (_mTimer.CurrentTime == 0) {
+        if (_mTimer.timerValue == 0) {
             Debug.Log("Time's up");
             _mTimerIsRunning = false;
             EndMiniGame(false, miniGameScore);
@@ -50,13 +51,12 @@ public class BusGameManager : MiniGameManager
                 Debug.Log("False");
                 EndMiniGame(false, miniGameScore);
             }
-        } else {
-            _mTimer.UpdateTimer();
-            if (Input.GetMouseButtonDown(0)) {
-                Time.timeScale = 0;
-                _mIsPaused = true;
-            }
         }
+    }
+
+    public void OnClicked()
+    {
+        _mIsPaused = true;
     }
 
     IEnumerator  SpawnBus()
