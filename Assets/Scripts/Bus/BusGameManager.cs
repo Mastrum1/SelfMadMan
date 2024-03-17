@@ -6,7 +6,6 @@ using UnityEngine;
 public class BusGameManager : MiniGameManager
 {
     [SerializeField] float TimeRemaining = 10.0f;
-    bool _mTimerIsRunning = true;
     bool _mIsPaused = false;
 
     bool _mCatch = false;    
@@ -39,28 +38,27 @@ public class BusGameManager : MiniGameManager
         
         if (_mTimer.timerValue == 0) {
             Debug.Log("Time's up");
-            _mTimerIsRunning = false;
             EndMiniGame(false, miniGameScore);
-        } else
-            _mTimerIsRunning = true;
+        }
         if (_mIsPaused) {
             if (_mCatch) {
                 Debug.Log("Win");
                 EndMiniGame(true, miniGameScore);
             } else {
-                Debug.Log("False");
+                Debug.Log("Loose");
                 EndMiniGame(false, miniGameScore);
             }
-        } else {
-            if (Input.GetMouseButtonDown(0)) {
-                _mIsPaused = true;
-            }
+        }
+        if ( !_mIsPaused && Input.GetMouseButtonDown(0)) {
+            _mIsPaused = true;
+            BusPool.SharedInstance.StopAllBuses();
+            StopCoroutine(SpawnBus());
         }
     }
 
     IEnumerator  SpawnBus()
     {
-        while (_mTimerIsRunning) {
+        while (!_mIsPaused) {
             float nextDelay = Random.Range(0, _mAverageSpawnRate);
             yield return new WaitForSeconds(nextDelay);
             GameObject bus = BusPool.SharedInstance.GetPooledBus(); 

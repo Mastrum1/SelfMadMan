@@ -23,4 +23,9 @@ public class BusMovement : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col)
     {
     }
+
+    public void Stop()
+    {
+        Speed = 0;
+    }
 }
