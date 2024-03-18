@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class QuestManager : MonoBehaviour
@@ -15,18 +16,29 @@ public class QuestManager : MonoBehaviour
     [Serializable]
     public class Quest
     {
-        public Quests questSO;
-        public State questState;
-        public Quests.QuestBaseDispo questDispo;
-        [NonSerialized] public Quests.Difficulty difficulty;
-        [NonSerialized] public int maxAmount;
-        [NonSerialized] public int currentAmount;
+        [SerializeField] private Quests _questSO;
+        public Quests QuestSO { get => _questSO; set => _questSO = value; }
+
+        [SerializeField] private State _questState;
+        public State QuestState { get => _questState; set => _questState = value; }
+        
+        [SerializeField] private Quests.QuestBaseDispo _questDispo;
+        public Quests.QuestBaseDispo QuestDispo { get => _questDispo; set => _questDispo = value; }
+        
+        private Quests.Difficulty _difficulty;
+        public Quests.Difficulty Difficulty { get => _difficulty; set => _difficulty = value; }
+
+        private int _maxAmount;
+        public int MaxAmount {get => _maxAmount; set => _maxAmount = value;}
+        
+        private int _currentAmount;
+        public int CurrentAmount {get => _currentAmount; set => _currentAmount = value;}
 
         public Quest()
         {
-            questState = State.Inactive;
-            if (questSO)
-                questDispo = questSO.disponibility;
+            _questState = State.Inactive;
+            if (_questSO)
+                _questDispo = _questSO.disponibility;
         }
     }
     
@@ -42,7 +54,7 @@ public class QuestManager : MonoBehaviour
 
         foreach (var item in _questsList)
         {
-            item.questDispo = item.questSO.disponibility;
+            item.QuestDispo = item.QuestSO.disponibility;
         }
     }
 
@@ -68,7 +80,7 @@ public class QuestManager : MonoBehaviour
         {
             foreach (var item in _questsList)
             {
-                if (item.questState == State.Active)
+                if (item.QuestState == State.Active)
                 {
                     _activeQuestsList.Add(item);
                 }
@@ -77,7 +89,7 @@ public class QuestManager : MonoBehaviour
         
         foreach (var item in _activeQuestsList)
         {
-            if (item.questState == State.Inactive)
+            if (item.QuestState == State.Inactive)
             {
                 _activeQuestsList.Remove(item);
             }
@@ -97,13 +109,13 @@ public class QuestManager : MonoBehaviour
         {
             var randomQuest = Random.Range(0, _questsList.Count);
             var randomDifficulty = Random.Range(0, 2);
-            if (_questsList[randomQuest].questDispo == Quests.QuestBaseDispo.Unlocked && _questsList[randomQuest].questState == State.Inactive)
+            if (_questsList[randomQuest].QuestDispo == Quests.QuestBaseDispo.Unlocked && _questsList[randomQuest].QuestState == State.Inactive)
             {
-                _questsList[randomQuest].questState = State.Active;
+                _questsList[randomQuest].QuestState = State.Active;
                 Quest temp = _questsList[randomQuest];
-                temp.difficulty = temp.questSO.difficulties[randomDifficulty];
-                temp.maxAmount = temp.difficulty.amount;
-                temp.currentAmount = 0;
+                temp.Difficulty = temp.QuestSO.difficulties[randomDifficulty];
+                temp.MaxAmount = temp.Difficulty.amount;
+                temp.CurrentAmount = 0;
                 _activeQuestsList.Add(temp);
             }
         }
@@ -113,17 +125,17 @@ public class QuestManager : MonoBehaviour
     {
         foreach (var item in _activeQuestsList)
         {
-            if (item.currentAmount >= item.maxAmount)
+            if (item.CurrentAmount >= item.MaxAmount)
             {
-                item.questState = State.Complete;
+                item.QuestState = State.Complete;
             }
         }
     }
 
     void OnQuestFinish(Quest quest)
     {
-        quest.questState = State.Inactive;
-        OnQuestComplete?.Invoke(quest.difficulty.reward);
+        quest.QuestState = State.Inactive;
+        OnQuestComplete?.Invoke(quest.Difficulty.reward);
         
         if (!CheckForActiveQuest())
         {
@@ -132,7 +144,7 @@ public class QuestManager : MonoBehaviour
     }
     void ChangeQuest(Quest quest)
     {
-        quest.questState = State.Inactive;
+        quest.QuestState = State.Inactive;
         if (!CheckForActiveQuest())
         {
             SetNewActiveQuest();
@@ -143,9 +155,9 @@ public class QuestManager : MonoBehaviour
     {
         foreach (var quest in _questsList)
         {
-            if (quest.questSO.time == time)
+            if (quest.QuestSO.time == time)
             {
-                quest.questDispo = Quests.QuestBaseDispo.Unlocked;
+                quest.QuestDispo = Quests.QuestBaseDispo.Unlocked;
             }
         }
     }
@@ -154,9 +166,9 @@ public class QuestManager : MonoBehaviour
     {
         foreach (var quest in _questsList)
         {
-            if (quest.questSO.time == time)
+            if (quest.QuestSO.time == time)
             {
-                quest.questDispo = Quests.QuestBaseDispo.Locked;
+                quest.QuestDispo = Quests.QuestBaseDispo.Locked;
             }
         }
     }
