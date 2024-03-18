@@ -6,7 +6,7 @@ public class Money : MonoBehaviour
 {
     // Private
 
-    public int CurrentMoney { get => _mCurrentMoney; private set => _mCurrentMoney = value; }
+    public int CurrentMoney { get => _mCurrentMoney; set => _mCurrentMoney = value; }
     [SerializeField] private int _mCurrentMoney;
 
     private string _mMoneyPlayerPrefsKey = "PlayerMoney";  // Key for PlayerPrefs
