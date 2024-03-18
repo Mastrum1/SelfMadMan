@@ -6,17 +6,6 @@ public class FightingGame : MiniGameManager
 {
     [SerializeField] FightingUIManager UIManager;
 
-
-    int interval = 0;
-   
-    public void Awake()
-    {
-        QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = 60;
-
-        _mTimer.ResetTimer(5f);
-    }
-
     public void OnClicked()
     {
         UIManager.Bar.AddValue(150);

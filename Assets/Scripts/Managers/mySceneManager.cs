@@ -25,6 +25,7 @@ public class mySceneManager : MonoBehaviour
         SceneManager.LoadScene(_mScene, LoadSceneMode.Single);
     }
 
+   
     public void RandomGameChoice(int era)
     {
         switch (era)

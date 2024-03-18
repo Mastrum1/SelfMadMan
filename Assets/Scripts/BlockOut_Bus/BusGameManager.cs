@@ -20,7 +20,8 @@ public class BusGameManager : MiniGameManager
 
     public void Awake()
     {
-        _mTimer.ResetTimer(TimeRemaining);
+        base.Awake();
+        TimeRemaining = GameManager.instance.Speed;
         _mAverageSpawnRate = TimeRemaining / 15;
         StartCoroutine(SpawnBus());
     }

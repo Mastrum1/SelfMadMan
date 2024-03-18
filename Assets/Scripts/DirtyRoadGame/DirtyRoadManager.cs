@@ -12,9 +12,10 @@ public class DirtyRoadManager : MiniGameManager
     public float miniGameTime;
     private void Awake()
     {
+        base.Awake();
         SpawnPornAdds(mNumOfAdds);
         mInteractableManager.OnGameEnd += OnGameEnd;
-        _mTimer.ResetTimer(miniGameTime);
+       
     }
 
 

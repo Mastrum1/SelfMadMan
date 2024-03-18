@@ -14,6 +14,10 @@ public class MiniGameManager : MonoBehaviour
 
     public int miniGameScore;
 
+    public void Awake()
+    {
+        _mTimer.ResetTimer(GameManager.instance.Speed);
+    }
     public void Start()
     {
         GameManager.instance.SelectNewMiniGame(this);

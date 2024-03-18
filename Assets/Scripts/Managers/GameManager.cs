@@ -7,12 +7,14 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    [SerializeField] float _mSpeed;
+    public float Speed { get; private set; }
     [SerializeField] float _mScore;
     [SerializeField] int _mHearts;
 
     MiniGameManager _currentMinigameManager;
     private Scoring _mScoring;
+
+    private int minigameCount = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +22,7 @@ public class GameManager : MonoBehaviour
 
         Application.targetFrameRate = 60;
         _mHearts = 3;
-        _mSpeed = 1;
+        Speed = 10;
 
         _mScoring = new Scoring();
 
@@ -36,6 +38,7 @@ public class GameManager : MonoBehaviour
 
     public void SelectNewMiniGame(MiniGameManager myMinigame)
     {
+        minigameCount++;
         if (_currentMinigameManager != null)
         {
             _currentMinigameManager.OnMiniGameEnd -= HandleMiniGameEnd;
@@ -45,11 +48,18 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void GoFaster()
+    {
+        SceneManager.LoadScene("WinScreen");
+        Debug.Log("Faster");
+        Speed *= 0.8f;
+    }
 
     public void ResetGame()
     {
         _mScore = 0;
         _mHearts = 3;
+        Speed = 10f;
     }
 
     public float GetScore()
@@ -69,7 +79,7 @@ public class GameManager : MonoBehaviour
 
     public float GetSpeed()
     {
-        return _mSpeed;
+        return Speed;
     }
 
     private void HandleMiniGameEnd(bool won, int score)
@@ -84,7 +94,12 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene("LoseScreen");
             ResetGame();
         }
+        else if(minigameCount % 3 == 0)
+        {
+            GoFaster();
+        }
         else
             SceneManager.LoadScene("WinScreen");
+
     }
 }
