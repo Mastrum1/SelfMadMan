@@ -32,7 +32,7 @@ public class Quests : ScriptableObject
     public string questName;
     public int time;
     public string questDescription;
-    public List<Difficulty> difficulty;
+    public List<Difficulty> difficulties;
 
     public QuestBaseDispo disponibility;
   
