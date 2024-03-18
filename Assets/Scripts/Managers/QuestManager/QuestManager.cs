@@ -47,6 +47,14 @@ public class QuestManager : MonoBehaviour
                 _activeQuestsList.Add(quest);
             }
         }
+        
+        foreach (var quest in _activeQuestsList)
+        {
+            if (quest.status == Quests.State.Inactive)
+            {
+                _activeQuestsList.Remove(quest);
+            }
+        }
 
         if (_activeQuestsList.Count is 3)
         {
