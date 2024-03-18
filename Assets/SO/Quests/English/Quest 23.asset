@@ -14,9 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questName: None
   time: 0
-  questDescription: Ralentissez le temps
-  easy: 5
-  normal: 10
-  hard: 15
-  questDescription2: fois.
+  questDescription: Slow down the time * times
+  difficulty:
+  - difficulty: 0
+    amount: 5
+    reward: 1
+  - difficulty: 1
+    amount: 10
+    reward: 2
+  - difficulty: 2
+    amount: 15
+    reward: 3
   disponibility: 1

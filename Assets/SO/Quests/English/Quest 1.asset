@@ -14,9 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questName: None
   time: 0
-  questDescription: Reach a score of
-  easy: 1000
-  normal: 2000
-  hard: 3000
-  questDescription2: at the end of a game.
+  questDescription: Reach a score of * at the end of the game.
+  difficulty:
+  - difficulty: 0
+    amount: 1000
+    reward: 1
+  - difficulty: 1
+    amount: 2000
+    reward: 2
+  - difficulty: 2
+    amount: 3000
+    reward: 3
   disponibility: 1

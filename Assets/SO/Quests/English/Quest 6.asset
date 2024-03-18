@@ -14,9 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questName: None
   time: 1
-  questDescription: Smash the face off
-  easy: 2
-  normal: 4
-  hard: 6
-  questDescription2: people in "Fight this dude" within a game.
+  questDescription: Beat up * people in "Fight this dude" during a game.
+  difficulty:
+  - difficulty: 0
+    amount: 2
+    reward: 1
+  - difficulty: 1
+    amount: 4
+    reward: 2
+  - difficulty: 2
+    amount: 6
+    reward: 3
   disponibility: 0

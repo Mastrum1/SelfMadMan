@@ -14,9 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questName: None
   time: 0
-  questDescription: Gagner
-  easy: 200
-  normal: 400
-  hard: 600
-  questDescription2: Madcoins.
+  questDescription: Win * Madcoins.
+  difficulty:
+  - difficulty: 0
+    amount: 200
+    reward: 1
+  - difficulty: 1
+    amount: 400
+    reward: 2
+  - difficulty: 2
+    amount: 600
+    reward: 3
   disponibility: 1

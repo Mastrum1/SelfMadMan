@@ -14,9 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questName: None
   time: 1
-  questDescription: Crush
-  easy: 15
-  normal: 30
-  hard: 40
-  questDescription2: cockroaches in "Clean your kitchen".
+  questDescription: Crush * cockroaches in "Clean your kitchen".
+  difficulty:
+  - difficulty: 0
+    amount: 15
+    reward: 1
+  - difficulty: 1
+    amount: 30
+    reward: 2
+  - difficulty: 2
+    amount: 40
+    reward: 3
   disponibility: 0

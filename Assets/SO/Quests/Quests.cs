@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using NaughtyAttributes;
@@ -25,17 +26,18 @@ public class Quests : ScriptableObject
         Hard
     }
     
-    [System.Serializable]
+    [Serializable]
     public class Difficulty
     {
         public Difficulties difficulty;
         public  int amount;
+        public int reward;
     }
     
     public string questName;
     public int time;
     public string questDescription;
-    //public int reward;
+    public List<Difficulty> difficulty;
 
     public QuestDispo disponibility;
     [NonSerialized] public State status;

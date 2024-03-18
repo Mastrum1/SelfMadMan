@@ -14,9 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questName: None
   time: 0
-  questDescription: Catch
-  easy: 2
-  normal: 4
-  hard: 6
-  questDescription2: power ups during a game
+  questDescription: Catch * power-ups during a game.
+  difficulty:
+  - difficulty: 0
+    amount: 2
+    reward: 1
+  - difficulty: 1
+    amount: 4
+    reward: 2
+  - difficulty: 2
+    amount: 6
+    reward: 3
   disponibility: 1

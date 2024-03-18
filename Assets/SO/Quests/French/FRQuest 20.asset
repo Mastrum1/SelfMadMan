@@ -10,13 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9dc3ce7687a9342da8dc83dbd1e4d1bd, type: 3}
-  m_Name: Quest 10
+  m_Name: FRQuest 20
   m_EditorClassIdentifier: 
   questName: None
-  time: 0
-  questDescription: "Ne r\xE9cup\xE9rer aucun bonus au cours de la partie."
-  easy: 0
-  normal: 0
-  hard: 0
-  questDescription2: 
-  disponibility: 1
+  time: 2
+  questDescription: likez * tweets en une partie.
+  difficulty:
+  - difficulty: 0
+    amount: 5
+    reward: 1
+  - difficulty: 1
+    amount: 10
+    reward: 2
+  - difficulty: 2
+    amount: 15
+    reward: 3
+  disponibility: 0

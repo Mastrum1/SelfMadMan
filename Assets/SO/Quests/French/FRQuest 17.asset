@@ -10,12 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9dc3ce7687a9342da8dc83dbd1e4d1bd, type: 3}
-  m_Name: Quest 1
+  m_Name: FRQuest 17
   m_EditorClassIdentifier: 
   questName: None
-  time: 0
-  questDescription: "Atteindre un score de * \xE0 la fin de la partie."
-  easy: 1000
-  normal: 2000
-  hard: 3000
-  disponibility: 1
+  time: 1
+  questDescription: Likez * femme dans Findher.
+  difficulty:
+  - difficulty: 0
+    amount: 10
+    reward: 1
+  - difficulty: 1
+    amount: 20
+    reward: 2
+  - difficulty: 2
+    amount: 30
+    reward: 2
+  disponibility: 0

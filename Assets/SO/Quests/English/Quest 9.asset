@@ -14,9 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questName: None
   time: 0
-  questDescription: Complete
-  easy: 3
-  normal: 6
-  hard: 9
-  questDescription2: minigames without loosing a life during a game.
+  questDescription: Successfully complete * mini-games in a row without losing any
+    lives during a game.
+  difficulty:
+  - difficulty: 0
+    amount: 3
+    reward: 1
+  - difficulty: 1
+    amount: 6
+    reward: 2
+  - difficulty: 2
+    amount: 9
+    reward: 3
   disponibility: 1

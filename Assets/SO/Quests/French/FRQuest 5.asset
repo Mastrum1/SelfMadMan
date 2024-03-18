@@ -10,13 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9dc3ce7687a9342da8dc83dbd1e4d1bd, type: 3}
-  m_Name: Quest 11
+  m_Name: FRQuest 5
   m_EditorClassIdentifier: 
   questName: None
-  time: 0
-  questDescription: "R\xE9cup\xE9rer tous les bonus en une seule partie."
-  easy: 0
-  normal: 0
-  hard: 0
-  questDescription2: 
-  disponibility: 1
+  time: 1
+  questDescription: Casser la figure de * personne dans "Fight this dude".
+  difficulty:
+  - difficulty: 0
+    amount: 5
+    reward: 1
+  - difficulty: 1
+    amount: 10
+    reward: 2
+  - difficulty: 2
+    amount: 15
+    reward: 3
+  disponibility: 0

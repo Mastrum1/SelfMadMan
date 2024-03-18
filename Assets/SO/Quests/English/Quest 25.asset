@@ -14,9 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questName: None
   time: 3
-  questDescription: "Enl\xE8ves"
-  easy: 10
-  normal: 20
-  hard: 30
-  questDescription2: "d\xE9chets de ton yatch."
+  questDescription: Remove * waste from your yacht.
+  difficulty:
+  - difficulty: 0
+    amount: 10
+    reward: 1
+  - difficulty: 1
+    amount: 20
+    reward: 2
+  - difficulty: 2
+    amount: 30
+    reward: 3
   disponibility: 0
