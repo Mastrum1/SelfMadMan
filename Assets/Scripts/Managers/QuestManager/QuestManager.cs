@@ -6,32 +6,9 @@ using Random = UnityEngine.Random;
 public class QuestManager : MonoBehaviour
 {
     public static QuestManager instance;
-
-    public event Action<int> OnQuestComplete; 
-    public enum State
-    {
-        Inactive, Complete, Active
-    }
-    [Serializable]
-    public class Quest
-    {
-        public Quests questSO;
-        public State questState;
-        public Quests.QuestBaseDispo questDispo;
-        [NonSerialized] public Quests.Difficulty difficulty;
-        [NonSerialized] public int maxAmount;
-        [NonSerialized] public int currentAmount;
-
-        public Quest()
-        {
-            questState = State.Inactive;
-            if (questSO)
-                questDispo = questSO.disponibility;
-        }
-    }
     
-    [SerializeField] private List<Quest> _questsList;
-    private readonly List<Quest> _activeQuestsList = new List<Quest>();
+    [SerializeField] private List<Quests> _questsList;
+    private readonly List<Quests> _activeQuestsList = new List<Quests>();
 
     private void Awake()
     {
@@ -39,11 +16,6 @@ public class QuestManager : MonoBehaviour
             instance = this;
         else if (instance != this)
             Destroy(gameObject);
-
-        foreach (var item in _questsList)
-        {
-            item.questDispo = item.questSO.disponibility;
-        }
     }
 
     void Start()
@@ -59,27 +31,28 @@ public class QuestManager : MonoBehaviour
     
     void Update()
     {
-        CheckQuestCompletion();
+        if (!CheckForActiveQuest())
+        {
+            SetNewActiveQuest();
+        }
     }
 
     bool CheckForActiveQuest()
     {
-        if (_activeQuestsList.Count < 3)
+
+        foreach (var quest in _questsList)
         {
-            foreach (var item in _questsList)
+            if (quest.status == Quests.State.Active)
             {
-                if (item.questState == State.Active)
-                {
-                    _activeQuestsList.Add(item);
-                }
+                _activeQuestsList.Add(quest);
             }
         }
         
-        foreach (var item in _activeQuestsList)
+        foreach (var quest in _activeQuestsList)
         {
-            if (item.questState == State.Inactive)
+            if (quest.status == Quests.State.Inactive)
             {
-                _activeQuestsList.Remove(item);
+                _activeQuestsList.Remove(quest);
             }
         }
 
@@ -95,57 +68,28 @@ public class QuestManager : MonoBehaviour
     {
         if (_activeQuestsList.Count < 3)
         {
-            var randomQuest = Random.Range(0, _questsList.Count);
-            var randomDifficulty = Random.Range(0, 2);
-            if (_questsList[randomQuest].questDispo == Quests.QuestBaseDispo.Unlocked && _questsList[randomQuest].questState == State.Inactive)
+            var randomNum = Random.Range(0, _questsList.Count);
+            if (_questsList[randomNum].disponibility == Quests.QuestDispo.Unlocked && _questsList[randomNum].status == Quests.State.Inactive)
             {
-                _questsList[randomQuest].questState = State.Active;
-                Quest temp = _questsList[randomQuest];
-                temp.difficulty = temp.questSO.difficulties[randomDifficulty];
-                temp.maxAmount = temp.difficulty.amount;
-                temp.currentAmount = 0;
-                _activeQuestsList.Add(temp);
+                _questsList[randomNum].status = Quests.State.Active;
+                _activeQuestsList.Add(_questsList[randomNum]);
             }
         }
     }
 
-    void CheckQuestCompletion()
+    void ChangeQuest(Quests quest)
     {
-        foreach (var item in _activeQuestsList)
-        {
-            if (item.currentAmount >= item.maxAmount)
-            {
-                item.questState = State.Complete;
-            }
-        }
-    }
-
-    void OnQuestFinish(Quest quest)
-    {
-        quest.questState = State.Inactive;
-        OnQuestComplete?.Invoke(quest.difficulty.reward);
-        
-        if (!CheckForActiveQuest())
-        {
-            SetNewActiveQuest();
-        }
-    }
-    void ChangeQuest(Quest quest)
-    {
-        quest.questState = State.Inactive;
-        if (!CheckForActiveQuest())
-        {
-            SetNewActiveQuest();
-        }
+        quest.status = Quests.State.Inactive;
+        SetNewActiveQuest();
     }
     
     void UnlockQuest(int time)
     {
         foreach (var quest in _questsList)
         {
-            if (quest.questSO.time == time)
+            if (quest.time == time)
             {
-                quest.questDispo = Quests.QuestBaseDispo.Unlocked;
+                quest.disponibility = Quests.QuestDispo.Unlocked;
             }
         }
     }
@@ -154,9 +98,9 @@ public class QuestManager : MonoBehaviour
     {
         foreach (var quest in _questsList)
         {
-            if (quest.questSO.time == time)
+            if (quest.time == time)
             {
-                quest.questDispo = Quests.QuestBaseDispo.Locked;
+                quest.disponibility = Quests.QuestDispo.Locked;
             }
         }
     }
