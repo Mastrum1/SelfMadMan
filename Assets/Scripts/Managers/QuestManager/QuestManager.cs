@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 public class QuestManager : MonoBehaviour
 {
-    public QuestManager instance;
+    public static QuestManager instance;
     
     [SerializeField] private List<Quests> _questsList;
     private readonly List<Quests> _activeQuestsList = new List<Quests>();
@@ -25,9 +25,7 @@ public class QuestManager : MonoBehaviour
             do
             {
                 SetNewActiveQuest();
-            } while (_activeQuestsList.Count != 3);
-
-            Debug.Log(_activeQuestsList.Count);
+            } while (_activeQuestsList.Count < 3);
         }
     }
     
@@ -60,7 +58,7 @@ public class QuestManager : MonoBehaviour
 
     void SetNewActiveQuest()
     {
-        if (_questsList.Count < 3)
+        if (_activeQuestsList.Count < 3)
         {
             var randomNum = Random.Range(0, _questsList.Count);
             if (_questsList[randomNum].disponibility == Quests.QuestDispo.Unlocked && _questsList[randomNum].status == Quests.State.Inactive)
