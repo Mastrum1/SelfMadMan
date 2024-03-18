@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] float _mScore;
     [SerializeField] int _mHearts;
 
-
     MiniGameManager _currentMinigameManager;
     private Scoring _mScoring;
 
@@ -60,6 +59,7 @@ public class GameManager : MonoBehaviour
 
     private void Faster()
     {
+        Debug.Log("Faster");
         Speed *= 0.8f;
     }
     public void ResetGame()
@@ -89,16 +89,30 @@ public class GameManager : MonoBehaviour
 
         mySceneManager.instance.UnloadCurrentScene();
 
-        if(_mMinigameCount % 3 == 0)
-            Faster();
-        
         _mHearts -= won ? 0 : 1;
         score += won ? 100 : 0;
         _mScore = _mScoring.ChangeScore(Scoring.Param.Add, _mScore, score);
+
         if (_mHearts <= 0)
         {
             SceneManager.LoadScene("LoseScreen");
             ResetGame();
         }
+        else
+            StartCoroutine(ContinueMinigames());
+
+
+    }
+
+    IEnumerator ContinueMinigames()
+    {
+        if (_mMinigameCount % 3 == 0)
+        {
+            Faster();
+            
+        }
+        yield return new WaitForSeconds(3f);
+        mySceneManager.instance.RandomGameChoice();
+
     }
 }
