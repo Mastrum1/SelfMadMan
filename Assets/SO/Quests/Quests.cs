@@ -7,17 +7,12 @@ using NaughtyAttributes;
 [CreateAssetMenu(fileName = "Quests", menuName = "SO/NewQuest", order = 1)]
 public class Quests : ScriptableObject
 {
-    public enum QuestDispo
+    public enum QuestBaseDispo
     {
         Locked,
         Unlocked
     }
     
-    public enum State
-    {
-        Inactive,
-        Active
-    }
     
     public enum Difficulties
     {
@@ -39,6 +34,6 @@ public class Quests : ScriptableObject
     public string questDescription;
     public List<Difficulty> difficulty;
 
-    public QuestDispo disponibility;
-    [NonSerialized] public State status;
+    public QuestBaseDispo disponibility;
+  
 }
