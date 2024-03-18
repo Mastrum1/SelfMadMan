@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -6,15 +7,15 @@ public class CryptoManager : MiniGameManager
 {
     public float miniGameTime;
     [SerializeField] private Sprite[] cryptoCharts;
-    [SerializeField] private Button[] cryptoGraphs;
     [SerializeField] private Image cryptoChartOutput;
+    [SerializeField] private CryptoInteractableManager _cryptoIManager;
     
-    private Image _activeCryptoChart;
     private int _activeChart;
-    private int _buttonNum;
+
     void Awake()
     {
         DrawGraph();
+        _cryptoIManager.OnPostItClicked += CheckCryptoGraphPressed;
     }
     
     void Update()
@@ -31,18 +32,9 @@ public class CryptoManager : MiniGameManager
         cryptoChartOutput.sprite = cryptoCharts[_activeChart];
     }
 
-    public void CheckCryptoGraphPressed(Button button)
+    public void CheckCryptoGraphPressed(Sprite sprite)
     {
-        print("clicked");
-        for (int i = 0; i < cryptoGraphs.Length; i++)
-        {
-            if (button == cryptoGraphs[i])
-            {
-                _buttonNum = i;
-            }
-        }
-
-        if (_activeChart == _buttonNum)
+        if (cryptoChartOutput.sprite == sprite)
         {
             print("Win");
             EndMiniGame(true, miniGameScore);
@@ -52,5 +44,10 @@ public class CryptoManager : MiniGameManager
             print("Loose");
             EndMiniGame(false, miniGameScore);
         }
+    }
+
+    private void OnDestroy()
+    {
+        _cryptoIManager.OnPostItClicked -= CheckCryptoGraphPressed;
     }
 }
