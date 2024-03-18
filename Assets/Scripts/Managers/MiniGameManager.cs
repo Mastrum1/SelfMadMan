@@ -22,7 +22,7 @@ public class MiniGameManager : MonoBehaviour
 
     public void EndMiniGame(bool won, int score)
     {
-        // Trigger the event
+        
         Debug.Log("finished");
         OnMiniGameEnd?.Invoke(won, score);
     }

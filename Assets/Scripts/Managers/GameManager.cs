@@ -9,8 +9,12 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     
     public float Speed { get; private set; }
+
+    public int Era { get; private set; }
+
     [SerializeField] float _mScore;
     [SerializeField] int _mHearts;
+
 
     MiniGameManager _currentMinigameManager;
     private Scoring _mScoring;
@@ -22,6 +26,7 @@ public class GameManager : MonoBehaviour
     {
         _mMinigameCount = 0;
         Application.targetFrameRate = 60;
+        Era = 0;
         _mHearts = 3;
         Speed = 10;
 
@@ -35,7 +40,11 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    // Update is called once per frame
+    public void OnGameStart()
+    {
+        mySceneManager.instance.LoadWinScreen();
+        mySceneManager.instance.RandomGameChoice();
+    }
 
     public void SelectNewMiniGame(MiniGameManager myMinigame)
     {
@@ -76,9 +85,10 @@ public class GameManager : MonoBehaviour
     }
 
     private void HandleMiniGameEnd(bool won, int score)
-    {
-        Debug.Log("is finished");
-       
+    {       
+
+        mySceneManager.instance.UnloadCurrentScene();
+
         if(_mMinigameCount % 3 == 0)
             Faster();
         
@@ -90,7 +100,5 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene("LoseScreen");
             ResetGame();
         }
-        else
-            SceneManager.LoadScene("WinScreen");
     }
 }
