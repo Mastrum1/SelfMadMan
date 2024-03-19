@@ -16,7 +16,7 @@ public class MiniGameManager : MonoBehaviour
 
     public void Awake()
     {
-        _mTimer.ResetTimer(GameManager.instance.Speed);
+     //   _mTimer.ResetTimer(GameManager.instance.Speed);
     }
     public void Start()
     {

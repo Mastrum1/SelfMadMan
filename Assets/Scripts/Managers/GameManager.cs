@@ -26,8 +26,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        _mQuestManager = QuestManager.instance;
-        _mQuestManager.OnQuestComplete += AddStars;
+      //  _mQuestManager = QuestManager.instance;
+        //_mQuestManager.OnQuestComplete += AddStars;
     }
 
     // Start is called before the first frame update
@@ -138,6 +138,6 @@ public class GameManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        _mQuestManager.OnQuestComplete -= AddStars;
+      //  _mQuestManager.OnQuestComplete -= AddStars;
     }
 }
