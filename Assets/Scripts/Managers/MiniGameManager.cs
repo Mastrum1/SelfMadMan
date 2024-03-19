@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,11 +14,16 @@ public class MiniGameManager : MonoBehaviour
 
     public int miniGameScore;
 
+    public void Start()
+    {
+        _mTimer.ResetTimer(GameManager.instance.Speed);
+        GameManager.instance.SelectNewMiniGame(this);
+    }
 
     public void EndMiniGame(bool won, int score)
     {
-        // Trigger the event
+        
+        Debug.Log("finished");
         OnMiniGameEnd?.Invoke(won, score);
     }
-
 }
