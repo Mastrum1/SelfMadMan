@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,8 +9,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     
+    public int Level { get => _mLevelCount; private set => _mLevelCount = value; }
     public float Speed { get; private set; }
-
     public int Era { get; private set; }
 
     [SerializeField] float _mScore;
@@ -17,8 +18,17 @@ public class GameManager : MonoBehaviour
 
     MiniGameManager _currentMinigameManager;
     private Scoring _mScoring;
+    private QuestManager _mQuestManager;
 
     private int _mMinigameCount;
+    private int _mLevelCount;
+    private int _mCurrentStars;
+
+    private void Awake()
+    {
+        _mQuestManager = QuestManager.instance;
+        _mQuestManager.OnQuestComplete += AddStars;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -114,5 +124,20 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(3f);
         mySceneManager.instance.RandomGameChoice();
 
+    }
+
+    void AddStars(int reward)
+    {
+        _mCurrentStars += reward;
+        if (_mCurrentStars >= 5)
+        {
+            Level++;
+            _mCurrentStars -= 5;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        _mQuestManager.OnQuestComplete -= AddStars;
     }
 }
