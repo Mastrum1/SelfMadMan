@@ -20,14 +20,13 @@ public class CryptoInteractableManager : InteractableManager
         for(int i = 0; i < placeHolders.Length; i++)
         {
             postIts[i].transform.position = placeHolders[i].transform.position;
-            Debug.Log("Subscribing to event for " + postIts[i].name);
             postIts[i].PostItClicked += DetectClick;
         }
     }
 
     private void DetectClick(PostIt postIt)
     {
-        Debug.Log("Post-it pressed: " + postIt.name + ", corresponding graph: " + postIt.CorrespondingGraph.name);
+            OnPostItClicked.Invoke(postIt.CorrespondingGraph);
     }
 
     private void OnDestroy()

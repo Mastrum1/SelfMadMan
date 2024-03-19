@@ -8,10 +8,9 @@ public class PostIt : MonoBehaviour
     public event Action<PostIt> PostItClicked;
     [SerializeField] public Sprite CorrespondingGraph;
     // Start is called before the first frame update
-   
+
     public void OnPostItClicked()
     {
-        Debug.Log(this)
-;      //  PostItClicked.Invoke(this);
+        PostItClicked.Invoke(this);
     }
 }
