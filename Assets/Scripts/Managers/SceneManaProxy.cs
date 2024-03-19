@@ -6,6 +6,8 @@ using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class SceneManaProxy : MonoBehaviour
 {
+    List<string> _mMinigameNames = new List<string>();
+
     [Scene] public string SceneName;
 
     public int Era {  get => _mEra; private set => _mEra = value; }
