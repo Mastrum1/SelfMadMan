@@ -5,6 +5,11 @@ using UnityEngine.UI;
 
 public class ContentManager : MonoBehaviour
 {
+    [Header("For Screnn space Camera")]
+    [SerializeField] private Canvas _mMyCanvas;
+    private Camera cam { get { return _mMyCanvas.worldCamera; } }
+
+
     [Header("Content Vieport")]
     [SerializeField] private Image contentDisplay;
     [SerializeField] private List<GameObject> contentPanels;
@@ -105,11 +110,15 @@ public class ContentManager : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             Vector2 touchEndPos = Input.mousePosition;
+            Vector3 output = Vector2.zero;
             float swipeDistance = touchEndPos.x - touchStartPos.x;
 
+            contentArea.position = output;
+
             // Check if the swipe is within the content area bounds
-            if (Mathf.Abs(swipeDistance) > swipeThreshold && IsTouchInContentArea(touchStartPos))
+            if (Mathf.Abs(swipeDistance) > swipeThreshold && IsTouchInContentArea(touchStartPos, output))
             {
+
                 if (isLimitedSwipe && ((currentIndex == 0 && swipeDistance > 0) || (currentIndex == contentPanels.Count - 1 && swipeDistance < 0)))
                 {
                     // Limited swipe is enabled, and at the edge of content
@@ -129,9 +138,9 @@ public class ContentManager : MonoBehaviour
     }
 
     // Check if the touch position is within the content area bounds
-    bool IsTouchInContentArea(Vector2 touchPosition)
+    bool IsTouchInContentArea(Vector2 touchPosition, Vector3 output)
     {
-        return RectTransformUtility.RectangleContainsScreenPoint(contentArea, touchPosition);
+        return RectTransformUtility.ScreenPointToWorldPointInRectangle(_mMyCanvas.GetComponent<RectTransform>(), touchPosition, cam, out output);
     }
 
     void AutoMoveContent()
