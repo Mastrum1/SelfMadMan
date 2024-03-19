@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using System;
 
-public class DirtyRoadInteractableManager : MonoBehaviour
+public class DirtyRoadInteractableManager : InteractableManager
 {
     public event Action<bool> OnGameEnd;
     
