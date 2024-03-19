@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 212904314021264970}
   - component: {fileID: 8668535913891730446}
   - component: {fileID: 123125060389669151}
-  - component: {fileID: 5747994419087136056}
+  - component: {fileID: 3618579672933370882}
   m_Layer: 0
   m_Name: PostIt Template
   m_TagString: Untagged
@@ -149,7 +149,7 @@ PolygonCollider2D:
       - {x: 0.5, y: -0.5}
       - {x: 0.5, y: 0.5}
   m_UseDelaunayMesh: 0
---- !u!114 &5747994419087136056
+--- !u!114 &3618579672933370882
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,15 +158,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 193327779195378045}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7c1c71d8ad5da9438de3b2e5990763f, type: 3}
+  m_Script: {fileID: 11500000, guid: 83dcd8dace8b7fe449d796b980cb121d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ignoreStartedOverGui: 1
-  ignoreIsOverGui: 0
-  requiredSelectable: {fileID: 0}
-  requiredTapCount: 0
-  requiredTapInterval: 0
-  onFinger:
+  selfSelected: 0
+  onSelected:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8668535913891730446}
@@ -181,20 +177,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onCount:
+  onDeselected:
     m_PersistentCalls:
       m_Calls: []
-  ScreenDepth:
-    Conversion: 1
-    Camera: {fileID: 0}
-    Object: {fileID: 0}
-    Layers:
-      serializedVersion: 2
-      m_Bits: 4294967291
-    Distance: 0
-  onWorld:
+  use: 0
+  onSelectedFinger:
     m_PersistentCalls:
       m_Calls: []
-  onScreen:
+  onSelectedFingerUp:
+    m_PersistentCalls:
+      m_Calls: []
+  onSelectedSelectFinger:
+    m_PersistentCalls:
+      m_Calls: []
+  onSelectedSelectFingerUp:
     m_PersistentCalls:
       m_Calls: []
