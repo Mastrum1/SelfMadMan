@@ -34,6 +34,6 @@ public class PauseMenu : MonoBehaviour
 
     public void Quit()
     {
-        mySceneManager.instance.SetScene("Clement");
+        mySceneManager.instance.SetScene("Clement", mySceneManager.LoadMode.SINGLE);
     }
 }
