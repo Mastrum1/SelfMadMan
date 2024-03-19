@@ -1,20 +1,31 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager instance;
+    static AudioManager _mInstance;
 
-    public AudioSource MusicSource, SFXSource;
-    public AudioClip[] musicClips, SFXClip;
+    [SerializeField] private AudioSource _mMusicSource;
+    [SerializeField] private AudioSource _mSfxSource;
+    [SerializeField] private AudioClip[] _mMusicClips;
+    [SerializeField] private AudioClip[] _mSfxClip;
+
+    public static AudioManager Instance
+    {
+        get { return _mInstance; }
+    }
+
+    public AudioSource MusicSource { get { return _mMusicSource; }  }
+    public AudioSource SFXSource { get { return _mSfxSource; } }
+    public AudioClip[] MusicClips { get { return _mMusicClips; } }
+    public AudioClip[] SFXClips { get { return _mSfxClip; } }
 
     private void Awake()
     {
         // Singleton pattern to ensure only one instance exists
-        if (instance == null)
+        if (_mInstance == null)
         {
-            instance = this;
+            _mInstance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -23,23 +34,23 @@ public class AudioManager : MonoBehaviour
         }
 
         // Initialize AudioSource components if they are not set in the Inspector
-        if (MusicSource == null)
+        if (_mMusicSource == null)
         {
-            MusicSource = gameObject.AddComponent<AudioSource>();
+            _mMusicSource = gameObject.AddComponent<AudioSource>();
         }
-        if (SFXSource == null)
+        if (_mSfxSource == null)
         {
-            SFXSource = gameObject.AddComponent<AudioSource>();
+            _mSfxSource = gameObject.AddComponent<AudioSource>();
         }
     }
 
     // Method to play music clip
     public void PlayMusic(int index)
     {
-        if (index < musicClips.Length && index >= 0)
+        if (index < _mMusicClips.Length && index >= 0)
         {
-            MusicSource.clip = musicClips[index];
-            MusicSource.Play();
+            _mSfxSource.clip = _mMusicClips[index];
+            _mSfxSource.Play();
         }
         else
         {
@@ -50,10 +61,10 @@ public class AudioManager : MonoBehaviour
     // Method to play sound effect clip
     public void PlaySFX(int index)
     {
-        if (index < SFXClip.Length && index >= 0)
+        if (index < _mSfxClip.Length && index >= 0)
         {
-            SFXSource.clip = SFXClip[index];
-            SFXSource.Play();
+            _mSfxSource.clip = _mSfxClip[index];
+            _mSfxSource.Play();
         }
         else
         {
@@ -64,55 +75,54 @@ public class AudioManager : MonoBehaviour
     // Method to stop playing music
     public void StopMusic()
     {
-        MusicSource.Stop();
+        _mSfxSource.Stop();
     }
 
     // Method to stop playing sound effects
     public void StopSFX()
     {
-        SFXSource.Stop();
+        _mSfxSource.Stop();
     }
 
     // Method to modify the volume of music
     public void SetMusicVolume(float volume)
     {
-        MusicSource.volume = Mathf.Clamp01(volume);
+        _mSfxSource.volume = Mathf.Clamp01(volume);
     }
 
     // Method to modify the volume of sound effects
     public void SetSFXVolume(float volume)
     {
-        SFXSource.volume = Mathf.Clamp01(volume);
+        _mSfxSource.volume = Mathf.Clamp01(volume);
     }
 
     // Method to fade music volume in or out over time
     public IEnumerator FadeMusic(float targetVolume, float fadeDuration)
     {
-        float startVolume = MusicSource.volume;
+        float startVolume = _mSfxSource.volume;
         float startTime = Time.time;
 
         while (Time.time < startTime + fadeDuration)
         {
-            MusicSource.volume = Mathf.Lerp(startVolume, targetVolume, (Time.time - startTime) / fadeDuration);
+            _mSfxSource.volume = Mathf.Lerp(startVolume, targetVolume, (Time.time - startTime) / fadeDuration);
             yield return null;
         }
 
-        MusicSource.volume = targetVolume;
+        _mSfxSource.volume = targetVolume;
     }
 
     // Method to fade sound effects volume in or out over time
     public IEnumerator FadeSFX(float targetVolume, float fadeDuration)
     {
-        float startVolume = SFXSource.volume;
+        float startVolume = _mSfxSource.volume;
         float startTime = Time.time;
 
         while (Time.time < startTime + fadeDuration)
         {
-            SFXSource.volume = Mathf.Lerp(startVolume, targetVolume, (Time.time - startTime) / fadeDuration);
+            _mSfxSource.volume = Mathf.Lerp(startVolume, targetVolume, (Time.time - startTime) / fadeDuration);
             yield return null;
         }
 
-        SFXSource.volume = targetVolume;
+        _mSfxSource.volume = targetVolume;
     }
-
 }
