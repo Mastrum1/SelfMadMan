@@ -15,18 +15,19 @@ public class CryptoInteractableManager : InteractableManager
 
     private void Awake()
     {
-        
+
         postIts = postIts.OrderBy(x => UnityEngine.Random.Range(0, int.MaxValue)).ToArray();
         for(int i = 0; i < placeHolders.Length; i++)
         {
             postIts[i].transform.position = placeHolders[i].transform.position;
+            Debug.Log("Subscribing to event for " + postIts[i].name);
             postIts[i].PostItClicked += DetectClick;
         }
     }
 
     private void DetectClick(PostIt postIt)
     {
-        OnPostItClicked.Invoke(postIt.CorrespondingGraph);
+        Debug.Log("Post-it pressed: " + postIt.name + ", corresponding graph: " + postIt.CorrespondingGraph.name);
     }
 
     private void OnDestroy()

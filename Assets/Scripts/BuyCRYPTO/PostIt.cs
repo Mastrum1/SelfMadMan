@@ -11,7 +11,7 @@ public class PostIt : MonoBehaviour
    
     public void OnPostItClicked()
     {
-        Debug.Log("yes");
-        PostItClicked?.Invoke(this);
+        Debug.Log(this)
+;      //  PostItClicked.Invoke(this);
     }
 }
