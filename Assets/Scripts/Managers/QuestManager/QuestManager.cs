@@ -50,6 +50,7 @@ public class QuestManager : MonoBehaviour
             instance = this;
         else if (instance != this)
             Destroy(gameObject);
+        DontDestroyOnLoad(gameObject);
 
         foreach (var item in _questsList)
         {

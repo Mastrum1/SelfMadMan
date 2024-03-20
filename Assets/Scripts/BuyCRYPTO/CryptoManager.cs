@@ -12,20 +12,12 @@ public class CryptoManager : MiniGameManager
     
     private int _activeChart;
 
-    void Awake()
+    void Start()
     {
         DrawGraph();
         _cryptoIManager.OnPostItClicked += CheckCryptoGraphPressed;
     }
     
-    void Update()
-    {
-        if (_mTimer.timerValue == 0)
-        {
-            EndMiniGame(false, miniGameScore);
-        }
-    }
-
     void DrawGraph()
     {
         _activeChart = Random.Range(0, cryptoCharts.Length);
