@@ -17,9 +17,6 @@ public class SwipeGameManager : MiniGameManager
     [SerializeField]
     private List<GameObject> _mListPeople;
 
-    [SerializeField]
-    private SwipeDetection _mSwipe;
-
     private int _mSwipeLeft = 0;
 
     private int _mSwipeRight = 0;
@@ -28,26 +25,12 @@ public class SwipeGameManager : MiniGameManager
 
     private GameObject _mActualProfile;
 
-    public string SwipeDir = "Horizontal";
-
     public float time = 10f;
 
     private void Awake()
     {
         _mTimer.ResetTimer(time);
         ShowProfile();
-    }
-
-    private void OnEnable()
-    {
-        _mSwipe.OnSwipeLeft += SwipeLeft;
-        _mSwipe.OnSwipeRight += SwipeRight;
-    }
-
-    private void OnDisable()
-    {
-        _mSwipe.OnSwipeLeft -= SwipeLeft;
-        _mSwipe.OnSwipeRight -= SwipeRight;
     }
 
     private void Update()
