@@ -9,19 +9,23 @@ public class ISaidStopGameManager : MiniGameManager
 
     void Start()
     {
-        base.Start();
-        Hand.PackCaught = OnPackCaught;
+        Hand.CigarPackCaught +=  OnPackCaught;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if (_mTimer.timerValue == 0)
-          //  EndMiniGame(true, miniGameScore);
+        if (_mTimer.timerValue == 0)
+            EndMiniGame(true, miniGameScore);
     }
 
     void OnPackCaught()
     {
-        //EndMiniGame(false, miniGameScore);
+        EndMiniGame(false, miniGameScore);
+    }
+
+    void OnDestroy()
+    {
+        Hand.CigarPackCaught += OnPackCaught;
     }
 }
