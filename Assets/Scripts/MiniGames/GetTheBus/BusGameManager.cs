@@ -5,30 +5,23 @@ using UnityEngine;
 
 public class BusGameManager : MiniGameManager
 {
-    float TimeRemaining;
-    bool _mTimerIsRunning = true;
     bool _mIsPaused = false;
-
     bool _mCatch = false;    
 
     // bus Spawn
-    [SerializeField] private Vector3 SpawnPosition;
+    [SerializeField] Vector3 SpawnPosition;
     private float _mAverageSpawnRate;
 
     //bus stop
     [SerializeField] BusStop BusStop;
 
-    public void Awake()
-    {
-        TimeRemaining = GameManager.instance.Speed;
-        _mAverageSpawnRate = TimeRemaining / 15;
-        StartCoroutine(SpawnBus());
-    }
-
     // Start is called before the first frame update
     void Start()
     {
-        base.Start();
+        // move to awake
+        _mAverageSpawnRate = GameManager.instance.Speed / 15;
+        StartCoroutine(SpawnBus()); //
+
         BusStop.triggerEnter = BusStartOverride;
         BusStop.triggerExit = BusStopOverride;
     }
@@ -36,32 +29,32 @@ public class BusGameManager : MiniGameManager
     // Update is called once per frame
     void Update()
     {
-        
-        if (_mTimer.timerValue == 0) {
-            Debug.Log("Time's up");
-            _mTimerIsRunning = false;
-            EndMiniGame(false, miniGameScore);
-        } else
-            _mTimerIsRunning = true;
+        if (_mTimer.timerValue == 0)
+            EndGame(false);
         if (_mIsPaused) {
-            if (_mCatch) {
-                Debug.Log("Win");
-                EndMiniGame(true, miniGameScore);
-            } else {
-                Debug.Log("False");
-                EndMiniGame(false, miniGameScore);
-            }
+            if (_mCatch)
+                EndGame(true);
+            else
+                EndGame(false);
         }
+    }
+
+    void EndGame(bool isWin)
+    {
+        EndMiniGame(isWin, miniGameScore);
+        BusPool.SharedInstance.HideAllBuses();
     }
 
     public void OnClicked()
     {
         _mIsPaused = true;
+        BusPool.SharedInstance.StopAllBuses();
+        StopCoroutine(SpawnBus());
     }
 
     IEnumerator  SpawnBus()
     {
-        while (_mTimerIsRunning) {
+        while (!_mIsPaused) {
             float nextDelay = Random.Range(0, _mAverageSpawnRate);
             yield return new WaitForSeconds(nextDelay);
             GameObject bus = BusPool.SharedInstance.GetPooledBus(); 
@@ -74,15 +67,13 @@ public class BusGameManager : MiniGameManager
 
     void BusStartOverride(Collider2D collider2D)
     {
-        if (collider2D.gameObject.CompareTag("Bus")) {
+        if (collider2D.gameObject.CompareTag("Bus"))
             _mCatch = true;
-        }
     }
 
     void BusStopOverride(Collider2D collider2D)
     {
-        if (collider2D.gameObject.CompareTag("Bus")) {
+        if (collider2D.gameObject.CompareTag("Bus"))
             _mCatch = false;
-        }
     }
 }

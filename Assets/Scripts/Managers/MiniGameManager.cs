@@ -14,16 +14,26 @@ public class MiniGameManager : MonoBehaviour
 
     public int miniGameScore;
 
-    public void Start()
+    public virtual void Awake()
     {
         _mTimer.ResetTimer(GameManager.instance.Speed);
         GameManager.instance.SelectNewMiniGame(this);
     }
 
-    public void EndMiniGame(bool won, int score)
+    public virtual void EndMiniGame(bool won, int score)
     {
-        // Trigger the event
+        
         Debug.Log("finished");
         OnMiniGameEnd?.Invoke(won, score);
+    }
+
+
+    public virtual void Update()
+    {
+        if (_mTimer.timerValue == 0)
+        {
+            Debug.Log("Time's up");
+            EndMiniGame(false, miniGameScore);
+        }
     }
 }

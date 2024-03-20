@@ -9,7 +9,7 @@ public class BusPool : MonoBehaviour
     [SerializeField] private List<GameObject> pooledObjects;
     [SerializeField] private GameObject objectToPool;
     [SerializeField] private int amountToPool;
-    // Start is called before the first frame update
+    private bool isStopped = false;
 
     void Awake()
     {
@@ -30,7 +30,8 @@ public class BusPool : MonoBehaviour
 
     public GameObject GetPooledBus()
     {
-        for(int i = 0; i < amountToPool; i++)
+        if (isStopped) return null;
+        for (int i = 0; i < amountToPool; i++)
             if(!pooledObjects[i].activeInHierarchy)
                 return pooledObjects[i];
         return null;
@@ -43,5 +44,20 @@ public class BusPool : MonoBehaviour
             if(pooledObjects[i].activeInHierarchy)
                 buses.Add(pooledObjects[i]);
         return buses;
+    }
+
+    public void StopAllBuses()
+    {
+        isStopped = true;
+        for (int i = 0; i < amountToPool; i++)
+            if (pooledObjects[i].activeInHierarchy)
+                pooledObjects[i].GetComponent<BusMovement>().Stop();
+    }
+
+    public void HideAllBuses()
+    {
+        for (int i = 0; i < amountToPool; i++)
+            if (pooledObjects[i].activeInHierarchy)
+                pooledObjects[i].SetActive(false);
     }
 }

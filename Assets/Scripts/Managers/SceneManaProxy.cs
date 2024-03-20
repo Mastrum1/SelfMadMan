@@ -15,12 +15,11 @@ public class SceneManaProxy : MonoBehaviour
 
     public void ChangeScene()
     {
-        mySceneManager.instance.SetScene(SceneName);
+        mySceneManager.instance.SetScene(SceneName, mySceneManager.LoadMode.SINGLE);
     }
 
-    public void RandomScene(int era)
+    public void StartGame()
     {
-        _mEra = era;
-        mySceneManager.instance.RandomGameChoice(_mEra);
+        GameManager.instance.OnGameStart();
     }
 }
