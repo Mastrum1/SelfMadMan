@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    
+
     public int Level { get => _mLevelCount; private set => _mLevelCount = value; }
     public float Speed { get; private set; }
     public int Era { get; private set; }
@@ -26,20 +26,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-      //  _mQuestManager = QuestManager.instance;
-        //_mQuestManager.OnQuestComplete += AddStars;
-    }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        _mMinigameCount = 0;
         Application.targetFrameRate = 60;
-        Era = 0;
-        _mHearts = 3;
-        Speed = 10;
-
-        _mScoring = new Scoring();
 
         if (instance == null)
             instance = this;
@@ -47,6 +35,20 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
+        _mMinigameCount = 0;
+        Era = 0;
+        _mHearts = 3;
+        Speed = 10;
+
+        _mQuestManager = QuestManager.instance;
+        _mQuestManager.OnQuestComplete += AddStars;
+        _mScoring = new Scoring();
     }
 
     public void OnGameStart()
@@ -95,7 +97,7 @@ public class GameManager : MonoBehaviour
     }
 
     private void HandleMiniGameEnd(bool won, int score)
-    {       
+    {
 
         mySceneManager.instance.UnloadCurrentScene();
 
@@ -119,7 +121,7 @@ public class GameManager : MonoBehaviour
         if (_mMinigameCount % 3 == 0)
         {
             Faster();
-            
+
         }
         yield return new WaitForSeconds(3f);
         mySceneManager.instance.RandomGameChoice();
@@ -138,6 +140,6 @@ public class GameManager : MonoBehaviour
 
     private void OnDestroy()
     {
-      //  _mQuestManager.OnQuestComplete -= AddStars;
+        //_mQuestManager.OnQuestComplete -= AddStars; => A fix Jimmy
     }
 }

@@ -53,4 +53,11 @@ public class BusPool : MonoBehaviour
             if (pooledObjects[i].activeInHierarchy)
                 pooledObjects[i].GetComponent<BusMovement>().Stop();
     }
+
+    public void HideAllBuses()
+    {
+        for (int i = 0; i < amountToPool; i++)
+            if (pooledObjects[i].activeInHierarchy)
+                pooledObjects[i].SetActive(false);
+    }
 }

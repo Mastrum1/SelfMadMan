@@ -15,14 +15,9 @@ public class BusGameManager : MiniGameManager
     //bus stop
     [SerializeField] BusStop BusStop;
 
-    public void Awake()
-    {
-    }
-
     // Start is called before the first frame update
     void Start()
     {
-        base.Start();
         // move to awake
         _mAverageSpawnRate = GameManager.instance.Speed / 15;
         StartCoroutine(SpawnBus()); //
@@ -35,13 +30,19 @@ public class BusGameManager : MiniGameManager
     void Update()
     {
         if (_mTimer.timerValue == 0)
-            EndMiniGame(false, miniGameScore);
+            EndGame(false);
         if (_mIsPaused) {
             if (_mCatch)
-                EndMiniGame(true, miniGameScore);
+                EndGame(true);
             else
-                EndMiniGame(false, miniGameScore);
+                EndGame(false);
         }
+    }
+
+    void EndGame(bool isWin)
+    {
+        EndMiniGame(isWin, miniGameScore);
+        BusPool.SharedInstance.HideAllBuses();
     }
 
     public void OnClicked()
