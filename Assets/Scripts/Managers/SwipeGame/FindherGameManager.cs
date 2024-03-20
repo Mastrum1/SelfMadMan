@@ -1,7 +1,8 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class SwipeGameManager : MiniGameManager
+public class FindherGameManager : MiniGameManager
 {
     [SerializeField]
     private int _mTotalNbSwipeLeft = 5;
@@ -27,20 +28,11 @@ public class SwipeGameManager : MiniGameManager
 
     public float time = 10f;
 
-    private void Awake()
+    new private void Awake()
     {
-        _mTimer.ResetTimer(time);
         ShowProfile();
     }
 
-    private void Update()
-    {
-        if (_mTimer.timerValue == 0)
-        {
-            Debug.Log("Time's up");
-            EndMiniGame(false, miniGameScore);
-        }
-    }
 
     public void SwipeLeft()
     {
