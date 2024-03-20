@@ -14,9 +14,13 @@ public class HandMovement : MonoBehaviour
     public delegate void CigarPackCaught();
     public CigarPackCaught PackCaught;
 
+    private float _mDelay;
+
     void Start()
     {
+        _mDelay = GameManager.instance.Speed / 10;
         _mRigidBody = GetComponent<Rigidbody2D>();
+        StartCoroutine(AccelerateMovement());
     }
 
     // Update is called once per frame
@@ -34,6 +38,14 @@ public class HandMovement : MonoBehaviour
         if (col.CompareTag("GameInteractable")) {
             _mIsGet = true;
             PackCaught();
+        }
+    }
+
+    IEnumerator  AccelerateMovement()
+    {
+        while (!_mIsGet) {
+            yield return new WaitForSeconds(_mDelay);
+            _mSpeed++;
         }
     }
 }
