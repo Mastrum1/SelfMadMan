@@ -9,8 +9,19 @@ public class UIManager : MonoBehaviour
     [Header("BUTTON LIST")]
     [SerializeField] private List<GameObject> _mButtons = new List<GameObject>();
 
-    public void DesactivateGO(GameObject panel)
+    public void SetAlpha(GameObject panel)
     {
-        panel.SetActive(false);
+        if (!panel.GetComponent<CanvasGroup>())
+            return;
+        else if (panel.GetComponent<CanvasGroup>())
+            foreach (var c in _mPanels)
+            {
+                c.gameObject.GetComponent<CanvasGroup>().alpha = 0;
+                c.gameObject.GetComponent<CanvasGroup>().interactable = false;
+                c.gameObject.GetComponent<CanvasGroup>().blocksRaycasts = false;
+            }
+        panel.GetComponent<CanvasGroup>().alpha = 1;
+        panel.GetComponent<CanvasGroup>().interactable = true;
+        panel.GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
 }

@@ -17,6 +17,6 @@ public class ScoreScreen : MonoBehaviour
         if (!mySceneManager.instance)
             SceneManager.LoadScene("MinigamesChoice");
         else
-            mySceneManager.instance.RandomGameChoice(0); //random
+            mySceneManager.instance.RandomGameChoice(); //random
     }
 }

@@ -105,6 +105,7 @@ public class ContentManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             touchStartPos = Input.mousePosition;
+            Debug.Log(touchStartPos);
         }
 
         if (Input.GetMouseButtonUp(0))
@@ -118,7 +119,7 @@ public class ContentManager : MonoBehaviour
             // Check if the swipe is within the content area bounds
             if (Mathf.Abs(swipeDistance) > swipeThreshold && IsTouchInContentArea(touchStartPos, output))
             {
-
+                
                 if (isLimitedSwipe && ((currentIndex == 0 && swipeDistance > 0) || (currentIndex == contentPanels.Count - 1 && swipeDistance < 0)))
                 {
                     // Limited swipe is enabled, and at the edge of content

@@ -15,6 +15,6 @@ public class MinigamesButton : MonoBehaviour
         if (!mySceneManager.instance)
             SceneManager.LoadScene(choice);
         else
-            mySceneManager.instance.SetScene(choice);
+            mySceneManager.instance.SetScene(choice, mySceneManager.LoadMode.SINGLE);
     }
 }

@@ -2,6 +2,7 @@ using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class SceneManaProxy : MonoBehaviour
@@ -15,11 +16,21 @@ public class SceneManaProxy : MonoBehaviour
 
     public void ChangeScene()
     {
-        mySceneManager.instance.SetScene(SceneName, mySceneManager.LoadMode.SINGLE);
+        if (!mySceneManager.instance)
+            SceneManager.LoadScene(SceneName, LoadSceneMode.Single);
+        else if (mySceneManager.instance != null)
+            mySceneManager.instance.SetScene(SceneName, mySceneManager.LoadMode.SINGLE);
+
     }
 
     public void StartGame()
     {
         GameManager.instance.OnGameStart();
+    }
+
+    // When mySceneManager is not avaible
+    public void MinigamesChoice()
+    {
+        SceneManager.LoadScene("MinigamesChoice", LoadSceneMode.Single);
     }
 }
