@@ -30,13 +30,19 @@ public class BusGameManager : MiniGameManager
     void Update()
     {
         if (_mTimer.timerValue == 0)
-            EndMiniGame(false, miniGameScore);
+            EndGame(false);
         if (_mIsPaused) {
             if (_mCatch)
-                EndMiniGame(true, miniGameScore);
+                EndGame(true);
             else
-                EndMiniGame(false, miniGameScore);
+                EndGame(false);
         }
+    }
+
+    void EndGame(bool isWin)
+    {
+        EndMiniGame(isWin, miniGameScore);
+        BusPool.SharedInstance.HideAllBuses();
     }
 
     public void OnClicked()
