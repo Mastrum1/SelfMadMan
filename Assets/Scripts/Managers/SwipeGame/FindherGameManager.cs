@@ -5,8 +5,6 @@ using UnityEngine;
 public class FindherGameManager : MiniGameManager
 {
     [SerializeField]
-    private int _mTotalNbSwipeLeft = 5;
-    [SerializeField]
     private int _mTotalNbSwipeRight = 10;
 
     [SerializeField]
@@ -17,8 +15,6 @@ public class FindherGameManager : MiniGameManager
 
     [SerializeField]
     private List<GameObject> _mListPeople;
-
-    private int _mSwipeLeft = 0;
 
     private int _mSwipeRight = 0;
 
@@ -38,18 +34,13 @@ public class FindherGameManager : MiniGameManager
     {
         if (!_mIsPub)
         {
-            Debug.Log("Game Over");
             EndMiniGame(false, miniGameScore);
 
         }
         else
         {
-            Debug.Log("Swipe gauche Pub");
             _mActualProfile.SetActive(false);
-            _mSwipeLeft++;
             ShowProfile();
-
-
         }
     }
 
@@ -57,13 +48,11 @@ public class FindherGameManager : MiniGameManager
     {
         if (_mIsPub)
         {
-            Debug.Log("Game Over");
             EndMiniGame(false, miniGameScore);
 
         }
         else
         {
-            Debug.Log("Swipe Right People");
             _mActualProfile.SetActive(false);
             _mSwipeRight++;
             if (_mSwipeRight < _mTotalNbSwipeRight)
@@ -72,7 +61,6 @@ public class FindherGameManager : MiniGameManager
             }
             else
             {
-                Debug.Log("Win Game");
                 EndMiniGame(true, miniGameScore);
 
             }
@@ -86,13 +74,21 @@ public class FindherGameManager : MiniGameManager
         if (pub < 50)
         {
             int index = Random.Range(0, _mListPeople.Count);
+            while (_mListPeople[index] == _mActualProfile)
+            {
+                index = Random.Range(0, _mListPeople.Count);
+            }
             _mActualProfile = _mListPeople[index];
             _mActualProfile.SetActive(true);
             if (_mIsPub) _mIsPub = false;
         }
-        else if (_mSwipeRight < _mTotalNbSwipeRight)
+        else
         {
             int index = Random.Range(0, _mListPub.Count);
+            while (_mListPub[index] == _mActualProfile)
+            {
+                index = Random.Range(0, _mListPub.Count);
+            }
             _mActualProfile = _mListPub[index];
             _mActualProfile.SetActive(true);
             if (!_mIsPub) _mIsPub = true;
