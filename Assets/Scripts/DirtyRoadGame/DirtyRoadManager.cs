@@ -10,23 +10,12 @@ public class DirtyRoadManager : MiniGameManager
     [SerializeField] private int mNumOfAdds;
     [SerializeField] private DirtyRoadInteractableManager mInteractableManager;
     public float miniGameTime;
-    private void Awake()
+
+    public override void Awake()
     {
         base.Awake();
         SpawnPornAdds(mNumOfAdds);
         mInteractableManager.OnGameEnd += OnGameEnd;
-       
-    }
-
-
-    
-    void Update()
-    {
-        if (_mTimer.timerValue == 0)
-        {
-            Debug.Log("Time's up");
-            OnGameEnd(false);
-        }
     }
 
     void OnGameEnd(bool win)
