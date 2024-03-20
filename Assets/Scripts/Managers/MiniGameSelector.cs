@@ -9,7 +9,8 @@ public class MiniGameSelector : MonoBehaviour
 {
     public static MiniGameSelector instance;
 
-    public Dictionary<string, List<string>> MinigameLists = new Dictionary<string, List<string>>();
+    public Dictionary<string, List<string>> Minigamelists {  get => _mMinigameLists; private set => _mMinigameLists = value; }
+    private Dictionary<string, List<string>> _mMinigameLists = new Dictionary<string, List<string>>();
 
     [SerializeField] public List<string> Era1 = new List<string>(); // TO DO : change to dictionnary if not unlocked
     public List<string> Era2 = new List<string>();
@@ -48,7 +49,7 @@ public class MiniGameSelector : MonoBehaviour
             }
 
             // Add the list of scene names to the dictionary with the minigame folder name as the key
-            MinigameLists.Add(Path.GetFileName(minigameFolder), sceneNames);
+            _mMinigameLists.Add(Path.GetFileName(minigameFolder), sceneNames);
         }
         // Now minigameLists contains a dictionary where keys are minigame folder names, and values are lists of scene names.
         // You can access the lists using minigameLists["FolderName"].
@@ -71,17 +72,17 @@ public class MiniGameSelector : MonoBehaviour
 
     void GetMinigamesNameEra()
     {
-        foreach (string minigameName in MinigameLists["Era1"])
+        foreach (string minigameName in _mMinigameLists["Era1"])
         {
            Era1.Add(minigameName);
         }
             
-        foreach (string minigameName in MinigameLists["Era2"])
+        foreach (string minigameName in _mMinigameLists["Era2"])
         {
            Era2.Add(minigameName);
         }
               
-        foreach (string minigameName in MinigameLists["Era3"])
+        foreach (string minigameName in _mMinigameLists["Era3"])
         {
            Era3.Add(minigameName);
         }

@@ -8,7 +8,8 @@ public class ScoreScreen : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        StartCoroutine(Loading());
+        if (!SceneManager.GetSceneByName("HomePage").IsValid())
+            StartCoroutine(Loading());
     }
 
     IEnumerator Loading()
