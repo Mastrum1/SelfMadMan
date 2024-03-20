@@ -19,7 +19,7 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         _mpauseMenu?.SetActive(false);
-        Time.timeScale = GameManager.instance.GetSpeed();
+        Time.timeScale = GameManager.instance.Speed;
     }
 
     public void Restart()
@@ -34,6 +34,6 @@ public class PauseMenu : MonoBehaviour
 
     public void Quit()
     {
-        mySceneManager.instance.SetScene("Clement");
+        mySceneManager.instance.SetScene("Clement", mySceneManager.LoadMode.SINGLE);
     }
 }

@@ -133,7 +133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 16856688}
   - component: {fileID: 16856687}
-  - component: {fileID: 16856686}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -141,14 +140,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &16856686
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 16856685}
-  m_Enabled: 1
 --- !u!20 &16856687
 Camera:
   m_ObjectHideFlags: 0
@@ -563,7 +554,7 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!1001 &1603023037
+--- !u!1001 &1544447574
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -571,47 +562,47 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1527802384342363840, guid: c782552722799074e8962dbd5e7574bf, type: 3}
+    - target: {fileID: 352132099647722105, guid: e6a17ea60d4d24ffaa9e35b5fb2a66ff, type: 3}
       propertyPath: m_Name
-      value: InputManager
+      value: QuestManager
       objectReference: {fileID: 0}
-    - target: {fileID: 1548188670643521760, guid: c782552722799074e8962dbd5e7574bf, type: 3}
+    - target: {fileID: 5293982140691701158, guid: e6a17ea60d4d24ffaa9e35b5fb2a66ff, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 184.41524
+      value: 0.33110863
       objectReference: {fileID: 0}
-    - target: {fileID: 1548188670643521760, guid: c782552722799074e8962dbd5e7574bf, type: 3}
+    - target: {fileID: 5293982140691701158, guid: e6a17ea60d4d24ffaa9e35b5fb2a66ff, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 312.47406
+      value: 0.38381746
       objectReference: {fileID: 0}
-    - target: {fileID: 1548188670643521760, guid: c782552722799074e8962dbd5e7574bf, type: 3}
+    - target: {fileID: 5293982140691701158, guid: e6a17ea60d4d24ffaa9e35b5fb2a66ff, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 85.80526
+      value: -0.9612859
       objectReference: {fileID: 0}
-    - target: {fileID: 1548188670643521760, guid: c782552722799074e8962dbd5e7574bf, type: 3}
+    - target: {fileID: 5293982140691701158, guid: e6a17ea60d4d24ffaa9e35b5fb2a66ff, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1548188670643521760, guid: c782552722799074e8962dbd5e7574bf, type: 3}
+    - target: {fileID: 5293982140691701158, guid: e6a17ea60d4d24ffaa9e35b5fb2a66ff, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1548188670643521760, guid: c782552722799074e8962dbd5e7574bf, type: 3}
+    - target: {fileID: 5293982140691701158, guid: e6a17ea60d4d24ffaa9e35b5fb2a66ff, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1548188670643521760, guid: c782552722799074e8962dbd5e7574bf, type: 3}
+    - target: {fileID: 5293982140691701158, guid: e6a17ea60d4d24ffaa9e35b5fb2a66ff, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1548188670643521760, guid: c782552722799074e8962dbd5e7574bf, type: 3}
+    - target: {fileID: 5293982140691701158, guid: e6a17ea60d4d24ffaa9e35b5fb2a66ff, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1548188670643521760, guid: c782552722799074e8962dbd5e7574bf, type: 3}
+    - target: {fileID: 5293982140691701158, guid: e6a17ea60d4d24ffaa9e35b5fb2a66ff, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1548188670643521760, guid: c782552722799074e8962dbd5e7574bf, type: 3}
+    - target: {fileID: 5293982140691701158, guid: e6a17ea60d4d24ffaa9e35b5fb2a66ff, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
@@ -619,7 +610,7 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: c782552722799074e8962dbd5e7574bf, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: e6a17ea60d4d24ffaa9e35b5fb2a66ff, type: 3}
 --- !u!1 &1817061806
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,23 +793,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: Era1.Array.size
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: Era1.Array.data[0]
-      value: BlockOutClick
+      value: FightingGame
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: Era1.Array.data[1]
-      value: CrossyPorn
+      value: Crypto
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: Era1.Array.data[2]
-      value: FIghtingGame
+      value: DirtyRoad
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: Era1.Array.data[3]
-      value: Findher
+      value: Crypto
       objectReference: {fileID: 0}
     - target: {fileID: 5661505165497571510, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: m_Name
@@ -877,6 +868,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4525237552063667283, guid: 108cce104fcb83340958920a484c1bac, type: 3}
+      propertyPath: WinScreen
+      value: WinScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 4525237552063667283, guid: 108cce104fcb83340958920a484c1bac, type: 3}
+      propertyPath: FasterScreen
+      value: LoseScreen
+      objectReference: {fileID: 0}
     - target: {fileID: 8806018735200440851, guid: 108cce104fcb83340958920a484c1bac, type: 3}
       propertyPath: m_Name
       value: SceneManager
@@ -890,7 +889,6 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1603023037}
   - {fileID: 7911446559097213416}
   - {fileID: 8982916059568699010}
   - {fileID: 1840523861636629208}
@@ -898,3 +896,4 @@ SceneRoots:
   - {fileID: 1138750869}
   - {fileID: 740921388}
   - {fileID: 1150571097}
+  - {fileID: 1544447574}
