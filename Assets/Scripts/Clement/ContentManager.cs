@@ -180,5 +180,4 @@ public class ContentManager : MonoBehaviour
             UpdateDots();
         }
     }
-
 }

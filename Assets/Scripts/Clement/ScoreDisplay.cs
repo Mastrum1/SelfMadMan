@@ -8,17 +8,17 @@ using UnityEngine;
 public class ScoreDisplay : MonoBehaviour
 {
 
-    [SerializeField] TMP_Text _mscoreText;
+    [SerializeField] TMP_Text _mScoreText;
 
     // Start is called before the first frame update
     void Start()
     {
-        _mscoreText = GetComponent<TMP_Text>();
+        _mScoreText = GetComponent<TMP_Text>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        _mscoreText.text = GameManager.instance.DisplayScore();
+        _mScoreText.text = GameManager.instance.DisplayScore();
     }
 }
