@@ -24,4 +24,9 @@ public class UIManager : MonoBehaviour
         panel.GetComponent<CanvasGroup>().interactable = true;
         panel.GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
+
+    public void ChangeLanguage()
+    {
+        
+    }
 }

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ContentManager : MonoBehaviour
 {
@@ -9,18 +10,20 @@ public class ContentManager : MonoBehaviour
     [SerializeField] private Canvas _mMyCanvas;
     private Camera cam { get { return _mMyCanvas.worldCamera; } }
 
-
     [Header("Content Vieport")]
-    [SerializeField] private Image contentDisplay;
-    [SerializeField] private List<GameObject> contentPanels;
+    [SerializeField] private Image _mContentDisplay;
+    [SerializeField] private Image _mEraBGContent;
+    [SerializeField] private List<GameObject> _mContentPanels;
+    [SerializeField] private List<GameObject> _mEraBGPanel;
 
     [Header("Navigation Dots")]
-    [SerializeField] private GameObject dotsContainer;
-    [SerializeField] private GameObject dotPrefab;
+    [SerializeField] private GameObject _mDotsContainer;
+    [SerializeField] private GameObject _mDotPrefab;
+    [SerializeField] private TMP_Text _mText;
 
     [Header("Pagination Buttons")]
-    [SerializeField] private Button nextButton;
-    [SerializeField] private Button prevButton;
+    [SerializeField] private Button _mNextButton;
+    [SerializeField] private Button _mPrevButton;
 
     [Header("Page Settings")]
     [SerializeField] private bool useTimer = false;
@@ -36,8 +39,8 @@ public class ContentManager : MonoBehaviour
 
     void Start()
     {
-        nextButton.onClick.AddListener(NextContent);
-        prevButton.onClick.AddListener(PreviousContent);
+        _mNextButton.onClick.AddListener(NextContent);
+        _mPrevButton.onClick.AddListener(PreviousContent);
 
         // Initialize dots
         InitializeDots();
@@ -56,26 +59,29 @@ public class ContentManager : MonoBehaviour
     void InitializeDots()
     {
         // Create dots based on the number of content panels
-        for (int i = 0; i < contentPanels.Count; i++)
+        for (int i = 0; i < _mContentPanels.Count; i++)
         {
-            GameObject dot = Instantiate(dotPrefab, dotsContainer.transform);
+            GameObject dot = Instantiate(_mDotPrefab, _mDotsContainer.transform);
             Image dotImage = dot.GetComponent<Image>();
             dotImage.color = (i == currentIndex) ? Color.white : Color.gray;
             dotImage.fillAmount = 0f; // Initial fill amount
             // You may want to customize the dot appearance and layout here
+            _mText.text = "Ere " + (currentIndex + 1);
         }
     }
 
     void UpdateDots()
     {
         // Update the appearance of dots based on the current index
-        for (int i = 0; i < dotsContainer.transform.childCount; i++)
+        for (int i = 0; i < _mDotsContainer.transform.childCount; i++)
         {
-            Image dotImage = dotsContainer.transform.GetChild(i).GetComponent<Image>();
+            Image dotImage = _mDotsContainer.transform.GetChild(i).GetComponent<Image>();
             dotImage.color = (i == currentIndex) ? Color.white : Color.gray;
 
             float targetFillAmount = timer / autoMoveTime;
             StartCoroutine(SmoothFill(dotImage, targetFillAmount, 0.5f));
+
+            _mText.text = "Ere " + (currentIndex + 1);
         }
     }
 
@@ -120,7 +126,7 @@ public class ContentManager : MonoBehaviour
             if (Mathf.Abs(swipeDistance) > swipeThreshold && IsTouchInContentArea(touchStartPos, output))
             {
                 
-                if (isLimitedSwipe && ((currentIndex == 0 && swipeDistance > 0) || (currentIndex == contentPanels.Count - 1 && swipeDistance < 0)))
+                if (isLimitedSwipe && ((currentIndex == 0 && swipeDistance > 0) || (currentIndex == _mContentPanels.Count - 1 && swipeDistance < 0)))
                 {
                     // Limited swipe is enabled, and at the edge of content
                     return;
@@ -159,14 +165,14 @@ public class ContentManager : MonoBehaviour
 
     void NextContent()
     {
-        currentIndex = (currentIndex + 1) % contentPanels.Count;
+        currentIndex = (currentIndex + 1) % _mContentPanels.Count;
         ShowContent();
         UpdateDots();
     }
 
     void PreviousContent()
     {
-        currentIndex = (currentIndex - 1 + contentPanels.Count) % contentPanels.Count;
+        currentIndex = (currentIndex - 1 + _mContentPanels.Count) % _mContentPanels.Count;
         ShowContent();
         UpdateDots();
     }
@@ -174,13 +180,13 @@ public class ContentManager : MonoBehaviour
     void ShowContent()
     {
         // Activate the current panel and deactivate others
-        for (int i = 0; i < contentPanels.Count; i++)
+        for (int i = 0; i < _mContentPanels.Count; i++)
         {
             bool isActive = i == currentIndex;
-            contentPanels[i].SetActive(isActive);
+            _mContentPanels[i].SetActive(isActive);
 
             // Update dot visibility and color based on the current active content
-            Image dotImage = dotsContainer.transform.GetChild(i).GetComponent<Image>();
+            Image dotImage = _mDotsContainer.transform.GetChild(i).GetComponent<Image>();
             dotImage.color = isActive ? Color.white : Color.gray;
 
             if (isActive)
@@ -195,11 +201,17 @@ public class ContentManager : MonoBehaviour
                 dotImage.fillAmount = 0f;
             }
         }
+
+        for (int i = 0; i < _mEraBGPanel.Count; i++)
+        {
+            bool isActive = i == currentIndex;
+            _mEraBGPanel[i].SetActive(isActive);
+        }
     }
 
     public void SetCurrentIndex(int newIndex)
     {
-        if (newIndex >= 0 && newIndex < contentPanels.Count)
+        if (newIndex >= 0 && newIndex < _mContentPanels.Count)
         {
             currentIndex = newIndex;
             ShowContent();
