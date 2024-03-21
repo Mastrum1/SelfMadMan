@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class ScoreScreen : MonoBehaviour
 {
     // Start is called before the first frame update
-    private void Awake()
+  /*  private void Awake()
     {
         if (!SceneManager.GetSceneByName("HomePage").IsValid())
             StartCoroutine(Loading());
@@ -19,5 +19,5 @@ public class ScoreScreen : MonoBehaviour
             SceneManager.LoadScene("MinigamesChoice");
         else
             mySceneManager.instance.RandomGameChoice(); //random
-    }
+    }*/
 }
