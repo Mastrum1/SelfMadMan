@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 4401339869329618634}
   - component: {fileID: 15716378913150138}
   - component: {fileID: 491009848461839725}
+  - component: {fileID: 3059695925226260984}
   m_Layer: 0
   m_Name: buttonTiming
   m_TagString: Untagged
@@ -250,10 +251,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28945584cfd7ed245aefedf41334cade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentTime: 0
-  _mMaxTime: 8
+  _mMaxScale: 2.5
   _mMinTimeForClick: 0.1
   _mPerfectTiming: 0.3
   _mMidTiming: 0.5
   _mImmondeTiming: 0.85
   _mTorus: {fileID: 1030962731721815075}
+  _mDecreaseSpeed: 0
+--- !u!114 &3059695925226260984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4409378949257764596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83dcd8dace8b7fe449d796b980cb121d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selfSelected: 0
+  onSelected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 491009848461839725}
+        m_TargetAssemblyTypeName: NewBehaviourScript, Assembly-CSharp
+        m_MethodName: ObjectTaped
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onDeselected:
+    m_PersistentCalls:
+      m_Calls: []
+  use: 0
+  onSelectedFinger:
+    m_PersistentCalls:
+      m_Calls: []
+  onSelectedFingerUp:
+    m_PersistentCalls:
+      m_Calls: []
+  onSelectedSelectFinger:
+    m_PersistentCalls:
+      m_Calls: []
+  onSelectedSelectFingerUp:
+    m_PersistentCalls:
+      m_Calls: []
