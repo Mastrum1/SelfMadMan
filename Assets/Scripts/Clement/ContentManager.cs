@@ -72,21 +72,6 @@ public class ContentManager : MonoBehaviour
         }
     }
 
-    IEnumerator SmoothFill(Image image, float targetFillAmount, float duration)
-    {
-        float startFillAmount = image.fillAmount;
-        float elapsedTime = 0f;
-
-        while (elapsedTime < duration)
-        {
-            image.fillAmount = Mathf.Lerp(startFillAmount, targetFillAmount, elapsedTime / duration);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        image.fillAmount = targetFillAmount; // Ensure it reaches the exact target
-    }
-
     void Update()
     {
         // Detect swipe input only within the content area
@@ -98,7 +83,6 @@ public class ContentManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             touchStartPos = Input.mousePosition;
-            Debug.Log(touchStartPos);
         }
 
         if (Input.GetMouseButtonUp(0))
@@ -180,5 +164,4 @@ public class ContentManager : MonoBehaviour
             UpdateDots();
         }
     }
-
 }
