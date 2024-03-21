@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -58,5 +59,13 @@ public class UIManager : MonoBehaviour
             default:
                 return;
         }
+    }
+
+    public void Toggle(Toggle toggle)
+    {
+        if (toggle.isOn)
+            LocaleSelector.Instance.ChangeLocale(1);
+        else if (!toggle.isOn)
+            LocaleSelector.Instance.ChangeLocale(0);
     }
 }

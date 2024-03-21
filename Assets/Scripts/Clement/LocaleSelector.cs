@@ -40,12 +40,4 @@ public class LocaleSelector : MonoBehaviour
         PlayerPrefs.SetInt("LocaleKey", localeID);
         active = false;
     }
-
-    public void ToggleLocate(Toggle toggle)
-    {
-        if (toggle.isOn)
-            ChangeLocale(1);
-        else if (!toggle.isOn)
-            ChangeLocale(0);
-    }
 }
