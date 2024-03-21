@@ -8,7 +8,7 @@ public class ContentManager : MonoBehaviour
 {
     [Header("For Screnn space Camera")]
     [SerializeField] private Canvas _mMyCanvas;
-    private Camera cam { get { return _mMyCanvas.worldCamera; } }
+    private Camera cam { get => _mMyCanvas.worldCamera; }
 
     [Header("Content Vieport")]
     [SerializeField] private Image _mContentDisplay;
@@ -26,10 +26,7 @@ public class ContentManager : MonoBehaviour
     [SerializeField] private Button _mPrevButton;
 
     [Header("Page Settings")]
-    [SerializeField] private bool useTimer = false;
     [SerializeField] private bool isLimitedSwipe = false;
-    [SerializeField] private float autoMoveTime = 5f;
-    [SerializeField] private float timer;
     [SerializeField] private int currentIndex = 0;
     [SerializeField] private float swipeThreshold = 50f;
     [SerializeField] private Vector2 touchStartPos;
@@ -47,13 +44,6 @@ public class ContentManager : MonoBehaviour
 
         // Display initial content
         ShowContent();
-
-        // Start auto-move timer if enabled
-        if (useTimer)
-        {
-            timer = autoMoveTime;
-            InvokeRepeating("AutoMoveContent", 1f, 1f); // Invoke every second to update the timer
-        }
     }
 
     void InitializeDots()
@@ -77,9 +67,6 @@ public class ContentManager : MonoBehaviour
         {
             Image dotImage = _mDotsContainer.transform.GetChild(i).GetComponent<Image>();
             dotImage.color = (i == currentIndex) ? Color.white : Color.gray;
-
-            float targetFillAmount = timer / autoMoveTime;
-            StartCoroutine(SmoothFill(dotImage, targetFillAmount, 0.5f));
 
             _mText.text = "Ere " + (currentIndex + 1);
         }
@@ -150,19 +137,6 @@ public class ContentManager : MonoBehaviour
         return RectTransformUtility.ScreenPointToWorldPointInRectangle(_mMyCanvas.GetComponent<RectTransform>(), touchPosition, cam, out output);
     }
 
-    void AutoMoveContent()
-    {
-        timer -= 1f; // Decrease timer every second
-
-        if (timer <= 0)
-        {
-            timer = autoMoveTime;
-            NextContent();
-        }
-
-        UpdateDots(); // Update dots on every timer tick
-    }
-
     void NextContent()
     {
         currentIndex = (currentIndex + 1) % _mContentPanels.Count;
@@ -188,18 +162,7 @@ public class ContentManager : MonoBehaviour
             // Update dot visibility and color based on the current active content
             Image dotImage = _mDotsContainer.transform.GetChild(i).GetComponent<Image>();
             dotImage.color = isActive ? Color.white : Color.gray;
-
-            if (isActive)
-            {
-                // Reset timer and fill amount when the content is swiped
-                timer = autoMoveTime;
-                dotImage.fillAmount = 1f;
-            }
-            else
-            {
-                // Set the fill amount to 0 for non-active content
-                dotImage.fillAmount = 0f;
-            }
+            dotImage.fillAmount = isActive ? 1f : 0f;
         }
 
         for (int i = 0; i < _mEraBGPanel.Count; i++)
@@ -208,7 +171,6 @@ public class ContentManager : MonoBehaviour
             _mEraBGPanel[i].SetActive(isActive);
         }
     }
-
     public void SetCurrentIndex(int newIndex)
     {
         if (newIndex >= 0 && newIndex < _mContentPanels.Count)
@@ -218,4 +180,5 @@ public class ContentManager : MonoBehaviour
             UpdateDots();
         }
     }
+
 }
