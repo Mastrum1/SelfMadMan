@@ -1,21 +1,38 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class DirtyRoadManager : MiniGameManager
 {
-    [SerializeField] private GameObject mDirtyAdds;
+    public enum RoadStates
+    {
+        Two,
+        Three,
+        Four,
+        Five,
+        Six
+    }
+    
+    private RoadStates _roadState;
+
+    [SerializeField] private Dictionary<RoadStates, float> _roadGaps;
     [SerializeField] private int mNumOfAdds;
-    [SerializeField] private DirtyRoadInteractableManager mInteractableManager;
+    [SerializeField] private OnAddsCollide _onAddsCollide;
+    [SerializeField] private GameObject _road;
     public float miniGameTime;
 
     public override void Awake()
     {
         base.Awake();
-        SpawnPornAdds(mNumOfAdds);
-        mInteractableManager.OnGameEnd += OnGameEnd;
+        
+        _onAddsCollide.OnCollided += OnGameEnd;
+    }
+
+    private void Start()
+    {
+        ChangeRoadState(Random.Range(0, Enum.GetNames(typeof(RoadStates)).Length));
+        SpawnRoads(_roadState);
     }
 
     void OnGameEnd(bool win)
@@ -23,17 +40,21 @@ public class DirtyRoadManager : MiniGameManager
         EndMiniGame(win, miniGameScore);
     }
 
-    void SpawnPornAdds(int numOfAdds)
+    void ChangeRoadState(int state)
     {
-        for (int i = 0; i < numOfAdds; i++)
+        _roadState = (RoadStates)state;
+    }
+
+    void SpawnRoads(RoadStates state)
+    {
+        for (int i = 0; i < (int)state; i++)
         {
-            GameObject ad = Instantiate(mDirtyAdds, new Vector3(Random.Range(-2.0f, 2.0f), Random.Range(0.0f, 3.5f), 0.0f), Quaternion.identity);
-            ad.transform.SetParent(mInteractableManager.dirtyAddParent.transform);
+            Instantiate(_road, new Vector3(0,_roadGaps[state], 0), Quaternion.identity);
         }
     }
 
     private void OnDestroy()
     {
-        mInteractableManager.OnGameEnd -= OnGameEnd;
+        _onAddsCollide.OnCollided -= OnGameEnd;
     }
 }

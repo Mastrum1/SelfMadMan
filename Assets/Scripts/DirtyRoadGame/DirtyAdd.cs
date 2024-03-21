@@ -1,45 +1,25 @@
+using System.Collections;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class DirtyAdd : MonoBehaviour
 {
-    [SerializeField] private bool mRandForce;
-    [SerializeField] private float mForceX;
-    [SerializeField] private float mForceY;
-    [SerializeField] private float mDirX;
-    [SerializeField] private float mDirY;
-    [SerializeField] private Rigidbody2D mRigid2d;
+    [SerializeField] private float _force;
+    public float Dir { get => _dir; set => _dir = value; }
+    [SerializeField] private float _dir;
+    public float TimeTilMove { get => _timeTilMove; set => _timeTilMove = value; }
+    [SerializeField] private float _timeTilMove;
+    
+    [SerializeField] private Rigidbody2D _rigid2d;
 
     void Start()
     {
-        Move();
+        StartCoroutine(Move(TimeTilMove));
     }
 
-    void Move()
+    IEnumerator Move(float time)
     {
-        if (mRandForce)
-        {
-            do
-            {
-                mDirX = Random.Range(-1, 2);
-                mDirY = Random.Range(-1, 2); 
-            } while (mDirX == 0 || mDirY == 0);
-            
-            mForceX = Random.Range(51, 200);
-            mForceY = Random.Range(51, 200);
-            mRigid2d.AddForce(new Vector2(mForceX * mDirX, mForceY * mDirY));
-        }
-        else
-        {
-            if (mForceX < 51)
-            {
-                mForceX = 51;
-            }
-            if (mForceY < 51)
-            {
-                mForceY = 51;
-            }
-            mRigid2d.AddForce(new Vector2(mForceX * mDirX, mForceY * mDirY));
-        }
+        yield return new WaitForSeconds(time);
+        _force = Random.Range(60, 150);
+        _rigid2d.AddForce(new Vector2(_force * Dir, 0));
     }
 }
