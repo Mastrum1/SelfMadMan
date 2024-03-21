@@ -10,7 +10,7 @@ public class ContentManager : MonoBehaviour
     [SerializeField] private Canvas _mMyCanvas;
     private Camera cam { get => _mMyCanvas.worldCamera; }
 
-    [Header("Content Vieport")]
+    [Header("Content Viewport")]
     [SerializeField] private Image _mContentDisplay;
     [SerializeField] private Image _mEraBGContent;
     [SerializeField] private List<GameObject> _mContentPanels;
@@ -27,12 +27,16 @@ public class ContentManager : MonoBehaviour
 
     [Header("Page Settings")]
     [SerializeField] private bool isLimitedSwipe = false;
-    [SerializeField] private int currentIndex = 0;
-    [SerializeField] private float swipeThreshold = 50f;
-    [SerializeField] private Vector2 touchStartPos;
+    [SerializeField] private int _mCurrentIndex = 0;
+    [SerializeField] private float _mSwipeThreshold = 50f;
+    [SerializeField] private Vector2 _mTouchStartPos;
 
     // Reference to the RectTransform of the content area
     [SerializeField] private RectTransform contentArea;
+
+    [Header("UIManager")]
+    [SerializeField] private UIManager _mUIManager;
+    [SerializeField] private CanvasGroup _mMainCanvas;
 
     void Start()
     {
@@ -53,10 +57,10 @@ public class ContentManager : MonoBehaviour
         {
             GameObject dot = Instantiate(_mDotPrefab, _mDotsContainer.transform);
             Image dotImage = dot.GetComponent<Image>();
-            dotImage.color = (i == currentIndex) ? Color.white : Color.gray;
+            dotImage.color = (i == _mCurrentIndex) ? Color.white : Color.gray;
             dotImage.fillAmount = 0f; // Initial fill amount
             // You may want to customize the dot appearance and layout here
-            _mText.text = "Ere " + (currentIndex + 1);
+            _mText.text = "Ere " + (_mCurrentIndex + 1);
         }
     }
 
@@ -66,9 +70,9 @@ public class ContentManager : MonoBehaviour
         for (int i = 0; i < _mDotsContainer.transform.childCount; i++)
         {
             Image dotImage = _mDotsContainer.transform.GetChild(i).GetComponent<Image>();
-            dotImage.color = (i == currentIndex) ? Color.white : Color.gray;
+            dotImage.color = (i == _mCurrentIndex) ? Color.white : Color.gray;
 
-            _mText.text = "Ere " + (currentIndex + 1);
+            _mText.text = "Ere " + (_mCurrentIndex + 1);
         }
     }
 
@@ -80,24 +84,24 @@ public class ContentManager : MonoBehaviour
 
     void DetectSwipe()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && _mUIManager.CurrentCanvas == _mMainCanvas)
         {
-            touchStartPos = Input.mousePosition;
+            _mTouchStartPos = Input.mousePosition;
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && _mUIManager.CurrentCanvas == _mMainCanvas)
         {
             Vector2 touchEndPos = Input.mousePosition;
             Vector3 output = Vector2.zero;
-            float swipeDistance = touchEndPos.x - touchStartPos.x;
+            float swipeDistance = touchEndPos.x - _mTouchStartPos.x;
 
             contentArea.position = output;
 
             // Check if the swipe is within the content area bounds
-            if (Mathf.Abs(swipeDistance) > swipeThreshold && IsTouchInContentArea(touchStartPos, output))
+            if (Mathf.Abs(swipeDistance) > _mSwipeThreshold && IsTouchInContentArea(_mTouchStartPos, output))
             {
                 
-                if (isLimitedSwipe && ((currentIndex == 0 && swipeDistance > 0) || (currentIndex == _mContentPanels.Count - 1 && swipeDistance < 0)))
+                if (isLimitedSwipe && ((_mCurrentIndex == 0 && swipeDistance > 0) || (_mCurrentIndex == _mContentPanels.Count - 1 && swipeDistance < 0)))
                 {
                     // Limited swipe is enabled, and at the edge of content
                     return;
@@ -123,14 +127,14 @@ public class ContentManager : MonoBehaviour
 
     void NextContent()
     {
-        currentIndex = (currentIndex + 1) % _mContentPanels.Count;
+        _mCurrentIndex = (_mCurrentIndex + 1) % _mContentPanels.Count;
         ShowContent();
         UpdateDots();
     }
 
     void PreviousContent()
     {
-        currentIndex = (currentIndex - 1 + _mContentPanels.Count) % _mContentPanels.Count;
+        _mCurrentIndex = (_mCurrentIndex - 1 + _mContentPanels.Count) % _mContentPanels.Count;
         ShowContent();
         UpdateDots();
     }
@@ -140,7 +144,7 @@ public class ContentManager : MonoBehaviour
         // Activate the current panel and deactivate others
         for (int i = 0; i < _mContentPanels.Count; i++)
         {
-            bool isActive = i == currentIndex;
+            bool isActive = i == _mCurrentIndex;
             _mContentPanels[i].SetActive(isActive);
 
             // Update dot visibility and color based on the current active content
@@ -151,7 +155,7 @@ public class ContentManager : MonoBehaviour
 
         for (int i = 0; i < _mEraBGPanel.Count; i++)
         {
-            bool isActive = i == currentIndex;
+            bool isActive = i == _mCurrentIndex;
             _mEraBGPanel[i].SetActive(isActive);
         }
     }
@@ -159,7 +163,7 @@ public class ContentManager : MonoBehaviour
     {
         if (newIndex >= 0 && newIndex < _mContentPanels.Count)
         {
-            currentIndex = newIndex;
+            _mCurrentIndex = newIndex;
             ShowContent();
             UpdateDots();
         }

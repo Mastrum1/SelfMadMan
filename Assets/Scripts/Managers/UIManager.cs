@@ -6,7 +6,8 @@ public class UIManager : MonoBehaviour
     [Header("Canvas LIST")]
     [SerializeField] private List<CanvasGroup> _mCanvasGroup = new List<CanvasGroup>();
 
-    public CanvasGroup CanvasGroup {  get => _mCurrentCanvas; set => _mCurrentCanvas = value; }
+    public CanvasGroup CurrentCanvas {  get => _mCurrentCanvas; set => _mCurrentCanvas = value; }
+    [Header("Current Canvas")]
     [SerializeField] private CanvasGroup _mCurrentCanvas;
 
     // Links towards our socials medias
@@ -35,7 +36,7 @@ public class UIManager : MonoBehaviour
 
     public void ChangeLanguage()
     {
-        // Localization package ?
+        //
     }
 
     public void Redirection(string platform)

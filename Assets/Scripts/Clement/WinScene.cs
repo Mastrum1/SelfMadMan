@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class WinScene : MonoBehaviour
 {
-    [SerializeField] public Slider slider;
+    [SerializeField] private Slider slider;
 
     private void Awake()
     {

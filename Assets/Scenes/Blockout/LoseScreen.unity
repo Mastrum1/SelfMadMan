@@ -737,8 +737,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 354217640}
         m_TargetAssemblyTypeName: SceneManaProxy, Assembly-CSharp
-        m_MethodName: RandomScene
-        m_Mode: 3
+        m_MethodName: StartGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -798,6 +798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SceneName: HomePage
+  _mEra: 0
 --- !u!1 &454995540
 GameObject:
   m_ObjectHideFlags: 0
@@ -1615,6 +1616,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SceneName: HomePage
+  _mEra: 0
 --- !u!1001 &1911719137
 PrefabInstance:
   m_ObjectHideFlags: 0
