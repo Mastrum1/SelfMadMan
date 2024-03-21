@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 
     public int Level { get => _mLevelCount; private set => _mLevelCount = value; }
     public float Speed { get; private set; }
-    public int Era { get; private set; }
+    public int Era { get; set; }
 
     [SerializeField] float _mScore;
     [SerializeField] int _mHearts;
@@ -26,7 +26,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-
         Application.targetFrameRate = 60;
 
         if (instance == null)

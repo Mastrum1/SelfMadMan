@@ -13,8 +13,8 @@ public class ContentManager : MonoBehaviour
     [Header("Content Viewport")]
     [SerializeField] private Image _mContentDisplay;
     [SerializeField] private Image _mEraBGContent;
-    [SerializeField] private List<GameObject> _mContentPanels;
-    [SerializeField] private List<GameObject> _mEraBGPanel;
+    [SerializeField] private List<Sprite> _mContentPanels;
+    [SerializeField] private List<Sprite> _mEraBGPanel;
 
     [Header("Navigation Dots")]
     [SerializeField] private GameObject _mDotsContainer;
@@ -145,7 +145,7 @@ public class ContentManager : MonoBehaviour
         for (int i = 0; i < _mContentPanels.Count; i++)
         {
             bool isActive = i == _mCurrentIndex;
-            _mContentPanels[i].SetActive(isActive);
+            _mContentDisplay.sprite = _mContentPanels[_mCurrentIndex];
 
             // Update dot visibility and color based on the current active content
             Image dotImage = _mDotsContainer.transform.GetChild(i).GetComponent<Image>();
@@ -155,10 +155,20 @@ public class ContentManager : MonoBehaviour
 
         for (int i = 0; i < _mEraBGPanel.Count; i++)
         {
-            bool isActive = i == _mCurrentIndex;
-            _mEraBGPanel[i].SetActive(isActive);
+            _mEraBGContent.sprite = _mEraBGPanel[_mCurrentIndex];
+  
         }
+
+        if (_mCurrentIndex == 0)
+            GameManager.instance.Era = 0;
+        if (_mCurrentIndex == 1)
+            GameManager.instance.Era = 1;
+        if (_mCurrentIndex == 2)
+            GameManager.instance.Era = 2;
+
+        Debug.Log(GameManager.instance.Era);
     }
+
     public void SetCurrentIndex(int newIndex)
     {
         if (newIndex >= 0 && newIndex < _mContentPanels.Count)
