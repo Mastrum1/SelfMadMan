@@ -19,7 +19,7 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         _mpauseMenu?.SetActive(false);
-        Time.timeScale = GameManager.instance.Speed;
+        Time.timeScale = 1;
     }
 
     public void Restart()
