@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LikeElonsTweetsGameManager : MiniGameManager
 {
-    [SerializeField] Vector3 SpawnPosition;
+   // [SerializeField] Vector3 SpawnPosition;
     private float _mAverageSpawnRate;
 
     // Start is called before the first frame update
@@ -26,7 +26,7 @@ public class LikeElonsTweetsGameManager : MiniGameManager
             yield return new WaitForSeconds(_mAverageSpawnRate);
             GameObject tweet = TweetSpawner.SharedInstance.GetPooledTweet(); 
             if (tweet != null) {
-               // tweet.transform.position = SpawnPosition;
+                //tweet.transform.position = SpawnPosition;
                 tweet.SetActive(true);
             }
         }
