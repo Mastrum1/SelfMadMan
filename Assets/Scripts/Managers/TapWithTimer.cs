@@ -1,8 +1,10 @@
+using CW.Common;
 using UnityEngine;
 
 public class TapWithTimer : MonoBehaviour
 {
-    private InputManager _mInput;
+    [SerializeField]
+    private GetBenchManager _mBenchManager;
 
     private bool _EndGame = false;
 
@@ -30,10 +32,10 @@ public class TapWithTimer : MonoBehaviour
     void OnEnable()
     {
         _mTorus.transform.localScale = new Vector3(_mMaxScale, _mMaxScale, _mMaxScale);
-        _EndGame = false;
     }
 
     // Update is called once per frame
+
 
     private void Update()
     {
@@ -42,7 +44,9 @@ public class TapWithTimer : MonoBehaviour
             _mTorus.transform.localScale -= new Vector3(Time.deltaTime * _mDecreaseSpeed, Time.deltaTime * _mDecreaseSpeed, Time.deltaTime * _mDecreaseSpeed);
             if (_mTorus.transform.localScale.x < _mMinTimeForClick)
             {
-                _EndGame = true;
+                //_mBenchManager.EndMiniGame(false, _mBenchManager.miniGameScore);
+                gameObject.SetActive(false);
+
             }
         }
     }
@@ -65,14 +69,10 @@ public class TapWithTimer : MonoBehaviour
         else
         {
             Debug.Log("Tu pues :) ");
-            _EndGame = true;
-            gameObject.SetActive(false);
+            //_mBenchManager.EndMiniGame(false, _mBenchManager.miniGameScore);
 
         }
-        if (_EndGame != false)
-        {
-            gameObject.SetActive(false);
-        }
+        gameObject.SetActive(false);
 
     }
 }

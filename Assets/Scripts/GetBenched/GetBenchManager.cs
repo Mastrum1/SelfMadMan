@@ -1,3 +1,4 @@
+using CW.Common;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,11 +6,16 @@ using UnityEngine;
 public class GetBenchManager : MiniGameManager
 {
 
+
+
     [SerializeField]
     private GameObject _mInteractables;
 
     [SerializeField]
     private List<GameObject> _mJamesState;
+
+    [SerializeField]
+    private List<GameObject> _mShadowState;
 
     [SerializeField] private List<GameObject> _mButtons;
 
@@ -37,17 +43,37 @@ public class GetBenchManager : MiniGameManager
     }
 
 
+    override public void Update()
+    {
+        if (_mTimer.timerValue == 0)
+        {
+            Debug.Log("Time's up");
+            EndMiniGame(true, miniGameScore);
+        }
+    }
+
     public void ChangeJames()
     {
         if (_mJamesState[0].activeSelf == true)
         {
             _mJamesState[0].SetActive(false);
+
+            _mShadowState[0].SetActive(false);
+
             _mJamesState[1].SetActive(true);
+
+            _mShadowState[1].SetActive(true);
         }
         else
         {
             _mJamesState[0].SetActive(true);
+
+            _mShadowState[0].SetActive(true);
+
             _mJamesState[1].SetActive(false);
+
+            _mShadowState[1].SetActive(false);
+
             _mNbRep++;
         }
     }
