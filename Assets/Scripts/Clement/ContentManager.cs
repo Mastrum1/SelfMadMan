@@ -29,9 +29,7 @@ public class ContentManager : MonoBehaviour
     [SerializeField] private Button _mPrevButton;
 
     [Header("Page Settings")]
-    [SerializeField] private bool isLimitedSwipe = false;
     [SerializeField] private int _mCurrentIndex = 0;
-    [SerializeField] private Vector2 _mTouchStartPos;
 
     [Header("UIManager")]
     [SerializeField] private UIManager _mUIManager;
@@ -91,19 +89,7 @@ public class ContentManager : MonoBehaviour
         _mTouchStartPos = Input.mousePosition;
         Debug.Log("Start Distance: " + _mTouchStartPos);
     }
-/*
-    public float OnUp()
-    {
-        Vector2 touchEndPos = Input.mousePosition;
-        float swipeDistance = touchEndPos.x - _mTouchStartPos.x;
-        return swipeDistance;
-    }
-
-    public void SwipeContent()
-    {   
-        SwapContent(1);
-    }
-*/
+    
     void ShowContent()
     {
         // Activate the current panel and deactivate others
