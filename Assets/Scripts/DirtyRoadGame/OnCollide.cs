@@ -11,7 +11,6 @@ public class OnCollide : MonoBehaviour
         if (col.gameObject.CompareTag("Player"))
         {
             OnCollided?.Invoke(_win);
-            print("loose");
         }
     }
 }

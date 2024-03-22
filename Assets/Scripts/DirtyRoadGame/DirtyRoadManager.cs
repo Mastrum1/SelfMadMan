@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DirtyRoadManager : MiniGameManager
@@ -8,12 +10,13 @@ public class DirtyRoadManager : MiniGameManager
     [SerializeField] private GameObject _road;
     public float miniGameTime;
 
-    public override void Awake()
+    private List<Road> _roads = new List<Road>();
+
+    private void Start()
     {
-        base.Awake();
-        
         _interactableManager.OnGameEnd += OnGameEnd;
         SpawnRoads();
+        _interactableManager.EnableCollision(_roads);
     }
 
     void OnGameEnd(bool win)
@@ -31,15 +34,17 @@ public class DirtyRoadManager : MiniGameManager
         
         for (int i = 0; i < _numOfRoads; i++)
         {
-            var gap = (6.5f / (_numOfRoads + 1)) * (i+1);
+            var gap = (7f / (_numOfRoads + 1)) * (i+1);
             Debug.Log(gap);
-            var road = Instantiate(_road, new Vector3(0,3.5f - gap, 0), Quaternion.identity);
+            var road = Instantiate(_road, new Vector3(0, 3.5f - gap, 0), Quaternion.identity);
             road.transform.SetParent(_roadParent.transform);
+            _roads.Add(road.GetComponent<Road>());
         }
     }
 
     private void OnDestroy()
     {
         _interactableManager.OnGameEnd -= OnGameEnd;
+        _interactableManager.DisableCollision(_roads);
     }
 }

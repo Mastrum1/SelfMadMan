@@ -1,16 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 public class Road : MonoBehaviour
 {
     
     [SerializeField] private GameObject _dirtyAd;
-    //public GameObject AdHolder { get => _adHolder; }
-    public GameObject _adHolder;
+    [SerializeField] private GameObject _adHolder;
     [SerializeField] private GameObject _adSpawnPoint;
     
-    void Start()
+    public List<OnCollide> Ads
+    {
+        get => _ads;
+        set => _ads = value;
+    }
+    private List<OnCollide> _ads = new List<OnCollide>();
+    
+    
+    void Awake()
     {
         SpawnDirtyAd();
     }
@@ -31,5 +39,7 @@ public class Road : MonoBehaviour
         adScript.Dir = -dir;
         adScript.TimeTilMove = Random.Range(0.1f, 3f);
         ad.transform.SetParent(_adHolder.transform); 
+        _ads.Add(ad.GetComponent<OnCollide>());
+        Debug.Log(_ads.Count);
     }
 }
