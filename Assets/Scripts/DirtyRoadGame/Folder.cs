@@ -32,13 +32,11 @@ public class Folder : MonoBehaviour
 
     public void MoveRight()
     {
-        Debug.Log("Right");
         transform.Translate(transform.right * (_turn * Time.deltaTime), Space.World);
     }
 
     public void MoveLeft()
     {
-        Debug.Log("Left");
         transform.Translate(-transform.right * (_turn * Time.deltaTime), Space.World);
     }
 
