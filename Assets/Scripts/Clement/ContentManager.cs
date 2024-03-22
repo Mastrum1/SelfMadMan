@@ -128,6 +128,7 @@ public class ContentManager : MonoBehaviour
     void NextContent()
     {
         _mCurrentIndex = (_mCurrentIndex + 1) % _mContentPanels.Count;
+        GameManager.instance.Era = _mCurrentIndex +1;
         ShowContent();
         UpdateDots();
     }
@@ -135,6 +136,7 @@ public class ContentManager : MonoBehaviour
     void PreviousContent()
     {
         _mCurrentIndex = (_mCurrentIndex - 1 + _mContentPanels.Count) % _mContentPanels.Count;
+        GameManager.instance.Era = _mCurrentIndex + 1;
         ShowContent();
         UpdateDots();
     }
@@ -158,15 +160,6 @@ public class ContentManager : MonoBehaviour
             _mEraBGContent.sprite = _mEraBGPanel[_mCurrentIndex];
   
         }
-
-        if (_mCurrentIndex == 0)
-            GameManager.instance.Era = 0;
-        if (_mCurrentIndex == 1)
-            GameManager.instance.Era = 1;
-        if (_mCurrentIndex == 2)
-            GameManager.instance.Era = 2;
-
-        Debug.Log(GameManager.instance.Era);
     }
 
     public void SetCurrentIndex(int newIndex)
