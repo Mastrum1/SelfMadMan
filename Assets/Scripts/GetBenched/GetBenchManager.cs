@@ -7,11 +7,9 @@ using UnityEngine;
 public class GetBenchManager : MiniGameManager
 {
 
-    [SerializeField]
-    private GameObject _mInteractables;
+    [SerializeField] private GameObject _mInteractables;
 
-    [SerializeField]
-    private List<GameObject> _mJamesState;
+    [SerializeField] private List<GameObject> _mJamesState;
 
     [SerializeField]
     private List<GameObject> _mShadowState;
