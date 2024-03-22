@@ -5,20 +5,11 @@ using Random = UnityEngine.Random;
 
 public class DirtyRoadManager : MiniGameManager
 {
-    public enum RoadStates
-    {
-        Two,
-        Three,
-        Four,
-        Five,
-        Six
-    }
+    private int _numOfRoads;
     
-    private RoadStates _roadState;
-
-    [SerializeField] private Dictionary<RoadStates, float> _roadGaps;
     [SerializeField] private int mNumOfAdds;
     [SerializeField] private OnAddsCollide _onAddsCollide;
+    [SerializeField] private GameObject _roadParent;
     [SerializeField] private GameObject _road;
     public float miniGameTime;
 
@@ -31,8 +22,8 @@ public class DirtyRoadManager : MiniGameManager
 
     private void Start()
     {
-        ChangeRoadState(Random.Range(0, Enum.GetNames(typeof(RoadStates)).Length));
-        SpawnRoads(_roadState);
+        _numOfRoads = 2;
+        SpawnRoads();
     }
 
     void OnGameEnd(bool win)
@@ -40,16 +31,14 @@ public class DirtyRoadManager : MiniGameManager
         EndMiniGame(win, miniGameScore);
     }
 
-    void ChangeRoadState(int state)
+    void SpawnRoads()
     {
-        _roadState = (RoadStates)state;
-    }
-
-    void SpawnRoads(RoadStates state)
-    {
-        for (int i = 0; i < (int)state; i++)
+        for (int i = 0; i < _numOfRoads; i++)
         {
-            Instantiate(_road, new Vector3(0,_roadGaps[state], 0), Quaternion.identity);
+            var gap = (5 / (_numOfRoads + 1)) * (i+1);
+            Debug.Log(gap);
+            var road = Instantiate(_road, new Vector3(0,-2.5f + gap, 0), Quaternion.identity);
+            road.transform.SetParent(_roadParent.transform);
         }
     }
 

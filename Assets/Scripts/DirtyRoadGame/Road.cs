@@ -6,15 +6,11 @@ public class Road : MonoBehaviour
 {
     
     [SerializeField] private GameObject _dirtyAd;
-    
     [SerializeField] private GameObject _adHolder;
     [SerializeField] private GameObject _adSpawnPoint;
-    public Vector3 Position { get; set; }
     
     void Start()
     {
-        transform.position = Position;
-        
         SpawnDirtyAd();
     }
 
