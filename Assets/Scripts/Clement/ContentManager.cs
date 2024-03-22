@@ -84,12 +84,12 @@ public class ContentManager : MonoBehaviour
 
     void DetectSwipe()
     {
-        if (Input.GetMouseButtonDown(0) && _mUIManager.CurrentCanvas == _mMainCanvas)
+        if (Input.GetMouseButtonDown(0))
         {
             _mTouchStartPos = Input.mousePosition;
         }
 
-        if (Input.GetMouseButtonUp(0) && _mUIManager.CurrentCanvas == _mMainCanvas)
+        if (Input.GetMouseButtonUp(0))
         {
             Vector2 touchEndPos = Input.mousePosition;
             Vector3 output = Vector2.zero;

@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    [Header("Canvas LIST")]
-    [SerializeField] private List<CanvasGroup> _mCanvasGroup = new List<CanvasGroup>();
+    [Header("GameObject LIST")]
+    [SerializeField] private List<GameObject> _mMenuUI = new List<GameObject>();
 
-    public CanvasGroup CurrentCanvas {  get => _mCurrentCanvas; set => _mCurrentCanvas = value; }
+    /*public CanvasGroup CurrentCanvas {  get => _mCurrentCanvas; set => _mCurrentCanvas = value; }
     [Header("Current Canvas")]
-    [SerializeField] private CanvasGroup _mCurrentCanvas;
+    [SerializeField] private GameObject _mCurrentGame;*/
 
     // Links towards our socials medias
     private string _mTwitterURL = "https://twitter.com/selfmadman_";
@@ -17,22 +17,16 @@ public class UIManager : MonoBehaviour
     private string _mTiktokURL = "https://www.tiktok.com/@selfmadman._?_t=8kpgaAFiNd2&_r=1";
     private string _mYoutubeURL = "https://www.youtube.com/@Selfmadman_";
 
-    public void SetAlpha(CanvasGroup canvasGroup)
+    public void SetOnOff(GameObject obj)
     {
-        if (!canvasGroup)
+        if (!obj)
             return;
-        else if (canvasGroup)
-            foreach (var c in _mCanvasGroup)
+        else if (obj)
+            foreach (var c in _mMenuUI)
             {
-                c.alpha = 0;
-                c.interactable = false;
-                c.blocksRaycasts = false;
+                c.SetActive(false);
             }
-
-        canvasGroup.alpha = 1;
-        canvasGroup.interactable = true;
-        canvasGroup.blocksRaycasts = true;
-        _mCurrentCanvas = canvasGroup;
+        obj.SetActive(true);
     }
 
     public void ChangeLanguage()
