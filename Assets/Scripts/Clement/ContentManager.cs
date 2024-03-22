@@ -7,10 +7,6 @@ using Lean.Touch;
 
 public class ContentManager : MonoBehaviour
 {
-    [Header("For Screen space Camera")]
-    [SerializeField] private Canvas _mMyCanvas;
-    private Camera cam { get => _mMyCanvas.worldCamera; }
-
     [Header("Content Viewport")]
     [SerializeField] private Image _mBaseImage;
     [SerializeField] private Image _mEraBGContent;
@@ -78,7 +74,7 @@ public class ContentManager : MonoBehaviour
     public void SwapContent(int i)
     {
         _mCurrentIndex = (_mCurrentIndex + i + _mImages.Count) % _mImages.Count;
-        //GameManager.instance.Era = _mCurrentIndex + 1;
+        GameManager.instance.Era = _mCurrentIndex + 1;
         ShowContent();
         UpdateDots();
         Debug.Log(_mCurrentIndex);
