@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class DirtyRoadManager : MiniGameManager
 {
-    private int _numOfRoads;
-    
-    [SerializeField] private int mNumOfAdds;
+    [SerializeField] private int _numOfRoads;
     [SerializeField] private OnAddsCollide _onAddsCollide;
     [SerializeField] private GameObject _roadParent;
     [SerializeField] private GameObject _road;
@@ -22,7 +17,6 @@ public class DirtyRoadManager : MiniGameManager
 
     private void Start()
     {
-        _numOfRoads = 2;
         SpawnRoads();
     }
 
@@ -33,11 +27,17 @@ public class DirtyRoadManager : MiniGameManager
 
     void SpawnRoads()
     {
+        if (_numOfRoads is < 2 or > 6)
+        {
+            Debug.LogError("number of roads is < 2 or > 6");
+            return;
+        }
+        
         for (int i = 0; i < _numOfRoads; i++)
         {
-            var gap = (5 / (_numOfRoads + 1)) * (i+1);
+            var gap = (6.5f / (_numOfRoads + 1)) * (i+1);
             Debug.Log(gap);
-            var road = Instantiate(_road, new Vector3(0,-2.5f + gap, 0), Quaternion.identity);
+            var road = Instantiate(_road, new Vector3(0,3.5f - gap, 0), Quaternion.identity);
             road.transform.SetParent(_roadParent.transform);
         }
     }
