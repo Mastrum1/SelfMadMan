@@ -27,13 +27,8 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void Settings()
-    {
-
-    }
-
     public void Quit()
     {
-        mySceneManager.instance.SetScene("Clement", mySceneManager.LoadMode.SINGLE);
+        mySceneManager.instance.SetScene("HomePage", mySceneManager.LoadMode.SINGLE);
     }
 }

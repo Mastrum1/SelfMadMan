@@ -3,18 +3,21 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Lean.Touch;
 
 public class ContentManager : MonoBehaviour
 {
-    [Header("For Screnn space Camera")]
+    [Header("For Screen space Camera")]
     [SerializeField] private Canvas _mMyCanvas;
     private Camera cam { get => _mMyCanvas.worldCamera; }
 
-    [Header("Content Vieport")]
-    [SerializeField] private Image _mContentDisplay;
+    [Header("Content Viewport")]
+    [SerializeField] private Image _mBaseImage;
     [SerializeField] private Image _mEraBGContent;
-    [SerializeField] private List<GameObject> _mContentPanels;
-    [SerializeField] private List<GameObject> _mEraBGPanel;
+    [SerializeField] private Image _mJames;
+    [SerializeField] private List<Sprite> _mImages;
+    [SerializeField] private List<Sprite> _mEraBGPanel;
+    [SerializeField] private List<Sprite> _mJamesForms;
 
     [Header("Navigation Dots")]
     [SerializeField] private GameObject _mDotsContainer;
@@ -26,18 +29,18 @@ public class ContentManager : MonoBehaviour
     [SerializeField] private Button _mPrevButton;
 
     [Header("Page Settings")]
-    [SerializeField] private bool isLimitedSwipe = false;
-    [SerializeField] private int currentIndex = 0;
-    [SerializeField] private float swipeThreshold = 50f;
-    [SerializeField] private Vector2 touchStartPos;
+    [SerializeField] private int _mCurrentIndex = 0;
 
-    // Reference to the RectTransform of the content area
-    [SerializeField] private RectTransform contentArea;
+    [Header("UIManager")]
+    [SerializeField] private UIManager _mUIManager;
+
+    [Header("LeanTocuh")]
+    [SerializeField] private LeanTouch _mLeantouch;
 
     void Start()
     {
-        _mNextButton.onClick.AddListener(NextContent);
-        _mPrevButton.onClick.AddListener(PreviousContent);
+        _mNextButton.onClick.AddListener(delegate { SwapContent(1); });
+        _mPrevButton.onClick.AddListener(delegate { SwapContent(-1); });
 
         // Initialize dots
         InitializeDots();
@@ -49,14 +52,14 @@ public class ContentManager : MonoBehaviour
     void InitializeDots()
     {
         // Create dots based on the number of content panels
-        for (int i = 0; i < _mContentPanels.Count; i++)
+        for (int i = 0; i < _mImages.Count; i++)
         {
             GameObject dot = Instantiate(_mDotPrefab, _mDotsContainer.transform);
             Image dotImage = dot.GetComponent<Image>();
-            dotImage.color = (i == currentIndex) ? Color.white : Color.gray;
+            dotImage.color = (i == _mCurrentIndex) ? Color.white : Color.gray;
             dotImage.fillAmount = 0f; // Initial fill amount
             // You may want to customize the dot appearance and layout here
-            _mText.text = "Ere " + (currentIndex + 1);
+            _mText.text = "Ere " + (_mCurrentIndex + 1);
         }
     }
 
@@ -66,82 +69,28 @@ public class ContentManager : MonoBehaviour
         for (int i = 0; i < _mDotsContainer.transform.childCount; i++)
         {
             Image dotImage = _mDotsContainer.transform.GetChild(i).GetComponent<Image>();
-            dotImage.color = (i == currentIndex) ? Color.white : Color.gray;
+            dotImage.color = (i == _mCurrentIndex) ? Color.white : Color.gray;
 
-            _mText.text = "Ere " + (currentIndex + 1);
+            _mText.text = "Ere " + (_mCurrentIndex + 1);
         }
     }
 
-    void Update()
+    public void SwapContent(int i)
     {
-        // Detect swipe input only within the content area
-        DetectSwipe();
-    }
-
-    void DetectSwipe()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            touchStartPos = Input.mousePosition;
-        }
-
-        if (Input.GetMouseButtonUp(0))
-        {
-            Vector2 touchEndPos = Input.mousePosition;
-            Vector3 output = Vector2.zero;
-            float swipeDistance = touchEndPos.x - touchStartPos.x;
-
-            contentArea.position = output;
-
-            // Check if the swipe is within the content area bounds
-            if (Mathf.Abs(swipeDistance) > swipeThreshold && IsTouchInContentArea(touchStartPos, output))
-            {
-                
-                if (isLimitedSwipe && ((currentIndex == 0 && swipeDistance > 0) || (currentIndex == _mContentPanels.Count - 1 && swipeDistance < 0)))
-                {
-                    // Limited swipe is enabled, and at the edge of content
-                    return;
-                }
-
-                if (swipeDistance > 0)
-                {
-                    PreviousContent();
-                }
-                else
-                {
-                    NextContent();
-                }
-            }
-        }
-    }
-
-    // Check if the touch position is within the content area bounds
-    bool IsTouchInContentArea(Vector2 touchPosition, Vector3 output)
-    {
-        return RectTransformUtility.ScreenPointToWorldPointInRectangle(_mMyCanvas.GetComponent<RectTransform>(), touchPosition, cam, out output);
-    }
-
-    void NextContent()
-    {
-        currentIndex = (currentIndex + 1) % _mContentPanels.Count;
+        _mCurrentIndex = (_mCurrentIndex + i + _mImages.Count) % _mImages.Count;
+        GameManager.instance.Era = _mCurrentIndex + i;
         ShowContent();
         UpdateDots();
-    }
-
-    void PreviousContent()
-    {
-        currentIndex = (currentIndex - 1 + _mContentPanels.Count) % _mContentPanels.Count;
-        ShowContent();
-        UpdateDots();
+        Debug.Log(_mCurrentIndex);
     }
 
     void ShowContent()
     {
         // Activate the current panel and deactivate others
-        for (int i = 0; i < _mContentPanels.Count; i++)
+        for (int i = 0; i < _mImages.Count; i++)
         {
-            bool isActive = i == currentIndex;
-            _mContentPanels[i].SetActive(isActive);
+            bool isActive = i == _mCurrentIndex;
+            _mBaseImage.sprite = _mImages[_mCurrentIndex];
 
             // Update dot visibility and color based on the current active content
             Image dotImage = _mDotsContainer.transform.GetChild(i).GetComponent<Image>();
@@ -151,17 +100,14 @@ public class ContentManager : MonoBehaviour
 
         for (int i = 0; i < _mEraBGPanel.Count; i++)
         {
-            bool isActive = i == currentIndex;
-            _mEraBGPanel[i].SetActive(isActive);
+            _mEraBGContent.sprite = _mEraBGPanel[_mCurrentIndex];
+  
         }
-    }
-    public void SetCurrentIndex(int newIndex)
-    {
-        if (newIndex >= 0 && newIndex < _mContentPanels.Count)
+
+        for (int i = 0; i < _mJamesForms.Count; i++) 
         {
-            currentIndex = newIndex;
-            ShowContent();
-            UpdateDots();
+            _mJames.sprite = _mJamesForms[_mCurrentIndex];
         }
+
     }
 }
