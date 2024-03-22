@@ -22,7 +22,7 @@ public class FindherGameManager : MiniGameManager
 
     private GameObject _mActualProfile;
 
-    new private void Awake()
+    private void Start()
     {
         ShowProfile();
     }
@@ -59,6 +59,7 @@ public class FindherGameManager : MiniGameManager
             }
             else
             {
+
                 EndMiniGame(true, miniGameScore);
 
             }
