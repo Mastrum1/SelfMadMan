@@ -84,12 +84,6 @@ public class ContentManager : MonoBehaviour
         Debug.Log(_mCurrentIndex);
     }
 
-    public void OnTouch()
-    {
-        _mTouchStartPos = Input.mousePosition;
-        Debug.Log("Start Distance: " + _mTouchStartPos);
-    }
-    
     void ShowContent()
     {
         // Activate the current panel and deactivate others
