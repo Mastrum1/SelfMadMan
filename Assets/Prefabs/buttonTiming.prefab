@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 491009848461839725}
   - component: {fileID: 3059695925226260984}
   - component: {fileID: 2317051105271876901}
+  - component: {fileID: 2567393454158139450}
   m_Layer: 0
   m_Name: buttonTiming
   m_TagString: Untagged
@@ -185,6 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mBenchManager: {fileID: 0}
+  _mChangeSpawn: {fileID: 2567393454158139450}
   _mMaxScale: 2
   _mMinTimeForClick: 0.1
   _mPerfectTiming: 0.3
@@ -271,3 +273,16 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.64172107
+--- !u!114 &2567393454158139450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4409378949257764596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bac689672c5ce4144b0500c888a421a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mSpawnBounds: {fileID: 0}

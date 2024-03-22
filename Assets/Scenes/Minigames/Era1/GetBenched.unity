@@ -604,6 +604,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 54613993}
     m_Modifications:
     - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
+      propertyPath: _mChangeSpawn
+      value: 
+      objectReference: {fileID: 808575405}
+    - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: _mBenchManager
       value: 
       objectReference: {fileID: 1940354304}
@@ -615,6 +619,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2317051105271876901, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2567393454158139450, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
+      propertyPath: _mSpawnBounds
+      value: 
+      objectReference: {fileID: 2093133821}
     - target: {fileID: 3059695925226260984, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: onSelected.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -657,7 +669,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4401339869329618634, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4401339869329618634, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -717,6 +729,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4401339869329618634, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
   m_PrefabInstance: {fileID: 808575403}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &808575405 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2567393454158139450, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
+  m_PrefabInstance: {fileID: 808575403}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2108132219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bac689672c5ce4144b0500c888a421a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1157196758
 GameObject:
   m_ObjectHideFlags: 0
@@ -825,6 +848,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2317051105271876901, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2567393454158139450, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
+      propertyPath: _mSpawnBounds
+      value: 
+      objectReference: {fileID: 2093133821}
     - target: {fileID: 3059695925226260984, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: onSelected.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -1124,6 +1155,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2317051105271876901, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2567393454158139450, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
+      propertyPath: _mSpawnBounds
+      value: 
+      objectReference: {fileID: 2093133821}
     - target: {fileID: 3059695925226260984, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: onSelected.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -1166,7 +1205,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4401339869329618634, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 100
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4401339869329618634, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1262,6 +1301,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2317051105271876901, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2567393454158139450, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
+      propertyPath: _mSpawnBounds
+      value: 
+      objectReference: {fileID: 2093133821}
     - target: {fileID: 3059695925226260984, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: onSelected.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -1431,6 +1478,7 @@ MonoBehaviour:
   - {fileID: 1860807685}
   - {fileID: 1854934950}
   _mSpawnBounds: {fileID: 2093133821}
+  _mChangeSpawn: {fileID: 0}
   time: 10
   _mCircleSpawnTime: 0.5
 --- !u!1 &1995662144 stripped

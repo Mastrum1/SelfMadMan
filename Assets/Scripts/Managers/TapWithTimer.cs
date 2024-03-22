@@ -6,6 +6,8 @@ public class TapWithTimer : MonoBehaviour
     [SerializeField]
     private GetBenchManager _mBenchManager;
 
+    [SerializeField] private ChangeSpawn _mChangeSpawn;
+
     private bool _EndGame = false;
 
     [SerializeField]
@@ -32,6 +34,7 @@ public class TapWithTimer : MonoBehaviour
     void OnEnable()
     {
         _mTorus.transform.localScale = new Vector3(_mMaxScale, _mMaxScale, _mMaxScale);
+        _mChangeSpawn.enabled = true;
     }
 
     // Update is called once per frame

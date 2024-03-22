@@ -1,6 +1,7 @@
 using CW.Common;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GetBenchManager : MiniGameManager
@@ -21,11 +22,11 @@ public class GetBenchManager : MiniGameManager
 
     [SerializeField] private BoxCollider2D _mSpawnBounds;
 
+    [SerializeField] private ChangeSpawn _mChangeSpawn;
+
     private int _mIndexToActivate = -1;
 
     private int _mNbRep = 0;
-
-    private Coroutine _mCoroutine;
 
     public float time = 10f;
 
@@ -76,6 +77,15 @@ public class GetBenchManager : MiniGameManager
 
             _mNbRep++;
         }
+    }
+
+    private void ChangeSpawnButtons()
+    {
+        _mButtons[_mIndexToActivate].transform.position = new Vector3(
+                   Random.Range(_mSpawnBounds.bounds.min.x, _mSpawnBounds.bounds.max.x),
+                   Random.Range(_mSpawnBounds.bounds.min.y, _mSpawnBounds.bounds.max.y),
+                   _mButtons[_mIndexToActivate].transform.position.z
+                   );
     }
 
     private IEnumerator SpawnButtons()
