@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Lean.Touch;
 
 public class ContentManager : MonoBehaviour
 {
@@ -28,12 +29,15 @@ public class ContentManager : MonoBehaviour
     [SerializeField] private Button _mPrevButton;
 
     [Header("Page Settings")]
+    [SerializeField] private bool isLimitedSwipe = false;
     [SerializeField] private int _mCurrentIndex = 0;
-    [SerializeField] private float _mSwipeThreshold = 50f;
     [SerializeField] private Vector2 _mTouchStartPos;
 
     [Header("UIManager")]
     [SerializeField] private UIManager _mUIManager;
+
+    [Header("LeanTocuh")]
+    [SerializeField] private LeanTouch _mLeantouch;
 
     void Start()
     {
@@ -73,14 +77,33 @@ public class ContentManager : MonoBehaviour
         }
     }
 
-    void SwapContent(int i)
+    public void SwapContent(int i)
     {
         _mCurrentIndex = (_mCurrentIndex + i + _mImages.Count) % _mImages.Count;
-        //GameManager.instance.Era = _mCurrentIndex + i;
+        //GameManager.instance.Era = _mCurrentIndex + 1;
         ShowContent();
         UpdateDots();
+        Debug.Log(_mCurrentIndex);
     }
 
+    public void OnTouch()
+    {
+        _mTouchStartPos = Input.mousePosition;
+        Debug.Log("Start Distance: " + _mTouchStartPos);
+    }
+/*
+    public float OnUp()
+    {
+        Vector2 touchEndPos = Input.mousePosition;
+        float swipeDistance = touchEndPos.x - _mTouchStartPos.x;
+        return swipeDistance;
+    }
+
+    public void SwipeContent()
+    {   
+        SwapContent(1);
+    }
+*/
     void ShowContent()
     {
         // Activate the current panel and deactivate others
