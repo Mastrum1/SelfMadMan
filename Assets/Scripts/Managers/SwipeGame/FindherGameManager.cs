@@ -22,8 +22,6 @@ public class FindherGameManager : MiniGameManager
 
     private GameObject _mActualProfile;
 
-    public float time = 10f;
-
     new private void Awake()
     {
         ShowProfile();
