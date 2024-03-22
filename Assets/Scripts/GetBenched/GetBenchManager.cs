@@ -7,8 +7,6 @@ using UnityEngine;
 public class GetBenchManager : MiniGameManager
 {
 
-
-
     [SerializeField]
     private GameObject _mInteractables;
 
@@ -27,8 +25,6 @@ public class GetBenchManager : MiniGameManager
     private int _mIndexToActivate = -1;
 
     private int _mNbRep = 0;
-
-    public float time = 10f;
 
     [SerializeField]
     private float _mCircleSpawnTime = 1f;
