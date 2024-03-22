@@ -78,7 +78,7 @@ public class ContentManager : MonoBehaviour
     public void SwapContent(int i)
     {
         _mCurrentIndex = (_mCurrentIndex + i + _mImages.Count) % _mImages.Count;
-        //GameManager.instance.Era = _mCurrentIndex + 1;
+        GameManager.instance.Era = _mCurrentIndex + i;
         ShowContent();
         UpdateDots();
         Debug.Log(_mCurrentIndex);
