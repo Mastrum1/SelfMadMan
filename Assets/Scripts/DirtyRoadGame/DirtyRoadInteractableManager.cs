@@ -16,19 +16,19 @@ public class DirtyRoadInteractableManager : InteractableManager
     {
         for (int i = 0; i < dirtyAddParent.transform.childCount; i++)
         {
-            var addChild = dirtyAddParent.transform.GetChild(i).GetComponent<OnAddsCollide>();
-            if (addChild != null)
+            var adChild = dirtyAddParent.transform.GetChild(i).GetComponent<OnCollide>();
+            
+            if (adChild != null)
             {
-                addChild.OnCollided += HandleEndGame;
+                adChild.OnCollided += HandleEndGame;
             }
         }
 
-        trashCan.GetComponent<OnAddsCollide>().OnCollided += HandleEndGame;
+        trashCan.GetComponent<OnCollide>().OnCollided += HandleEndGame;
     }
 
     void HandleEndGame(bool win)
     {
-        Debug.Log("yes");
         OnGameEnd?.Invoke(win);
     }
 
@@ -36,12 +36,12 @@ public class DirtyRoadInteractableManager : InteractableManager
     {
         for (int i = 0; i < dirtyAddParent.transform.childCount; i++)
         {
-            var addChild = dirtyAddParent.transform.GetChild(i).GetComponent<OnAddsCollide>();
-            if (addChild != null)
+            var adChild = dirtyAddParent.transform.GetChild(i).GetComponent<OnCollide>();
+            if (adChild != null)
             {
-                addChild.OnCollided -= HandleEndGame;
+                adChild.OnCollided -= HandleEndGame;
             }
         }
-        trashCan.GetComponent<OnAddsCollide>().OnCollided -= HandleEndGame;
+        trashCan.GetComponent<OnCollide>().OnCollided -= HandleEndGame;
     }
 }

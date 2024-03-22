@@ -3,7 +3,7 @@ using UnityEngine;
 public class DirtyRoadManager : MiniGameManager
 {
     [SerializeField] private int _numOfRoads;
-    [SerializeField] private OnAddsCollide _onAddsCollide;
+    [SerializeField] private DirtyRoadInteractableManager _interactableManager;
     [SerializeField] private GameObject _roadParent;
     [SerializeField] private GameObject _road;
     public float miniGameTime;
@@ -12,11 +12,7 @@ public class DirtyRoadManager : MiniGameManager
     {
         base.Awake();
         
-        _onAddsCollide.OnCollided += OnGameEnd;
-    }
-
-    private void Start()
-    {
+        _interactableManager.OnGameEnd += OnGameEnd;
         SpawnRoads();
     }
 
@@ -44,6 +40,6 @@ public class DirtyRoadManager : MiniGameManager
 
     private void OnDestroy()
     {
-        _onAddsCollide.OnCollided -= OnGameEnd;
+        _interactableManager.OnGameEnd -= OnGameEnd;
     }
 }

@@ -6,7 +6,8 @@ public class Road : MonoBehaviour
 {
     
     [SerializeField] private GameObject _dirtyAd;
-    [SerializeField] private GameObject _adHolder;
+    //public GameObject AdHolder { get => _adHolder; }
+    public GameObject _adHolder;
     [SerializeField] private GameObject _adSpawnPoint;
     
     void Start()

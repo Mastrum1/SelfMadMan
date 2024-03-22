@@ -1,19 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
-using Unity.VisualScripting;
 
-public class OnAddsCollide : MonoBehaviour
+public class OnCollide : MonoBehaviour
 {
     public event Action<bool> OnCollided;
-    private bool _win;
+    [SerializeField] private bool _win;
 
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.CompareTag("Player"))
         {
             OnCollided?.Invoke(_win);
+            print("loose");
         }
     }
 }
