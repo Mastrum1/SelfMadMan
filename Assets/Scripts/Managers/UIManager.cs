@@ -29,6 +29,16 @@ public class UIManager : MonoBehaviour
         obj.SetActive(true);
     }
 
+    public void SingleSetOnOff(GameObject obj)
+    {
+        if (!obj)
+            return;
+        if (obj.active == true)
+            obj.SetActive(false);
+        else if (obj.active == false)
+            obj.SetActive(true);
+    }
+
     public void ChangeLanguage()
     {
         //
