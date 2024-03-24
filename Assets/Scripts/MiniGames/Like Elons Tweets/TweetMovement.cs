@@ -16,4 +16,9 @@ public class TweetMovement : MonoBehaviour
     {
         transform.Translate(Vector3.up * speed * Time.deltaTime);
     }
+
+    public void Stop()
+    {
+        speed = 0;
+    }
 }
