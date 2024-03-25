@@ -302,6 +302,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc9c532f4f12cc84c8844d8c27e5affb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &76589273 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3535083652033021504, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+  m_PrefabInstance: {fileID: 76589270}
+  m_PrefabAsset: {fileID: 0}
+--- !u!328 &76589274 stripped
+VideoPlayer:
+  m_CorrespondingSourceObject: {fileID: 2832519352422410854, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+  m_PrefabInstance: {fileID: 76589270}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &620197490 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 858162965914010274, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
@@ -1341,9 +1351,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mTimer: {fileID: 76589272}
-  _cash: {fileID: 0}
-  _loosePanel: {fileID: 0}
-  miniGameScore: 0
+  _cash: {fileID: 76589274}
+  _sceneCamera: {fileID: 1759891334}
+  _loosePanel: {fileID: 76589273}
   _interactableManager: {fileID: 1446968342}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
