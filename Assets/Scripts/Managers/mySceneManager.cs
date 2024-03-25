@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
@@ -9,11 +10,14 @@ public class mySceneManager : MonoBehaviour
 {
     public static mySceneManager instance;
 
+    public event Action<string> OnChangeScene;
+
     [Scene] public string WinScreen;
     [Scene] public string FasterScreen;
 
     private string _mScene;
     private string _mMinigameScene;
+    public string MinigameScene => _mMinigameScene;
 
     public enum LoadMode { SINGLE, ADDITIVE };
 
@@ -34,9 +38,11 @@ public class mySceneManager : MonoBehaviour
         {
             case LoadMode.SINGLE:
                 SceneManager.LoadScene(_mScene, LoadSceneMode.Single);
+                OnChangeScene?.Invoke(_mScene);
                 break;
             case LoadMode.ADDITIVE:
                 SceneManager.LoadScene(_mScene, LoadSceneMode.Additive);
+                OnChangeScene?.Invoke(_mScene);
                 break;
         }
 

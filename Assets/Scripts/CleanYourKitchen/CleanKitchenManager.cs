@@ -1,12 +1,24 @@
-
-
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class CleanKitchenManager : MiniGameManager
 {
-    // Update is called once per frame
-
+    private QuestManager _questManager;
+    private List<QuestManager.Quest> _quests;
+    private void Start()
+    {
+        _questManager = QuestManager.instance;
+        CheckForActiveQuest(mySceneManager.instance.MinigameScene);
+    }
+    
+    void CheckForActiveQuest(string scene)
+    {
+        foreach (var quest in _questManager.ActiveQuests.Where(quest => quest.QuestSO.scene == scene))
+        {
+            _quests.Add(quest);
+        }
+    }
+    
+    
 }

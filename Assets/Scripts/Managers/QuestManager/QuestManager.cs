@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -43,6 +44,7 @@ public class QuestManager : MonoBehaviour
     
     [SerializeField] private List<Quest> _questsList;
     private readonly List<Quest> _activeQuestsList = new List<Quest>();
+    public List<Quest> ActiveQuests => _activeQuestsList;
 
     private void Awake()
     {
@@ -65,70 +67,59 @@ public class QuestManager : MonoBehaviour
             do
             {
                 SetNewActiveQuest();
-            } while (_activeQuestsList.Count < 3);
+            } while (ActiveQuests.Count < 3);
         }
-    }
-    
-    void Update()
-    {
-        CheckQuestCompletion();
     }
 
     bool CheckForActiveQuest()
     {
-        if (_activeQuestsList.Count < 3)
+        if (ActiveQuests.Count < 3)
         {
-            foreach (var item in _questsList)
+            foreach (var item in _questsList.Where(item => item.QuestState == State.Active))
             {
-                if (item.QuestState == State.Active)
-                {
-                    _activeQuestsList.Add(item);
-                }
+                ActiveQuests.Add(item);
             }
         }
         
-        foreach (var item in _activeQuestsList)
+        foreach (var item in ActiveQuests.Where(item => item.QuestState == State.Inactive))
         {
-            if (item.QuestState == State.Inactive)
-            {
-                _activeQuestsList.Remove(item);
-            }
+            ActiveQuests.Remove(item);
         }
 
-        if (_activeQuestsList.Count is 3)
-        {
-            return true;
-        }
-
-        return false;
+        return ActiveQuests.Count is 3;
     }
 
     void SetNewActiveQuest()
     {
-        if (_activeQuestsList.Count < 3)
-        {
-            var randomQuest = Random.Range(0, _questsList.Count);
-            var randomDifficulty = Random.Range(0, 2);
-            if (_questsList[randomQuest].QuestDispo == Quests.QuestBaseDispo.Unlocked && _questsList[randomQuest].QuestState == State.Inactive)
-            {
-                _questsList[randomQuest].QuestState = State.Active;
-                Quest temp = _questsList[randomQuest];
-                temp.Difficulty = temp.QuestSO.difficulties[randomDifficulty];
-                temp.MaxAmount = temp.Difficulty.amount;
-                temp.CurrentAmount = 0;
-                _activeQuestsList.Add(temp);
-            }
-        }
+        if (ActiveQuests.Count >= 3) return;
+        
+        var randomQuest = Random.Range(0, _questsList.Count);
+        var randomDifficulty = Random.Range(0, 2);
+        
+        if (_questsList[randomQuest].QuestDispo != Quests.QuestBaseDispo.Unlocked ||
+            _questsList[randomQuest].QuestState != State.Inactive) return;
+        
+        _questsList[randomQuest].QuestState = State.Active;
+        Quest temp = _questsList[randomQuest];
+        temp.Difficulty = temp.QuestSO.difficulties[randomDifficulty];
+        temp.MaxAmount = temp.Difficulty.amount;
+        temp.CurrentAmount = 0;
+        ActiveQuests.Add(temp);
     }
 
+    void AddQuestAmount(string questName, int amount)
+    {
+        foreach (var activeQuest in ActiveQuests.Where(activeQuest => questName == activeQuest.QuestSO.questName))
+        {
+            activeQuest.CurrentAmount += amount;
+            CheckQuestCompletion();
+        }
+    }
     void CheckQuestCompletion()
     {
-        foreach (var item in _activeQuestsList)
+        foreach (var item in ActiveQuests.Where(item => item.CurrentAmount >= item.MaxAmount))
         {
-            if (item.CurrentAmount >= item.MaxAmount)
-            {
-                item.QuestState = State.Complete;
-            }
+            item.QuestState = State.Complete;
         }
     }
 
@@ -153,23 +144,17 @@ public class QuestManager : MonoBehaviour
     
     void UnlockQuest(int time)
     {
-        foreach (var quest in _questsList)
+        foreach (var quest in _questsList.Where(quest => quest.QuestSO.time == time))
         {
-            if (quest.QuestSO.time == time)
-            {
-                quest.QuestDispo = Quests.QuestBaseDispo.Unlocked;
-            }
+            quest.QuestDispo = Quests.QuestBaseDispo.Unlocked;
         }
     }
     
     void LockQuest(int time)
     {
-        foreach (var quest in _questsList)
+        foreach (var quest in _questsList.Where(quest => quest.QuestSO.time == time))
         {
-            if (quest.QuestSO.time == time)
-            {
-                quest.QuestDispo = Quests.QuestBaseDispo.Locked;
-            }
+            quest.QuestDispo = Quests.QuestBaseDispo.Locked;
         }
     }
 }
