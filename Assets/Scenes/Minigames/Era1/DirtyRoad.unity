@@ -290,7 +290,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8422203497983469050, guid: 2ccf7ed243c47b6478139734494af5f1, type: 3}
       propertyPath: tapThreshold
-      value: 0.5
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 8422203497983469050, guid: 2ccf7ed243c47b6478139734494af5f1, type: 3}
       propertyPath: swipeThreshold
@@ -632,7 +632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d181d2e91803743a59e8c9622e564fec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 2
+  _speed: 20
   _turn: 10
 --- !u!1 &880904007 stripped
 GameObject:
@@ -658,9 +658,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 787821384}
-        m_TargetAssemblyTypeName: UnityEngine.MonoBehaviour, UnityEngine
-        m_MethodName: StopCoroutine
-        m_Mode: 5
+        m_TargetAssemblyTypeName: Folder, Assembly-CSharp
+        m_MethodName: MoveForward
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1464,6 +1464,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5207680123847298842, guid: d125ed243d771db4ba4d21aa79c7ce1a, type: 3}
+    - {fileID: 963690631258955520, guid: d125ed243d771db4ba4d21aa79c7ce1a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
