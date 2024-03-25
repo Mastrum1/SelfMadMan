@@ -1,17 +1,17 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 
 public class MiniGameManager : MonoBehaviour
 {
     public delegate void MiniGameEndHandler(bool won, int score);
     public event MiniGameEndHandler OnMiniGameEnd;
+
+    protected int Amount { get; set; }
+    
     private bool _gameIsPlaying;
 
     [SerializeField] public Timer _mTimer;
@@ -21,6 +21,8 @@ public class MiniGameManager : MonoBehaviour
     [SerializeField] private GameObject _loosePanel;
 
     [NonSerialized] public int miniGameScore;
+    
+    private QuestManager _questManager;
 
     public virtual void Awake()
     {
@@ -28,9 +30,10 @@ public class MiniGameManager : MonoBehaviour
         _cash.targetCamera = _sceneCamera;
         _mTimer.ResetTimer(GameManager.instance.Speed);
         GameManager.instance.SelectNewMiniGame(this);
+        _questManager = QuestManager.instance;
     }
 
-    public virtual void EndMiniGame(bool won, int score)
+    protected virtual void EndMiniGame(bool won, int score)
     {
         _gameIsPlaying = false;
         _mTimer.MyTimer = false;
@@ -41,6 +44,13 @@ public class MiniGameManager : MonoBehaviour
             _loosePanel.SetActive(true);
 
         float timeout = won ? 1.5f : 0.5f;
+        
+        foreach (var quest in _questManager.SelectedQuests.Where(quest => quest.QuestSO.scene.SceneName == SceneManager.GetActiveScene().name))
+        {
+            quest.CurrentAmount += Amount;
+            _questManager.CheckQuestCompletion();
+        }
+        
         StartCoroutine(StartAnim(won, score, timeout));
     }
 
@@ -62,5 +72,9 @@ public class MiniGameManager : MonoBehaviour
             EndMiniGame(false, miniGameScore);
         }
     }
-    
+
+    protected void IncrementQuestAmount()
+    {
+        Amount++;
+    }
 }

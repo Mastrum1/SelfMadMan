@@ -1,24 +1,16 @@
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine.SceneManagement;
+using UnityEngine;
 
 public class CleanKitchenManager : MiniGameManager
 {
-    private QuestManager _questManager;
-    private List<QuestManager.Quest> _quests;
+    [SerializeField] private CleanYourKitchenInteractableManager _interactableManager;
     private void Start()
     {
-        _questManager = QuestManager.instance;
-        CheckForActiveQuest(mySceneManager.instance.MinigameScene);
+        Amount = 0;
+        _interactableManager.OnRoachDeath += IncrementQuestAmount;
     }
-    
-    void CheckForActiveQuest(string scene)
+
+    private void OnDestroy()
     {
-        foreach (var quest in _questManager.ActiveQuests.Where(quest => quest.QuestSO.scene == scene))
-        {
-            _quests.Add(quest);
-        }
+        _interactableManager.OnRoachDeath -= IncrementQuestAmount;
     }
-    
-    
 }

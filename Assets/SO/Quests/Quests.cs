@@ -39,6 +39,6 @@ public class Quests : ScriptableObject
 
     public QuestBaseDispo disponibility;
 
-    [Scene] public string scene;
+    public MinigameScene scene;
 
 }
