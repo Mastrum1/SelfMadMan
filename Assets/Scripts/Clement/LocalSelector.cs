@@ -3,13 +3,13 @@ using UnityEngine;
 using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
-public class LocaleSelector : MonoBehaviour
+public class LocalSelector : MonoBehaviour
 {
-    static LocaleSelector _mInstance;
+    static LocalSelector _mInstance;
 
     private bool active = false;
 
-    public static LocaleSelector Instance { get =>_mInstance; } 
+    public static LocalSelector Instance { get =>_mInstance; } 
 
     private void Start()
     {
