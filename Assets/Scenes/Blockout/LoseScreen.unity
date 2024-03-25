@@ -737,8 +737,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 354217640}
         m_TargetAssemblyTypeName: SceneManaProxy, Assembly-CSharp
-        m_MethodName: RandomScene
-        m_Mode: 3
+        m_MethodName: StartGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -798,6 +798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SceneName: HomePage
+  _mEra: 0
 --- !u!1 &454995540
 GameObject:
   m_ObjectHideFlags: 0
@@ -1014,7 +1015,6 @@ GameObject:
   m_Component:
   - component: {fileID: 986166062}
   - component: {fileID: 986166061}
-  - component: {fileID: 986166060}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1022,14 +1022,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &986166060
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 986166059}
-  m_Enabled: 1
 --- !u!20 &986166061
 Camera:
   m_ObjectHideFlags: 0
@@ -1624,6 +1616,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SceneName: HomePage
+  _mEra: 0
 --- !u!1001 &1911719137
 PrefabInstance:
   m_ObjectHideFlags: 0

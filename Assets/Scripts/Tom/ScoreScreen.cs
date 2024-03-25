@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScoreScreen : MonoBehaviour
 {
     // Start is called before the first frame update
-    private void Awake()
+  /*  private void Awake()
     {
-        StartCoroutine(Loading());   
+        if (!SceneManager.GetSceneByName("HomePage").IsValid())
+            StartCoroutine(Loading());
     }
 
     IEnumerator Loading()
     {
         yield return new WaitForSeconds(3f);
-        mySceneManager.instance.RandomGameChoice(0); //random
-    }
+        if (!mySceneManager.instance)
+            SceneManager.LoadScene("MinigamesChoice");
+        else
+            mySceneManager.instance.RandomGameChoice(); //random
+    }*/
 }

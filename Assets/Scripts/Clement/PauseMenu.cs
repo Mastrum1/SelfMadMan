@@ -19,7 +19,7 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         _mpauseMenu?.SetActive(false);
-        Time.timeScale = GameManager.instance.GetSpeed();
+        Time.timeScale = 1;
     }
 
     public void Restart()
@@ -27,13 +27,8 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void Settings()
-    {
-
-    }
-
     public void Quit()
     {
-        mySceneManager.instance.SetScene("Clement");
+        mySceneManager.instance.SetScene("HomePage", mySceneManager.LoadMode.SINGLE);
     }
 }
