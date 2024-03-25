@@ -4,16 +4,29 @@ using System.IO;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using NaughtyAttributes;
 
 public class MiniGameSelector : MonoBehaviour
 {
     public static MiniGameSelector instance;
 
-    public Dictionary<string, List<string>> MinigameLists = new Dictionary<string, List<string>>();
+    public Dictionary<string, List<string>> Minigamelists { get => _mMinigameLists; private set => _mMinigameLists = value; }
+    private Dictionary<string, List<string>> _mMinigameLists = new Dictionary<string, List<string>>();
 
-    [SerializeField] public List<string> Era1 = new List<string>(); // TO DO : change to dictionnary if not unlocked
-    public List<string> Era2 = new List<string>();
-    public List<string> Era3 = new List<string>();
+
+
+
+
+    [SerializeField] private List<MinigameScene> _era1;
+    [SerializeField] private List<MinigameScene> _era2;
+    [SerializeField] private List<MinigameScene> _era3;
+
+    public List<MinigameScene> Era1 { get => _era1; set => _era1 = value; }
+    public List<MinigameScene> Era2 { get => _era2; set => _era2 = value; }
+    public List<MinigameScene> Era3 { get => _era3; set => _era3 = value; }
+
+    private List<List<MinigameScene>> _allMinigames = new List<List<MinigameScene>>();
+    public List<List<MinigameScene>> AllMinigames { get => _allMinigames; set => _allMinigames = value; }
 
     Regex regex = new Regex(@"([^/]*/)*([\w\d\-]*)\.unity");
 
@@ -24,69 +37,14 @@ public class MiniGameSelector : MonoBehaviour
         else if (instance != this)
             Destroy(gameObject);
 
-       // GetNamesScenes();
-        //GetMinigamesNameEra();
         DontDestroyOnLoad(gameObject);
+
+        _allMinigames.Add(Era1);
+        _allMinigames.Add(Era2);
+        _allMinigames.Add(Era3);
     }
 
-    void GetNamesScenes()
-    {
-        string minigamesFolder = Application.dataPath + "/Scenes/Minigames";
-        string[] minigameFolders = Directory.GetDirectories(minigamesFolder);
-
-        foreach (string minigameFolder in minigameFolders)
-        {
-            List<string> sceneNames = new List<string>();
-
-            var dirInfo = new DirectoryInfo(minigameFolder);
-            var allFileInfos = dirInfo.GetFiles("*.unity", SearchOption.AllDirectories);
-
-            foreach (var fileInfo in allFileInfos)
-            {
-                string sceneName = ExtractSceneName(fileInfo.FullName);
-                sceneNames.Add(sceneName);
-            }
-
-            // Add the list of scene names to the dictionary with the minigame folder name as the key
-            MinigameLists.Add(Path.GetFileName(minigameFolder), sceneNames);
-        }
-        // Now minigameLists contains a dictionary where keys are minigame folder names, and values are lists of scene names.
-        // You can access the lists using minigameLists["FolderName"].
-    }
-
-    string ExtractSceneName(string fullPath)
-    {
-        Match match = regex.Match(fullPath);
-        if (match.Success)
-        {
-            return match.Groups[2].Value; // Group 2 contains the scene name
-        }
-        else
-        {
-            // Handle the case where the match is not successful
-            Debug.LogWarning("Unable to extract scene name for: " + fullPath);
-            return fullPath;
-        }
-    }
-
-    void GetMinigamesNameEra()
-    {
-        foreach (string minigameName in MinigameLists["Era1"])
-        {
-           Era1.Add(minigameName);
-        }
-            
-        foreach (string minigameName in MinigameLists["Era2"])
-        {
-           Era2.Add(minigameName);
-        }
-              
-        foreach (string minigameName in MinigameLists["Era3"])
-        {
-           Era3.Add(minigameName);
-        }
-    }
-
+  
     public static T GetRandomElement<T>(List<T> list)
     {
         int index = UnityEngine.Random.Range(0, list.Count);
