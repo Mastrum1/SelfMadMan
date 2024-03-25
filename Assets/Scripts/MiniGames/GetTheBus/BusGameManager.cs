@@ -69,7 +69,6 @@ public class BusGameManager : MiniGameManager
 
     void BusStopOverride(Collider2D collider2D)
     {
-        Debug.Log("yess");
         _mCatch = false;
     }
 }
