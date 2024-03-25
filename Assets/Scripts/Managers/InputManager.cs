@@ -9,27 +9,42 @@ using UnityEngine.Events;
 public class InputManager : MonoBehaviour
 {
 
-    [SerializeField, Range(0f, 1f)] private float _mDirectionTreshold = 0.75f;
+    [SerializeField, Range(0f, 1f)] private float _mDirectionTreshold = 0.85f;
+
+    [SerializeField, Range(0f, 0.6f)] private float _mDiagonalDirectionTreshold = 0.45f;
 
     [SerializeField] private float _mMinimumDist = .3f;
+
+    [SerializeField] private float _mDragAndDropMinimumDist = .15f;
+
 
     [SerializeField] private float _mHoldTiming = 0.35f;
 
     private bool _mHold;
 
+    private bool _mIsDraging;
+
     [SerializeField] private bool _mEnableHold = true;
 
     [SerializeField] private bool _mEnableSlide4Dir = true;
 
-    [SerializeField] private bool _mEnableSlide8Dir = true;
+    [SerializeField] private bool _mEnableSlide8Dir = false;
 
-    [SerializeField] private bool _mEnableTapOnFingerDown = true;
+    [SerializeField] private bool _mEnableTapOnFingerDown = false;
 
-    [SerializeField] private bool _mEnableTapOnFingerUp = false;
+    [SerializeField] private bool _mEnableTapOnFingerUp = true;
+
+    [SerializeField] private bool _mEnableDragAndDrop = true;
+
+    [SerializeField] private bool _mEnableGiroscope = false;
 
     [SerializeField] private UnityEvent _mOnTap;
 
     [SerializeField] private UnityEvent _mOnHold;
+
+    [SerializeField] private UnityEvent<Quaternion> _mOnGiroscope;
+
+    [SerializeField] private UnityEvent<Vector3> _mOnDragAndDrop;
 
     [Header("Slide Events")]
 
@@ -55,8 +70,23 @@ public class InputManager : MonoBehaviour
 
     private float _mStartTiming;
 
+    void Start()
+    {
+
+        if (SystemInfo.supportsGyroscope && _mEnableGiroscope)
+        {
+            Input.gyro.enabled = true;
+        }
+
+    }
+
     private void Update()
     {
+        if (_mEnableGiroscope)
+        {
+            Debug.Log("Giro");
+            if(_mOnGiroscope != null) _mOnGiroscope.Invoke(GyroToUnity(Input.gyro.attitude));
+        }
 
         if (Input.touchCount > 0)
         {
@@ -69,9 +99,15 @@ public class InputManager : MonoBehaviour
 
             float holdTiming = Time.time - _mStartTiming;
 
-            if (touch.phase == TouchPhase.Stationary && holdTiming >= _mHoldTiming && _mEnableHold)
+            if (touch.phase == TouchPhase.Stationary && holdTiming >= _mHoldTiming && _mEnableHold && !_mIsDraging)
             {
                 Hold();
+            }
+
+            if(touch.phase == TouchPhase.Moved &&holdTiming >= _mHoldTiming && _mEnableDragAndDrop && Vector3.Distance(_mStartTouchPos, Camera.main.ScreenToWorldPoint(touch.position)) >= _mDragAndDropMinimumDist || _mIsDraging)
+            {
+                DragAndDrop(Camera.main.ScreenToWorldPoint(touch.position));
+                _mIsDraging = true;
             }
 
             if (touch.phase == TouchPhase.Began && _mEnableTapOnFingerDown)
@@ -83,11 +119,11 @@ public class InputManager : MonoBehaviour
             {
                 _mEndTouchPos = Camera.main.ScreenToWorldPoint(touch.position);
 
-                if (Vector3.Distance(_mStartTouchPos, _mEndTouchPos) >= 0.5 && _mEnableSlide4Dir || Vector3.Distance(_mStartTouchPos, _mEndTouchPos) >= 0.5 && _mEnableSlide8Dir)
+                if (Vector3.Distance(_mStartTouchPos, _mEndTouchPos) >= _mMinimumDist && _mEnableSlide4Dir && !_mIsDraging || Vector3.Distance(_mStartTouchPos, _mEndTouchPos) >= 0.5 && _mEnableSlide8Dir && !_mIsDraging)
                 {
                     Slide();
                 }
-                else if (!_mHold && _mEnableTapOnFingerUp)
+                else if (!_mHold && _mEnableTapOnFingerUp && !_mIsDraging)
                 {
                     Tap();
                 }
@@ -95,6 +131,7 @@ public class InputManager : MonoBehaviour
                 _mStartTouchPos = Vector3.zero;
                 _mStartTiming = Time.time;
                 _mHold = false;
+                _mIsDraging = false;
             }
         }
     }
@@ -107,30 +144,52 @@ public class InputManager : MonoBehaviour
 
         if (_mEnableSlide8Dir)
         {
-
+            if (direction2d.x > _mDiagonalDirectionTreshold && direction2d.y > _mDiagonalDirectionTreshold )
+            {
+                Debug.Log("Up Right");
+                if (_mOnSlideUpRight != null) _mOnSlideUpRight.Invoke();
+            }
+            else if (-direction2d.x > _mDiagonalDirectionTreshold && -direction2d.y > _mDiagonalDirectionTreshold)
+            {
+                Debug.Log("Down Left");
+                if (_mOnSlideDownLeft != null) _mOnSlideDownLeft.Invoke();
+            }
+            else if (-direction2d.x > _mDiagonalDirectionTreshold && direction2d.y > _mDiagonalDirectionTreshold)
+            {
+                Debug.Log("Up Left");
+                if (_mOnSlideUpLeft != null) _mOnSlideUpLeft.Invoke();
+            }
+            else if (direction2d.x > _mDiagonalDirectionTreshold && -direction2d.y > _mDiagonalDirectionTreshold)
+            {
+                Debug.Log("Down Right");
+                if (_mOnSlideDownRight != null) _mOnSlideDownRight.Invoke();
+            }
         }
 
         if (Vector2.Dot(Vector2.right, direction2d) > _mDirectionTreshold)
         {
             Debug.Log("Right");
+            if (_mOnSlideRight != null) _mOnSlideRight.Invoke();
 
-            //OnSwipeRight();
+
         }
         else if (Vector2.Dot(Vector2.left, direction2d) > _mDirectionTreshold)
         {
             Debug.Log("Left");
+            if (_mOnSlideLeft != null) _mOnSlideLeft.Invoke();
 
-            //OnSwipeLeft();
         }
         else if (Vector2.Dot(Vector2.up, direction2d) > _mDirectionTreshold)
         {
-            //OnSwipeUp();
             Debug.Log("Up");
+            if (_mOnSlideUp != null) _mOnSlideUp.Invoke();
+
         }
         else if (Vector2.Dot(Vector2.down, direction2d) > _mDirectionTreshold)
         {
-            //OnSwipeDown();
             Debug.Log("Down");
+
+            if (_mOnSlideDown != null) _mOnSlideDown.Invoke();
         }
     }
 
@@ -148,4 +207,14 @@ public class InputManager : MonoBehaviour
         if (_mOnHold != null) _mOnHold.Invoke();
     }
 
+    public void DragAndDrop(Vector3 pos)
+    {
+        if (_mOnDragAndDrop != null) _mOnDragAndDrop.Invoke(pos);
+        Debug.Log("Test");
+    }
+
+    private Quaternion GyroToUnity(Quaternion q)
+    {
+        return new Quaternion(q.x, q.y, -q.z, -q.w);
+    }
 }
