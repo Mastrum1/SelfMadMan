@@ -15,15 +15,16 @@ public class MiniGameManager : MonoBehaviour
 
     [SerializeField] public Timer _mTimer;
     [SerializeField] private VideoPlayer _cash;
+    [SerializeField] private Camera _sceneCamera;
 
     [SerializeField] private GameObject _loosePanel;
 
-    public int miniGameScore;
+    [NonSerialized] public int miniGameScore;
 
     public virtual void Awake()
     {
         _gameIsPlaying = true;
-        _cash.targetCamera = Camera.main;
+        _cash.targetCamera = _sceneCamera;
         _mTimer.ResetTimer(GameManager.instance.Speed);
         GameManager.instance.SelectNewMiniGame(this);
     }
@@ -31,6 +32,7 @@ public class MiniGameManager : MonoBehaviour
     public virtual void EndMiniGame(bool won, int score)
     {
         _gameIsPlaying = false;
+        _mTimer.MyTimer = false;
 
         if (won)
             _cash.Play();
