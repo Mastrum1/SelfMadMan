@@ -398,6 +398,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 482852762911477117, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1759891334}
     - target: {fileID: 858162965914010274, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
       propertyPath: m_Layer
       value: 5
@@ -414,6 +418,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 2787288119170624239, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 738821cf8d4e13b409ebfb9599b604f3, type: 3}
     - target: {fileID: 2849288213195742059, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
       propertyPath: m_text
       value: G E T  B I G !
@@ -1464,6 +1472,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mTimer: {fileID: 76589272}
+  _cash: {fileID: 0}
+  _loosePanel: {fileID: 0}
   miniGameScore: 0
   _mInteractables: {fileID: 54613994}
   _mJamesState:
@@ -1479,7 +1489,6 @@ MonoBehaviour:
   - {fileID: 1854934950}
   _mSpawnBounds: {fileID: 2093133821}
   _mChangeSpawn: {fileID: 0}
-  time: 10
   _mCircleSpawnTime: 0.5
 --- !u!1 &1995662144 stripped
 GameObject:

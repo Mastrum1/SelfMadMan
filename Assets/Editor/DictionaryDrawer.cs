@@ -11,7 +11,7 @@ public class DictionaryDrawer : Editor
         MiniGameSelector script = (MiniGameSelector)target;
 
         // Iterate through the dictionary and display key-value pairs in the Inspector
-        foreach (var pair in script.MinigameLists)
+        foreach (var pair in script.Minigamelists)
         {
             EditorGUILayout.LabelField(pair.Key, string.Join(", ", pair.Value.ToArray()));
         }
