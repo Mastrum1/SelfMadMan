@@ -30,7 +30,7 @@ public class ContentManager : MonoBehaviour
     [Header("UIManager")]
     [SerializeField] private UIManager _mUIManager;
 
-    [Header("LeanTocuh")]
+    [Header("LeanTouch")]
     [SerializeField] private LeanTouch _mLeantouch;
 
     void Start()
