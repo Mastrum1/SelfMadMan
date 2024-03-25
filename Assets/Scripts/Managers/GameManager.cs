@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
     private int _mLevelCount;
     private int _mCurrentStars;
 
+    public event Action<bool, int> WinScreenHandle;
+
     private void Awake()
     {
         Application.targetFrameRate = 60;
@@ -113,18 +115,19 @@ public class GameManager : MonoBehaviour
             ResetGame();
         }
         else
-            StartCoroutine(ContinueMinigames());
+            StartCoroutine(ContinueMinigames(won));
 
 
     }
 
-    IEnumerator ContinueMinigames()
+    IEnumerator ContinueMinigames(bool won)
     {
         if (_mMinigameCount % 3 == 0)
         {
             Faster();
 
         }
+        WinScreenHandle?.Invoke(won, Era);
         yield return new WaitForSeconds(3f);
         mySceneManager.instance.RandomGameChoice();
 
