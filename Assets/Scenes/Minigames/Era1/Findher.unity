@@ -2573,6 +2573,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mTimer: {fileID: 1591078642}
+  _cash: {fileID: 0}
+  _loosePanel: {fileID: 0}
   miniGameScore: 0
   _mTotalNbSwipeRight: 10
   _mListPub:
@@ -3263,9 +3265,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1174132575}
     m_Modifications:
+    - target: {fileID: 482852762911477117, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1413889385}
     - target: {fileID: 1702616548624728975, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 2787288119170624239, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+      propertyPath: m_Color.a
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2849288213195742059, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
       propertyPath: m_text

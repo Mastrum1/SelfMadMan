@@ -197,10 +197,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1940354303}
     m_Modifications:
+    - target: {fileID: 482852762911477117, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1759891334}
     - target: {fileID: 1702616548624728975, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 2832519352422410854, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+      propertyPath: m_TargetCamera
+      value: 
+      objectReference: {fileID: 1759891334}
     - target: {fileID: 5046088403478487706, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
       propertyPath: m_Camera
       value: 
@@ -255,22 +263,16 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6805509144928125002, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
   m_PrefabInstance: {fileID: 76589270}
   m_PrefabAsset: {fileID: 0}
+--- !u!328 &76589272 stripped
+VideoPlayer:
+  m_CorrespondingSourceObject: {fileID: 2832519352422410854, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+  m_PrefabInstance: {fileID: 76589270}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &620197490 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 858162965914010274, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
   m_PrefabInstance: {fileID: 76589270}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &670977051 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9152682137124682944, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
-  m_PrefabInstance: {fileID: 76589270}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc9c532f4f12cc84c8844d8c27e5affb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1157196758
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,6 +341,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1438571919 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3535083652033021504, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+  m_PrefabInstance: {fileID: 76589270}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1759891332
 GameObject:
   m_ObjectHideFlags: 0
@@ -460,7 +467,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b277c1250a7dc642a662bdf8abcc1f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mTimer: {fileID: 670977051}
+  _mTimer: {fileID: 0}
+  _cash: {fileID: 76589272}
+  _loosePanel: {fileID: 1438571919}
   miniGameScore: 0
 --- !u!4 &1940354303
 Transform:
