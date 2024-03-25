@@ -22,7 +22,7 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        // Singleton pattern to ensure only one instance exists
+        // Singleton pattern to ensure only one instance existsfffff
         if (_mInstance == null)
         {
             _mInstance = this;
