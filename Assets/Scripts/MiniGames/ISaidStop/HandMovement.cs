@@ -17,6 +17,18 @@ public class HandMovement : MonoBehaviour
             transform.position += mMoveDir * _mSpeed * Time.deltaTime;
     }
 
+    public void OnSwipe(Vector3 from, Vector3 to)
+    {
+        Vector3 delta = to - from, gap =  delta / 4;
+
+        if (delta.x <= 0 && delta.y >= 0) {
+            transform.position += gap;
+            Debug.Log("Yessssssssssssss");
+        }
+        else
+            Debug.Log("Nooo");
+    }
+
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("GameInteractable")) {
