@@ -3,20 +3,21 @@ using UnityEngine;
 
 public class CockroachSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject cockroaches;
-    public int numOfCockroach;
+    [SerializeField] private GameObject _cockroach;
+    [SerializeField] private GameObject _cockroachParent;
+    [SerializeField] private int _numOfCockroach;
     
     void Start()
     {
-        StartCoroutine(SpawnCockroaches(numOfCockroach));
+        StartCoroutine(SpawnCockroaches(_numOfCockroach));
     }
 
     IEnumerator SpawnCockroaches(int amount)
     {
         for (int i = 0; i < amount; i++)
         {
-            GameObject roach = Instantiate(cockroaches, transform.position, Quaternion.Euler(new Vector3(0, 0, Random.Range(0, 360))));
-            roach.transform.SetParent(transform);
+            var roach = Instantiate(_cockroach, transform.position, Quaternion.Euler(new Vector3(0, 0, Random.Range(0, 360))));
+            roach.transform.SetParent(_cockroachParent.transform);
             yield return new WaitForSeconds(Random.Range(0.1f, 0.5f));
         }
     }
