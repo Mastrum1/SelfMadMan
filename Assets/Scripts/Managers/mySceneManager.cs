@@ -12,8 +12,8 @@ public class mySceneManager : MonoBehaviour
     [Scene] public string WinScreen;
     [Scene] public string FasterScreen;
 
-    private string _mScene;
-    private string _mMinigameScene;
+    private string _mSceneName;
+    private MinigameScene _mMinigameScene;
 
     public enum LoadMode { SINGLE, ADDITIVE };
 
@@ -29,14 +29,14 @@ public class mySceneManager : MonoBehaviour
 
     public void SetScene(string scene, LoadMode mode)
     {
-        _mScene = scene;
+        _mSceneName = scene;
         switch (mode)
         {
             case LoadMode.SINGLE:
-                SceneManager.LoadScene(_mScene, LoadSceneMode.Single);
+                SceneManager.LoadScene(_mSceneName, LoadSceneMode.Single);
                 break;
             case LoadMode.ADDITIVE:
-                SceneManager.LoadScene(_mScene, LoadSceneMode.Additive);
+                SceneManager.LoadScene(_mSceneName, LoadSceneMode.Additive);
                 break;
         }
 
@@ -44,7 +44,7 @@ public class mySceneManager : MonoBehaviour
 
     public void UnloadCurrentScene()
     {
-        SceneManager.UnloadSceneAsync(_mMinigameScene);
+        SceneManager.UnloadSceneAsync(_mMinigameScene.SceneName);
     }
 
     public void LoadWinScreen()
@@ -59,23 +59,12 @@ public class mySceneManager : MonoBehaviour
 
     public void RandomGameChoice()
     {
-        switch (GameManager.instance.Era)
+        do
         {
-            case 0:
-                _mMinigameScene = MiniGameSelector.GetRandomElement<string>(MiniGameSelector.instance.Era1);
+            _mMinigameScene = MiniGameSelector.GetRandomElement(MiniGameSelector.instance.AllMinigames[GameManager.instance.Era]);
 
-                break;
-            case 1:
-                _mMinigameScene = MiniGameSelector.GetRandomElement<string>(MiniGameSelector.instance.Era2);
+        } while (_mMinigameScene.Unlocked);
 
-                break;
-            case 2:
-                _mMinigameScene = MiniGameSelector.GetRandomElement<string>(MiniGameSelector.instance.Era3);
-                break;
-            default:
-                Debug.Log("Choose 1, 2 or 3");
-                break;
-        }
-        SetScene(_mMinigameScene, LoadMode.ADDITIVE);
+        SetScene(_mMinigameScene.SceneName, LoadMode.ADDITIVE);
     }
 }

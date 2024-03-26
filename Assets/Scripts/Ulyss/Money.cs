@@ -5,7 +5,10 @@ using UnityEngine.UI;
 public class Money : MonoBehaviour
 {
     // Private
-    private int _mCurrentMoney = 0;
+
+    public int CurrentMoney { get => _mCurrentMoney; set => _mCurrentMoney = value; }
+    [SerializeField] private int _mCurrentMoney;
+
     private string _mMoneyPlayerPrefsKey = "PlayerMoney";  // Key for PlayerPrefs
     private string _mEncryptionKey = "SelfMadManAbsoluteEncryptionKeyMyBoyLorIs<304112001200416hChineGuillaume"; // Key code for encryption
 
@@ -32,11 +35,6 @@ public class Money : MonoBehaviour
             _mCurrentMoney -= MoneyToRemove;
             SaveMoney();
         }
-    }
-
-    public int GetMoney()
-    {
-        return _mCurrentMoney;
     }
 
     public int SetMoney(int MoneyToBe)

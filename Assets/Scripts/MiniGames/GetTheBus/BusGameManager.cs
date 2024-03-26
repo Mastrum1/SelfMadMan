@@ -11,6 +11,7 @@ public class BusGameManager : MiniGameManager
     // bus Spawn
     [SerializeField] Vector3 SpawnPosition;
     private float _mAverageSpawnRate;
+    private float _mBusNumber;
 
     //bus stop
     [SerializeField] BusStop BusStop;
@@ -18,25 +19,20 @@ public class BusGameManager : MiniGameManager
     // Start is called before the first frame update
     void Start()
     {
-        // move to awake
-        _mAverageSpawnRate = GameManager.instance.Speed / 15;
-        StartCoroutine(SpawnBus()); //
-
+        _mAverageSpawnRate = GameManager.instance.Speed / 2;
+        StartCoroutine(SpawnBus());
         BusStop.triggerEnter = BusStartOverride;
         BusStop.triggerExit = BusStopOverride;
+        _mBusNumber = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (_mIsPaused)
+            EndGame(_mCatch);
         if (_mTimer.timerValue == 0)
             EndGame(false);
-        if (_mIsPaused) {
-            if (_mCatch)
-                EndGame(true);
-            else
-                EndGame(false);
-        }
     }
 
     void EndGame(bool isWin)
@@ -47,33 +43,32 @@ public class BusGameManager : MiniGameManager
 
     public void OnClicked()
     {
-        _mIsPaused = true;
+        _mIsPaused = true;    
         BusPool.SharedInstance.StopAllBuses();
         StopCoroutine(SpawnBus());
     }
 
     IEnumerator  SpawnBus()
     {
-        while (!_mIsPaused) {
-            float nextDelay = Random.Range(0, _mAverageSpawnRate);
+        while (!_mIsPaused && _mBusNumber < 4) {
+            float nextDelay = Random.Range(_mAverageSpawnRate / 4, _mAverageSpawnRate);
             yield return new WaitForSeconds(nextDelay);
             GameObject bus = BusPool.SharedInstance.GetPooledBus(); 
             if (bus != null) {
                 bus.transform.position = SpawnPosition;
                 bus.SetActive(true);
+                _mBusNumber++;
             }
         }
     }
 
     void BusStartOverride(Collider2D collider2D)
     {
-        if (collider2D.gameObject.CompareTag("Bus"))
-            _mCatch = true;
+        _mCatch = true;
     }
 
     void BusStopOverride(Collider2D collider2D)
     {
-        if (collider2D.gameObject.CompareTag("Bus"))
-            _mCatch = false;
+        _mCatch = false;
     }
 }
