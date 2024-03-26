@@ -10,8 +10,6 @@ public class TapWithTimer : MonoBehaviour
 
     [SerializeField] private ChangeSpawn _mChangeSpawn;
 
-    private bool _EndGame = false;
-
     [SerializeField] private float _mMaxScale = 2.5f;
 
     [SerializeField] private float _mMinTimeForClick = 0.8f;
@@ -26,6 +24,8 @@ public class TapWithTimer : MonoBehaviour
 
     [SerializeField] private float _mDecreaseSpeed;
 
+    private bool _EndGame = false;
+
     void OnEnable()
     {
         _mTorus.transform.localScale = new Vector3(_mMaxScale, _mMaxScale, _mMaxScale);
@@ -33,8 +33,6 @@ public class TapWithTimer : MonoBehaviour
     }
 
     // Update is called once per frame
-
-
     private void Update()
     {
         if (_EndGame == false)
@@ -43,16 +41,13 @@ public class TapWithTimer : MonoBehaviour
             if (_mTorus.transform.localScale.x < _mMinTimeForClick)
             {
                 OnLoose?.Invoke(false);
-                //_mBenchManager.EndMiniGame(false, _mBenchManager.miniGameScore);
                 gameObject.SetActive(false);
-
             }
         }
     }
 
     public void ObjectTaped()
     {
-
         if (_mTorus.transform.localScale.x < _mPerfectTiming && _mTorus.transform.localScale.x > _mMinTimeForClick)
         {
             Debug.Log("Perfect click");
@@ -67,12 +62,8 @@ public class TapWithTimer : MonoBehaviour
         }
         else
         {
-            Debug.Log("Tu pues :) ");
             OnLoose?.Invoke(false);
-            //_mBenchManager.EndMiniGame(false, _mBenchManager.miniGameScore);
-
         }
         gameObject.SetActive(false);
-
     }
 }
