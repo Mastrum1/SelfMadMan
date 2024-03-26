@@ -37,7 +37,7 @@ public class TapWithTimer : MonoBehaviour
             _mTorus.transform.localScale -= new Vector3(Time.deltaTime * _mDecreaseSpeed, Time.deltaTime * _mDecreaseSpeed, Time.deltaTime * _mDecreaseSpeed);
             if (_mTorus.transform.localScale.x < _mMinTimeForClick)
             {
-                _mBenchManager.EndMiniGame(false, _mBenchManager.miniGameScore);
+                //_mBenchManager.EndMiniGame(false, _mBenchManager.miniGameScore);
                 gameObject.SetActive(false);
             }
         }
