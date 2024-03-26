@@ -254,7 +254,7 @@ public class InputManager : MonoBehaviour
 
         if (hit.collider != null)
         {
-            SelectableObject script = hit.collider.GetComponent<SelectableObject>();
+            NewSelectableObject script = hit.collider.GetComponent<NewSelectableObject>();
             if (script != null)
             {
                 script.GetSelected();
