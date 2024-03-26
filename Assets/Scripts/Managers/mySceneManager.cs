@@ -44,7 +44,12 @@ public class mySceneManager : MonoBehaviour
 
     public void UnloadCurrentScene()
     {
-        SceneManager.UnloadSceneAsync(_mMinigameScene.SceneName);
+        SceneManager.UnloadSceneAsync(_mSceneName);
+    }
+
+    public void UnloadPreciseScene(string name)
+    {
+        SceneManager.UnloadSceneAsync(name);
     }
 
     public void LoadWinScreen()

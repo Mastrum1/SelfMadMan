@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using NaughtyAttributes;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,11 +14,13 @@ public class GameManager : MonoBehaviour
     public float Speed { get; private set; }
 
     private int _era;
-    public int Era { get => _era - 1;  set => _era = value; }
+    public int Era { get => _era - 1; set => _era = value; }
 
 
     [SerializeField] float _mScore;
     [SerializeField] int _mHearts;
+
+    [Scene] public string FasterScene; 
 
     MiniGameManager _currentMinigameManager;
     private Scoring _mScoring;
@@ -75,8 +78,11 @@ public class GameManager : MonoBehaviour
 
     private void Faster()
     {
-        Debug.Log("Faster");
+
+        mySceneManager.instance.SetScene(FasterScene, mySceneManager.LoadMode.ADDITIVE);
         Speed *= 0.8f;
+
+
     }
     public void ResetGame()
     {
@@ -121,12 +127,17 @@ public class GameManager : MonoBehaviour
 
     IEnumerator ContinueMinigames(bool won)
     {
+
+        yield return new WaitForSeconds(2f);
         if (_mMinigameCount % 3 == 0)
         {
             Faster();
+            yield return new WaitForSeconds(2f);
         }
-        yield return new WaitForSeconds(2f);
         mySceneManager.instance.RandomGameChoice();
+
+
+
 
     }
 
