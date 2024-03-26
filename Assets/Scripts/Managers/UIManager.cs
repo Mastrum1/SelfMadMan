@@ -68,8 +68,8 @@ public class UIManager : MonoBehaviour
     public void Toggle(Toggle toggle)
     {
         if (toggle.isOn)
-            LocaleSelector.Instance.ChangeLocale(1);
+            LocalSelector.Instance.ChangeLocale(1);
         else if (!toggle.isOn)
-            LocaleSelector.Instance.ChangeLocale(0);
+            LocalSelector.Instance.ChangeLocale(0);
     }
 }
