@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1548188670643521760}
-  - component: {fileID: 2703452438719558517}
+  - component: {fileID: 8027851054952419813}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2703452438719558517
+--- !u!114 &8027851054952419813
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,4 +44,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd3752021fdc44c48bf13f5b74ee9118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDragging: 0
+  _mDirectionTreshold: 0.85
+  _mDiagonalDirectionTreshold: 0.45
+  _mMinimumDist: 0.3
+  _mDragAndDropMinimumDist: 0.15
+  _mHoldTiming: 0.35
+  _mEnableHold: 1
+  _mEnableSlide4Dir: 1
+  _mEnableSlide8Dir: 0
+  _mEnableTapOnFingerDown: 0
+  _mEnableTapOnFingerUp: 1
+  _mEnableDragAndDrop: 1
+  _mEnableGiroscope: 0
+  _mOnTap:
+    m_PersistentCalls:
+      m_Calls: []
+  _mOnHold:
+    m_PersistentCalls:
+      m_Calls: []
+  _mOnGiroscope:
+    m_PersistentCalls:
+      m_Calls: []
+  _mOnDragAndDrop:
+    m_PersistentCalls:
+      m_Calls: []
+  _mOnSlideUp:
+    m_PersistentCalls:
+      m_Calls: []
+  _mOnSlideUpRight:
+    m_PersistentCalls:
+      m_Calls: []
+  _mOnSlideRight:
+    m_PersistentCalls:
+      m_Calls: []
+  _mOnSlideDown:
+    m_PersistentCalls:
+      m_Calls: []
+  _mOnSlideDownRight:
+    m_PersistentCalls:
+      m_Calls: []
+  _mOnSlideDownLeft:
+    m_PersistentCalls:
+      m_Calls: []
+  _mOnSlideLeft:
+    m_PersistentCalls:
+      m_Calls: []
+  _mOnSlideUpLeft:
+    m_PersistentCalls:
+      m_Calls: []
