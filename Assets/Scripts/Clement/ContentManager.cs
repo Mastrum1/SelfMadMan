@@ -28,7 +28,7 @@ public class ContentManager : MonoBehaviour
     [SerializeField] private int _mCurrentIndex = 0;
 
     [Header("UIManager")]
-    [SerializeField] private UIManager _mUIManager;
+   // [SerializeField] private UIManager _mUIManager;
 
     [Header("LeanTocuh")]
     [SerializeField] private LeanTouch _mLeantouch;
