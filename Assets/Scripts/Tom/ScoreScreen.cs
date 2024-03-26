@@ -17,6 +17,7 @@ public class ScoreScreen : MonoBehaviour
 
     void OnWinScreenDisplay(bool won, int era)
     {
+        Debug.Log("fzefzefez" + won);
         _jamesSprite.overrideSprite = _jamesSprites[GameManager.instance.Era];
         _animator.SetBool("Idle", false);
         _animator.SetBool("Won", won);
