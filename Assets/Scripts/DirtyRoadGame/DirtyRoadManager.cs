@@ -1,21 +1,22 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class DirtyRoadManager : MiniGameManager
 {
-    [SerializeField] private GameObject mDirtyAdds;
-    [SerializeField] private int mNumOfAdds;
-    [SerializeField] private DirtyRoadInteractableManager mInteractableManager;
+    [SerializeField] private int _numOfRoads;
+    [SerializeField] private DirtyRoadInteractableManager _interactableManager;
+    [SerializeField] private GameObject _roadParent;
+    [SerializeField] private GameObject _road;
     public float miniGameTime;
 
-    public override void Awake()
+    private List<Road> _roads = new List<Road>();
+
+    private void Start()
     {
-        base.Awake();
-        SpawnPornAdds(mNumOfAdds);
-        mInteractableManager.OnGameEnd += OnGameEnd;
+        _interactableManager.OnGameEnd += OnGameEnd;
+        SpawnRoads();
+        _interactableManager.EnableCollision(_roads);
     }
 
     void OnGameEnd(bool win)
@@ -23,17 +24,27 @@ public class DirtyRoadManager : MiniGameManager
         EndMiniGame(win, miniGameScore);
     }
 
-    void SpawnPornAdds(int numOfAdds)
+    void SpawnRoads()
     {
-        for (int i = 0; i < numOfAdds; i++)
+        if (_numOfRoads is < 2 or > 6)
         {
-            GameObject ad = Instantiate(mDirtyAdds, new Vector3(Random.Range(-2.0f, 2.0f), Random.Range(0.0f, 3.5f), 0.0f), Quaternion.identity);
-            ad.transform.SetParent(mInteractableManager.dirtyAddParent.transform);
+            Debug.LogError("number of roads is < 2 or > 6");
+            return;
+        }
+        
+        for (int i = 0; i < _numOfRoads; i++)
+        {
+            var gap = (7f / (_numOfRoads + 1)) * (i+1);
+            Debug.Log(gap);
+            var road = Instantiate(_road, new Vector3(0, 3.5f - gap, 0), Quaternion.identity);
+            road.transform.SetParent(_roadParent.transform);
+            _roads.Add(road.GetComponent<Road>());
         }
     }
 
     private void OnDestroy()
     {
-        mInteractableManager.OnGameEnd -= OnGameEnd;
+        _interactableManager.OnGameEnd -= OnGameEnd;
+        _interactableManager.DisableCollision(_roads);
     }
 }
