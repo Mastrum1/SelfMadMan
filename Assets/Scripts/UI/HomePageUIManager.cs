@@ -33,9 +33,9 @@ public class HomePageUIManager : MonoBehaviour
     {
         if (!obj)
             return;
-        if (obj.active == true)
+        if (obj.activeSelf == true)
             obj.SetActive(false);
-        else if (obj.active == false)
+        else if (obj.activeSelf == false)
             obj.SetActive(true);
     }
 

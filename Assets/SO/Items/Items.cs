@@ -10,5 +10,5 @@ public class Items : ScriptableObject
     public string Type;
     public Sprite Icon;
     public Sprite Look;
-    public float Cost;
+    public int Cost;
 }
