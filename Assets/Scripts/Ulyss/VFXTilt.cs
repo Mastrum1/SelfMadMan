@@ -3,19 +3,23 @@ using UnityEngine;
 
 public class VFXTilt : MonoBehaviour
 {
-    public float tiltAngle = 15f; // Maximum tilt angle
-    public float tiltSpeed = 1000f; // Tilt speed in degrees per second
-    public float returnSpeed = 500f; // Return speed in degrees per second
-    public float interval = 3f; // Time interval between tilts
+    [SerializeField]
+    private float tiltAngle = 15f; // Maximum tilt angle
+    [SerializeField]
+    private float tiltSpeed = 1000f; // Tilt speed in degrees per second
+    [SerializeField]
+    private float returnSpeed = 500f; // Return speed in degrees per second
+    [SerializeField]
+    private float interval = 3f; // Time interval between tilts
 
     private bool isTilting = false; // Flag to check if currently tilting
 
-    void Start()
+    private void Start()
     {
         StartCoroutine(TiltCoroutine());
     }
 
-    IEnumerator TiltCoroutine()
+    private IEnumerator TiltCoroutine()
     {
         while (true)
         {
