@@ -3,6 +3,7 @@ using Lean.Touch;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using static UnityEditor.PlayerSettings;
 
 [System.Serializable]
 
@@ -17,12 +18,13 @@ public class InputManager : MonoBehaviour
 
     [SerializeField] private float _mDragAndDropMinimumDist = .15f;
 
-
     [SerializeField] private float _mHoldTiming = 0.35f;
 
     private bool _mHold;
 
     private bool _mIsDraging;
+
+    private GameObject _mSelectedObject;
 
     [SerializeField] private bool _mEnableHold = true;
 
@@ -34,13 +36,19 @@ public class InputManager : MonoBehaviour
 
     [SerializeField] private bool _mEnableTapOnFingerUp = true;
 
+    [SerializeField] private bool _mEnableTapOnObject = true;
+
     [SerializeField] private bool _mEnableDragAndDrop = true;
 
     [SerializeField] private bool _mEnableGiroscope = false;
 
+    [SerializeField] private bool _mEnableSelectable = false;
+
     [SerializeField] private UnityEvent _mOnTap;
 
     [SerializeField] private UnityEvent _mOnHold;
+
+    [SerializeField] private UnityEvent _mOnTapObject;
 
     [SerializeField] private UnityEvent<Quaternion> _mOnGiroscope;
 
@@ -49,7 +57,7 @@ public class InputManager : MonoBehaviour
     [Header("Slide Events")]
 
     [SerializeField] private UnityEvent _mOnSlideUp;
-       
+
     [SerializeField] private UnityEvent _mOnSlideUpRight;
 
     [SerializeField] private UnityEvent _mOnSlideRight;
@@ -85,7 +93,7 @@ public class InputManager : MonoBehaviour
         if (_mEnableGiroscope)
         {
             Debug.Log("Giro");
-            if(_mOnGiroscope != null) _mOnGiroscope.Invoke(GyroToUnity(Input.gyro.attitude));
+            if (_mOnGiroscope != null) _mOnGiroscope.Invoke(GyroToUnity(Input.gyro.attitude));
         }
 
         if (Input.touchCount > 0)
@@ -104,15 +112,20 @@ public class InputManager : MonoBehaviour
                 Hold();
             }
 
-            if(touch.phase == TouchPhase.Moved &&holdTiming >= _mHoldTiming && _mEnableDragAndDrop && Vector3.Distance(_mStartTouchPos, Camera.main.ScreenToWorldPoint(touch.position)) >= _mDragAndDropMinimumDist || _mIsDraging)
+            if (touch.phase == TouchPhase.Moved && holdTiming >= _mHoldTiming && _mEnableDragAndDrop && Vector3.Distance(_mStartTouchPos, Camera.main.ScreenToWorldPoint(touch.position)) >= _mDragAndDropMinimumDist || _mIsDraging)
             {
-                DragAndDrop(Camera.main.ScreenToWorldPoint(touch.position));
+                DragAndDrop(Camera.main.ScreenToWorldPoint(touch.position),touch);
                 _mIsDraging = true;
             }
 
             if (touch.phase == TouchPhase.Began && _mEnableTapOnFingerDown)
             {
-                Tap();
+                Tap(touch);
+            }
+
+            if (_mEnableSelectable && _mSelectedObject == null)
+            {
+                SelectObject(touch);
             }
 
             if (touch.phase == TouchPhase.Ended)
@@ -123,15 +136,17 @@ public class InputManager : MonoBehaviour
                 {
                     Slide();
                 }
-                else if (!_mHold && _mEnableTapOnFingerUp && !_mIsDraging)
+
+                if (!_mHold && _mEnableTapOnFingerUp && !_mIsDraging)
                 {
-                    Tap();
+                    Tap(touch);
                 }
 
                 _mStartTouchPos = Vector3.zero;
                 _mStartTiming = Time.time;
                 _mHold = false;
                 _mIsDraging = false;
+                _mSelectedObject = null;
             }
         }
     }
@@ -144,7 +159,7 @@ public class InputManager : MonoBehaviour
 
         if (_mEnableSlide8Dir)
         {
-            if (direction2d.x > _mDiagonalDirectionTreshold && direction2d.y > _mDiagonalDirectionTreshold )
+            if (direction2d.x > _mDiagonalDirectionTreshold && direction2d.y > _mDiagonalDirectionTreshold)
             {
                 Debug.Log("Up Right");
                 if (_mOnSlideUpRight != null) _mOnSlideUpRight.Invoke();
@@ -193,10 +208,23 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    public void Tap()
+    public void Tap(Touch touch)
     {
-        Debug.Log("Tap");
-        if (_mOnTap != null) _mOnTap.Invoke();
+        if (_mEnableTapOnObject)
+        {
+            SelectObject(touch);
+
+            if (_mSelectedObject != null && _mOnTapObject != null)
+            {
+                Debug.Log("TapOnObject");
+                _mOnTapObject.Invoke();
+            }
+        }
+        else
+        {
+            Debug.Log("Tap");
+            if (_mOnTap != null) _mOnTap.Invoke();
+        }
     }
 
 
@@ -207,10 +235,37 @@ public class InputManager : MonoBehaviour
         if (_mOnHold != null) _mOnHold.Invoke();
     }
 
-    public void DragAndDrop(Vector3 pos)
+    public void DragAndDrop(Vector3 pos,Touch touch)
     {
-        if (_mOnDragAndDrop != null) _mOnDragAndDrop.Invoke(pos);
-        Debug.Log("Test");
+
+        SelectObject(touch);
+
+        if (_mSelectedObject != null)
+        {
+            if (_mOnDragAndDrop != null) _mOnDragAndDrop.Invoke(pos);
+            Debug.Log("dragAndDrop");
+        }
+    }
+
+    public void SelectObject(Touch touch)
+    {
+
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(touch.position), transform.TransformDirection(Vector3.forward), Mathf.Infinity);
+
+        if (hit.collider != null)
+        {
+            SelectableObject script = hit.collider.GetComponent<SelectableObject>();
+            if (script != null)
+            {
+                script.GetSelected();
+                _mSelectedObject = hit.collider.gameObject;
+            }
+        }
+        else
+        {
+            Debug.Log("notSelectable");
+        }
+        // Create a particle if hit
     }
 
     private Quaternion GyroToUnity(Quaternion q)
