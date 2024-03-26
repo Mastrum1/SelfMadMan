@@ -6,8 +6,7 @@ using UnityEngine;
 
 public class GetBenchManager : MiniGameManager
 {
-
-    [SerializeField] private GameObject _mInteractables;
+    [SerializeField] private GetBenchedInteractableManager _mInteractableManager;
 
     [SerializeField] private List<GameObject> _mJamesState;
 
@@ -17,14 +16,22 @@ public class GetBenchManager : MiniGameManager
 
     [SerializeField] private BoxCollider2D _mSpawnBounds;
 
-    [SerializeField] private ChangeSpawn _mChangeSpawn;
-
     [SerializeField] private float _mCircleSpawnTime = 1f;
 
     private int _mIndexToActivate = -1;
 
     private int _mNbRep = 0;
 
+
+    private void Start()
+    {
+        _mInteractableManager.OnGameEnd += OnGameEnd;
+    }
+
+    void OnGameEnd(bool win)
+    {
+        EndMiniGame(win, miniGameScore);
+    }
 
     private void OnEnable()
     {
@@ -33,6 +40,7 @@ public class GetBenchManager : MiniGameManager
 
     private void OnDisable()
     {
+        _mInteractableManager.OnGameEnd -= OnGameEnd;
         StopCoroutine("SpawnButtons");
     }
 
@@ -42,7 +50,7 @@ public class GetBenchManager : MiniGameManager
         if (_mTimer.timerValue == 0)
         {
             Debug.Log("Time's up");
-            EndMiniGame(true, miniGameScore);
+            OnGameEnd(true);
         }
     }
 
@@ -70,15 +78,6 @@ public class GetBenchManager : MiniGameManager
 
             _mNbRep++;
         }
-    }
-
-    private void ChangeSpawnButtons()
-    {
-        _mButtons[_mIndexToActivate].transform.position = new Vector3(
-                   Random.Range(_mSpawnBounds.bounds.min.x, _mSpawnBounds.bounds.max.x),
-                   Random.Range(_mSpawnBounds.bounds.min.y, _mSpawnBounds.bounds.max.y),
-                   _mButtons[_mIndexToActivate].transform.position.z
-                   );
     }
 
     private IEnumerator SpawnButtons()

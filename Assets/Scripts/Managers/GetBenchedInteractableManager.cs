@@ -15,10 +15,10 @@ public class GetBenchedInteractableManager : MonoBehaviour
     {
         for (int i = 0; i < _mInteractablesParent.transform.childCount; i++)
         {
-            var addChild = _mInteractablesParent.transform.GetChild(i).GetComponent<OnAddsCollide>();
+            var addChild = _mInteractablesParent.transform.GetChild(i).GetComponent<TapWithTimer>();
             if (addChild != null)
             {
-                addChild.OnCollided += HandleEndGame;
+                addChild.OnLoose += HandleEndGame;
             }
         }
     }
@@ -31,10 +31,10 @@ public class GetBenchedInteractableManager : MonoBehaviour
     {
         for (int i = 0; i < _mInteractablesParent.transform.childCount; i++)
         {
-            var addChild = _mInteractablesParent.transform.GetChild(i).GetComponent<OnAddsCollide>();
+            var addChild = _mInteractablesParent.transform.GetChild(i).GetComponent<TapWithTimer>();
             if (addChild != null)
             {
-                addChild.OnCollided -= HandleEndGame;
+                addChild.OnLoose -= HandleEndGame;
             }
         }
     }
