@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     private int _mLevelCount;
     private int _mCurrentStars;
 
-    public event Action<bool, int> WinScreenHandle;
+    public event Action<bool, int, int> WinScreenHandle;
 
     private void Awake()
     {
@@ -108,11 +108,10 @@ public class GameManager : MonoBehaviour
         _mHearts -= won ? 0 : 1;
         score += won ? 100 : 0;
         _mScore = _mScoring.ChangeScore(Scoring.Param.Add, _mScore, score);
-
+        WinScreenHandle?.Invoke(won, Era, _mHearts);
         if (_mHearts <= 0)
         {
-            SceneManager.LoadScene("LoseScreen");
-            ResetGame();
+            //ResetGame();
         }
         else
             StartCoroutine(ContinueMinigames(won));
@@ -125,10 +124,8 @@ public class GameManager : MonoBehaviour
         if (_mMinigameCount % 3 == 0)
         {
             Faster();
-
         }
-        WinScreenHandle?.Invoke(won, Era);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         mySceneManager.instance.RandomGameChoice();
 
     }
