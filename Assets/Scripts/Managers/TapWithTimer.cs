@@ -59,7 +59,7 @@ public class TapWithTimer : MonoBehaviour
         }
         else
         { 
-            _mBenchManager.EndMiniGame(false, _mBenchManager.miniGameScore);
+            //_mBenchManager.EndMiniGame(false, _mBenchManager.miniGameScore);
         }
         gameObject.SetActive(false);
     }
