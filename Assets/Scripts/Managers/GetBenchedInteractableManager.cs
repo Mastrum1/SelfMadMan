@@ -1,0 +1,42 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+
+public class GetBenchedInteractableManager : MonoBehaviour
+{
+    public event Action<bool> OnGameEnd;
+
+    [SerializeField] private GameObject _mInteractablesParent;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        for (int i = 0; i < _mInteractablesParent.transform.childCount; i++)
+        {
+            var addChild = _mInteractablesParent.transform.GetChild(i).GetComponent<OnAddsCollide>();
+            if (addChild != null)
+            {
+                addChild.OnCollided += HandleEndGame;
+            }
+        }
+    }
+
+    void HandleEndGame(bool win)
+    {
+        OnGameEnd?.Invoke(win);
+    }
+    private void OnDestroy()
+    {
+        for (int i = 0; i < _mInteractablesParent.transform.childCount; i++)
+        {
+            var addChild = _mInteractablesParent.transform.GetChild(i).GetComponent<OnAddsCollide>();
+            if (addChild != null)
+            {
+                addChild.OnCollided -= HandleEndGame;
+            }
+        }
+    }
+
+}

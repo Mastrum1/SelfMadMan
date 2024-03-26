@@ -1,35 +1,30 @@
 using CW.Common;
+using System;
 using UnityEngine;
 
 public class TapWithTimer : MonoBehaviour
 {
-    [SerializeField]
-    private GetBenchManager _mBenchManager;
+    [SerializeField] private GetBenchManager _mBenchManager;
+
+    public event Action<bool> OnLoose;
 
     [SerializeField] private ChangeSpawn _mChangeSpawn;
 
     private bool _EndGame = false;
 
-    [SerializeField]
-    private float _mMaxScale = 2.5f;
+    [SerializeField] private float _mMaxScale = 2.5f;
 
-    [SerializeField]
-    private float _mMinTimeForClick = 0.8f;
+    [SerializeField] private float _mMinTimeForClick = 0.8f;
 
-    [SerializeField]
-    private float _mPerfectTiming = 1f;
+    [SerializeField] private float _mPerfectTiming = 1f;
 
-    [SerializeField]
-    private float _mMidTiming = 1.5f;
+    [SerializeField] private float _mMidTiming = 1.5f;
 
-    [SerializeField]
-    private float _mImmondeTiming = 2f;
+    [SerializeField] private float _mImmondeTiming = 2f;
 
-    [SerializeField]
-    private GameObject _mTorus;
+    [SerializeField] private GameObject _mTorus;
 
-    [SerializeField]
-    private float _mDecreaseSpeed;
+    [SerializeField] private float _mDecreaseSpeed;
 
     void OnEnable()
     {
@@ -47,6 +42,7 @@ public class TapWithTimer : MonoBehaviour
             _mTorus.transform.localScale -= new Vector3(Time.deltaTime * _mDecreaseSpeed, Time.deltaTime * _mDecreaseSpeed, Time.deltaTime * _mDecreaseSpeed);
             if (_mTorus.transform.localScale.x < _mMinTimeForClick)
             {
+                OnLoose?.Invoke(false);
                 //_mBenchManager.EndMiniGame(false, _mBenchManager.miniGameScore);
                 gameObject.SetActive(false);
 
@@ -72,6 +68,7 @@ public class TapWithTimer : MonoBehaviour
         else
         {
             Debug.Log("Tu pues :) ");
+            OnLoose?.Invoke(false);
             //_mBenchManager.EndMiniGame(false, _mBenchManager.miniGameScore);
 
         }
