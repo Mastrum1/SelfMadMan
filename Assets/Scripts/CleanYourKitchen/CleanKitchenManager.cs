@@ -1,12 +1,16 @@
-
-
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CleanKitchenManager : MiniGameManager
 {
-    // Update is called once per frame
+    [SerializeField] private CleanYourKitchenInteractableManager _interactableManager;
+    private void Start()
+    {
+        Amount = 0;
+        _interactableManager.OnRoachDeath += IncrementQuestAmount;
+    }
 
+    private void OnDestroy()
+    {
+        _interactableManager.OnRoachDeath -= IncrementQuestAmount;
+    }
 }
