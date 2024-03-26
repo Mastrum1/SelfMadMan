@@ -11,8 +11,7 @@ public class GetBenchManager : MiniGameManager
 
     [SerializeField] private List<GameObject> _mJamesState;
 
-    [SerializeField]
-    private List<GameObject> _mShadowState;
+    [SerializeField] private List<GameObject> _mShadowState;
 
     [SerializeField] private List<GameObject> _mButtons;
 
@@ -20,12 +19,12 @@ public class GetBenchManager : MiniGameManager
 
     [SerializeField] private ChangeSpawn _mChangeSpawn;
 
+    [SerializeField] private float _mCircleSpawnTime = 1f;
+
     private int _mIndexToActivate = -1;
 
     private int _mNbRep = 0;
 
-    [SerializeField]
-    private float _mCircleSpawnTime = 1f;
 
     private void OnEnable()
     {

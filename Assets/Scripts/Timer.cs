@@ -14,10 +14,13 @@ public class Timer : MonoBehaviour
     public float timerValue;
     [SerializeField] public RectTransform Panel;
 
+    private bool _timerOn;
+    public bool MyTimer { get => _timerOn;  set => _timerOn = value; }
 
 
     public void ResetTimer(float time)
     {
+        MyTimer = true;
         timerValue = maxBarValue;
         _mDepletionRate = maxBarValue / time;
         Panel.sizeDelta = new Vector2(maxBarWidth, Panel.sizeDelta.y);
@@ -25,7 +28,7 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
-        if (timerValue > 0)
+        if (timerValue > 0 && MyTimer)
         {
             float depletion = _mDepletionRate * Time.deltaTime;
             timerValue -= depletion;
