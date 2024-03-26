@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     private int _era;
     public int Era { get => _era - 1;  set => _era = value; }
 
+    [SerializeField] private Player _mPlayer;
 
     [SerializeField] float _mScore;
     [SerializeField] int _mHearts;
@@ -31,6 +32,10 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        if (_mPlayer.CheckFile())
+        {
+            _mPlayer.LoadJson();
+        }
         Application.targetFrameRate = 60;
 
         if (instance == null)
@@ -146,5 +151,10 @@ public class GameManager : MonoBehaviour
     private void OnDestroy()
     {
         //_mQuestManager.OnQuestComplete -= AddStars; => A fix Jimmy
+    }
+
+    private void OnApplicationQuit()
+    {
+        _mPlayer.SaveJson();
     }
 }
