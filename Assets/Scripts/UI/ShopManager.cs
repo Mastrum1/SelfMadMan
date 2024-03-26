@@ -8,7 +8,9 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private Money _mMoney;
 
     public Items[] ShopItems { get => _mShopItems; }
+
     [Header("Item Shop SO")]
+    [SerializeField] private Items[] _SpinWheel;
     [SerializeField] private Items[] _mShopItems;
     [SerializeField] private Items[] _mFurnitures;
     [SerializeField] private Items[] _PowerUp; 
@@ -18,6 +20,7 @@ public class ShopManager : MonoBehaviour
     public GameObject ShopPowerUpContainer { get => _mShopPowerUpContainer; }
 
     [Header("Templates Panels")]
+    [SerializeField] private GameObject _mSpinWheelContainer;
     [SerializeField] private GameObject _mTemplateContainer;
     [SerializeField] private GameObject _mShopFurnituresContainer;
     [SerializeField] private GameObject _mShopPowerUpContainer;
