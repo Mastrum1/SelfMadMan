@@ -10,10 +10,17 @@ public class ShopManager : MonoBehaviour
     public Items[] ShopItems { get => _mShopItems; }
     [Header("Item Shop SO")]
     [SerializeField] private Items[] _mShopItems;
+    [SerializeField] private Items[] _mFurnitures;
+    [SerializeField] private Items[] _PowerUp; 
 
     public GameObject TemplateContainer { get => _mTemplateContainer; }
+    public GameObject ShopFurnituresContainer { get => _mShopFurnituresContainer; }
+    public GameObject ShopPowerUpContainer { get => _mShopPowerUpContainer; }
+
     [Header("Templates Panels")]
     [SerializeField] private GameObject _mTemplateContainer;
+    [SerializeField] private GameObject _mShopFurnituresContainer;
+    [SerializeField] private GameObject _mShopPowerUpContainer;
     [SerializeField] private GameObject _mTemplatePrefab;
 
     private void Awake()
@@ -24,22 +31,29 @@ public class ShopManager : MonoBehaviour
 
     private void Start()
     {
-        LoadPanels();
+        LoadAllPanels();
         CheckPurchasable();
     }
 
     public void CheckPurchasable()
     {
-        for (int i = 0; i < _mShopItems.Length; i++)
+        CheckPurchasablePerType(_mShopItems);
+        CheckPurchasablePerType(_mFurnitures);
+        CheckPurchasablePerType(_PowerUp);
+    }
+
+    public void CheckPurchasablePerType(Items[] item)
+    {
+        for (int i = 0; i < item.Length; i++)
         {
             ShopTemplate TemplateInfos = _mTemplateContainer.transform.GetChild(i).GetComponent<ShopTemplate>();
-            if (_mMoney.CurrentMoney >= _mShopItems[i].Cost) 
+            if (_mMoney.CurrentMoney >= item[i].Cost) 
             {
                 Color newColor = TemplateInfos.PurchaseBox.color;
                 newColor.a = 1f; // 1f represents fully visible, 0f would be fully transparent
                 TemplateInfos.PurchaseBox.color = newColor;
             }
-            else if (_mMoney.CurrentMoney < _mShopItems[i].Cost)
+            else if (_mMoney.CurrentMoney < item[i].Cost)
             {
                 Color newColor = TemplateInfos.PurchaseBox.color;
                 newColor.a = 0.5f; // 1f represents fully visible, 0f would be fully transparent
@@ -68,17 +82,26 @@ public class ShopManager : MonoBehaviour
         PurchaseItem(index, cost);
     }
 
-    public void LoadPanels()
+    public void LoadAllPanels()
     {
-        for (int i = 0; i < _mShopItems.Length; i++) 
+        LoadPanels(_mShopItems, _mTemplateContainer);
+        LoadPanels(_mFurnitures, _mShopFurnituresContainer);
+        LoadPanels(_PowerUp, _mShopPowerUpContainer);
+    }
+
+    public void LoadPanels(Items[] item, GameObject container)
+    {
+        for (int i = 0; i < item.Length; i++) 
         {
-            GameObject Templates = Instantiate(_mTemplatePrefab, _mTemplateContainer.transform);
+            GameObject Templates = Instantiate(_mTemplatePrefab, container.transform);
+
+            // Get the ShopTemplate component
             ShopTemplate TemplatesInfo = Templates.GetComponent<ShopTemplate>();
-            TemplatesInfo.TitleText.text = _mShopItems[i].ItemName;
-            TemplatesInfo.CostText.text = _mShopItems[i].Cost.ToString();
-            TemplatesInfo.ImageItem.sprite = _mShopItems[i].Look;
+            TemplatesInfo.TitleText.text = item[i].ItemName;
+            TemplatesInfo.CostText.text = item[i].Cost.ToString();
+            TemplatesInfo.ImageItem.sprite = item[i].Look;
             TemplatesInfo.Index = i;
-            TemplatesInfo.Cost = _mShopItems[i].Cost;
+            TemplatesInfo.Cost = item[i].Cost;
         }
     }
 }
