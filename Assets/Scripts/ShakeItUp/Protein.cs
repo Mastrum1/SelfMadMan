@@ -32,11 +32,12 @@ public class Protein : MonoBehaviour
         _proteibRb.AddForce(new Vector2(force.x * speed, force.y * speed));
         
         var shakeForce = Mathf.Abs((force.x * speed + force.y * speed) / 2);
-        if (shakeForce < _resistance) return;
+        //Debug.Log(shakeForce + "ShakeForce" + _resistance + "Resistance");
+        //if (shakeForce < _resistance) return;
 
-        _scale.x -= Mathf.Clamp(_scale.x - (shakeForce / _resistance * 100), 0f, 0.02f);
-        _scale.y -= Mathf.Clamp(_scale.y - (shakeForce / _resistance * 100), 0f, 0.02f);
-        //Debug.Log(_scale + " Scale");
+        _scale.x -= shakeForce;
+        _scale.y -= shakeForce;
+        Debug.Log(_scale + " Scale");
         transform.localScale = _scale;
     }
 }
