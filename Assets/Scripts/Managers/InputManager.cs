@@ -2,7 +2,9 @@
 using Lean.Touch;
 using Unity.VisualScripting;
 using UnityEngine;
+
 using UnityEngine.Events;
+using static Lean.Touch.LeanSwipeBase;
 using static UnityEditor.PlayerSettings;
 
 [System.Serializable]
@@ -28,6 +30,8 @@ public class InputManager : MonoBehaviour
 
     [SerializeField] private bool _mEnableHold = true;
 
+    [SerializeField] private bool _mEnableSlide = true;
+
     [SerializeField] private bool _mEnableSlide4Dir = true;
 
     [SerializeField] private bool _mEnableSlide8Dir = false;
@@ -44,6 +48,8 @@ public class InputManager : MonoBehaviour
 
     [SerializeField] private bool _mEnableSelectable = false;
 
+    [SerializeField] private bool _mEnableAccelerometer = false;
+
     [SerializeField] private UnityEvent _mOnTap;
 
     [SerializeField] private UnityEvent _mOnHold;
@@ -52,9 +58,11 @@ public class InputManager : MonoBehaviour
 
     [SerializeField] private UnityEvent<Quaternion> _mOnGiroscope;
 
+    [SerializeField] private UnityEvent<Vector3> _mOnAccelerometer;
+
     [SerializeField] private UnityEvent<Vector3> _mOnDragAndDrop;
 
-    [Header("Slide Events")]
+    [Header("Slide dir Events")]
 
     [SerializeField] private UnityEvent _mOnSlideUp;
 
@@ -71,6 +79,20 @@ public class InputManager : MonoBehaviour
     [SerializeField] private UnityEvent _mOnSlideLeft;
 
     [SerializeField] private UnityEvent _mOnSlideUpLeft;
+
+    [Header("Slide Events")]
+
+    [SerializeField] private UnityEvent<Vector2> _mOnDelta;
+
+    [SerializeField] private UnityEvent<float> _mOnDistance;
+
+    [SerializeField] private UnityEvent<Vector3> _mOnWorldFrom;
+
+    [SerializeField] private UnityEvent<Vector3> _mOnWorldTo;
+
+    [SerializeField] private UnityEvent<Vector3> _mOnWorldDelta;
+
+    [SerializeField] private UnityEvent<Vector3, Vector3> _mOnWorldFromTo;
 
     private Vector3 _mStartTouchPos;
 
@@ -90,10 +112,23 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
+        if (_mEnableAccelerometer)
+        {
+            Vector3 dir = Vector3.zero;
+
+            dir.x = -Input.acceleration.y;
+            dir.z = Input.acceleration.x;
+            if (dir.sqrMagnitude > 1)
+                dir.Normalize();
+
+            dir *= Time.deltaTime;
+
+            _mOnAccelerometer?.Invoke(dir);
+        }
         if (_mEnableGiroscope)
         {
             Debug.Log("Giro");
-            if (_mOnGiroscope != null) _mOnGiroscope.Invoke(GyroToUnity(Input.gyro.attitude));
+            _mOnGiroscope?.Invoke(GyroToUnity(Input.gyro.attitude));
         }
 
         if (Input.touchCount > 0)
@@ -114,7 +149,7 @@ public class InputManager : MonoBehaviour
 
             if (touch.phase == TouchPhase.Moved && holdTiming >= _mHoldTiming && _mEnableDragAndDrop && Vector3.Distance(_mStartTouchPos, Camera.main.ScreenToWorldPoint(touch.position)) >= _mDragAndDropMinimumDist || _mIsDraging)
             {
-                DragAndDrop(Camera.main.ScreenToWorldPoint(touch.position),touch);
+                DragAndDrop(Camera.main.ScreenToWorldPoint(touch.position), touch);
                 _mIsDraging = true;
             }
 
@@ -132,14 +167,19 @@ public class InputManager : MonoBehaviour
             {
                 _mEndTouchPos = Camera.main.ScreenToWorldPoint(touch.position);
 
-                if (Vector3.Distance(_mStartTouchPos, _mEndTouchPos) >= _mMinimumDist && _mEnableSlide4Dir && !_mIsDraging || Vector3.Distance(_mStartTouchPos, _mEndTouchPos) >= 0.5 && _mEnableSlide8Dir && !_mIsDraging)
+                if (Vector3.Distance(_mStartTouchPos, _mEndTouchPos) >= _mMinimumDist && _mEnableSlide4Dir && !_mIsDraging || Vector3.Distance(_mStartTouchPos, _mEndTouchPos) >= _mMinimumDist && _mEnableSlide8Dir && !_mIsDraging)
                 {
-                    Slide();
+                    SlideDir();
                 }
 
                 if (!_mHold && _mEnableTapOnFingerUp && !_mIsDraging)
                 {
                     Tap(touch);
+                }
+
+                if (_mEnableSlide && Vector3.Distance(_mStartTouchPos, _mEndTouchPos) >= _mMinimumDist)
+                {
+                    Slide();
                 }
 
                 _mStartTouchPos = Vector3.zero;
@@ -153,6 +193,29 @@ public class InputManager : MonoBehaviour
 
     public void Slide()
     {
+        var finalDelta = _mEndTouchPos - _mStartTouchPos;
+
+        finalDelta = finalDelta.normalized;
+
+        _mOnDelta?.Invoke(finalDelta);
+
+        _mOnDistance?.Invoke(finalDelta.magnitude);
+
+        var worldFrom = Camera.main.ScreenToWorldPoint(_mStartTouchPos);
+        var worldTo = Camera.main.ScreenToWorldPoint(_mEndTouchPos);
+
+        _mOnWorldFrom?.Invoke(worldFrom);
+
+
+        _mOnWorldTo?.Invoke(worldTo);
+
+        _mOnWorldDelta?.Invoke(worldTo - worldFrom);
+
+        _mOnWorldFromTo?.Invoke(worldFrom, worldTo);
+    }
+
+    public void SlideDir()
+    {
         Vector3 direction = _mEndTouchPos - _mStartTouchPos;
         Vector2 direction2d = new Vector2(direction.x, direction.y).normalized;
         Debug.Log("Slide");
@@ -162,49 +225,49 @@ public class InputManager : MonoBehaviour
             if (direction2d.x > _mDiagonalDirectionTreshold && direction2d.y > _mDiagonalDirectionTreshold)
             {
                 Debug.Log("Up Right");
-                if (_mOnSlideUpRight != null) _mOnSlideUpRight.Invoke();
+                _mOnSlideUpRight?.Invoke();
             }
             else if (-direction2d.x > _mDiagonalDirectionTreshold && -direction2d.y > _mDiagonalDirectionTreshold)
             {
                 Debug.Log("Down Left");
-                if (_mOnSlideDownLeft != null) _mOnSlideDownLeft.Invoke();
+                _mOnSlideDownLeft?.Invoke();
             }
             else if (-direction2d.x > _mDiagonalDirectionTreshold && direction2d.y > _mDiagonalDirectionTreshold)
             {
                 Debug.Log("Up Left");
-                if (_mOnSlideUpLeft != null) _mOnSlideUpLeft.Invoke();
+                _mOnSlideUpLeft?.Invoke();
             }
             else if (direction2d.x > _mDiagonalDirectionTreshold && -direction2d.y > _mDiagonalDirectionTreshold)
             {
                 Debug.Log("Down Right");
-                if (_mOnSlideDownRight != null) _mOnSlideDownRight.Invoke();
+                _mOnSlideDownRight?.Invoke();
             }
         }
 
         if (Vector2.Dot(Vector2.right, direction2d) > _mDirectionTreshold)
         {
             Debug.Log("Right");
-            if (_mOnSlideRight != null) _mOnSlideRight.Invoke();
+            _mOnSlideRight?.Invoke();
 
 
         }
         else if (Vector2.Dot(Vector2.left, direction2d) > _mDirectionTreshold)
         {
             Debug.Log("Left");
-            if (_mOnSlideLeft != null) _mOnSlideLeft.Invoke();
+            _mOnSlideLeft?.Invoke();
 
         }
         else if (Vector2.Dot(Vector2.up, direction2d) > _mDirectionTreshold)
         {
             Debug.Log("Up");
-            if (_mOnSlideUp != null) _mOnSlideUp.Invoke();
+            _mOnSlideUp?.Invoke();
 
         }
         else if (Vector2.Dot(Vector2.down, direction2d) > _mDirectionTreshold)
         {
             Debug.Log("Down");
 
-            if (_mOnSlideDown != null) _mOnSlideDown.Invoke();
+            _mOnSlideDown?.Invoke();
         }
     }
 
@@ -223,7 +286,7 @@ public class InputManager : MonoBehaviour
         else
         {
             Debug.Log("Tap");
-            if (_mOnTap != null) _mOnTap.Invoke();
+            _mOnTap?.Invoke();
         }
     }
 
@@ -232,17 +295,17 @@ public class InputManager : MonoBehaviour
     {
         Debug.Log("hold");
         _mHold = true;
-        if (_mOnHold != null) _mOnHold.Invoke();
+        _mOnHold?.Invoke();
     }
 
-    public void DragAndDrop(Vector3 pos,Touch touch)
+    public void DragAndDrop(Vector3 pos, Touch touch)
     {
 
         SelectObject(touch);
 
         if (_mSelectedObject != null)
         {
-            if (_mOnDragAndDrop != null) _mOnDragAndDrop.Invoke(pos);
+            _mOnDragAndDrop?.Invoke(pos);
             Debug.Log("dragAndDrop");
         }
     }
@@ -267,7 +330,6 @@ public class InputManager : MonoBehaviour
         }
         // Create a particle if hit
     }
-
     private Quaternion GyroToUnity(Quaternion q)
     {
         return new Quaternion(q.x, q.y, -q.z, -q.w);
