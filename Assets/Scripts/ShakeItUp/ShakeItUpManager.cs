@@ -1,13 +1,20 @@
+using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
 public class ShakeItUpManager : MiniGameManager
 {
-    [SerializeField] private GameObject _waterParticle;
+    [SerializeField] private GameObject _waterParticleParent;
+
+    private List<GameObject> _waterParticle;
     // Start is called before the first frame update
     void Start()
     {
-        
+        for (int i = 0; i < _waterParticleParent.transform.childCount; i++)
+        {
+            var particleChild = _waterParticleParent.transform.GetChild(i).gameObject;
+            _waterParticle.Add(particleChild);
+        }
     }
     
     public void ChangeGravityOrientation(Quaternion orientation)
@@ -29,6 +36,11 @@ public class ShakeItUpManager : MiniGameManager
     public void ApplyAccelerometerForce(Vector3 force)
     {
         Debug.Log(force);
+
+        foreach (var particle in _waterParticle)
+        {
+            particle.transform.Translate(force);
+        }
     }
 }
 
