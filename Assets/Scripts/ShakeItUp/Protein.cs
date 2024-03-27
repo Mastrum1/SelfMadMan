@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Protein : MonoBehaviour
@@ -7,8 +6,9 @@ public class Protein : MonoBehaviour
     public event Action OnDeath; 
     
     [SerializeField] private Rigidbody2D _proteibRb;
-    [SerializeField] private float _resistance;
     
+    private float _resistance;
+    public float Resistance { get => _resistance; set => _resistance = value; }
     private Vector3 _scale;
 
     void Start()
