@@ -623,7 +623,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Interactables
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 624856087996716298, guid: fb7a9e24c693f6248a0f2dac6e3fa695, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3552847836467319964, guid: fb7a9e24c693f6248a0f2dac6e3fa695, type: 3}
@@ -635,13 +636,34 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3552847836467319964, guid: fb7a9e24c693f6248a0f2dac6e3fa695, type: 3}
       insertIndex: -1
       addedObject: {fileID: 190582000}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7709737431448565946, guid: fb7a9e24c693f6248a0f2dac6e3fa695, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 54613995}
   m_SourcePrefab: {fileID: 100100000, guid: fb7a9e24c693f6248a0f2dac6e3fa695, type: 3}
 --- !u!4 &54613993 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3552847836467319964, guid: fb7a9e24c693f6248a0f2dac6e3fa695, type: 3}
   m_PrefabInstance: {fileID: 54613992}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &54613994 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7709737431448565946, guid: fb7a9e24c693f6248a0f2dac6e3fa695, type: 3}
+  m_PrefabInstance: {fileID: 54613992}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &54613995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54613994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 088d9d9029e2d4e1cbb5a4d095a72d26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _proteinParent: {fileID: 0}
 --- !u!1001 &55774892
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16550,7 +16572,7 @@ GameObject:
   - component: {fileID: 1940354303}
   - component: {fileID: 1940354304}
   m_Layer: 0
-  m_Name: MiniGameManager
+  m_Name: ShakeItUpManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16590,6 +16612,7 @@ MonoBehaviour:
   _cash: {fileID: 1398139708}
   _sceneCamera: {fileID: 1759891334}
   _loosePanel: {fileID: 1438571919}
+  _interactableManager: {fileID: 54613995}
   _waterParticleParent: {fileID: 856947444}
   _proteinParent: {fileID: 190581999}
   _protein: {fileID: 6947334999596568910, guid: a1815b62a891847dba571c6839a88b25, type: 3}

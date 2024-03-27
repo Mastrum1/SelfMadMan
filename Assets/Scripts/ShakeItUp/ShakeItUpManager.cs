@@ -5,6 +5,7 @@ using Random = UnityEngine.Random;
 
 public class ShakeItUpManager : MiniGameManager
 {
+    [SerializeField] private ShakeItUpInteractableManager _interactableManager;
     [SerializeField] private GameObject _waterParticleParent;
     [SerializeField] private GameObject _proteinParent;
     [SerializeField] private GameObject _protein;
@@ -22,6 +23,13 @@ public class ShakeItUpManager : MiniGameManager
             var particleChild = _waterParticleParent.transform.GetChild(i).GetComponent<Rigidbody2D>();
             _waterParticle.Add(particleChild);
         }
+
+        _interactableManager.OnGameEnd += OnGameEnd;
+    }
+    
+    void OnGameEnd(bool win)
+    {
+        EndMiniGame(win, miniGameScore);
     }
 
     void SpawnProteins()
