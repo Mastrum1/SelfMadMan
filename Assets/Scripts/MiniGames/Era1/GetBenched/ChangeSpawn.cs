@@ -19,8 +19,6 @@ public class ChangeSpawn : MonoBehaviour
     }
     private void Update()
     {
-
         this.enabled = false;
-
     }
 }
