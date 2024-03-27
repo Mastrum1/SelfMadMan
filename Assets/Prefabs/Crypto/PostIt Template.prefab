@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 212904314021264970}
   - component: {fileID: 8668535913891730446}
   - component: {fileID: 123125060389669151}
-  - component: {fileID: 3618579672933370882}
+  - component: {fileID: 7335001270484757465}
   m_Layer: 0
   m_Name: PostIt Template
   m_TagString: Untagged
@@ -149,7 +149,7 @@ PolygonCollider2D:
       - {x: 0.5, y: -0.5}
       - {x: 0.5, y: 0.5}
   m_UseDelaunayMesh: 0
---- !u!114 &3618579672933370882
+--- !u!114 &7335001270484757465
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,38 +158,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 193327779195378045}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83dcd8dace8b7fe449d796b980cb121d, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d9312d381f0eb94fa340b529733662e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selfSelected: 0
-  onSelected:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8668535913891730446}
-        m_TargetAssemblyTypeName: PostIt, Assembly-CSharp
-        m_MethodName: OnPostItClicked
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onDeselected:
-    m_PersistentCalls:
-      m_Calls: []
-  use: 0
-  onSelectedFinger:
-    m_PersistentCalls:
-      m_Calls: []
-  onSelectedFingerUp:
-    m_PersistentCalls:
-      m_Calls: []
-  onSelectedSelectFinger:
-    m_PersistentCalls:
-      m_Calls: []
-  onSelectedSelectFingerUp:
+  _mOnSelected:
     m_PersistentCalls:
       m_Calls: []
