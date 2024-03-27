@@ -23,7 +23,7 @@ public class Cockroach : MonoBehaviour
         mRigid2d.AddForce(transform.up * _speed, ForceMode2D.Force);
     }
 
-    void Touched()
+    public void Touched()
     {
         OnTouched?.Invoke();
         StartCoroutine(DisableCockroach());
