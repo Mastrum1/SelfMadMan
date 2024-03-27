@@ -6,7 +6,7 @@ public class TweetMovement : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    [SerializeField] private float speed = 2;
+    [SerializeField] private float _mSpeed = 2;
     void Start()
     {
     }
@@ -14,11 +14,11 @@ public class TweetMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.up * speed * Time.deltaTime);
+        transform.Translate(Vector3.up * _mSpeed * Time.deltaTime);
     }
 
     public void Stop()
     {
-        speed = 0;
+        _mSpeed = 0;
     }
 }
