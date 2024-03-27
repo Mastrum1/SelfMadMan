@@ -39,7 +39,7 @@ public class ShakeItUpManager : MiniGameManager
 
         foreach (var particle in _waterParticle)
         {
-            particle.transform.Translate(force);
+            particle.transform.Translate(new Vector2(force.x, force.y));
         }
     }
 }
