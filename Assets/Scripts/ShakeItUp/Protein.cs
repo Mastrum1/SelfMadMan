@@ -10,13 +10,12 @@ public class Protein : MonoBehaviour
     [SerializeField] private float _resistance;
     
     private Vector3 _scale;
-    // Start is called before the first frame update
+
     void Start()
     {
         _scale = transform.localScale;
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         if (_scale.x < 0.05f)
@@ -34,9 +33,9 @@ public class Protein : MonoBehaviour
         var shakeForce = Mathf.Abs((force.x * speed + force.y * speed) / 2);
         if (shakeForce < _resistance) return;
 
-        _scale.x -= shakeForce;
-        _scale.y -= shakeForce;
-        //Debug.Log(_scale + " Scale");
+        _scale.x -= shakeForce / 10;
+        _scale.y -= shakeForce / 10;
+        
         transform.localScale = _scale;
     }
 }

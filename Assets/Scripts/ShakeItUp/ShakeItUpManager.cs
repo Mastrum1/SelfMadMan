@@ -9,7 +9,6 @@ public class ShakeItUpManager : MiniGameManager
     [SerializeField] private GameObject _waterParticleParent;
     [SerializeField] private List<Rigidbody2D> _waterParticle;
     
-    // Start is called before the first frame update
     void Start()
     {
         for (int i = 0; i < _waterParticleParent.transform.childCount; i++)

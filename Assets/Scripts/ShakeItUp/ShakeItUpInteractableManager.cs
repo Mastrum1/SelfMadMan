@@ -8,15 +8,15 @@ public class ShakeItUpInteractableManager : InteractableManager
     
     [SerializeField] private GameObject _proteinParent;
 
-    [SerializeField] private List<Protein> _proteins;
+    private readonly List<Protein> _proteins = new List<Protein>();
     private int _numProteinDead;
     void Start()
     {
         for (int i = 0; i < _proteinParent.transform.childCount; i++)
         {
             var proteinChild = _proteinParent.transform.GetChild(i).GetComponent<Protein>();
-            //_proteins.Add(proteinChild);
-            if (proteinChild is null) return;
+            _proteins.Add(proteinChild);
+            if (proteinChild is null) break;
             
             proteinChild.OnDeath += IncreaseNumDead;
         }
@@ -30,7 +30,7 @@ public class ShakeItUpInteractableManager : InteractableManager
         {
             var randScale = UnityEngine.Random.Range(0.15f, 0.4f);
             protein.transform.localScale = new Vector3(randScale, randScale, 1);
-            protein.enabled = true;
+            protein.gameObject.SetActive(true);
         }
     }
 
