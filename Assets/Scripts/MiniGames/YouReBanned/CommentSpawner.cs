@@ -57,7 +57,6 @@ public class CommentSpawner : MonoBehaviour
 
     public void StopAllComments()
     {
-        //isStopped = true;
         for (int i = 0; i < m_AmountToPool; i++)
             if (_mPooledObjects[i].activeInHierarchy) {
                 _mPooledObjects[i].GetComponent<CommentMovement>().Stop();

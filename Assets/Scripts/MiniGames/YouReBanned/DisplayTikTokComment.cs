@@ -27,10 +27,6 @@ public class DisplayTikTokComment : MonoBehaviour
         _mProfilPicture.sprite = _mData.ProfilPicture;
     }
 
-    void Update()
-    {
-    }
-
     void OnTriggerEnter2D(Collider2D collider2D)
     {
         if (collider2D.gameObject.CompareTag("GameInteractable")) {
@@ -60,5 +56,10 @@ public class DisplayTikTokComment : MonoBehaviour
     public void Disable()
     {
         _mIsEnable = false;
+    }
+
+    public bool GetIsGood()
+    {
+        return _mData.IsGood;
     }
 }
