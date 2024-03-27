@@ -6,7 +6,7 @@ public class ShakeItUpManager : MiniGameManager
 {
     [SerializeField] private GameObject _waterParticleParent;
 
-    private List<Rigidbody2D> _waterParticle;
+    [SerializeField] private List<Rigidbody2D> _waterParticle;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +36,7 @@ public class ShakeItUpManager : MiniGameManager
     public void ApplyAccelerometerForce(Vector3 force)
     {
         //force *= 0.1f;
-        var speed = 10;
+        var speed = 15;
 
         foreach (var particle in _waterParticle)
         {
