@@ -27,14 +27,4 @@ public class ADS : MonoBehaviour
     {
         this.transform.gameObject.SetActive(false);
     }
-
-    void Update()
-    {
-        
-    }
-
-   /* public void OnDelete()
-    {
-        this.transform.gameObject.SetActive(false);
-    }*/
 }
