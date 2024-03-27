@@ -171,7 +171,7 @@ public class InputManager : MonoBehaviour
                     SlideDir();
                 }
 
-                if (!_mHold && _mEnableTapOnFingerUp && !_mIsDraging)
+                else if (!_mHold && _mEnableTapOnFingerUp && !_mIsDraging)
                 {
                     Tap(touch);
                 }
