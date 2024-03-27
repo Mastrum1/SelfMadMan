@@ -7,6 +7,9 @@ public class HomePageUIManager : MonoBehaviour
     [Header("GameObject LIST")]
     [SerializeField] private List<GameObject> _mMenuUI = new List<GameObject>();
 
+    [Header("ButtonsList")]
+    [SerializeField] private List<BoxCollider2D> _mIcons = new List<BoxCollider2D>();
+
     // Links towards our socials medias
     private string _mTwitterURL = "https://twitter.com/selfmadman_";
     private string _mInstagramURL = "https://www.instagram.com/selfmadman_/";
@@ -23,6 +26,10 @@ public class HomePageUIManager : MonoBehaviour
             {
                 c.SetActive(false);
             }
+            foreach (var c in _mIcons)
+            {
+                c.gameObject.SetActive(true);
+            }
         obj.SetActive(true);
     }
 
@@ -31,9 +38,22 @@ public class HomePageUIManager : MonoBehaviour
         if (!obj)
             return;
         if (obj.activeSelf == true)
+        {
+            foreach(var c in _mIcons)
+            {
+                c.gameObject.SetActive(true);
+            }
+
             obj.SetActive(false);
+        }
         else if (obj.activeSelf == false)
-            obj.SetActive(true);  
+        {
+            foreach (var c in _mIcons)
+            {
+                c.gameObject.SetActive(false);
+            }
+            obj.SetActive(true);
+        }
     }
 
     public void Redirection(string platform)

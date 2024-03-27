@@ -314,7 +314,7 @@ public class InputManager : MonoBehaviour
 
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(touch.position), transform.TransformDirection(Vector3.forward), Mathf.Infinity);
 
-        if (hit.collider != null)
+        if (hit.collider != null) 
         {
             NewSelectableObject script = hit.collider.GetComponent<NewSelectableObject>();
             if (script != null)

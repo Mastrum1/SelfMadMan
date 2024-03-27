@@ -14,9 +14,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TableCollectionName: ButtonsTable
   m_TableCollectionNameGuidString: 84ac792bfb1570c4b92e6f164058c9bb
-  m_Entries: []
+  m_Entries:
+  - m_Id: 2174446465982464
+    m_Key: PlayButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2174470843277312
+    m_Key: ShopButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2174651248680960
+    m_Key: ObjectivesButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2174687260975104
+    m_Key: SettingsButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2174711680212992
+    m_Key: CreditsButton
+    m_Metadata:
+      m_Items: []
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 2978227975319715842
   m_KeyGenerator:
     rid: 2978227846485639172
   references:
@@ -26,3 +47,13 @@ MonoBehaviour:
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
       data:
         m_CustomEpoch: 1711041395652
+    - rid: 2978227975319715842
+      type: {class: AssetTypeMetadata, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries:
+        - m_KeyId: 2174687260975104
+          m_TableCodes:
+          - fr
+          - en
+        m_TypeString: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
