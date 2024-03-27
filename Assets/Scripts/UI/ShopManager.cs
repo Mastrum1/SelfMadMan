@@ -8,12 +8,14 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private Money _mMoney;
 
     public Items[] ShopItems { get => _mShopItems; }
+    public Items[] Furnitures { get => _mFurnitures; }
+    public Items[] PowerUp { get => _mPowerUp; }
 
     [Header("Item Shop SO")]
     [SerializeField] private Items[] _SpinWheel;
     [SerializeField] private Items[] _mShopItems;
     [SerializeField] private Items[] _mFurnitures;
-    [SerializeField] private Items[] _PowerUp; 
+    [SerializeField] private Items[] _mPowerUp; 
 
     public GameObject TemplateContainer { get => _mTemplateContainer; }
     public GameObject ShopFurnituresContainer { get => _mShopFurnituresContainer; }
@@ -42,7 +44,7 @@ public class ShopManager : MonoBehaviour
     {
         CheckPurchasablePerType(_mShopItems);
         CheckPurchasablePerType(_mFurnitures);
-        CheckPurchasablePerType(_PowerUp);
+        CheckPurchasablePerType(_mPowerUp);
     }
 
     public void CheckPurchasablePerType(Items[] item)
@@ -65,7 +67,7 @@ public class ShopManager : MonoBehaviour
         }
     }
     
-    public void PurchaseItem(int index, int cost)
+    public void PurchaseItem(Items[] item, int index, int cost)
     {
         if (_mMoney.CurrentMoney >= cost)
         {
@@ -80,16 +82,16 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    public void OnImageClicked(int index, int cost)
+    public void OnImageClicked(Items[] item,int index, int cost)
     {
-        PurchaseItem(index, cost);
+        PurchaseItem(item, index, cost);
     }
 
     public void LoadAllPanels()
     {
         LoadPanels(_mShopItems, _mTemplateContainer);
         LoadPanels(_mFurnitures, _mShopFurnituresContainer);
-        LoadPanels(_PowerUp, _mShopPowerUpContainer);
+        LoadPanels(_mPowerUp, _mShopPowerUpContainer);
     }
 
     public void LoadPanels(Items[] item, GameObject container)
@@ -105,6 +107,7 @@ public class ShopManager : MonoBehaviour
             TemplatesInfo.ImageItem.sprite = item[i].Look;
             TemplatesInfo.Index = i;
             TemplatesInfo.Cost = item[i].Cost;
+            TemplatesInfo.Type = item[i].Type;
         }
     }
 }

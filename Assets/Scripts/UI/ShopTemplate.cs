@@ -23,14 +23,76 @@ public class ShopTemplate : MonoBehaviour, IPointerClickHandler
     public int Cost { get => _mCost; set => _mCost = value; }
     [SerializeField] private int _mCost;
 
+    public string Type { get => _mType; set => _mType = value; }
+    [SerializeField] private string _mType;
+
 
     public void OnPointerClick(PointerEventData eventData)
-    {
-        // Notify the ClickImageHandler that this template was clicked, passing its index
-        ClickImageHandler clickHandler = FindObjectOfType<ClickImageHandler>();
-        if (clickHandler != null && PurchaseBox)
+    { // Get the parent of the clicked object
+        Transform parent = transform.parent;
+
+        // Find the index of the clicked object within its parent
+        int index = -1;
+        for (int i = 0; i < parent.childCount; i++)
         {
-            clickHandler.OnTemplateClicked(_mIndex);
+            if (parent.GetChild(i) == transform)
+            {
+                index = i;
+                break;
+            }
         }
+
+        if (index != -1)
+        {
+            // Determine the correct list based on the clicked object's type
+            Items[] itemList = null;
+            if (Type == "MadCoins")
+            {
+                itemList = FindObjectOfType<ShopManager>().ShopItems;
+            }
+            else if (Type == "Furnitures")
+            {
+                itemList = FindObjectOfType<ShopManager>().Furnitures;
+            }
+            else if (Type == "PowerUp")
+            {
+                itemList = FindObjectOfType<ShopManager>().PowerUp;
+            }
+            else
+            {
+                Debug.LogError("Unknown item type for clicked object: " + Type);
+                return;
+            }
+
+            // Call the OnTemplateClicked method with the correct index and item list
+            FindObjectOfType<ClickImageHandler>().OnTemplateClicked(index, itemList);
+        }
+        else
+        {
+            Debug.LogError("Failed to find index of clicked object within its parent.");
+        }
+
     }
+
+/*    private Items[] DetermineItemList(GameObject clickedObj)
+    {
+        // Determine the correct list based on the clicked object
+        if (clickedObj.GetComponent<ShopTemplate>().Type == "MadCoins")
+        {
+            return ShopManager.Instance.ShopItems;
+        }
+        if (clickedObj.GetComponent<ShopTemplate>().Type == "Furniture")
+        {
+            return ShopManager.Instance.Furnitures;
+        }
+        else if (clickedObj.GetComponent<ShopTemplate>().Type == "PowerUp")
+        {
+            return ShopManager.Instance.PowerUp;
+        }
+        else
+        {
+            Debug.LogError("Unknown item type for clicked object: " + clickedObj.name);
+            return null;
+        }
+    }*/
 }
