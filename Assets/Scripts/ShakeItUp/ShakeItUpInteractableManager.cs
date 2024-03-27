@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,26 +8,48 @@ public class ShakeItUpInteractableManager : InteractableManager
     
     [SerializeField] private GameObject _proteinParent;
 
-    private int numProteinDead;
+    private List<Protein> _proteins;
+    private int _numProteinDead;
     void Start()
     {
         for (int i = 0; i < _proteinParent.transform.childCount; i++)
         {
             var proteinChild = _proteinParent.transform.GetChild(i).GetComponent<Protein>();
+            _proteins.Add(proteinChild);
             if (proteinChild is null) return;
             
             proteinChild.OnDeath += IncreaseNumDead;
+        }
+        
+        SpawnProteins();
+    }
+    
+    void SpawnProteins()
+    {
+        foreach (var protein in _proteins)
+        {
+            var randScale = UnityEngine.Random.Range(0.15f, 0.4f);
+            protein.transform.localScale = new Vector3(randScale, randScale, 1);
+            protein.enabled = true;
+        }
+    }
+
+    public void ApplyForce(Vector3 force)
+    {
+        foreach (var protein in _proteins)
+        {
+            protein.ReduceScale(force);
         }
     }
 
     void IncreaseNumDead()
     {
-        numProteinDead++;
+        _numProteinDead++;
     }
 
     private void Update()
     {
-        if (numProteinDead >= 4)
+        if (_numProteinDead >= 4)
         {
             HandleEndGame();
         }

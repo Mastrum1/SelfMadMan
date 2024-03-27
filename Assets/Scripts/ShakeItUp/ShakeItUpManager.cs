@@ -7,17 +7,11 @@ public class ShakeItUpManager : MiniGameManager
 {
     [SerializeField] private ShakeItUpInteractableManager _interactableManager;
     [SerializeField] private GameObject _waterParticleParent;
-    [SerializeField] private GameObject _proteinParent;
-    [SerializeField] private GameObject _protein;
     [SerializeField] private List<Rigidbody2D> _waterParticle;
-    [SerializeField] private int _numOfProteins;
     
     // Start is called before the first frame update
     void Start()
     {
-        
-        SpawnProteins();
-        
         for (int i = 0; i < _waterParticleParent.transform.childCount; i++)
         {
             var particleChild = _waterParticleParent.transform.GetChild(i).GetComponent<Rigidbody2D>();
@@ -30,17 +24,6 @@ public class ShakeItUpManager : MiniGameManager
     void OnGameEnd(bool win)
     {
         EndMiniGame(win, miniGameScore);
-    }
-
-    void SpawnProteins()
-    {
-        for (int i = 0; i < _numOfProteins; i++)
-        {
-            var protein = Instantiate(_protein, new Vector3(0,-2.5f,0),quaternion.identity);
-            protein.transform.SetParent(_proteinParent.transform);
-            var randScale = Random.Range(0.15f, 0.4f);
-            protein.transform.localScale = new Vector3(randScale, randScale, 1);
-        }
     }
     
     public void ChangeGravityOrientation(Quaternion orientation)
