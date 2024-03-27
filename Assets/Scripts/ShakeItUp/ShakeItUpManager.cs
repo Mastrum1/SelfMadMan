@@ -6,13 +6,13 @@ public class ShakeItUpManager : MiniGameManager
 {
     [SerializeField] private GameObject _waterParticleParent;
 
-    private List<GameObject> _waterParticle;
+    private List<Rigidbody2D> _waterParticle;
     // Start is called before the first frame update
     void Start()
     {
         for (int i = 0; i < _waterParticleParent.transform.childCount; i++)
         {
-            var particleChild = _waterParticleParent.transform.GetChild(i).gameObject;
+            var particleChild = _waterParticleParent.transform.GetChild(i).GetComponent<Rigidbody2D>();
             _waterParticle.Add(particleChild);
         }
     }
@@ -35,13 +35,11 @@ public class ShakeItUpManager : MiniGameManager
 
     public void ApplyAccelerometerForce(Vector3 force)
     {
-        Debug.Log(force);
-
-        force *= 0.1f;
+        //force *= 0.1f;
 
         foreach (var particle in _waterParticle)
         {
-            particle.transform.Translate(new Vector2(force.x, force.y));
+            particle.AddForce(force);
         }
     }
 }
