@@ -16,12 +16,18 @@ public class ISaidStopGameManager : MiniGameManager
     void Update()
     {
         if (_mTimer.timerValue == 0)
-            EndMiniGame(true, miniGameScore);
+            EndGame(true);
+    }
+
+    void EndGame(bool isWin) 
+    {
+        EndMiniGame(isWin, miniGameScore);
+        Hand.Stop();
     }
 
     void OnPackCaught()
     {
-        EndMiniGame(false, miniGameScore);
+        EndGame(false);
     }
 
     void OnDestroy()
