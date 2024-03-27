@@ -37,6 +37,8 @@ public class ShakeItUpManager : MiniGameManager
     {
         Debug.Log(force);
 
+        force *= 0.1f;
+
         foreach (var particle in _waterParticle)
         {
             particle.transform.Translate(new Vector2(force.x, force.y));
