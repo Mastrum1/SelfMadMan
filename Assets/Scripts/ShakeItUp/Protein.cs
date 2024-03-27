@@ -22,7 +22,7 @@ public class Protein : MonoBehaviour
         if (_scale.x < 0.05f)
         {
             OnDeath?.Invoke();
-            Destroy(this);
+            gameObject.SetActive(false);
         }
     }
 
@@ -32,7 +32,7 @@ public class Protein : MonoBehaviour
         _proteibRb.AddForce(new Vector2(force.x * speed, force.y * speed));
         
         var shakeForce = Mathf.Abs((force.x * speed + force.y * speed) / 2);
-        if (shakeForce > _resistance) return;
+        if (shakeForce < _resistance) return;
 
         _scale.x -= shakeForce;
         _scale.y -= shakeForce;

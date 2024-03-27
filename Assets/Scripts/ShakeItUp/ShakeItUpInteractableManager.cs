@@ -8,14 +8,14 @@ public class ShakeItUpInteractableManager : InteractableManager
     
     [SerializeField] private GameObject _proteinParent;
 
-    private List<Protein> _proteins;
+    [SerializeField] private List<Protein> _proteins;
     private int _numProteinDead;
     void Start()
     {
         for (int i = 0; i < _proteinParent.transform.childCount; i++)
         {
             var proteinChild = _proteinParent.transform.GetChild(i).GetComponent<Protein>();
-            _proteins.Add(proteinChild);
+            //_proteins.Add(proteinChild);
             if (proteinChild is null) return;
             
             proteinChild.OnDeath += IncreaseNumDead;
@@ -36,6 +36,7 @@ public class ShakeItUpInteractableManager : InteractableManager
 
     public void ApplyForce(Vector3 force)
     {
+        if (_proteins == null) return;
         foreach (var protein in _proteins)
         {
             protein.ReduceScale(force);
