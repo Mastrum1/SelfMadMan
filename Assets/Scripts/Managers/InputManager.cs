@@ -5,7 +5,6 @@ using UnityEngine;
 
 using UnityEngine.Events;
 using static Lean.Touch.LeanSwipeBase;
-using static UnityEditor.PlayerSettings;
 
 [System.Serializable]
 

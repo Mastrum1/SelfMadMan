@@ -81,7 +81,7 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    public void OnImageClicked(Items[] item,int index, int cost)
+    public void OnImageClicked(Items[] item, int index, int cost)
     {
         PurchaseItem(item, index, cost);
     }

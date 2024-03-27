@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class ShopTemplate : MonoBehaviour, IPointerClickHandler
+public class ShopTemplate : MonoBehaviour/*, IPointerClickHandler*/
 {
     public TMP_Text TitleText { get => _mTitleText; set => _mTitleText = value; }
     [SerializeField] public TMP_Text _mTitleText;
@@ -27,7 +27,7 @@ public class ShopTemplate : MonoBehaviour, IPointerClickHandler
     [SerializeField] private string _mType;
 
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerClick()
     { // Get the parent of the clicked object
         Transform parent = transform.parent;
 
@@ -46,24 +46,23 @@ public class ShopTemplate : MonoBehaviour, IPointerClickHandler
         {
             // Determine the correct list based on the clicked object's type
             Items[] itemList = null;
-            if (Type == "MadCoins")
-            {
-                itemList = FindObjectOfType<ShopManager>().ShopItems;
-            }
-            else if (Type == "Furnitures")
-            {
-                itemList = FindObjectOfType<ShopManager>().Furnitures;
-            }
-            else if (Type == "PowerUp")
-            {
-                itemList = FindObjectOfType<ShopManager>().PowerUp;
-            }
-            else
-            {
-                Debug.LogError("Unknown item type for clicked object: " + Type);
-                return;
-            }
 
+            switch (Type)
+            {
+                case "MadCoins":
+                    itemList = FindObjectOfType<ShopManager>().ShopItems;
+                    break;
+                case "Furnitures":
+                    itemList = FindObjectOfType<ShopManager>().Furnitures;
+                    break;
+                case "PowerUp":
+                    itemList = FindObjectOfType<ShopManager>().PowerUp;
+                    break;
+                default:
+                    Debug.LogError("Unknown item type for clicked object: " + Type);
+                    return;
+            }
+            
             // Call the OnTemplateClicked method with the correct index and item list
             FindObjectOfType<ShopClickImageHandler>().OnTemplateClicked(index, itemList);
         }
