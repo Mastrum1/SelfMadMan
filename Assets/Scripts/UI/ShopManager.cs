@@ -42,26 +42,26 @@ public class ShopManager : MonoBehaviour
 
     public void CheckPurchasable()
     {
-        CheckPurchasablePerType(_mShopItems);
-        CheckPurchasablePerType(_mFurnitures);
-        CheckPurchasablePerType(_mPowerUp);
+        CheckPurchasablePerType(_mShopItems, _mTemplateContainer);
+        CheckPurchasablePerType(_mFurnitures, _mShopFurnituresContainer);
+        CheckPurchasablePerType(_mPowerUp, _mShopPowerUpContainer);
     }
 
-    public void CheckPurchasablePerType(Items[] item)
+    public void CheckPurchasablePerType(Items[] item, GameObject container)
     {
         for (int i = 0; i < item.Length; i++)
         {
-            ShopTemplate TemplateInfos = _mTemplateContainer.transform.GetChild(i).GetComponent<ShopTemplate>();
+            ShopTemplate TemplateInfos = container.transform.GetChild(i).GetComponent<ShopTemplate>();
             if (_mMoney.CurrentMoney >= item[i].Cost) 
             {
                 Color newColor = TemplateInfos.PurchaseBox.color;
-                newColor.a = 1f; // 1f represents fully visible, 0f would be fully transparent
+                newColor.a = 1f;
                 TemplateInfos.PurchaseBox.color = newColor;
             }
             else if (_mMoney.CurrentMoney < item[i].Cost)
             {
                 Color newColor = TemplateInfos.PurchaseBox.color;
-                newColor.a = 0.5f; // 1f represents fully visible, 0f would be fully transparent
+                newColor.a = 0.5f; 
                 TemplateInfos.PurchaseBox.color = newColor;
             }
         }
@@ -73,7 +73,6 @@ public class ShopManager : MonoBehaviour
         {
             _mMoney.CurrentMoney = _mMoney.CurrentMoney -= cost;
             CheckPurchasable() ;
-            Debug.Log("Purchased item at index: " + index);
             Debug.Log("Remaining coins: " + _mMoney.CurrentMoney);
         }
         else

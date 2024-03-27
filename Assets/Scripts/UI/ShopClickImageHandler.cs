@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ClickImageHandler : MonoBehaviour
+public class ShopClickImageHandler : MonoBehaviour
 {
     public void OnTemplateClicked(int index, Items[] items)
     {

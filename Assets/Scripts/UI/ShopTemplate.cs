@@ -65,7 +65,7 @@ public class ShopTemplate : MonoBehaviour, IPointerClickHandler
             }
 
             // Call the OnTemplateClicked method with the correct index and item list
-            FindObjectOfType<ClickImageHandler>().OnTemplateClicked(index, itemList);
+            FindObjectOfType<ShopClickImageHandler>().OnTemplateClicked(index, itemList);
         }
         else
         {
@@ -73,26 +73,4 @@ public class ShopTemplate : MonoBehaviour, IPointerClickHandler
         }
 
     }
-
-/*    private Items[] DetermineItemList(GameObject clickedObj)
-    {
-        // Determine the correct list based on the clicked object
-        if (clickedObj.GetComponent<ShopTemplate>().Type == "MadCoins")
-        {
-            return ShopManager.Instance.ShopItems;
-        }
-        if (clickedObj.GetComponent<ShopTemplate>().Type == "Furniture")
-        {
-            return ShopManager.Instance.Furnitures;
-        }
-        else if (clickedObj.GetComponent<ShopTemplate>().Type == "PowerUp")
-        {
-            return ShopManager.Instance.PowerUp;
-        }
-        else
-        {
-            Debug.LogError("Unknown item type for clicked object: " + clickedObj.name);
-            return null;
-        }
-    }*/
 }
