@@ -3,7 +3,7 @@ using UnityEngine;
 public class Protein : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D _proteibRb;
-    
+
     private float _resistance;
     private Vector3 _scale;
     private float _shakeForce;
@@ -11,6 +11,7 @@ public class Protein : MonoBehaviour
     void Start()
     {
         _scale = transform.localScale;
+        _resistance = 10f;
     }
 
     // Update is called once per frame
@@ -24,11 +25,16 @@ public class Protein : MonoBehaviour
 
     public void ReduceScale(Vector3 force)
     {
+        Debug.Log("t nul");
         var speed = 0.15f;
-        _shakeForce = (force.x * speed + force.y * speed) / 2;
-        Debug.Log(_shakeForce);
-        _proteibRb.AddForce(new Vector2(force.x * speed,force.y * speed));
-        
-        _scale -= new Vector3(_shakeForce / _resistance, _shakeForce / _resistance);
+        //Debug.Log(_shakeForce);
+        _proteibRb.AddForce(new Vector2(force.x * speed, force.y * speed));
+
+        _scale.x -= Mathf.Abs((force.x * speed)) / _resistance;
+        _scale.y -= Mathf.Abs((force.x * speed)) / _resistance;
+        Debug.Log(_scale + " Scale");
+        //transform.localScale = _scale;
+
+
     }
 }
