@@ -25,4 +25,11 @@ public class ShakeItUpManager : MiniGameManager
 
         Physics2D.gravity = newGravityDirection.normalized * Physics2D.gravity.magnitude;
     }
+
+    public void ApplyAccelerometerForce(Vector3 force)
+    {
+        Debug.Log(force);
+    }
 }
+
+
