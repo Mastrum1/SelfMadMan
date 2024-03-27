@@ -36,10 +36,11 @@ public class ShakeItUpManager : MiniGameManager
     public void ApplyAccelerometerForce(Vector3 force)
     {
         //force *= 0.1f;
+        var speed = 10;
 
         foreach (var particle in _waterParticle)
         {
-            particle.AddForce(new Vector2(force.x,force.y));
+            particle.AddForce(new Vector2(force.x * speed,force.y * speed));
         }
     }
 }
