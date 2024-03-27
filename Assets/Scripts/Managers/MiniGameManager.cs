@@ -27,7 +27,7 @@ public class MiniGameManager : MonoBehaviour
     public virtual void Awake()
     {
         _gameIsPlaying = true;
-        _cash.targetCamera = _sceneCamera;
+        //_cash.targetCamera = _sceneCamera;
         _mTimer.ResetTimer(GameManager.instance.Speed);
         GameManager.instance.SelectNewMiniGame(this);
         _questManager = QuestManager.instance;

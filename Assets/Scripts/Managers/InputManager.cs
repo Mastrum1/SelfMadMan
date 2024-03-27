@@ -44,6 +44,8 @@ public class InputManager : MonoBehaviour
 
     [SerializeField] private bool _mEnableSelectable = false;
 
+    [SerializeField] private bool _mEnableAccelerometer = false;
+
     [SerializeField] private UnityEvent _mOnTap;
 
     [SerializeField] private UnityEvent _mOnHold;
@@ -51,6 +53,8 @@ public class InputManager : MonoBehaviour
     [SerializeField] private UnityEvent _mOnTapObject;
 
     [SerializeField] private UnityEvent<Quaternion> _mOnGiroscope;
+
+    [SerializeField] private UnityEvent<Vector3> _mOnAccelerometer;
 
     [SerializeField] private UnityEvent<Vector3> _mOnDragAndDrop;
 
@@ -90,6 +94,10 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
+        if(_mEnableAccelerometer)
+        {
+            _mOnAccelerometer?.Invoke(Input.acceleration);
+        }
         if (_mEnableGiroscope)
         {
             Debug.Log("Giro");
@@ -267,7 +275,6 @@ public class InputManager : MonoBehaviour
         }
         // Create a particle if hit
     }
-
     private Quaternion GyroToUnity(Quaternion q)
     {
         return new Quaternion(q.x, q.y, -q.z, -q.w);
