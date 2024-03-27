@@ -2,16 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TweetMovement : MonoBehaviour
+public class CommentMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
-
-    [SerializeField] private float _mSpeed = 2;
+    [SerializeField] private float _mSpeed = 1.5f;
     void Start()
     {
     }
 
-    // Update is called once per frame
     void Update()
     {
         transform.Translate(Vector3.up * _mSpeed * Time.deltaTime);
