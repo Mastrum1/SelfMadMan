@@ -1,9 +1,12 @@
 using CW.Common;
+using System;
 using UnityEngine;
 
 public class TapWithTimer : MonoBehaviour
 {
     [SerializeField] private GetBenchManager _mBenchManager;
+
+    public event Action<bool> OnLoose;
 
     [SerializeField] private ChangeSpawn _mChangeSpawn;
 
@@ -37,7 +40,7 @@ public class TapWithTimer : MonoBehaviour
             _mTorus.transform.localScale -= new Vector3(Time.deltaTime * _mDecreaseSpeed, Time.deltaTime * _mDecreaseSpeed, Time.deltaTime * _mDecreaseSpeed);
             if (_mTorus.transform.localScale.x < _mMinTimeForClick)
             {
-                //_mBenchManager.EndMiniGame(false, _mBenchManager.miniGameScore);
+                OnLoose?.Invoke(false);
                 gameObject.SetActive(false);
             }
         }
@@ -58,8 +61,8 @@ public class TapWithTimer : MonoBehaviour
             Debug.Log("Immonde click");
         }
         else
-        { 
-            //_mBenchManager.EndMiniGame(false, _mBenchManager.miniGameScore);
+        {
+            OnLoose?.Invoke(false);
         }
         gameObject.SetActive(false);
     }
