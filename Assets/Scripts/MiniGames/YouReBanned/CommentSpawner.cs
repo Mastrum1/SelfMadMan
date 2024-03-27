@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CommentSpawner : MonoBehaviour
 {
-    public static CommentSpawner SharedInstance;
+    public static CommentSpawner CommentSharedInstance;
     private List<GameObject> _mPooledObjects;
     [SerializeField] private List<GameObject> _objectsToPool;
     [SerializeField] private GameObject _mParent;
@@ -13,7 +13,7 @@ public class CommentSpawner : MonoBehaviour
 
     void Awake()
     {
-        SharedInstance = this;
+        CommentSharedInstance = this;
     }
 
     void Start()
@@ -33,26 +33,26 @@ public class CommentSpawner : MonoBehaviour
     public GameObject GetPooledComment()
     {
         if (m_IsStopped) return null;
-        List<GameObject> mTweets = GetUnActiveComment();
-        int i = Random.Range(0, mTweets.Count);
-        return mTweets[i];
+        List<GameObject> mDisplayComment = GetUnActiveComment();
+        int i = Random.Range(0, mDisplayComment.Count);
+        return mDisplayComment[i];
     }
 
     public List<GameObject> GetUnActiveComment()
     {
-        List<GameObject> mTweets = new List<GameObject>();
+        List<GameObject> mDisplayComment = new List<GameObject>();
         for(int i = 0; i < m_AmountToPool; i++)
             if(!_mPooledObjects[i].activeInHierarchy)
-                mTweets.Add(_mPooledObjects[i]);
-        return mTweets;
+                mDisplayComment.Add(_mPooledObjects[i]);
+        return mDisplayComment;
     }
     public List<GameObject> GetActiveComments()
     {
-        List<GameObject> mTweets = new List<GameObject>();
+        List<GameObject> mDisplayComment = new List<GameObject>();
         for(int i = 0; i < m_AmountToPool; i++)
             if(_mPooledObjects[i].activeInHierarchy)
-                mTweets.Add(_mPooledObjects[i]);
-        return mTweets;
+                mDisplayComment.Add(_mPooledObjects[i]);
+        return mDisplayComment;
     }
 
     public void StopAllComments()

@@ -10,8 +10,8 @@ public class DisplayTikTokComment : MonoBehaviour
 {
     [SerializeField] TikTokCommentData _mData;
     [SerializeField] TMP_Text _mComment;
-    [SerializeField] Image _mProfilPicture;
-    [SerializeField] Image _mDeletePicture;
+    [SerializeField] SpriteRenderer _mProfilPicture;
+    [SerializeField] SpriteRenderer _mDeletePicture;
     [SerializeField] Sprite _mBaseState;
     [SerializeField] Sprite _mDeleteState;
     private bool _mIsEnable;
@@ -21,7 +21,7 @@ public class DisplayTikTokComment : MonoBehaviour
 
     void Start()
     {
-        _mIsEnable = false;
+        _mIsEnable = true;
         _mIsDeleted = false;
         _mComment.text = _mData.CommentContent;
         _mProfilPicture.sprite = _mData.ProfilPicture;
@@ -42,7 +42,6 @@ public class DisplayTikTokComment : MonoBehaviour
 
     public void OnDeleteComment()
     {
-        Debug.Log("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
         if (_mIsEnable) {
             _mIsDeleted = true;
             _mDeletePicture.sprite = _mDeleteState;
@@ -61,6 +60,5 @@ public class DisplayTikTokComment : MonoBehaviour
     public void Disable()
     {
         _mIsEnable = false;
-        _mIsDeleted = true;
     }
 }

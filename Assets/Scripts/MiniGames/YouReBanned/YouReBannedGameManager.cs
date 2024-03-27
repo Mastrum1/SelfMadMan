@@ -8,7 +8,7 @@ public class YouReBannedGameManager : MiniGameManager
     private float _mAverageSpawnRate;
     void Start()
     {
-        _mAverageSpawnRate = 0.75f;
+        _mAverageSpawnRate = 1.0f;
         StartCoroutine(SpawnComments());
     }
 
@@ -17,8 +17,8 @@ public class YouReBannedGameManager : MiniGameManager
         bool mStatus = true;
         if (_mTimer.timerValue != 0)
             return;
-        CommentSpawner.SharedInstance.StopAllComments();
-        List<GameObject> mComments = CommentSpawner.SharedInstance.GetActiveComments();
+        CommentSpawner.CommentSharedInstance.StopAllComments();
+        List<GameObject> mComments = CommentSpawner.CommentSharedInstance.GetActiveComments();
         for (int i = 0; i < mComments.Count; i++) {
             //if (!mComments[i].GetComponent<>().FinalStatus())
               //  mStatus = false;
@@ -33,12 +33,12 @@ public class YouReBannedGameManager : MiniGameManager
     { 
         while (_mTimer.timerValue >= 420) {
             yield return new WaitForSeconds(_mAverageSpawnRate);
-            GameObject mComment = CommentSpawner.SharedInstance.GetPooledComment();
+            GameObject mComment = CommentSpawner.CommentSharedInstance.GetPooledComment();
             if (mComment != null) {
-                DisplayTikTokComment mDisplayComment = mComment.GetComponent<DisplayTikTokComment>();
                 mComment.SetActive(true);
-                mComment.transform.position = _mSpawnPosition.position;
-                mDisplayComment.ResetComment();
+                DisplayTikTokComment mDisplayComment = mComment.GetComponent<DisplayTikTokComment>();
+               mComment.transform.position = _mSpawnPosition.position;
+               mDisplayComment.ResetComment();
                 mDisplayComment.DeleteComment += OnDeleteComment;
                 mDisplayComment.ExitScreen += OnScreenExited;
             }
