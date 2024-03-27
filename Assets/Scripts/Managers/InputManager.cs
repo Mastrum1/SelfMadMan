@@ -275,9 +275,6 @@ public class InputManager : MonoBehaviour
         }
         // Create a particle if hit
     }
-
-    private Vector3
-
     private Quaternion GyroToUnity(Quaternion q)
     {
         return new Quaternion(q.x, q.y, -q.z, -q.w);
