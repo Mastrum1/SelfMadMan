@@ -50,49 +50,49 @@ public class InputManager : MonoBehaviour
 
     [SerializeField] private bool _mEnableAccelerometer = false;
 
-    [SerializeField] private UnityEvent _mOnTap;
+    [SerializeField] public UnityEvent _mOnTap;
 
-    [SerializeField] private UnityEvent _mOnHold;
+    [SerializeField] public UnityEvent _mOnHold;
 
-    [SerializeField] private UnityEvent _mOnTapObject;
+    [SerializeField] public UnityEvent _mOnTapObject;
 
-    [SerializeField] private UnityEvent<Quaternion> _mOnGiroscope;
+    [SerializeField] public UnityEvent<Quaternion> _mOnGiroscope;
 
-    [SerializeField] private UnityEvent<Vector3> _mOnAccelerometer;
+    [SerializeField] public UnityEvent<Vector3> _mOnAccelerometer;
 
-    [SerializeField] private UnityEvent<Vector3> _mOnDragAndDrop;
+    [SerializeField] public UnityEvent<Vector3> _mOnDragAndDrop;
 
     [Header("Slide dir Events")]
 
-    [SerializeField] private UnityEvent _mOnSlideUp;
+    [SerializeField] public UnityEvent _mOnSlideUp;
 
-    [SerializeField] private UnityEvent _mOnSlideUpRight;
+    [SerializeField] public UnityEvent _mOnSlideUpRight;
 
-    [SerializeField] private UnityEvent _mOnSlideRight;
+    [SerializeField] public UnityEvent _mOnSlideRight;
 
-    [SerializeField] private UnityEvent _mOnSlideDown;
+    [SerializeField] public UnityEvent _mOnSlideDown;
 
-    [SerializeField] private UnityEvent _mOnSlideDownRight;
+    [SerializeField] public UnityEvent _mOnSlideDownRight;
 
-    [SerializeField] private UnityEvent _mOnSlideDownLeft;
+    [SerializeField] public UnityEvent _mOnSlideDownLeft;
 
-    [SerializeField] private UnityEvent _mOnSlideLeft;
+    [SerializeField] public UnityEvent _mOnSlideLeft;
 
-    [SerializeField] private UnityEvent _mOnSlideUpLeft;
+    [SerializeField] public UnityEvent _mOnSlideUpLeft;
 
     [Header("Slide Events")]
 
-    [SerializeField] private UnityEvent<Vector2> _mOnDelta;
+    [SerializeField] public UnityEvent<Vector2> _mOnDelta;
 
-    [SerializeField] private UnityEvent<float> _mOnDistance;
+    [SerializeField] public UnityEvent<float> _mOnDistance;
 
-    [SerializeField] private UnityEvent<Vector3> _mOnWorldFrom;
+    [SerializeField] public UnityEvent<Vector3> _mOnWorldFrom;
 
-    [SerializeField] private UnityEvent<Vector3> _mOnWorldTo;
+    [SerializeField] public UnityEvent<Vector3> _mOnWorldTo;
 
-    [SerializeField] private UnityEvent<Vector3> _mOnWorldDelta;
+    [SerializeField] public UnityEvent<Vector3> _mOnWorldDelta;
 
-    [SerializeField] private UnityEvent<Vector3, Vector3> _mOnWorldFromTo;
+    [SerializeField] public UnityEvent<Vector3, Vector3> _mOnWorldFromTo;
 
     private Vector3 _mStartTouchPos;
 
@@ -172,7 +172,7 @@ public class InputManager : MonoBehaviour
                     SlideDir();
                 }
 
-                if (!_mHold && _mEnableTapOnFingerUp && !_mIsDraging)
+                else if (!_mHold && _mEnableTapOnFingerUp && !_mIsDraging)
                 {
                     Tap(touch);
                 }
@@ -305,6 +305,7 @@ public class InputManager : MonoBehaviour
 
         if (_mSelectedObject != null)
         {
+            pos.z = 0;
             _mOnDragAndDrop?.Invoke(pos);
             Debug.Log("dragAndDrop");
         }
