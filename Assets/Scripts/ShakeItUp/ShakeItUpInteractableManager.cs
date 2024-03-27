@@ -7,7 +7,7 @@ public class ShakeItUpInteractableManager : InteractableManager
 {
     public event Action<bool> OnGameEnd;
     
-    [SerializeField] private Protein _proteinParent;
+    [SerializeField] private GameObject _proteinParent;
 
     private int numProteinDead;
     void Start()
