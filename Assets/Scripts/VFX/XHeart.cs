@@ -3,21 +3,24 @@ using System.Collections;
 
 public class XHeart : MonoBehaviour
 {
-    public AnimationCurve scaleCurve = AnimationCurve.EaseInOut(0, 0, 1, 1.3f);
-    public float animationDuration = 0.33f; // Total duration for the animation, divided by 3
-    public float scaleBackDuration = 0.167f; // Duration for scaling back to original size, divided by 3
+    [SerializeField]
+    private AnimationCurve scaleCurve = AnimationCurve.EaseInOut(0, 0, 1, 1.3f);
+    [SerializeField]
+    private float animationDuration = 0.33f; // Total duration for the animation, divided by 3
+    [SerializeField]
+    private float scaleBackDuration = 0.167f; // Duration for scaling back to original size, divided by 3
 
     private Vector3 originalHeartScale;
     private bool isAnimating = false;
 
-    void Start()
+    private void Start()
     {
         originalHeartScale = transform.localScale;
         transform.localScale = Vector3.zero; // Start with scale zero
         StartAnimation();
     }
 
-    void StartAnimation()
+    private void StartAnimation()
     {
         if (!isAnimating)
         {
@@ -26,7 +29,7 @@ public class XHeart : MonoBehaviour
         }
     }
 
-    IEnumerator HeartAnimation()
+    private IEnumerator HeartAnimation()
     {
         float timeElapsed = 0f;
 
@@ -35,7 +38,7 @@ public class XHeart : MonoBehaviour
             float t = timeElapsed / animationDuration;
             float scaleValue = scaleCurve.Evaluate(t);
 
-            transform.localScale = originalHeartScale * scaleValue; // Apply scale based on curve
+            transform.localScale = originalHeartScale * scaleValue;
 
             yield return null;
             timeElapsed += Time.deltaTime * 3f; // Speed up by 3
