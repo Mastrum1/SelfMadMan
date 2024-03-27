@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: -4240065033053939666}
   - component: {fileID: -404674134123845465}
   - component: {fileID: 7907697858808925697}
+  - component: {fileID: 7524013865727059562}
   m_Layer: 6
   m_Name: Cockroach
   m_TagString: Untagged
@@ -112,6 +113,33 @@ CapsuleCollider2D:
   m_Offset: {x: 0.28513864, y: -0.45362955}
   m_Size: {x: 0.47407836, y: 1.90726}
   m_Direction: 0
+--- !u!114 &7524013865727059562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5479544207747234949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d9312d381f0eb94fa340b529733662e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mOnSelected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -4240065033053939666}
+        m_TargetAssemblyTypeName: Cockroach, Assembly-CSharp
+        m_MethodName: Touched
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7161521997274721034
 GameObject:
   m_ObjectHideFlags: 0
