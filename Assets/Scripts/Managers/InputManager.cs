@@ -2,7 +2,9 @@
 using Lean.Touch;
 using Unity.VisualScripting;
 using UnityEngine;
+
 using UnityEngine.Events;
+using static Lean.Touch.LeanSwipeBase;
 using static UnityEditor.PlayerSettings;
 
 [System.Serializable]
@@ -27,6 +29,8 @@ public class InputManager : MonoBehaviour
     private GameObject _mSelectedObject;
 
     [SerializeField] private bool _mEnableHold = true;
+
+    [SerializeField] private bool _mEnableSlide = true;
 
     [SerializeField] private bool _mEnableSlide4Dir = true;
 
@@ -58,7 +62,7 @@ public class InputManager : MonoBehaviour
 
     [SerializeField] private UnityEvent<Vector3> _mOnDragAndDrop;
 
-    [Header("Slide Events")]
+    [Header("Slide dir Events")]
 
     [SerializeField] private UnityEvent _mOnSlideUp;
 
@@ -75,6 +79,20 @@ public class InputManager : MonoBehaviour
     [SerializeField] private UnityEvent _mOnSlideLeft;
 
     [SerializeField] private UnityEvent _mOnSlideUpLeft;
+
+    [Header("Slide Events")]
+
+    [SerializeField] private UnityEvent<Vector2> _mOnDelta;
+
+    [SerializeField] private UnityEvent<float> _mOnDistance;
+
+    [SerializeField] private UnityEvent<Vector3> _mOnWorldFrom;
+
+    [SerializeField] private UnityEvent<Vector3> _mOnWorldTo;
+
+    [SerializeField] private UnityEvent<Vector3> _mOnWorldDelta;
+
+    [SerializeField] private UnityEvent<Vector3, Vector3> _mOnWorldFromTo;
 
     private Vector3 _mStartTouchPos;
 
@@ -94,7 +112,7 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
-        if(_mEnableAccelerometer)
+        if (_mEnableAccelerometer)
         {
             Vector3 dir = Vector3.zero;
 
@@ -105,12 +123,12 @@ public class InputManager : MonoBehaviour
 
             dir *= Time.deltaTime;
 
-            _mOnAccelerometer?.Invoke(dir);  
+            _mOnAccelerometer?.Invoke(dir);
         }
         if (_mEnableGiroscope)
         {
             Debug.Log("Giro");
-           _mOnGiroscope?.Invoke(GyroToUnity(Input.gyro.attitude));
+            _mOnGiroscope?.Invoke(GyroToUnity(Input.gyro.attitude));
         }
 
         if (Input.touchCount > 0)
@@ -131,7 +149,7 @@ public class InputManager : MonoBehaviour
 
             if (touch.phase == TouchPhase.Moved && holdTiming >= _mHoldTiming && _mEnableDragAndDrop && Vector3.Distance(_mStartTouchPos, Camera.main.ScreenToWorldPoint(touch.position)) >= _mDragAndDropMinimumDist || _mIsDraging)
             {
-                DragAndDrop(Camera.main.ScreenToWorldPoint(touch.position),touch);
+                DragAndDrop(Camera.main.ScreenToWorldPoint(touch.position), touch);
                 _mIsDraging = true;
             }
 
@@ -149,14 +167,19 @@ public class InputManager : MonoBehaviour
             {
                 _mEndTouchPos = Camera.main.ScreenToWorldPoint(touch.position);
 
-                if (Vector3.Distance(_mStartTouchPos, _mEndTouchPos) >= _mMinimumDist && _mEnableSlide4Dir && !_mIsDraging || Vector3.Distance(_mStartTouchPos, _mEndTouchPos) >= 0.5 && _mEnableSlide8Dir && !_mIsDraging)
+                if (Vector3.Distance(_mStartTouchPos, _mEndTouchPos) >= _mMinimumDist && _mEnableSlide4Dir && !_mIsDraging || Vector3.Distance(_mStartTouchPos, _mEndTouchPos) >= _mMinimumDist && _mEnableSlide8Dir && !_mIsDraging)
                 {
-                    Slide();
+                    SlideDir();
                 }
 
                 if (!_mHold && _mEnableTapOnFingerUp && !_mIsDraging)
                 {
                     Tap(touch);
+                }
+
+                if (_mEnableSlide && Vector3.Distance(_mStartTouchPos, _mEndTouchPos) >= _mMinimumDist)
+                {
+                    Slide();
                 }
 
                 _mStartTouchPos = Vector3.zero;
@@ -169,6 +192,29 @@ public class InputManager : MonoBehaviour
     }
 
     public void Slide()
+    {
+        var finalDelta = _mEndTouchPos - _mStartTouchPos;
+
+        finalDelta = finalDelta.normalized;
+
+        _mOnDelta?.Invoke(finalDelta);
+
+        _mOnDistance?.Invoke(finalDelta.magnitude);
+
+        var worldFrom = Camera.main.ScreenToWorldPoint(_mStartTouchPos);
+        var worldTo = Camera.main.ScreenToWorldPoint(_mEndTouchPos);
+
+        _mOnWorldFrom?.Invoke(worldFrom);
+
+
+        _mOnWorldTo?.Invoke(worldTo);
+
+        _mOnWorldDelta?.Invoke(worldTo - worldFrom);
+
+        _mOnWorldFromTo?.Invoke(worldFrom, worldTo);
+    }
+
+    public void SlideDir()
     {
         Vector3 direction = _mEndTouchPos - _mStartTouchPos;
         Vector2 direction2d = new Vector2(direction.x, direction.y).normalized;
@@ -252,7 +298,7 @@ public class InputManager : MonoBehaviour
         _mOnHold?.Invoke();
     }
 
-    public void DragAndDrop(Vector3 pos,Touch touch)
+    public void DragAndDrop(Vector3 pos, Touch touch)
     {
 
         SelectObject(touch);
