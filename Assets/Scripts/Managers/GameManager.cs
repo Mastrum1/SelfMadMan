@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using NaughtyAttributes;
+using UnityEditor.Localization.Platform.Android;
 
 public class GameManager : MonoBehaviour
 {
@@ -50,13 +51,14 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _mPlayer.LoadJson();
+        _mCurrentStars = _mPlayer.Xp;
         _mMinigameCount = 0;
         Era = 1;
         _mHearts = 3;
         Speed = 10;
 
         _mQuestManager = QuestManager.instance;
-        _mQuestManager.OnQuestComplete += AddStars;
+        _mQuestManager.OnReward += AddStars;
         _mScoring = new Scoring();
     }
 
@@ -145,11 +147,16 @@ public class GameManager : MonoBehaviour
 
     void AddStars(int reward)
     {
+
         _mCurrentStars += reward;
         if (_mCurrentStars >= 5)
         {
-            Level++;
-            _mCurrentStars -= 5;
+            _mPlayer.LvlUp();
+            _mPlayer.ResetStars();
+        }
+        else
+        {
+            _mPlayer.AddStars(reward);
         }
     }
 

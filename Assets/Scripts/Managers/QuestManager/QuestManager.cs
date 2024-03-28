@@ -9,17 +9,19 @@ public class QuestManager : MonoBehaviour
 {
     public static QuestManager instance;
 
-    public event Action<int> OnQuestComplete;
+    public event Action<Quest> OnQuestComplete;
 
-    public event Action<int> OnAddActiveQuest;
+    public event Action<int> OnReward;
 
-    public event Action<int> OnRemoveActiveQuest;
+    public event Action<Quest> OnAddActiveQuest;
+
+    public event Action<Quest> OnRemoveActiveQuest;
 
     public event Action<int> OnUnlockQuest;
 
     public event Action<int> OnLockQuest;
 
-    public event Action<int> OnQuestFinished;
+    public event Action<Quest> OnQuestFinished;
 
     public enum CompletionState
     {
@@ -73,7 +75,7 @@ public class QuestManager : MonoBehaviour
         //}
     }
 
-    public void LoadQuests(List<Quest> quests, List<int> ActiveQuests)
+    public void LoadQuests(List<Quest> quests, List<Quest> ActiveQuests)
     {
         _questsList = quests;
         if(ActiveQuests.Count < 3)
@@ -84,14 +86,6 @@ public class QuestManager : MonoBehaviour
             } while (ActiveQuests.Count < 3);
         }
     }
-
-    //void Start()
-    //{
-
-
-
-
-    //}
 
     bool CheckForActiveQuest()
     {
@@ -106,7 +100,7 @@ public class QuestManager : MonoBehaviour
         foreach (var item in SelectedQuests.Where(item => item.QuestCompletionState == CompletionState.NotSelected))
         {
             SelectedQuests.Remove(item);
-            OnRemoveActiveQuest?.Invoke(item.QuestSO.ID);
+            OnRemoveActiveQuest?.Invoke(item);
 
         }
 
@@ -130,14 +124,14 @@ public class QuestManager : MonoBehaviour
         temp.CurrentAmount = 0;
         SelectedQuests.Add(temp);
 
-        OnAddActiveQuest?.Invoke(temp.QuestSO.ID);
+        OnAddActiveQuest?.Invoke(temp);
     }
 
     public void CheckQuestCompletion()
     {
         foreach (var quest in SelectedQuests.Where(item => item.CurrentAmount >= item.MaxAmount))
         {
-            OnQuestComplete?.Invoke(quest.Difficulty.reward);
+            OnQuestComplete?.Invoke(quest);
             quest.QuestCompletionState = CompletionState.Complete;
         }
     }
@@ -145,8 +139,8 @@ public class QuestManager : MonoBehaviour
     void OnQuestFinish(Quest quest)
     {
         quest.QuestCompletionState = CompletionState.NotSelected;
-        OnQuestFinished?.Invoke(quest.Difficulty.reward);
-
+        OnQuestFinished?.Invoke(quest);
+        OnReward?.Invoke(quest.Difficulty.reward);
         if (!CheckForActiveQuest())
         {
             SetNewActiveQuest();
@@ -154,7 +148,7 @@ public class QuestManager : MonoBehaviour
     }
     void ChangeQuest(Quest quest)
     {
-        OnRemoveActiveQuest?.Invoke(quest.QuestSO.ID);
+        OnRemoveActiveQuest?.Invoke(quest);
         quest.QuestCompletionState = CompletionState.NotSelected;
         if (!CheckForActiveQuest())
         {

@@ -3,10 +3,17 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 using UnityEngine;
+using static QuestManager;
 
 [System.Serializable]
 public class Player : MonoBehaviour
 {
+
+    public class ActiveQuest
+    {
+        public int ID;
+
+    }
 
     public event Action<PlayerData> OnDataLoad;
 
@@ -17,6 +24,8 @@ public class Player : MonoBehaviour
     private MiniGameSelector _mMiniGameSelectorInstance;
 
     private QuestManager _mQuestManagerInstance;
+
+    private GameManager _mGameManager;
 
     [SerializeField] private MiniGameSelector _mMiniGameSelector;
 
@@ -57,13 +66,13 @@ public class Player : MonoBehaviour
     public List<Items> ItemLocked { get => _mItemLocked; private set => _mItemLocked = value; }
 
     [SerializeField] private List<Items> _mItemLocked;
-    public List<int> ActiveQuests { get => _mActiveQuests; private set => _mActiveQuests = value; }
+    public List<QuestManager.Quest> ActiveQuests { get => _mActiveQuests; private set => _mActiveQuests = value; }
 
-    [SerializeField] private List<int> _mActiveQuests;
+    [SerializeField] private List<QuestManager.Quest> _mActiveQuests;
 
-    public List<int> CompletedQuests { get => _mCompletedQuests; private set => _mCompletedQuests = value; }
+    public List<QuestManager.Quest> CompletedQuests { get => _mCompletedQuests; private set => _mCompletedQuests = value; }
 
-    [SerializeField] private List<int> _mCompletedQuests;
+    [SerializeField] private List<QuestManager.Quest> _mCompletedQuests;
 
     public List<int> QuestUnlocked { get => _mQuestUnlocked; private set => _mQuestUnlocked = value; }
 
@@ -116,6 +125,7 @@ public class Player : MonoBehaviour
     public void Awake()
     {
         _mMiniGameSelectorInstance = MiniGameSelector.instance;
+        _mGameManager = GameManager.instance;
 
         _mQuestManagerInstance = QuestManager.instance;
 
@@ -125,7 +135,6 @@ public class Player : MonoBehaviour
         _mQuestManagerInstance.OnUnlockQuest += UnlockQuest;
         _mQuestManagerInstance.OnLockQuest += RemoveUnlockQuest;
         _mQuestManagerInstance.OnQuestFinished += RemoveCompleteQuests;
-
 
     }
 
@@ -170,16 +179,14 @@ public class Player : MonoBehaviour
                 if (!ActiveQuests.Contains(item))
                     ActiveQuests.Add(item);
 
-                AllQuest[item].QuestDispo = Quests.QuestBaseDispo.Unlocked;
-                AllQuest[item].QuestCompletionState = QuestManager.CompletionState.Selected;
+                AllQuest[item.QuestSO.ID] = item;
             }
             foreach (var item in data.CompletedQuests)
             {
                 if (!CompletedQuests.Contains(item))
                     CompletedQuests.Add(item);
 
-                AllQuest[item].QuestDispo = Quests.QuestBaseDispo.Unlocked;
-                AllQuest[item].QuestCompletionState = QuestManager.CompletionState.Complete;
+                AllQuest[item.QuestSO.ID] = item;
 
             }
             foreach (var item in data.QuestUnlocked)
@@ -203,29 +210,29 @@ public class Player : MonoBehaviour
 
     }
 
-    public void AddActiveQuests(int ID)
+    public void AddActiveQuests(Quest quest)
     {
 
-        ActiveQuests.Add(ID);
-        RemoveUnlockQuest(ID);
+        ActiveQuests.Add(quest);
+        RemoveUnlockQuest(quest.QuestSO.ID);
     }
 
-    public void RemoveActiveQuests(int ID)
+    public void RemoveActiveQuests(Quest quest)
     {
-        ActiveQuests.Remove(ID);
-        UnlockQuest(ID);
+        ActiveQuests.Remove(quest);
+        UnlockQuest(quest.QuestSO.ID);
     }
 
-    public void QuestComplete(int ID)
+    public void QuestComplete(Quest quest)
     {
-        CompletedQuests.Add(ID);
-        RemoveActiveQuests(ID);
+        CompletedQuests.Add(quest);
+        ActiveQuests.Remove(quest);
     }
 
-    public void RemoveCompleteQuests(int ID)
+    public void RemoveCompleteQuests(Quest quest)
     {
-        CompletedQuests.Remove(ID);
-        UnlockQuest(ID);
+        CompletedQuests.Remove(quest);
+        UnlockQuest(quest.QuestSO.ID);
     }
 
     public void UnlockQuest(int ID)
@@ -236,6 +243,37 @@ public class Player : MonoBehaviour
     public void RemoveUnlockQuest(int ID)
     {
         QuestUnlocked.Remove(ID);
+    }
+
+    public void NewCurrency(int NewCurrency)
+    {
+        Money = NewCurrency;
+    }
+
+    public void AddStars(int Reward)
+    {
+        Xp += Reward;
+    }
+
+    public void ResetStars()
+    {
+        Xp = 0;
+    }
+
+    public void LvlUp()
+    {
+        Level++;
+    }
+
+    public void ChangeMusicVolume(float Value)
+    {
+        VolumeMusic = (int)Value; ;
+    }
+
+    public void ChangeSFXVolume(float Value)
+    {
+
+        VolumeFX = (int)Value;
     }
 
     //public void AddItemInInventory()
