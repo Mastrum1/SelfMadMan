@@ -9,9 +9,13 @@ public class CleanYourYatchGameManager : MiniGameManager
     [SerializeField] private int _mAmountToPool;
     [SerializeField] private Collider2D _mCollider;
     [SerializeField] private InputManager _mInputManager;
+    [SerializeField] private YatchHandler _mYatchHandler;
+    private int _mGarbageRemaining;
 
     void Start()
     {
+        _mGarbageRemaining = _mAmountToPool;
+        _mYatchHandler.GarbageDeleted += OnGarbageDeleted;
         GameObject mTmp;
         _mPooledObjects = new List<GameObject>();
         for (int i = 0, n = 0; i < _mAmountToPool; i++, n++) {
@@ -26,7 +30,10 @@ public class CleanYourYatchGameManager : MiniGameManager
     // Update is called once per frame
     void Update()
     {
-        
+        if (_mGarbageRemaining == 0)
+            EndMiniGame(true, miniGameScore);
+        if (_mTimer.timerValue == 0)
+            EndMiniGame(false, miniGameScore);
     }
 
     private Vector3 RandomPointInBox()
@@ -36,5 +43,15 @@ public class CleanYourYatchGameManager : MiniGameManager
            (Random.value - 0.5f) * _mCollider.bounds.size.y,
            0
         );
+    }
+
+    void OnGarbageDeleted()
+    {
+        _mGarbageRemaining --;
+    }
+
+    void OnDestroy()
+    {
+        _mYatchHandler.GarbageDeleted -= OnGarbageDeleted;
     }
 }
