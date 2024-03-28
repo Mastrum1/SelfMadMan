@@ -4,18 +4,23 @@ using UnityEngine;
 public class VFXClean : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer;
-    public GameObject smallGameObjectPrefab; 
+    public GameObject smallGameObjectPrefab;
     public float spacing = 0.1f;
+
+    private List<GameObject> toCleanObjects = new List<GameObject>();
+    private List<GameObject> smallGameObjects = new List<GameObject>();
 
     void Start()
     {
+        // Find all GameObjects with the "ToClean" tag
+        GameObject[] toCleanObjectsArray = GameObject.FindGameObjectsWithTag("ToClean");
+        toCleanObjects.AddRange(toCleanObjectsArray);
+
         Vector2 spriteSize = spriteRenderer.bounds.size;
         int columns = Mathf.CeilToInt(spriteSize.x / spacing);
         int rows = Mathf.CeilToInt(spriteSize.y / spacing);
 
         Vector3 startPos = spriteRenderer.bounds.min;
-
-        List<GameObject> smallGameObjects = new List<GameObject>();
 
         for (int i = 0; i < columns; i++)
         {
@@ -25,15 +30,26 @@ public class VFXClean : MonoBehaviour
 
                 if (IsSuitableForSpawn(position))
                 {
-                    smallGameObjects.Add(Instantiate(smallGameObjectPrefab, position, Quaternion.identity, transform));
+                    GameObject smallObject = Instantiate(smallGameObjectPrefab, position, Quaternion.identity, transform);
+                    smallGameObjects.Add(smallObject);
                 }
             }
         }
 
         // Batch instantiate the small game objects
-        InstantiateBatch(smallGameObjects);
+        InstantiateBatch();
     }
 
+    private void Update()
+    {
+        // If there are no "ToClean" objects, log "Win" and return
+        if (toCleanObjects.Count == 0)
+        {
+            Debug.Log("Win");
+            return;
+        }
+
+    }
     bool IsSuitableForSpawn(Vector3 position)
     {
         // Raycast to check if there's a collider with the "Statue" tag nearby
@@ -41,16 +57,16 @@ public class VFXClean : MonoBehaviour
         return hit.collider != null && hit.collider.CompareTag("Statue");
     }
 
-    void InstantiateBatch(List<GameObject> gameObjects)
+    void InstantiateBatch()
     {
         // Disable all objects before enabling them together
-        foreach (var go in gameObjects)
+        foreach (var go in smallGameObjects)
         {
             go.SetActive(false);
         }
 
         // Enable all objects together
-        foreach (var go in gameObjects)
+        foreach (var go in smallGameObjects)
         {
             go.SetActive(true);
         }
