@@ -54,8 +54,6 @@ public class InputManager : MonoBehaviour
 
     [SerializeField] public UnityEvent<Vector3> _mOnAccelerometer;
 
-    [SerializeField] public UnityEvent<Vector3> _mOnDragAndDrop;
-
     [Header("Slide dir Events")]
 
     [SerializeField] public UnityEvent _mOnSlideUp;
@@ -290,8 +288,9 @@ public class InputManager : MonoBehaviour
 
         if (_mSelectedObject != null)
         {
+            DragAndDropManager dragScript = _mSelectedObject.GetComponent<DragAndDropManager>();
             pos.z = 0;
-            _mOnDragAndDrop?.Invoke(pos);
+            dragScript._mOnDragAndDrop?.Invoke(pos);
             Debug.Log("dragAndDrop");
         }
     }
@@ -303,7 +302,7 @@ public class InputManager : MonoBehaviour
 
         if (hit.collider != null)
         {
-            NewSelectableObject script = hit.collider.GetComponent<NewSelectableObject>();
+            SelectableObject script = hit.collider.GetComponent<SelectableObject>();
             if (script != null)
             {
                 script.GetSelected();
