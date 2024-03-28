@@ -28,9 +28,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] float _mScore;
     [SerializeField] int _mHearts;
 
-    [Scene] public string FasterScene; 
+    [Scene] public string FasterScene;
 
-    MiniGameManager _currentMinigameManager;
+    private MiniGameManager _currentMinigameManager;
     private Scoring _mScoring;
     private QuestManager _mQuestManager;
 
@@ -89,12 +89,9 @@ public class GameManager : MonoBehaviour
 
     private void Faster()
     {
-
         mySceneManager.instance.SetScene(FasterScene, mySceneManager.LoadMode.ADDITIVE);
         FasterLevel++;
         Speed *= 0.8f;
-
-
     }
     public void ResetGame()
     {
@@ -129,14 +126,11 @@ public class GameManager : MonoBehaviour
         _mScore = _mScoring.ChangeScore(Scoring.Param.Add, _mScore, score);
         WinScreenHandle?.Invoke(won, Era, _mHearts);
         if (_mHearts > 0)
-        {
             StartCoroutine(ContinueMinigames(won));
-        }
     }
 
     IEnumerator ContinueMinigames(bool won)
     {
-
         yield return new WaitForSeconds(2f);
         if (_mMinigameCount % 3 == 0)
         {
@@ -144,10 +138,6 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(2f);
         }
         mySceneManager.instance.RandomGameChoice();
-
-
-
-
     }
 
     void AddStars(int reward)
