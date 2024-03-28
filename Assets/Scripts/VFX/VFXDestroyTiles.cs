@@ -12,7 +12,7 @@ public class VFXDestroyTiles : MonoBehaviour
         {
             Debug.Log("Destroying " + collision.gameObject.name);
 
-            if (Random.value < 0.05f && Foam != null)
+            if (Random.value < 0.02f && Foam != null)
             {
                 Debug.Log("Instantiating " + Foam.name);
                 Instantiate(Foam, collision.transform.position, Quaternion.identity);
