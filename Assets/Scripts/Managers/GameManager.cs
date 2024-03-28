@@ -5,16 +5,24 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using NaughtyAttributes;
+using Unity.Collections;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
     public int Level { get => _mLevelCount; private set => _mLevelCount = value; }
-    public float Speed { get; private set; }
+
+    private float _speed;
+    public float Speed { get => _speed; private set => _speed = value; }
 
     private int _era;
     public int Era { get => _era - 1; set => _era = value; }
+
+    private int _fasterLevel;
+    public int FasterLevel { get => _fasterLevel; set => _fasterLevel = value; }
+
+    private Dictionary<int,bool> _unlockedEra = new Dictionary<int,bool>();
 
 
     [SerializeField] float _mScore;
@@ -52,6 +60,9 @@ public class GameManager : MonoBehaviour
         Era = 1;
         _mHearts = 3;
         Speed = 10;
+        FasterLevel = 1;
+
+        _unlockedEra.Add(0, true);
 
         _mQuestManager = QuestManager.instance;
         _mQuestManager.OnQuestComplete += AddStars;
@@ -80,6 +91,7 @@ public class GameManager : MonoBehaviour
     {
 
         mySceneManager.instance.SetScene(FasterScene, mySceneManager.LoadMode.ADDITIVE);
+        FasterLevel++;
         Speed *= 0.8f;
 
 
@@ -89,6 +101,7 @@ public class GameManager : MonoBehaviour
         _mScore = 0;
         _mHearts = 3;
         Speed = 10;
+        FasterLevel = 1;
     }
 
     public float GetScore()
@@ -115,14 +128,10 @@ public class GameManager : MonoBehaviour
         score += won ? 100 : 0;
         _mScore = _mScoring.ChangeScore(Scoring.Param.Add, _mScore, score);
         WinScreenHandle?.Invoke(won, Era, _mHearts);
-        if (_mHearts <= 0)
+        if (_mHearts > 0)
         {
-            //ResetGame();
-        }
-        else
             StartCoroutine(ContinueMinigames(won));
-
-
+        }
     }
 
     IEnumerator ContinueMinigames(bool won)

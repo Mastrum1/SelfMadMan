@@ -46,10 +46,26 @@ public class Spin : MonoBehaviour
 
             if (currentSpeed == 0.0f)
                 ClaimObject();
-
-
         }
 
+    }
+    public Items CreateItemObject(Quarter quarter)
+    {
+        switch (quarter.Item.Type)
+        {
+            case ItemsSO.TYPE.COINS:
+                Coins coin = new Coins();
+                CoinsSO coinSO = quarter.Item as CoinsSO;
+                coin.Amount = coinSO.Amount;
+                return coin;
+            case ItemsSO.TYPE.MINIGAME:
+                MinigameItem minigame = new MinigameItem();
+                MinigameSO minigameSO = quarter.Item as MinigameSO;
+                minigame.SceneName = minigameSO.name;
+                return minigame;
+            default:
+                return null;
+        }
     }
 
     void ClaimObject()
@@ -57,22 +73,10 @@ public class Spin : MonoBehaviour
         _quarter = _arrow.FetchQuarterData();
         isSpnning = false;
 
-        switch(_quarter.Item.Type)
+        Items item = CreateItemObject(_quarter);
+        if (item != null)
         {
-            case ItemsSO.TYPE.COINS:
-                Coins coin = new Coins();
-                CoinsSO coinSO = _quarter.Item as CoinsSO;
-                coin.Amount = coinSO.Amount;
-                coin.Obtain();
-                break;
-            case ItemsSO.TYPE.MINIGAME:
-                MinigameItem minigame = new MinigameItem();
-                MinigameSO minigameSO = _quarter.Item as MinigameSO;
-                minigame.SceneName = minigameSO.name;
-                minigame.Obtain();
-                break;
-            default:
-                break;
+            item.Obtain();
         }
 
     }
