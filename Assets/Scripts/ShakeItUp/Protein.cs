@@ -34,8 +34,8 @@ public class Protein : MonoBehaviour
         var shakeForce = Mathf.Abs((force.x * speed + force.y * speed) / 2);
         if (shakeForce < _resistance) return;
 
-        _scale.x -= shakeForce;
-        _scale.y -= shakeForce;
+        _scale.x -= shakeForce/100;
+        _scale.y -= shakeForce/100;
         //Debug.Log(_scale + " Scale");
         transform.localScale = _scale;
     }
