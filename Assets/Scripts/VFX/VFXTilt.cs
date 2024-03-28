@@ -4,15 +4,15 @@ using UnityEngine;
 public class VFXTilt : MonoBehaviour
 {
     [SerializeField]
-    private float tiltAngle = 15f; // Maximum tilt angle
+    private float tiltAngle = 15f; 
     [SerializeField]
-    private float tiltSpeed = 1000f; // Tilt speed in degrees per second
+    private float tiltSpeed = 1000f; 
     [SerializeField]
-    private float returnSpeed = 500f; // Return speed in degrees per second
+    private float returnSpeed = 500f; 
     [SerializeField]
-    private float interval = 3f; // Time interval between tilts
+    private float interval = 3f; 
 
-    private bool isTilting = false; // Flag to check if currently tilting
+    private bool isTilting = false; 
 
     private void Start()
     {

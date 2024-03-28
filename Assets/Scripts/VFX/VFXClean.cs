@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class VFXClean : MonoBehaviour
 {
-    public SpriteRenderer spriteRenderer; // Reference to the sprite renderer component
-    public GameObject smallGameObjectPrefab; // Prefab for small game objects
-    public float spacing = 0.1f; // Spacing between small game objects
+    public SpriteRenderer spriteRenderer;
+    public GameObject smallGameObjectPrefab; 
+    public float spacing = 0.1f;
 
     void Start()
     {
@@ -15,7 +15,6 @@ public class VFXClean : MonoBehaviour
 
         Vector3 startPos = spriteRenderer.bounds.min;
 
-        // Batch instantiation list
         List<GameObject> smallGameObjects = new List<GameObject>();
 
         for (int i = 0; i < columns; i++)
@@ -24,10 +23,8 @@ public class VFXClean : MonoBehaviour
             {
                 Vector3 position = startPos + new Vector3(i * spacing, j * spacing, 0);
 
-                // Check if the position is suitable for spawning
                 if (IsSuitableForSpawn(position))
                 {
-                    // Instantiate the small game object and add it to the batch list
                     smallGameObjects.Add(Instantiate(smallGameObjectPrefab, position, Quaternion.identity, transform));
                 }
             }
