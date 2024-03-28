@@ -154,6 +154,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7343525793379699271}
+  - component: {fileID: 7097537114954028267}
   m_Layer: 0
   m_Name: OnClick
   m_TagString: Untagged
@@ -171,13 +172,27 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.53, y: 4.01, z: 0.0096936}
-  m_LocalScale: {x: 0.13379, y: 0.13379, z: 0.13379}
+  m_LocalScale: {x: 19.893953, y: 19.893953, z: 19.893953}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4375955128093991715}
   - {fileID: 9086346418084103863}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7097537114954028267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749494149280346611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04b6b442c5b30e0429a441c91796293e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spinSpeed: 4
+  radius: 0.5
 --- !u!1 &1652357673098930315
 GameObject:
   m_ObjectHideFlags: 0

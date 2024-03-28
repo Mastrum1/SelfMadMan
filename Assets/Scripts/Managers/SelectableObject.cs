@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class NewSelectableObject : MonoBehaviour
+public class SelectableObject : MonoBehaviour
 {
 
     [SerializeField] private UnityEvent _mOnSelected;
