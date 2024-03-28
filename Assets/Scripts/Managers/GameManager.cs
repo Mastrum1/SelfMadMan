@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] float _mScore;
     [SerializeField] int _mHearts;
 
-    [Scene] public string FasterScene; 
+    [Scene] public string FasterScene;
 
     MiniGameManager _currentMinigameManager;
     private Scoring _mScoring;
@@ -35,10 +35,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (_mPlayer.CheckFile())
-        {
-            _mPlayer.LoadJson();
-        }
+  
         Application.targetFrameRate = 60;
 
         if (instance == null)
@@ -52,7 +49,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        _mPlayer.LoadJson();
         _mMinigameCount = 0;
         Era = 1;
         _mHearts = 3;
