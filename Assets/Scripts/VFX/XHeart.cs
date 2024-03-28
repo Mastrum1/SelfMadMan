@@ -6,9 +6,9 @@ public class XHeart : MonoBehaviour
     [SerializeField]
     private AnimationCurve scaleCurve = AnimationCurve.EaseInOut(0, 0, 1, 1.3f);
     [SerializeField]
-    private float animationDuration = 0.33f; // Total duration for the animation, divided by 3
+    private float animationDuration = 0.33f; 
     [SerializeField]
-    private float scaleBackDuration = 0.167f; // Duration for scaling back to original size, divided by 3
+    private float scaleBackDuration = 0.167f; 
 
     private Vector3 originalHeartScale;
     private bool isAnimating = false;
@@ -41,7 +41,7 @@ public class XHeart : MonoBehaviour
             transform.localScale = originalHeartScale * scaleValue;
 
             yield return null;
-            timeElapsed += Time.deltaTime * 3f; // Speed up by 3
+            timeElapsed += Time.deltaTime * 3f; 
         }
 
         // Ensure final scale is 1.3
