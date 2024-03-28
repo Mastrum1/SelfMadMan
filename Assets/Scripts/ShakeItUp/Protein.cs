@@ -27,14 +27,14 @@ public class Protein : MonoBehaviour
 
     public void ReduceScale(Vector3 force)
     {
-        var speed = 0.15f;
+        const int speed = 15;
         _proteibRb.AddForce(new Vector2(force.x * speed, force.y * speed));
         
         var shakeForce = Mathf.Abs((force.x * speed + force.y * speed) / 2);
         if (shakeForce < _resistance) return;
 
-        _scale.x -= shakeForce / 10;
-        _scale.y -= shakeForce / 10;
+        _scale.x -= shakeForce / 200;
+        _scale.y -= shakeForce / 200;
         
         transform.localScale = _scale;
     }

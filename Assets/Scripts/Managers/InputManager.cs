@@ -1,11 +1,5 @@
-
-using Lean.Touch;
-using Unity.VisualScripting;
 using UnityEngine;
-
 using UnityEngine.Events;
-using static Lean.Touch.LeanSwipeBase;
-using static UnityEditor.PlayerSettings;
 
 [System.Serializable]
 
@@ -112,16 +106,7 @@ public class InputManager : MonoBehaviour
     {
         if (_mEnableAccelerometer)
         {
-            Vector3 dir = Vector3.zero;
-
-            dir.x = -Input.acceleration.y;
-            dir.z = Input.acceleration.x;
-            if (dir.sqrMagnitude > 1)
-                dir.Normalize();
-
-            dir *= Time.deltaTime;
-
-            _mOnAccelerometer?.Invoke(dir);
+            _mOnAccelerometer?.Invoke(Input.acceleration);
         }
         if (_mEnableGiroscope)
         {

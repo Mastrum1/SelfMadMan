@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
 
     [Scene] public string FasterScene; 
 
-    MiniGameManager _currentMinigameManager;
+    private MiniGameManager _currentMinigameManager;
     private Scoring _mScoring;
     private QuestManager _mQuestManager;
 
@@ -78,11 +78,8 @@ public class GameManager : MonoBehaviour
 
     private void Faster()
     {
-
         mySceneManager.instance.SetScene(FasterScene, mySceneManager.LoadMode.ADDITIVE);
         Speed *= 0.8f;
-
-
     }
     public void ResetGame()
     {
@@ -121,13 +118,10 @@ public class GameManager : MonoBehaviour
         }
         else
             StartCoroutine(ContinueMinigames(won));
-
-
     }
 
     IEnumerator ContinueMinigames(bool won)
     {
-
         yield return new WaitForSeconds(2f);
         if (_mMinigameCount % 3 == 0)
         {
@@ -135,10 +129,6 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(2f);
         }
         mySceneManager.instance.RandomGameChoice();
-
-
-
-
     }
 
     void AddStars(int reward)
