@@ -1,16 +1,20 @@
 using UnityEngine;
 
-public class ParticleLerper : MonoBehaviour
+public class VFXGoTowardGO : MonoBehaviour
 {
-    public ParticleSystem particleSystemComponent; 
-    public GameObject targetObject; 
-    public float lerpSpeed = 5f; 
-    public float destroyDistanceThreshold = 0.1f;
+    [SerializeField]
+    private ParticleSystem particleSystemComponent;
+    [SerializeField]
+    private GameObject targetObject;
+    [SerializeField]
+    private float lerpSpeed = 5f;
+    [SerializeField]
+    private float destroyDistanceThreshold = 0.1f;
 
     private ParticleSystem.Particle[] particles;
     private Vector3 targetPosition;
 
-    void Start()
+    private void Start()
     {
         // Ensure the target object is assigned
         if (targetObject == null)
@@ -23,7 +27,7 @@ public class ParticleLerper : MonoBehaviour
         targetPosition = targetObject.transform.position;
     }
 
-    void Update()
+    private void Update()
     {
         // Ensure the particle system component is assigned
         if (particleSystemComponent == null)

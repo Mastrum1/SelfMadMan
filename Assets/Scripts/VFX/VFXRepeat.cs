@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class VFXRepeat : MonoBehaviour
 {
-    public GameObject prefab;
+    [SerializeField] private GameObject prefab;
     private GameObject instantiatedObject; 
 
     void Start()

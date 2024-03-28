@@ -3,14 +3,17 @@ using UnityEngine;
 
 public class VFXClean : MonoBehaviour
 {
-    public SpriteRenderer spriteRenderer;
-    public GameObject smallGameObjectPrefab;
-    public float spacing = 0.1f;
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
+    [SerializeField]
+    private GameObject smallGameObjectPrefab;
+    [SerializeField]
+    private float spacing = 0.1f;
 
     private List<GameObject> toCleanObjects = new List<GameObject>();
     private List<GameObject> smallGameObjects = new List<GameObject>();
 
-    void Start()
+    private void Start()
     {
         // Find all GameObjects with the "ToClean" tag
         GameObject[] toCleanObjectsArray = GameObject.FindGameObjectsWithTag("ToClean");
@@ -48,16 +51,16 @@ public class VFXClean : MonoBehaviour
             Debug.Log("Win");
             return;
         }
-
     }
-    bool IsSuitableForSpawn(Vector3 position)
+
+    private bool IsSuitableForSpawn(Vector3 position)
     {
         // Raycast to check if there's a collider with the "Statue" tag nearby
         RaycastHit2D hit = Physics2D.Raycast(position, Vector2.zero, 0f);
         return hit.collider != null && hit.collider.CompareTag("Statue");
     }
 
-    void InstantiateBatch()
+    private void InstantiateBatch()
     {
         // Disable all objects before enabling them together
         foreach (var go in smallGameObjects)
