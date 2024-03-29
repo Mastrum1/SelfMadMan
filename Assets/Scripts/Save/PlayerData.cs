@@ -16,7 +16,7 @@ public class PlayerData
 
     public string Language;
 
-    public List<int> Inventory = new List<int>();
+    public List<Items> Inventory = new List<Items>();
 
     public List<int> UnlockedCinematics = new List<int>();
 

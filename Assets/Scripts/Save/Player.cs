@@ -30,10 +30,6 @@ public class Player : MonoBehaviour
 
     [SerializeField] private QuestManager _mQuestManager;
 
-    public List<int> FirstQuests { get => _mFirstQuests; private set => _mFirstQuests = value; }
-
-    [SerializeField] private List<int> _mFirstQuests;
-
     public int Level { get => _mLevel; private set => _mLevel = value; }
 
     [SerializeField] private int _mLevel;
@@ -67,13 +63,17 @@ public class Player : MonoBehaviour
     [SerializeField] private List<Cinematics> _mUnlockedCinematics;
 
 
-    public List<int> Inventory { get => _mInventory; private set => _mInventory = value; }
+    public List<Items> Inventory { get => _mInventory; private set => _mInventory = value; }
 
-    [SerializeField] private List<int> _mInventory;
+    [SerializeField] private List<Items> _mInventory;
 
     public List<Items> ItemLocked { get => _mItemLocked; private set => _mItemLocked = value; }
 
     [SerializeField] private List<Items> _mItemLocked;
+
+    public List<int> FirstQuests { get => _mFirstQuests; private set => _mFirstQuests = value; }
+
+    [SerializeField] private List<int> _mFirstQuests;
     public List<QuestManager.Quest> ActiveQuests { get => _mActiveQuests; private set => _mActiveQuests = value; }
 
     [SerializeField] private List<QuestManager.Quest> _mActiveQuests;
@@ -185,7 +185,7 @@ public class Player : MonoBehaviour
             foreach (var item in data.Inventory)
             {
                 Inventory.Add(item);
-                ItemLocked.Remove(ItemLocked[item]);
+                ItemLocked.Remove(item);
             }
 
             foreach (var item in data.ActiveQuests)
@@ -290,15 +290,40 @@ public class Player : MonoBehaviour
         VolumeFX = (int)Value;
     }
 
-    //public void AddItemInInventory()
-    //{
+    public void AddItemInInventory(Items Item)
+    {
+        Inventory.Add(Item);
+        ItemLocked.Remove(Item);
+    }
 
-    //}
+    public void RemoveItemToInventory(Items Item)
+    {
+        Inventory.Remove(Item);
+        ItemLocked.Add(Item);
+    }
 
-    //public void UnlockQuests()
-    //{
+    public void AddUsableItemInInventory(Items item)
+    {
+        Inventory.Add(item);
+    }
 
-    //}
+    public void RemoveUsableItemInInventory(Items item)
+    {
+        Inventory.Remove(item);
+    }
+
+    public void AddUnlockedCinematics(Cinematics cinematics)
+    {
+        UnlockedCinematics.Add(cinematics);
+        AllCinematics.Remove(cinematics);
+    }
+
+    public void RmoveUnlockedCinematics(Cinematics cinematics)
+    {
+        UnlockedCinematics.Remove(cinematics);
+        AllCinematics.Add(cinematics);
+    }
+
     public bool CheckFile()
     {
         if (!File.Exists(Application.persistentDataPath + "/player-stats.json"))
