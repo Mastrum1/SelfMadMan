@@ -13,34 +13,46 @@ public class CockroachSpawner : MonoBehaviour
     [SerializeField] private List<Cockroach> _cockroaches;
     public List<Cockroach> Cockroaches => _cockroaches;
     [SerializeField] private float _percentage;
-    public float Percentage => _percentage; 
+    public float Percentage => _percentage;
+
+    private int _numToSpawn;
+    public int NumToSpawn { get => _numToSpawn; set => _numToSpawn = value; }
     
-    private int _numActive;
     private int _numActivated;
     public IEnumerator EnableCockroaches(int amount)
     {
+        CheckActive(amount);
+
+        yield return new WaitForSeconds(Random.Range(0.1f, 0.5f));
+        
+        ActivateRoach(amount);
+    }
+
+    private void CheckActive(int amount)
+    {
+        var numActive = _cockroaches.Count(cockroach => cockroach.gameObject.activeSelf);
+
+        if (numActive == _cockroaches.Count && _numActivated < amount)
+        {
+            OnSpawnMore?.Invoke(1, this);
+        }
+    }
+
+    private void ActivateRoach(int amount)
+    {
         for (var i = 0; i < amount; i++)
         {
-            if (_cockroaches.Any(cockroach => cockroach.gameObject.activeSelf))
+            _cockroaches[i].gameObject.SetActive(true);
+            _cockroaches[i].transform.position = transform.position;
+            _cockroaches[i].transform.rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(0, 360)));
+            if (_cockroaches[i].gameObject.layer == LayerMask.NameToLayer("Default"))
             {
-                _numActive++;
-                if(_numActive == _cockroaches.Count)
-                    OnSpawnMore?.Invoke(amount-_numActivated, this);
+                _cockroaches[i].gameObject.layer = gameObject.layer;
+                _cockroaches[i].transform.localScale = transform.localScale;
             }
-            foreach (var cockroach in _cockroaches.TakeWhile(cockroach => !cockroach.gameObject.activeSelf))
-            {
-                cockroach.gameObject.SetActive(true);
-                cockroach.transform.position = transform.position;
-                cockroach.transform.rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(0, 360)));
-                if (cockroach.gameObject.layer == LayerMask.NameToLayer("Default"))
-                {
-                    cockroach.gameObject.layer = gameObject.layer;
-                    //cockroach.transform.localScale = new Vector3()
-                }
-                _numActivated++;
-                OnActivated?.Invoke(cockroach);
-                yield return new WaitForSeconds(Random.Range(0.1f, 0.5f));
-            }
+            _numActivated++;
+            OnActivated?.Invoke(_cockroaches[i]);
+            
         }
     }
 }

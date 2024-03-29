@@ -14,23 +14,25 @@ public class Cockroach : MonoBehaviour
     [SerializeField] private GameObject _anim;
     [SerializeField] private GameObject _squish;
     private float _speed;
-    void Start()
+
+    private void Start()
     {
+        _speed = Random.Range(40f, 70f);
         Move();
     }
-    
-    void Update()
+
+    private void Update()
     {
         transform.up = _rigid2d.velocity;
         CheckSpeed();
     }
 
-    void Move()
+    private void Move()
     {
-        _speed = Random.Range(51f, 60f);
         _rigid2d.AddForce(transform.up * _speed, ForceMode2D.Force);
     }
-    void CheckSpeed()
+
+    private void CheckSpeed()
     {
         if (Mathf.Abs(_rigid2d.velocity.x) <= 0.1f)
         {
@@ -50,12 +52,17 @@ public class Cockroach : MonoBehaviour
         StartCoroutine(DisableCockroach());
     }
 
-    IEnumerator DisableCockroach()
+    private IEnumerator DisableCockroach()
     {
         _body.gameObject.SetActive(false);
         _anim.gameObject.SetActive(false);
         _squish.gameObject.SetActive(true);
         yield return new WaitForSeconds(1f);
         gameObject.SetActive(false);
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        Move();
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CleanYourKitchenInteractableManager : InteractableManager
@@ -13,9 +14,24 @@ public class CleanYourKitchenInteractableManager : InteractableManager
     public int NumOfCockroach { get; set; }
     private void Start()
     {
+        DistributeObjects();
+    }
+    
+    private void DistributeObjects()
+    {
+        var remainingObjects = NumOfCockroach;
+
         foreach (var cockroachSpawner in _spawnParents)
         {
-            StartCoroutine(cockroachSpawner.EnableCockroaches((int)(NumOfCockroach * (cockroachSpawner.Percentage / 100))));
+            cockroachSpawner.NumToSpawn = (int)(NumOfCockroach * (cockroachSpawner.Percentage / 100));
+            remainingObjects -= cockroachSpawner.NumToSpawn;
+        }
+
+        _spawnParents[0].NumToSpawn += remainingObjects;
+        
+        foreach (var cockroachSpawner in _spawnParents)
+        {
+            StartCoroutine(cockroachSpawner.EnableCockroaches(cockroachSpawner.NumToSpawn));
             cockroachSpawner.OnSpawnMore += SpawnCockroaches;
             cockroachSpawner.OnActivated += AddToList;
         }
@@ -23,10 +39,9 @@ public class CleanYourKitchenInteractableManager : InteractableManager
     
     private void SpawnCockroaches(int amount, CockroachSpawner spawner)
     {
-        for (int i = 0; i < amount; i++)
+        for (var i = 0; i < amount; i++)
         {
-            var roach = Instantiate(_cockroach);
-            roach.transform.SetParent(_cockroachParent.transform);
+            var roach = Instantiate(_cockroach, _cockroachParent.transform, true);
             spawner.Cockroaches.Add(roach.GetComponent<Cockroach>());
         }
     }
@@ -44,7 +59,7 @@ public class CleanYourKitchenInteractableManager : InteractableManager
 
     private void OnDestroy()
     {
-        for (int i = 0; i < _cockroachParent.transform.childCount; i++)
+        for (var i = 0; i < _cockroachParent.transform.childCount; i++)
         {
             var cockroachChild = _cockroachParent.transform.GetChild(i).GetComponent<Cockroach>();
             if (cockroachChild != null)
