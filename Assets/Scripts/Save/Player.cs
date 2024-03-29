@@ -20,15 +20,7 @@ public class Player : MonoBehaviour
 
     private readonly IDataService DataService = new JsonData();
 
-    private MiniGameSelector _mMiniGameSelectorInstance;
-
     private QuestManager _mQuestManagerInstance;
-
-    private GameManager _mGameManager;
-
-    [SerializeField] private MiniGameSelector _mMiniGameSelector;
-
-    [SerializeField] private QuestManager _mQuestManager;
 
     public int Level { get => _mLevel; private set => _mLevel = value; }
 
@@ -132,9 +124,6 @@ public class Player : MonoBehaviour
 
     public void Awake()
     {
-        _mMiniGameSelectorInstance = MiniGameSelector.instance;
-        _mGameManager = GameManager.instance;
-
         _mQuestManagerInstance = QuestManager.instance;
 
         _mQuestManagerInstance.OnAddActiveQuest += AddActiveQuests;
@@ -213,8 +202,8 @@ public class Player : MonoBehaviour
 
             }
 
-            _mMiniGameSelector.LoadEra(AllEra1, AllEra2, AllEra3);
-            _mQuestManager.LoadQuests(AllQuest, ActiveQuests);
+            MiniGameSelector.instance.LoadEra(AllEra1, AllEra2, AllEra3);
+            _mQuestManagerInstance.LoadQuests(AllQuest, ActiveQuests);
         }
 
         else

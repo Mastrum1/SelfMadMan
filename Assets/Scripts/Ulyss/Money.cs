@@ -6,22 +6,18 @@ using UnityEngine.UI;
 public class Money : MonoBehaviour
 {
     // Private
-    GameManager _mGameManager;
-    Player _mPlayer;
     public int CurrentMoney { get => _mCurrentMoney; set => _mCurrentMoney = value; }
     [SerializeField] private int _mCurrentMoney;
 
     void Start()
     {
-        _mGameManager = GameManager.instance;
-        _mPlayer = _mGameManager.GetComponent<Player>();
         LoadMoney(); // Load PlayerPrefs
     }
 
     public void AddMoney(int MoneyToAdd)
     {
         _mCurrentMoney += MoneyToAdd;
-        _mPlayer.NewCurrency(_mCurrentMoney);
+        GameManager.instance.GetComponent<Player>().NewCurrency(_mCurrentMoney);
     }
 
     public void SubtractMoney(int MoneyToRemove)
@@ -34,14 +30,14 @@ public class Money : MonoBehaviour
         else
         {
             _mCurrentMoney -= MoneyToRemove;
-            _mPlayer.NewCurrency(_mCurrentMoney);
+            GameManager.instance.GetComponent<Player>().NewCurrency(_mCurrentMoney);
         }
     }
 
     private void LoadMoney()
     {
-        _mCurrentMoney = _mPlayer.Money;
-        Debug.Log("Money loaded: " + _mPlayer.Money);
+        _mCurrentMoney = GameManager.instance.GetComponent<Player>().Money;
+        Debug.Log("Money loaded: " + _mCurrentMoney);
 
     }
 }
