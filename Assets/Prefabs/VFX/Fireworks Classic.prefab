@@ -4899,12 +4899,12 @@ GameObject:
   m_Component:
   - component: {fileID: 770911866830544969}
   m_Layer: 0
-  m_Name: Fireworks
+  m_Name: Fireworks Classic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &770911866830544969
 Transform:
   m_ObjectHideFlags: 0
@@ -4948,7 +4948,7 @@ Transform:
   m_GameObject: {fileID: 4747864279903953576}
   serializedVersion: 2
   m_LocalRotation: {x: -0.5069796, y: 0.46546295, z: 0.49519908, w: 0.5301829}
-  m_LocalPosition: {x: 1.8799999, y: -5.76, z: 0}
+  m_LocalPosition: {x: -1.8, y: 5.59, z: -0.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5587,7 +5587,7 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 4
-    angle: 25
+    angle: 1.74
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 0.94
@@ -8920,7 +8920,7 @@ ParticleSystem:
     worldSpace: 0
     dieWithParticles: 1
     sizeAffectsWidth: 1
-    sizeAffectsLifetime: 0
+    sizeAffectsLifetime: 1
     inheritParticleColor: 1
     generateLightingData: 0
     splitSubEmitterRibbons: 0
