@@ -6,25 +6,33 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using NaughtyAttributes;
 using UnityEditor.Localization.Platform.Android;
+using Unity.Collections;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
     public int Level { get => _mLevelCount; private set => _mLevelCount = value; }
-    public float Speed { get; private set; }
+
+    private float _speed;
+    public float Speed { get => _speed; private set => _speed = value; }
 
     private int _era;
     public int Era { get => _era - 1; set => _era = value; }
 
     [SerializeField] private Player _mPlayer;
+    private int _fasterLevel;
+    public int FasterLevel { get => _fasterLevel; set => _fasterLevel = value; }
+
+    private Dictionary<int,bool> _unlockedEra = new Dictionary<int,bool>();
+
 
     [SerializeField] float _mScore;
     [SerializeField] int _mHearts;
 
     [Scene] public string FasterScene;
 
-    MiniGameManager _currentMinigameManager;
+    private MiniGameManager _currentMinigameManager;
     private Scoring _mScoring;
     private QuestManager _mQuestManager;
 
@@ -56,6 +64,9 @@ public class GameManager : MonoBehaviour
         Era = 1;
         _mHearts = 3;
         Speed = 10;
+        FasterLevel = 1;
+
+        _unlockedEra.Add(0, true);
 
         _mQuestManager = QuestManager.instance;
         _mQuestManager.OnReward += AddStars;
@@ -82,17 +93,16 @@ public class GameManager : MonoBehaviour
 
     private void Faster()
     {
-
         mySceneManager.instance.SetScene(FasterScene, mySceneManager.LoadMode.ADDITIVE);
+        FasterLevel++;
         Speed *= 0.8f;
-
-
     }
     public void ResetGame()
     {
         _mScore = 0;
         _mHearts = 3;
         Speed = 10;
+        FasterLevel = 1;
     }
 
     public float GetScore()
@@ -119,19 +129,12 @@ public class GameManager : MonoBehaviour
         score += won ? 100 : 0;
         _mScore = _mScoring.ChangeScore(Scoring.Param.Add, _mScore, score);
         WinScreenHandle?.Invoke(won, Era, _mHearts);
-        if (_mHearts <= 0)
-        {
-            //ResetGame();
-        }
-        else
+        if (_mHearts > 0)
             StartCoroutine(ContinueMinigames(won));
-
-
     }
 
     IEnumerator ContinueMinigames(bool won)
     {
-
         yield return new WaitForSeconds(2f);
         if (_mMinigameCount % 3 == 0)
         {
@@ -139,10 +142,6 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(2f);
         }
         mySceneManager.instance.RandomGameChoice();
-
-
-
-
     }
 
     void AddStars(int reward)

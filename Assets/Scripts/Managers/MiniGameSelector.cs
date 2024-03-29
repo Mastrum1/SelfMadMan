@@ -64,4 +64,20 @@ public class MiniGameSelector : MonoBehaviour
         Debug.Log(index);
         return list[index];
     }
+
+    public void UnlockMinigame(string SceneName)
+    {
+        foreach (var era in AllMinigames)
+        {
+            foreach (var game in era)
+            {
+                if (game.SceneName == SceneName)
+                {
+                    game.Unlock();
+                    break; 
+                }
+            }
+        }
+    }
+
 }
