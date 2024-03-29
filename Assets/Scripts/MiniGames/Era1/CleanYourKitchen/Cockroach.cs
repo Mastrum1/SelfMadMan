@@ -17,7 +17,7 @@ public class Cockroach : MonoBehaviour
 
     private void Start()
     {
-        _speed = Random.Range(40f, 70f);
+        _speed = Random.Range(30f, 50f);
         Move();
     }
 
