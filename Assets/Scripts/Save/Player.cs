@@ -224,26 +224,26 @@ public class Player : MonoBehaviour
 
     }
 
-    public void AddActiveQuests(Quest quest)
+    public void AddActiveQuests(QuestManager.Quest quest)
     {
 
         ActiveQuests.Add(quest);
         RemoveUnlockQuest(quest.QuestSO.ID);
     }
 
-    public void RemoveActiveQuests(Quest quest)
+    public void RemoveActiveQuests(QuestManager.Quest quest)
     {
         ActiveQuests.Remove(quest);
         UnlockQuest(quest.QuestSO.ID);
     }
 
-    public void QuestComplete(Quest quest)
+    public void QuestComplete(QuestManager.Quest quest)
     {
         CompletedQuests.Add(quest);
         ActiveQuests.Remove(quest);
     }
 
-    public void RemoveCompleteQuests(Quest quest)
+    public void RemoveCompleteQuests(QuestManager.Quest quest)
     {
         CompletedQuests.Remove(quest);
         UnlockQuest(quest.QuestSO.ID);
