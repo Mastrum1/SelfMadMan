@@ -29,17 +29,11 @@ public class MiniGameSelector : MonoBehaviour
 
     public void LoadEra(List<MinigameScene> AllEra1, List<MinigameScene> AllEra2, List<MinigameScene> AllEra3) 
     {
-        List<List<MinigameScene>> newAllMinigames = new List<List<MinigameScene>>();
 
         Era1 = AllEra1;
         Era2 = AllEra2;
         Era3 = AllEra3;
 
-        //newAllMinigames.Add(Era1);
-        //newAllMinigames.Add(Era2);
-        //newAllMinigames.Add(Era3);
-
-        //_allMinigames = newAllMinigames;
     }
 
     private void Start()
@@ -67,15 +61,20 @@ public class MiniGameSelector : MonoBehaviour
 
     public void UnlockMinigame(string SceneName)
     {
+        int eraIndex = 0;
+        int gameIndex = 0;
         foreach (var era in AllMinigames)
         {
+            eraIndex++;
             foreach (var game in era)
             {
                 if (game.SceneName == SceneName)
                 {
                     game.Unlock();
+                    GameManager.instance.GetComponent<Player>().UnlockMinigame(eraIndex, gameIndex);
                     break; 
                 }
+                gameIndex++;
             }
         }
     }

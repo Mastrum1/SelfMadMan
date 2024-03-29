@@ -318,10 +318,27 @@ public class Player : MonoBehaviour
         AllCinematics.Remove(cinematics);
     }
 
-    public void RmoveUnlockedCinematics(Cinematics cinematics)
+    public void RemoveUnlockedCinematics(Cinematics cinematics)
     {
         UnlockedCinematics.Remove(cinematics);
         AllCinematics.Add(cinematics);
+    }
+
+    public void UnlockMinigame(int era, int minigame)
+    {
+        switch (era)
+        {
+            case 1:
+                AllEra1[minigame].Unlock();
+                break;
+            case 2:
+                AllEra2[minigame].Unlock();
+                break;
+            case 3:
+                AllEra3[minigame].Unlock();
+                break;
+
+        }
     }
 
     public bool CheckFile()
