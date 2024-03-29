@@ -18,6 +18,8 @@ public class PlayerData
 
     public List<int> Inventory = new List<int>();
 
+    public List<int> UnlockedCinematics = new List<int>();
+
     public List<QuestManager.Quest> ActiveQuests = new List<QuestManager.Quest>();
 
     public List<QuestManager.Quest> CompletedQuests = new List<QuestManager.Quest>();
@@ -43,6 +45,12 @@ public class PlayerData
         VolumeFX = player.VolumeFX;
 
         Language = player.Language;
+
+
+        foreach (var item in player.UnlockedCinematics)
+        {
+            UnlockedCinematics.Add(item.ID);
+        }
 
         AllEra1 = player.AllEra1;
         AllEra2 = player.AllEra2;

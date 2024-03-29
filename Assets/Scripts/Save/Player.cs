@@ -1,18 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml;
 using UnityEngine;
-using static QuestManager;
+using UnityEngine.Video;
 
 [System.Serializable]
 public class Player : MonoBehaviour
 {
-
-    public class ActiveQuest
+    [System.Serializable]
+    public class Cinematics
     {
         public int ID;
-
+        public VideoClip clip;
     }
 
     public event Action<PlayerData> OnDataLoad;
@@ -58,6 +57,15 @@ public class Player : MonoBehaviour
     public string Language { get => _mLanguage; private set => _mLanguage = value; }
 
     [SerializeField] private string _mLanguage;
+
+    public List<Cinematics> AllCinematics { get => _mAllCinematics; private set => _mAllCinematics = value; }
+
+    [SerializeField] private List<Cinematics> _mAllCinematics;
+
+    public List<Cinematics> UnlockedCinematics { get => _mUnlockedCinematics; private set => _mUnlockedCinematics = value; }
+
+    [SerializeField] private List<Cinematics> _mUnlockedCinematics;
+
 
     public List<int> Inventory { get => _mInventory; private set => _mInventory = value; }
 
@@ -163,6 +171,12 @@ public class Player : MonoBehaviour
             VolumeFX = data.VolumeFX;
 
             Language = data.Language;
+
+            foreach (var item in data.UnlockedCinematics)
+            {
+                UnlockedCinematics.Add(AllCinematics[item]);
+                AllCinematics.Remove(AllCinematics[item]);
+            }
 
             AllEra1 = data.AllEra1;
             AllEra2 = data.AllEra2;
