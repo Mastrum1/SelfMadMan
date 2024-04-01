@@ -520,7 +520,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.025753021, y: -0.006500244}
+  m_AnchoredPosition: {x: 0, y: -0.006}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &858633367
@@ -756,6 +756,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1004987274}
   m_CullTransparentMesh: 1
+--- !u!1 &1087094027 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2336781545738248334, guid: 97140b0016c6fcf46b74c88f4f7d1346, type: 3}
+  m_PrefabInstance: {fileID: 1677026083}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1157196758
 GameObject:
   m_ObjectHideFlags: 0
@@ -1009,7 +1014,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Download
+  m_text: Dowload
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1485,6 +1490,7 @@ MonoBehaviour:
   _mParent: {fileID: 1942289302}
   _mNumberToSpawn: 7
   _mButtonToHide: {fileID: 2064201128}
+  _mDownloadPopUp: {fileID: 1087094027}
 --- !u!4 &1425359845
 Transform:
   m_ObjectHideFlags: 0
@@ -1958,7 +1964,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -5
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.59728724, g: 0.90188676, b: 0.66316485, a: 1}
   m_FlipX: 0

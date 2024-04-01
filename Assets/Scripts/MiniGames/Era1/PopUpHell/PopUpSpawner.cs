@@ -9,25 +9,19 @@ public class PopUpSpawner : MonoBehaviour
     [SerializeField] private GameObject _mParent;
     [SerializeField] private int _mNumberToSpawn;
     [SerializeField] private GameObject _mButtonToHide;
+    [SerializeField] private GameObject _mDownloadPopUp;
+
     private List<GameObject> _mPopUpList;
 
     void Start()
     {
         _mPopUpList = new List<GameObject> ();
-       // SpawnPopUp(_mPopUps[Random.Range(0, _mPopUps.Count)], _mButtonToHide.transform.position, 6);
-       // SpawnPopUp(_mPopUps[Random.Range(0, _mPopUps.Count)], _mButtonToHide.bounds.center, 6);
-        for (int i = 0; i < _mNumberToSpawn - 2; i++) {
+        SpawnPopUp(_mPopUps[Random.Range(0, _mPopUps.Count)], _mButtonToHide.transform.position, 6);
+        for (int i = 0; i < _mNumberToSpawn - 1; i++) {
             int j = Random.Range(0, _mPopUps.Count);
-            if (i == 0)
                 SpawnPopUp(_mPopUps[j], RandomPointInBox(), (i * 3) + 20);
-            else
-                SpawnPopUp(_mPopUps[j], RandomPointInBox(), (i * 3) + 20);
-            /*GameObject mTmp = Instantiate(_mPopUps[j]);
-            mTmp.GetComponent<SpriteRenderer>().sortingOrder = (i * 3) + 3;
-            mTmp.transform.position = RandomPointInBox();
-            mTmp.transform.SetParent(_mParent.transform, true);
-            _mPopUpList.Add(mTmp);*/
         }
+        _mPopUpList.Add(_mDownloadPopUp);
     }
 
     void SpawnPopUp(GameObject model, Vector3  position, int order)
@@ -37,12 +31,6 @@ public class PopUpSpawner : MonoBehaviour
         mTmp.transform.position = position;
         mTmp.transform.SetParent(_mParent.transform, true);
         _mPopUpList.Add(mTmp);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private Vector3 RandomPointInBox()
