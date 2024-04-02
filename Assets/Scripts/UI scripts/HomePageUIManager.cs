@@ -28,7 +28,7 @@ public class HomePageUIManager : MonoBehaviour
             }
             foreach (var c in _mIcons)
             {
-                c.gameObject.SetActive(true);
+                c.enabled = true;
             }
         obj.SetActive(true);
     }
@@ -41,7 +41,7 @@ public class HomePageUIManager : MonoBehaviour
         {
             foreach(var c in _mIcons)
             {
-                c.gameObject.SetActive(true);
+                c.enabled = true;
             }
 
             obj.SetActive(false);
@@ -50,7 +50,7 @@ public class HomePageUIManager : MonoBehaviour
         {
             foreach (var c in _mIcons)
             {
-                c.gameObject.SetActive(false);
+                c.enabled = false;
             }
             obj.SetActive(true);
         }

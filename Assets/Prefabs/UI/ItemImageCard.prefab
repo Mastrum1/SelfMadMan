@@ -222,8 +222,6 @@ GameObject:
   - component: {fileID: 4704999940835520155}
   - component: {fileID: 2764078039487283198}
   - component: {fileID: 1651191303181834509}
-  - component: {fileID: 3286779477752050670}
-  - component: {fileID: 5036518401672115435}
   m_Layer: 5
   m_Name: PriceItem
   m_TagString: Untagged
@@ -289,63 +287,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!61 &3286779477752050670
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2811244397836244751}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.31867218, y: 0.000030517578}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 219.61357, y: 44.785034}
-  m_EdgeRadius: 0
---- !u!114 &5036518401672115435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2811244397836244751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16d15cc773ca2014aa65a41df05e2ac9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4157902307382560118
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,6 +389,11 @@ MonoBehaviour:
   _mIndex: 0
   _mCost: 0
   _mType: 
+  _mImg:
+  - {fileID: 2241688298410219189}
+  - {fileID: 777646573791371567}
+  - {fileID: 1651191303181834509}
+  - {fileID: 5641710946371015102}
 --- !u!61 &316954927527400645
 BoxCollider2D:
   m_ObjectHideFlags: 0

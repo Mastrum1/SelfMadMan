@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
 using UnityEngine.EventSystems;
 
-public class ShopTemplate : MonoBehaviour/*, IPointerClickHandler*/
+public class ShopTemplate : MonoBehaviour
 {
     public TMP_Text TitleText { get => _mTitleText; set => _mTitleText = value; }
     [SerializeField] public TMP_Text _mTitleText;
@@ -26,6 +27,8 @@ public class ShopTemplate : MonoBehaviour/*, IPointerClickHandler*/
     public string Type { get => _mType; set => _mType = value; }
     [SerializeField] private string _mType;
 
+    public Image[] Img { get => _mImg; set => _mImg = value; }
+    [SerializeField] private Image[] _mImg;
 
     public void OnPointerClick()
     { // Get the parent of the clicked object
@@ -72,4 +75,22 @@ public class ShopTemplate : MonoBehaviour/*, IPointerClickHandler*/
         }
 
     }
+
+    /*public void OnInteract()
+    {
+        Color color = new Color(1f, 1f, 1f, 0.5f);
+
+        foreach (var i in Img)
+        {
+            i.color = color;
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            foreach (var i in Img)
+            {
+                i.color = new Color(1f, 1f, 1f, 1f);
+            }
+        }
+    }*/
 }
