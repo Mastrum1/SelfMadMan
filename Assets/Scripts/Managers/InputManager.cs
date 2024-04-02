@@ -164,6 +164,13 @@ public class InputManager : MonoBehaviour
                     Slide();
                 }
 
+                if(_mEnableSelectable && _mSelectedObject != null)
+                {
+                    SelectableObject script = _mSelectedObject.GetComponent<SelectableObject>();
+                    script.GetDeselected();
+                    _mSelectedObject = null;
+                }
+
                 _mStartTouchPos = Vector3.zero;
                 _mStartTiming = Time.time;
                 _mHold = false;
@@ -247,7 +254,8 @@ public class InputManager : MonoBehaviour
     {
         if (_mEnableTapOnObject)
         {
-            SelectObject(touch);
+            if (_mSelectedObject == null)
+                SelectObject(touch);
 
             if (_mSelectedObject != null && _mOnTapObject != null)
             {
@@ -269,8 +277,8 @@ public class InputManager : MonoBehaviour
 
     public void DragAndDrop(Vector3 pos, Touch touch)
     {
-
-        SelectObject(touch);
+        if(_mSelectedObject == null)
+            SelectObject(touch);
 
         if (_mSelectedObject != null)
         {
