@@ -55,6 +55,15 @@ public class CommentSpawner : MonoBehaviour
         return mDisplayComment;
     }
 
+    public void AccelarateActiveComments(Vector3 targetPos)
+    {
+        for(int i = 0; i < m_AmountToPool; i++)
+            if(_mPooledObjects[i].activeInHierarchy) {
+                _mPooledObjects[i].GetComponent<CommentMovement>().MoveFaster(targetPos);
+                Debug.Log("Yo");
+            }
+    }
+
     public void StopAllComments()
     {
         for (int i = 0; i < m_AmountToPool; i++)
