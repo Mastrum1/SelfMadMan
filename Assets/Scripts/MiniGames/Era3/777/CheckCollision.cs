@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CheckCollision : MonoBehaviour
 {
-    [SerializeField] Transform _mSpawnPos;
+    [SerializeField] Transform _mPreviousObj;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "EndPos")
@@ -22,7 +22,7 @@ public class CheckCollision : MonoBehaviour
         {
             Debug.Log("ExitBox");
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
-            gameObject.transform.position = _mSpawnPos.position;
+            gameObject.transform.position = new Vector2(_mPreviousObj.position.x, _mPreviousObj.position.y + 1.18f);
         }
     }
 }
