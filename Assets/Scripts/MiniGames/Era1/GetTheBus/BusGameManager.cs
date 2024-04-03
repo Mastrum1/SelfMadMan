@@ -6,29 +6,31 @@ using UnityEngine;
 public class BusGameManager : MiniGameManager
 {
     bool _mIsPaused = false;
-    bool _mCatch = false;    
+    bool _mCatch = false;
+    bool _mIsEnd;
 
     // bus Spawn
-    [SerializeField] Vector3 SpawnPosition;
+    [SerializeField] Vector3 _mSpawnPosition;
     private float _mAverageSpawnRate;
     private float _mBusNumber;
 
-    //bus stop
-    [SerializeField] BusStop BusStop;
+    [SerializeField] EnterScreen _mEnterScreen;
+    [SerializeField] ExitScreen _mExitScreen;
 
-    // Start is called before the first frame update
     void Start()
     {
         _mAverageSpawnRate = GameManager.instance.Speed / 2;
         StartCoroutine(SpawnBus());
-        BusStop.triggerEnter = BusStartOverride;
-        BusStop.triggerExit = BusStopOverride;
+        _mEnterScreen.triggerEnter = BusStartOverride;
+        _mExitScreen.triggerExit = BusStopOverride;
         _mBusNumber = 0;
+        _mIsEnd  = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        if (_mIsEnd)
+            return;
         if (_mIsPaused)
             EndGame(_mCatch);
         if (_mTimer.timerValue == 0)
@@ -37,13 +39,15 @@ public class BusGameManager : MiniGameManager
 
     void EndGame(bool isWin)
     {
+        _mIsEnd = true;
         EndMiniGame(isWin, miniGameScore);
-        BusPool.SharedInstance.HideAllBuses();
+        //BusPool.SharedInstance.HideAllBuses();
     }
 
     public void OnClicked()
     {
-        _mIsPaused = true;    
+        _mIsPaused = true;
+       // BusPool.SharedInstance.HideAllBuses();
         BusPool.SharedInstance.StopAllBuses();
         StopCoroutine(SpawnBus());
     }
@@ -51,11 +55,11 @@ public class BusGameManager : MiniGameManager
     IEnumerator  SpawnBus()
     {
         while (!_mIsPaused && _mBusNumber < 4) {
-            float nextDelay = Random.Range(_mAverageSpawnRate / 4, _mAverageSpawnRate);
+            float nextDelay = Random.Range(0, _mAverageSpawnRate);
             yield return new WaitForSeconds(nextDelay);
             GameObject bus = BusPool.SharedInstance.GetPooledBus(); 
             if (bus != null) {
-                bus.transform.position = SpawnPosition;
+                bus.transform.position = _mSpawnPosition;
                 bus.SetActive(true);
                 _mBusNumber++;
             }
