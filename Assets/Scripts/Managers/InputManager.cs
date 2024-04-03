@@ -110,7 +110,6 @@ public class InputManager : MonoBehaviour
         }
         if (_mEnableGiroscope)
         {
-            Debug.Log("Giro");
             _mOnGiroscope?.Invoke(GyroToUnity(Input.gyro.attitude));
         }
 
@@ -165,6 +164,13 @@ public class InputManager : MonoBehaviour
                     Slide();
                 }
 
+                if(_mEnableSelectable && _mSelectedObject != null)
+                {
+                    SelectableObject script = _mSelectedObject.GetComponent<SelectableObject>();
+                    script.GetDeselected();
+                    _mSelectedObject = null;
+                }
+
                 _mStartTouchPos = Vector3.zero;
                 _mStartTiming = Time.time;
                 _mHold = false;
@@ -201,55 +207,45 @@ public class InputManager : MonoBehaviour
     {
         Vector3 direction = _mEndTouchPos - _mStartTouchPos;
         Vector2 direction2d = new Vector2(direction.x, direction.y).normalized;
-        Debug.Log("Slide");
 
         if (_mEnableSlide8Dir)
         {
             if (direction2d.x > _mDiagonalDirectionTreshold && direction2d.y > _mDiagonalDirectionTreshold)
             {
-                Debug.Log("Up Right");
                 _mOnSlideUpRight?.Invoke();
             }
             else if (-direction2d.x > _mDiagonalDirectionTreshold && -direction2d.y > _mDiagonalDirectionTreshold)
             {
-                Debug.Log("Down Left");
                 _mOnSlideDownLeft?.Invoke();
             }
             else if (-direction2d.x > _mDiagonalDirectionTreshold && direction2d.y > _mDiagonalDirectionTreshold)
             {
-                Debug.Log("Up Left");
                 _mOnSlideUpLeft?.Invoke();
             }
             else if (direction2d.x > _mDiagonalDirectionTreshold && -direction2d.y > _mDiagonalDirectionTreshold)
             {
-                Debug.Log("Down Right");
                 _mOnSlideDownRight?.Invoke();
             }
         }
 
         if (Vector2.Dot(Vector2.right, direction2d) > _mDirectionTreshold)
         {
-            Debug.Log("Right");
             _mOnSlideRight?.Invoke();
 
 
         }
         else if (Vector2.Dot(Vector2.left, direction2d) > _mDirectionTreshold)
         {
-            Debug.Log("Left");
             _mOnSlideLeft?.Invoke();
 
         }
         else if (Vector2.Dot(Vector2.up, direction2d) > _mDirectionTreshold)
         {
-            Debug.Log("Up");
             _mOnSlideUp?.Invoke();
 
         }
         else if (Vector2.Dot(Vector2.down, direction2d) > _mDirectionTreshold)
         {
-            Debug.Log("Down");
-
             _mOnSlideDown?.Invoke();
         }
     }
@@ -258,17 +254,16 @@ public class InputManager : MonoBehaviour
     {
         if (_mEnableTapOnObject)
         {
-            SelectObject(touch);
+            if (_mSelectedObject == null)
+                SelectObject(touch);
 
             if (_mSelectedObject != null && _mOnTapObject != null)
             {
-                Debug.Log("TapOnObject");
                 _mOnTapObject.Invoke();
             }
         }
         else
         {
-            Debug.Log("Tap");
             _mOnTap?.Invoke();
         }
     }
@@ -276,22 +271,20 @@ public class InputManager : MonoBehaviour
 
     public void Hold()
     {
-        Debug.Log("hold");
         _mHold = true;
         _mOnHold?.Invoke();
     }
 
     public void DragAndDrop(Vector3 pos, Touch touch)
     {
-
-        SelectObject(touch);
+        if(_mSelectedObject == null)
+            SelectObject(touch);
 
         if (_mSelectedObject != null)
         {
             DragAndDropManager dragScript = _mSelectedObject.GetComponent<DragAndDropManager>();
             pos.z = 0;
             dragScript._mOnDragAndDrop?.Invoke(pos);
-            Debug.Log("dragAndDrop");
         }
     }
 
