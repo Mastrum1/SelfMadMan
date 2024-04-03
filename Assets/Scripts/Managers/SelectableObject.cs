@@ -10,6 +10,7 @@ public class SelectableObject : MonoBehaviour
 
     public void GetSelected()
     {
-        if(_mOnSelected != null) _mOnSelected.Invoke();
+        Debug.Log("test");
+        _mOnSelected?.Invoke();
     }
 }

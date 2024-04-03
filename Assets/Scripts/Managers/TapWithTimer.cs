@@ -48,6 +48,7 @@ public class TapWithTimer : MonoBehaviour
 
     public void ObjectTaped()
     {
+        this.gameObject.SetActive(false);
         if (_mTorus.transform.localScale.x < _mPerfectTiming && _mTorus.transform.localScale.x > _mMinTimeForClick)
         {
             Debug.Log("Perfect click");
@@ -64,6 +65,5 @@ public class TapWithTimer : MonoBehaviour
         {
             OnLoose?.Invoke(false);
         }
-        gameObject.SetActive(false);
     }
 }

@@ -10,6 +10,7 @@ public class Cockroach : MonoBehaviour
     public event Action OnTouched;
     
     [SerializeField] private Rigidbody2D _rigid2d;
+    [SerializeField] private CapsuleCollider2D _collider2D;
     [SerializeField] private GameObject _body;
     [SerializeField] private GameObject _anim;
     [SerializeField] private GameObject _squish;
@@ -56,6 +57,7 @@ public class Cockroach : MonoBehaviour
     {
         _body.gameObject.SetActive(false);
         _anim.gameObject.SetActive(false);
+        _collider2D.enabled = false;
         _squish.gameObject.SetActive(true);
         yield return new WaitForSeconds(1f);
         gameObject.SetActive(false);
