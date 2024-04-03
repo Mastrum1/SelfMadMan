@@ -41,7 +41,7 @@ public class BusGameManager : MiniGameManager
     {
         _mIsEnd = true;
         EndMiniGame(isWin, miniGameScore);
-        //BusPool.SharedInstance.HideAllBuses();
+        BusPool.SharedInstance.HideAllBuses();
     }
 
     public void OnClicked()

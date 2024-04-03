@@ -5,35 +5,39 @@ using UnityEngine;
 public class PopUpSpawner : MonoBehaviour
 {
     [SerializeField] private List<GameObject> _mPopUps;
+    [SerializeField] private List<GameObject> _mSpawnPoints;
     [SerializeField] private GameObject _mParent;
     [SerializeField] private int _mNumberToSpawn;
-    [SerializeField] private Collider2D _mCollider;
+    [SerializeField] private GameObject _mButtonToHide;
+    [SerializeField] private GameObject _mDownloadPopUp;
+
     private List<GameObject> _mPopUpList;
 
     void Start()
     {
         _mPopUpList = new List<GameObject> ();
-        for (int i = 0; i < _mNumberToSpawn; i++) {
+        SpawnPopUp(_mPopUps[Random.Range(0, _mPopUps.Count)], _mButtonToHide.transform.position, 6);
+        for (int i = 0; i < _mNumberToSpawn - 1; i++) {
             int j = Random.Range(0, _mPopUps.Count);
-            GameObject mTmp = Instantiate(_mPopUps[j]);
-            mTmp.GetComponent<SpriteRenderer>().sortingOrder = (i * 3) + 3;
-            mTmp.transform.position = RandomPointInBox();
-            mTmp.transform.SetParent(_mParent.transform, true);
-            _mPopUpList.Add(mTmp);
+                SpawnPopUp(_mPopUps[j], RandomPointInBox(), (i * 3) + 20);
         }
+        _mPopUpList.Add(_mDownloadPopUp);
     }
 
-    // Update is called once per frame
-    void Update()
+    void SpawnPopUp(GameObject model, Vector3  position, int order)
     {
-        
+        GameObject mTmp = Instantiate(model);
+        mTmp.GetComponent<SpriteRenderer>().sortingOrder = order;
+        mTmp.transform.position = position;
+        mTmp.transform.SetParent(_mParent.transform, true);
+        _mPopUpList.Add(mTmp);
     }
 
     private Vector3 RandomPointInBox()
     {
-        return _mCollider.bounds.center + new Vector3(
-           (Random.value - 0.5f) * _mCollider.bounds.size.x,
-           (Random.value - 0.5f) * _mCollider.bounds.size.y,
+        return new Vector3(
+            Random.Range( _mSpawnPoints[0].transform.position.x, _mSpawnPoints[1].transform.position.x),
+            Random.Range(_mSpawnPoints[0].transform.position.y, _mSpawnPoints[2].transform.position.y),
            0
         );
     }
