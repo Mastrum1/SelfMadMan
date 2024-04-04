@@ -49,10 +49,10 @@ public class ShopManager : MonoBehaviour
 
     public void CheckPurchasablePerType(Items[] item, GameObject container)
     {
-        for (int i = 0; i < item.Length; i++)
+       /* for (int i = 0; i < item.Length; i++)
         {
             ShopTemplate TemplateInfos = container.transform.GetChild(i).GetComponent<ShopTemplate>();
-            if (_mMoney.CurrentMoney >= item[i].Cost) 
+            if (_mMoney.CurrentMoney >= item[i]. Cost) 
             {
                 Color newColor = TemplateInfos.PurchaseBox.color;
                 newColor.a = 1f;
@@ -64,7 +64,7 @@ public class ShopManager : MonoBehaviour
                 newColor.a = 0.5f; 
                 TemplateInfos.PurchaseBox.color = newColor;
             }
-        }
+        }*/
     }
     
     public void PurchaseItem(Items[] item, int index, int cost)
@@ -97,7 +97,7 @@ public class ShopManager : MonoBehaviour
     {
         for (int i = 0; i < item.Length; i++) 
         {
-            GameObject Templates = Instantiate(_mTemplatePrefab, container.transform);
+         /*   GameObject Templates = Instantiate(_mTemplatePrefab, container.transform);
 
             // Get the ShopTemplate component
             ShopTemplate TemplatesInfo = Templates.GetComponent<ShopTemplate>();
@@ -106,7 +106,7 @@ public class ShopManager : MonoBehaviour
             TemplatesInfo.ImageItem.sprite = item[i].Look;
             TemplatesInfo.Index = i;
             TemplatesInfo.Cost = item[i].Cost;
-            TemplatesInfo.Type = item[i].Type;
+            TemplatesInfo.Type = item[i].Type;*/
         }
     }
 }
