@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] float _mScore;
     [SerializeField] int _mHearts;
 
+    private bool _mGameOver;
+
     [Scene] public string FasterScene;
 
     private MiniGameManager _currentMinigameManager;
@@ -39,7 +41,7 @@ public class GameManager : MonoBehaviour
     private int _mLevelCount;
     private int _mCurrentStars;
 
-    public event Action<bool, int, int> WinScreenHandle;
+    public event Action<bool, int, int, bool> WinScreenHandle;
 
     private void Awake()
     {
@@ -56,7 +58,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        _mGameOver = false;
         _mMinigameCount = 0;
         Era = 1;
         _mHearts = 3;
@@ -96,6 +98,7 @@ public class GameManager : MonoBehaviour
     }
     public void ResetGame()
     {
+        _mGameOver = false;
         _mScore = 0;
         _mHearts = 3;
         Speed = 10;
@@ -123,10 +126,11 @@ public class GameManager : MonoBehaviour
         mySceneManager.instance.UnloadCurrentScene();
 
         _mHearts -= won ? 0 : 1;
+        _mGameOver = _mHearts == 0 ? true : false;
         score += won ? 100 : 0;
         _mScore = _mScoring.ChangeScore(Scoring.Param.Add, _mScore, score);
-        WinScreenHandle?.Invoke(won, Era, _mHearts);
-        if (_mHearts > 0)
+        WinScreenHandle?.Invoke(won, Era, _mHearts, _mGameOver);
+        if (!_mGameOver)
             StartCoroutine(ContinueMinigames(won));
     }
 
