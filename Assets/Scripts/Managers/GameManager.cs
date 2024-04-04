@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     private QuestManager _mQuestManager;
 
     private int _mMinigameCount;
+    public int MinigameCount { get => _mMinigameCount; }
     private int _mLevelCount;
     private int _mCurrentStars;
 
