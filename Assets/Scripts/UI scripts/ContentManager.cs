@@ -20,6 +20,7 @@ public class ContentManager : MonoBehaviour
     [SerializeField] private GameObject _mDotPrefab;
     [SerializeField] private TMP_Text _mText;
 
+    public int CurrentIndex { get => _mCurrentIndex; set => _mCurrentIndex = value; }
     [Header("Page Settings")]
     [SerializeField] private int _mCurrentIndex = 0;
 

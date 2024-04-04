@@ -73,24 +73,5 @@ public class ShopTemplate : MonoBehaviour
         {
             Debug.LogError("Failed to find index of clicked object within its parent.");
         }
-
     }
-
-    /*public void OnInteract()
-    {
-        Color color = new Color(1f, 1f, 1f, 0.5f);
-
-        foreach (var i in Img)
-        {
-            i.color = color;
-        }
-
-        if (Input.GetMouseButtonUp(0))
-        {
-            foreach (var i in Img)
-            {
-                i.color = new Color(1f, 1f, 1f, 1f);
-            }
-        }
-    }*/
 }

@@ -13,10 +13,6 @@ public class MiniGameSelector : MonoBehaviour
     public Dictionary<string, List<string>> Minigamelists { get => _mMinigameLists; private set => _mMinigameLists = value; }
     private Dictionary<string, List<string>> _mMinigameLists = new Dictionary<string, List<string>>();
 
-
-
-
-
     [SerializeField] private List<MinigameScene> _era1;
     [SerializeField] private List<MinigameScene> _era2;
     [SerializeField] private List<MinigameScene> _era3;
