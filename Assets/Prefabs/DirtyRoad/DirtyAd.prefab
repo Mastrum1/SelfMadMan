@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2726577322894070044}
   - component: {fileID: 642446615030249458}
   - component: {fileID: 4091489196959674480}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DirtyAd
   m_TagString: DirtyAd
   m_Icon: {fileID: 0}
@@ -172,10 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b996d2aad41a4d259abac28b0d71f0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dir: 0
-  _timeTilMove: 0
   _rigid2d: {fileID: 2726577322894070044}
-  _force: 0
 --- !u!114 &4091489196959674480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,3 +185,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37ff578d441c65641a0ff2adb6951612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _win: 0
