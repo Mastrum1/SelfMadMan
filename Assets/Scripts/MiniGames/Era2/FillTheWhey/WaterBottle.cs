@@ -8,7 +8,7 @@ public class WaterBottle : MonoBehaviour
         StopCoroutine(TiltUp());
         if (transform.eulerAngles.z <= 120)
         {
-            transform.Rotate(0,0,35 * Time.deltaTime);
+            transform.Rotate(0,0,60 * Time.deltaTime);
         }
     }
 
@@ -21,7 +21,7 @@ public class WaterBottle : MonoBehaviour
     {
         while (transform.eulerAngles.z >= 65)
         {
-            transform.Rotate(0,0,-20 * Time.deltaTime);
+            transform.Rotate(0,0,-50 * Time.deltaTime);
 
             yield return null;
         }

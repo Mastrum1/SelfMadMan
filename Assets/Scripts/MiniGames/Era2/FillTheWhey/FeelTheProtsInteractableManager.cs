@@ -7,24 +7,19 @@ public class FeelTheProtsInteractableManager : InteractableManager
     public event Action<bool> OnEndGame; 
     
     public bool IsHolding { get; set; }
-    
+
+    [SerializeField] private GameObject _bars;
+    public GameObject Bars => _bars;
     [SerializeField] private SuccessBar _successBar;
     [SerializeField] private FailBar _failBar;
-    void Start()
+
+    private void Start()
     {
         _successBar.OnParticleSuccess += HandleWin;
         _failBar.OnFail += HandleLose;
     }
 
-    private void Update()
-    {
-        if (IsHolding)
-        {
-            StopCoroutine(OnWin());
-        }
-    }
-
-    void HandleWin()
+    private void HandleWin()
     {
         if (!IsHolding)
         {
@@ -37,8 +32,10 @@ public class FeelTheProtsInteractableManager : InteractableManager
         yield return new WaitForSeconds(1f);
         OnEndGame?.Invoke(true);
     }
-    void HandleLose()
+
+    private void HandleLose()
     {
+        StopCoroutine(OnWin());
         OnEndGame?.Invoke(false);
     }
 
