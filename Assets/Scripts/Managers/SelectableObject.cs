@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,7 @@ public class SelectableObject : MonoBehaviour
 
     public void GetDeselected()
     {
+        Debug.Log("test");
         _mOnDeselected?.Invoke();
     }
 }
