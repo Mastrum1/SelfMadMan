@@ -716,7 +716,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6a7e166481b3ef4bb252de234aef339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mEraChoice: {fileID: 827073217}
 --- !u!114 &285153443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -863,7 +862,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6a7e166481b3ef4bb252de234aef339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mEraChoice: {fileID: 1628624458}
 --- !u!114 &294137558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2200,7 +2198,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6a7e166481b3ef4bb252de234aef339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mEraChoice: {fileID: 1628624458}
 --- !u!114 &700539403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4316,6 +4313,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8033778001097723853, guid: 955c140043dcea9438330a0816e6fa03, type: 3}
+      propertyPath: _questsList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8033778001097723853, guid: 955c140043dcea9438330a0816e6fa03, type: 3}
+      propertyPath: _questsList.Array.data[0]._questSO
+      value: 
+      objectReference: {fileID: 11400000, guid: c7ac2ff421f5a4a619b34325e7943770, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
