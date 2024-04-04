@@ -13,8 +13,8 @@ public class DirtyAdd : MonoBehaviour
 
     private void OnEnable()
     {
-        _forceX = Random.Range(60, 110);
-        _forceY = Random.Range(60, 110);
+        _forceX = Random.Range(60, 80);
+        _forceY = Random.Range(60, 80);
         _dirX = Random.Range(-1, 1);
         if (_dirX == 0) _dirX = 1;
         _dirY = Random.Range(-1, 1);
