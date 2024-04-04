@@ -9,7 +9,6 @@ public class ContentManager : MonoBehaviour
 {
     [Header("Content Viewport")]
     [SerializeField] private Image _mBaseImage;
-    [SerializeField] private Image _mEraBGContent;
     [SerializeField] private Image _mJames;
     [SerializeField] private List<Sprite> _mImages;
     [SerializeField] private List<Sprite> _mJamesForms;
