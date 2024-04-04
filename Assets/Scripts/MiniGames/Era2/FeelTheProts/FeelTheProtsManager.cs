@@ -1,18 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class FeelTheProtsManager : MiniGameManager
 {
-    // Start is called before the first frame update
+    [SerializeField] private FeelTheProtsInteractableManager _interactableManager;
     void Start()
     {
-        
+        _interactableManager.OnEndGame += HandleEndGame;
     }
 
-    // Update is called once per frame
-    void Update()
+    void HandleEndGame(bool win)
     {
-        
+        EndMiniGame(win, miniGameScore);
+    }
+
+    private void OnDestroy()
+    {
+        _interactableManager.OnEndGame -= HandleEndGame;
     }
 }
