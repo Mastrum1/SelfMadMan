@@ -3,7 +3,9 @@ using UnityEngine;
 public class VFXDestroyTiles : MonoBehaviour
 {
     [SerializeField]
-    private GameObject Foam; // GameObject to instantiate with 20% chance
+    private GameObject Foam; // GameObject to instantiate with 2% chance
+    [SerializeField]
+    private GameObject Bubbles; // Additional particle system to instantiate alongside Foam
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -15,7 +17,12 @@ public class VFXDestroyTiles : MonoBehaviour
             if (Random.value < 0.02f && Foam != null)
             {
                 Debug.Log("Instantiating " + Foam.name);
-                Instantiate(Foam, collision.transform.position, Quaternion.identity);
+                GameObject foamInstance = Instantiate(Foam, collision.transform.position, Quaternion.identity);
+                // Instantiate additional particle system if available
+                if (Bubbles != null)
+                {
+                    Instantiate(Bubbles, collision.transform.position, Quaternion.identity);
+                }
             }
 
             Destroy(collision.gameObject);

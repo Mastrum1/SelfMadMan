@@ -20,24 +20,11 @@ public class ContentManager : MonoBehaviour
     [SerializeField] private GameObject _mDotPrefab;
     [SerializeField] private TMP_Text _mText;
 
-    [Header("Pagination Buttons")]
-    [SerializeField] private Button _mNextButton;
-    [SerializeField] private Button _mPrevButton;
-
     [Header("Page Settings")]
     [SerializeField] private int _mCurrentIndex = 0;
 
-    [Header("UIManager")]
-   // [SerializeField] private UIManager _mUIManager;
-
-    [Header("LeanTocuh")]
-    [SerializeField] private LeanTouch _mLeantouch;
-
     void Start()
     {
-        _mNextButton.onClick.AddListener(delegate { SwapContent(1); });
-        _mPrevButton.onClick.AddListener(delegate { SwapContent(-1); });
-
         // Initialize dots
         InitializeDots();
 
