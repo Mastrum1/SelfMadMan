@@ -32,8 +32,7 @@ public class CleanYourYatchGameManager : MiniGameManager
     {
         if (_mGarbageRemaining == 0)
             EndMiniGame(true, miniGameScore);
-        if (_mTimer.timerValue == 0)
-            EndMiniGame(false, miniGameScore);
+
     }
 
     private Vector3 RandomPointInBox()
