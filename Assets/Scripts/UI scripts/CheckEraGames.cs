@@ -20,22 +20,7 @@ public class CheckEraGames : MonoBehaviour
     private void Start()
     {
         _mUnlockedMinigames = 0;
-        switch (_mCurrentEra)
-        {
-            case 0:
-                CheckUnlockedMinigames(MiniGameSelector.instance.Era1, _mMinigameContainer);
-                Debug.Log("Loading Era 1");
-                break;
-            case 1:
-                CheckUnlockedMinigames(MiniGameSelector.instance.Era2, _mMinigameContainer);
-                Debug.Log("Loading Era 2");
-                break;
-            case 2:
-                CheckUnlockedMinigames(MiniGameSelector.instance.Era3, _mMinigameContainer);
-                Debug.Log("Loading Era 3");
-                break;
-        }
-        _mNumberUnlocked.text = _mUnlockedMinigames.ToString();
+        CheckEra();
     }
 
     private void Update()
@@ -46,25 +31,7 @@ public class CheckEraGames : MonoBehaviour
         {
             _mUnlockedMinigames = 0;
             _mCurrentEra = GameManager.instance.Era;
-            switch (_mCurrentEra)
-            {
-                case 0:
-                    DestroyChildren();
-                    CheckUnlockedMinigames(MiniGameSelector.instance.Era1, _mMinigameContainer);
-                    Debug.Log("Loading Era 1");
-                    break;
-                case 1:
-                    DestroyChildren();
-                    CheckUnlockedMinigames(MiniGameSelector.instance.Era2, _mMinigameContainer);
-                    Debug.Log("Loading Era 2");
-                    break;
-                case 2:
-                    DestroyChildren();
-                    CheckUnlockedMinigames(MiniGameSelector.instance.Era3, _mMinigameContainer);
-                    Debug.Log("Loading Era 3");
-                    break;
-            }
-            _mNumberUnlocked.text = _mUnlockedMinigames.ToString();
+            CheckEra();
         }
     }
 
@@ -97,5 +64,28 @@ public class CheckEraGames : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+    }
+
+    public void CheckEra()
+    {
+        switch (_mCurrentEra)
+        {
+            case 0:
+                DestroyChildren();
+                CheckUnlockedMinigames(MiniGameSelector.instance.Era1, _mMinigameContainer);
+                Debug.Log("Loading Era 1");
+                break;
+            case 1:
+                DestroyChildren();
+                CheckUnlockedMinigames(MiniGameSelector.instance.Era2, _mMinigameContainer);
+                Debug.Log("Loading Era 2");
+                break;
+            case 2:
+                DestroyChildren();
+                CheckUnlockedMinigames(MiniGameSelector.instance.Era3, _mMinigameContainer);
+                Debug.Log("Loading Era 3");
+                break;
+        }
+        _mNumberUnlocked.text = _mUnlockedMinigames.ToString();
     }
 }
