@@ -19,10 +19,11 @@ public class ScoreScreen : MonoBehaviour
 
     private int Timer = 5;
 
-    private bool _mPopupClosed;
+    private bool _mPopupClosed = true;
     private bool _mContinue = false;
     private void Awake()
     {
+
         GameManager.instance.WinScreenHandle += OnWinScreenDisplay;
         _mPanelOnClick.OnClick += OnPanelClicked;
     }
@@ -31,7 +32,7 @@ public class ScoreScreen : MonoBehaviour
     void OnWinScreenDisplay(bool won, int era, int hearts, bool gameOver)
     {
         Debug.Log(hearts);
-        foreach(var text in _mscoreTexts)
+        foreach (var text in _mscoreTexts)
         {
             text.text = GameManager.instance.DisplayScore();
         }
@@ -45,7 +46,7 @@ public class ScoreScreen : MonoBehaviour
         _mJamesAnimator.SetInteger("Era", era + 1);
 
 
-        if(gameOver)
+        if (gameOver)
         {
             StartCoroutine(OnGameOver());
         }
@@ -58,22 +59,19 @@ public class ScoreScreen : MonoBehaviour
     void OnPanelClicked()
     {
         _mPopupClosed = true;
+        _UIAnimator.SetBool("DisplayPopUp", false);
     }
-    IEnumerator Countdown() 
+    void Countdown()
     {
-        if( !_mPopupClosed )
+        if (!_mPopupClosed)
         {
-            Timer--;
-            foreach(var text in _mTimerTexts )
-            {
-                text.text = Timer.ToString();
-            }
+
         }
-        yield return new WaitForSeconds(1f);
+
     }
     IEnumerator ResetCharacter()
     {
-        yield return new WaitForSeconds(2f); 
+        yield return new WaitForSeconds(2f);
         _mJamesAnimator.SetBool("Idle", true);
     }
     IEnumerator OnGameOver()
@@ -81,20 +79,27 @@ public class ScoreScreen : MonoBehaviour
         yield return new WaitForSeconds(2f);
         _mJamesAnimator.SetBool("GameOver", true);
         yield return new WaitForSeconds(2f);
-        _mPopup.SetActive(true);
-        do
-        {
-            StartCoroutine(Countdown());
-        } while (!_mPopupClosed || Timer == 0);
+        _UIAnimator.SetBool("DisplayPopUp", true);
+        _mPopupClosed = false;
 
-        if(_mContinue)
+        while (!_mPopupClosed && Timer > 0)
+        {
+            Debug.Log(Timer.ToString());
+            Timer--;
+            foreach (var text in _mTimerTexts)
+            {
+                text.text = Timer.ToString();
+            }
+            yield return new WaitForSeconds(1f);
+        }
+
+        if (_mContinue)
         {
             //TO DO;
         }
         else
-        {
+            _UIAnimator.SetBool("EndGame", true);
 
-        }
     }
 
     private void OnDestroy()

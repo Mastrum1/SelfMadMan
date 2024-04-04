@@ -7,8 +7,9 @@ public class PanelOnClick : MonoBehaviour
 {
     // Start is called before the first frame update
     public event Action OnClick;
-   void OnPanelClicked()
+   public void OnPanelClicked()
     {
+        Debug.Log("panel clicked");
         OnClick?.Invoke();
     }
 }
