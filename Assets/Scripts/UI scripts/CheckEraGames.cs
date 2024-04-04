@@ -1,9 +1,8 @@
 using System.Collections;
-using TMPro;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class CheckEraGames : MonoBehaviour
 {
@@ -16,13 +15,52 @@ public class CheckEraGames : MonoBehaviour
     [Header("Era Info")]
     [SerializeField] private int _mCurrentEra;
 
-    private void Awake()
+    [Header("Unlocked Minigames")]
+    [SerializeField] private TMP_Text _mNumberUnlocked;
+    [SerializeField] private int _mUnlockedMinigames;
+
+    private void Start()
     {
+        _mUnlockedMinigames = 0;
         _mCurrentEra = GameManager.instance.Era;
+        switch (_mCurrentEra)
+        {
+            case 0:
+                CheckUnlockedMinigames(MiniGameSelector.instance.Era1, _mMinigameContainer);
+                Debug.Log("Loading Era 1");
+                break;
+            case 1:
+                CheckUnlockedMinigames(MiniGameSelector.instance.Era2, _mMinigameContainer);
+                Debug.Log("Loading Era 2");
+                break;
+            case 2:
+                CheckUnlockedMinigames(MiniGameSelector.instance.Era3, _mMinigameContainer);
+                Debug.Log("Loading Era 3");
+                break;
+        }
+        _mNumberUnlocked.text = _mUnlockedMinigames.ToString();
     }
 
-    public void CheckUnlockedMinigames()
+    public void CheckUnlockedMinigames(List<MinigameScene> minigame, GameObject container)
     {
-        
+        for (int i = 0; i < minigame.Count; i++) 
+        {
+            GameObject Templates = Instantiate(_mGameContainerPrefab, container.transform);
+            CheckEraGamesTemplate TemplateInfos = Templates.GetComponent<CheckEraGamesTemplate>();
+            TemplateInfos.EraGameName.text = minigame[i].SceneName;
+            //TemplateInfos.EraGameIcon.sprite = minigame[i].SceneIcon;
+
+            if (minigame[i].Unlocked)
+            {
+                TemplateInfos.GameLocked = false;
+                TemplateInfos.EraGameBorder = TemplateInfos.EraGameBorderUnlocked;
+                _mUnlockedMinigames++;
+            }
+            else
+            {
+                TemplateInfos.GameLocked = true;
+                TemplateInfos.EraGameBorder = TemplateInfos.EraGameBorderLocked;
+            }
+        }
     }
 }

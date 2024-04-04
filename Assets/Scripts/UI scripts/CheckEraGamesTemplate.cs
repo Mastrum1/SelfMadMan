@@ -12,9 +12,15 @@ public class CheckEraGamesTemplate : MonoBehaviour
     public Image EraGameIcon { get => _mEraGameIcon; set => _mEraGameIcon = value; }
     [SerializeField] private Image _mEraGameIcon;
 
-    public Image EraGameBorder { get => _mEraGameBorder; set => _mEraGameBorder = value; }
-    [SerializeField] private Image _mEraGameBorder;
+    public Sprite EraGameBorder { get => _mEraGameBorder; set => _mEraGameBorder = value; }
+    [SerializeField] private Sprite _mEraGameBorder;
 
     public bool GameLocked { get => _mGameLocked; set => _mGameLocked = value; }
     [SerializeField] private bool _mGameLocked;
+
+    public Sprite EraGameBorderLocked { get => _mEraGameBorderLocked; set => _mEraGameBorderLocked = value; }
+    [SerializeField] private Sprite _mEraGameBorderLocked;
+
+    public Sprite EraGameBorderUnlocked { get => _mEraGameBorderUnlocked; set => _mEraGameBorderUnlocked = value; }
+    [SerializeField] private Sprite _mEraGameBorderUnlocked;
 }
