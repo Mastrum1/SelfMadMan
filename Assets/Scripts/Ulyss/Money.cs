@@ -9,6 +9,7 @@ public class Money : MonoBehaviour
     public int CurrentMoney { get => _mCurrentMoney; set => _mCurrentMoney = value; }
     [SerializeField] private int _mCurrentMoney;
 
+    [SerializeField] private ShopManager _mShopManager;
     private string _mMoneyPlayerPrefsKey = "PlayerMoney";  // Key for PlayerPrefs
     private string _mEncryptionKey = "SelfMadManAbsoluteEncryptionKeyMyBoyLorIs<304112001200416hChineGuillaume"; // Key code for encryption
 
@@ -21,6 +22,7 @@ public class Money : MonoBehaviour
     {
         _mCurrentMoney += MoneyToAdd;
         SaveMoney();
+        _mShopManager.CheckPurchasable();
     }
 
     public void SubtractMoney(int MoneyToRemove)
