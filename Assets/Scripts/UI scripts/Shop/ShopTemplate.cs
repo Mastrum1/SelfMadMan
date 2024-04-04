@@ -45,10 +45,10 @@ public class ShopTemplate : MonoBehaviour
             }
         }
 
-        if (index != -1)
+        /*if (index != -1)
         {
             // Determine the correct list based on the clicked object's type
-            Items[] itemList = null;
+            ItemsSO[] itemList = null;
 
             switch (Type)
             {
@@ -72,6 +72,6 @@ public class ShopTemplate : MonoBehaviour
         else
         {
             Debug.LogError("Failed to find index of clicked object within its parent.");
-        }
+        }*/
     }
 }

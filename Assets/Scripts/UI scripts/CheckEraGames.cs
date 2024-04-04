@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class CheckEraGames : MonoBehaviour
 {
@@ -22,7 +20,6 @@ public class CheckEraGames : MonoBehaviour
     private void Start()
     {
         _mUnlockedMinigames = 0;
-        _mCurrentEra = GameManager.instance.Era;
         switch (_mCurrentEra)
         {
             case 0:
@@ -41,6 +38,36 @@ public class CheckEraGames : MonoBehaviour
         _mNumberUnlocked.text = _mUnlockedMinigames.ToString();
     }
 
+    private void Update()
+    {
+        if (_mCurrentEra == GameManager.instance.Era)
+            return;
+        else
+        {
+            _mUnlockedMinigames = 0;
+            _mCurrentEra = GameManager.instance.Era;
+            switch (_mCurrentEra)
+            {
+                case 0:
+                    DestroyChildren();
+                    CheckUnlockedMinigames(MiniGameSelector.instance.Era1, _mMinigameContainer);
+                    Debug.Log("Loading Era 1");
+                    break;
+                case 1:
+                    DestroyChildren();
+                    CheckUnlockedMinigames(MiniGameSelector.instance.Era2, _mMinigameContainer);
+                    Debug.Log("Loading Era 2");
+                    break;
+                case 2:
+                    DestroyChildren();
+                    CheckUnlockedMinigames(MiniGameSelector.instance.Era3, _mMinigameContainer);
+                    Debug.Log("Loading Era 3");
+                    break;
+            }
+            _mNumberUnlocked.text = _mUnlockedMinigames.ToString();
+        }
+    }
+
     public void CheckUnlockedMinigames(List<MinigameScene> minigame, GameObject container)
     {
         for (int i = 0; i < minigame.Count; i++) 
@@ -53,14 +80,22 @@ public class CheckEraGames : MonoBehaviour
             if (minigame[i].Unlocked)
             {
                 TemplateInfos.GameLocked = false;
-                TemplateInfos.EraGameBorder = TemplateInfos.EraGameBorderUnlocked;
+                TemplateInfos.EraGameBorder.sprite = TemplateInfos.EraGameBorderUnlocked;
                 _mUnlockedMinigames++;
             }
             else
             {
                 TemplateInfos.GameLocked = true;
-                TemplateInfos.EraGameBorder = TemplateInfos.EraGameBorderLocked;
+                TemplateInfos.EraGameBorder.sprite = TemplateInfos.EraGameBorderLocked;
             }
+        }
+    }
+
+    public void DestroyChildren()
+    {
+        foreach (Transform child in _mMinigameContainer.transform)
+        {
+            Destroy(child.gameObject);
         }
     }
 }

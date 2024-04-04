@@ -26,10 +26,6 @@ public class HomePageUIManager : MonoBehaviour
             {
                 c.SetActive(false);
             }
-            foreach (var c in _mIcons)
-            {
-                c.enabled = true;
-            }
         obj.SetActive(true);
     }
 

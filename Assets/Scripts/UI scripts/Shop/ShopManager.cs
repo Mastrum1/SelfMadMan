@@ -7,15 +7,15 @@ public class ShopManager : MonoBehaviour
     [Header("Money")]
     [SerializeField] private Money _mMoney;
 
-    public Items[] ShopItems { get => _mShopItems; }
-    public Items[] Furnitures { get => _mFurnitures; }
-    public Items[] PowerUp { get => _mPowerUp; }
+    public ItemsSO[] ShopItems { get => _mShopItems; }
+    public ItemsSO[] Furnitures { get => _mFurnitures; }
+    public ItemsSO[] PowerUp { get => _mPowerUp; }
 
     [Header("Item Shop SO")]
     [SerializeField] private Items[] _SpinWheel;
-    [SerializeField] private Items[] _mShopItems;
-    [SerializeField] private Items[] _mFurnitures;
-    [SerializeField] private Items[] _mPowerUp; 
+    [SerializeField] private ItemsSO[] _mShopItems;
+    [SerializeField] private ItemsSO[] _mFurnitures;
+    [SerializeField] private ItemsSO[] _mPowerUp; 
 
     public GameObject TemplateContainer { get => _mTemplateContainer; }
     public GameObject ShopFurnituresContainer { get => _mShopFurnituresContainer; }
@@ -47,7 +47,7 @@ public class ShopManager : MonoBehaviour
         CheckPurchasablePerType(_mPowerUp, _mShopPowerUpContainer);
     }
 
-    public void CheckPurchasablePerType(Items[] item, GameObject container)
+    public void CheckPurchasablePerType(ItemsSO[] item, GameObject container)
     {
        /* for (int i = 0; i < item.Length; i++)
         {
@@ -88,9 +88,9 @@ public class ShopManager : MonoBehaviour
 
     public void LoadAllPanels()
     {
-        LoadPanels(_mShopItems, _mTemplateContainer);
+        /*LoadPanels(_mShopItems, _mTemplateContainer);
         LoadPanels(_mFurnitures, _mShopFurnituresContainer);
-        LoadPanels(_mPowerUp, _mShopPowerUpContainer);
+        LoadPanels(_mPowerUp, _mShopPowerUpContainer);*/
     }
 
     public void LoadPanels(Items[] item, GameObject container)

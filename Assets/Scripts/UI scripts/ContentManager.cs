@@ -12,7 +12,6 @@ public class ContentManager : MonoBehaviour
     [SerializeField] private Image _mEraBGContent;
     [SerializeField] private Image _mJames;
     [SerializeField] private List<Sprite> _mImages;
-    [SerializeField] private List<Sprite> _mEraBGPanel;
     [SerializeField] private List<Sprite> _mJamesForms;
 
     [Header("Navigation Dots")]
@@ -82,16 +81,9 @@ public class ContentManager : MonoBehaviour
             dotImage.fillAmount = isActive ? 1f : 0f;
         }
 
-        for (int i = 0; i < _mEraBGPanel.Count; i++)
-        {
-            _mEraBGContent.sprite = _mEraBGPanel[_mCurrentIndex];
-  
-        }
-
         for (int i = 0; i < _mJamesForms.Count; i++) 
         {
             _mJames.sprite = _mJamesForms[_mCurrentIndex];
         }
-
     }
 }
