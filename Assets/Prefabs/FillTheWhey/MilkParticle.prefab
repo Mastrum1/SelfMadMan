@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 6909064119781786948}
   - component: {fileID: 3973915881954260709}
   - component: {fileID: -2064170106903564289}
+  - component: {fileID: 4093172026796231632}
   m_Layer: 0
-  m_Name: WaterParticle
-  m_TagString: Water
+  m_Name: MilkParticle
+  m_TagString: MilkParticles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: b0f246114a5634b85954f35302409f63, type: 3}
+  - {fileID: -876546973899608171, guid: 1c6998ccde2a847dca9d0d8fdc4f622b, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 9150d7e95bbb6664f9003b200188f544, type: 3}
-  m_Color: {r: 0, g: 0.85551786, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -148,3 +149,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4093172026796231632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5678760692952544675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a838bcf7cd1fc4d99a576cd8df5eff77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
