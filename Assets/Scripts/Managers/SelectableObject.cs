@@ -7,9 +7,15 @@ public class SelectableObject : MonoBehaviour
 {
 
     [SerializeField] private UnityEvent _mOnSelected;
+    [SerializeField] private UnityEvent _mOnDeselected;
 
     public void GetSelected()
     {
-        if(_mOnSelected != null) _mOnSelected.Invoke();
+        _mOnSelected?.Invoke();
+    }
+
+    public void GetDeselected()
+    {
+        _mOnDeselected?.Invoke();
     }
 }

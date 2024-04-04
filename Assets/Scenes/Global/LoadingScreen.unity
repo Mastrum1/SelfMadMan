@@ -594,6 +594,72 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &1467463272
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1467463274}
+  - component: {fileID: 1467463273}
+  m_Layer: 0
+  m_Name: Composition_2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!328 &1467463273
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1467463272}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 32900000, guid: 3ef85412bda86ee4fa729bd71295cf5c, type: 3}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 16856687}
+  m_TargetTexture: {fileID: 0}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: <noninit>
+  m_RenderMode: 0
+  m_AspectRatio: 5
+  m_DataSource: 0
+  m_TimeUpdateMode: 2
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 2
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
+  m_Url: 
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
+  m_PlayOnAwake: 1
+  m_SkipOnDrop: 1
+  m_Looping: 0
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
+  m_VideoShaders: []
+--- !u!4 &1467463274
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1467463272}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1543053065
 GameObject:
   m_ObjectHideFlags: 0
@@ -948,7 +1014,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era2.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: Era1.Array.data[0]
@@ -968,15 +1034,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[0]._unlocked
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[1]._unlocked
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[2]._unlocked
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[3]._unlocked
@@ -992,7 +1058,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[6]._unlocked
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era2.Array.data[0]._unlocked
@@ -1004,11 +1070,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era2.Array.data[2]._unlocked
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
+      propertyPath: _era2.Array.data[3]._unlocked
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
+      propertyPath: _era2.Array.data[4]._unlocked
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[0]._sceneName
-      value: LoadingScreen
+      value: CRYPTO
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[1]._sceneName
@@ -1045,6 +1119,14 @@ PrefabInstance:
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era2.Array.data[2]._sceneName
       value: PerfectShot
+      objectReference: {fileID: 0}
+    - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
+      propertyPath: _era2.Array.data[3]._sceneName
+      value: ShakeItUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
+      propertyPath: _era2.Array.data[4]._sceneName
+      value: ShakeItUp
       objectReference: {fileID: 0}
     - target: {fileID: 5661505165497571510, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: m_Name
@@ -1132,3 +1214,4 @@ SceneRoots:
   - {fileID: 740921388}
   - {fileID: 1150571097}
   - {fileID: 1544447574}
+  - {fileID: 1467463274}
