@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Item", menuName = "Item")]
-public class Items : ScriptableObject
+public class ItemsSO : ScriptableObject
 {
+    public enum TYPE { COINS, MINIGAME };
+
     public string ItemName;
-    public string Description;
-    public string Type;
+    public TYPE Type;
     public Sprite Icon;
-    public Sprite Look;
     public int Cost;
 }
