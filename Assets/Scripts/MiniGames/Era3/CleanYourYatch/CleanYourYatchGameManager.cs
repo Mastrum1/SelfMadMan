@@ -15,6 +15,7 @@ public class CleanYourYatchGameManager : MiniGameManager
 
     void Start()
     {
+        _mAmountToPool = Random.Range(_mAmountToPool, _mAmountToPool + 3);
         _mGarbageRemaining = _mAmountToPool;
         _mEnd = false;
         _mYatchHandler.GarbageDeleted += OnGarbageDeleted;
