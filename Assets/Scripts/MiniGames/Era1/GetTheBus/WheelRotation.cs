@@ -10,4 +10,9 @@ public class WheelRotation : MonoBehaviour
     {
         transform.Rotate(Vector3.back * 45 * Time.deltaTime * _mSpeed, Space.Self);
     }
+
+    public void Stop()
+    {
+        _mSpeed = 0;
+    }
 }
