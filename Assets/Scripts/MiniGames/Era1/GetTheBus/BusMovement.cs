@@ -4,19 +4,23 @@ using UnityEngine;
 
 public class BusMovement : MonoBehaviour
 {
-    [SerializeField] private float Speed;
-    [SerializeField] public Vector3 EndPosition;
+    [SerializeField] private float _mSpeed;
+    [SerializeField] private Vector3 _mEndPosition;
+    [SerializeField] WheelRotation _mWheel1;
+    [SerializeField] WheelRotation _mWheel2;
 
     // Update is called once per frame
     void Update()
     {
-        transform.position += Vector3.right * Time.deltaTime * Speed;
-        if (transform.position.x >= EndPosition.x)
+        transform.position += Vector3.right * Time.deltaTime * _mSpeed;
+        if (transform.position.x >= _mEndPosition.x)
             this.transform.gameObject.SetActive(false);
     }
 
     public void Stop()
     {
-        Speed = 0;
+        _mSpeed = 0;
+        _mWheel1.Stop();
+        _mWheel2.Stop();
     }
 }
