@@ -26,8 +26,8 @@ Transform:
   m_GameObject: {fileID: 1030962731721815075}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -5}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4401339869329618634}
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 27
   m_Sprite: {fileID: 21300000, guid: 0bee755990b8e364d99bd2fa9fb316c3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -95,7 +95,6 @@ GameObject:
   - component: {fileID: 4401339869329618634}
   - component: {fileID: 15716378913150138}
   - component: {fileID: 491009848461839725}
-  - component: {fileID: 3059695925226260984}
   - component: {fileID: 2317051105271876901}
   - component: {fileID: 2567393454158139450}
   - component: {fileID: 7125997283650389834}
@@ -162,7 +161,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 26
   m_Sprite: {fileID: 21300000, guid: b3e49099cd8e9b94cae96b979edfed12, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -189,56 +188,12 @@ MonoBehaviour:
   _mBenchManager: {fileID: 0}
   _mChangeSpawn: {fileID: 2567393454158139450}
   _mMaxScale: 2
-  _mMinTimeForClick: 0.1
-  _mPerfectTiming: 0.3
-  _mMidTiming: 0.5
-  _mImmondeTiming: 0.85
+  _mMinTimeForClick: 0.6
+  _mPerfectTiming: 0.9
+  _mMidTiming: 1.1
+  _mImmondeTiming: 1.45
   _mTorus: {fileID: 1030962731721815075}
   _mDecreaseSpeed: 0.5
---- !u!114 &3059695925226260984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4409378949257764596}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83dcd8dace8b7fe449d796b980cb121d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selfSelected: 0
-  onSelected:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 491009848461839725}
-        m_TargetAssemblyTypeName: NewBehaviourScript, Assembly-CSharp
-        m_MethodName: ObjectTaped
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onDeselected:
-    m_PersistentCalls:
-      m_Calls: []
-  use: 0
-  onSelectedFinger:
-    m_PersistentCalls:
-      m_Calls: []
-  onSelectedFingerUp:
-    m_PersistentCalls:
-      m_Calls: []
-  onSelectedSelectFinger:
-    m_PersistentCalls:
-      m_Calls: []
-  onSelectedSelectFingerUp:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!58 &2317051105271876901
 CircleCollider2D:
   m_ObjectHideFlags: 0

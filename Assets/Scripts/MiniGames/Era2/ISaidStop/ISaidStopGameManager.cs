@@ -1,28 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using UnityEngine;
 
 public class ISaidStopGameManager : MiniGameManager
 {
     // Start is called before the first frame update
-    [SerializeField] HandMovement Hand;
+    [SerializeField] HandMovement _mHand;
+    private bool _mIsEnd;
 
     void Start()
     {
-        Hand.CigarPackCaught +=  OnPackCaught;
+        _mIsEnd = false;
+        _mHand.CigarPackCaught +=  OnPackCaught;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (_mIsEnd)
+            return;
         if (_mTimer.timerValue == 0)
             EndGame(true);
     }
 
     void EndGame(bool isWin) 
     {
+        _mHand.Stop();
         EndMiniGame(isWin, miniGameScore);
-        Hand.Stop();
+        _mIsEnd = true;
     }
 
     void OnPackCaught()
@@ -32,6 +38,6 @@ public class ISaidStopGameManager : MiniGameManager
 
     void OnDestroy()
     {
-        Hand.CigarPackCaught += OnPackCaught;
+        _mHand.CigarPackCaught -= OnPackCaught;
     }
 }

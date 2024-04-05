@@ -6,6 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class MinigameScene
 {
+
     [SerializeField][Scene] private string _sceneName;
     public string SceneName { get => _sceneName; set => _sceneName = value; }
 
@@ -14,6 +15,7 @@ public class MinigameScene
 
     public void Unlock()
     {
-        Unlocked = true;
+        Debug.Log("unlocking " + SceneName);
+        Unlocked = false;
     }
 }

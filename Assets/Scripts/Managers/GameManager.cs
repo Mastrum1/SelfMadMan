@@ -5,28 +5,37 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using NaughtyAttributes;
+using Unity.Collections;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
     public int Level { get => _mLevelCount; private set => _mLevelCount = value; }
-    public float Speed { get; private set; }
+
+    private float _speed;
+    public float Speed { get => _speed; private set => _speed = value; }
 
     private int _era;
     public int Era { get => _era - 1; set => _era = value; }
+
+    private int _fasterLevel;
+    public int FasterLevel { get => _fasterLevel; set => _fasterLevel = value; }
+
+    private Dictionary<int,bool> _unlockedEra = new Dictionary<int,bool>();
 
 
     [SerializeField] float _mScore;
     [SerializeField] int _mHearts;
 
-    [Scene] public string FasterScene; 
+    [Scene] public string FasterScene;
 
     private MiniGameManager _currentMinigameManager;
     private Scoring _mScoring;
     private QuestManager _mQuestManager;
 
     private int _mMinigameCount;
+    public int MinigameCount { get => _mMinigameCount; }
     private int _mLevelCount;
     private int _mCurrentStars;
 
@@ -52,6 +61,9 @@ public class GameManager : MonoBehaviour
         Era = 1;
         _mHearts = 3;
         Speed = 10;
+        FasterLevel = 1;
+
+        _unlockedEra.Add(0, true);
 
         _mQuestManager = QuestManager.instance;
         _mQuestManager.OnQuestComplete += AddStars;
@@ -79,6 +91,7 @@ public class GameManager : MonoBehaviour
     private void Faster()
     {
         mySceneManager.instance.SetScene(FasterScene, mySceneManager.LoadMode.ADDITIVE);
+        FasterLevel++;
         Speed *= 0.8f;
     }
     public void ResetGame()
@@ -86,6 +99,7 @@ public class GameManager : MonoBehaviour
         _mScore = 0;
         _mHearts = 3;
         Speed = 10;
+        FasterLevel = 1;
     }
 
     public float GetScore()
@@ -112,11 +126,7 @@ public class GameManager : MonoBehaviour
         score += won ? 100 : 0;
         _mScore = _mScoring.ChangeScore(Scoring.Param.Add, _mScore, score);
         WinScreenHandle?.Invoke(won, Era, _mHearts);
-        if (_mHearts <= 0)
-        {
-            //ResetGame();
-        }
-        else
+        if (_mHearts > 0)
             StartCoroutine(ContinueMinigames(won));
     }
 
