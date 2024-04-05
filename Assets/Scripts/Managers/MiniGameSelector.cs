@@ -14,9 +14,6 @@ public class MiniGameSelector : MonoBehaviour
     private Dictionary<string, List<string>> _mMinigameLists = new Dictionary<string, List<string>>();
 
 
-
-
-
     [SerializeField] private List<MinigameScene> _era1;
     [SerializeField] private List<MinigameScene> _era2;
     [SerializeField] private List<MinigameScene> _era3;
