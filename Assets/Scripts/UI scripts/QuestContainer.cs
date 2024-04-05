@@ -23,8 +23,4 @@ public class QuestContainer : MonoBehaviour
 
     public GameObject StarsContainer { get => _mStarsContainer; set => _mStarsContainer = value; }
     [SerializeField] private GameObject _mStarsContainer;
-
-    public GameObject Star { get => _mStar; set => _mStar = value; }
-    [SerializeField] private GameObject _mStar;
-
 }

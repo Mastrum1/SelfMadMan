@@ -97,7 +97,7 @@ public class QuestManager : MonoBehaviour
         if (SelectedQuests.Count >= 3) return;
         
         var randomQuest = Random.Range(0, _questsList.Count);
-        var randomDifficulty = Random.Range(0, 2);
+        var randomDifficulty = Random.Range(0, 3);
         
         if (_questsList[randomQuest].QuestDispo != Quests.QuestBaseDispo.Unlocked ||
             _questsList[randomQuest].QuestCompletionState != CompletionState.NotSelected) return;
