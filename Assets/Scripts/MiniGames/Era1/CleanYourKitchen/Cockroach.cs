@@ -1,37 +1,70 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.Video;
+using Random = UnityEngine.Random;
 
 public class Cockroach : MonoBehaviour
 {
     public event Action OnTouched;
     
-    [SerializeField] private Rigidbody2D mRigid2d;
-    [SerializeField] private float _speed;
-    void Start()
+    [SerializeField] private Rigidbody2D _rigid2d;
+    [SerializeField] private CapsuleCollider2D _collider2D;
+    [SerializeField] private GameObject _body;
+    [SerializeField] private GameObject _anim;
+    [SerializeField] private GameObject _squish;
+    private float _speed;
+
+    private void Start()
     {
+        _speed = Random.Range(30f, 50f);
         Move();
     }
+
+    private void Update()
+    {
+        transform.up = _rigid2d.velocity;
+        CheckSpeed();
+    }
+
+    private void Move()
+    {
+        _rigid2d.AddForce(transform.up * _speed, ForceMode2D.Force);
+    }
+
+    private void CheckSpeed()
+    {
+        if (Mathf.Abs(_rigid2d.velocity.x) <= 0.1f)
+        {
+            _rigid2d.AddForce(new Vector2(_speed, 0), ForceMode2D.Force);
+        }
+        if (Mathf.Abs(_rigid2d.velocity.y) <= 0.1f)
+        {
+            _rigid2d.AddForce(new Vector2(0, _speed), ForceMode2D.Force);
+        }
+    }
     
-    void Update()
-    {
-        transform.up = mRigid2d.velocity;
-    }
-
-    void Move()
-    {
-        mRigid2d.AddForce(transform.up * _speed, ForceMode2D.Force);
-    }
-
     public void Touched()
     {
         OnTouched?.Invoke();
+        _speed = 0;
+        _rigid2d.velocity = new Vector2(0, 0);
         StartCoroutine(DisableCockroach());
     }
 
-    IEnumerator DisableCockroach()
+    private IEnumerator DisableCockroach()
     {
-        yield return new WaitForSeconds(0.5f);
-        enabled = false;
+        _body.gameObject.SetActive(false);
+        _anim.gameObject.SetActive(false);
+        _collider2D.enabled = false;
+        _squish.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        gameObject.SetActive(false);
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        Move();
     }
 }

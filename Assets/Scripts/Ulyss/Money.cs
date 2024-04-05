@@ -17,7 +17,8 @@ public class Money : MonoBehaviour
     public void AddMoney(int MoneyToAdd)
     {
         _mCurrentMoney += MoneyToAdd;
-        GameManager.instance.GetComponent<Player>().NewCurrency(_mCurrentMoney);
+        SaveMoney();
+        _mShopManager.CheckPurchasable();
     }
 
     public void SubtractMoney(int MoneyToRemove)

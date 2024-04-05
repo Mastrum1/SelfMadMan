@@ -15,7 +15,6 @@ public class Quests : ScriptableObject
         Unlocked
     }
     
-    
     public enum Difficulties
     {
         Easy,

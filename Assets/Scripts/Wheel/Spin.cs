@@ -72,6 +72,7 @@ public class Spin : MonoBehaviour
         _quarter = _arrow.FetchQuarterData();
         isSpnning = false;
 
+
         Items item = CreateItemObject(_quarter);
         if (item != null)
         {
