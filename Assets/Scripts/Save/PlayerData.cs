@@ -16,6 +16,8 @@ public class PlayerData
 
     public string Language;
 
+    public int BestScore;
+
     public List<Items> Inventory = new List<Items>();
 
     public List<int> UnlockedCinematics = new List<int>();

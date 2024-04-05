@@ -22,6 +22,10 @@ public class Player : MonoBehaviour
 
     private QuestManager _mQuestManagerInstance;
 
+    public int BestScore { get => _mBestScore; private set => _mBestScore = value; }
+
+    [SerializeField] private int _mBestScore;
+
     public int Level { get => _mLevel; private set => _mLevel = value; }
 
     [SerializeField] private int _mLevel;
@@ -152,6 +156,7 @@ public class Player : MonoBehaviour
         if (CheckFile())
         {
             PlayerData data = DataService.LoadData<PlayerData>("/player-stats.json", false);
+            BestScore = data.BestScore;
             Level = data.Level;
             Xp = data.Xp;
             Money = data.Money;
@@ -211,6 +216,11 @@ public class Player : MonoBehaviour
             SaveJson();
         }
 
+    }
+
+    public void UpdateBestScore(int newBestScore)
+    {
+        BestScore = newBestScore;
     }
 
     public void AddActiveQuests(QuestManager.Quest quest)
