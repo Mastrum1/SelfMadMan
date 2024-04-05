@@ -8,13 +8,23 @@ public class MoveBrick : MonoBehaviour
 {
     [SerializeField] int _mSpeed;
     [SerializeField] private GameObject _mSpawnBrick;
+    [SerializeField] private GameObject _mSpriteBrick;
+    [SerializeField] private GameObject _mThrowLimit;
+
     private Vector2 _mDelta;
+
     public void OnSlide(Vector2 finalDelta)
     {
-        Debug.Log(finalDelta);
         _mDelta = finalDelta;
+        _mThrowLimit.SetActive(false);
         StartCoroutine("ThrowBrick");
 
+    }
+
+    public void Move(Vector3 pos)
+    {
+        if(pos.y < _mThrowLimit.transform.position.y)
+            transform.position = pos;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -22,21 +32,31 @@ public class MoveBrick : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ecolo"))
         {
             collision.gameObject.GetComponent<MoveEcolo>().EcoloGetHit();
-            StopCoroutine("ThrowBrick");
-            gameObject.transform.position = _mSpawnBrick.transform.position;
-            gameObject.transform.rotation = _mSpawnBrick.transform.rotation;
-            gameObject.transform.localScale = _mSpawnBrick.transform.localScale;
-
+            RespawnBrick();
         }
+    }
+
+    private void RespawnBrick()
+    {
+        StopCoroutine("ThrowBrick");
+        gameObject.transform.position = _mSpawnBrick.transform.position;
+        _mSpriteBrick.transform.rotation = _mSpawnBrick.transform.rotation;
+        gameObject.transform.localScale = _mSpawnBrick.transform.localScale;
+        _mThrowLimit.SetActive(true);
+
     }
 
     private IEnumerator ThrowBrick()
     {
         while (true)
         {
-            Debug.Log("test");
-            gameObject.transform.Translate(new Vector3(_mDelta.x, _mDelta.y, 0) * _mSpeed * Time.deltaTime);
-            gameObject.transform.localScale -= new Vector3(0.025f,0.025f,0.025f);
+            gameObject.transform.Translate(new Vector3(_mDelta.x, _mDelta.y, 0) *  _mSpeed * Time.deltaTime);
+            _mSpriteBrick.transform.Rotate(new Vector3(0, 0, 1) * 10);
+            if (gameObject.transform.position.y > 0.5f)
+            {
+                RespawnBrick();
+            }
+            gameObject.transform.localScale -= new Vector3(0.04f, 0.04f, 0.04f);
             yield return null;
 
         }
