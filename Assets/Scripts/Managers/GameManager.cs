@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _mPlayer.LoadJson();
-        _mCurrentStars = _mPlayer.Xp;
+        //_mCurrentStars = _mPlayer.Xp;
         _mMinigameCount = 0;
         Era = 1;
         _mHearts = 3;
