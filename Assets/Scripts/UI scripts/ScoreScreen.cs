@@ -10,8 +10,8 @@ public class ScoreScreen : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private Animator _HeartAnimator;
     [SerializeField] private Image _jamesSprite;
-    [SerializeField] private Sprite[] _jamesSprites;
-    [SerializeField] private TMP_Text _mscoreText;
+    [SerializeField] private TMP_Text[] _mscoreTexts;
+    [SerializeField] private TMP_Text[] _mMnigameCountTexts;
     private void Awake()
     {
         GameManager.instance.WinScreenHandle += OnWinScreenDisplay;
@@ -21,7 +21,14 @@ public class ScoreScreen : MonoBehaviour
     void OnWinScreenDisplay(bool won, int era, int hearts)
     {
         Debug.Log(hearts);
-        _mscoreText.text = GameManager.instance.DisplayScore();
+        foreach(var text in _mscoreTexts)
+        {
+            text.text = GameManager.instance.DisplayScore();
+        }
+        foreach (var text in _mMnigameCountTexts)
+        {
+            text.text = "GAMES COMPLETED : " + GameManager.instance.MinigameCount.ToString();
+        }
         _HeartAnimator.SetInteger("Hearts", hearts);
         _animator.SetBool("Idle", false);
         _animator.SetBool("Won", won);

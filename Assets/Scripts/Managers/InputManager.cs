@@ -48,6 +48,8 @@ public class InputManager : MonoBehaviour
 
     [SerializeField] public UnityEvent _mOnHold;
 
+    [SerializeField] public UnityEvent _mOnHoldRelease;
+
     [SerializeField] public UnityEvent _mOnTapObject;
 
     [SerializeField] public UnityEvent<Quaternion> _mOnGiroscope;
@@ -169,6 +171,11 @@ public class InputManager : MonoBehaviour
                     SelectableObject script = _mSelectedObject.GetComponent<SelectableObject>();
                     script.GetDeselected();
                     _mSelectedObject = null;
+                }
+
+                if (_mHold)
+                {
+                    _mOnHoldRelease?.Invoke();
                 }
 
                 _mStartTouchPos = Vector3.zero;
