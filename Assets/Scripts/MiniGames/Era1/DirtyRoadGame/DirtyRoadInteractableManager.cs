@@ -1,60 +1,52 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using System;
 
 public class DirtyRoadInteractableManager : InteractableManager
 {
     public event Action<bool> OnGameEnd;
+    public event Action<int> OnSpawnMoreAds;
     
-    public GameObject dirtyAddParent;
-    public GameObject trashCan;
-        
-    void Start()
+    [SerializeField] private GameObject _dirtyAddParent;
+    [SerializeField] private GameObject _trashCan;
+
+    private void Start()
     {
-        trashCan.GetComponent<OnCollide>().OnCollided += HandleEndGame;
+        _trashCan.GetComponent<OnCollide>().OnCollided += HandleEndGame;
     }
 
-    public void EnableCollision(List<Road> roads)
+    public void EnableAds(int numOfAds)
     {
-        foreach (var road in roads)
+        if (numOfAds > _dirtyAddParent.transform.childCount)
         {
-            Debug.Log("road");
-            foreach (var ad in road.Ads)
-            {
-                Debug.Log("Ad");
-                ad.OnCollided += HandleEndGame;
-            }
+            OnSpawnMoreAds?.Invoke(numOfAds - _dirtyAddParent.transform.childCount);
+        }
+        
+        for (var i = 0; i < numOfAds; i++)
+        {
+            _dirtyAddParent.transform.GetChild(i).gameObject.SetActive(true);
+            
+            var adCollider = _dirtyAddParent.transform.GetChild(i).GetComponent<OnCollide>();
+            adCollider.OnCollided += HandleEndGame;
         }
     }
     
-    public void DisableCollision(List<Road> roads)
+    private void DisableCollision()
     {
-        foreach (var road in roads)
+        for (var i = 0; i < _dirtyAddParent.transform.childCount; i++)
         {
-            foreach (var ad in road.Ads)
-            {
-                ad.OnCollided -= HandleEndGame;
-            }
+            var ad = _dirtyAddParent.transform.GetChild(i).GetComponent<OnCollide>();
+            ad.OnCollided -= HandleEndGame;
         }
     }
-    void HandleEndGame(bool win)
+
+    private void HandleEndGame(bool win)
     {
         OnGameEnd?.Invoke(win);
     }
 
     private void OnDestroy()
     {
-        for (int i = 0; i < dirtyAddParent.transform.childCount; i++)
-        {
-            var adChild = dirtyAddParent.transform.GetChild(i).GetComponent<OnCollide>();
-            if (adChild != null)
-            {
-                adChild.OnCollided -= HandleEndGame;
-            }
-        }
-        trashCan.GetComponent<OnCollide>().OnCollided -= HandleEndGame;
+        _trashCan.GetComponent<OnCollide>().OnCollided -= HandleEndGame;
+        DisableCollision();
     }
 }
