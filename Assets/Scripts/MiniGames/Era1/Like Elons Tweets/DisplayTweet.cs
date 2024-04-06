@@ -10,8 +10,10 @@ public class DisplayTweet : MonoBehaviour
 {
     [SerializeField] TweetScriptableObject TweetData;
     [SerializeField] TMP_Text TweetContent;
-    [SerializeField] TMP_Text NumberOfRetweet;
-    [SerializeField] TMP_Text NumberOfComment;
+    [SerializeField] TMP_Text ProfileName;
+    [SerializeField] TMP_Text Pseudo;
+    [SerializeField] TMP_Text Date;
+    [SerializeField] TMP_Text NumberOfLikes;
     [SerializeField] SpriteRenderer ProfilPicture;
     [SerializeField] SpriteRenderer Like;
     [SerializeField] Sprite BaseState;
@@ -28,8 +30,10 @@ public class DisplayTweet : MonoBehaviour
         mIsLiked = false;
         TweetContent.text = TweetData.TweetContent;
         ProfilPicture.sprite = TweetData.ProfilPicture;
-        NumberOfRetweet.text = TweetData.NumberOfRetweets.ToString();
-        NumberOfComment.text = TweetData.NumberOfComments.ToString();
+        ProfileName.text = TweetData.ProfileName;
+        Pseudo.text = TweetData.Pseudo;
+        NumberOfLikes.text = TweetData.NumberOfLikes;
+        Date.text = TweetData.Date;
     }
 
     void OnTriggerExit2D(Collider2D collider2D)
