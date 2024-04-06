@@ -5,7 +5,6 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using NaughtyAttributes;
-using static QuestManager;
 
 public class MiniGameSelector : MonoBehaviour
 {
@@ -13,6 +12,7 @@ public class MiniGameSelector : MonoBehaviour
 
     public Dictionary<string, List<string>> Minigamelists { get => _mMinigameLists; private set => _mMinigameLists = value; }
     private Dictionary<string, List<string>> _mMinigameLists = new Dictionary<string, List<string>>();
+
 
     [SerializeField] private List<MinigameScene> _era1;
     [SerializeField] private List<MinigameScene> _era2;
@@ -27,18 +27,8 @@ public class MiniGameSelector : MonoBehaviour
 
     Regex regex = new Regex(@"([^/]*/)*([\w\d\-]*)\.unity");
 
-    public void LoadEra(List<MinigameScene> AllEra1, List<MinigameScene> AllEra2, List<MinigameScene> AllEra3) 
-    {
-
-        Era1 = AllEra1;
-        Era2 = AllEra2;
-        Era3 = AllEra3;
-
-    }
-
     private void Start()
     {
-
         if (instance == null)
             instance = this;
         else if (instance != this)
@@ -61,20 +51,15 @@ public class MiniGameSelector : MonoBehaviour
 
     public void UnlockMinigame(string SceneName)
     {
-        int eraIndex = 0;
-        int gameIndex = 0;
         foreach (var era in AllMinigames)
         {
-            eraIndex++;
             foreach (var game in era)
             {
                 if (game.SceneName == SceneName)
                 {
                     game.Unlock();
-                    GameManager.instance.GetComponent<Player>().UnlockMinigame(eraIndex, gameIndex);
                     break; 
                 }
-                gameIndex++;
             }
         }
     }
