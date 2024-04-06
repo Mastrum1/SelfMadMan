@@ -29,7 +29,7 @@ public class Quests : ScriptableObject
         public  int amount;
         public int reward;
     }
-    
+    public int ID;
     public string questName;
     public int time;
     public string questDescription;
