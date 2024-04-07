@@ -60,7 +60,6 @@ public class CommentSpawner : MonoBehaviour
         for(int i = 0; i < m_AmountToPool; i++)
             if(_mPooledObjects[i].activeInHierarchy) {
                 _mPooledObjects[i].GetComponent<CommentMovement>().MoveFaster(targetPos);
-                Debug.Log("Yo");
             }
     }
 

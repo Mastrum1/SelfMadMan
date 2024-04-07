@@ -10,10 +10,11 @@ public class DisplayTikTokComment : MonoBehaviour
 {
     [SerializeField] TikTokCommentData _mData;
     [SerializeField] TMP_Text _mComment;
+    [SerializeField] TMP_Text _mProfileName;
     [SerializeField] SpriteRenderer _mProfilPicture;
     [SerializeField] SpriteRenderer _mDeletePicture;
-    [SerializeField] Sprite _mBaseState;
-    [SerializeField] Sprite _mDeleteState;
+    //[SerializeField] Sprite _mBaseState;
+    //[SerializeField] Sprite _mDeleteState;
     private bool _mIsEnable;
     private bool _mIsDeleted;
     public event Action<bool, GameObject> DeleteComment;
@@ -25,6 +26,7 @@ public class DisplayTikTokComment : MonoBehaviour
         _mIsDeleted = false;
         _mComment.text = _mData.CommentContent;
         _mProfilPicture.sprite = _mData.ProfilPicture;
+        _mProfileName.text = _mData.ProfileName;
     }
 
     void OnTriggerEnter2D(Collider2D collider2D)
@@ -40,7 +42,7 @@ public class DisplayTikTokComment : MonoBehaviour
     {
         if (_mIsEnable) {
             _mIsDeleted = true;
-            _mDeletePicture.sprite = _mDeleteState;
+           // _mDeletePicture.sprite = _mDeleteState;
             Disable();
             DeleteComment?.Invoke(_mData.IsGood, this.transform.gameObject);
         }
@@ -48,7 +50,7 @@ public class DisplayTikTokComment : MonoBehaviour
 
     public void ResetComment()
     {
-        _mDeletePicture.sprite = _mBaseState;
+      //  _mDeletePicture.sprite = _mBaseState;
         _mIsEnable = true;
         _mIsDeleted = false;
     }

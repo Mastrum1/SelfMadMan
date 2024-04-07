@@ -9,6 +9,8 @@ public class YouReBannedGameManager : MiniGameManager
     private int _mCount;
     private bool _mIsEnd;
     private int _mNbDeleted;
+
+    private GameObject _lastComment;
     void Start()
     {
         _mAverageSpawnRate = 1.0f;
@@ -16,6 +18,7 @@ public class YouReBannedGameManager : MiniGameManager
         StartCoroutine(SpawnComments());
         _mIsEnd = false;
         _mNbDeleted = 0;
+        _lastComment = null;
     }
 
     void Update()
@@ -25,7 +28,7 @@ public class YouReBannedGameManager : MiniGameManager
             return;
         if (_mIsEnd)
             return;
-        /*CommentSpawner.CommentSharedInstance.StopAllComments();
+       /* CommentSpawner.CommentSharedInstance.StopAllComments();
         List<GameObject> mComments = CommentSpawner.CommentSharedInstance.GetActiveComments();
         for (int i = 0; i < mComments.Count; i++) {
             DisplayTikTokComment mDisplayComment = mComments[i].GetComponent<DisplayTikTokComment>();
@@ -59,31 +62,15 @@ public class YouReBannedGameManager : MiniGameManager
                 mDisplayComment.DeleteComment += OnDeleteComment;
                 mDisplayComment.ExitScreen += OnScreenExited;
                 if (_mNbDeleted > 0)
-                    mComment.GetComponent<CommentMovement>().MoveFaster(_mSpawnPosition.position + new Vector3(0, 10, 0), _mNbDeleted);
-
+                    mComment.GetComponent<CommentMovement>().MoveFaster(mComment.transform.position + new Vector3(0, 118 * _mNbDeleted, 0), _mNbDeleted);
+                _lastComment = mComment;
             }
-        }
-    }
-
-    void SpawnComment()
-    {
-        GameObject mComment = CommentSpawner.CommentSharedInstance.GetPooledComment();
-        _mCount++;
-        if (mComment != null && !_mIsEnd) {
-            mComment.SetActive(true);
-            DisplayTikTokComment mDisplayComment = mComment.GetComponent<DisplayTikTokComment>();
-            mComment.transform.position = _mSpawnPosition.position;
-            mDisplayComment.ResetComment();
-            mDisplayComment.DeleteComment += OnDeleteComment;
-            mDisplayComment.ExitScreen += OnScreenExited;
         }
     }
 
     public void OnDeleteComment(bool IsGood, GameObject Comment)
     {
-        // call all the active comment and send my pos to them
         _mNbDeleted++;
-       // SpawnComment();
         CommentSpawner.CommentSharedInstance.AccelarateActiveComments(Comment.transform.position);
         Comment.SetActive(false);
         DisplayTikTokComment mDisplayTikTokComment = Comment.GetComponent<DisplayTikTokComment>();
