@@ -5,11 +5,12 @@ public class CleanKitchenManager : MiniGameManager
 {
     [SerializeField] private CleanYourKitchenInteractableManager _interactableManager;
     [SerializeField] private TextMeshProUGUI _roachRemainder;
-    [SerializeField] private int _numOfCockroaches;
+    private int _numOfCockroaches;
 
     public override void Awake()
     {
         base.Awake();
+        _numOfCockroaches = GameManager.instance.FasterLevel + 3;
         _interactableManager.NumOfCockroach = _numOfCockroaches;
     }
 
