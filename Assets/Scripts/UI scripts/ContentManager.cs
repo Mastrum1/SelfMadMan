@@ -63,7 +63,6 @@ public class ContentManager : MonoBehaviour
         GameManager.instance.Era = _mCurrentIndex + 1;
         ShowContent();
         UpdateDots();
-        Debug.Log(_mCurrentIndex);
     }
 
     void ShowContent()
