@@ -13,7 +13,7 @@ public class YouReBannedGameManager : MiniGameManager
     private GameObject _lastComment;
     void Start()
     {
-        _mAverageSpawnRate = 1.0f;
+        _mAverageSpawnRate = 0.85f;
         _mCount = 0;
         StartCoroutine(SpawnComments());
         _mIsEnd = false;
@@ -43,14 +43,14 @@ public class YouReBannedGameManager : MiniGameManager
 
     void EndGame(bool status)
     {
-        EndMiniGame(status, miniGameScore);
-        CommentSpawner.CommentSharedInstance.StopAllComments();
-        _mIsEnd = true;
+      //  EndMiniGame(status, miniGameScore);
+        //CommentSpawner.CommentSharedInstance.StopAllComments();
+        //_mIsEnd = true;
     }
 
     IEnumerator  SpawnComments()
     {
-        while (/*_mTimer.timerValue >= 420 &&*/ !_mIsEnd) {
+        while (/*_mTimer.timerValue >= 420 &&*/ !_mIsEnd && _mCount < 6) {
             yield return new WaitForSeconds((_mCount == 0) ? 0 : _mAverageSpawnRate);
             GameObject mComment = CommentSpawner.CommentSharedInstance.GetPooledComment();
             _mCount++;
@@ -62,7 +62,7 @@ public class YouReBannedGameManager : MiniGameManager
                 mDisplayComment.DeleteComment += OnDeleteComment;
                 mDisplayComment.ExitScreen += OnScreenExited;
                 if (_mNbDeleted > 0)
-                    mComment.GetComponent<CommentMovement>().MoveFaster(mComment.transform.position + new Vector3(0, 118 * _mNbDeleted, 0), _mNbDeleted);
+                    mComment.GetComponent<CommentMovement>().MoveFaster(_lastComment.transform.position, _mNbDeleted);
                 _lastComment = mComment;
             }
         }

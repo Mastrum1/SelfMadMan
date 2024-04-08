@@ -7,16 +7,22 @@ using Unity.Mathematics;
 public class CommentMovement : MonoBehaviour
 {
     [SerializeField] private float _mSpeed = 0.75f;
-    private Rigidbody2D _mRigidBody2D;
+    [SerializeField] CommentBorder _mUpBorder;
+    [SerializeField] CommentBorder _mDownBorder;
+    private float _mSpeedInitial;
+   private Rigidbody2D _mRigidBody2D;
     
     void Start()
     {
         _mRigidBody2D = GetComponent<Rigidbody2D>();
+        _mSpeedInitial = _mSpeed;
+        _mUpBorder.OnEnter += OnUpBorderEnter;
+        _mDownBorder.OnEnter += OnDownBorderEnter;
     }
 
     void Update()
     {
-        //transform.Translate(Vector3.up * _mSpeed * Time.deltaTime);
+       // transform.Translate(Vector3.up * _mSpeed * Time.deltaTime);
         _mRigidBody2D.velocity = Vector3.up * _mSpeed;
     }
 
@@ -29,18 +35,56 @@ public class CommentMovement : MonoBehaviour
     public void MoveFaster(Vector3 position, int times = 1) 
     {
         if (transform.position.y < position.y) {
-            Debug.Log("Fassssssssssssssssterrrrrrrrrrrrrr");
-           /*// _mSpeed =  times * 3;
-           _mSpeed = times * 2.5F;
-            StartCoroutine(ResetSpeed());*/
+            _mSpeed += (1.289999f ) / 0.25f; //_mSpeed * (times * 5);
+            Debug.Log("CALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLED " + transform.gameObject.name + " sp: " + _mSpeed + " pos: " + (position.y - transform.position.y));
+            StartCoroutine(Reset());   
         }
     }
 
-    /*IEnumerator ResetSpeed()
+    void OnTriggerEnter2D(Collider2D col)
     {
-        yield return new WaitForSeconds(0.5f);
-        _mSpeed = 0.5f;
-    }*/
+        if (col.gameObject.transform.position.y > transform.position.y) {
+            Debug.Log(this.gameObject.name + " meeeeeeeeeeeeeeee?" + col.gameObject.name);
+            ResetSpeed();
+        }
+    }
+    
+    void OnUpBorderEnter(GameObject other)
+    {
+        /*if (other.CompareTag("TIkTokComment") && other != this.gameObject) {
+            Debug.Log(this.gameObject.name + " meeeeeeeeeeeeeeee?" + other.gameObject.name);
+            ResetSpeed();
+        }*/
+    }
+
+    void OnDownBorderEnter(GameObject other)
+    {
+        /*if (other.CompareTag("TIkTokComment")) {
+           // ResetSpeed();
+           Debug.Log(this.gameObject.name + " OTTTTTTTTTTTTTTTTTTTTTHEEEEEEEEEEEEEEEEEE" + other.gameObject.name);
+            other.GetComponent<CommentMovement>().ResetSpeed();
+        }*/
+    }
+
+    public void ResetSpeed()
+    {
+        Debug.Log("Resssssssssss" + transform.gameObject.name);
+        _mSpeed = _mSpeedInitial;
+        
+    }
+
+    void OnDestroy()
+    {
+        _mUpBorder.OnEnter -= OnUpBorderEnter;
+        _mDownBorder.OnEnter -= OnDownBorderEnter;
+    }
+
+    IEnumerator Reset()
+    {
+        yield return new WaitForSeconds(0.3f);
+        _mSpeed = _mSpeedInitial;
+        Debug.Log("Ressssssssssssssssssssssettttttttttttttttt");
+    }
 
 
 /*
