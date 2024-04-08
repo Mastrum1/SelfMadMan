@@ -12,7 +12,6 @@ public class VFXScaleUp : MonoBehaviour
     void Start()
     {
         originalScale = transform.localScale;
-        StartCoroutine(ScaleObject());
     }
 
     // Update is called once per frame
