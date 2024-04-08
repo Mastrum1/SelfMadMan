@@ -9,7 +9,7 @@ public class QuestAndAchievement : MonoBehaviour
 
     [SerializeField] private GameObject _mQuestView;
 
-    private void Start()
+    private void OnEnable()
     {
         _mQuestManager = QuestManager.instance;
 
@@ -18,7 +18,7 @@ public class QuestAndAchievement : MonoBehaviour
 
     private void LoadQuestContainer()
     {
-        int childCount = 0;
+        var childCount = 0;
 
         foreach (var quest in _mQuestManager.SelectedQuests)
         {
@@ -29,7 +29,7 @@ public class QuestAndAchievement : MonoBehaviour
            questContainerScript.QuestDifficulty = quest.Difficulty;
            questContainerScript.Reward.text = quest.Difficulty.reward.ToString();
            questContainerScript.QuestDescription.text = quest.QuestSO.questDescription;
-           //questContainerScript.QuestIcon.sprite = quest.QuestSO.questIcon;
+           questContainerScript.QuestIcon.sprite = quest.QuestSO.questIcon;
            questContainerScript.QuestProgression.fillAmount = (float)quest.CurrentAmount / quest.MaxAmount;
            
            Debug.Log((int)quest.Difficulty.difficulty);
