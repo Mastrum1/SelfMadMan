@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+#if UNITY_EDITOR
 using UnityEditor.Localization.Platform.Android;
+#endif
 using UnityEngine;
 using Random = UnityEngine.Random;
 
