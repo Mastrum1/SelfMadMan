@@ -50,13 +50,6 @@ public class QuestManager : MonoBehaviour
 
         private int _currentAmount;
         public int CurrentAmount { get => _currentAmount; set => _currentAmount = value; }
-
-        //public Quest()
-        //{
-        //    _questCompletionState = CompletionState.NotSelected;
-        //    if (_questSO)
-        //        _questDispo = _questSO.disponibility;
-        //}
     }
 
     [SerializeField] private List<Quest> _questsList;
@@ -70,11 +63,6 @@ public class QuestManager : MonoBehaviour
         else if (instance != this)
             Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
-
-        //foreach (var item in _questsList)
-        //{
-        //    item.QuestDispo = item.QuestSO.disponibility;
-        //}
     }
 
     public void LoadQuests(List<Quest> quests, List<Quest> ActiveQuests)
