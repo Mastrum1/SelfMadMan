@@ -26,7 +26,7 @@ public class Quests : ScriptableObject
     public class Difficulty
     {
         public Difficulties difficulty;
-        public  int amount;
+        public int amount;
         public int reward;
     }
     public int ID;

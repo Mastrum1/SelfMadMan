@@ -9,10 +9,8 @@ public class ContentManager : MonoBehaviour
 {
     [Header("Content Viewport")]
     [SerializeField] private Image _mBaseImage;
-    [SerializeField] private Image _mEraBGContent;
     [SerializeField] private Image _mJames;
     [SerializeField] private List<Sprite> _mImages;
-    [SerializeField] private List<Sprite> _mEraBGPanel;
     [SerializeField] private List<Sprite> _mJamesForms;
 
     [Header("Navigation Dots")]
@@ -20,6 +18,7 @@ public class ContentManager : MonoBehaviour
     [SerializeField] private GameObject _mDotPrefab;
     [SerializeField] private TMP_Text _mText;
 
+    public int CurrentIndex { get => _mCurrentIndex; set => _mCurrentIndex = value; }
     [Header("Page Settings")]
     [SerializeField] private int _mCurrentIndex = 0;
 
@@ -81,16 +80,9 @@ public class ContentManager : MonoBehaviour
             dotImage.fillAmount = isActive ? 1f : 0f;
         }
 
-        for (int i = 0; i < _mEraBGPanel.Count; i++)
-        {
-            _mEraBGContent.sprite = _mEraBGPanel[_mCurrentIndex];
-  
-        }
-
         for (int i = 0; i < _mJamesForms.Count; i++) 
         {
             _mJames.sprite = _mJamesForms[_mCurrentIndex];
         }
-
     }
 }
