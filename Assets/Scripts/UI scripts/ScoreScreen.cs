@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Localization.Platform.Android;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;

@@ -18,6 +18,7 @@ public class QuestAndAchievement : MonoBehaviour
 
     private void LoadQuestContainer()
     {
+        Debug.Log("load quests");
         var childCount = 0;
 
         foreach (var quest in _mQuestManager.SelectedQuests)
