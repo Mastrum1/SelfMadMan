@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using NaughtyAttributes;
-using UnityEditor.Localization.Platform.Android;
 using Unity.Collections;
 
 public class GameManager : MonoBehaviour
