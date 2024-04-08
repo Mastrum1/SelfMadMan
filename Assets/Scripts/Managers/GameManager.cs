@@ -25,7 +25,8 @@ public class GameManager : MonoBehaviour
     private Dictionary<int,bool> _unlockedEra = new Dictionary<int,bool>();
 
 
-    [SerializeField] float _mScore;
+    private float _mScore;
+    public float Score { get => _mScore; private set => _mScore = value; }
     [SerializeField] int _mHearts;
 
     private bool _mGameOver;

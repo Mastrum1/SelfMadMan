@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Localization.Platform.Android;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,6 +12,7 @@ public class ScoreScreen : MonoBehaviour
     [SerializeField] private Animator _UIAnimator;
     [SerializeField] private Animator _HeartAnimator;
     [SerializeField] private Image _jamesSprite;
+    [SerializeField] private Image _mHighscoreTag;
     [SerializeField] private TMP_Text[] _mscoreTexts;
     [SerializeField] private TMP_Text[] _mMnigameCountTexts;
     [SerializeField] private TMP_Text[] _mTimerTexts;
@@ -34,7 +36,7 @@ public class ScoreScreen : MonoBehaviour
         Debug.Log(hearts);
         foreach (var text in _mscoreTexts)
         {
-            text.text = GameManager.instance.DisplayScore();
+            text.text = GameManager.instance.Score.ToString();
         }
         foreach (var text in _mMnigameCountTexts)
         {
@@ -98,7 +100,11 @@ public class ScoreScreen : MonoBehaviour
             //TO DO;
         }
         else
+        {
             _UIAnimator.SetBool("EndGame", true);
+            if(GameManager.instance.Score > Player.insta)
+        }
+           
 
     }
 
