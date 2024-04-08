@@ -12,10 +12,11 @@ public class ScoreScreen : MonoBehaviour
     [SerializeField] private Animator _UIAnimator;
     [SerializeField] private Animator _HeartAnimator;
     [SerializeField] private Image _jamesSprite;
-    [SerializeField] private Image _mHighscoreTag;
+    [SerializeField] private GameObject _mHighscoreTag;
     [SerializeField] private TMP_Text[] _mscoreTexts;
     [SerializeField] private TMP_Text[] _mMnigameCountTexts;
     [SerializeField] private TMP_Text[] _mTimerTexts;
+    [SerializeField] private TMP_Text[] _bestScore;
     [SerializeField] private PanelOnClick _mPanelOnClick;
     [SerializeField] private GameObject _mPopup;
 
@@ -63,14 +64,7 @@ public class ScoreScreen : MonoBehaviour
         _mPopupClosed = true;
         _UIAnimator.SetBool("DisplayPopUp", false);
     }
-    void Countdown()
-    {
-        if (!_mPopupClosed)
-        {
 
-        }
-
-    }
     IEnumerator ResetCharacter()
     {
         yield return new WaitForSeconds(2f);
@@ -101,11 +95,35 @@ public class ScoreScreen : MonoBehaviour
         }
         else
         {
+            OnPanelClicked();
             _UIAnimator.SetBool("EndGame", true);
-            if(GameManager.instance.Score > Player.insta)
-        }
-           
 
+            if (GameManager.instance.Score > GameManager.instance.Player.BestScore)
+            {
+                _mHighscoreTag.SetActive(true);
+                GameManager.instance.Player.UpdateBestScore((int)GameManager.instance.Score);
+            }
+            foreach (var text in _bestScore)
+            {
+                text.text = "BEST : " + GameManager.instance.Player.BestScore.ToString();
+            }
+        }
+    }
+    private void ResetScreen()
+    {
+        _mJamesAnimator.SetBool("Idle", true);
+        _mJamesAnimator.SetBool("EndGame", false);
+    }
+    public void RestartGame()
+    {
+        ResetScreen();
+        GameManager.instance.OnRestart();
+    }
+
+    public void GoHome()
+    {
+        ResetScreen();
+       mySceneManager.instance.LoadHomeScreen();
     }
 
     private void OnDestroy()

@@ -126,7 +126,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Awake()
+    public void Start()
     {
         _mQuestManagerInstance = QuestManager.instance;
 

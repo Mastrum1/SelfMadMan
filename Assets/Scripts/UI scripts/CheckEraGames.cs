@@ -44,7 +44,7 @@ public class CheckEraGames : MonoBehaviour
             TemplateInfos.EraGameName.text = minigame[i].SceneName;
             //TemplateInfos.EraGameIcon.sprite = minigame[i].SceneIcon;
 
-            if (minigame[i].Unlocked)
+            if (minigame[i].Locked)
             {
                 TemplateInfos.GameLocked = false;
                 TemplateInfos.EraGameBorder.sprite = TemplateInfos.EraGameBorderUnlocked;

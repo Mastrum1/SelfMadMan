@@ -22,6 +22,9 @@ public class GameManager : MonoBehaviour
     private int _fasterLevel;
     public int FasterLevel { get => _fasterLevel; set => _fasterLevel = value; }
 
+    [SerializeField] private Player _mPlayer;
+    public Player Player { get => _mPlayer; }
+
     private Dictionary<int,bool> _unlockedEra = new Dictionary<int,bool>();
 
 
@@ -66,16 +69,32 @@ public class GameManager : MonoBehaviour
         Speed = 10;
         FasterLevel = 1;
 
+        _mPlayer.LoadJson();
         _unlockedEra.Add(0, true);
 
         _mQuestManager = QuestManager.instance;
-        _mQuestManager.OnQuestComplete += AddStars;
+        _mQuestManager.OnReward += AddStars;
         _mScoring = new Scoring();
+    }
+    public void ResetGame()
+    {
+        _mScore = 0;
+        _mHearts = 3;
+        Speed = 10;
+        FasterLevel = 1;
+        _mGameOver = false;
+        _mMinigameCount = 0;
     }
 
     public void OnGameStart()
     {
+        ResetGame();
         mySceneManager.instance.LoadWinScreen();
+        mySceneManager.instance.RandomGameChoice();
+    }
+    public void OnRestart()
+    {
+        ResetGame();
         mySceneManager.instance.RandomGameChoice();
     }
 
@@ -97,15 +116,6 @@ public class GameManager : MonoBehaviour
         FasterLevel++;
         Speed *= 0.8f;
     }
-    public void ResetGame()
-    {
-        _mGameOver = false;
-        _mScore = 0;
-        _mHearts = 3;
-        Speed = 10;
-        FasterLevel = 1;
-    }
-
     public float GetScore()
     {
         return _mScore;
@@ -156,8 +166,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void OnApplicationQuit()
+    {
+        _mPlayer.SaveJson();
+    }
     private void OnDestroy()
     {
-        //_mQuestManager.OnQuestComplete -= AddStars; => A fix Jimmy
+       // _mQuestManager.OnReward -= AddStars;
+
     }
 }
