@@ -54,6 +54,8 @@ public class InputManager : MonoBehaviour
 
     [SerializeField] public UnityEvent<Vector3> _mOnAccelerometer;
 
+    [SerializeField] public UnityEvent<Vector3> _mFingerPos;
+
     [Header("Slide dir Events")]
 
     [SerializeField] public UnityEvent _mOnSlideUp;
@@ -116,6 +118,8 @@ public class InputManager : MonoBehaviour
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
+            _mFingerPos?.Invoke(Camera.main.ScreenToWorldPoint(touch.position));
+
             if (_mStartTouchPos == Vector3.zero)
             {
                 _mStartTouchPos = Camera.main.ScreenToWorldPoint(touch.position);
