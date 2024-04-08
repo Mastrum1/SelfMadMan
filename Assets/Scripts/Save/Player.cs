@@ -126,33 +126,27 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Start()
-    {
-        _mQuestManagerInstance = QuestManager.instance;
-
-        _mQuestManagerInstance.OnAddActiveQuest += AddActiveQuests;
-        _mQuestManagerInstance.OnRemoveActiveQuest += RemoveActiveQuests;
-        _mQuestManagerInstance.OnQuestComplete += QuestComplete;
-        _mQuestManagerInstance.OnUnlockQuest += UnlockQuest;
-        _mQuestManagerInstance.OnLockQuest += RemoveUnlockQuest;
-        _mQuestManagerInstance.OnQuestFinished += RemoveCompleteQuests;
-
-    }
-
     public void OnDisable()
     {
-        _mQuestManagerInstance.OnAddActiveQuest -= AddActiveQuests;
-        _mQuestManagerInstance.OnRemoveActiveQuest -= RemoveActiveQuests;
-        _mQuestManagerInstance.OnQuestComplete -= QuestComplete;
-        _mQuestManagerInstance.OnUnlockQuest -= UnlockQuest;
-        _mQuestManagerInstance.OnLockQuest -= RemoveUnlockQuest;
-        _mQuestManagerInstance.OnQuestFinished -= RemoveCompleteQuests;
+        QuestManager.instance.OnAddActiveQuest -= AddActiveQuests;
+        QuestManager.instance.OnRemoveActiveQuest -= RemoveActiveQuests;
+        QuestManager.instance.OnQuestComplete -= QuestComplete;
+        QuestManager.instance.OnUnlockQuest -= UnlockQuest;
+        QuestManager.instance.OnLockQuest -= RemoveUnlockQuest;
+        QuestManager.instance.OnQuestFinished -= RemoveCompleteQuests;
 
 
     }
 
     public void LoadJson()
     {
+        QuestManager.instance.OnAddActiveQuest += AddActiveQuests;
+        QuestManager.instance.OnRemoveActiveQuest += RemoveActiveQuests;
+        QuestManager.instance.OnQuestComplete += QuestComplete;
+        QuestManager.instance.OnUnlockQuest += UnlockQuest;
+        QuestManager.instance.OnLockQuest += RemoveUnlockQuest;
+        QuestManager.instance.OnQuestFinished += RemoveCompleteQuests;
+
         if (CheckFile())
         {
             PlayerData data = DataService.LoadData<PlayerData>("/player-stats.json", false);
@@ -208,7 +202,8 @@ public class Player : MonoBehaviour
             }
 
             //MiniGameSelector.instance.LoadEra(AllEra1, AllEra2, AllEra3);
-            _mQuestManagerInstance.LoadQuests(AllQuest, ActiveQuests);
+
+            QuestManager.instance.LoadQuests(AllQuest, ActiveQuests);
         }
 
         else
@@ -225,6 +220,7 @@ public class Player : MonoBehaviour
 
     public void AddActiveQuests(QuestManager.Quest quest)
     {
+        Debug.Log("test");
 
         ActiveQuests.Add(quest);
         RemoveUnlockQuest(quest.QuestSO.ID);
