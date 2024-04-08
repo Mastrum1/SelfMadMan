@@ -37,33 +37,28 @@ public class CheckEraGames : MonoBehaviour
 
     public void CheckUnlockedMinigames(List<MinigameScene> minigame, GameObject container)
     {
-        for (int i = 0; i < minigame.Count; i++) 
-        {
-            GameObject Templates = Instantiate(_mGameContainerPrefab, container.transform);
-            CheckEraGamesTemplate TemplateInfos = Templates.GetComponent<CheckEraGamesTemplate>();
-            TemplateInfos.EraGameName.text = minigame[i].SceneName;
-            //TemplateInfos.EraGameIcon.sprite = minigame[i].SceneIcon;
-
-            if (minigame[i].Locked)
-            {
-                TemplateInfos.GameLocked = false;
-                TemplateInfos.EraGameBorder.sprite = TemplateInfos.EraGameBorderUnlocked;
-                _mUnlockedMinigames++;
-            }
-            else
-            {
-                TemplateInfos.GameLocked = true;
-                TemplateInfos.EraGameBorder.sprite = TemplateInfos.EraGameBorderLocked;
-            }
-        }
-    }
-
-    public void DestroyChildren()
-    {
         foreach (Transform child in _mMinigameContainer.transform)
         {
-            Destroy(child.gameObject);
+            for (int i = 0; i < minigame.Count; i++)
+            {
+                CheckEraGamesTemplate TemplateInfos = child.GetComponent<CheckEraGamesTemplate>();
+                TemplateInfos.EraGameName.text = minigame[i].SceneName;
+                //TemplateInfos.EraGameIcon.sprite = minigame[i].SceneIcon;
+
+                if (minigame[i].Locked)
+                {
+                    TemplateInfos.GameLocked = false;
+                    TemplateInfos.EraGameBorder.sprite = TemplateInfos.EraGameBorderUnlocked;
+                    _mUnlockedMinigames++;
+                }
+                else
+                {
+                    TemplateInfos.GameLocked = true;
+                    TemplateInfos.EraGameBorder.sprite = TemplateInfos.EraGameBorderLocked;
+                }
+            }
         }
+
     }
 
     public void CheckEra()
@@ -71,17 +66,14 @@ public class CheckEraGames : MonoBehaviour
         switch (_mCurrentEra)
         {
             case 0:
-                DestroyChildren();
                 CheckUnlockedMinigames(MiniGameSelector.instance.Era1, _mMinigameContainer);
                 Debug.Log("Loading Era 1");
                 break;
             case 1:
-                DestroyChildren();
                 CheckUnlockedMinigames(MiniGameSelector.instance.Era2, _mMinigameContainer);
                 Debug.Log("Loading Era 2");
                 break;
             case 2:
-                DestroyChildren();
                 CheckUnlockedMinigames(MiniGameSelector.instance.Era3, _mMinigameContainer);
                 Debug.Log("Loading Era 3");
                 break;
