@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using NaughtyAttributes;
+using UnityEditor.Localization.Platform.Android;
 using Unity.Collections;
 
 public class GameManager : MonoBehaviour
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
     private int _era;
     public int Era { get => _era - 1; set => _era = value; }
 
+    [SerializeField] private Player _mPlayer;
     private int _fasterLevel;
     public int FasterLevel { get => _fasterLevel; set => _fasterLevel = value; }
 
@@ -35,6 +37,7 @@ public class GameManager : MonoBehaviour
     private QuestManager _mQuestManager;
 
     private int _mMinigameCount;
+    public int MinigameCount { get => _mMinigameCount; }
     private int _mLevelCount;
     private int _mCurrentStars;
 
@@ -42,6 +45,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+  
         Application.targetFrameRate = 60;
 
         if (instance == null)
@@ -55,7 +59,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        _mPlayer.LoadJson();
+        //_mCurrentStars = _mPlayer.Xp;
         _mMinigameCount = 0;
         Era = 1;
         _mHearts = 3;
@@ -65,7 +70,7 @@ public class GameManager : MonoBehaviour
         _unlockedEra.Add(0, true);
 
         _mQuestManager = QuestManager.instance;
-        _mQuestManager.OnQuestComplete += AddStars;
+        _mQuestManager.OnReward += AddStars;
         _mScoring = new Scoring();
     }
 
@@ -142,16 +147,26 @@ public class GameManager : MonoBehaviour
 
     void AddStars(int reward)
     {
+
         _mCurrentStars += reward;
         if (_mCurrentStars >= 5)
         {
-            Level++;
-            _mCurrentStars -= 5;
+            _mPlayer.LvlUp();
+            _mPlayer.ResetStars();
+        }
+        else
+        {
+            _mPlayer.AddStars(reward);
         }
     }
 
     private void OnDestroy()
     {
         //_mQuestManager.OnQuestComplete -= AddStars; => A fix Jimmy
+    }
+
+    private void OnApplicationQuit()
+    {
+        _mPlayer.SaveJson();
     }
 }

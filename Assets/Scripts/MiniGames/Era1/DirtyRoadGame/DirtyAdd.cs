@@ -1,30 +1,42 @@
 using System;
-using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class DirtyAdd : MonoBehaviour
 {
-    public float Dir { get => _dir; set => _dir = value; }
-    [SerializeField] private float _dir;
-    public float TimeTilMove { get => _timeTilMove; set => _timeTilMove = value; }
-    [SerializeField] private float _timeTilMove;
-    
     [SerializeField] private Rigidbody2D _rigid2d;
-    [SerializeField] private float _force;
+    private float _forceX;
+    private float _forceY;
+    private float _dirX;
+    private float _dirY;
+    
 
-    public Vector3 OrinalPos { get; set; }
-
-    void Start()
+    private void OnEnable()
     {
-        OrinalPos = transform.position;
-        StartCoroutine(MoveAfterTime(TimeTilMove));
+        _forceX = Random.Range(60, 80);
+        _forceY = Random.Range(60, 80);
+        _dirX = Random.Range(-1, 1);
+        if (_dirX == 0) _dirX = 1;
+        _dirY = Random.Range(-1, 1);
+        if (_dirY == 0) _dirY = 1;
+        
+        Move();
     }
 
-    IEnumerator MoveAfterTime(float time)
+    private void Update()
     {
-        yield return new WaitForSeconds(time);
-        _force = Random.Range(60, 150);
-        _rigid2d.AddForce(new Vector2(_force * Dir, 0));
+        if (Mathf.Abs(_rigid2d.velocity.x) <= 0.1)
+        {
+            _rigid2d.AddForce(new Vector2(_forceX, 0));
+        }
+        if (Mathf.Abs(_rigid2d.velocity.x) <= 0.1)
+        {
+            _rigid2d.AddForce(new Vector2(_forceY, 0));
+        }
+    }
+
+    private void Move()
+    {
+        _rigid2d.AddForce(new Vector2(_forceX * _dirY, _forceY * _dirY));
     }
 }

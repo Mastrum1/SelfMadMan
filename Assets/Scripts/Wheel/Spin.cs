@@ -9,7 +9,6 @@ public class Spin : MonoBehaviour
     [SerializeField] private Transform _contentTransform;
     [SerializeField] private Arrow _arrow;
 
-
     [SerializeField] private List<ItemsSO> _itemsSOs;
     [SerializeField] private List<Quarter> _quarters;
     private Quarter _quarter;
@@ -72,6 +71,7 @@ public class Spin : MonoBehaviour
     {
         _quarter = _arrow.FetchQuarterData();
         isSpnning = false;
+
 
         Items item = CreateItemObject(_quarter);
         if (item != null)
