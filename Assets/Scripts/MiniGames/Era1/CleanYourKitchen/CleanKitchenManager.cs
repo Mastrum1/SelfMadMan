@@ -29,6 +29,11 @@ public class CleanKitchenManager : MiniGameManager
         _roachRemainder.text = (_numOfCockroaches - Amount).ToString();
     }
 
+    public void PlayTapAnim(GameObject clickAnim)
+    {
+        //clickAnim.transform.position =
+    }
+
     void OnGameEnd()
     {
         if (Amount == _numOfCockroaches)
