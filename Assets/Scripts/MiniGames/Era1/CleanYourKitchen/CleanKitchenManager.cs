@@ -5,6 +5,8 @@ public class CleanKitchenManager : MiniGameManager
 {
     [SerializeField] private CleanYourKitchenInteractableManager _interactableManager;
     [SerializeField] private TextMeshProUGUI _roachRemainder;
+    [SerializeField] private TextMeshProUGUI _roachAmount;
+    [SerializeField] private GameObject _clickAnim;
     private int _numOfCockroaches;
 
     public override void Awake()
@@ -16,8 +18,9 @@ public class CleanKitchenManager : MiniGameManager
 
     private void Start()
     {
-        _roachRemainder.text = _numOfCockroaches.ToString();
         Amount = 0;
+        _roachRemainder.text = Amount.ToString();
+        _roachAmount.text = "/" + _numOfCockroaches;
         _interactableManager.OnRoachDeath += IncrementQuestAmount;
         _interactableManager.OnRoachDeath += OnGameEnd;
     }
@@ -26,15 +29,17 @@ public class CleanKitchenManager : MiniGameManager
     {
         base.Update();
 
-        _roachRemainder.text = (_numOfCockroaches - Amount).ToString();
+        _roachRemainder.text = Amount.ToString();
     }
 
-    public void PlayTapAnim(GameObject clickAnim)
+    public void PlayTapAnim(Vector3 pos)
     {
-        //clickAnim.transform.position =
+        if (_clickAnim.activeSelf) _clickAnim.SetActive(false); 
+        _clickAnim.transform.position = pos;
+        _clickAnim.SetActive(true);
     }
 
-    void OnGameEnd()
+    private void OnGameEnd()
     {
         if (Amount == _numOfCockroaches)
         {
