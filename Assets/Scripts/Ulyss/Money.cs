@@ -38,6 +38,5 @@ public class Money : MonoBehaviour
     {
         _mCurrentMoney = GameManager.instance.GetComponent<Player>().Money;
         Debug.Log("Money loaded: " + _mCurrentMoney);
-
     }
 }
