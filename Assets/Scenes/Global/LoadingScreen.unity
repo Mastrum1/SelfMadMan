@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &7840223 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
+  m_PrefabInstance: {fileID: 7911446559097213416}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6339b32145543184fa001eba11adf192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &16856685
 GameObject:
   m_ObjectHideFlags: 0
@@ -816,16 +827,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6016029795989203765, guid: e6a17ea60d4d24ffaa9e35b5fb2a66ff, type: 3}
-      propertyPath: _questsList.Array.data[0]._questDispo
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: _mPlayer
+      value: 
+      objectReference: {fileID: 2086177878}
     - target: {fileID: 6016029795989203765, guid: e6a17ea60d4d24ffaa9e35b5fb2a66ff, type: 3}
-      propertyPath: _questsList.Array.data[1]._questDispo
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6016029795989203765, guid: e6a17ea60d4d24ffaa9e35b5fb2a66ff, type: 3}
-      propertyPath: _questsList.Array.data[2]._questDispo
-      value: 1
+      propertyPath: _questsList.Array.size
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -907,6 +914,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1817061806}
   m_CullTransparentMesh: 1
+--- !u!114 &1830181864 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6016029795989203765, guid: e6a17ea60d4d24ffaa9e35b5fb2a66ff, type: 3}
+  m_PrefabInstance: {fileID: 1544447574}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 066fbca4ba63047a8bac798802d6fec1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2086177878 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+  m_PrefabInstance: {fileID: 1840523861636629208}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1fd27820466371439e0ddd51649555c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1840523861636629208
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -955,22 +984,234 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3699729203737973389, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: FasterScene
+      value: Faster
+      objectReference: {fileID: 0}
     - target: {fileID: 3783518028089879279, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
-    - target: {fileID: 6542784465200720699, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
-      propertyPath: _mAllQuest.Array.size
-      value: 28
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mLanguage
+      value: fr
       objectReference: {fileID: 0}
-    - target: {fileID: 6542784465200720699, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
-      propertyPath: _mAllQuest.Array.data[26]._questSO
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mQuestManager
       value: 
-      objectReference: {fileID: 11400000, guid: 650ef6235e4824b6d9336aa35b4af282, type: 2}
-    - target: {fileID: 6542784465200720699, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
-      propertyPath: _mAllQuest.Array.data[27]._questSO
+      objectReference: {fileID: 1830181864}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mMiniGameSelector
       value: 
-      objectReference: {fileID: 11400000, guid: 28a897b8c17ac40b5a111eeffff7ef27, type: 2}
+      objectReference: {fileID: 7840223}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mCinematics.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllMinigames.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mInventory.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4a2e5fceeac3ea4439e26d7a1f39fafc, type: 2}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllCinematics.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mCinematics.Array.data[0]
+      value: 
+      objectReference: {fileID: 32900000, guid: b9bdeb9c0367c46418a211b955d3ca8d, type: 3}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mItemLocked.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4a2e5fceeac3ea4439e26d7a1f39fafc, type: 2}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllEra1.Array.data[0]._era
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllEra1.Array.data[1]._era
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllCinematics.Array.data[1].ID
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllMinigames.Array.data[0]._era
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllMinigames.Array.data[1]._era
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllMinigames.Array.data[2]._era
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllMinigames.Array.data[3]._era
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllMinigames.Array.data[4]._era
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllMinigames.Array.data[5]._era
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllMinigames.Array.data[6]._era
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllCinematics.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 32900000, guid: b9bdeb9c0367c46418a211b955d3ca8d, type: 3}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllCinematics.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 32900000, guid: a1e5f1890b65965448f7ef969bfe7ba2, type: 3}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllEra1.Array.data[0]._sceneName
+      value: CleanYourKitchen
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllEra1.Array.data[1]._sceneName
+      value: DirtyRoad
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllEra1.Array.data[2]._sceneName
+      value: FightThisDude
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllEra1.Array.data[3]._sceneName
+      value: Findher
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllEra1.Array.data[4]._sceneName
+      value: LikeElonsTweets
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllEra1.Array.data[5]._sceneName
+      value: GetBenched
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllEra1.Array.data[6]._sceneName
+      value: CRYPTO
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllEra1.Array.data[7]._sceneName
+      value: PopUpHell
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllEra2.Array.data[0]._sceneName
+      value: PerfectShot
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllEra2.Array.data[1]._sceneName
+      value: LoadingScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllEra2.Array.data[2]._sceneName
+      value: ShakeItUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllEra2.Array.data[3]._sceneName
+      value: LoadingScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllEra2.Array.data[4]._sceneName
+      value: YouReBanned
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllEra2.Array.data[5]._sceneName
+      value: ISaidStop
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllEra2.Array.data[6]._sceneName
+      value: FeelTheProts
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllEra2.Array.data[7]._sceneName
+      value: GetTheBus
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllEra3.Array.data[0]._sceneName
+      value: CleanYourYatch
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllMinigames.Array.data[0]._unlocked
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllMinigames.Array.data[1]._unlocked
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllMinigames.Array.data[2]._unlocked
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllMinigames.Array.data[3]._unlocked
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllMinigames.Array.data[4]._unlocked
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllMinigames.Array.data[5]._unlocked
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllMinigames.Array.data[6]._unlocked
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllMinigames.Array.data[0]._sceneName
+      value: FIghtingGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllMinigames.Array.data[1]._sceneName
+      value: DirtyRoad
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllMinigames.Array.data[2]._sceneName
+      value: CRYPTO
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllMinigames.Array.data[3]._sceneName
+      value: CleanYourKitchen
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllMinigames.Array.data[4]._sceneName
+      value: Findher
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllMinigames.Array.data[5]._sceneName
+      value: LikeElonsTweets
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllMinigames.Array.data[6]._sceneName
+      value: GetBenched
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllMinigames.Array.data[7]._sceneName
+      value: LoadingScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllMinigames.Array.data[8]._sceneName
+      value: LoadingScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mAllMinigames.Array.data[9]._sceneName
+      value: LoadingScreen
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1027,7 +1268,7 @@ PrefabInstance:
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2086177878}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: Era1.Array.size
       value: 1
@@ -1058,7 +1299,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[0]._locked
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[1]._locked
@@ -1070,7 +1311,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[3]._locked
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[4]._locked
@@ -1093,6 +1334,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
+      propertyPath: _era2.Array.data[2]._locked
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era2.Array.data[3]._locked
       value: 1
       objectReference: {fileID: 0}
@@ -1102,15 +1347,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[1]._unlocked
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[2]._unlocked
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[3]._unlocked
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[4]._unlocked
@@ -1122,7 +1367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[6]._unlocked
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era2.Array.data[0]._unlocked
