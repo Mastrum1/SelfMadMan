@@ -20,7 +20,7 @@ public class QuestContainer : MonoBehaviour
 
     public Image QuestProgression { get => _mQuestProgression; set => _mQuestProgression = value; }
     [SerializeField] private Image _mQuestProgression;
-
-    public GameObject StarsContainer { get => _mStarsContainer; set => _mStarsContainer = value; }
-    [SerializeField] private GameObject _mStarsContainer;
+    
+    public List<GameObject> Stars { get => _mStars; set => _mStars = value; }
+    [SerializeField] private List<GameObject> _mStars;
 }
