@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class FindherGameManager : MiniGameManager
 {
@@ -11,20 +11,26 @@ public class FindherGameManager : MiniGameManager
 
     //Girls Variables
     [SerializeField] GameObject _mProfile;
-    [SerializeField] SpriteRenderer _mGirlSpriteRenderer;
+    [SerializeField] Image _mGirlSpriteRenderer;
     [SerializeField] TextMeshProUGUI _mGirlName;
     [SerializeField] TextMeshProUGUI _mGirlAge;
+    [SerializeField] TextMeshProUGUI _mGirlDescription;
+    Sprite _mGirlBackground;
 
-    //Pub Variables
-    [SerializeField] GameObject _mPub;
-    [SerializeField] SpriteRenderer _mPubSpriteRenderer;
+    //Ad Variables
+    [SerializeField] GameObject _mAd;
+    [SerializeField] Image _mAdSpriteRenderer;
+    [SerializeField] TextMeshProUGUI _mAdName;
+    [SerializeField] TextMeshProUGUI _mAdDescription;
 
     //SO lists
     [SerializeField] List<Ads> _mListAd;
     [SerializeField] List<Girls> _mListPeople;
+   
+    [SerializeField] List<Sprite> _mListImages;
 
     private int _mSwipeRight = 0;
-    private bool _mIsPub = false;
+    private bool _mIsAd = false;
 
     private void Start()
     {
@@ -33,13 +39,13 @@ public class FindherGameManager : MiniGameManager
 
     public void SwipeLeft()
     {
-        if (!_mIsPub)
+        if (!_mIsAd)
         {
             EndMiniGame(false, miniGameScore);
         }
         else
         {
-            _mPub.SetActive(false);
+            _mAd.SetActive(false);
             _mProfile.SetActive(false);
             ShowProfile();
         }
@@ -47,14 +53,14 @@ public class FindherGameManager : MiniGameManager
 
     public void SwipeRight()
     {
-        if (_mIsPub)
+        if (_mIsAd)
         {
             EndMiniGame(false, miniGameScore);
 
         }
         else
         {
-            _mPub.SetActive(false);
+            _mAd.SetActive(false);
             _mProfile.SetActive(false);
 
             _mSwipeRight++;
@@ -82,18 +88,24 @@ public class FindherGameManager : MiniGameManager
             _mGirlSpriteRenderer.sprite = _mListPeople[index].ProfilePicture;
             _mGirlName.text = _mListPeople[index].GirlName;
             _mGirlAge.text = _mListPeople[index].Age.ToString();
+            //_mGirlDescription.text = _mListPeople[index].Description;
+            
+            int bgIndex = Random.Range(0, _mListImages.Count);
+            _mGirlBackground = _mListImages[bgIndex];
 
             _mProfile.SetActive(true);
-            if (_mIsPub) _mIsPub = false;
+            if (_mIsAd) _mIsAd = false;
         }
         else
         {
             int index = Random.Range(0, _mListAd.Count);
 
-            _mPubSpriteRenderer.sprite = _mListAd[index].ProfilePicture;
+            _mAdSpriteRenderer.sprite = _mListAd[index].ProfilePicture;
+            //_mAdName.text = _mListAd[index].Name;
+            //_mAdName.text = _mListAd[index].Description;
 
-            _mPub.SetActive(true);
-            if (!_mIsPub) _mIsPub = true;
+            _mAd.SetActive(true);
+            if (!_mIsAd) _mIsAd = true;
         }
     }
 }

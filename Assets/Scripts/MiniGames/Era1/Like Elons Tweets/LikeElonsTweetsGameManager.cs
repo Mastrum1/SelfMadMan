@@ -6,12 +6,14 @@ public class LikeElonsTweetsGameManager : MiniGameManager
 {
     [SerializeField] Transform SpawnPosition;
 
-    private float _mAverageSpawnRate;
+    [SerializeField] private float _mAverageSpawnRate;
+    bool _mIsEnd;
     
     // Start is called before the first frame update
     void Start()
     {
-        _mAverageSpawnRate = 0.5f;
+        _mAverageSpawnRate = 0.75f;
+        _mIsEnd = false;
         StartCoroutine(SpawnTweet());
     }
 
@@ -19,7 +21,7 @@ public class LikeElonsTweetsGameManager : MiniGameManager
     void Update()
     {
         bool mStatus = true;
-        if (_mTimer.timerValue != 0)
+        if (_mTimer.timerValue != 0 || _mIsEnd)
             return;
         TweetSpawner.SharedInstance.StopAllTweetes();
         List<GameObject> mTweets = TweetSpawner.SharedInstance.GetActiveTweets();
@@ -29,15 +31,27 @@ public class LikeElonsTweetsGameManager : MiniGameManager
             mTweets[i].GetComponent<DisplayTweet>().LikeTweet -= OnLikeTweet;
             mTweets[i].GetComponent<DisplayTweet>().ExitScreen -= OnScreenExited;
         }
-        EndMiniGame(mStatus, miniGameScore);
+        EndGame(mStatus);
     }
+
+    void EndGame(bool status)
+    {
+        if (!_mIsEnd) {
+            TweetSpawner.SharedInstance.StopAllTweetes();
+            _mIsEnd = true;
+            Debug.Log("ENDGAME  " + _mIsEnd);
+            EndMiniGame(status, miniGameScore);
+        }
+    }
+
 
     IEnumerator  SpawnTweet()
     { 
-        while (_mTimer.timerValue >= 420) {
+        while (_mTimer.timerValue >= 420 && !_mIsEnd) {
             yield return new WaitForSeconds(_mAverageSpawnRate);
             GameObject mTweet = TweetSpawner.SharedInstance.GetPooledTweet();
-            if (mTweet != null) {
+            Debug.Log("Spawneeeeeeeeeer " + _mIsEnd);
+            if (mTweet != null && !_mIsEnd) {
                 DisplayTweet mDisplayTweet = mTweet.GetComponent<DisplayTweet>();
                 mTweet.SetActive(true);
                 mTweet.transform.position = SpawnPosition.position;
@@ -50,14 +64,14 @@ public class LikeElonsTweetsGameManager : MiniGameManager
 
     void OnLikeTweet(bool IsElon)
     {
-        if (!IsElon)
-            EndMiniGame(false, miniGameScore);
+        if (!IsElon && !_mIsEnd)
+            EndGame(false);
     }
 
     void OnScreenExited(bool IsElon, GameObject Tweet)
     {
-        if (IsElon)
-            EndMiniGame(false, miniGameScore);
+        if (IsElon && !_mIsEnd)
+            EndGame(false);
         Tweet.SetActive(false);
         Tweet.GetComponent<DisplayTweet>().Disable();
         Tweet.GetComponent<DisplayTweet>().LikeTweet -= OnLikeTweet;
