@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using NaughtyAttributes;
-using UnityEditor.Localization.Platform.Android;
 using Unity.Collections;
 
 public class GameManager : MonoBehaviour
@@ -20,15 +19,20 @@ public class GameManager : MonoBehaviour
     private int _era;
     public int Era { get => _era - 1; set => _era = value; }
 
-    [SerializeField] private Player _mPlayer;
     private int _fasterLevel;
     public int FasterLevel { get => _fasterLevel; set => _fasterLevel = value; }
+
+    [SerializeField] private Player _mPlayer;
+    public Player Player { get => _mPlayer; }
 
     private Dictionary<int,bool> _unlockedEra = new Dictionary<int,bool>();
 
 
-    [SerializeField] float _mScore;
+    private float _mScore;
+    public float Score { get => _mScore; private set => _mScore = value; }
     [SerializeField] int _mHearts;
+
+    private bool _mGameOver;
 
     [Scene] public string FasterScene;
 
@@ -41,11 +45,10 @@ public class GameManager : MonoBehaviour
     private int _mLevelCount;
     private int _mCurrentStars;
 
-    public event Action<bool, int, int> WinScreenHandle;
+    public event Action<bool, int, int, bool> WinScreenHandle;
 
     private void Awake()
     {
-  
         Application.targetFrameRate = 60;
 
         if (instance == null)
@@ -59,24 +62,39 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _mPlayer.LoadJson();
-        //_mCurrentStars = _mPlayer.Xp;
+        _mGameOver = false;
         _mMinigameCount = 0;
         Era = 1;
         _mHearts = 3;
         Speed = 10;
         FasterLevel = 1;
 
+        _mPlayer.LoadJson();
         _unlockedEra.Add(0, true);
 
         _mQuestManager = QuestManager.instance;
         _mQuestManager.OnReward += AddStars;
         _mScoring = new Scoring();
     }
+    public void ResetGame()
+    {
+        _mScore = 0;
+        _mHearts = 3;
+        Speed = 10;
+        FasterLevel = 1;
+        _mGameOver = false;
+        _mMinigameCount = 0;
+    }
 
     public void OnGameStart()
     {
+        ResetGame();
         mySceneManager.instance.LoadWinScreen();
+        mySceneManager.instance.RandomGameChoice();
+    }
+    public void OnRestart()
+    {
+        ResetGame();
         mySceneManager.instance.RandomGameChoice();
     }
 
@@ -98,14 +116,6 @@ public class GameManager : MonoBehaviour
         FasterLevel++;
         Speed *= 0.8f;
     }
-    public void ResetGame()
-    {
-        _mScore = 0;
-        _mHearts = 3;
-        Speed = 10;
-        FasterLevel = 1;
-    }
-
     public float GetScore()
     {
         return _mScore;
@@ -127,10 +137,11 @@ public class GameManager : MonoBehaviour
         mySceneManager.instance.UnloadCurrentScene();
 
         _mHearts -= won ? 0 : 1;
+        _mGameOver = _mHearts == 0 ? true : false;
         score += won ? 100 : 0;
         _mScore = _mScoring.ChangeScore(Scoring.Param.Add, _mScore, score);
-        WinScreenHandle?.Invoke(won, Era, _mHearts);
-        if (_mHearts > 0)
+        WinScreenHandle?.Invoke(won, Era, _mHearts, _mGameOver);
+        if (!_mGameOver)
             StartCoroutine(ContinueMinigames(won));
     }
 
@@ -147,26 +158,21 @@ public class GameManager : MonoBehaviour
 
     void AddStars(int reward)
     {
-
         _mCurrentStars += reward;
         if (_mCurrentStars >= 5)
         {
-            _mPlayer.LvlUp();
-            _mPlayer.ResetStars();
+            Level++;
+            _mCurrentStars -= 5;
         }
-        else
-        {
-            _mPlayer.AddStars(reward);
-        }
-    }
-
-    private void OnDestroy()
-    {
-        //_mQuestManager.OnQuestComplete -= AddStars; => A fix Jimmy
     }
 
     private void OnApplicationQuit()
     {
         _mPlayer.SaveJson();
+    }
+    private void OnDestroy()
+    {
+       // _mQuestManager.OnReward -= AddStars;
+
     }
 }

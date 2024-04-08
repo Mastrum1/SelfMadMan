@@ -470,6 +470,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _mOnDeselected:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!61 &155471102
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1392,7 +1395,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5990196176655351961, guid: 32c7e4ce4a13b314f804c624bea8fa11, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6264904987954444532, guid: 32c7e4ce4a13b314f804c624bea8fa11, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2018,6 +2021,10 @@ PrefabInstance:
     - target: {fileID: 1629463244761357840, guid: d98c6fb8847f3ca43ba5e9c10a088eef, type: 3}
       propertyPath: m_Name
       value: PauseButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 1629463244761357840, guid: d98c6fb8847f3ca43ba5e9c10a088eef, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
