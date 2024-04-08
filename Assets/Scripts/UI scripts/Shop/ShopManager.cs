@@ -27,23 +27,23 @@ public class ShopManager : MonoBehaviour
     private void Start()
     {
         LoadAllPanels();
-        CheckPurchasable();
+        //CheckPurchasable();
     }
 
-    public void CheckPurchasable()
+    /*public void CheckPurchasable()
     {
-        /*CheckPurchasablePerType(_mShopItems);
+        *//*CheckPurchasablePerType(_mShopItems);
         CheckPurchasablePerType(_mFurnitures);
-        CheckPurchasablePerType(_mPowerUp);*/
-    }
+        CheckPurchasablePerType(_mPowerUp);*//*
+    }*/
 
-    public void CheckPurchasablePerType(ItemsSO[] item)
+    /*public void CheckPurchasablePerType(ItemsSO[] item)
     {
         for (int i = 0; i < item.Length; i++)
         {
             
         }
-    }
+    }*/
 
     public void LoadAllPanels()
     {
