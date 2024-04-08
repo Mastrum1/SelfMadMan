@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ShopManager : MonoBehaviour
@@ -11,14 +12,17 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private Items[] _SpinWheel;
     [SerializeField] private ItemsSO[] _mCoins;
     [SerializeField] private ItemsSO[] _mFurnitures;
-    [SerializeField] private ItemsSO[] _mPowerUp; 
+    [SerializeField] private ItemsSO[] _mPowerUp;
 
-    [Header("Templates Panels")]
+    [Header("Coins Template")]
+    [SerializeField] private List<ShopTemplate> _mCoinsTemplates;
+    [SerializeField] private List<ShopTemplate> _mFurnituresTemplates;
+    /*[Header("Templates Panels")]
     [SerializeField] private GameObject _mSpinWheelContainer;
     [SerializeField] private GameObject _mTemplateContainer;
     [SerializeField] private GameObject _mShopFurnituresContainer;
     [SerializeField] private GameObject _mShopPowerUpContainer;
-    [SerializeField] private GameObject _mTemplatePrefab;
+    [SerializeField] private GameObject _mTemplatePrefab;*/
 
     private void Awake()
     {
@@ -80,23 +84,26 @@ public class ShopManager : MonoBehaviour
 
     public void LoadAllPanels()
     {
-        LoadPanels(_mCoins, _mTemplateContainer);
-        LoadPanels(_mFurnitures, _mShopFurnituresContainer);
-        LoadPanels(_mPowerUp, _mShopPowerUpContainer);
+        LoadPanels(_mCoins);
+        LoadPanels(_mFurnitures);
+        LoadPanels(_mPowerUp);
     }
 
-    public void LoadPanels(ItemsSO[] item, GameObject container)
+    public void LoadPanels(ItemsSO[] item)
     {
         for (int i = 0; i < item.Length; i++) 
         {
-            GameObject Templates = Instantiate(_mTemplatePrefab, container.transform);
+            _mCoinsTemplates[i].TitleText.text = item[i].name;
+            _mCoinsTemplates[i].CostText.text = item[i].Cost.ToString();
+            _mCoinsTemplates[i].ImageItem.sprite = item[i].Icon;
+            _mCoinsTemplates[i].Type = item[i].Type;
 
-            // Get the ShopTemplate component
-            ShopTemplate TemplatesInfo = Templates.GetComponent<ShopTemplate>();
-            TemplatesInfo.TitleText.text = item[i].ItemName;
-            TemplatesInfo.CostText.text = item[i].Cost.ToString();
-            TemplatesInfo.ImageItem.sprite = item[i].Icon;
-            TemplatesInfo.Type = item[i].Type;
+            /*if (item[i] is Coins)
+            {
+                // Cast the item to Coins type to access the Amount property
+                Coins coinItem = (Coins)item[i];
+                _mCoinsTemplates[i].Amount.text = coinItem.Amount.ToString();
+            }*/
         }
     }
 }

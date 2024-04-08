@@ -6,11 +6,14 @@ using UnityEngine.EventSystems;
 
 public class ShopTemplate : MonoBehaviour
 {
-    public TMP_Text TitleText { get => _mTitleText; set => _mTitleText = value; }
+    public TMP_Text TitleText { get => _mTitleText; private set => _mTitleText = value; }
     [SerializeField] public TMP_Text _mTitleText;
 
-    public TMP_Text CostText { get => _mCostText; set => _mCostText = value; }
+    public TMP_Text CostText { get => _mCostText; private set => _mCostText = value; }
     [SerializeField] public TMP_Text _mCostText;
+
+    public TMP_Text Amount { get => _mAmount; private set => _mAmount = value; }    
+    [SerializeField] private TMP_Text _mAmount;
 
     public Image ImageItem { get => _mImageItem; set => _mImageItem = value; }
     [SerializeField] private Image _mImageItem;
