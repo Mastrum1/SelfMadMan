@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Localization.Platform.Android;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -109,10 +108,14 @@ public class ScoreScreen : MonoBehaviour
             }
         }
     }
-    private void ResetScreen()
+    public void ResetScreen()
     {
+        _UIAnimator.SetBool("EndGame", false);
         _mJamesAnimator.SetBool("Idle", true);
-        _mJamesAnimator.SetBool("EndGame", false);
+        _mJamesAnimator.SetBool("GameOver", false);
+        _HeartAnimator.SetInteger("Hearts", 3);
+        _mHighscoreTag.SetActive(false);
+        Timer = 5;
     }
     public void RestartGame()
     {
