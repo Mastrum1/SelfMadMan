@@ -6,7 +6,7 @@ public class WaterBottle : MonoBehaviour
     public void TiltDown()
     {
         StopCoroutine(TiltUp());
-        if (transform.eulerAngles.z <= 120)
+        if (transform.eulerAngles.z <= 100)
         {
             transform.Rotate(0,0,60 * Time.deltaTime);
         }
@@ -19,7 +19,7 @@ public class WaterBottle : MonoBehaviour
     
     private IEnumerator TiltUp()
     {
-        while (transform.eulerAngles.z >= 65)
+        while (transform.eulerAngles.z >= 55)
         {
             transform.Rotate(0,0,-50 * Time.deltaTime);
 
