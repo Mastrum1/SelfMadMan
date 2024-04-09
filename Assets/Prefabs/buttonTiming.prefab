@@ -336,6 +336,7 @@ GameObject:
   - component: {fileID: 2317051105271876901}
   - component: {fileID: 7125997283650389834}
   - component: {fileID: 8039306362533089082}
+  - component: {fileID: 6946697609774946393}
   m_Layer: 0
   m_Name: buttonTiming
   m_TagString: Untagged
@@ -426,9 +427,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mBenchManager: {fileID: 0}
   _mMaxTimeFadeOut: 3
+  _mVFXScaleUp: {fileID: 6946697609774946393}
   _StopTorus: 1
+  scaleUpDuration: 0.5
+  _mSpriteRenderer: {fileID: 15716378913150138}
+  _mTorusSpriteRenderer: {fileID: 5555450955114174553}
   _Number: {fileID: 8515790817402934522}
-  _mChangeSpawn: {fileID: 0}
   _mMaxScale: 1
   _mMinTimeForClick: 0.38
   _mPerfectTiming: 0.68
@@ -528,3 +532,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6946697609774946393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4409378949257764596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b51b89ad8563c2b4788e7b87281d2bb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleUpDuration: 0.5
+  scaleDownDuration: 0.5

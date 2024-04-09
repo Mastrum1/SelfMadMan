@@ -17,6 +17,8 @@ public class GetBenchManager : MiniGameManager
 
     [SerializeField] private List<CircleCollider2D> _mButtonsCollider;
 
+    [SerializeField] private List<GameObject> _mButtonsTorus;
+
     [SerializeField] private List<TextMeshProUGUI> _mButtonsText;
 
     [SerializeField] private BoxCollider2D _mSpawnBounds;
@@ -113,7 +115,7 @@ public class GetBenchManager : MiniGameManager
             {
                 continue;
             }
-            if (!_mButtonsScript[i].StopTorus && _mButtons[i].activeSelf)
+            if (_mButtons[i].activeSelf)
             {
                 if (_mButtonsCollider[_mIndexToActivate].transform.position.x - _mButtonsCollider[_mIndexToActivate].bounds.extents.x <= _mButtonsCollider[i].transform.position.x + _mButtonsCollider[i].bounds.extents.x &&
                     _mButtonsCollider[_mIndexToActivate].transform.position.x - _mButtonsCollider[_mIndexToActivate].bounds.extents.x >= _mButtonsCollider[i].transform.position.x - _mButtonsCollider[i].bounds.extents.x &&
@@ -160,6 +162,7 @@ public class GetBenchManager : MiniGameManager
             _mButtonsText[_mIndexToActivate].enabled = true;
             _mButtonsScript[_mIndexToActivate].Torus.GetComponent<SpriteRenderer>().enabled = true;
             _mButtonsScript[_mIndexToActivate].StopTorus = false;
+            _mButtonsTorus[_mIndexToActivate].SetActive(true);
         }
     }
 
