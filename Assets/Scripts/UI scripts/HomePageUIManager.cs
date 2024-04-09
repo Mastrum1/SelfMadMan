@@ -14,7 +14,7 @@ public class HomePageUIManager : MonoBehaviour
     private string _mTwitterURL = "https://twitter.com/selfmadman_";
     private string _mInstagramURL = "https://www.instagram.com/selfmadman_/";
     private string _mTiktokURL = "https://www.tiktok.com/@selfmadman._?_t=8kpgaAFiNd2&_r=1";
-    private string _mYoutubeURL = "https://www.youtube.com/@Selfmadman_";
+    private string _mLinkedInURL = "https://www.linkedin.com/in/chad-motivation-1930ab2b7/";
     private string _mInternetSite = "https://selfmadman.fr/";
 
     public void SetOnOff(GameObject obj)
@@ -25,10 +25,6 @@ public class HomePageUIManager : MonoBehaviour
             foreach (var c in _mMenuUI)
             {
                 c.SetActive(false);
-            }
-            foreach (var c in _mIcons)
-            {
-                c.enabled = true;
             }
         obj.SetActive(true);
     }
@@ -69,8 +65,8 @@ public class HomePageUIManager : MonoBehaviour
             case "Insta":
                 Application.OpenURL(_mInstagramURL);
                 break;
-            case "Youtube":
-                Application.OpenURL(_mYoutubeURL);
+            case "LinkedIn":
+                Application.OpenURL(_mLinkedInURL);
                 break;
             case "InternetSite":
                 Application.OpenURL(_mInternetSite);

@@ -12,6 +12,7 @@ public class mySceneManager : MonoBehaviour
 
     [Scene] public string WinScreen;
     [Scene] public string FasterScreen;
+    [Scene] public string HomeScreen;
 
     private string _mSceneName;
     private MinigameScene _mMinigameScene;
@@ -62,6 +63,12 @@ public class mySceneManager : MonoBehaviour
     {
         SceneManager.LoadScene(FasterScreen, LoadSceneMode.Additive);
     }
+
+    public void LoadHomeScreen()
+    {
+        SceneManager.LoadScene(HomeScreen, LoadSceneMode.Additive);
+    }
+
 
     public void RandomGameChoice()
     {
