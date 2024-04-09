@@ -107,7 +107,7 @@ public class GetBenchManager : MiniGameManager
         bool ChangeSpawn = false;
         _mButtons[_mIndexToActivate].SetActive(true);
         CircleCollider2D collider = _mButtons[_mIndexToActivate].GetComponent<CircleCollider2D>();
-        for (int i = 0; i < _mButtons.Count - 1; i++)
+        for (int i = 0; i < _mButtons.Count; i++)
         {
             if (i == _mIndexToActivate)
             {
@@ -184,6 +184,11 @@ public class GetBenchManager : MiniGameManager
                     _mNumberToShow++;
                     _mButtonsText[_mIndexToActivate].text = _mNumberToShow.ToString();
                     _mButtons[_mIndexToActivate].SetActive(true);
+                    _mButtons[_mIndexToActivate].transform.position = new Vector3(
+                    Random.Range(_mMinX, _mMaxX),
+                    Random.Range(_mMinY, _mMaxY),
+                    -2
+                    );
                     CheckCollide();
                 }
                 yield return new WaitForSeconds(_mCircleSpawnTime);
