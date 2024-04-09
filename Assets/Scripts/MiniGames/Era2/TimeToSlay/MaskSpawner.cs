@@ -18,7 +18,6 @@ public class MaskSpawner : MonoBehaviour
     private int _mObjectRemain;
     private int _mObjectTotal;
     private int _mPercent;
-    //private float _mObjectRemain
     private List<GameObject> _mObjectsToClean;
     void Start()
     {
@@ -37,8 +36,8 @@ public class MaskSpawner : MonoBehaviour
                         GameObject mObject = Instantiate(_mObjectMask, position, Quaternion.identity);
                     mObject.transform.SetParent(_mParent.transform, true);
                     mObject.GetComponent<Mask>().Remove += DeleteMask;
+                    mObject.SetActive(true);
                     _mObjectsToClean.Add(mObject);
-                    
                 }
             }
         }
