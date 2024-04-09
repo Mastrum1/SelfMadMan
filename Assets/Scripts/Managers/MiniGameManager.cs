@@ -12,7 +12,7 @@ public class MiniGameManager : MonoBehaviour
 
     protected int Amount { get; set; }
     
-    private bool _gameIsPlaying;
+    protected bool _gameIsPlaying;
 
     [SerializeField] public Timer _mTimer;
     [SerializeField] private VideoPlayer _cash;

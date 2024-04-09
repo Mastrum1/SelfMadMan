@@ -3722,7 +3722,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1128004926}
         m_TargetAssemblyTypeName: HomePageUIManager, Assembly-CSharp
-        m_MethodName: SingleSetOnOff
+        m_MethodName: SetOnOff
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1840910067}
@@ -5103,6 +5103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mMoney: {fileID: 1128004924}
+  _SpinWheel: []
   _mShopItems:
   - {fileID: 11400000, guid: 7218c248da19f6a4fae7fd5a585ea7a7, type: 2}
   - {fileID: 11400000, guid: f530670c0ce8c9e41a47a4a4e84084a1, type: 2}
@@ -5551,7 +5552,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SceneName: MinigamesChoice
-  _mEra: 0
 --- !u!114 &1128004924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5565,7 +5565,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mCurrentMoney: 0
-  _mShopManager: {fileID: 1027901000}
 --- !u!114 &1128004926
 MonoBehaviour:
   m_ObjectHideFlags: 0
