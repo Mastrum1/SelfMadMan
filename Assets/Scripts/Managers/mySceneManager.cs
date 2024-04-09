@@ -31,17 +31,22 @@ public class mySceneManager : MonoBehaviour
 
     public void SetScene(string scene, LoadMode mode)
     {
-        _mSceneName = scene;
-        switch (mode)
+        
+        if (SceneManager.sceneCount < 4)
         {
-            case LoadMode.SINGLE:
-                SceneManager.LoadScene(_mSceneName, LoadSceneMode.Single);
-                break;
-            case LoadMode.ADDITIVE:
-                SceneManager.LoadScene(_mSceneName, LoadSceneMode.Additive);
-                break;
+            _mSceneName = scene;
+            switch (mode)
+            {
+                case LoadMode.SINGLE:
+                    SceneManager.LoadScene(_mSceneName, LoadSceneMode.Single);
+                    break;
+                case LoadMode.ADDITIVE:
+                    SceneManager.LoadScene(_mSceneName, LoadSceneMode.Additive);
+                    break;
+            }
         }
-
+        else
+            Debug.Log("Tried to duplicate scene");
     }
 
     public void UnloadCurrentScene()
