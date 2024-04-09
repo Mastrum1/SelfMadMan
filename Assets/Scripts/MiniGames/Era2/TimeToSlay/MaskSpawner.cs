@@ -15,6 +15,7 @@ public class MaskSpawner : MonoBehaviour
     [SerializeField] float _mSpacing = 0.1f;
     [SerializeField] BrushMovement _mBrush;
     [SerializeField] TMP_Text _mPercentageText;
+    [SerializeField] TMP_Text _mPercentageBackText;
     private int _mObjectRemain;
     private int _mObjectTotal;
     private int _mPercent;
@@ -55,7 +56,9 @@ public class MaskSpawner : MonoBehaviour
     void Update()
     {
         _mPercent = (_mObjectTotal - _mObjectRemain ) * 100 / _mObjectTotal;
-        _mPercentageText.text = _mPercent.ToString() + " %";
+        _mPercentageText.text = _mPercent.ToString() + "%";
+        _mPercentageBackText.text = _mPercent.ToString() + "%";
+        
         if (_mPercent == 100)
             OnCompleted?.Invoke();
     }

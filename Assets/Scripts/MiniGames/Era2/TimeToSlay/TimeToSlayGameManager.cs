@@ -6,6 +6,7 @@ public class TimeToSlayGameManager : MiniGameManager
 {
     [SerializeField] MaskSpawner _mMaskSpawner;
     [SerializeField] BrushMovement _mBrushMovement;
+    [SerializeField] GameObject _mFoam;
     private bool _mIsEnd;
 
     void Start()
@@ -34,6 +35,7 @@ public class TimeToSlayGameManager : MiniGameManager
     void OnCompleted()
     {
         EndGame(true);
+        _mFoam.SetActive(true);
     }
 
     void OnDestroy()
