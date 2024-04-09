@@ -19,8 +19,6 @@ public class TapWithTimer : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI _Number;
 
-    [SerializeField] private ChangeSpawn _mChangeSpawn;
-
     [SerializeField] private float _mMaxScale = 2.5f;
 
     [SerializeField] private float _mMinTimeForClick = 0.8f;
@@ -39,7 +37,6 @@ public class TapWithTimer : MonoBehaviour
     void OnEnable()
     {
         _mTorus.transform.localScale = new Vector3(_mMaxScale, _mMaxScale, _mMaxScale);
-        _mChangeSpawn.enabled = true;
         _Number.color = new Color(_Number.color.r, _Number.color.g, _Number.color.b, 255);
         gameObject.GetComponent<SpriteRenderer>().color = new Color(gameObject.GetComponent<SpriteRenderer>().color.r, gameObject.GetComponent<SpriteRenderer>().color.g, gameObject.GetComponent<SpriteRenderer>().color.b, 255);
         _mTorus.GetComponent<SpriteRenderer>().color = new Color(_mTorus.GetComponent<SpriteRenderer>().color.r, _mTorus.GetComponent<SpriteRenderer>().color.g, _mTorus.GetComponent<SpriteRenderer>().color.b, 255);

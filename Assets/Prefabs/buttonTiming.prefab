@@ -334,7 +334,6 @@ GameObject:
   - component: {fileID: 15716378913150138}
   - component: {fileID: 491009848461839725}
   - component: {fileID: 2317051105271876901}
-  - component: {fileID: 2567393454158139450}
   - component: {fileID: 7125997283650389834}
   - component: {fileID: 8039306362533089082}
   m_Layer: 0
@@ -427,9 +426,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mBenchManager: {fileID: 0}
   _mMaxTimeFadeOut: 3
-  StopTorus: 0
+  _StopTorus: 1
   _Number: {fileID: 8515790817402934522}
-  _mChangeSpawn: {fileID: 2567393454158139450}
+  _mChangeSpawn: {fileID: 0}
   _mMaxScale: 1
   _mMinTimeForClick: 0.38
   _mPerfectTiming: 0.68
@@ -472,19 +471,6 @@ CircleCollider2D:
   m_Offset: {x: 0.023115873, y: 0}
   serializedVersion: 2
   m_Radius: 1.6961658
---- !u!114 &2567393454158139450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4409378949257764596}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bac689672c5ce4144b0500c888a421a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mSpawnBounds: {fileID: 0}
 --- !u!114 &7125997283650389834
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -21,6 +21,12 @@ public class GetBenchManager : MiniGameManager
 
     [SerializeField] private BoxCollider2D _mSpawnBounds;
 
+    private float _mMinX;
+    private float _mMinY;
+    private float _mMaxX;
+    private float _mMaxY;
+
+
     private bool _mIsSpawning = false;
 
     private int _mNumberToShow;
@@ -36,6 +42,10 @@ public class GetBenchManager : MiniGameManager
     private void Start()
     {
         _mInteractableManager.OnGameEnd += OnGameEnd;
+        _mMinX = _mSpawnBounds.bounds.min.x;
+        _mMinY = _mSpawnBounds.bounds.min.y;
+        _mMaxX = _mSpawnBounds.bounds.max.x;
+        _mMaxY = _mSpawnBounds.bounds.max.y;
     }
 
     void OnGameEnd(bool win)
@@ -95,7 +105,8 @@ public class GetBenchManager : MiniGameManager
     {
         _mIsSpawning = true;
         bool ChangeSpawn = false;
-
+        _mButtons[_mIndexToActivate].SetActive(true);
+        CircleCollider2D collider = _mButtons[_mIndexToActivate].GetComponent<CircleCollider2D>();
         for (int i = 0; i < _mButtons.Count - 1; i++)
         {
             if (i == _mIndexToActivate)
@@ -104,11 +115,27 @@ public class GetBenchManager : MiniGameManager
             }
             if (!_mButtonsScript[i].StopTorus && _mButtons[i].activeSelf)
             {
-                CircleCollider2D collider = _mButtons[_mIndexToActivate].GetComponent<CircleCollider2D>();
-                if (collider.transform.position.x - collider.bounds.extents.x < _mButtonsCollider[i].transform.position.x + _mButtonsCollider[i].bounds.extents.x && collider.transform.position.x - collider.bounds.extents.x > _mButtonsCollider[i].transform.position.x - _mButtonsCollider[i].bounds.extents.x ||
-                    collider.transform.position.x + collider.bounds.extents.x < _mButtonsCollider[i].transform.position.x + _mButtonsCollider[i].bounds.extents.x && collider.transform.position.x + collider.bounds.extents.x > _mButtonsCollider[i].transform.position.x - _mButtonsCollider[i].bounds.extents.x ||
-                    collider.transform.position.y - collider.bounds.extents.y < _mButtonsCollider[i].transform.position.y + _mButtonsCollider[i].bounds.extents.y && collider.transform.position.y - collider.bounds.extents.y > _mButtonsCollider[i].transform.position.y - _mButtonsCollider[i].bounds.extents.y ||
-                    collider.transform.position.y + collider.bounds.extents.y < _mButtonsCollider[i].transform.position.y + _mButtonsCollider[i].bounds.extents.y && collider.transform.position.y + collider.bounds.extents.y > _mButtonsCollider[i].transform.position.y - _mButtonsCollider[i].bounds.extents.y)
+                if (_mButtonsCollider[_mIndexToActivate].transform.position.x - _mButtonsCollider[_mIndexToActivate].bounds.extents.x <= _mButtonsCollider[i].transform.position.x + _mButtonsCollider[i].bounds.extents.x &&
+                    _mButtonsCollider[_mIndexToActivate].transform.position.x - _mButtonsCollider[_mIndexToActivate].bounds.extents.x >= _mButtonsCollider[i].transform.position.x - _mButtonsCollider[i].bounds.extents.x &&
+                    _mButtonsCollider[_mIndexToActivate].transform.position.y + _mButtonsCollider[_mIndexToActivate].bounds.extents.y <= _mButtonsCollider[i].transform.position.y + _mButtonsCollider[i].bounds.extents.y &&
+                    _mButtonsCollider[_mIndexToActivate].transform.position.y + _mButtonsCollider[_mIndexToActivate].bounds.extents.y >= _mButtonsCollider[i].transform.position.y - _mButtonsCollider[i].bounds.extents.y
+                    ||
+
+                    _mButtonsCollider[_mIndexToActivate].transform.position.x - _mButtonsCollider[_mIndexToActivate].bounds.extents.x <= _mButtonsCollider[i].transform.position.x + _mButtonsCollider[i].bounds.extents.x &&
+                    _mButtonsCollider[_mIndexToActivate].transform.position.x - _mButtonsCollider[_mIndexToActivate].bounds.extents.x >= _mButtonsCollider[i].transform.position.x - _mButtonsCollider[i].bounds.extents.x &&
+                    _mButtonsCollider[_mIndexToActivate].transform.position.y - _mButtonsCollider[_mIndexToActivate].bounds.extents.y <= _mButtonsCollider[i].transform.position.y + _mButtonsCollider[i].bounds.extents.y &&
+                    _mButtonsCollider[_mIndexToActivate].transform.position.y - _mButtonsCollider[_mIndexToActivate].bounds.extents.y >= _mButtonsCollider[i].transform.position.y - _mButtonsCollider[i].bounds.extents.y
+                    ||
+
+                    _mButtonsCollider[_mIndexToActivate].transform.position.x + _mButtonsCollider[_mIndexToActivate].bounds.extents.x <= _mButtonsCollider[i].transform.position.x + _mButtonsCollider[i].bounds.extents.x &&
+                    _mButtonsCollider[_mIndexToActivate].transform.position.x + _mButtonsCollider[_mIndexToActivate].bounds.extents.x >= _mButtonsCollider[i].transform.position.x - _mButtonsCollider[i].bounds.extents.x &&
+                    _mButtonsCollider[_mIndexToActivate].transform.position.y - _mButtonsCollider[_mIndexToActivate].bounds.extents.y <= _mButtonsCollider[i].transform.position.y + _mButtonsCollider[i].bounds.extents.y &&
+                    _mButtonsCollider[_mIndexToActivate].transform.position.y - _mButtonsCollider[_mIndexToActivate].bounds.extents.y >= _mButtonsCollider[i].transform.position.y - _mButtonsCollider[i].bounds.extents.y
+                    ||
+                    _mButtonsCollider[_mIndexToActivate].transform.position.x + _mButtonsCollider[_mIndexToActivate].bounds.extents.x <= _mButtonsCollider[i].transform.position.x + _mButtonsCollider[i].bounds.extents.x &&
+                    _mButtonsCollider[_mIndexToActivate].transform.position.x + _mButtonsCollider[_mIndexToActivate].bounds.extents.x >= _mButtonsCollider[i].transform.position.x - _mButtonsCollider[i].bounds.extents.x &&
+                    _mButtonsCollider[_mIndexToActivate].transform.position.y + _mButtonsCollider[_mIndexToActivate].bounds.extents.y <= _mButtonsCollider[i].transform.position.y + _mButtonsCollider[i].bounds.extents.y &&
+                    _mButtonsCollider[_mIndexToActivate].transform.position.y + _mButtonsCollider[_mIndexToActivate].bounds.extents.y >= _mButtonsCollider[i].transform.position.y - _mButtonsCollider[i].bounds.extents.y)
                 {
                     ChangeSpawn = true;
                     break;
@@ -118,9 +145,9 @@ public class GetBenchManager : MiniGameManager
         if (ChangeSpawn)
         {
             _mButtons[_mIndexToActivate].transform.position = new Vector3(
-               Random.Range(_mSpawnBounds.bounds.min.x, _mSpawnBounds.bounds.max.x),
-               Random.Range(_mSpawnBounds.bounds.min.y, _mSpawnBounds.bounds.max.y),
-               _mButtons[_mIndexToActivate].transform.position.z
+               Random.Range(_mMinX, _mMaxX),
+               Random.Range(_mMinY, _mMaxY),
+               -2
                );
             CheckCollide();
 
