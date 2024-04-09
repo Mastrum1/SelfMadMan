@@ -27,7 +27,7 @@ public class QuestView : MonoBehaviour
             questContainerScript.QuestDifficulty = quest.Difficulty;
             questContainerScript.Reward.text = quest.Difficulty.reward.ToString();
             questContainerScript.QuestDescription.text = quest.QuestSO.questDescription;
-            questContainerScript.QuestIcon.sprite = quest.QuestSO.questIcon;
+            questContainerScript.QuestIcon.sprite = Resources.Load<Sprite>(quest.Sprite);
             questContainerScript.QuestProgression.fillAmount = (float)quest.CurrentAmount / quest.MaxAmount;
 
             var difficultyValue = (int)quest.Difficulty.difficulty;

@@ -3,9 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using NaughtyAttributes;
-using Unity.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -167,13 +165,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void OnApplicationQuit()
+
+    void OnApplicationFocus(bool hasFocus)
     {
-        _mPlayer.SaveJson();
+        if (!hasFocus)
+        {
+            _mPlayer.SaveJson();
+        }
     }
     private void OnDestroy()
     {
-       // _mQuestManager.OnReward -= AddStars;
+        // _mQuestManager.OnReward -= AddStars;
 
     }
 }

@@ -22,9 +22,9 @@ public class PlayerData
 
     public List<int> UnlockedCinematics = new List<int>();
 
-    public List<QuestManager.Quest> ActiveQuests = new List<QuestManager.Quest>();
+    public List<Player.QuestSave> ActiveQuests = new List<Player.QuestSave>();
 
-    public List<QuestManager.Quest> CompletedQuests = new List<QuestManager.Quest>();
+    public List<Player.QuestSave> CompletedQuests = new List<Player.QuestSave>();
 
     public List<int> QuestUnlocked = new List<int>();
 
@@ -60,9 +60,19 @@ public class PlayerData
 
         Inventory = player.Inventory;
 
-        ActiveQuests = player.ActiveQuests;
+        ActiveQuests = new List<Player.QuestSave>();
 
-        CompletedQuests = player.CompletedQuests;
+        foreach (var item in player.ActiveQuests)
+        {
+            ActiveQuests.Add(new Player.QuestSave(item.QuestSO, item.QuestCompletionState, item.QuestDispo, item.Sprite, item.Difficulty, item.MaxAmount, item.CurrentAmount));
+        }
+
+        CompletedQuests = new List<Player.QuestSave>();
+
+        foreach (var item in player.CompletedQuests)
+        {
+            CompletedQuests.Add(new Player.QuestSave(item.QuestSO, item.QuestCompletionState, item.QuestDispo, item.Sprite, item.Difficulty, item.MaxAmount, item.CurrentAmount));
+        }
 
         QuestUnlocked = player.QuestUnlocked;
     }
