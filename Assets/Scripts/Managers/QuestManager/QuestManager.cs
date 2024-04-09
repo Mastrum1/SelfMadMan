@@ -42,9 +42,6 @@ public class QuestManager : MonoBehaviour
         [SerializeField] private Quests.QuestBaseDispo _questDispo;
         public Quests.QuestBaseDispo QuestDispo { get => _questDispo; set => _questDispo = value; }
 
-        [SerializeField] private string _Sprite;
-        public string Sprite { get => _Sprite; set => _Sprite = value; }
-
         private Quests.Difficulty _difficulty;
         public Quests.Difficulty Difficulty { get => _difficulty; set => _difficulty = value; }
 
@@ -54,12 +51,11 @@ public class QuestManager : MonoBehaviour
         private int _currentAmount;
         public int CurrentAmount { get => _currentAmount; set => _currentAmount = value; }
 
-        public Quest(Quests questSO, CompletionState questCompletionState, Quests.QuestBaseDispo questDispo, string sprite, Quests.Difficulty difficulty, int maxAmount, int currentAmount)
+        public Quest(Quests questSO, CompletionState questCompletionState, Quests.QuestBaseDispo questDispo, Quests.Difficulty difficulty, int maxAmount, int currentAmount)
         {
             QuestSO = questSO;
             QuestCompletionState = questCompletionState;
             QuestDispo = questDispo;
-            Sprite = sprite;
             Difficulty = difficulty;
             MaxAmount = maxAmount;
             CurrentAmount = currentAmount;

@@ -173,6 +173,11 @@ public class GameManager : MonoBehaviour
             _mPlayer.SaveJson();
         }
     }
+
+    void OnApplicationQuit()
+    {
+        _mPlayer.SaveJson();
+    }
     private void OnDestroy()
     {
         // _mQuestManager.OnReward -= AddStars;

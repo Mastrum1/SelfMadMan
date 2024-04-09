@@ -33,7 +33,7 @@ public class Quests : ScriptableObject
     public string questName;
     public int time;
     public string questDescription;
-    //public Sprite questIcon;
+    public Sprite questIcon;
 
     public List<Difficulty> difficulties;
 

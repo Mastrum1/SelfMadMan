@@ -64,14 +64,14 @@ public class PlayerData
 
         foreach (var item in player.ActiveQuests)
         {
-            ActiveQuests.Add(new Player.QuestSave(item.QuestSO, item.QuestCompletionState, item.QuestDispo, item.Sprite, item.Difficulty, item.MaxAmount, item.CurrentAmount));
+            ActiveQuests.Add(new Player.QuestSave(item.QuestSO.ID, item.QuestCompletionState, item.QuestDispo, item.Difficulty, item.MaxAmount, item.CurrentAmount));
         }
 
         CompletedQuests = new List<Player.QuestSave>();
 
         foreach (var item in player.CompletedQuests)
         {
-            CompletedQuests.Add(new Player.QuestSave(item.QuestSO, item.QuestCompletionState, item.QuestDispo, item.Sprite, item.Difficulty, item.MaxAmount, item.CurrentAmount));
+            CompletedQuests.Add(new Player.QuestSave(item.QuestSO.ID, item.QuestCompletionState, item.QuestDispo, item.Difficulty, item.MaxAmount, item.CurrentAmount));
         }
 
         QuestUnlocked = player.QuestUnlocked;
