@@ -11,21 +11,23 @@ public class SceneManaProxy : MonoBehaviour
 
     [Scene] public string SceneName;
 
-    public int Era {  get => _mEra; private set => _mEra = value; }
-    [SerializeField] private int _mEra;
-
     public void ChangeScene()
     {
         if (!mySceneManager.instance)
-            SceneManager.LoadScene(SceneName, LoadSceneMode.Single);
+            SceneManager.LoadScene(SceneName, LoadSceneMode.Additive);
         else if (mySceneManager.instance != null)
-            mySceneManager.instance.SetScene(SceneName, mySceneManager.LoadMode.SINGLE);
+            mySceneManager.instance.SetScene(SceneName, mySceneManager.LoadMode.ADDITIVE);
 
     }
 
     public void StartGame()
     {
         GameManager.instance.OnGameStart();
+    }
+
+    public void RestartGame()
+    {
+        GameManager.instance.OnRestart();
     }
 
     // When mySceneManager is not avaible

@@ -25,7 +25,12 @@ public class GetBenchedInteractableManager : MonoBehaviour
 
     void HandleEndGame(bool win)
     {
+        for (int i = 0; i < _mInteractablesParent.transform.childCount; i++)
+        {
+            _mInteractablesParent.transform.GetChild(i).GetComponent<TapWithTimer>().StopTorus = true;
+        }
         OnGameEnd?.Invoke(win);
+        
     }
     private void OnDestroy()
     {
