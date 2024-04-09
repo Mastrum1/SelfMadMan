@@ -208,7 +208,7 @@ public class Player : MonoBehaviour
             }
 
             //MiniGameSelector.instance.LoadEra(AllEra1, AllEra2, AllEra3);
-            _mQuestManagerInstance.LoadQuests(AllQuest, ActiveQuests);
+            //_mQuestManagerInstance.LoadQuests(AllQuest, ActiveQuests);
         }
 
         else

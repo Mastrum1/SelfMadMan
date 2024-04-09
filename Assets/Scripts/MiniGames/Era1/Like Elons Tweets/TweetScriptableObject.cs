@@ -7,8 +7,10 @@ using UnityEngine;
 public class TweetScriptableObject : ScriptableObject
 {
     public string TweetContent;
+    public string ProfileName;
+    public string Pseudo;
+    public string Date;
     public Sprite ProfilPicture;
-    public int NumberOfRetweets;
-    public int NumberOfComments;
+    public string NumberOfLikes;
     public bool IsElon;
 }

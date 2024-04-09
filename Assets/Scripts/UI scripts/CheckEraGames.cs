@@ -17,52 +17,35 @@ public class CheckEraGames : MonoBehaviour
     [SerializeField] private TMP_Text _mNumberUnlocked;
     [SerializeField] private int _mUnlockedMinigames;
 
-    private void Start()
+    [Header("Minigame Container List")]
+    [SerializeField] private List<CheckEraGamesTemplate> _mMinigameContainerList;
+
+    private void OnEnable()
     {
-        _mUnlockedMinigames = 0;
         CheckEra();
     }
 
-    private void Update()
+    public void Checking()
     {
-        if (_mCurrentEra == GameManager.instance.Era)
-            return;
-        else
-        {
-            _mUnlockedMinigames = 0;
-            _mCurrentEra = GameManager.instance.Era;
-            CheckEra();
-        }
+        _mUnlockedMinigames = 0;
+        _mCurrentEra = GameManager.instance.Era;
+        CheckEra();
     }
 
-    public void CheckUnlockedMinigames(List<MinigameScene> minigame, GameObject container)
+    public void CheckUnlockedMinigames(List<MinigameScene> minigame)
     {
-        for (int i = 0; i < minigame.Count; i++) 
+        for (int i = 0; i < minigame.Count; i++)
         {
-            GameObject Templates = Instantiate(_mGameContainerPrefab, container.transform);
-            CheckEraGamesTemplate TemplateInfos = Templates.GetComponent<CheckEraGamesTemplate>();
-            TemplateInfos.EraGameName.text = minigame[i].SceneName;
-            //TemplateInfos.EraGameIcon.sprite = minigame[i].SceneIcon;
-
+            _mMinigameContainerList[i].EraGameName.text = minigame[i].SceneName;
+            Debug.Log("Current index : " + i);
+            //minigameContainerScript.EraGameIcon.sprite = minigame[i].Icon;
             if (minigame[i].Locked)
             {
-                TemplateInfos.GameLocked = false;
-                TemplateInfos.EraGameBorder.sprite = TemplateInfos.EraGameBorderUnlocked;
+                _mMinigameContainerList[i].EraGameBorder.sprite = _mMinigameContainerList[i].EraGameBorderUnlocked;
                 _mUnlockedMinigames++;
             }
             else
-            {
-                TemplateInfos.GameLocked = true;
-                TemplateInfos.EraGameBorder.sprite = TemplateInfos.EraGameBorderLocked;
-            }
-        }
-    }
-
-    public void DestroyChildren()
-    {
-        foreach (Transform child in _mMinigameContainer.transform)
-        {
-            Destroy(child.gameObject);
+                _mMinigameContainerList[i].EraGameBorder.sprite = _mMinigameContainerList[i].EraGameBorderLocked;
         }
     }
 
@@ -71,21 +54,16 @@ public class CheckEraGames : MonoBehaviour
         switch (_mCurrentEra)
         {
             case 0:
-                DestroyChildren();
-                CheckUnlockedMinigames(MiniGameSelector.instance.Era1, _mMinigameContainer);
-                Debug.Log("Loading Era 1");
+                CheckUnlockedMinigames(MiniGameSelector.instance.Era1);
                 break;
             case 1:
-                DestroyChildren();
-                CheckUnlockedMinigames(MiniGameSelector.instance.Era2, _mMinigameContainer);
-                Debug.Log("Loading Era 2");
+                CheckUnlockedMinigames(MiniGameSelector.instance.Era2);
                 break;
             case 2:
-                DestroyChildren();
-                CheckUnlockedMinigames(MiniGameSelector.instance.Era3, _mMinigameContainer);
-                Debug.Log("Loading Era 3");
+                CheckUnlockedMinigames(MiniGameSelector.instance.Era3);
                 break;
         }
+
         _mNumberUnlocked.text = _mUnlockedMinigames.ToString();
     }
 }

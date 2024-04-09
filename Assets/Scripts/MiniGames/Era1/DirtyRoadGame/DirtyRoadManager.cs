@@ -4,13 +4,13 @@ public class DirtyRoadManager : MiniGameManager
 {
     [SerializeField] private DirtyRoadInteractableManager _interactableManager;
     [SerializeField] private GameObject _dirtyAd;
-    [SerializeField] private int _numOfAds;
+    private int _numOfAds;
 
     private void Start()
     {
         _interactableManager.OnGameEnd += OnGameEnd;
         _interactableManager.OnSpawnMoreAds += SpawnAds;
-        if (_numOfAds <= 0) _numOfAds = 4;
+        _numOfAds = GameManager.instance.FasterLevel + 2;
         _interactableManager.EnableAds(_numOfAds);
     }
 

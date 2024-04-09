@@ -10,7 +10,7 @@ public class ContentManager : MonoBehaviour
     [Header("Content Viewport")]
     [SerializeField] private Image _mBaseImage;
     [SerializeField] private Image _mJames;
-    [SerializeField] private List<Sprite> _mImages;
+    [SerializeField] private List<Sprite> _mSprites;
     [SerializeField] private List<Sprite> _mJamesForms;
 
     [Header("Navigation Dots")]
@@ -34,7 +34,7 @@ public class ContentManager : MonoBehaviour
     void InitializeDots()
     {
         // Create dots based on the number of content panels
-        for (int i = 0; i < _mImages.Count; i++)
+        for (int i = 0; i < _mSprites.Count; i++)
         {
             GameObject dot = Instantiate(_mDotPrefab, _mDotsContainer.transform);
             Image dotImage = dot.GetComponent<Image>();
@@ -59,20 +59,19 @@ public class ContentManager : MonoBehaviour
 
     public void SwapContent(int i)
     {
-        _mCurrentIndex = (_mCurrentIndex + i + _mImages.Count) % _mImages.Count;
+        _mCurrentIndex = (_mCurrentIndex + i + _mSprites.Count) % _mSprites.Count;
         GameManager.instance.Era = _mCurrentIndex + 1;
         ShowContent();
         UpdateDots();
-        Debug.Log(_mCurrentIndex);
     }
 
     void ShowContent()
     {
         // Activate the current panel and deactivate others
-        for (int i = 0; i < _mImages.Count; i++)
+        for (int i = 0; i < _mSprites.Count; i++)
         {
             bool isActive = i == _mCurrentIndex;
-            _mBaseImage.sprite = _mImages[_mCurrentIndex];
+            _mBaseImage.sprite = _mSprites[_mCurrentIndex];
 
             // Update dot visibility and color based on the current active content
             Image dotImage = _mDotsContainer.transform.GetChild(i).GetComponent<Image>();
