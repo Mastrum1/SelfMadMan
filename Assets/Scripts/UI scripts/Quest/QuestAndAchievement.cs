@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class QuestAndAchievement : MonoBehaviour
@@ -11,6 +8,4 @@ public class QuestAndAchievement : MonoBehaviour
     {
         _mQuestView.SetActive(isEnabled);
     }
-
-    
 }

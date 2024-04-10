@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-#if UNITY_EDITOR
-using UnityEditor.Localization.Platform.Android;
-#endif
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -63,7 +60,7 @@ public class QuestManager : MonoBehaviour
     }
 
     [SerializeField] private List<Quest> _questsList;
-    private readonly List<Quest> _selectedQuestsList = new List<Quest>();
+    private List<Quest> _selectedQuestsList = new List<Quest>();
     public List<Quest> SelectedQuests => _selectedQuestsList;
 
     private void Awake()
@@ -78,16 +75,15 @@ public class QuestManager : MonoBehaviour
     public void LoadQuests(List<Quest> quests, List<Quest> ActiveQuests)
     {
         _questsList = quests;
-        if (ActiveQuests.Count < 3)
+        _selectedQuestsList = ActiveQuests;
+
+        while (ActiveQuests.Count < 3)
         {
-            do
-            {
-                SetNewActiveQuest();
-            } while (ActiveQuests.Count < 3);
-        }
+            SetNewActiveQuest();
+        } 
     }
 
-    bool CheckForActiveQuest()
+    private bool CheckForActiveQuest()
     {
         if (SelectedQuests.Count < 3)
         {
@@ -107,11 +103,12 @@ public class QuestManager : MonoBehaviour
         return SelectedQuests.Count is 3;
     }
 
-    void SetNewActiveQuest()
+    private void SetNewActiveQuest()
     {
         if (SelectedQuests.Count >= 3) return;
 
         var randomQuest = Random.Range(0, _questsList.Count);
+        Debug.Log("RandomQuest " + randomQuest);
         var randomDifficulty = Random.Range(0, 2);
 
         if (_questsList[randomQuest].QuestDispo != Quests.QuestBaseDispo.Unlocked ||

@@ -248,6 +248,8 @@ public class Player : MonoBehaviour
 
     public void AddActiveQuests(QuestManager.Quest quest)
     {
+        if (ActiveQuests.Contains(quest)) return;
+
         ActiveQuests.Add(quest);
         RemoveUnlockQuest(quest.QuestSO.ID);
     }

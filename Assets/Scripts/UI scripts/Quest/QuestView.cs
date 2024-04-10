@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class QuestView : MonoBehaviour
@@ -7,16 +9,18 @@ public class QuestView : MonoBehaviour
     private QuestManager _mQuestManager;
 
     [SerializeField] private List<GameObject> _quests;
+
     private void OnEnable()
     {
         _mQuestManager = QuestManager.instance;
-
+        
         LoadQuestContainer();
     }
-    
+
     private void LoadQuestContainer()
     {
         var questCount = _mQuestManager.SelectedQuests.Count;
+        Debug.Log(_mQuestManager.SelectedQuests.Count);
         for (var i = 0; i < questCount; i++)
         {
             var quest = _mQuestManager.SelectedQuests[i];
