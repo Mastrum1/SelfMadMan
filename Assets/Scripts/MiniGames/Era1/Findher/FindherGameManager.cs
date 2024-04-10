@@ -56,8 +56,9 @@ public class FindherGameManager : MiniGameManager
     private bool _mIsAd = false;
     private int _index = 0;
 
-    private void Awake()
-    {
+    public override void Awake()
+    {   
+        base.Awake();
         ShowProfile();
     }
 
