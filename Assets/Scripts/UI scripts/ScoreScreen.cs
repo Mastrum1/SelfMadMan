@@ -14,8 +14,8 @@ public class ScoreScreen : MonoBehaviour
     [SerializeField] private GameObject _mHighscoreTag;
     [SerializeField] private TMP_Text _mscoreTexts;
     [SerializeField] private TMP_Text _mMnigameCountTexts;
-    [SerializeField] private TMP_Text[] _mTimerTexts;
-    [SerializeField] private TMP_Text[] _bestScore;
+    [SerializeField] private TMP_Text _mTimerTexts;
+    [SerializeField] private TMP_Text _bestScore;
     [SerializeField] private PanelOnClick _mPanelOnClick;
     [SerializeField] private GameObject _mPopup;
 
@@ -74,10 +74,7 @@ public class ScoreScreen : MonoBehaviour
         {
             Debug.Log(Timer.ToString());
             Timer--;
-            foreach (var text in _mTimerTexts)
-            {
-                text.text = Timer.ToString();
-            }
+            _mTimerTexts.text = Timer.ToString();
             yield return new WaitForSeconds(1f);
         }
 
@@ -95,10 +92,8 @@ public class ScoreScreen : MonoBehaviour
                 _mHighscoreTag.SetActive(true);
                 GameManager.instance.Player.UpdateBestScore((int)GameManager.instance.Score);
             }
-            foreach (var text in _bestScore)
-            {
-                text.text = "BEST : " + GameManager.instance.Player.BestScore.ToString();
-            }
+            _bestScore.text = "BEST : " + GameManager.instance.Player.BestScore.ToString();
+
         }
     }
     public void ResetScreen()
