@@ -17,6 +17,9 @@ public class QuestContainer : MonoBehaviour
 
     public Image QuestIcon { get => _mQuestIcon; set => _mQuestIcon = value; }
     [SerializeField] private Image _mQuestIcon;
+    
+    public Image QuestColor { get => _mQuestColor; set => _mQuestColor = value; }
+    [SerializeField] private Image _mQuestColor;
 
     public Image QuestProgression { get => _mQuestProgression; set => _mQuestProgression = value; }
     [SerializeField] private Image _mQuestProgression;
