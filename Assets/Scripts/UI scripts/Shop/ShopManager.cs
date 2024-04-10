@@ -14,7 +14,7 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private ItemsSO[] _mFurnitures;
     [SerializeField] private ItemsSO[] _mPowerUp;
 
-    [Header("Coins Template")]
+    [Header("Shop Template")]
     [SerializeField] private List<ShopTemplate> _mCoinsTemplates;
     [SerializeField] private List<ShopTemplate> _mFurnituresTemplates;
 
@@ -27,23 +27,34 @@ public class ShopManager : MonoBehaviour
     private void Start()
     {
         LoadAllPanels();
-        //CheckPurchasable();
+        CheckPurchasable();
     }
 
-    /*public void CheckPurchasable()
+    public void CheckPurchasable()
     {
-        *//*CheckPurchasablePerType(_mShopItems);
-        CheckPurchasablePerType(_mFurnitures);
-        CheckPurchasablePerType(_mPowerUp);*//*
-    }*/
+        CheckPurchasableCoins(_mCoins);
+    }
 
-    /*public void CheckPurchasablePerType(ItemsSO[] item)
+    public void CheckPurchasableCoins(ItemsSO[] item)
     {
         for (int i = 0; i < item.Length; i++)
         {
-            
+            if (_mMoney.CurrentMoney >= item[i].Cost)
+            {
+                Color newColor = _mCoinsTemplates[i].PurchaseBox.color;
+                newColor.a = 1f;
+                _mCoinsTemplates[i].PurchaseBox.color = newColor;
+                _mCoinsTemplates[i].TemplateBox.enabled = true;
+            }
+            else
+            {
+                Color newColor = _mCoinsTemplates[i].PurchaseBox.color;
+                newColor.a = 0.5f;
+                _mCoinsTemplates[i].PurchaseBox.color = newColor;
+                _mCoinsTemplates[i].TemplateBox.enabled = false;
+            }
         }
-    }*/
+    }
 
     public void LoadAllPanels()
     {
@@ -62,16 +73,15 @@ public class ShopManager : MonoBehaviour
                 _mCoinsTemplates[i].Type = item[i].Type;
                 CoinsSO coinSO = (CoinsSO)item[i];
                 _mCoinsTemplates[i].Amount.text = coinSO.Amount.ToString();
-                
             }
         }
     }
 
-   public void PurchaseItem(ItemsSO coin) 
+    public void PurchaseItem(ItemsSO item) 
     {
-        if (ItemsSO.TYPE.COINS == coin.Type)
+        if (ItemsSO.TYPE.COINS == item.Type)
         {
-            CoinsSO coinSO = (CoinsSO)coin;
+            CoinsSO coinSO = (CoinsSO)item;
             _mMoney.AddMoney(coinSO.Amount);
         }
     }
