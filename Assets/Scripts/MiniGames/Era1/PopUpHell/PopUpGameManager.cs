@@ -16,7 +16,7 @@ public class PopUpGameManager : MiniGameManager
     public void  OnDownload(GameObject button)
     {
         if (!spawner.IsActivePopUp()) {
-            button.SetActive(false);
+            //button.SetActive(false);
             EndMiniGame(true, miniGameScore);
         }
     }
