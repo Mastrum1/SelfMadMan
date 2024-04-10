@@ -10,19 +10,13 @@ public class ShopManager : MonoBehaviour
 
     [Header("Item Shop SO")]
     [SerializeField] private Items[] _SpinWheel;
-    [SerializeField] private ItemsSO[] _mCoins;
+    [SerializeField] private CoinsSO[] _mCoins;
     [SerializeField] private ItemsSO[] _mFurnitures;
     [SerializeField] private ItemsSO[] _mPowerUp;
 
-    [Header("Coins Template")]
+    [Header("Shop Template")]
     [SerializeField] private List<ShopTemplate> _mCoinsTemplates;
     [SerializeField] private List<ShopTemplate> _mFurnituresTemplates;
-    /*[Header("Templates Panels")]
-    [SerializeField] private GameObject _mSpinWheelContainer;
-    [SerializeField] private GameObject _mTemplateContainer;
-    [SerializeField] private GameObject _mShopFurnituresContainer;
-    [SerializeField] private GameObject _mShopPowerUpContainer;
-    [SerializeField] private GameObject _mTemplatePrefab;*/
 
     private void Awake()
     {
@@ -38,72 +32,57 @@ public class ShopManager : MonoBehaviour
 
     public void CheckPurchasable()
     {
-        /*CheckPurchasablePerType(_mShopItems, _mTemplateContainer);
-        CheckPurchasablePerType(_mFurnitures, _mShopFurnituresContainer);
-        CheckPurchasablePerType(_mPowerUp, _mShopPowerUpContainer);*/
+        CheckPurchasableCoins(_mCoins);
     }
 
-    public void CheckPurchasablePerType(ItemsSO[] item, GameObject container)
+    public void CheckPurchasableCoins(ItemsSO[] item)
     {
         for (int i = 0; i < item.Length; i++)
         {
-            ShopTemplate TemplateInfos = container.transform.GetChild(i).GetComponent<ShopTemplate>();
             if (_mMoney.CurrentMoney >= item[i].Cost)
             {
-                Color newColor = TemplateInfos.PurchaseBox.color;
+                Color newColor = _mCoinsTemplates[i].PurchaseBox.color;
                 newColor.a = 1f;
-                TemplateInfos.PurchaseBox.color = newColor;
+                _mCoinsTemplates[i].PurchaseBox.color = newColor;
+                _mCoinsTemplates[i].TemplateBox.enabled = true;
             }
-            else if (_mMoney.CurrentMoney < item[i].Cost)
+            else
             {
-                Color newColor = TemplateInfos.PurchaseBox.color;
+                Color newColor = _mCoinsTemplates[i].PurchaseBox.color;
                 newColor.a = 0.5f;
-                TemplateInfos.PurchaseBox.color = newColor;
+                _mCoinsTemplates[i].PurchaseBox.color = newColor;
+                _mCoinsTemplates[i].TemplateBox.enabled = false;
             }
         }
-    }
-    
-    public void PurchaseItem(Items[] item, int index, int cost)
-    {
-        if (_mMoney.CurrentMoney >= cost)
-        {
-            _mMoney.CurrentMoney = _mMoney.CurrentMoney -= cost;
-            CheckPurchasable() ;
-            Debug.Log("Remaining coins: " + _mMoney.CurrentMoney);
-        }
-        else
-        {
-            Debug.Log("Insufficient coins to purchase item at index: " + index);
-        }
-    }
-
-    public void OnImageClicked(Items[] item, int index, int cost)
-    {
-        PurchaseItem(item, index, cost);
     }
 
     public void LoadAllPanels()
     {
         LoadPanels(_mCoins);
-        LoadPanels(_mFurnitures);
-        LoadPanels(_mPowerUp);
     }
 
     public void LoadPanels(ItemsSO[] item)
     {
         for (int i = 0; i < item.Length; i++) 
         {
-            _mCoinsTemplates[i].TitleText.text = item[i].name;
-            _mCoinsTemplates[i].CostText.text = item[i].Cost.ToString();
-            _mCoinsTemplates[i].ImageItem.sprite = item[i].Icon;
-            _mCoinsTemplates[i].Type = item[i].Type;
-
-            /*if (item[i] is Coins)
+            if (item[i].Type == ItemsSO.TYPE.COINS)
             {
-                // Cast the item to Coins type to access the Amount property
-                Coins coinItem = (Coins)item[i];
-                _mCoinsTemplates[i].Amount.text = coinItem.Amount.ToString();
-            }*/
+                _mCoinsTemplates[i].TitleText.text = item[i].name;
+                _mCoinsTemplates[i].CostText.text = item[i].Cost.ToString();
+                _mCoinsTemplates[i].ImageItem.sprite = item[i].Icon;
+                _mCoinsTemplates[i].Type = item[i].Type;
+                CoinsSO coinSO = (CoinsSO)item[i];
+                _mCoinsTemplates[i].Amount.text = coinSO.Amount.ToString();
+            }
+        }
+    }
+
+    public void PurchaseItem(ItemsSO item) 
+    {
+        if (ItemsSO.TYPE.COINS == item.Type)
+        {
+            CoinsSO coinSO = (CoinsSO)item;
+            _mMoney.AddMoney(coinSO.Amount);
         }
     }
 }
