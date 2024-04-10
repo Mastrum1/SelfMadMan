@@ -34,8 +34,14 @@ public class TimeToSlayGameManager : MiniGameManager
 
     void OnCompleted()
     {
-        EndGame(true);
         _mFoam.SetActive(true);
+        StartCoroutine(Win());
+    }
+
+    IEnumerator Win()
+    {
+        yield return new WaitForSeconds(0.5f);
+        EndGame(true);
     }
 
     void OnDestroy()
