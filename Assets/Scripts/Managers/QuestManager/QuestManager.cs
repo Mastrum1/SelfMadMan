@@ -117,7 +117,7 @@ public class QuestManager : MonoBehaviour
         var temp = _questsList[randomQuest];
         temp.Difficulty = temp.QuestSO.difficulties[randomDifficulty];
         temp.MaxAmount = temp.Difficulty.amount;
-        temp.CurrentAmount = 3;
+        temp.CurrentAmount = 0;
         SelectedQuests.Add(temp);
 
         OnAddActiveQuest?.Invoke(temp);
