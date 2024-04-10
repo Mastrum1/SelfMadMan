@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1010335928497963446}
   - component: {fileID: 3699729203737973389}
   - component: {fileID: 2012955190311056230}
-  - component: {fileID: 4838021411539081621}
+  - component: {fileID: 6542784465200720699}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -46,10 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa9b56807f438c149b7f83a5829750a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mPlayer: {fileID: 4838021411539081621}
-  _mScore: 0
+  _mPlayer: {fileID: 6542784465200720699}
   _mHearts: 0
-  FasterScene: 
+  FasterScene: Faster
 --- !u!81 &2012955190311056230
 AudioListener:
   m_ObjectHideFlags: 0
@@ -58,7 +57,7 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3783518028089879279}
   m_Enabled: 1
---- !u!114 &4838021411539081621
+--- !u!114 &6542784465200720699
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70,23 +69,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1fd27820466371439e0ddd51649555c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mMiniGameSelector: {fileID: 0}
-  _mQuestManager: {fileID: 0}
-  _mLevel: 1
+  _mBestScore: 0
+  _mLevel: 0
   _mXp: 0
   _mMoney: 0
-  _mVolumeMusic: 100
-  _mVolumeFX: 100
-  _mLanguage: fr
-  _mAllCinematics:
-  - ID: 0
-    clip: {fileID: 32900000, guid: b9bdeb9c0367c46418a211b955d3ca8d, type: 3}
-  - ID: 1
-    clip: {fileID: 32900000, guid: a1e5f1890b65965448f7ef969bfe7ba2, type: 3}
+  _mVolumeMusic: 0
+  _mVolumeFX: 0
+  _mLanguage: 
+  _mAllCinematics: []
   _mUnlockedCinematics: []
-  _mInventory: []
-  _mItemLocked: []
-  _mFirstQuests: 000000000100000008000000090000000a0000000b0000000c0000000d0000000e0000000f0000001500000016000000
+  _mFirstQuests: 050000000400000006000000
   _mActiveQuests: []
   _mCompletedQuests: []
   _mQuestUnlocked: 
@@ -169,54 +161,6 @@ MonoBehaviour:
   - _questSO: {fileID: 11400000, guid: 545dd826ef0a44d919d1d4c507b890da, type: 2}
     _questCompletionState: 0
     _questDispo: 0
-  _mAllEra1:
-  - _sceneName: FIghtingGame
-    _unlocked: 0
-  - _sceneName: DirtyRoad
-    _unlocked: 0
-  - _sceneName: CleanYourKitchen
-    _unlocked: 0
-  - _sceneName: GetBenched
-    _unlocked: 0
-  - _sceneName: CRYPTO
-    _unlocked: 1
-  - _sceneName: Findher
-    _unlocked: 1
-  - _sceneName: LikeElonsTweets
-    _unlocked: 1
-  - _sceneName: LoadingScreen
-    _unlocked: 1
-  _mAllEra2:
-  - _sceneName: GetTheBus
-    _unlocked: 1
-  - _sceneName: ISaidStop
-    _unlocked: 1
-  - _sceneName: PerfectShot
-    _unlocked: 1
-  - _sceneName: YouReBanned
-    _unlocked: 1
-  - _sceneName: LoadingScreen
-    _unlocked: 1
-  - _sceneName: LoadingScreen
-    _unlocked: 1
-  - _sceneName: LoadingScreen
-    _unlocked: 1
-  - _sceneName: LoadingScreen
-    _unlocked: 1
-  _mAllEra3:
-  - _sceneName: LoadingScreen
-    _unlocked: 1
-  - _sceneName: LoadingScreen
-    _unlocked: 1
-  - _sceneName: LoadingScreen
-    _unlocked: 1
-  - _sceneName: LoadingScreen
-    _unlocked: 1
-  - _sceneName: LoadingScreen
-    _unlocked: 1
-  - _sceneName: LoadingScreen
-    _unlocked: 1
-  - _sceneName: LoadingScreen
-    _unlocked: 1
-  - _sceneName: LoadingScreen
-    _unlocked: 1
+  _mAllEra1: []
+  _mAllEra2: []
+  _mAllEra3: []

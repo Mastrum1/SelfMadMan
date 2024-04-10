@@ -12,6 +12,7 @@ public class mySceneManager : MonoBehaviour
 
     [Scene] public string WinScreen;
     [Scene] public string FasterScreen;
+    [Scene] public string HomeScreen;
 
     private string _mSceneName;
     private MinigameScene _mMinigameScene;
@@ -30,17 +31,22 @@ public class mySceneManager : MonoBehaviour
 
     public void SetScene(string scene, LoadMode mode)
     {
-        _mSceneName = scene;
-        switch (mode)
+        
+        if (SceneManager.sceneCount < 4)
         {
-            case LoadMode.SINGLE:
-                SceneManager.LoadScene(_mSceneName, LoadSceneMode.Single);
-                break;
-            case LoadMode.ADDITIVE:
-                SceneManager.LoadScene(_mSceneName, LoadSceneMode.Additive);
-                break;
+            _mSceneName = scene;
+            switch (mode)
+            {
+                case LoadMode.SINGLE:
+                    SceneManager.LoadScene(_mSceneName, LoadSceneMode.Single);
+                    break;
+                case LoadMode.ADDITIVE:
+                    SceneManager.LoadScene(_mSceneName, LoadSceneMode.Additive);
+                    break;
+            }
         }
-
+        else
+            Debug.Log("Tried to duplicate scene");
     }
 
     public void UnloadCurrentScene()
@@ -62,6 +68,12 @@ public class mySceneManager : MonoBehaviour
     {
         SceneManager.LoadScene(FasterScreen, LoadSceneMode.Additive);
     }
+
+    public void LoadHomeScreen()
+    {
+        SceneManager.LoadScene(HomeScreen, LoadSceneMode.Additive);
+    }
+
 
     public void RandomGameChoice()
     {

@@ -7,48 +7,119 @@ using UnityEngine.UI;
 
 public class ScoreScreen : MonoBehaviour
 {
-    [SerializeField] private Animator _animator;
+    [SerializeField] private Animator _mJamesAnimator;
+    [SerializeField] private Animator _UIAnimator;
     [SerializeField] private Animator _HeartAnimator;
     [SerializeField] private Image _jamesSprite;
-    [SerializeField] private TMP_Text[] _mscoreTexts;
-    [SerializeField] private TMP_Text[] _mMnigameCountTexts;
+    [SerializeField] private GameObject _mHighscoreTag;
+    [SerializeField] private TMP_Text _mscoreTexts;
+    [SerializeField] private TMP_Text _mMnigameCountTexts;
+    [SerializeField] private TMP_Text[] _mTimerTexts;
+    [SerializeField] private TMP_Text[] _bestScore;
+    [SerializeField] private PanelOnClick _mPanelOnClick;
+    [SerializeField] private GameObject _mPopup;
+
+    private int Timer = 5;
+
+    private bool _mPopupClosed = true;
+    private bool _mContinue = false;
     private void Awake()
     {
         GameManager.instance.WinScreenHandle += OnWinScreenDisplay;
+        _mPanelOnClick.OnClick += OnPanelClicked;
     }
 
 
-    void OnWinScreenDisplay(bool won, int era, int hearts)
+    void OnWinScreenDisplay(bool won, int era, int hearts, bool gameOver)
     {
         Debug.Log(hearts);
-        foreach(var text in _mscoreTexts)
-        {
-            text.text = GameManager.instance.DisplayScore();
-        }
-        foreach (var text in _mMnigameCountTexts)
-        {
-            text.text = "GAMES COMPLETED : " + GameManager.instance.MinigameCount.ToString();
-        }
+        _mscoreTexts.text = GameManager.instance.Score.ToString();
+        _mMnigameCountTexts.text = "GAMES COMPLETED : " + GameManager.instance.MinigameCount.ToString();
         _HeartAnimator.SetInteger("Hearts", hearts);
-        _animator.SetBool("Idle", false);
-        _animator.SetBool("Won", won);
-        _animator.SetInteger("Era", era + 1); 
-        StartCoroutine(Reset());
-        if(hearts == 0)
-            StartCoroutine(RestartGame());
+        _mJamesAnimator.SetBool("Idle", false);
+        _mJamesAnimator.SetBool("Won", won);
+        _mJamesAnimator.SetInteger("Era", era + 1);
+
+
+        if (gameOver)
+        {
+            StartCoroutine(OnGameOver());
+        }
+        else
+        {
+            StartCoroutine(ResetCharacter());
+        }
     }
 
-    IEnumerator Reset()
+    void OnPanelClicked()
     {
-        yield return new WaitForSeconds(2f); 
-        _animator.SetBool("Idle", true);
+        _mPopupClosed = true;
+        _UIAnimator.SetBool("DisplayPopUp", false);
     }
 
-    IEnumerator RestartGame()
+    IEnumerator ResetCharacter()
     {
         yield return new WaitForSeconds(2f);
-        mySceneManager.instance.SetScene("LoseScreen", mySceneManager.LoadMode.ADDITIVE);
-        _animator.SetInteger("Hearts", 3);
+        _mJamesAnimator.SetBool("Idle", true);
+    }
+    IEnumerator OnGameOver()
+    {
+        yield return new WaitForSeconds(2f);
+        _mJamesAnimator.SetBool("GameOver", true);
+        yield return new WaitForSeconds(2f);
+        _UIAnimator.SetBool("DisplayPopUp", true);
+        _mPopupClosed = false;
+
+        while (!_mPopupClosed && Timer > 0)
+        {
+            Debug.Log(Timer.ToString());
+            Timer--;
+            foreach (var text in _mTimerTexts)
+            {
+                text.text = Timer.ToString();
+            }
+            yield return new WaitForSeconds(1f);
+        }
+
+        if (_mContinue)
+        {
+            //TO DO;
+        }
+        else
+        {
+            OnPanelClicked();
+            _UIAnimator.SetBool("EndGame", true);
+
+            if (GameManager.instance.Score > GameManager.instance.Player.BestScore)
+            {
+                _mHighscoreTag.SetActive(true);
+                GameManager.instance.Player.UpdateBestScore((int)GameManager.instance.Score);
+            }
+            foreach (var text in _bestScore)
+            {
+                text.text = "BEST : " + GameManager.instance.Player.BestScore.ToString();
+            }
+        }
+    }
+    public void ResetScreen()
+    {
+        _UIAnimator.SetBool("EndGame", false);
+        _mJamesAnimator.SetBool("Idle", true);
+        _mJamesAnimator.SetBool("GameOver", false);
+        _HeartAnimator.SetInteger("Hearts", 3);
+        _mHighscoreTag.SetActive(false);
+        Timer = 5;
+    }
+    public void RestartGame()
+    {
+        ResetScreen();
+        GameManager.instance.OnRestart();
+    }
+
+    public void GoHome()
+    {
+        ResetScreen();
+        mySceneManager.instance.LoadHomeScreen();
     }
 
     private void OnDestroy()
