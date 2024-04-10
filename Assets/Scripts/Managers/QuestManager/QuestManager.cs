@@ -72,12 +72,12 @@ public class QuestManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void LoadQuests(List<Quest> quests, List<Quest> ActiveQuests)
+    public void LoadQuests(List<Quest> quests, List<Quest> activeQuests)
     {
         _questsList = quests;
-        _selectedQuestsList = ActiveQuests;
+        _selectedQuestsList = activeQuests;
 
-        while (ActiveQuests.Count < 3)
+        while (activeQuests.Count < 3)
         {
             SetNewActiveQuest();
         } 
@@ -114,10 +114,10 @@ public class QuestManager : MonoBehaviour
             _questsList[randomQuest].QuestCompletionState != CompletionState.NotSelected) return;
 
         _questsList[randomQuest].QuestCompletionState = CompletionState.Selected;
-        Quest temp = _questsList[randomQuest];
+        var temp = _questsList[randomQuest];
         temp.Difficulty = temp.QuestSO.difficulties[randomDifficulty];
         temp.MaxAmount = temp.Difficulty.amount;
-        temp.CurrentAmount = 0;
+        temp.CurrentAmount = 3;
         SelectedQuests.Add(temp);
 
         OnAddActiveQuest?.Invoke(temp);

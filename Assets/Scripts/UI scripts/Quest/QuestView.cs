@@ -1,4 +1,7 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class QuestView : MonoBehaviour
@@ -21,18 +24,19 @@ public class QuestView : MonoBehaviour
         Debug.Log(_mQuestManager.SelectedQuests.Count);
         for (var i = 0; i < questCount; i++)
         {
-            
             var quest = _mQuestManager.SelectedQuests[i];
             var questContainer = _quests[i];
             questContainer.SetActive(true);
 
+            var replace = quest.QuestSO.questDescription.Replace("*", quest.Difficulty.amount.ToString());
             var questContainerScript = questContainer.GetComponent<QuestContainer>();
             questContainerScript.QuestDifficulty = quest.Difficulty;
             questContainerScript.Reward.text = (25 * quest.Difficulty.reward).ToString();
-            questContainerScript.QuestDescription.text = quest.QuestSO.questDescription;
+            questContainerScript.QuestDescription.text = replace;
             questContainerScript.QuestIcon.sprite = quest.QuestSO.questIcon;
             questContainerScript.QuestColor.color = _difficultyColor[(int)quest.Difficulty.difficulty];
-            questContainerScript.QuestProgression.fillAmount = (float)quest.CurrentAmount / quest.MaxAmount;
+            //StartCoroutine(ShowCompletionBar(questContainerScript.QuestProgression.transform, quest, questContainerScript.StartPosX));
+
             
             for (var j = 0; j < quest.Difficulty.reward; j++)
             {
@@ -40,6 +44,15 @@ public class QuestView : MonoBehaviour
                 if (!starObject.activeSelf)
                     starObject.SetActive(true);
             }
+        }
+    }
+
+    private static IEnumerator ShowCompletionBar(Transform pos, QuestManager.Quest quest, float startPos)
+    {
+        while (pos.position.x < startPos + 3 * (float)quest.CurrentAmount / quest.MaxAmount)
+        {
+            pos.position += pos.right * ((float)quest.CurrentAmount / quest.MaxAmount * 3 * Time.deltaTime);
+            yield return new WaitForSeconds(0.01f);
         }
     }
 }
