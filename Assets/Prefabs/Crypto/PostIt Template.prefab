@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CorrespondingGraph: {fileID: 0}
+  SpriteRenderer: {fileID: 212904314021264970}
 --- !u!60 &123125060389669151
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -162,5 +163,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mOnSelected:
+    m_PersistentCalls:
+      m_Calls: []
+  _mOnDeselected:
     m_PersistentCalls:
       m_Calls: []
