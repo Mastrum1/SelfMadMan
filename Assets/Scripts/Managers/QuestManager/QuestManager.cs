@@ -13,6 +13,8 @@ public class QuestManager : MonoBehaviour
     public event Action<int> OnReward;
 
     public event Action<Quest> OnAddActiveQuest;
+    
+    public event Action<int, int?> OnUpdateQuestUI;
 
     public event Action<Quest> OnRemoveActiveQuest;
 
@@ -83,43 +85,33 @@ public class QuestManager : MonoBehaviour
         } 
     }
 
-    private bool CheckForActiveQuest()
+    private void RemoveActiveQuest(Quest quest)
     {
-        if (SelectedQuests.Count < 3)
+        Debug.Log("NotSelected");
+        _selectedQuestsList.Remove(quest);
+        OnRemoveActiveQuest?.Invoke(quest);
+        while (_selectedQuestsList.Count < 3)
         {
-            foreach (var item in _questsList.Where(item => item.QuestCompletionState == CompletionState.Selected))
-            {
-                SelectedQuests.Add(item);
-            }
+            SetNewActiveQuest();
         }
-
-        foreach (var item in SelectedQuests.Where(item => item.QuestCompletionState == CompletionState.NotSelected))
-        {
-            SelectedQuests.Remove(item);
-            OnRemoveActiveQuest?.Invoke(item);
-
-        }
-
-        return SelectedQuests.Count is 3;
     }
 
     private void SetNewActiveQuest()
     {
-        if (SelectedQuests.Count >= 3) return;
+        if (_selectedQuestsList.Count >= 3) return;
 
         var randomQuest = Random.Range(0, _questsList.Count);
         var randomDifficulty = Random.Range(0, 3);
 
         if (_questsList[randomQuest].QuestDispo != Quests.QuestBaseDispo.Unlocked ||
             _questsList[randomQuest].QuestCompletionState != CompletionState.NotSelected) return;
-
+        
         _questsList[randomQuest].QuestCompletionState = CompletionState.Selected;
         var temp = _questsList[randomQuest];
         temp.Difficulty = temp.QuestSO.difficulties[randomDifficulty];
         temp.MaxAmount = temp.Difficulty.amount;
         temp.CurrentAmount = 0;
-        SelectedQuests.Add(temp);
-
+        _selectedQuestsList.Add(temp);
         OnAddActiveQuest?.Invoke(temp);
     }
 
@@ -132,27 +124,21 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    void OnQuestFinish(Quest quest)
+    public void OnQuestFinish(Quest quest)
     {
         quest.QuestCompletionState = CompletionState.NotSelected;
         OnQuestFinished?.Invoke(quest);
         OnReward?.Invoke(quest.Difficulty.reward);
-        if (!CheckForActiveQuest())
-        {
-            SetNewActiveQuest();
-        }
+        RemoveActiveQuest(quest);
     }
-    void ChangeQuest(Quest quest)
+    public void OnChangeQuest(Quest quest, int container)
     {
-        OnRemoveActiveQuest?.Invoke(quest);
         quest.QuestCompletionState = CompletionState.NotSelected;
-        if (!CheckForActiveQuest())
-        {
-            SetNewActiveQuest();
-        }
+        RemoveActiveQuest(quest);
+        OnUpdateQuestUI?.Invoke(container, 2);
     }
 
-    void UnlockQuest(int time)
+    public void UnlockQuest(int time)
     {
         foreach (var quest in _questsList.Where(quest => quest.QuestSO.time == time))
         {
@@ -161,7 +147,7 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    void LockQuest(int time)
+    public void LockQuest(int time)
     {
         foreach (var quest in _questsList.Where(quest => quest.QuestSO.time == time))
         {
