@@ -69,7 +69,6 @@ public class mySceneManager : MonoBehaviour
         SceneManager.LoadScene(HomeScreen, LoadSceneMode.Additive);
     }
 
-
     public void RandomGameChoice()
     {
         do
