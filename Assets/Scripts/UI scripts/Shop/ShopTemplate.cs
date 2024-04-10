@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Collections.Generic;
-using UnityEngine.EventSystems;
 
 public class ShopTemplate : MonoBehaviour
 {
