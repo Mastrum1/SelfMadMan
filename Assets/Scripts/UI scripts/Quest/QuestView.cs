@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class QuestView : MonoBehaviour
@@ -21,7 +19,6 @@ public class QuestView : MonoBehaviour
     private void LoadQuestContainer()
     {
         var questCount = _mQuestManager.SelectedQuests.Count;
-        Debug.Log(_mQuestManager.SelectedQuests.Count);
         for (var i = 0; i < questCount; i++)
         {
             var quest = _mQuestManager.SelectedQuests[i];
@@ -35,7 +32,7 @@ public class QuestView : MonoBehaviour
             questContainerScript.QuestDescription.text = replace;
             questContainerScript.QuestIcon.sprite = quest.QuestSO.questIcon;
             questContainerScript.QuestColor.color = _difficultyColor[(int)quest.Difficulty.difficulty];
-            //StartCoroutine(ShowCompletionBar(questContainerScript.QuestProgression.transform, quest, questContainerScript.StartPosX));
+            StartCoroutine(ShowCompletionBar(questContainerScript.QuestProgression.gameObject.transform, quest, questContainerScript.StartPosX));
 
             
             for (var j = 0; j < quest.Difficulty.reward; j++)
@@ -53,6 +50,14 @@ public class QuestView : MonoBehaviour
         {
             pos.position += pos.right * ((float)quest.CurrentAmount / quest.MaxAmount * 3 * Time.deltaTime);
             yield return new WaitForSeconds(0.01f);
+        }
+    }
+
+    private void OnDisable()
+    {
+        foreach (var quest in _quests)
+        {
+            quest.SetActive(false);
         }
     }
 }

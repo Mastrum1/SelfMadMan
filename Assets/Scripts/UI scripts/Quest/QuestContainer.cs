@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -22,9 +20,22 @@ public class QuestContainer : MonoBehaviour
     public Image QuestColor { get => _mQuestColor; set => _mQuestColor = value; }
     [SerializeField] private Image _mQuestColor;
 
-    public Image QuestProgression { get => _mQuestProgression; set => _mQuestProgression = value; }
-    [SerializeField] private Image _mQuestProgression;
+    public GameObject QuestProgression { get => _mQuestProgression; set => _mQuestProgression = value; }
+    [SerializeField] private GameObject _mQuestProgression;
+    
+    public float StartPosX => _mStartPos;
+    private float _mStartPos;
     
     public List<GameObject> Stars { get => _mStars; set => _mStars = value; }
     [SerializeField] private List<GameObject> _mStars;
+
+    private void Awake()
+    {
+        _mStartPos = QuestProgression.transform.position.x;
+    }
+
+    private void OnDisable()
+    {
+        QuestProgression.transform.position = new Vector3(_mStartPos, transform.position.y);
+    }
 }
