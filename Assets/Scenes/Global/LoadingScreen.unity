@@ -1271,6 +1271,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
+      propertyPath: _era3.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: Era1.Array.data[0]
       value: CRYPTO
       objectReference: {fileID: 0}
@@ -1324,7 +1328,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era2.Array.data[2]._locked
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era2.Array.data[3]._locked
@@ -1430,6 +1434,10 @@ PrefabInstance:
       propertyPath: _era2.Array.data[4]._sceneName
       value: FeelTheWhey
       objectReference: {fileID: 0}
+    - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
+      propertyPath: _era3.Array.data[0]._sceneName
+      value: FightThisDude
+      objectReference: {fileID: 0}
     - target: {fileID: 5661505165497571510, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: m_Name
       value: MiniGameSelector
@@ -1492,8 +1500,12 @@ PrefabInstance:
       value: WinScreen
       objectReference: {fileID: 0}
     - target: {fileID: 4525237552063667283, guid: 108cce104fcb83340958920a484c1bac, type: 3}
+      propertyPath: HomeScreen
+      value: LoadingScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 4525237552063667283, guid: 108cce104fcb83340958920a484c1bac, type: 3}
       propertyPath: FasterScreen
-      value: LoseScreen
+      value: LoadingScreen
       objectReference: {fileID: 0}
     - target: {fileID: 8806018735200440851, guid: 108cce104fcb83340958920a484c1bac, type: 3}
       propertyPath: m_Name

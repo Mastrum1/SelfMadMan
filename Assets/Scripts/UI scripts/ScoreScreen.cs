@@ -12,8 +12,8 @@ public class ScoreScreen : MonoBehaviour
     [SerializeField] private Animator _HeartAnimator;
     [SerializeField] private Image _jamesSprite;
     [SerializeField] private GameObject _mHighscoreTag;
-    [SerializeField] private TMP_Text[] _mscoreTexts;
-    [SerializeField] private TMP_Text[] _mMnigameCountTexts;
+    [SerializeField] private TMP_Text _mscoreTexts;
+    [SerializeField] private TMP_Text _mMnigameCountTexts;
     [SerializeField] private TMP_Text[] _mTimerTexts;
     [SerializeField] private TMP_Text[] _bestScore;
     [SerializeField] private PanelOnClick _mPanelOnClick;
@@ -25,7 +25,6 @@ public class ScoreScreen : MonoBehaviour
     private bool _mContinue = false;
     private void Awake()
     {
-
         GameManager.instance.WinScreenHandle += OnWinScreenDisplay;
         _mPanelOnClick.OnClick += OnPanelClicked;
     }
@@ -34,14 +33,8 @@ public class ScoreScreen : MonoBehaviour
     void OnWinScreenDisplay(bool won, int era, int hearts, bool gameOver)
     {
         Debug.Log(hearts);
-        foreach (var text in _mscoreTexts)
-        {
-            text.text = GameManager.instance.Score.ToString();
-        }
-        foreach (var text in _mMnigameCountTexts)
-        {
-            text.text = "GAMES COMPLETED : " + GameManager.instance.MinigameCount.ToString();
-        }
+        _mscoreTexts.text = GameManager.instance.Score.ToString();
+        _mMnigameCountTexts.text = "GAMES COMPLETED : " + GameManager.instance.MinigameCount.ToString();
         _HeartAnimator.SetInteger("Hearts", hearts);
         _mJamesAnimator.SetBool("Idle", false);
         _mJamesAnimator.SetBool("Won", won);
@@ -108,10 +101,14 @@ public class ScoreScreen : MonoBehaviour
             }
         }
     }
-    private void ResetScreen()
+    public void ResetScreen()
     {
+        _UIAnimator.SetBool("EndGame", false);
         _mJamesAnimator.SetBool("Idle", true);
-        _mJamesAnimator.SetBool("EndGame", false);
+        _mJamesAnimator.SetBool("GameOver", false);
+        _HeartAnimator.SetInteger("Hearts", 3);
+        _mHighscoreTag.SetActive(false);
+        Timer = 5;
     }
     public void RestartGame()
     {
@@ -122,7 +119,7 @@ public class ScoreScreen : MonoBehaviour
     public void GoHome()
     {
         ResetScreen();
-       mySceneManager.instance.LoadHomeScreen();
+        mySceneManager.instance.LoadHomeScreen();
     }
 
     private void OnDestroy()

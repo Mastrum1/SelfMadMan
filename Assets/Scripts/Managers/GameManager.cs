@@ -69,11 +69,12 @@ public class GameManager : MonoBehaviour
         Speed = 10;
         FasterLevel = 1;
 
-        _mPlayer.LoadJson();
+        
         _unlockedEra.Add(0, true);
 
         _mQuestManager = QuestManager.instance;
         _mQuestManager.OnReward += AddStars;
+        _mPlayer.LoadJson();
         _mScoring = new Scoring();
     }
     public void ResetGame()
