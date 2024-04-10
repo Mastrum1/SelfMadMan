@@ -13,6 +13,9 @@ public class ContentManager : MonoBehaviour
     [SerializeField] private List<Sprite> _mSprites;
     [SerializeField] private List<Sprite> _mJamesForms;
 
+    [SerializeField] private List<Image> _mImagesToDeactivate;
+    [SerializeField] private List<TMP_Text> _mTextsToDeactivate;
+
     [Header("Navigation Dots")]
     [SerializeField] private GameObject _mDotsContainer;
     [SerializeField] private GameObject _mDotPrefab;
