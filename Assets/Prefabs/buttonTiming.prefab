@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 3523688269042661855}
   - component: {fileID: 7363871784857445327}
   - component: {fileID: 8515790817402934522}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.49999997, y: -0.5}
+  m_AnchoredPosition: {x: 0.000000059604645, y: -0.060000002}
   m_SizeDelta: {x: 2.2, y: 2.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7363871784857445327
@@ -149,9 +149,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '
-
-'
+  m_text: 7
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9d435c23d9d5e0344b28ed1287d21668, type: 2}
   m_sharedMaterial: {fileID: -4142128784620268135, guid: 9d435c23d9d5e0344b28ed1287d21668, type: 2}
@@ -178,8 +176,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 150
-  m_fontSizeBase: 150
+  m_fontSize: 1.5
+  m_fontSizeBase: 1.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -232,7 +230,7 @@ GameObject:
   - component: {fileID: 1805001655797893732}
   - component: {fileID: 2443226951724284867}
   - component: {fileID: 4604011397027616266}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -337,9 +335,9 @@ GameObject:
   - component: {fileID: 7125997283650389834}
   - component: {fileID: 8039306362533089082}
   - component: {fileID: 6946697609774946393}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: buttonTiming
-  m_TagString: Untagged
+  m_TagString: Buttons
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -359,6 +357,7 @@ Transform:
   m_Children:
   - {fileID: 1752435655840144196}
   - {fileID: 4915309102904229766}
+  - {fileID: 7327547796437303213}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &15716378913150138
@@ -425,7 +424,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28945584cfd7ed245aefedf41334cade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mBenchManager: {fileID: 0}
   _mMaxTimeFadeOut: 3
   _mVFXScaleUp: {fileID: 6946697609774946393}
   _StopTorus: 1
@@ -434,7 +432,7 @@ MonoBehaviour:
   _mTorusSpriteRenderer: {fileID: 5555450955114174553}
   _Number: {fileID: 8515790817402934522}
   _mMaxScale: 1
-  _mMinTimeForClick: 0.38
+  _mMinTimeForClick: 0.33
   _mPerfectTiming: 0.68
   _mMidTiming: 0.75
   _mImmondeTiming: 0.9
@@ -469,7 +467,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.023115873, y: 0}
@@ -544,5 +542,119 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b51b89ad8563c2b4788e7b87281d2bb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleUpDuration: 0.5
-  scaleDownDuration: 0.5
+  scaleUpDuration: 0.3
+  scaleDownDuration: 0.3
+--- !u!1 &5451832724464473322
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7327547796437303213}
+  - component: {fileID: 6036179808191227244}
+  - component: {fileID: 7729318276324666613}
+  - component: {fileID: 1725531904360208459}
+  m_Layer: 2
+  m_Name: ObjectCollide
+  m_TagString: Buttons
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7327547796437303213
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5451832724464473322}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4401339869329618634}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &6036179808191227244
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5451832724464473322}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.040208273, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.8536714
+--- !u!114 &7729318276324666613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5451832724464473322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bac689672c5ce4144b0500c888a421a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mSpawnBounds: {fileID: 0}
+  _mObjectSpriteRenderer: {fileID: 15716378913150138}
+  _mTorusSpriteRenderer: {fileID: 5555450955114174553}
+  _mTapWithTimer: {fileID: 491009848461839725}
+  _mText: {fileID: 8515790817402934522}
+  _Parent: {fileID: 4409378949257764596}
+--- !u!50 &1725531904360208459
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5451832724464473322}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
