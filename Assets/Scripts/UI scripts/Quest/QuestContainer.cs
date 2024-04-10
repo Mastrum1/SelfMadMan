@@ -36,6 +36,6 @@ public class QuestContainer : MonoBehaviour
 
     private void OnDisable()
     {
-        QuestProgression.transform.position = new Vector3(_mStartPos, transform.position.y);
+        QuestProgression.transform.position = new Vector3(_mStartPos - 0.176f, transform.position.y);
     }
 }
