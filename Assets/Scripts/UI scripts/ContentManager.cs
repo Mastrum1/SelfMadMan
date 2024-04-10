@@ -21,6 +21,7 @@ public class ContentManager : MonoBehaviour
     public int CurrentIndex { get => _mCurrentIndex; set => _mCurrentIndex = value; }
     [Header("Page Settings")]
     [SerializeField] private int _mCurrentIndex = 0;
+    [SerializeField] private GameObject _mLockEraPanel;
 
     void Start()
     {
@@ -61,6 +62,7 @@ public class ContentManager : MonoBehaviour
     {
         _mCurrentIndex = (_mCurrentIndex + i + _mSprites.Count) % _mSprites.Count;
         GameManager.instance.Era = _mCurrentIndex + 1;
+        if (!GameManager.instance.UnlockedEra[GameManager.instance.Era])
         ShowContent();
         UpdateDots();
     }
