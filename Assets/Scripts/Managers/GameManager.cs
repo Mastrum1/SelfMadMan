@@ -66,8 +66,10 @@ public class GameManager : MonoBehaviour
         _mHearts = 3;
         Speed = 10;
         FasterLevel = 1;
+        _mScore = 0;
 
-        
+
+
         _unlockedEra.Add(0, true);
 
         _mQuestManager = QuestManager.instance;
