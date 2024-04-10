@@ -58,6 +58,8 @@ public class InputManager : MonoBehaviour
 
     [SerializeField] public UnityEvent<Vector3> _mGetFingerPos;
 
+    [SerializeField] public UnityEvent _mOnFingerReleased;
+
     [Header("Slide dir Events")]
 
     [SerializeField] public UnityEvent _mOnSlideUp;
@@ -154,6 +156,7 @@ public class InputManager : MonoBehaviour
             if (touch.phase == TouchPhase.Ended)
             {
                 _mEndTouchPos = Camera.main.ScreenToWorldPoint(touch.position);
+                _mOnFingerReleased?.Invoke();
 
                 if (Vector3.Distance(_mStartTouchPos, _mEndTouchPos) >= _mMinimumDist && _mEnableSlide4Dir && !_mIsDraging || Vector3.Distance(_mStartTouchPos, _mEndTouchPos) >= _mMinimumDist && _mEnableSlide8Dir && !_mIsDraging)
                 {
