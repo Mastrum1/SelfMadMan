@@ -45,7 +45,6 @@ public class GetBenchManager : MiniGameManager
 
     private void Start()
     {
-
         _mMinX = _mSpawnBounds.bounds.min.x;
         _mMinY = _mSpawnBounds.bounds.min.y;
         _mMaxX = _mSpawnBounds.bounds.max.x;
@@ -121,7 +120,7 @@ public class GetBenchManager : MiniGameManager
                 }
                 if (_mButtons[_mIndexToActivate].activeSelf == true)
                 {
-                    yield return new WaitForSeconds(_mCircleSpawnTime);
+                    yield return new WaitForSeconds(_mCircleSpawnTime / GameManager.instance.FasterLevel);
                 }
                 else
                 {
@@ -136,7 +135,7 @@ public class GetBenchManager : MiniGameManager
                     );
                     _mIsSpawning = true;
                 }
-                yield return new WaitForSeconds(_mCircleSpawnTime);
+                yield return new WaitForSeconds(_mCircleSpawnTime / GameManager.instance.FasterLevel);
             }
             else
             {

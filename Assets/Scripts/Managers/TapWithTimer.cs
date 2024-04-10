@@ -39,6 +39,8 @@ public class TapWithTimer : MonoBehaviour
 
     [SerializeField] private GameObject _mTorus;
 
+    private float _mDecrease;
+
     [SerializeField] private float _mDecreaseSpeed;
 
     void OnEnable()
@@ -58,7 +60,8 @@ public class TapWithTimer : MonoBehaviour
     {
         if (!StopTorus)
         {
-            _mTorus.transform.localScale -= new Vector3(Time.deltaTime * _mDecreaseSpeed, Time.deltaTime * _mDecreaseSpeed, Time.deltaTime * _mDecreaseSpeed);
+            
+            _mTorus.transform.localScale -= new Vector3(Time.deltaTime * _mDecreaseSpeed * GameManager.instance.FasterLevel, Time.deltaTime * _mDecreaseSpeed * GameManager.instance.FasterLevel, Time.deltaTime * _mDecreaseSpeed * GameManager.instance.FasterLevel);
             if (_mTorus.transform.localScale.x < _mMinTimeForClick)
             {
                 _StopTorus = true;

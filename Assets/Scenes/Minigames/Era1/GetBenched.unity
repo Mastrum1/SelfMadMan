@@ -382,7 +382,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b618507f320a6c14f8a11ea55f03bf7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mParentGameObject: {fileID: 1273582158}
   _mTapWithTimers:
   - {fileID: 173540816}
   - {fileID: 1794432042}
@@ -495,6 +494,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6805509144928125002, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731437104907751157, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+      propertyPath: m_text
+      value: G E T  B I G  !
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731437104907751157, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 3803c74790811ec4fb1ea2063a6e907b, type: 2}
+    - target: {fileID: 7731437104907751157, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -7929761794402918686, guid: 3803c74790811ec4fb1ea2063a6e907b, type: 2}
+    - target: {fileID: 7731437104907751157, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8223125005017807307, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
@@ -916,11 +931,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8515790817402934522, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: m_fontSize
-      value: 2
+      value: 1.65
       objectReference: {fileID: 0}
     - target: {fileID: 8515790817402934522, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: m_fontSizeBase
-      value: 2
+      value: 1.65
       objectReference: {fileID: 0}
     - target: {fileID: 8515790817402934522, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: m_enableAutoSizing
@@ -1465,11 +1480,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8515790817402934522, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: m_fontSize
-      value: 2
+      value: 1.65
       objectReference: {fileID: 0}
     - target: {fileID: 8515790817402934522, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: m_fontSizeBase
-      value: 2
+      value: 1.65
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2048,11 +2063,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8515790817402934522, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: m_fontSize
-      value: 2
+      value: 1.65
       objectReference: {fileID: 0}
     - target: {fileID: 8515790817402934522, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: m_fontSizeBase
-      value: 2
+      value: 1.65
       objectReference: {fileID: 0}
     - target: {fileID: 8515790817402934522, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: m_VerticalAlignment
@@ -2512,11 +2527,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8515790817402934522, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: m_fontSize
-      value: 2
+      value: 1.65
       objectReference: {fileID: 0}
     - target: {fileID: 8515790817402934522, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: m_fontSizeBase
-      value: 2
+      value: 1.65
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2780,6 +2795,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: _mEnableHold
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
+      propertyPath: _mEnableSlide
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
