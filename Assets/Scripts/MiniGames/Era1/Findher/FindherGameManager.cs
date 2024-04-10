@@ -56,7 +56,7 @@ public class FindherGameManager : MiniGameManager
     private bool _mIsAd = false;
     private int _index = 0;
 
-    private void Start()
+    private void Awake()
     {
         ShowProfile();
     }
@@ -150,7 +150,7 @@ public class FindherGameManager : MiniGameManager
             _mListSliderAdsGO[_index].SetActive(false);
             _mListSliderGirlsName[_index].text = _mGirlName.text;
             _mListSliderGirlsAge[_index].text = _mGirlAge.text;
-            //add job here
+            _mListSliderGirlsJob[_index].text = _mGirlDescription.text;
             _mListSliderImageGirls[_index].sprite = _mGirlSpriteRenderer.sprite;
             _mListSliderImageGirlsBackground[_index].sprite = _mGirlBackground;
         }
