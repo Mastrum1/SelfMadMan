@@ -62,7 +62,7 @@ public class ContentManager : MonoBehaviour
     {
         _mCurrentIndex = (_mCurrentIndex + i + _mSprites.Count) % _mSprites.Count;
         GameManager.instance.Era = _mCurrentIndex + 1;
-        if (!GameManager.instance.UnlockedEra[GameManager.instance.Era])
+        _mLockEraPanel.SetActive(GameManager.instance.UnlockedEra[GameManager.instance.Era] ? false : true );
         ShowContent();
         UpdateDots();
     }
