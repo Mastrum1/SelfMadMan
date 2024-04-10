@@ -11,7 +11,8 @@ public class ShakeItUpInteractableManager : InteractableManager
 
     private readonly List<Protein> _proteins = new List<Protein>();
     private int _numProteinDead;
-    void Start()
+
+    private void Start()
     {
         for (int i = 0; i < _proteinParent.transform.childCount; i++)
         {
@@ -24,15 +25,15 @@ public class ShakeItUpInteractableManager : InteractableManager
         
         SpawnProteins();
     }
-    
-    void SpawnProteins()
+
+    private void SpawnProteins()
     {
         for (var i = 0; i < _numOfProteins; i++)
         {
             if ( i > _proteins.Count) return;
             var randScale = UnityEngine.Random.Range(0.2f, 0.4f);
             _proteins[i].transform.localScale = new Vector3(randScale, randScale, 1);
-            _proteins[i].Resistance = 0.1f; // Change with difficulty
+            _proteins[i].Resistance = 0.1f + (float)GameManager.instance.FasterLevel / 100;
             _proteins[i].gameObject.SetActive(true);
         }
     }
@@ -46,7 +47,7 @@ public class ShakeItUpInteractableManager : InteractableManager
         }
     }
 
-    void IncreaseNumDead()
+    private void IncreaseNumDead()
     {
         _numProteinDead++;
     }
@@ -59,7 +60,7 @@ public class ShakeItUpInteractableManager : InteractableManager
         }
     }
 
-    void HandleEndGame()
+    private void HandleEndGame()
     {
         OnGameEnd?.Invoke(true);
     }
