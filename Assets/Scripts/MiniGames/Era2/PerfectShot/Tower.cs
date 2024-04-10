@@ -11,7 +11,7 @@ public class Tower : MonoBehaviour
     public bool Rotating { get => _rotating; set => _rotating = value; }
 
     private float _rotationSpeed = 50;
-    private float _ClockrotationSpeed = 50 * 4.5f;
+    private float _ClockrotationSpeed;
 
     private float _minRotation = -15f;
     private float _maxRotation = 25f;
@@ -29,6 +29,11 @@ public class Tower : MonoBehaviour
 
     private void Start()
     {
+        if (GameManager.instance.FasterLevel < 5)
+        {
+            _rotationSpeed += GameManager.instance.FasterLevel * 20;
+            _ClockrotationSpeed = _rotationSpeed * 4.5f;
+        }
     }
     void Update()
     {
