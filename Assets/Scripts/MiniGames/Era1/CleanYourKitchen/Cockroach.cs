@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.Video;
@@ -12,8 +13,10 @@ public class Cockroach : MonoBehaviour
     [SerializeField] private Rigidbody2D _rigid2d;
     [SerializeField] private CapsuleCollider2D _collider2D;
     [SerializeField] private GameObject _body;
+    public GameObject Body => _body;
     [SerializeField] private GameObject _anim;
     [SerializeField] private GameObject _squish;
+    public GameObject Squish => _squish;
     private float _speed;
 
     private void Start()
@@ -59,12 +62,29 @@ public class Cockroach : MonoBehaviour
         _anim.gameObject.SetActive(false);
         _collider2D.enabled = false;
         _squish.gameObject.SetActive(true);
-        yield return new WaitForSeconds(1f);
+        StartCoroutine(FadeSquish());
+        yield return new WaitForSeconds(2f);
         gameObject.SetActive(false);
+    }
+
+    private IEnumerator FadeSquish()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.1f);
+            _squish.GetComponent<SpriteRenderer>().color -= new Color(0,0,0,4 * Time.deltaTime);
+
+        }
     }
 
     private void OnCollisionEnter(Collision other)
     {
         Move();
+    }
+
+    private void OnDisable()
+    {
+        StopCoroutine(DisableCockroach());
+        StopCoroutine(FadeSquish());
     }
 }

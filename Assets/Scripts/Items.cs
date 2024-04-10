@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Items
 {
+    public Player _mPlayer;
     private Sprite _sprite;
     public Sprite Sprite { get => _sprite; set => _sprite = value; }
 
     public virtual void Obtain()
     {
+
     }
 }
 
@@ -19,6 +22,8 @@ public class Coins : Items
 
     public override void Obtain()
     {
+        _mPlayer = GameManager.instance.GetComponent<Player>();
+        _mPlayer.NewCurrency(_mPlayer.Money + Amount);
         //put amount in money
     }
 }

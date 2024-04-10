@@ -26,13 +26,14 @@ public class Quests : ScriptableObject
     public class Difficulty
     {
         public Difficulties difficulty;
-        public  int amount;
+        public int amount;
         public int reward;
     }
-    
+    public int ID;
     public string questName;
     public int time;
     public string questDescription;
+    public Sprite questIcon;
 
     public List<Difficulty> difficulties;
 
