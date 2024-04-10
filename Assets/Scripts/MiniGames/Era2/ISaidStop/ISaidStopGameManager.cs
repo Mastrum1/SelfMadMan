@@ -20,7 +20,7 @@ public class ISaidStopGameManager : MiniGameManager
     {
         if (_mIsEnd)
             return;
-        if (_mTimer.timerValue == 0 && !_mIsEnd)
+        if (!_mTimer.MyTimer && !_mIsEnd)
             EndGame(true);
     }
 
