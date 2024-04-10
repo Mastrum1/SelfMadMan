@@ -1,24 +1,25 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 
 
 public class Timer : MonoBehaviour
 {
-    float maxBarWidth = 114;
-    public float maxBarValue = 2000;
-    private float _mDepletionRate;
-    public float timerValue = 2;
+
+    public event Action OnTimerEnded;
     [SerializeField] public RectMask2D RectMask2D;
     [SerializeField] public RectTransform Square;
 
+    public int TimerValue;
     public float totalTimeInSeconds = 10f; // Total time to reach the max padding
     private float elapsedTime = 0f; // Elapsed time since start
-    float paddingAmount = 0;
     private bool _timerOn;
 
     public Vector3 startPosition;
@@ -33,14 +34,22 @@ public class Timer : MonoBehaviour
     }
     public void ResetTimer(float time)
     {
+        TimerValue = (int)time;
+        _timerOn = true;
+        totalTimeInSeconds = time;
     }
 
     void Update()
     {
-        float newPadding = Mathf.Lerp(0, 1008, elapsedTime / totalTimeInSeconds);
-        RectMask2D.padding = new Vector4(RectMask2D.padding.x, RectMask2D.padding.y, newPadding, RectMask2D.padding.w);
-        Square.anchoredPosition = Vector2.Lerp(startPosition, targetPosition, elapsedTime / totalTimeInSeconds);
-        elapsedTime += Time.deltaTime;
+        if(_timerOn)
+        {
+            elapsedTime += Time.deltaTime;
+            TimerValue = (int)totalTimeInSeconds - (int)elapsedTime;
+            float newPadding = Mathf.Lerp(0, 1080, elapsedTime / totalTimeInSeconds);
+            RectMask2D.padding = new Vector4(RectMask2D.padding.x, RectMask2D.padding.y, newPadding, RectMask2D.padding.w);
+            Square.anchoredPosition = Vector2.Lerp(startPosition, targetPosition, elapsedTime / totalTimeInSeconds);
+        }
+     
     }
 
 }

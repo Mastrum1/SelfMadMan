@@ -21,7 +21,7 @@ public class LikeElonsTweetsGameManager : MiniGameManager
     void Update()
     {
         bool mStatus = true;
-        if (_mTimer.timerValue != 0 || _mIsEnd)
+        if (_mTimer.MyTimer || _mIsEnd)
             return;
         TweetSpawner.SharedInstance.StopAllTweetes();
         List<GameObject> mTweets = TweetSpawner.SharedInstance.GetActiveTweets();
@@ -45,9 +45,9 @@ public class LikeElonsTweetsGameManager : MiniGameManager
     }
 
 
-    IEnumerator  SpawnTweet()
+    IEnumerator SpawnTweet()
     { 
-        while (_mTimer.timerValue >= 420 && !_mIsEnd) {
+        while (_mTimer.TimerValue > 3 && !_mIsEnd) {
             yield return new WaitForSeconds(_mAverageSpawnRate);
             GameObject mTweet = TweetSpawner.SharedInstance.GetPooledTweet();
             Debug.Log("Spawneeeeeeeeeer " + _mIsEnd);

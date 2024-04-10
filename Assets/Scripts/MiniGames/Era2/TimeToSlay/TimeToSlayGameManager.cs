@@ -14,12 +14,13 @@ public class TimeToSlayGameManager : MiniGameManager
         _mMaskSpawner.OnCompleted += OnCompleted;
         _mIsEnd = false;
     }
+    
 
     void Update()
     {
         if (_mIsEnd)
             return;
-        if (_mTimer.timerValue == 0)
+        if (_mTimer.TimerValue == 0)
            EndGame(false);
     }
 
