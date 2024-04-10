@@ -6,29 +6,51 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Tower : MonoBehaviour
 {
+
     private bool _rotating = true;
     public bool Rotating { get => _rotating; set => _rotating = value; }
 
-    private float _rotationSpeed = 25f;
+    private float _rotationSpeed = 50;
+    private float _ClockrotationSpeed = 50 * 4.5f;
+
     private float _minRotation = -15f;
     private float _maxRotation = 25f;
     private float _targetRotation;
 
-    [NonSerialized] public float CurrentRotation;
-    [SerializeField] private RectTransform _rectTransform;
+    private float minClockRotation = -69.99f;
+    private float maxClockRotation = 110f;
+    private float _targetClockRotation;
 
+
+    [NonSerialized] public float CurrentRotation;
+    [NonSerialized] public float CurrentClockRotation;
+    [SerializeField] private RectTransform _rectTransform;
+    [SerializeField] private RectTransform _Hand;
+
+    private void Start()
+    {
+    }
     void Update()
     {
         if (Rotating)
         {
             float currentRotation = Mathf.MoveTowardsAngle(_rectTransform.localEulerAngles.z, _targetRotation, _rotationSpeed * Time.deltaTime);
             _rectTransform.localEulerAngles = new Vector3(_rectTransform.localEulerAngles.x, _rectTransform.localEulerAngles.y, currentRotation);
-
             CurrentRotation = NormalizeAngle(_rectTransform.localEulerAngles.z);
             if (Mathf.Approximately(currentRotation, _targetRotation))
             {
                 _targetRotation = (_targetRotation == _minRotation) ? _maxRotation : _minRotation;
             }
+
+            float clockRotation = Mathf.MoveTowardsAngle(_Hand.localEulerAngles.z, _targetClockRotation, _ClockrotationSpeed * Time.deltaTime);
+            _Hand.localEulerAngles = new Vector3(_Hand.localEulerAngles.x, _Hand.localEulerAngles.y, clockRotation);
+            Debug.Log("clock" + NormalizeAngle(clockRotation));
+            Debug.Log(" target "  + NormalizeAngle(_targetClockRotation));
+            if (Mathf.Approximately(clockRotation, _targetClockRotation))
+            {
+                _targetClockRotation = (_targetClockRotation == minClockRotation) ? maxClockRotation : minClockRotation;
+            }
+
         }
     }
 
@@ -38,7 +60,7 @@ public class Tower : MonoBehaviour
         angle %= 360f;
         if (angle > 180f)
             angle -= 360f;
-        else if (angle < -180f)
+        else if (angle < -181f)
             angle += 360f;
         return angle;
     }

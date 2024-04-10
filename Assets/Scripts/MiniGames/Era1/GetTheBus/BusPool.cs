@@ -24,6 +24,7 @@ public class BusPool : MonoBehaviour
         {
             tmp = Instantiate(objectToPool);
             tmp.SetActive(false);
+            tmp.transform.SetParent(gameObject.transform, true);
             pooledObjects.Add(tmp);
         }
     }
