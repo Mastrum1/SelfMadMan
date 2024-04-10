@@ -58,7 +58,7 @@ public class GetBenchManager : MiniGameManager
 
     override public void Update()
     {
-        if (_mTimer.timerValue == 0)
+        if (_mTimer.TimerValue == 0)
         {
             Debug.Log("Time's up");
             OnGameEnd(true);

@@ -11,6 +11,4 @@ public class QuestAndAchievement : MonoBehaviour
     {
         _mQuestView.SetActive(isEnabled);
     }
-
-    
 }
