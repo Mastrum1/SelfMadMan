@@ -11,7 +11,7 @@ public class MiniGameManager : MonoBehaviour
     public event MiniGameEndHandler OnMiniGameEnd;
 
     protected int Amount { get; set; }
-    
+
     protected bool _gameIsPlaying;
 
     [SerializeField] public Timer _mTimer;
@@ -21,13 +21,13 @@ public class MiniGameManager : MonoBehaviour
     [SerializeField] private GameObject _loosePanel;
 
     [NonSerialized] public int miniGameScore;
-    
+
     private QuestManager _questManager;
 
     public virtual void Awake()
     {
         _gameIsPlaying = true;
-        //_cash.targetCamera = _sceneCamera;
+        _cash.targetCamera = _sceneCamera;
         _mTimer.ResetTimer(GameManager.instance.Speed);
         GameManager.instance.SelectNewMiniGame(this);
         _questManager = QuestManager.instance;
@@ -44,13 +44,13 @@ public class MiniGameManager : MonoBehaviour
             _loosePanel.SetActive(true);
 
         float timeout = won ? 1.5f : 0.5f;
-        
+
         foreach (var quest in _questManager.SelectedQuests.Where(quest => quest.QuestSO.scene.SceneName == SceneManager.GetActiveScene().name))
         {
             quest.CurrentAmount += Amount;
             _questManager.CheckQuestCompletion();
         }
-        
+
         StartCoroutine(StartAnim(won, score, timeout));
     }
 
@@ -66,13 +66,9 @@ public class MiniGameManager : MonoBehaviour
 
     public virtual void Update()
     {
-        if (_mTimer.timerValue == 0)
-        {
-            Debug.Log("Time's up");
-            EndMiniGame(false, miniGameScore);
-        }
+        if (_mTimer.TimerValue == 0)
+            EndMiniGame(false, 0);
     }
-
     protected void IncrementQuestAmount()
     {
         Amount++;

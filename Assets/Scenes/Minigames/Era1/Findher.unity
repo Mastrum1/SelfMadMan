@@ -462,6 +462,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6805509144928125002, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
   m_PrefabInstance: {fileID: 76589270}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &76589272 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8430481896359637133, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+  m_PrefabInstance: {fileID: 76589270}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc9c532f4f12cc84c8844d8c27e5affb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &143755029
 GameObject:
   m_ObjectHideFlags: 0
@@ -1468,17 +1479,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 500977805}
   m_CullTransparentMesh: 1
---- !u!114 &522463888 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6557352867085563911, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
-  m_PrefabInstance: {fileID: 76589270}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc9c532f4f12cc84c8844d8c27e5affb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &531465105
 GameObject:
   m_ObjectHideFlags: 0
@@ -6235,7 +6235,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1759891335}
   - component: {fileID: 1759891334}
-  - component: {fileID: 1759891333}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -6243,14 +6242,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1759891333
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1759891332}
-  m_Enabled: 1
 --- !u!20 &1759891334
 Camera:
   m_ObjectHideFlags: 0
@@ -6553,7 +6544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 598cd86d57f711c46ae13f38cec80b30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mTimer: {fileID: 522463888}
+  _mTimer: {fileID: 76589272}
   _cash: {fileID: 1398139708}
   _sceneCamera: {fileID: 1759891334}
   _loosePanel: {fileID: 1438571919}

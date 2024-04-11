@@ -17,7 +17,7 @@ public class YouReBannedGameManager : MiniGameManager
     void Update()
     {
         bool mStatus = true;
-        if (_mTimer.timerValue != 0)
+        if (_mTimer.TimerValue != 0)
             return;
         CommentSpawner.CommentSharedInstance.StopAllComments();
         List<GameObject> mComments = CommentSpawner.CommentSharedInstance.GetActiveComments();
@@ -34,7 +34,7 @@ public class YouReBannedGameManager : MiniGameManager
 
     IEnumerator  SpawnComments()
     {
-        while (_mTimer.timerValue >= 420) {
+        while (_mTimer.TimerValue >= 3) {
             yield return new WaitForSeconds((_mCount == 0) ? 0 : _mAverageSpawnRate);
             GameObject mComment = CommentSpawner.CommentSharedInstance.GetPooledComment();
             _mCount++;
