@@ -81,6 +81,7 @@ public class GetBenchManager : MiniGameManager
 
                 _mButtons[i].SetActive(false);
             }
+            StopCoroutine("SpawnButtons");
             OnGameEnd(true);
         }
     }
