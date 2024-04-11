@@ -10,9 +10,9 @@ public class FeelTheProtsManager : MiniGameManager
     {
         _interactableManager.OnEndGame += HandleEndGame;
         _interactableManager.Bars.transform.position = new Vector3(_interactableManager.Bars.transform.position.x, 
-            Random.Range(-0.65f, -1.75f));
+            Random.Range(-1f, -2.2f));
         _interactableManager.Bars.transform.localScale = new Vector3(_interactableManager.Bars.transform.localScale.x, 
-            2.5f - (float)GameManager.instance.FasterLevel / 10 + 0.2f);
+            2.5f - (float)GameManager.instance.FasterLevel / 2);
     }
 
     private void HandleEndGame(bool win)
