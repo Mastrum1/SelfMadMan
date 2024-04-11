@@ -3,9 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using NaughtyAttributes;
-using Unity.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,12 +23,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Player _mPlayer;
     public Player Player { get => _mPlayer; }
 
-    private Dictionary<int,bool> _unlockedEra = new Dictionary<int,bool>();
-
+    private List<bool> _unlockedEra = new List<bool>();
+    public List<bool> UnlockedEra { get => _unlockedEra; }
 
     private float _mScore;
     public float Score { get => _mScore; private set => _mScore = value; }
-    [SerializeField] int _mHearts;
+    public int _mHearts;
 
     private bool _mGameOver;
 
@@ -71,13 +69,18 @@ public class GameManager : MonoBehaviour
         _mScore = 0;
 
 
-
-        _unlockedEra.Add(0, true);
-
         _mQuestManager = QuestManager.instance;
         _mQuestManager.OnReward += AddStars;
         _mPlayer.LoadJson();
+        InitEras();
         _mScoring = new Scoring();
+    }
+
+    private void InitEras()
+    {
+        _unlockedEra.Add(true);
+        _unlockedEra.Add(false);
+        _unlockedEra.Add(false);
     }
     public void ResetGame()
     {
@@ -169,13 +172,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void OnApplicationQuit()
+
+    void OnApplicationFocus(bool hasFocus)
+    {
+        if (!hasFocus)
+        {
+            _mPlayer.SaveJson();
+        }
+    }
+
+    void OnApplicationQuit()
     {
         _mPlayer.SaveJson();
     }
     private void OnDestroy()
     {
-       // _mQuestManager.OnReward -= AddStars;
+        // _mQuestManager.OnReward -= AddStars;
 
     }
 }
