@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class CleanKitchenManager : MiniGameManager
 {
@@ -9,8 +8,7 @@ public class CleanKitchenManager : MiniGameManager
     [SerializeField] private TextMeshProUGUI _roachAmount;
     [SerializeField] private GameObject _clickAnim;
     private int _numOfCockroaches;
-    private Vector3 _clickAnimOffset;
-    private Vector3 _clickAnimPos; 
+
     public override void Awake()
     {
         base.Awake();
@@ -21,7 +19,6 @@ public class CleanKitchenManager : MiniGameManager
     private void Start()
     {
         Amount = 0;
-        _clickAnimOffset = new Vector3(0f,0f,10f); 
         _roachRemainder.text = Amount.ToString();
         _roachAmount.text = "/" + _numOfCockroaches;
         _interactableManager.OnRoachDeath += IncrementQuestAmount;
@@ -37,14 +34,8 @@ public class CleanKitchenManager : MiniGameManager
 
     public void PlayTapAnim(Vector3 pos)
     {
-        _clickAnimPos = pos += _clickAnimOffset;
-    }
-
-    public void PlayTapAnim2()
-    {
-        Debug.Log("nigga");
-        if (_clickAnim.activeSelf) _clickAnim.SetActive(false);
-        _clickAnim.transform.position = _clickAnimPos;
+        if (_clickAnim.activeSelf) _clickAnim.SetActive(false); 
+        _clickAnim.transform.position = pos;
         _clickAnim.SetActive(true);
     }
 

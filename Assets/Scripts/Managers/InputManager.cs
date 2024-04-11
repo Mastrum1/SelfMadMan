@@ -273,10 +273,13 @@ public class InputManager : MonoBehaviour
 
             if (_mSelectedObject != null && _mOnTapObject != null)
             {
-                _mOnTapObject?.Invoke();
+                _mOnTapObject.Invoke();
             }
         }
+        else
+        {
             _mOnTap?.Invoke();
+        }
     }
 
 
