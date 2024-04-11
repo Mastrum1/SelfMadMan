@@ -47,8 +47,7 @@ public class ShakeItUpInteractableManager : InteractableManager
 
     private void IncreaseNumDead()
     {
-        _numProteinDead++;
-        if (_numProteinDead >= 4)
+        if (++_numProteinDead >= _numOfProteins)
         {
             OnGameEnd?.Invoke(true);
         }

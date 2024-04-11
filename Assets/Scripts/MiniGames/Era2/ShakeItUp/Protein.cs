@@ -13,7 +13,7 @@ public class Protein : MonoBehaviour
     public float Resistance { get => _resistance; set => _resistance = value; }
     private Vector3 _scale;
 
-    void Start()
+    private void Start()
     {
         _scale = transform.localScale;
     }
@@ -36,17 +36,17 @@ public class Protein : MonoBehaviour
 
     private void CheckDeath()
     {
-        if (!(_scale.x < 0.05f)) return;
+        if (!(_scale.x < 0.05f) || _deathEffect.activeSelf) return;
         
         _deathEffect.SetActive(true);
+        GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<CircleCollider2D>().enabled = false;
         OnDeath?.Invoke();
-        gameObject.SetActive(false);
-        //StartCoroutine(SetActiveFalse());
     }
 
-    private IEnumerator SetActiveFalse()
+    private IEnumerator Disable()
     {
+        yield return new WaitForSeconds(0.5f);
         gameObject.SetActive(false);
-        yield return new WaitForSeconds(1f);
     }
 }
