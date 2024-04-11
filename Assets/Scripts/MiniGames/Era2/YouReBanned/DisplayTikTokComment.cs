@@ -8,10 +8,17 @@ using System;
 
 public class DisplayTikTokComment : MonoBehaviour
 {
+    //Search for a way to add more than 1 color to textmeshpro
     [SerializeField] TikTokCommentData _mData;
     [SerializeField] TMP_Text _mComment;
-    [SerializeField] SpriteRenderer _mProfilPicture;
-    [SerializeField] SpriteRenderer _mDeletePicture;
+
+    [Header("Profile SO")]
+    [SerializeField] List<Girls> _mProfileSO;
+
+    [Header("Profile Picture Image")]
+    [SerializeField] List<Image> _mProfilPicture;
+    [SerializeField] List<Image> _mDeletePicture;
+
     [SerializeField] Sprite _mBaseState;
     [SerializeField] Sprite _mDeleteState;
     private bool _mIsEnable;
@@ -23,8 +30,7 @@ public class DisplayTikTokComment : MonoBehaviour
     {
         _mIsEnable = true;
         _mIsDeleted = false;
-        _mComment.text = _mData.CommentContent;
-        _mProfilPicture.sprite = _mData.ProfilPicture;
+        //Spawn texts + pictures
     }
 
     void OnTriggerEnter2D(Collider2D collider2D)
@@ -40,7 +46,7 @@ public class DisplayTikTokComment : MonoBehaviour
     {
         if (_mIsEnable) {
             _mIsDeleted = true;
-            _mDeletePicture.sprite = _mDeleteState;
+           // _mDeletePicture.sprite = _mDeleteState;
             Disable();
             DeleteComment?.Invoke(_mData.IsGood, this.transform.gameObject);
         }
@@ -48,7 +54,7 @@ public class DisplayTikTokComment : MonoBehaviour
 
     public void ResetComment()
     {
-        _mDeletePicture.sprite = _mBaseState;
+        //_mDeletePicture.sprite = _mBaseState;
         _mIsEnable = true;
         _mIsDeleted = false;
     }
