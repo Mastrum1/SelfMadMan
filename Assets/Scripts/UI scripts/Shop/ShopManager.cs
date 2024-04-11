@@ -79,10 +79,18 @@ public class ShopManager : MonoBehaviour
 
     public void PurchaseItem(ItemsSO item) 
     {
-        if (ItemsSO.TYPE.COINS == item.Type)
+        if (item.Type == ItemsSO.TYPE.COINS)
         {
-            CoinsSO coinSO = (CoinsSO)item;
-            _mMoney.AddMoney(coinSO.Amount);
+            Coins coin = new Coins();
+            CoinsSO coinSO = item as CoinsSO;
+            coin.Amount = coinSO.Amount;
+            Items items = coin;
+
+            if (items != null)
+            {
+                Debug.Log(coin.Amount);
+                items.Obtain();
+            }
         }
     }
 }
