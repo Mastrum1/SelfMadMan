@@ -69,6 +69,7 @@ public class MiniGameSelector : MonoBehaviour
                 if (AllMinigames[i][j].SceneName == SceneName)
                 {
                     AllMinigames[i][j].Unlock();
+                    //QuestManager.instance.OnUnlockQuest()
                     GameManager.instance.GetComponent<Player>().UnlockMinigame(i, j);
                     break; 
                 }

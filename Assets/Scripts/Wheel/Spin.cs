@@ -63,7 +63,7 @@ public class Spin : MonoBehaviour
                 int randomIndex = UnityEngine.Random.Range(0, _MinigamesSO.Count);
                 temp = _MinigamesSO[randomIndex];
 
-            } while (!GameManager.instance.UnlockedEra[temp.Era - 1]);
+            } while (!GameManager.instance.ErasData[temp.Era - 1].Unlocked);
                             _quarters[i].InitQuarter(temp);
         }
         for(int i = 2; i < 8; i++)
