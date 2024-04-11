@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CasinoInteractableManager : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class CasinoInteractableManager : MonoBehaviour
 
     [SerializeField] private List<GameObject> _mRightUpArrows;
     [SerializeField] private List<GameObject> _mRightDownArrows;
+
+    [SerializeField] private List<Image> _mBackgrounds;
 
     [SerializeField] private List<GameObject> _mStopPos;
 
@@ -173,10 +176,11 @@ public class CasinoInteractableManager : MonoBehaviour
                             }
                         }
                     }
-                    _mMiddleUpArrows[0].SetActive(false);
-                    _mMiddleUpArrows[1].SetActive(true);
-                    _mMiddleDownArrows[0].SetActive(false);
-                    _mMiddleDownArrows[1].SetActive(true);
+                    _mMiddleUpArrows[0].SetActive(true);
+                    _mMiddleUpArrows[1].SetActive(false);
+                    _mMiddleDownArrows[0].SetActive(true);
+                    _mMiddleDownArrows[1].SetActive(false);
+                    _mBackgrounds[0].color = new Color(_mBackgrounds[0].color.r, _mBackgrounds[0].color.g, _mBackgrounds[0].color.b, 255);
                     break;
                 case 1:
                     for (int i = 0; i < _mMiddleObjects.Count; i++)
@@ -204,10 +208,11 @@ public class CasinoInteractableManager : MonoBehaviour
                             }
                         }
                     }
-                    _mRightUpArrows[0].SetActive(false);
-                    _mRightUpArrows[1].SetActive(true);
-                    _mRightUpArrows[0].SetActive(false);
-                    _mRightUpArrows[1].SetActive(true);
+                    _mRightUpArrows[0].SetActive(true);
+                    _mRightUpArrows[1].SetActive(false);
+                    _mRightDownArrows[0].SetActive(true);
+                    _mRightDownArrows[1].SetActive(false);
+                    _mBackgrounds[1].color = new Color(_mBackgrounds[1].color.r, _mBackgrounds[1].color.g, _mBackgrounds[1].color.b, 255);
 
 
                     break;
@@ -243,7 +248,9 @@ public class CasinoInteractableManager : MonoBehaviour
             if (_mIndex > 2 && !_mLost)
             {
                 _mIndex = 0;
-                StartCoroutine(Wait());
+                OnGameEnd?.Invoke(true);
+
+                //StartCoroutine(Wait());
             }
         }
     }

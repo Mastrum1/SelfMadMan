@@ -25,6 +25,12 @@ public class ObjectScrolling : MonoBehaviour
         Started = true;
     }
 
+    private void Start()
+    {
+        _mSpeed = _mSpeed * GameManager.instance.FasterLevel;
+        _mEndMoveSpeed = _mEndMoveSpeed * GameManager.instance.FasterLevel;
+    }
+
     void Update()
     {
         if (Started)
