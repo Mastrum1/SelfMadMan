@@ -28,10 +28,9 @@ public class ContentManager : MonoBehaviour
 
     void Start()
     {
-        // Initialize dots
+        _mCurrentIndex = GameManager.instance.Era;
+        _mLockEraPanel.SetActive(GameManager.instance.UnlockedEra[GameManager.instance.Era] ? false : true);
         InitializeDots();
-
-        // Display initial content
         ShowContent();
     }
 

@@ -3,9 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using NaughtyAttributes;
-using Unity.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -174,7 +172,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void OnApplicationQuit()
+
+    void OnApplicationFocus(bool hasFocus)
+    {
+        if (!hasFocus)
+        {
+            _mPlayer.SaveJson();
+        }
+    }
+
+    void OnApplicationQuit()
     {
         _mPlayer.SaveJson();
     }
