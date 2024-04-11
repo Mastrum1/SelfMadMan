@@ -15,11 +15,18 @@ public class GetBenchManager : MiniGameManager
 
     [SerializeField] private List<TapWithTimer> _mButtonsScript;
 
-    [SerializeField] private List<CircleCollider2D> _mButtonsCollider;
+
+    [SerializeField] private List<ChangeSpawn> _mButtonsChangeSpawn;
 
     [SerializeField] private List<TextMeshProUGUI> _mButtonsText;
 
     [SerializeField] private BoxCollider2D _mSpawnBounds;
+
+    private float _mMinX;
+    private float _mMinY;
+    private float _mMaxX;
+    private float _mMaxY;
+
 
     private bool _mIsSpawning = false;
 
@@ -32,10 +39,19 @@ public class GetBenchManager : MiniGameManager
 
     private int _mNbRep = 0;
 
+    public override void Awake()
+    {
+        base.Awake();
+        _mInteractableManager.OnGameEnd += OnGameEnd;
+        _mInteractableManager.OnChangeSpawnState += ChangeState;
+    }
 
     private void Start()
     {
-        _mInteractableManager.OnGameEnd += OnGameEnd;
+        _mMinX = _mSpawnBounds.bounds.min.x;
+        _mMinY = _mSpawnBounds.bounds.min.y;
+        _mMaxX = _mSpawnBounds.bounds.max.x;
+        _mMaxY = _mSpawnBounds.bounds.max.y;
     }
 
     void OnGameEnd(bool win)
@@ -60,7 +76,12 @@ public class GetBenchManager : MiniGameManager
     {
         if (_mTimer.TimerValue == 0)
         {
-            Debug.Log("Time's up");
+            for (int i = 0; i < _mButtons.Count; i++)
+            {
+
+                _mButtons[i].SetActive(false);
+            }
+            StopCoroutine("SpawnButtons");
             OnGameEnd(true);
         }
     }
@@ -91,51 +112,10 @@ public class GetBenchManager : MiniGameManager
         }
     }
 
-    private void CheckCollide()
+    private void ChangeState()
     {
-        _mIsSpawning = true;
-        bool ChangeSpawn = false;
-
-        for (int i = 0; i < _mButtons.Count - 1; i++)
-        {
-            if (i == _mIndexToActivate)
-            {
-                continue;
-            }
-            if (!_mButtonsScript[i].StopTorus && _mButtons[i].activeSelf)
-            {
-                CircleCollider2D collider = _mButtons[_mIndexToActivate].GetComponent<CircleCollider2D>();
-                if (collider.transform.position.x - collider.bounds.extents.x < _mButtonsCollider[i].transform.position.x + _mButtonsCollider[i].bounds.extents.x && collider.transform.position.x - collider.bounds.extents.x > _mButtonsCollider[i].transform.position.x - _mButtonsCollider[i].bounds.extents.x ||
-                    collider.transform.position.x + collider.bounds.extents.x < _mButtonsCollider[i].transform.position.x + _mButtonsCollider[i].bounds.extents.x && collider.transform.position.x + collider.bounds.extents.x > _mButtonsCollider[i].transform.position.x - _mButtonsCollider[i].bounds.extents.x ||
-                    collider.transform.position.y - collider.bounds.extents.y < _mButtonsCollider[i].transform.position.y + _mButtonsCollider[i].bounds.extents.y && collider.transform.position.y - collider.bounds.extents.y > _mButtonsCollider[i].transform.position.y - _mButtonsCollider[i].bounds.extents.y ||
-                    collider.transform.position.y + collider.bounds.extents.y < _mButtonsCollider[i].transform.position.y + _mButtonsCollider[i].bounds.extents.y && collider.transform.position.y + collider.bounds.extents.y > _mButtonsCollider[i].transform.position.y - _mButtonsCollider[i].bounds.extents.y)
-                {
-                    ChangeSpawn = true;
-                    break;
-                }
-            }
-        }
-        if (ChangeSpawn)
-        {
-            _mButtons[_mIndexToActivate].transform.position = new Vector3(
-               Random.Range(_mSpawnBounds.bounds.min.x, _mSpawnBounds.bounds.max.x),
-               Random.Range(_mSpawnBounds.bounds.min.y, _mSpawnBounds.bounds.max.y),
-               _mButtons[_mIndexToActivate].transform.position.z
-               );
-            CheckCollide();
-
-
-        }
-        else
-        {
-            _mIsSpawning = false;
-            _mButtons[_mIndexToActivate].GetComponent<SpriteRenderer>().enabled = true;
-            _mButtonsText[_mIndexToActivate].enabled = true;
-            _mButtonsScript[_mIndexToActivate].Torus.GetComponent<SpriteRenderer>().enabled = true;
-            _mButtonsScript[_mIndexToActivate].StopTorus = false;
-        }
+        _mIsSpawning = false;
     }
-
     private IEnumerator SpawnButtons()
     {
         while (true)
@@ -149,7 +129,7 @@ public class GetBenchManager : MiniGameManager
                 }
                 if (_mButtons[_mIndexToActivate].activeSelf == true)
                 {
-                    yield return new WaitForSeconds(_mCircleSpawnTime);
+                    yield return new WaitForSeconds(_mCircleSpawnTime / GameManager.instance.FasterLevel);
                 }
                 else
                 {
@@ -157,9 +137,14 @@ public class GetBenchManager : MiniGameManager
                     _mNumberToShow++;
                     _mButtonsText[_mIndexToActivate].text = _mNumberToShow.ToString();
                     _mButtons[_mIndexToActivate].SetActive(true);
-                    CheckCollide();
+                    _mButtons[_mIndexToActivate].transform.position = new Vector3(
+                    Random.Range(_mMinX, _mMaxX),
+                    Random.Range(_mMinY, _mMaxY),
+                    -2
+                    );
+                    _mIsSpawning = true;
                 }
-                yield return new WaitForSeconds(_mCircleSpawnTime);
+                yield return new WaitForSeconds(_mCircleSpawnTime / GameManager.instance.FasterLevel);
             }
             else
             {

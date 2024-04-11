@@ -6,9 +6,10 @@ using System.Collections;
 
 public class TapWithTimer : MonoBehaviour
 {
-    [SerializeField] private GetBenchManager _mBenchManager;
 
     [SerializeField] private float _mMaxTimeFadeOut = 0.1f;
+
+    [SerializeField] private VFXScaleUp _mVFXScaleUp;
 
     public event Action<bool> OnLoose;
     public bool StopTorus { get => _StopTorus; set => _StopTorus = value; }
@@ -17,9 +18,13 @@ public class TapWithTimer : MonoBehaviour
 
     public TextMeshProUGUI Number { get => _Number; private set => _Number = value; }
 
-    [SerializeField] private TextMeshProUGUI _Number;
+    [SerializeField] private float scaleUpDuration = 0.5f;
 
-    [SerializeField] private ChangeSpawn _mChangeSpawn;
+    [SerializeField] private SpriteRenderer _mSpriteRenderer;
+
+    [SerializeField] private SpriteRenderer _mTorusSpriteRenderer;
+
+    [SerializeField] private TextMeshProUGUI _Number;
 
     [SerializeField] private float _mMaxScale = 2.5f;
 
@@ -34,18 +39,20 @@ public class TapWithTimer : MonoBehaviour
 
     [SerializeField] private GameObject _mTorus;
 
+    private float _mDecrease;
+
     [SerializeField] private float _mDecreaseSpeed;
 
     void OnEnable()
     {
         _mTorus.transform.localScale = new Vector3(_mMaxScale, _mMaxScale, _mMaxScale);
-        _mChangeSpawn.enabled = true;
         _Number.color = new Color(_Number.color.r, _Number.color.g, _Number.color.b, 255);
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(gameObject.GetComponent<SpriteRenderer>().color.r, gameObject.GetComponent<SpriteRenderer>().color.g, gameObject.GetComponent<SpriteRenderer>().color.b, 255);
-        _mTorus.GetComponent<SpriteRenderer>().color = new Color(_mTorus.GetComponent<SpriteRenderer>().color.r, _mTorus.GetComponent<SpriteRenderer>().color.g, _mTorus.GetComponent<SpriteRenderer>().color.b, 255);
+        _mSpriteRenderer.color = new Color(_mSpriteRenderer.color.r, _mSpriteRenderer.color.g, _mSpriteRenderer.color.b, 255);
         _Number.enabled = false;
-        _mTorus.GetComponent<SpriteRenderer>().enabled = false;
-        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        _mTorusSpriteRenderer.color = new Color(_mTorusSpriteRenderer.color.r, _mTorusSpriteRenderer.color.g, _mTorusSpriteRenderer.color.b, 255);
+        gameObject.transform.localScale = new Vector3(0.35f, 0.35f, 0.35f);
+        _mTorusSpriteRenderer.enabled = false;
+        _mSpriteRenderer.enabled = false;
     }
 
     // Update is called once per frame
@@ -53,17 +60,23 @@ public class TapWithTimer : MonoBehaviour
     {
         if (!StopTorus)
         {
-            _mTorus.transform.localScale -= new Vector3(Time.deltaTime * _mDecreaseSpeed, Time.deltaTime * _mDecreaseSpeed, Time.deltaTime * _mDecreaseSpeed);
+            
+            _mTorus.transform.localScale -= new Vector3(Time.deltaTime * _mDecreaseSpeed * GameManager.instance.FasterLevel, Time.deltaTime * _mDecreaseSpeed * GameManager.instance.FasterLevel, Time.deltaTime * _mDecreaseSpeed * GameManager.instance.FasterLevel);
             if (_mTorus.transform.localScale.x < _mMinTimeForClick)
             {
+                _StopTorus = true;
                 OnLoose?.Invoke(false);
-                gameObject.SetActive(false);
+                _mTorus.SetActive(false);
+                _mVFXScaleUp.OnObjectClicked();
             }
         }
     }
 
     public void ObjectTaped()
     {
+        _StopTorus = true;
+        _mTorus.SetActive(false);
+
         if (_mTorus.transform.localScale.x < _mPerfectTiming && _mTorus.transform.localScale.x > _mMinTimeForClick)
         {
             Debug.Log("Perfect click");
@@ -83,14 +96,16 @@ public class TapWithTimer : MonoBehaviour
         }
         else
         {
+            _mVFXScaleUp.OnObjectClicked();
             OnLoose?.Invoke(false);
         }
     }
 
     private IEnumerator FadeOut()
     {
+        _StopTorus = true;
         float counter = 0;
-
+        StartCoroutine(ScaleUp());
         while (counter < _mMaxTimeFadeOut)
         {
             _StopTorus = true;
@@ -99,13 +114,11 @@ public class TapWithTimer : MonoBehaviour
             //Fade from 1 to 0
             float alpha = Mathf.Lerp(1, 0, counter / _mMaxTimeFadeOut);
 
-            Debug.Log(alpha);
-
             _Number.color = new Color(_Number.color.r, _Number.color.g, _Number.color.b, alpha);
 
-            gameObject.GetComponent<SpriteRenderer>().color = new Color(gameObject.GetComponent<SpriteRenderer>().color.r, gameObject.GetComponent<SpriteRenderer>().color.g, gameObject.GetComponent<SpriteRenderer>().color.b, alpha);
+            _mSpriteRenderer.color = new Color(_mSpriteRenderer.color.r, _mSpriteRenderer.color.g, _mSpriteRenderer.color.b, alpha);
 
-            _mTorus.GetComponent<SpriteRenderer>().color = new Color(_mTorus.GetComponent<SpriteRenderer>().color.r, _mTorus.GetComponent<SpriteRenderer>().color.g, _mTorus.GetComponent<SpriteRenderer>().color.b, alpha);
+            _mTorusSpriteRenderer.color = new Color(_mTorusSpriteRenderer.color.r, _mTorusSpriteRenderer.color.g, _mTorusSpriteRenderer.color.b, alpha);
 
             //Wait for a frame
             yield return null;
@@ -115,4 +128,22 @@ public class TapWithTimer : MonoBehaviour
         StopCoroutine(FadeOut());
 
     }
+
+    private IEnumerator ScaleUp()
+    {
+        // Scale up to 1.3
+        float timer = 0f;
+        Vector3 targetScale = gameObject.transform.localScale * 1.5f;
+
+        while (timer < scaleUpDuration)
+        {
+            transform.localScale = Vector3.Lerp(gameObject.transform.localScale, targetScale, timer / scaleUpDuration);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        gameObject.SetActive(false);
+
+    }
+
 }
