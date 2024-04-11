@@ -9,6 +9,6 @@ public class MilkQuad : MonoBehaviour
 
         if (!_milk.gameObject.activeSelf) _milk.gameObject.SetActive(true);
 
-        transform.localScale += new Vector3(0, 1.2f + (float)GameManager.instance.FasterLevel/20 * Time.deltaTime, 0);
+        transform.localScale += new Vector3(0, (1.2f + (float)GameManager.instance.FasterLevel/60) * Time.deltaTime, 0);
     }
 }

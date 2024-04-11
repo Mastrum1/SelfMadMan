@@ -1,32 +1,30 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ShakeItUpInteractableManager : InteractableManager
 {
     public event Action<bool> OnGameEnd;
     
-    [SerializeField] private GameObject _proteinParent;
     [SerializeField] private int _numOfProteins;
-
-    private readonly List<Protein> _proteins = new List<Protein>();
+    [SerializeField] private List<Protein> _proteins;
+    
     private int _numProteinDead;
 
     private void Start()
     {
-        for (int i = 0; i < _proteinParent.transform.childCount; i++)
-        {
-            var proteinChild = _proteinParent.transform.GetChild(i).GetComponent<Protein>();
-            _proteins.Add(proteinChild);
-            if (proteinChild is null) break;
-            
-            proteinChild.OnDeath += IncreaseNumDead;
-        }
+        _numProteinDead = 0;
         
-        SpawnProteins();
+        EnableProteins();
+        
+        foreach (var protein in _proteins.Where(protein => protein.gameObject.activeSelf))
+        {
+            protein.OnDeath += IncreaseNumDead;
+        }
     }
 
-    private void SpawnProteins()
+    private void EnableProteins()
     {
         for (var i = 0; i < _numOfProteins; i++)
         {
@@ -49,30 +47,17 @@ public class ShakeItUpInteractableManager : InteractableManager
 
     private void IncreaseNumDead()
     {
-        _numProteinDead++;
-    }
-
-    private void Update()
-    {
-        if (_numProteinDead >= 4)
+        if (++_numProteinDead >= _numOfProteins)
         {
-            HandleEndGame();
+            OnGameEnd?.Invoke(true);
         }
     }
 
-    private void HandleEndGame()
+    private void OnDisable()
     {
-        OnGameEnd?.Invoke(true);
-    }
-
-    private void OnDestroy()
-    {
-        for (int i = 0; i < _proteinParent.transform.childCount; i++)
+        foreach (var protein in _proteins.Where(protein => protein.gameObject.activeSelf))
         {
-            var proteinChild = _proteinParent.transform.GetChild(i).GetComponent<Protein>();
-            if (proteinChild is null) return;
-            
-            proteinChild.OnDeath -= IncreaseNumDead;
+            protein.OnDeath -= IncreaseNumDead;
         }
     }
 }

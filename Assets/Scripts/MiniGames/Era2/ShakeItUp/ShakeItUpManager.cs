@@ -41,7 +41,7 @@ public class ShakeItUpManager : MiniGameManager
 
     public void ApplyAccelerometerForce(Vector3 force)
     {
-        var speed = 15;
+        const int speed = 15;
 
         foreach (var particle in _waterParticle)
         {
