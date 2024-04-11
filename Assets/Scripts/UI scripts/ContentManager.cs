@@ -13,6 +13,9 @@ public class ContentManager : MonoBehaviour
     [SerializeField] private List<Sprite> _mSprites;
     [SerializeField] private List<Sprite> _mJamesForms;
 
+    [SerializeField] private List<Image> _mImagesToDeactivate;
+    [SerializeField] private List<TMP_Text> _mTextsToDeactivate;
+
     [Header("Navigation Dots")]
     [SerializeField] private GameObject _mDotsContainer;
     [SerializeField] private GameObject _mDotPrefab;
@@ -21,6 +24,7 @@ public class ContentManager : MonoBehaviour
     public int CurrentIndex { get => _mCurrentIndex; set => _mCurrentIndex = value; }
     [Header("Page Settings")]
     [SerializeField] private int _mCurrentIndex = 0;
+    [SerializeField] private GameObject _mLockEraPanel;
 
     void Start()
     {
@@ -61,6 +65,7 @@ public class ContentManager : MonoBehaviour
     {
         _mCurrentIndex = (_mCurrentIndex + i + _mSprites.Count) % _mSprites.Count;
         GameManager.instance.Era = _mCurrentIndex + 1;
+        _mLockEraPanel.SetActive(GameManager.instance.UnlockedEra[GameManager.instance.Era] ? false : true );
         ShowContent();
         UpdateDots();
     }

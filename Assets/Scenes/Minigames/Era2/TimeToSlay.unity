@@ -510,6 +510,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6805509144928125002, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
   m_PrefabInstance: {fileID: 76589270}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &76589272 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8430481896359637133, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+  m_PrefabInstance: {fileID: 76589270}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc9c532f4f12cc84c8844d8c27e5affb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &93804814 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 79422935067397255, guid: 69fa8e5a61a6f704bb2a1c2108774f0e, type: 3}
@@ -4503,10 +4514,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 579463847}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -35, y: 895}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -35.5, y: 31}
+  m_SizeDelta: {x: 199, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1201402693
 MonoBehaviour:
@@ -7377,17 +7388,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7261965181194596054, guid: 7c5f1bd688cae804ab4a3000308bc878, type: 3}
   m_PrefabInstance: {fileID: 1991620608}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1894410158 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6557352867085563911, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
-  m_PrefabInstance: {fileID: 76589270}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc9c532f4f12cc84c8844d8c27e5affb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1898343494
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7640,7 +7640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e218d4086bd70534cbfe3f4955191a65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mTimer: {fileID: 1894410158}
+  _mTimer: {fileID: 76589272}
   _cash: {fileID: 1945612194}
   _sceneCamera: {fileID: 1759891334}
   _loosePanel: {fileID: 1438571919}

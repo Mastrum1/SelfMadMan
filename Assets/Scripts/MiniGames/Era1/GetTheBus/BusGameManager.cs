@@ -33,8 +33,6 @@ public class BusGameManager : MiniGameManager
             return;
         if (_mIsPaused)
             EndGame(_mCatch);
-        if (_mTimer.timerValue == 0)
-            EndGame(false);
     }
 
     void EndGame(bool isWin)

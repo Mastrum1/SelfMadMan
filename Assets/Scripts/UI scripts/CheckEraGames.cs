@@ -37,7 +37,6 @@ public class CheckEraGames : MonoBehaviour
         for (int i = 0; i < minigame.Count; i++)
         {
             _mMinigameContainerList[i].EraGameName.text = minigame[i].SceneName;
-            Debug.Log("Current index : " + i);
             //minigameContainerScript.EraGameIcon.sprite = minigame[i].Icon;
             if (minigame[i].Locked)
             {
