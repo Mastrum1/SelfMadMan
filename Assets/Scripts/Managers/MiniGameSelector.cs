@@ -61,20 +61,18 @@ public class MiniGameSelector : MonoBehaviour
 
     public void UnlockMinigame(string SceneName)
     {
-        int eraIndex = 0;
-        int gameIndex = 0;
-        foreach (var era in AllMinigames)
+
+        for(int i = 0; i < AllMinigames.Count; i++)
         {
-            eraIndex++;
-            foreach (var game in era)
+            for (int j = 0; j < AllMinigames[i].Count; j++)
             {
-                if (game.SceneName == SceneName)
+                if (AllMinigames[i][j].SceneName == SceneName)
                 {
-                    game.Unlock();
-                    GameManager.instance.GetComponent<Player>().UnlockMinigame(eraIndex, gameIndex);
+                    AllMinigames[i][j].Unlock();
+                    GameManager.instance.GetComponent<Player>().UnlockMinigame(i, j);
                     break; 
                 }
-                gameIndex++;
+
             }
         }
     }
