@@ -57,6 +57,8 @@ public class Player : MonoBehaviour
         public List<FournituresClass> Fournitures { get => _fournitures; set => _fournitures = value; }
     }
 
+    [SerializeField] private bool _mLoadSaveMinigame = false;
+
 
     public event Action<PlayerData> OnDataLoad;
 
@@ -247,7 +249,10 @@ public class Player : MonoBehaviour
                 AllQuest[item].QuestCompletionState = QuestManager.CompletionState.NotSelected;
             }
 
-            //MiniGameSelector.instance.LoadEra(AllEra1, AllEra2, AllEra3);
+            if (_mLoadSaveMinigame)
+            {
+                MiniGameSelector.instance.LoadEra(AllEra1, AllEra2, AllEra3);
+            }
             QuestManager.instance.LoadQuests(AllQuest, ActiveQuests);
         }
 
