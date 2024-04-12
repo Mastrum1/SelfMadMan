@@ -543,7 +543,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <b><size=0.8em>Melissa</size></b>,   <size=1em>21</size>
+  m_text: <b><size=0.8em>Melissa</size></b>, <size=1em>21</size>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 63d1cb333f678a94c835c748d1d19fdb, type: 2}
   m_sharedMaterial: {fileID: 5875027089109249916, guid: 63d1cb333f678a94c835c748d1d19fdb, type: 2}
@@ -1408,7 +1408,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.2977, y: -2.33}
+  m_AnchoredPosition: {x: -0.2977, y: -2.41}
   m_SizeDelta: {x: 703.4846, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &378654982
@@ -2205,6 +2205,7 @@ GameObject:
   - component: {fileID: 692571119}
   - component: {fileID: 692571118}
   - component: {fileID: 692571117}
+  - component: {fileID: 692571120}
   m_Layer: 2
   m_Name: Yes
   m_TagString: Untagged
@@ -2325,6 +2326,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 692571115}
   m_CullTransparentMesh: 1
+--- !u!114 &692571120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692571115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0c7f525ef7fefe4e9c7a083eebda77c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mButton: {fileID: 692571116}
 --- !u!1 &702387155
 GameObject:
   m_ObjectHideFlags: 0
@@ -2679,7 +2693,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 36.16527, y: -73}
+  m_AnchoredPosition: {x: 36.16527, y: -59}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &725831761
@@ -2992,7 +3006,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -45.834747, y: -0.000012397766}
+  m_AnchoredPosition: {x: -45.834747, y: -0.00001239777}
   m_SizeDelta: {x: 3.1656, y: 0.7689}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &791975282
@@ -4018,6 +4032,7 @@ GameObject:
   - component: {fileID: 925018370}
   - component: {fileID: 925018369}
   - component: {fileID: 925018368}
+  - component: {fileID: 925018371}
   m_Layer: 2
   m_Name: No
   m_TagString: Untagged
@@ -4138,6 +4153,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 925018366}
   m_CullTransparentMesh: 1
+--- !u!114 &925018371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 925018366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0c7f525ef7fefe4e9c7a083eebda77c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mButton: {fileID: 925018367}
 --- !u!1 &971213149
 GameObject:
   m_ObjectHideFlags: 0
@@ -4391,7 +4419,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 38, y: -73}
+  m_AnchoredPosition: {x: 38, y: -59}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1029251900
@@ -5673,7 +5701,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 924866330210954065, guid: 430bcba3b905dce4bafa57219b220e16, type: 3}
       propertyPath: m_PlayOnAwake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 924866330210954065, guid: 430bcba3b905dce4bafa57219b220e16, type: 3}
       propertyPath: m_TargetCamera
@@ -5725,7 +5753,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7957083526004862898, guid: 430bcba3b905dce4bafa57219b220e16, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6022,7 +6050,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -45.834747, y: -0.000012397766}
+  m_AnchoredPosition: {x: -45.834747, y: -0.00001239777}
   m_SizeDelta: {x: 3.1656, y: 0.7689}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1526275534
@@ -6225,8 +6253,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Ad descirption
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 78cf03f9d72d0a742a712261bdf64b65, type: 2}
-  m_sharedMaterial: {fileID: -7433897561652434602, guid: 78cf03f9d72d0a742a712261bdf64b65, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 950e230c5db6cc9468382aadd5228098, type: 2}
+  m_sharedMaterial: {fileID: 5175731487197764857, guid: 950e230c5db6cc9468382aadd5228098, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6250,8 +6278,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6675,7 +6703,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 36.16527, y: -73}
+  m_AnchoredPosition: {x: 36.16527, y: -59}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1738784352
@@ -7182,7 +7210,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 36.16527, y: -73}
+  m_AnchoredPosition: {x: 36.16527, y: -59}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1924305465
@@ -7333,7 +7361,7 @@ MonoBehaviour:
   _cash: {fileID: 1398139708}
   _sceneCamera: {fileID: 1759891334}
   _loosePanel: {fileID: 1438571919}
-  _mTotalNbSwipeRight: 10
+  _mTotalNbSwipe: 7
   _mInteractables: {fileID: 1207378746}
   _mCanvas: {fileID: 2057077891}
   _mProfile: {fileID: 2109063497}
@@ -7398,10 +7426,6 @@ MonoBehaviour:
   - {fileID: 531465108}
   - {fileID: 1325631163}
   - {fileID: 977618108}
-  _mListSliderGirlsAge:
-  - {fileID: 837655174}
-  - {fileID: 1529718768}
-  - {fileID: 224741002}
   _mListSliderGirlsJob:
   - {fileID: 725831762}
   - {fileID: 1738784353}
@@ -7422,6 +7446,8 @@ MonoBehaviour:
   - {fileID: 2084680217}
   - {fileID: 1324492939}
   - {fileID: 1748996257}
+  _mLeftButton: {fileID: 925018371}
+  _mRightButton: {fileID: 692571120}
 --- !u!1 &1951728935
 GameObject:
   m_ObjectHideFlags: 0
