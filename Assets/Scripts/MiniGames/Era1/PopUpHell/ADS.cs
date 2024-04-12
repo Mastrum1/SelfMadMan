@@ -32,7 +32,7 @@ public class ADS : MonoBehaviour
 
     IEnumerator CloseAd()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.3f);
         this.transform.gameObject.SetActive(false); 
     }
 }
