@@ -20,6 +20,7 @@ public class ScoreScreen : MonoBehaviour
     [SerializeField] private PanelOnClick _mPanelOnClick;
     [SerializeField] private GameObject _mPopup;
     [SerializeField] private GameObject _InputManager;
+    [SerializeField] private GameObject _mQuestManager;
 
     private int Timer = 5;
 
@@ -84,13 +85,14 @@ public class ScoreScreen : MonoBehaviour
 
         if (_mContinue)
         {
+            _InputManager.SetActive(false);
             //TO DO;
         }
         else
         {
             OnPanelClicked();
-
             _UIAnimator.SetBool("EndGame", true);
+            _mQuestManager.SetActive(true);
 
             if (GameManager.instance.Score > GameManager.instance.Player.BestScore)
             {
@@ -104,6 +106,7 @@ public class ScoreScreen : MonoBehaviour
     public void ResetScreen()
     {
         _UIAnimator.SetBool("EndGame", false);
+        //_mQuestManager.SetActive(false);
         _mJamesAnimator.SetBool("Idle", true);
         _mJamesAnimator.SetBool("GameOver", false);
         _HeartAnimator.SetInteger("Hearts", 3);
@@ -112,13 +115,18 @@ public class ScoreScreen : MonoBehaviour
     }
     public void RestartGame()
     {
+
         ResetScreen();
+        _InputManager.SetActive(false);
+
         GameManager.instance.OnRestart();
     }
 
     public void GoHome()
     {
         ResetScreen();
+        _InputManager.SetActive(false);
+
         mySceneManager.instance.LoadHomeScreen();
     }
 
