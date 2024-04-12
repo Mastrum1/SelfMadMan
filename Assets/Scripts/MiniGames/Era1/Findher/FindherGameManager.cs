@@ -104,14 +104,14 @@ public class FindherGameManager : MiniGameManager
     private void ShowProfile()
     {
         int pub = Random.Range(0, 100);
-
+        Debug.Log("heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
         if (pub < 50)
         {
             int index = Random.Range(0, _mListPeople.Count);
 
             _mGirlSpriteRenderer.sprite = _mListPeople[index].ProfilePicture;
             _mGirlName.text = _mListPeople[index].GirlName;
-            _mGirlAge.text = _mListPeople[index].Age.ToString();
+            //_mGirlAge.text = _mListPeople[index].Age.ToString();
             _mGirlDescription.text = _mListPeople[index].Description;
             
             int bgIndex = Random.Range(0, _mListImages.Count);
@@ -150,7 +150,7 @@ public class FindherGameManager : MiniGameManager
             _mListSliderGirlsGO[_index].SetActive(true);
             _mListSliderAdsGO[_index].SetActive(false);
             _mListSliderGirlsName[_index].text = _mGirlName.text;
-            _mListSliderGirlsAge[_index].text = _mGirlAge.text;
+           // _mListSliderGirlsAge[_index].text = _mGirlAge.text;
             _mListSliderGirlsJob[_index].text = _mGirlDescription.text;
             _mListSliderImageGirls[_index].sprite = _mGirlSpriteRenderer.sprite;
             _mListSliderImageGirlsBackground[_index].sprite = _mGirlBackground;
