@@ -6,11 +6,11 @@ using UnityEngine;
 
 public class CardiashianManager : MiniGameManager
 {
-    [SerializeField] private CasinoInteractableManager _mInteractableManager;
+    [SerializeField] private CardashianInteractableManager _mInteractableManager;
 
     private void Start()
     {
-        _mInteractableManager.OnGameEnd += OnGameEnd;
+        //_mInteractableManager.OnGameEnd += OnGameEnd;
     }
 
     void OnGameEnd(bool win)
@@ -20,6 +20,6 @@ public class CardiashianManager : MiniGameManager
 
     private void OnDisable()
     {
-        _mInteractableManager.OnGameEnd -= OnGameEnd;
+        //_mInteractableManager.OnGameEnd -= OnGameEnd;
     }
 }
