@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Video;
+using static UnityEditor.Progress;
 
 [System.Serializable]
 public class Player : MonoBehaviour
@@ -44,6 +45,16 @@ public class Player : MonoBehaviour
             _maxAmount = maxAmount;
             _currentAmount = currentAmount;
         }
+    }
+
+    [System.Serializable]
+    public class InventoryClass
+    {
+        private List<UsableItem> _usableItems;
+        public List<UsableItem> UsableItems { get => _usableItems; set => _usableItems = value; }
+
+        private List<FournituresClass> _fournitures;
+        public List<FournituresClass> Fournitures { get => _fournitures; set => _fournitures = value; }
     }
 
 
@@ -92,13 +103,17 @@ public class Player : MonoBehaviour
     [SerializeField] private List<Cinematics> _mUnlockedCinematics;
 
 
-    public List<Items> Inventory { get => _mInventory; private set => _mInventory = value; }
+    public InventoryClass Inventory { get => _mInventory; private set => _mInventory = value; }
 
-    [SerializeField] private List<Items> _mInventory;
+    [SerializeField] private InventoryClass _mInventory;
 
-    public List<Items> ItemLocked { get => _mItemLocked; private set => _mItemLocked = value; }
+    public List<FournituresClass> ItemLocked { get => _mItemLocked; private set => _mItemLocked = value; }
 
-    [SerializeField] private List<Items> _mItemLocked;
+    [SerializeField] private List<FournituresClass> _mItemLocked;
+
+    public List<FournituresClassSO> AllFournituresSO { get => _mAllFournituresSO; private set => _mAllFournituresSO = value; }
+
+    [SerializeField] private List<FournituresClassSO> _mAllFournituresSO;
 
     public List<int> FirstQuests { get => _mFirstQuests; private set => _mFirstQuests = value; }
 
@@ -203,11 +218,13 @@ public class Player : MonoBehaviour
             AllEra2 = data.AllEra2;
             AllEra3 = data.AllEra3;
 
-            foreach (var item in data.Inventory)
+            Inventory = data.Inventory;
+
+            foreach (var item in data.ItemLocked)
             {
-                Inventory.Add(item);
-                ItemLocked.Remove(item);
+                ItemLocked.Add(item);
             }
+
             ActiveQuests = new List<QuestManager.Quest>();
             foreach (var item in data.ActiveQuests)
             {
@@ -313,26 +330,46 @@ public class Player : MonoBehaviour
         VolumeFX = (int)Value;
     }
 
-    public void AddItemInInventory(Items Item)
+    public void AddFournitureInInventory(FournituresClassSO Item)
     {
-        Inventory.Add(Item);
-        ItemLocked.Remove(Item);
+        Inventory.Fournitures.Add(new FournituresClass(Item.GetItemSOID()));
+        ItemLocked.Remove(new FournituresClass(Item.GetItemSOID()));
     }
 
-    public void RemoveItemToInventory(Items Item)
+    public void RemoveFournitureInInventory(FournituresClassSO Item)
     {
-        Inventory.Remove(Item);
-        ItemLocked.Add(Item);
+        Inventory.Fournitures.Remove(Inventory.Fournitures[Inventory.Fournitures.IndexOf(new FournituresClass(Item.GetItemSOID()))]);
+        ItemLocked.Add(new FournituresClass(Item.GetItemSOID()));
     }
 
-    public void AddUsableItemInInventory(Items item)
+    public void AddUsableItemInInventory(UsableItem item)
     {
-        Inventory.Add(item);
+        if (Inventory.UsableItems.Contains(item))
+        {
+            Inventory.UsableItems[Inventory.UsableItems.IndexOf(item)].Quantity += 1;
+            return;
+        }
+        Inventory.UsableItems.Add(item);
     }
 
-    public void RemoveUsableItemInInventory(Items item)
+    public void UseUsableItem(UsableItem item)
     {
-        Inventory.Remove(item);
+        Inventory.UsableItems[Inventory.UsableItems.IndexOf(item)].Quantity -= 1;
+
+        if (Inventory.UsableItems[Inventory.UsableItems.IndexOf(item)].Quantity == 0)
+        {
+            Inventory.UsableItems.Remove(Inventory.UsableItems[Inventory.UsableItems.IndexOf(item)]);
+        }
+    }
+
+    public bool SearchForUsableItem(UsableItem item)
+    {
+        return Inventory.UsableItems.Contains(item);
+    }
+
+    public bool SearchForFournitureItem(FournituresClass item)
+    {
+        return Inventory.Fournitures.Contains(item);
     }
 
     public void AddUnlockedCinematics(Cinematics cinematics)
