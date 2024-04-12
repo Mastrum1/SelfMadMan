@@ -32,6 +32,10 @@ public class Spin : MonoBehaviour
     [SerializeField] private List<MinigameSO> _MinigamesSO;
 
     [SerializeField] private List<Quarter> _quarters;
+
+    [SerializeField] private GameObject _mPopupObtained;
+    [SerializeField] private PopUpObtained _mPopupObtainedScript;
+
     private Quarter _quarter;
     public bool isSpnning = false;
     public float initialSpeed = 500.0f;
@@ -55,7 +59,7 @@ public class Spin : MonoBehaviour
     {
         _minigamesOnWheel = 0;
         _quarters.Shuffle();
-        for(int i = 0; i < 2; i++)
+        for (int i = 0; i < 2; i++)
         {
             MinigameSO temp;
             do
@@ -64,9 +68,9 @@ public class Spin : MonoBehaviour
                 temp = _MinigamesSO[randomIndex];
 
             } while (!GameManager.instance.ErasData[temp.Era - 1].Unlocked);
-                            _quarters[i].InitQuarter(temp);
+            _quarters[i].InitQuarter(temp);
         }
-        for(int i = 2; i < 8; i++)
+        for (int i = 2; i < 8; i++)
         {
             int randomIndex = UnityEngine.Random.Range(0, _itemsSOs.Count);
             _quarters[i].InitQuarter(_itemsSOs[randomIndex]);
@@ -112,12 +116,15 @@ public class Spin : MonoBehaviour
         _quarter = _arrow.FetchQuarterData();
         isSpnning = false;
 
+        _mPopupObtained.SetActive(true);
+        _mPopupObtainedScript.OnObtainPopup(_quarter.Item);
 
         Items item = CreateItemObject(_quarter);
         if (item != null)
         {
             item.Obtain();
         }
+
 
     }
 }
