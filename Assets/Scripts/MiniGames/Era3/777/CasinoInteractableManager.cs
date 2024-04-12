@@ -19,6 +19,9 @@ public class CasinoInteractableManager : MonoBehaviour
     [SerializeField] private List<CheckCollision> _mMiddleCollisionObjects;
     [SerializeField] private List<CheckCollision> _mRightCollisionObjects;
 
+    [SerializeField] private List<GameObject> _mLeftUpArrows;
+    [SerializeField] private List<GameObject> _mLeftDownArrows;
+
 
     [SerializeField] private List<GameObject> _mMiddleUpArrows;
     [SerializeField] private List<GameObject> _mMiddleDownArrows;
@@ -176,6 +179,11 @@ public class CasinoInteractableManager : MonoBehaviour
                             }
                         }
                     }
+                    _mLeftUpArrows[0].SetActive(false);
+                    _mLeftUpArrows[1].SetActive(true);
+                    _mLeftDownArrows[0].SetActive(false);
+                    _mLeftDownArrows[1].SetActive(true);
+
                     _mMiddleUpArrows[0].SetActive(true);
                     _mMiddleUpArrows[1].SetActive(false);
                     _mMiddleDownArrows[0].SetActive(true);
@@ -208,6 +216,11 @@ public class CasinoInteractableManager : MonoBehaviour
                             }
                         }
                     }
+                    _mMiddleUpArrows[0].SetActive(false);
+                    _mMiddleUpArrows[1].SetActive(true);
+                    _mMiddleDownArrows[0].SetActive(false);
+                    _mMiddleDownArrows[1].SetActive(true);
+
                     _mRightUpArrows[0].SetActive(true);
                     _mRightUpArrows[1].SetActive(false);
                     _mRightDownArrows[0].SetActive(true);
