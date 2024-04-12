@@ -96,6 +96,36 @@ public class CasinoInteractableManager : MonoBehaviour
                 RightSwitchPrevious(child.transform);
             }
         }
+
+        for (int id = 0; id < _mParents.Count; id++)
+        {
+            for (int i = 0; i < _mLeftObjects.Count; i++)
+            {
+                var child = _mLeftObjects[i];
+                if (child != null)
+                {
+                    child.StartGame();
+                }
+            }
+            for (int i = 0; i < _mMiddleObjects.Count; i++)
+            {
+                var child = _mMiddleObjects[i];
+                if (child != null)
+                {
+                    child.StartGame();
+                }
+            }
+            for (int i = 0; i < _mRightObjects.Count; i++)
+            {
+                var child = _mRightObjects[i];
+                if (child != null)
+                {
+                    child.StartGame();
+                }
+
+            }
+
+        }
     }
 
     public void LeftSwitchPrevious(Transform transform)
@@ -125,147 +155,116 @@ public class CasinoInteractableManager : MonoBehaviour
 
     public void OnTap()
     {
-        if (!gameStarted)
+        switch (_mIndex)
         {
-            gameStarted = true;
-            for (int id = 0; id < _mParents.Count; id++)
-            {
+            case 0:
                 for (int i = 0; i < _mLeftObjects.Count; i++)
                 {
-                    var child = _mLeftObjects[i];
-                    if (child != null)
+                    var addChild = _mLeftObjects[i];
+                    if (addChild != null)
                     {
-                        child.StartGame();
+                        addChild.Started = false;
+
+
+                        if (addChild.IsCentered == true)
+                        {
+                            SendDistToAllLeftObj(_mStopPos[_mIndex].transform.localPosition.y - addChild.transform.localPosition.y);
+
+                            _mPreviousObj = addChild.gameObject;
+                            Debug.Log(_mPreviousObj.tag);
+
+                        }
                     }
                 }
+                _mLeftUpArrows[0].SetActive(false);
+                _mLeftUpArrows[1].SetActive(true);
+                _mLeftDownArrows[0].SetActive(false);
+                _mLeftDownArrows[1].SetActive(true);
+
+                _mMiddleUpArrows[0].SetActive(true);
+                _mMiddleUpArrows[1].SetActive(false);
+                _mMiddleDownArrows[0].SetActive(true);
+                _mMiddleDownArrows[1].SetActive(false);
+                _mBackgrounds[0].color = new Color(_mBackgrounds[0].color.r, _mBackgrounds[0].color.g, _mBackgrounds[0].color.b, 255);
+                break;
+            case 1:
                 for (int i = 0; i < _mMiddleObjects.Count; i++)
                 {
-                    var child = _mMiddleObjects[i];
-                    if (child != null)
+                    var addChild = _mMiddleObjects[i];
+                    if (addChild != null)
                     {
-                        child.StartGame();
+                        addChild.Started = false;
+
+
+                        if (addChild.IsCentered == true)
+                        {
+                            SendDistToAllMidObj(_mStopPos[_mIndex].transform.localPosition.y - addChild.transform.localPosition.y);
+
+                            Debug.Log(_mPreviousObj.tag);
+                            if (!addChild.CompareTag(_mPreviousObj.tag))
+                            {
+                                _mLost = true;
+                                Debug.Log("loose");
+                                OnGameEnd?.Invoke(false);
+                            }
+
+                            _mPreviousObj = addChild.gameObject;
+
+
+                        }
                     }
                 }
+                _mMiddleUpArrows[0].SetActive(false);
+                _mMiddleUpArrows[1].SetActive(true);
+                _mMiddleDownArrows[0].SetActive(false);
+                _mMiddleDownArrows[1].SetActive(true);
+
+                _mRightUpArrows[0].SetActive(true);
+                _mRightUpArrows[1].SetActive(false);
+                _mRightDownArrows[0].SetActive(true);
+                _mRightDownArrows[1].SetActive(false);
+                _mBackgrounds[1].color = new Color(_mBackgrounds[1].color.r, _mBackgrounds[1].color.g, _mBackgrounds[1].color.b, 255);
+
+
+                break;
+            case 2:
                 for (int i = 0; i < _mRightObjects.Count; i++)
                 {
-                    var child = _mRightObjects[i];
-                    if (child != null)
+                    var addChild = _mRightObjects[i];
+                    if (addChild != null)
                     {
-                        child.StartGame();
-                    }
+                        addChild.Started = false;
 
+                        if (addChild.IsCentered == true)
+                        {
+                            SendDistToAllRightObj(_mStopPos[_mIndex].transform.localPosition.y - addChild.transform.localPosition.y);
+                            Debug.Log(_mPreviousObj.tag);
+
+                            if (!addChild.CompareTag(_mPreviousObj.tag))
+                            {
+                                _mLost = true;
+                                OnGameEnd?.Invoke(false);
+                            }
+
+                        }
+                    }
                 }
-            }
+
+
+                break;
+            default:
+                break;
         }
-        else
+        _mIndex++;
+
+        if (_mIndex > 2 && !_mLost)
         {
-            switch (_mIndex)
-            {
-                case 0:
-                    for (int i = 0; i < _mLeftObjects.Count; i++)
-                    {
-                        var addChild = _mLeftObjects[i];
-                        if (addChild != null)
-                        {
-                            addChild.Started = false;
+            _mIndex = 0;
+            OnGameEnd?.Invoke(true);
 
-
-                            if (addChild.IsCentered == true)
-                            {
-                                SendDistToAllLeftObj(_mStopPos[_mIndex].transform.localPosition.y - addChild.transform.localPosition.y);
-
-                                _mPreviousObj = addChild.gameObject;
-
-                            }
-                        }
-                    }
-                    _mLeftUpArrows[0].SetActive(false);
-                    _mLeftUpArrows[1].SetActive(true);
-                    _mLeftDownArrows[0].SetActive(false);
-                    _mLeftDownArrows[1].SetActive(true);
-
-                    _mMiddleUpArrows[0].SetActive(true);
-                    _mMiddleUpArrows[1].SetActive(false);
-                    _mMiddleDownArrows[0].SetActive(true);
-                    _mMiddleDownArrows[1].SetActive(false);
-                    _mBackgrounds[0].color = new Color(_mBackgrounds[0].color.r, _mBackgrounds[0].color.g, _mBackgrounds[0].color.b, 255);
-                    break;
-                case 1:
-                    for (int i = 0; i < _mMiddleObjects.Count; i++)
-                    {
-                        var addChild = _mMiddleObjects[i];
-                        if (addChild != null)
-                        {
-                            addChild.Started = false;
-
-
-                            if (addChild.IsCentered == true)
-                            {
-                                SendDistToAllMidObj(_mStopPos[_mIndex].transform.localPosition.y - addChild.transform.localPosition.y);
-
-                                if (!addChild.CompareTag(_mPreviousObj.tag))
-                                {
-                                    _mLost = true;
-                                    Debug.Log("loose");
-                                    OnGameEnd?.Invoke(false);
-                                }
-                                else
-                                {
-                                    _mPreviousObj = addChild.gameObject;
-                                }
-                            }
-                        }
-                    }
-                    _mMiddleUpArrows[0].SetActive(false);
-                    _mMiddleUpArrows[1].SetActive(true);
-                    _mMiddleDownArrows[0].SetActive(false);
-                    _mMiddleDownArrows[1].SetActive(true);
-
-                    _mRightUpArrows[0].SetActive(true);
-                    _mRightUpArrows[1].SetActive(false);
-                    _mRightDownArrows[0].SetActive(true);
-                    _mRightDownArrows[1].SetActive(false);
-                    _mBackgrounds[1].color = new Color(_mBackgrounds[1].color.r, _mBackgrounds[1].color.g, _mBackgrounds[1].color.b, 255);
-
-
-                    break;
-                case 2:
-                    for (int i = 0; i < _mMiddleObjects.Count; i++)
-                    {
-                        var addChild = _mMiddleObjects[i];
-                        if (addChild != null)
-                        {
-                            addChild.Started = false;
-
-                            if (addChild.IsCentered == true)
-                            {
-                                SendDistToAllRightObj(_mStopPos[_mIndex].transform.localPosition.y - addChild.transform.localPosition.y);
-
-                                if (!addChild.CompareTag(_mPreviousObj.tag))
-                                {
-                                    _mLost = true;
-                                    OnGameEnd?.Invoke(false);
-                                }
-
-                            }
-                        }
-                    }
-
-
-                    break;
-                default:
-                    break;
-            }
-            _mIndex++;
-
-            if (_mIndex > 2 && !_mLost)
-            {
-                _mIndex = 0;
-                OnGameEnd?.Invoke(true);
-
-                //StartCoroutine(Wait());
-            }
+            //StartCoroutine(Wait());
         }
+
     }
 
     void SendDistToAllLeftObj(float dist)
