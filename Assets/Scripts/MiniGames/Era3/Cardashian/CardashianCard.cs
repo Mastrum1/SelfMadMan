@@ -14,7 +14,6 @@ public class cardashianCard : MonoBehaviour
     private string _mList = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     [SerializeField] private List<TextMeshProUGUI> _mTexts;
     [SerializeField] private Image _mLogo;
-
     [SerializeField] private int _mNbErreur = 3;
 
     public bool Different
