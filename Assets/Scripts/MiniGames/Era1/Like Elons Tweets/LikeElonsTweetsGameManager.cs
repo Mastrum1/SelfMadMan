@@ -67,6 +67,8 @@ public class LikeElonsTweetsGameManager : MiniGameManager
     {
         if (!IsElon && !_mIsEnd)
             EndGame(false);
+        
+        else Amount++;
     }
 
     void OnScreenExited(bool IsElon, GameObject Tweet)

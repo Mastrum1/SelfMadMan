@@ -87,7 +87,6 @@ public class QuestManager : MonoBehaviour
 
     private void RemoveActiveQuest(Quest quest)
     {
-        Debug.Log("NotSelected");
         _selectedQuestsList.Remove(quest);
         OnRemoveActiveQuest?.Invoke(quest);
         while (_selectedQuestsList.Count < 3)
@@ -115,21 +114,23 @@ public class QuestManager : MonoBehaviour
         OnAddActiveQuest?.Invoke(temp);
     }
 
-    public void CheckQuestCompletion()
+    public void CheckQuestCompletion(Quest quest)
     {
-        foreach (var quest in SelectedQuests.Where(item => item.CurrentAmount >= item.MaxAmount))
-        {
-            OnQuestComplete?.Invoke(quest);
-            quest.QuestCompletionState = CompletionState.Complete;
-        }
+        if (quest.CurrentAmount < quest.MaxAmount) return;
+        
+        quest.QuestCompletionState = CompletionState.Complete;
+        OnQuestComplete?.Invoke(quest);
     }
-
-    public void OnQuestFinish(Quest quest)
+    
+    public void OnQuestFinish()
     {
-        quest.QuestCompletionState = CompletionState.NotSelected;
-        OnQuestFinished?.Invoke(quest);
-        OnReward?.Invoke(quest.Difficulty.reward);
-        RemoveActiveQuest(quest);
+        foreach (var quest in _selectedQuestsList.Where(quest => quest.QuestCompletionState == CompletionState.Complete))
+        {
+            quest.QuestCompletionState = CompletionState.NotSelected;
+            OnQuestFinished?.Invoke(quest);
+            OnReward?.Invoke(quest.Difficulty.reward);
+            RemoveActiveQuest(quest);
+        }
     }
     public void OnChangeQuest(Quest quest, int container)
     {

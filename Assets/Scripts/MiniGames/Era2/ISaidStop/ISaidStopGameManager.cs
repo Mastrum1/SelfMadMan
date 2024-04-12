@@ -28,6 +28,7 @@ public class ISaidStopGameManager : MiniGameManager
     {
         if (!_mIsEnd) {
             _mHand.Stop();
+            Amount++;
             EndMiniGame(isWin, miniGameScore);
             _mIsEnd = true;
         }
