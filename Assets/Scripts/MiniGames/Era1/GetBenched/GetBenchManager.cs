@@ -13,6 +13,9 @@ public class GetBenchManager : MiniGameManager
 
     [SerializeField] private List<GameObject> _mButtons;
 
+    [SerializeField] private List<TapWithTimer> _mButtonsScript;
+
+
     [SerializeField] private List<ChangeSpawn> _mButtonsChangeSpawn;
 
     [SerializeField] private List<TextMeshProUGUI> _mButtonsText;
@@ -71,8 +74,14 @@ public class GetBenchManager : MiniGameManager
 
     override public void Update()
     {
-        if (_mTimer.timerValue == 0)
+        if (_mTimer.TimerValue == 0)
         {
+            for (int i = 0; i < _mButtons.Count; i++)
+            {
+
+                _mButtons[i].SetActive(false);
+            }
+            StopCoroutine("SpawnButtons");
             OnGameEnd(true);
         }
     }

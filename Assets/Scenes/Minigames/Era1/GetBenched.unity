@@ -582,12 +582,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
+      propertyPath: _mTorus
+      value: 
+      objectReference: {fileID: 1894361682}
+    - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: _mMaxScale
-      value: 1
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: _mMidTiming
-      value: 0.75
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: _mBenchManager
@@ -595,15 +599,15 @@ PrefabInstance:
       objectReference: {fileID: 1940354304}
     - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: _mDecreaseSpeed
-      value: 0.5
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: _mImmondeTiming
-      value: 0.9
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: _mPerfectTiming
-      value: 0.68
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: _mMaxTimeFadeOut
@@ -611,8 +615,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: _mMinTimeForClick
-      value: 0.33
+      value: 2.8
       objectReference: {fileID: 0}
+    - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
+      propertyPath: _mTorusSpriteRenderer
+      value: 
+      objectReference: {fileID: 975863744}
     - target: {fileID: 1030962731721815075, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -620,6 +628,10 @@ PrefabInstance:
     - target: {fileID: 1030962731721815075, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1451841754733813870, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 1479611582740161044, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: m_IsActive
@@ -997,6 +1009,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28945584cfd7ed245aefedf41334cade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &293862023 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5715160110455369619, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
+  m_PrefabInstance: {fileID: 1854934948}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &620197490 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 858162965914010274, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
@@ -1086,6 +1103,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!212 &975863744 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 1451841754733813870, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
+  m_PrefabInstance: {fileID: 173540811}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1157196758
 GameObject:
   m_ObjectHideFlags: 0
@@ -1167,8 +1189,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
+      propertyPath: _mTorus
+      value: 
+      objectReference: {fileID: 1272140956}
+    - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: _mMaxScale
-      value: 1
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
+      propertyPath: _mMidTiming
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: _mBenchManager
@@ -1176,11 +1206,23 @@ PrefabInstance:
       objectReference: {fileID: 1940354304}
     - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: _mDecreaseSpeed
-      value: 0.5
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
+      propertyPath: _mImmondeTiming
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
+      propertyPath: _mPerfectTiming
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: _mMaxTimeFadeOut
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
+      propertyPath: _mMinTimeForClick
+      value: 2.8
       objectReference: {fileID: 0}
     - target: {fileID: 1030962731721815075, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: m_Layer
@@ -1529,6 +1571,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28945584cfd7ed245aefedf41334cade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1272140956 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5715160110455369619, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
+  m_PrefabInstance: {fileID: 1272140951}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1273582158
 GameObject:
   m_ObjectHideFlags: 0
@@ -1750,8 +1797,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
+      propertyPath: _mTorus
+      value: 
+      objectReference: {fileID: 1794432043}
+    - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: _mMaxScale
-      value: 1
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
+      propertyPath: _mMidTiming
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: _mBenchManager
@@ -1759,11 +1814,23 @@ PrefabInstance:
       objectReference: {fileID: 1940354304}
     - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: _mDecreaseSpeed
-      value: 0.5
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
+      propertyPath: _mImmondeTiming
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
+      propertyPath: _mPerfectTiming
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: _mMaxTimeFadeOut
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
+      propertyPath: _mMinTimeForClick
+      value: 2.8
       objectReference: {fileID: 0}
     - target: {fileID: 1030962731721815075, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: m_Layer
@@ -2120,6 +2187,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28945584cfd7ed245aefedf41334cade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1794432043 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5715160110455369619, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
+  m_PrefabInstance: {fileID: 1794432038}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1797027269
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2212,8 +2284,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
+      propertyPath: _mTorus
+      value: 
+      objectReference: {fileID: 293862023}
+    - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: _mMaxScale
-      value: 1
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
+      propertyPath: _mMidTiming
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: _mBenchManager
@@ -2221,11 +2301,23 @@ PrefabInstance:
       objectReference: {fileID: 1940354304}
     - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: _mDecreaseSpeed
-      value: 0.5
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
+      propertyPath: _mImmondeTiming
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
+      propertyPath: _mPerfectTiming
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: _mMaxTimeFadeOut
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 491009848461839725, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
+      propertyPath: _mMinTimeForClick
+      value: 2.8
       objectReference: {fileID: 0}
     - target: {fileID: 1030962731721815075, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
       propertyPath: m_Layer
@@ -2586,6 +2678,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4409378949257764596, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
   m_PrefabInstance: {fileID: 1272140951}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1894361682 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5715160110455369619, guid: 2817721b73157fc4a90c8af32bad143c, type: 3}
+  m_PrefabInstance: {fileID: 173540811}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1940354301
 GameObject:
   m_ObjectHideFlags: 0
@@ -2649,6 +2746,11 @@ MonoBehaviour:
   - {fileID: 1995662144}
   - {fileID: 1860807685}
   - {fileID: 1854934950}
+  _mButtonsScript:
+  - {fileID: 173540816}
+  - {fileID: 1794432042}
+  - {fileID: 1272140955}
+  - {fileID: 1854934951}
   _mButtonsChangeSpawn:
   - {fileID: 173540815}
   - {fileID: 1794432041}

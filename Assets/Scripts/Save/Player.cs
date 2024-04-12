@@ -14,6 +14,39 @@ public class Player : MonoBehaviour
         public VideoClip clip;
     }
 
+    [System.Serializable]
+    public class QuestSave
+    {
+        [SerializeField] private int _questSOIndex;
+        public int QuestSOIndex { get => _questSOIndex; set => _questSOIndex = value; }
+
+        [SerializeField] private QuestManager.CompletionState _questCompletionState;
+        public QuestManager.CompletionState QuestCompletionState { get => _questCompletionState; set => _questCompletionState = value; }
+
+        [SerializeField] private Quests.QuestBaseDispo _questDispo;
+        public Quests.QuestBaseDispo QuestDispo { get => _questDispo; set => _questDispo = value; }
+
+        private Quests.Difficulty _difficulty;
+        public Quests.Difficulty Difficulty { get => _difficulty; set => _difficulty = value; }
+
+        private int _maxAmount;
+        public int MaxAmount { get => _maxAmount; set => _maxAmount = value; }
+
+        private int _currentAmount;
+        public int CurrentAmount { get => _currentAmount; set => _currentAmount = value; }
+
+        public QuestSave(int QuestSOIndex, QuestManager.CompletionState questCompletionState, Quests.QuestBaseDispo questDispo, Quests.Difficulty difficulty, int maxAmount, int currentAmount)
+        {
+            _questSOIndex = QuestSOIndex;
+            _questCompletionState = questCompletionState;
+            _questDispo = questDispo;
+            _difficulty = difficulty;
+            _maxAmount = maxAmount;
+            _currentAmount = currentAmount;
+        }
+    }
+
+
     public event Action<PlayerData> OnDataLoad;
 
     private readonly PlayerData playerData = new PlayerData();
@@ -126,33 +159,27 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Start()
-    {
-        _mQuestManagerInstance = QuestManager.instance;
-
-        _mQuestManagerInstance.OnAddActiveQuest += AddActiveQuests;
-        _mQuestManagerInstance.OnRemoveActiveQuest += RemoveActiveQuests;
-        _mQuestManagerInstance.OnQuestComplete += QuestComplete;
-        _mQuestManagerInstance.OnUnlockQuest += UnlockQuest;
-        _mQuestManagerInstance.OnLockQuest += RemoveUnlockQuest;
-        _mQuestManagerInstance.OnQuestFinished += RemoveCompleteQuests;
-
-    }
-
     public void OnDisable()
     {
-        _mQuestManagerInstance.OnAddActiveQuest -= AddActiveQuests;
-        _mQuestManagerInstance.OnRemoveActiveQuest -= RemoveActiveQuests;
-        _mQuestManagerInstance.OnQuestComplete -= QuestComplete;
-        _mQuestManagerInstance.OnUnlockQuest -= UnlockQuest;
-        _mQuestManagerInstance.OnLockQuest -= RemoveUnlockQuest;
-        _mQuestManagerInstance.OnQuestFinished -= RemoveCompleteQuests;
+        QuestManager.instance.OnAddActiveQuest -= AddActiveQuests;
+        QuestManager.instance.OnRemoveActiveQuest -= RemoveActiveQuests;
+        QuestManager.instance.OnQuestComplete -= QuestComplete;
+        QuestManager.instance.OnUnlockQuest -= UnlockQuest;
+        QuestManager.instance.OnLockQuest -= RemoveUnlockQuest;
+        QuestManager.instance.OnQuestFinished -= RemoveCompleteQuests;
 
 
     }
 
     public void LoadJson()
     {
+        QuestManager.instance.OnAddActiveQuest += AddActiveQuests;
+        QuestManager.instance.OnRemoveActiveQuest += RemoveActiveQuests;
+        QuestManager.instance.OnQuestComplete += QuestComplete;
+        QuestManager.instance.OnUnlockQuest += UnlockQuest;
+        QuestManager.instance.OnLockQuest += RemoveUnlockQuest;
+        QuestManager.instance.OnQuestFinished += RemoveCompleteQuests;
+
         if (CheckFile())
         {
             PlayerData data = DataService.LoadData<PlayerData>("/player-stats.json", false);
@@ -181,20 +208,17 @@ public class Player : MonoBehaviour
                 Inventory.Add(item);
                 ItemLocked.Remove(item);
             }
-
+            ActiveQuests = new List<QuestManager.Quest>();
             foreach (var item in data.ActiveQuests)
             {
-                if (!ActiveQuests.Contains(item))
-                    ActiveQuests.Add(item);
-
-                AllQuest[item.QuestSO.ID] = item;
+                AllQuest[item.QuestSOIndex] = new QuestManager.Quest(AllQuest[item.QuestSOIndex].QuestSO, item.QuestCompletionState, item.QuestDispo, item.Difficulty, item.MaxAmount, item.CurrentAmount);
+                ActiveQuests.Add(AllQuest[item.QuestSOIndex]);
             }
+            CompletedQuests = new List<QuestManager.Quest>();
             foreach (var item in data.CompletedQuests)
             {
-                if (!CompletedQuests.Contains(item))
-                    CompletedQuests.Add(item);
-
-                AllQuest[item.QuestSO.ID] = item;
+                AllQuest[item.QuestSOIndex] = new QuestManager.Quest(AllQuest[item.QuestSOIndex].QuestSO, item.QuestCompletionState, item.QuestDispo, item.Difficulty, item.MaxAmount, item.CurrentAmount);
+                CompletedQuests.Add(AllQuest[item.QuestSOIndex]);
 
             }
             foreach (var item in data.QuestUnlocked)
@@ -204,11 +228,10 @@ public class Player : MonoBehaviour
 
                 AllQuest[item].QuestDispo = Quests.QuestBaseDispo.Unlocked;
                 AllQuest[item].QuestCompletionState = QuestManager.CompletionState.NotSelected;
-
             }
 
             //MiniGameSelector.instance.LoadEra(AllEra1, AllEra2, AllEra3);
-            //_mQuestManagerInstance.LoadQuests(AllQuest, ActiveQuests);
+            QuestManager.instance.LoadQuests(AllQuest, ActiveQuests);
         }
 
         else
@@ -225,6 +248,7 @@ public class Player : MonoBehaviour
 
     public void AddActiveQuests(QuestManager.Quest quest)
     {
+        if (ActiveQuests.Contains(quest)) return;
 
         ActiveQuests.Add(quest);
         RemoveUnlockQuest(quest.QuestSO.ID);

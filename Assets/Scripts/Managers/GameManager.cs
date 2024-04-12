@@ -3,9 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using NaughtyAttributes;
-using Unity.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -30,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     private float _mScore;
     public float Score { get => _mScore; private set => _mScore = value; }
-    [SerializeField] int _mHearts;
+    public int _mHearts;
 
     private bool _mGameOver;
 
@@ -70,9 +68,6 @@ public class GameManager : MonoBehaviour
         FasterLevel = 1;
         _mScore = 0;
 
-
-
-       
 
         _mQuestManager = QuestManager.instance;
         _mQuestManager.OnReward += AddStars;
@@ -177,7 +172,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void OnApplicationQuit()
+
+    void OnApplicationFocus(bool hasFocus)
+    {
+        if (!hasFocus)
+        {
+            _mPlayer.SaveJson();
+        }
+    }
+
+    void OnApplicationQuit()
     {
         _mPlayer.SaveJson();
     }

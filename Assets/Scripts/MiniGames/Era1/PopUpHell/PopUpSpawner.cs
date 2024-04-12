@@ -9,7 +9,7 @@ public class PopUpSpawner : MonoBehaviour
     [SerializeField] private GameObject _mParent;
     [SerializeField] private int _mNumberToSpawn;
     [SerializeField] private GameObject _mButtonToHide;
-    [SerializeField] private GameObject _mDownloadPopUp;
+    //[SerializeField] private GameObject _mDownloadPopUp;
 
     private List<GameObject> _mPopUpList;
 
@@ -21,7 +21,7 @@ public class PopUpSpawner : MonoBehaviour
             int j = Random.Range(0, _mPopUps.Count);
                 SpawnPopUp(_mPopUps[j], RandomPointInBox(), (i * 3) + 20);
         }
-        _mPopUpList.Add(_mDownloadPopUp);
+        //_mPopUpList.Add(_mDownloadPopUp);
     }
 
     void SpawnPopUp(GameObject model, Vector3  position, int order)
