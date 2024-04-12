@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CFX2_Heart Add
-  m_Shader: {fileID: -6465566751694194690, guid: 4fbad927f34d61743acf4ae9fa0b3f75, type: 3}
+  m_Name: Credits
+  m_Shader: {fileID: -6465566751694194690, guid: 16cd84ca6ccd7cb44b2bdb5bac09500a, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
@@ -26,48 +26,43 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 54a678d6ffce1064d82b8426bf599980, type: 3}
+        m_Texture: {fileID: 2800000, guid: 85cbaa79ea1698d4eb70cb4f2d6534ee, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_974bb68b1d2549e8a251babbd94f84e3_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: 38af1cf4cdd0bb047a178879cbb9bf1f, type: 3}
+    - _MainText:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_a2e5d6c50c4649009a87f347c6a548aa_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: d7df0e929092210449cd09ff841ff24b, type: 3}
+    - _None:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_bec0edffb9ce4da08361163b02a9be0f_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: 8f0bf4c47cc2475468ea79cf41dd70b1, type: 3}
+    - _Over_Text:
+        m_Texture: {fileID: 2800000, guid: 5e104a8246162cb40af2e674196be04b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Texture2DAsset_e8bd538512344d4b87f87ba3b68c80ce_Out_0_Texture2D:
-        m_Texture: {fileID: 2800000, guid: 54a678d6ffce1064d82b8426bf599980, type: 3}
+    - _SampleTexture2D_c3cb535bc7d746d78d949be03f20cb20_Texture_1_Texture2D:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 1.86
     - _BUILTIN_AlphaClip: 0
     - _BUILTIN_Blend: 0
-    - _BUILTIN_CullMode: 0
+    - _BUILTIN_CullMode: 2
     - _BUILTIN_DstBlend: 10
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
     - _BUILTIN_SrcBlend: 5
     - _BUILTIN_Surface: 1
     - _BUILTIN_ZTest: 4
-    - _BUILTIN_ZWrite: 0
-    - _BUILTIN_ZWriteControl: 0
-    - _Emission: 8.77
-    - _Float: 4.64
+    - _BUILTIN_ZWrite: 1
+    - _BUILTIN_ZWriteControl: 1
+    - _TimeSpeed: -6.6
     m_Colors:
-    - _Color: {r: 1, g: 0, b: 0, a: 1}
+    - _Direction: {r: 1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
---- !u!1002 &2100001
-EditorExtensionImpl:
-  serializedVersion: 6
---- !u!114 &3831462983636384393
+--- !u!114 &1342486287653486560
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
