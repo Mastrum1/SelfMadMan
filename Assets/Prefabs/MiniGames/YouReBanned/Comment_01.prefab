@@ -100,7 +100,7 @@ Transform:
   m_GameObject: {fileID: 4023339757110235902}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 227.12, y: -9.37, z: 0}
+  m_LocalPosition: {x: 1.67, y: -9.37, z: 0}
   m_LocalScale: {x: 45, y: 45, z: 45}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -521,14 +521,14 @@ Canvas:
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
-  m_OverrideSorting: 0
+  m_OverrideSorting: 1
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!114 &1036341893003396850
 MonoBehaviour:
@@ -552,7 +552,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &7127166548145435991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -674,8 +674,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 173.12823, y: 173.12823, z: 173.12823}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 250, y: 250, z: 250}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2231203388370925468}
   m_Father: {fileID: 0}
@@ -732,7 +732,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7797477975845785403}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b21f5597c07174f498a1a70249b0558c, type: 3}
   m_Name: 
@@ -752,8 +752,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mData: {fileID: 11400000, guid: f4005c93767ad6f47a335c10da5ad5f1, type: 2}
   _mComment: {fileID: 5048268719657677737}
-  _mProfilPicture: {fileID: 0}
-  _mDeletePicture: {fileID: 6363154943156500495}
+  _mProfileSO: []
+  _mProfilPicture:
+  - {fileID: 0}
+  _mDeletePicture:
+  - {fileID: 0}
+  _actualProfilPicture: {fileID: 1817562987906221436}
+  _actualBack0g0round: {fileID: 7660917645165825993}
   _mBaseState: {fileID: 21300000, guid: 61e6e702c03f4e84897d91fc7b69578b, type: 3}
   _mDeleteState: {fileID: 21300000, guid: e23f797cf9663e64c8c8c88a49c94772, type: 3}
 --- !u!1 &8108918476108567145
@@ -784,7 +789,7 @@ Transform:
   m_GameObject: {fileID: 8108918476108567145}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 3.7, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
