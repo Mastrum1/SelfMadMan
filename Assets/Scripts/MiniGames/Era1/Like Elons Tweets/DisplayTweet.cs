@@ -16,8 +16,9 @@ public class DisplayTweet : MonoBehaviour
     [SerializeField] TMP_Text NumberOfLikes;
     [SerializeField] SpriteRenderer ProfilPicture;
     [SerializeField] SpriteRenderer Like;
-    [SerializeField] Sprite BaseState;
-    [SerializeField] Sprite LikeState;
+    [SerializeField] Sprite _mBaseState;
+    [SerializeField] Sprite _mGoodLikeState;
+    [SerializeField] Sprite _mBadLikeState;
     bool mIsEnable;
     bool mIsLiked;
 
@@ -48,14 +49,14 @@ public class DisplayTweet : MonoBehaviour
     {
         if (mIsEnable) {
             mIsLiked = true;
-            Like.sprite = LikeState;
+            Like.sprite = (TweetData.IsElon) ? _mGoodLikeState : _mBadLikeState;
             LikeTweet?.Invoke(TweetData.IsElon);
         }
     }
 
     public void ResetTweet()
     {
-        Like.sprite = BaseState;
+        Like.sprite = _mBaseState;
         mIsEnable = true;
         mIsLiked = false;
     }
