@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using UnityEngine;
+using static Player;
 
 [System.Serializable]
 public class PlayerData
@@ -18,13 +20,15 @@ public class PlayerData
 
     public int BestScore;
 
-    public List<Items> Inventory = new List<Items>();
+    public InventoryClass Inventory;
 
     public List<int> UnlockedCinematics = new List<int>();
 
     public List<Player.QuestSave> ActiveQuests = new List<Player.QuestSave>();
 
     public List<Player.QuestSave> CompletedQuests = new List<Player.QuestSave>();
+
+    public List<FournituresClass> ItemLocked = new List<FournituresClass>();
 
     public List<int> QuestUnlocked = new List<int>();
 
@@ -34,14 +38,13 @@ public class PlayerData
 
     public List<MinigameScene> AllEra3 = new List<MinigameScene>();
 
-
-    //public List<> cinematique;
-
     public void SaveData(Player player)
     {
         Level = player.Level;
         Xp = player.Xp;
         Money = player.Money;
+
+        BestScore = player.BestScore;
 
         VolumeMusic = player.VolumeMusic;
         VolumeFX = player.VolumeFX;
@@ -59,6 +62,11 @@ public class PlayerData
         AllEra3 = player.AllEra3;
 
         Inventory = player.Inventory;
+
+        foreach (var item in player.ItemLocked)
+        {
+            ItemLocked.Add(item);
+        }
 
         ActiveQuests = new List<Player.QuestSave>();
 
@@ -82,6 +90,7 @@ public class PlayerData
         Level = 1;
         Xp = 0;
         Money = 0;
+        BestScore = 0;
 
         VolumeMusic = 100;
         VolumeFX = 100;
