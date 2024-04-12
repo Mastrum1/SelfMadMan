@@ -1,3 +1,4 @@
+using CW.Common;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -18,6 +19,7 @@ public class ScoreScreen : MonoBehaviour
     [SerializeField] private TMP_Text _bestScore;
     [SerializeField] private PanelOnClick _mPanelOnClick;
     [SerializeField] private GameObject _mPopup;
+    [SerializeField] private GameObject _InputManager;
 
     private int Timer = 5;
 
@@ -25,6 +27,7 @@ public class ScoreScreen : MonoBehaviour
     private bool _mContinue = false;
     private void Awake()
     {
+        _InputManager.SetActive(false);
         GameManager.instance.WinScreenHandle += OnWinScreenDisplay;
         _mPanelOnClick.OnClick += OnPanelClicked;
     }
@@ -43,6 +46,7 @@ public class ScoreScreen : MonoBehaviour
 
         if (gameOver)
         {
+            _InputManager.SetActive(true);
             StartCoroutine(OnGameOver());
         }
         else
@@ -85,6 +89,7 @@ public class ScoreScreen : MonoBehaviour
         else
         {
             OnPanelClicked();
+
             _UIAnimator.SetBool("EndGame", true);
 
             if (GameManager.instance.Score > GameManager.instance.Player.BestScore)

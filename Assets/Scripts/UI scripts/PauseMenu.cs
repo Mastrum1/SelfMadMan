@@ -10,7 +10,7 @@ public class PauseMenu : MonoBehaviour
     public void Pause()
     {
         _mPauseAnim.SetBool("OpenPause", true);
-        StartCoroutine(CheckFinished());
+        StartCoroutine(CheckOpenPause());
     }
 
     public void Resume()
@@ -21,17 +21,19 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void Quit()
     {
+        Time.timeScale = 1;
         mySceneManager.instance.SetScene("HomePage", mySceneManager.LoadMode.SINGLE);
     }
 
-    IEnumerator CheckFinished()
+    IEnumerator CheckOpenPause()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         if (_mPauseAnim.GetBool("OpenPause") == true)
         {
             if (_mPauseAnim.GetCurrentAnimatorStateInfo(0).IsName("OpenPause"))
