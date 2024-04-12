@@ -7,6 +7,14 @@ using Lean.Touch;
 
 public class ContentManager : MonoBehaviour
 {
+    public enum MENUS
+    {
+        MainMenu, Shop, QuestAndAchievements, Settings, Furnitures, EraMinigames
+    }
+
+    [SerializeField] private HomePageUIManager _mHomePageUIManager;
+    [SerializeField] private GameObject[] _MenuGameObjects;
+
     [Header("Content Viewport")]
     [SerializeField] private Image _mBaseImage;
     [SerializeField] private Image _mJames;
@@ -25,13 +33,17 @@ public class ContentManager : MonoBehaviour
     [Header("Page Settings")]
     [SerializeField] private int _mCurrentIndex = 0;
     [SerializeField] private GameObject _mLockEraPanel;
+    [SerializeField] private TMP_Text _mLockPrice;
+    [SerializeField] private Animator _mLockAnimator;
+    [SerializeField] private List<GameObject> _mLockObjects;
+
+    private bool IsUnlocking = false;
 
     void Start()
     {
-        // Initialize dots
+        _mCurrentIndex = GameManager.instance.Era;
+        _mLockEraPanel.SetActive(GameManager.instance.ErasData[GameManager.instance.Era].Unlocked ? false : true);
         InitializeDots();
-
-        // Display initial content
         ShowContent();
     }
 
@@ -56,18 +68,27 @@ public class ContentManager : MonoBehaviour
         {
             Image dotImage = _mDotsContainer.transform.GetChild(i).GetComponent<Image>();
             dotImage.color = (i == _mCurrentIndex) ? Color.white : Color.gray;
-
-            _mText.text = "Ere " + (_mCurrentIndex + 1);
+            _mText.text = "ERA " + (_mCurrentIndex + 1);
         }
     }
 
     public void SwapContent(int i)
     {
-        _mCurrentIndex = (_mCurrentIndex + i + _mSprites.Count) % _mSprites.Count;
-        GameManager.instance.Era = _mCurrentIndex + 1;
-        _mLockEraPanel.SetActive(GameManager.instance.UnlockedEra[GameManager.instance.Era] ? false : true );
-        ShowContent();
-        UpdateDots();
+        if (!IsUnlocking)
+        {
+            _mCurrentIndex = (_mCurrentIndex + i + _mSprites.Count) % _mSprites.Count;
+            GameManager.instance.Era = _mCurrentIndex + 1;
+            bool eraunlocked = GameManager.instance.ErasData[GameManager.instance.Era].Unlocked ? true : false;
+            _mLockEraPanel.SetActive(!eraunlocked);
+            _mLockPrice.text = GameManager.instance.ErasData[GameManager.instance.Era]._price.ToString();
+            _mHomePageUIManager.MenuUIDictionnary[_MenuGameObjects[(int)MENUS.EraMinigames]] = eraunlocked;
+
+            foreach (var go in _mLockObjects)
+                go.SetActive(!eraunlocked);
+
+            ShowContent();
+            UpdateDots();
+        }
     }
 
     void ShowContent()
@@ -84,9 +105,28 @@ public class ContentManager : MonoBehaviour
             dotImage.fillAmount = isActive ? 1f : 0f;
         }
 
-        for (int i = 0; i < _mJamesForms.Count; i++) 
+        for (int i = 0; i < _mJamesForms.Count; i++)
         {
             _mJames.sprite = _mJamesForms[_mCurrentIndex];
         }
+    }
+    public void UnlockEra()
+    {
+        IsUnlocking = true;
+        _mLockAnimator.SetBool("UnlockEraAnim", true);
+        StartCoroutine(Unlocking());
+    }
+
+    IEnumerator Unlocking()
+    {
+        yield return new WaitForSeconds(2f);
+        _mLockAnimator.SetBool("UnlockEraAnim", false);
+        GameManager.instance.ErasData[GameManager.instance.Era].UnlockEra();
+        _mHomePageUIManager.MenuUIDictionnary[_MenuGameObjects[(int)MENUS.EraMinigames]] = true;
+        foreach (var go in _mLockObjects)
+            go.SetActive(false);
+        _mLockEraPanel.SetActive(false);
+        IsUnlocking = false;
+
     }
 }

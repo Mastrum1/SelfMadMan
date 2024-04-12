@@ -1393,6 +1393,7 @@ MonoBehaviour:
   _bestScore: {fileID: 1248753100}
   _mPanelOnClick: {fileID: 571769416}
   _mPopup: {fileID: 1494979386}
+  _InputManager: {fileID: 1123041865}
 --- !u!95 &665581812
 Animator:
   serializedVersion: 5
@@ -2771,6 +2772,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InputManager
       objectReference: {fileID: 0}
+    - target: {fileID: 1527802384342363840, guid: c782552722799074e8962dbd5e7574bf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1548188670643521760, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.12191126
@@ -2908,6 +2913,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c782552722799074e8962dbd5e7574bf, type: 3}
+--- !u!1 &1123041865 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1527802384342363840, guid: c782552722799074e8962dbd5e7574bf, type: 3}
+  m_PrefabInstance: {fileID: 1123041864}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1162244830
 GameObject:
   m_ObjectHideFlags: 0
