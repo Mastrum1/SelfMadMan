@@ -1,11 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using AYellowpaper.SerializedCollections;
 
 public class HomePageUIManager : MonoBehaviour
 {
-    [Header("GameObject LIST")]
-    [SerializeField] private List<GameObject> _mMenuUI = new List<GameObject>();
+
+
+
+    [SerializeField] private SerializedDictionary<GameObject, bool> _mMenuUI;
+    public SerializedDictionary<GameObject, bool> MenuUIDictionnary { get => _mMenuUI; set => _mMenuUI = value; }
 
     [Header("ButtonsList")]
     [SerializeField] private List<BoxCollider2D> _mIcons = new List<BoxCollider2D>();
@@ -17,16 +21,19 @@ public class HomePageUIManager : MonoBehaviour
     private string _mLinkedInURL = "https://www.linkedin.com/in/chad-motivation-1930ab2b7/";
     private string _mInternetSite = "https://selfmadman.fr/";
 
-    public void SetOnOff(GameObject obj)
+    public void SetOnOff(GameObject GameObject)
     {
-        if (!obj)
-            return;
-        else if (obj)
-            foreach (var c in _mMenuUI)
-            {
-                c.SetActive(false);
-            }
-        obj.SetActive(true);
+        if (_mMenuUI[GameObject])
+        {
+            if (!GameObject)
+                return;
+            else if (GameObject)
+                foreach (var c in _mMenuUI)
+                {
+                    c.Key.SetActive(false);
+                }
+            GameObject.SetActive(true);
+        }
     }
 
     public void SingleSetOnOff(GameObject obj)
@@ -35,7 +42,7 @@ public class HomePageUIManager : MonoBehaviour
             return;
         if (obj.activeSelf == true)
         {
-            foreach(var c in _mIcons)
+            foreach (var c in _mIcons)
             {
                 c.enabled = true;
             }
@@ -83,4 +90,6 @@ public class HomePageUIManager : MonoBehaviour
         else if (!toggle.isOn)
             LocalSelector.Instance.ChangeLocale(0);
     }
+
+
 }

@@ -17,7 +17,7 @@ public class Tower : MonoBehaviour
     private float _maxRotation = 25f;
     private float _targetRotation;
 
-    private float minClockRotation = -69.99f;
+    private float minClockRotation = -69.9f;
     private float maxClockRotation = 110f;
     private float _targetClockRotation;
 
