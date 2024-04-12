@@ -35,7 +35,7 @@ public class CleanKitchenManager : MiniGameManager
     public void PlayTapAnim(Vector3 pos)
     {
         if (_clickAnim.activeSelf) _clickAnim.SetActive(false); 
-        _clickAnim.transform.position = pos;
+        _clickAnim.transform.position = new Vector3(pos.x, pos.y, 0);
         _clickAnim.SetActive(true);
     }
 

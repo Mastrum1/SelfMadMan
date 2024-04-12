@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Protein : MonoBehaviour
@@ -6,23 +7,15 @@ public class Protein : MonoBehaviour
     public event Action OnDeath; 
     
     [SerializeField] private Rigidbody2D _proteibRb;
+    [SerializeField] private GameObject _deathEffect;
     
     private float _resistance;
     public float Resistance { get => _resistance; set => _resistance = value; }
     private Vector3 _scale;
 
-    void Start()
+    private void Start()
     {
         _scale = transform.localScale;
-    }
-    
-    void Update()
-    {
-        if (_scale.x < 0.05f)
-        {
-            OnDeath?.Invoke();
-            gameObject.SetActive(false);
-        }
     }
 
     public void ReduceScale(Vector3 force)
@@ -37,5 +30,23 @@ public class Protein : MonoBehaviour
         _scale.y -= shakeForce / 200;
         
         transform.localScale = _scale;
+        
+        CheckDeath();
+    }
+
+    private void CheckDeath()
+    {
+        if (!(_scale.x < 0.05f) || _deathEffect.activeSelf) return;
+        
+        _deathEffect.SetActive(true);
+        GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<CircleCollider2D>().enabled = false;
+        OnDeath?.Invoke();
+    }
+
+    private IEnumerator Disable()
+    {
+        yield return new WaitForSeconds(0.5f);
+        gameObject.SetActive(false);
     }
 }

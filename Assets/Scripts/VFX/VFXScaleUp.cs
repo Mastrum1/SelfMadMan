@@ -5,6 +5,7 @@ public class VFXScaleUp : MonoBehaviour
 {
     [SerializeField] private float scaleUpDuration = 0.5f;
     [SerializeField] private float scaleDownDuration = 0.5f;
+    [SerializeField] private float scaleUpFactor = 1.3f;
     private bool isScaling = false;
     private Vector3 originalScale;
 
@@ -41,7 +42,7 @@ public class VFXScaleUp : MonoBehaviour
 
         // Scale up to 1.3
         float timer = 0f;
-        Vector3 targetScale = originalScale * 1.3f;
+        Vector3 targetScale = originalScale * scaleUpFactor;
 
         while (timer < scaleUpDuration)
         {
