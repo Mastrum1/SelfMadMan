@@ -103,6 +103,7 @@ public class ShopManager : MonoBehaviour
             {
                 Debug.Log(coin.Amount);
                 items.Obtain();
+                _mMoney.UpdateMoney();
             }
         }
     }
