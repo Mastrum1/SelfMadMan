@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class MilkParticles : MonoBehaviour
 {
-    private Vector2 _startPosition;
-    public Vector2 StartPosition => _startPosition;
+    private Vector3 _startPosition;
+    public Vector3 StartPosition => _startPosition;
 
     private void Start()
     {
