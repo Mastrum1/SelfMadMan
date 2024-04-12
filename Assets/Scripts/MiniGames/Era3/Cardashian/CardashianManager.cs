@@ -8,9 +8,13 @@ public class CardiashianManager : MiniGameManager
 {
     [SerializeField] private CardashianInteractableManager _mInteractableManager;
 
+    private float _Space = 1.78f;
+
+    [SerializeField] private List<cardashianCard> _mObj;
+
     private void Start()
     {
-        //_mInteractableManager.OnGameEnd += OnGameEnd;
+        _mInteractableManager.GameEnd += OnGameEnd;
     }
 
     void OnGameEnd(bool win)
@@ -20,6 +24,6 @@ public class CardiashianManager : MiniGameManager
 
     private void OnDisable()
     {
-        //_mInteractableManager.OnGameEnd -= OnGameEnd;
+        _mInteractableManager.GameEnd -= OnGameEnd;
     }
 }
