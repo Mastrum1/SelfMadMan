@@ -20,12 +20,11 @@ public class FightingGame : MiniGameManager
         {
             if (_UIManager.Bar.barValue >= _UIManager.Bar.maxBarValue)
             {
-                Debug.Log("Game finished");
+                Amount++;
                 EndMiniGame(true, miniGameScore);
             }
             if (_UIManager.Bar.barValue == 0)
             {
-                Debug.Log("Game finished");
                 EndMiniGame(false, miniGameScore);
             }
         }
