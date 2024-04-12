@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Video;
-using static UnityEditor.Progress;
 
 [System.Serializable]
 public class Player : MonoBehaviour

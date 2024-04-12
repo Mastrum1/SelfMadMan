@@ -19,6 +19,7 @@ public class PopUpGameManager : MiniGameManager
 
     public override void Update()
     {
+        base.Update();
         if (!spawner.IsActivePopUp())
         {
             if (!_enabled) _mAnimator.SetTrigger("NoPopup");
