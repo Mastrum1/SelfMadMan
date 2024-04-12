@@ -42,7 +42,7 @@ public class YouReBannedGameManager : MiniGameManager
                 mComment.SetActive(true);
                 DisplayTikTokComment mDisplayComment = mComment.GetComponent<DisplayTikTokComment>();
                mComment.transform.position = _mSpawnPosition.position;
-               mDisplayComment.ResetComment();
+               //mDisplayComment.ResetComment();
                 mDisplayComment.DeleteComment += OnDeleteComment;
                 mDisplayComment.ExitScreen += OnScreenExited;
             }

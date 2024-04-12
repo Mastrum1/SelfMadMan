@@ -23,8 +23,22 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Player _mPlayer;
     public Player Player { get => _mPlayer; }
 
-    private List<bool> _unlockedEra = new List<bool>();
-    public List<bool> UnlockedEra { get => _unlockedEra; }
+    public class EraData
+    {
+        public bool Unlocked;
+        public int _price;
+        public EraData(bool unlocked, int price)
+        {
+            Unlocked = unlocked;
+            _price = price;
+        }
+        public void UnlockEra()
+        {
+            Unlocked = true;
+        }
+    }
+    private List<EraData> _mErasData = new List<EraData>();
+    public List<EraData> ErasData { get => _mErasData; }
 
     private float _mScore;
     public float Score { get => _mScore; private set => _mScore = value; }
@@ -78,9 +92,9 @@ public class GameManager : MonoBehaviour
 
     private void InitEras()
     {
-        _unlockedEra.Add(true);
-        _unlockedEra.Add(false);
-        _unlockedEra.Add(false);
+        _mErasData.Add(new EraData(true, 0));
+        _mErasData.Add(new EraData(false, 1000));
+        _mErasData.Add(new EraData(false, 2000));
     }
     public void ResetGame()
     {
@@ -94,9 +108,12 @@ public class GameManager : MonoBehaviour
 
     public void OnGameStart()
     {
-        ResetGame();
-        mySceneManager.instance.LoadWinScreen();
-        mySceneManager.instance.RandomGameChoice();
+        if (_mErasData[Era].Unlocked)
+        {
+            ResetGame();
+            mySceneManager.instance.LoadWinScreen();
+            mySceneManager.instance.RandomGameChoice();
+        }
     }
     public void OnRestart()
     {
