@@ -36,7 +36,6 @@ public class MinigameItem : Items
 
     public override void Obtain()
     {
-        Debug.Log("ta race" + SceneName);
         MiniGameSelector.instance.UnlockMinigame(SceneName);
     }
 }

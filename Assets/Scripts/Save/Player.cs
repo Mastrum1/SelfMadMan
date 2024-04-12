@@ -351,13 +351,13 @@ public class Player : MonoBehaviour
     {
         switch (era)
         {
-            case 1:
+            case 0:
                 AllEra1[minigame].Unlock();
                 break;
-            case 2:
+            case 1:
                 AllEra2[minigame].Unlock();
                 break;
-            case 3:
+            case 2:
                 AllEra3[minigame].Unlock();
                 break;
 
