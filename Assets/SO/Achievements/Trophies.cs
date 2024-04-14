@@ -7,7 +7,6 @@ public class Trophies : ScriptableObject
 {
     public int ID;
     public string trophyDescription;
-    public int amount;
     public int reward;
     public Sprite trophyIcon;
 }
