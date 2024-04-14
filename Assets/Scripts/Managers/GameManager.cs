@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
         _mScore = 0;
 
 
-        _mQuestManager = QuestManager.instance;
+        _mQuestManager = QuestManager.Instance;
         _mQuestManager.OnReward += AddStars;
         _mPlayer.LoadJson();
         InitEras();

@@ -11,7 +11,7 @@ public class QuestView : MonoBehaviour
 
     private void OnEnable()
     {
-        _mQuestManager = QuestManager.instance;
+        _mQuestManager = QuestManager.Instance;
         _mQuestManager.OnUpdateQuestUI += UpdateQuestUI;
         
         LoadQuestContainers();

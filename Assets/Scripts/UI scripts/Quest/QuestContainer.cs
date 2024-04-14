@@ -41,7 +41,7 @@ public class QuestContainer : MonoBehaviour
     public void ChangeQuest(int container)
     {
         gameObject.SetActive(false);
-        QuestManager.instance.OnChangeQuest(_mSelectedQuest, container);
+        QuestManager.Instance.OnChangeQuest(_mSelectedQuest, container);
     }
 
     private void OnDisable()
