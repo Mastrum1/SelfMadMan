@@ -45,25 +45,6 @@ public class FightingGame : MiniGameManager
         }
     }
 
-    private void SpawnParticle()
-    {
-        if (particlePrefab != null)
-        {
-            Instantiate(particlePrefab, transform.position, Quaternion.identity);
-        }
-        else
-        {
-            Debug.LogError("No prefab ? wtf");
-        }
-
-        if(_gameIsPlaying)
-        {
-            _UIManager.OnFightImageChange();
-            _UIManager.Bar.AddValue(150 - (GameManager.instance.FasterLevel * 20));
-            Debug.Log("Clicked");
-        }
-    }
-
     public override void Update()
     {
         base.Update();
@@ -75,7 +56,8 @@ public class FightingGame : MiniGameManager
 
             if (lensMaterial != null)
             {
-                lensMaterial.SetFloat("_Float", valueInRange);
+                lensMaterial.SetFloat("_Float", ratio * 4);
+                Debug.Log(valueInRange);
             }
 
             if (_UIManager.Bar.barValue >= _UIManager.Bar.maxBarValue)
