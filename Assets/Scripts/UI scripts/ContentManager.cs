@@ -17,9 +17,7 @@ public class ContentManager : MonoBehaviour
 
     [Header("Content Viewport")]
     [SerializeField] private Image _mBaseImage;
-    [SerializeField] private Image _mJames;
     [SerializeField] private List<Sprite> _mSprites;
-    [SerializeField] private List<Sprite> _mJamesForms;
 
     [SerializeField] private List<Image> _mImagesToDeactivate;
     [SerializeField] private List<TMP_Text> _mTextsToDeactivate;
@@ -103,11 +101,6 @@ public class ContentManager : MonoBehaviour
             Image dotImage = _mDotsContainer.transform.GetChild(i).GetComponent<Image>();
             dotImage.color = isActive ? Color.white : Color.gray;
             dotImage.fillAmount = isActive ? 1f : 0f;
-        }
-
-        for (int i = 0; i < _mJamesForms.Count; i++)
-        {
-            _mJames.sprite = _mJamesForms[_mCurrentIndex];
         }
     }
     public void UnlockEra()
