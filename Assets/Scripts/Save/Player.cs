@@ -192,16 +192,12 @@ public class Player : MonoBehaviour
         {
             playerData.SaveData(this);
         }
-        if (DataService.SaveData("/player-stats.json", playerData, false))
+        if (DataService.SaveData("/player-stats.json", playerData, true))
         {
             if (firstSave)
             {
                 LoadJson();
             }
-        }
-        else
-        {
-            Debug.LogError("Could not save file !");
         }
     }
 
@@ -418,7 +414,12 @@ public class Player : MonoBehaviour
 
         if (CheckFile())
         {
-            PlayerData data = DataService.LoadData<PlayerData>("/player-stats.json", false);
+            PlayerData data = DataService.LoadData<PlayerData>("/player-stats.json", true);
+
+            if (data == default)
+                data = DataService.LoadData<PlayerData>("/player-stats.json", false);
+
+
             if (data.EraData.Count == 0)
             {
 
