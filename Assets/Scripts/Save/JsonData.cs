@@ -45,7 +45,7 @@ public class JsonData : IDataService
         }
         catch (Exception e)
         {
-            Debug.LogError($"Unable to save data {e.Message} {e.StackTrace}");
+            //Debug.LogError($"Unable to save data {e.Message} {e.StackTrace}");
             return false;
         }
     }
@@ -91,8 +91,8 @@ public class JsonData : IDataService
         }
         catch (Exception e)
         {
-            Debug.LogError($"Failed to load data due to: {e.Message} {e.StackTrace}");
-            throw e;
+            T data = default;
+            return data;
         }
     }
 
