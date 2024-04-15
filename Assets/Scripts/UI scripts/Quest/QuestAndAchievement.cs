@@ -4,6 +4,7 @@ using UnityEngine;
 public class QuestAndAchievement : MonoBehaviour
 {
     [SerializeField] private GameObject _mQuestView;
+    [SerializeField] private GameObject _mTrophyView;
 
     private void OnEnable()
     {
@@ -11,15 +12,28 @@ public class QuestAndAchievement : MonoBehaviour
         {
             _mQuestView.SetActive(true);
         }
+
+        if (_mTrophyView.activeSelf)
+        {
+            _mTrophyView.SetActive(false);
+        }
     }
 
-    public void EnableQuests(bool isEnabled)
+    public void EnableQuests()
     {
-        _mQuestView.SetActive(isEnabled);
+        _mTrophyView.SetActive(false);
+        _mQuestView.SetActive(true);
+    }
+
+    public void EnableTrophies()
+    {
+        _mQuestView.SetActive(false);
+        _mTrophyView.SetActive(true);
     }
 
     private void OnDisable()
     {
         _mQuestView.SetActive(false);
+        _mTrophyView.SetActive(false);
     }
 }
