@@ -13,6 +13,30 @@ public class Player : MonoBehaviour
         public int ID;
         public VideoClip clip;
     }
+    [System.Serializable]
+    public class TrophySave
+    {
+        [SerializeField] private int _TrophySOIndex;
+        public int TrophySOIndex { get => _TrophySOIndex; set => _TrophySOIndex = value; }
+
+        [SerializeField] private TrophyManager.CompletionState _trophyCompletionState;
+        public TrophyManager.CompletionState TrophyCompletionState { get => _trophyCompletionState; set => _trophyCompletionState = value; }
+
+        private int _goal;
+        public int Goal { get => _goal; set => _goal = value; }
+
+        private int _currentAmount;
+        public int CurrentAmount { get => _currentAmount; set => _currentAmount = value; }
+
+        public TrophySave(int TrophySOIndex, TrophyManager.CompletionState completionState, int goal, int currentAmount)
+        {
+            _TrophySOIndex = TrophySOIndex;
+            TrophyCompletionState = completionState;
+            Goal = goal;
+            CurrentAmount = currentAmount;
+        }
+    }
+
 
     [System.Serializable]
     public class QuestSave
@@ -135,6 +159,14 @@ public class Player : MonoBehaviour
 
     [SerializeField] private List<QuestManager.Quest> _mAllQuest;
 
+    public List<TrophyManager.Trophy> AllTrophy { get => _mAllTrophy; private set => _mAllTrophy = value; }
+
+    [SerializeField] private List<TrophyManager.Trophy> _mAllTrophy;
+
+    public List<GameManager.EraData> EraData { get => _EraData; private set => _EraData = value; }
+
+    private List<GameManager.EraData> _EraData = new List<GameManager.EraData>();
+
     public List<MinigameScene> AllEra1 { get => _mAllEra1; private set => _mAllEra1 = value; }
 
     [SerializeField] private List<MinigameScene> _mAllEra1;
@@ -209,6 +241,8 @@ public class Player : MonoBehaviour
 
             Language = data.Language;
 
+            EraData = data.EraData;
+
             foreach (var item in data.UnlockedCinematics)
             {
                 UnlockedCinematics.Add(AllCinematics[item]);
@@ -248,10 +282,20 @@ public class Player : MonoBehaviour
                 AllQuest[item].QuestCompletionState = QuestManager.CompletionState.NotSelected;
             }
 
+            AllTrophy = new List<TrophyManager.Trophy>();
+
+            foreach (var item in data.AllTrophy)
+            {
+                AllTrophy[item.TrophySOIndex] = new TrophyManager.Trophy(AllTrophy[item.TrophySOIndex].TrophySO, item.TrophyCompletionState, item.Goal, item.CurrentAmount);
+            }
+
             if (_mLoadSaveMinigame)
             {
                 MiniGameSelector.instance.LoadEra(AllEra1, AllEra2, AllEra3);
             }
+            GameManager.instance.LoadEraData(EraData);
+
+            TrophyManager.Instance.LoadTrophies(AllTrophy);
             QuestManager.Instance.LoadQuests(AllQuest, ActiveQuests);
         }
 
@@ -404,6 +448,13 @@ public class Player : MonoBehaviour
 
         }
     }
+
+    public void UnlockEra(int era)
+    {
+        EraData[era].UnlockEra();
+    }
+
+
 
     public bool CheckFile()
     {

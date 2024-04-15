@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static GameManager;
 using static Player;
 
 [System.Serializable]
@@ -26,11 +27,15 @@ public class PlayerData
 
     public List<Player.QuestSave> ActiveQuests = new List<Player.QuestSave>();
 
+    public List<TrophySave> AllTrophy = new List<TrophySave>();
+
     public List<Player.QuestSave> CompletedQuests = new List<Player.QuestSave>();
 
     public List<FournituresClass> ItemLocked = new List<FournituresClass>();
 
     public List<int> QuestUnlocked = new List<int>();
+
+    public List<GameManager.EraData> EraData = new List<GameManager.EraData>();
 
     public List<MinigameScene> AllEra1 = new List<MinigameScene>();
 
@@ -51,6 +56,7 @@ public class PlayerData
 
         Language = player.Language;
 
+        EraData = player.EraData;
 
         foreach (var item in player.UnlockedCinematics)
         {
@@ -82,7 +88,20 @@ public class PlayerData
             CompletedQuests.Add(new Player.QuestSave(item.QuestSO.ID, item.QuestCompletionState, item.QuestDispo, item.Difficulty, item.MaxAmount, item.CurrentAmount));
         }
 
+        AllTrophy = new List<TrophySave>();
+        foreach (var item in player.AllTrophy)
+        {
+            AllTrophy.Add(new TrophySave(item.TrophySO.ID, item.TrophyCompletionState, item.Goal, item.CurrentAmount));
+        }
+
         QuestUnlocked = player.QuestUnlocked;
+    }
+
+    private void InitEras()
+    {
+        EraData.Add(new EraData(true, 0));
+        EraData.Add(new EraData(false, 1000));
+        EraData.Add(new EraData(false, 2000));
     }
 
     public void FirstSaveData(Player player)
@@ -100,6 +119,8 @@ public class PlayerData
         AllEra1 = player.AllEra1;
         AllEra2 = player.AllEra2;
         AllEra3 = player.AllEra3;
+
+        InitEras();
 
         QuestUnlocked = player.FirstQuests;
 

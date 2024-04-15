@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
         }
     }
     private List<EraData> _mErasData = new List<EraData>();
-    public List<EraData> ErasData { get => _mErasData; }
+    public List<EraData> ErasData { get => _mErasData; private set => _mErasData = value; }
 
     private float _mScore;
     public float Score { get => _mScore; private set => _mScore = value; }
@@ -104,6 +104,11 @@ public class GameManager : MonoBehaviour
         FasterLevel = 1;
         _mGameOver = false;
         _mMinigameCount = 0;
+    }
+
+    public void LoadEraData(List<EraData> data)
+    {
+        _mErasData = data;
     }
 
     public void OnGameStart()
