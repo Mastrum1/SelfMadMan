@@ -55,6 +55,13 @@ public class FightingGame : MiniGameManager
         {
             Debug.LogError("No prefab ? wtf");
         }
+
+        if(_gameIsPlaying)
+        {
+            _UIManager.OnFightImageChange();
+            _UIManager.Bar.AddValue(150 - (GameManager.instance.FasterLevel * 20));
+            Debug.Log("Clicked");
+        }
     }
 
     public override void Update()
@@ -76,7 +83,7 @@ public class FightingGame : MiniGameManager
                 Amount++;
                 EndMiniGame(true, miniGameScore);
             }
-            if (_UIManager.Bar.barValue == 0)
+            if (_UIManager.Bar.barValue == _UIManager.Bar.maxBarValue)
             {
                 EndMiniGame(false, miniGameScore);
             }
