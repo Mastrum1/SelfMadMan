@@ -6,38 +6,25 @@ using UnityEngine;
 public class FightingGame : MiniGameManager
 {
     [SerializeField] private FightingUIManager _UIManager;
-    [SerializeField] private GameObject LensEffect;
     [SerializeField] private ParticleSystem particlePrefab;
+    [SerializeField] private GameObject targetParticle;
 
-    private Material lensMaterial;
-
-    private void Start()
-    {
-        Renderer renderer = LensEffect.GetComponent<Renderer>();
-        if (renderer != null)
-        {
-            lensMaterial = renderer.material;
-        }
-        else
-        {
-
-        }
-    }
 
     public void OnClicked()
     {
         _UIManager.Bar.AddValue(150 - (GameManager.instance.FasterLevel * 20));
+        _UIManager.OnFightImageChange();
         Debug.Log("Clicked");
-        SpawnParticle(Input.mousePosition);
+        SpawnParticle();
     }
 
-    private void SpawnParticle(Vector3 tapPosition)
+    private void SpawnParticle()
     {
         if (particlePrefab != null)
         {
-            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(tapPosition.x, tapPosition.y, 10f)); // Assuming z = 10f is the desired distance from camera
+            Vector3 targetPosition = targetParticle.transform.position;
 
-            Instantiate(particlePrefab, worldPosition, Quaternion.identity);
+            Instantiate(particlePrefab, targetPosition, Quaternion.identity);
         }
         else
         {
@@ -50,17 +37,7 @@ public class FightingGame : MiniGameManager
         base.Update();
         if (_gameIsPlaying)
         {
-            float ratio = _UIManager.Bar.barValue / _UIManager.Bar.maxBarValue;
-            float invertedRatio = 1f - ratio;
-            float valueInRange = invertedRatio * 4f;
-
-            if (lensMaterial != null)
-            {
-                lensMaterial.SetFloat("_Float", ratio * 4);
-                Debug.Log(valueInRange);
-            }
-
-            if (_UIManager.Bar.barValue >= _UIManager.Bar.maxBarValue)
+            if (_UIManager.Bar.barValue == 0)
             {
                 Amount++;
                 EndMiniGame(true, miniGameScore);
