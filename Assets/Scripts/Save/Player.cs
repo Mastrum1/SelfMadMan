@@ -203,7 +203,7 @@ public class Player : MonoBehaviour
 
     public void UpdateSaveFile(PlayerData data)
     {
-        if (data.AllEra1 != AllEra1)
+        if (data.AllEra1.Count == 8 && data.AllEra1 != AllEra1)
         {
             AllEra1 = data.AllEra1;
         }
@@ -212,7 +212,7 @@ public class Player : MonoBehaviour
             data.AllEra1 = AllEra1;
         }
 
-        if (data.AllEra2 != AllEra2)
+        if (data.AllEra2.Count == 8 && data.AllEra2 != AllEra2)
         {
             AllEra2 = data.AllEra2;
         }
@@ -221,7 +221,7 @@ public class Player : MonoBehaviour
             data.AllEra2 = AllEra2;
         }
 
-        if (data.AllEra3 != AllEra3)
+        if (data.AllEra3.Count == 8 && data.AllEra3 != AllEra3)
         {
             AllEra3 = data.AllEra3;
         }
@@ -298,7 +298,7 @@ public class Player : MonoBehaviour
             data.Language = Language;
         }
 
-        if (data.Inventory.Fournitures != null || data.Inventory.UsableItems != null || data.Inventory != null)
+        if (data.Inventory.Fournitures.Count != 0 || data.Inventory.UsableItems.Count != 0  || data.Inventory != null)
         {
             Inventory = data.Inventory;
         }
@@ -307,7 +307,7 @@ public class Player : MonoBehaviour
             data.Inventory = Inventory;
         }
 
-        if (data.ItemLocked != ItemLocked)
+        if (data.ItemLocked.Count != 0 && data.ItemLocked != ItemLocked)
         {
             ItemLocked = data.ItemLocked;
         }
@@ -359,7 +359,7 @@ public class Player : MonoBehaviour
         {
         }
 
-        if (data.AllTrophy != null)
+        if (data.AllTrophy.Count != 0)
         {
             foreach (var item in data.AllTrophy)
             {

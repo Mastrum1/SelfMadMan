@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    private float _mLostFocusTime;
+
     public int Level { get => _mLevelCount; private set => _mLevelCount = value; }
 
     private float _speed;
@@ -193,12 +195,28 @@ public class GameManager : MonoBehaviour
         if (!hasFocus)
         {
             _mPlayer.SaveJson();
+            _mLostFocusTime = System.DateTime.Now.Minute;
+        }
+        if (hasFocus)
+        {
+            Debug.Log(_mLostFocusTime);
+            if (System.DateTime.Now.Minute - _mLostFocusTime > 2)
+            {
+                for (int i = 0; i < SceneManager.sceneCount; i++)
+                {
+                    Debug.Log(SceneManager.GetSceneAt(i));
+                    SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(i));
+                }
+                SceneManager.LoadSceneAsync("LoadingScreen");
+
+            }
         }
     }
 
     void OnApplicationQuit()
     {
         _mPlayer.SaveJson();
+
     }
     private void OnDestroy()
     {
