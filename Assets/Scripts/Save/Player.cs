@@ -89,8 +89,6 @@ public class Player : MonoBehaviour
 
     private readonly IDataService DataService = new JsonData();
 
-    private QuestManager _mQuestManagerInstance;
-
     public int BestScore { get => _mBestScore; private set => _mBestScore = value; }
 
     [SerializeField] private int _mBestScore;
@@ -402,7 +400,8 @@ public class Player : MonoBehaviour
         QuestManager.Instance.OnUnlockQuest -= UnlockQuest;
         QuestManager.Instance.OnLockQuest -= RemoveUnlockQuest;
         QuestManager.Instance.OnQuestFinished -= RemoveCompleteQuests;
-
+        TrophyManager.Instance.OnTrophyComplete -= TrophyCompleted;
+        TrophyManager.Instance.OnTrophyClaimed -= ClaimTrophy;
 
     }
 
@@ -414,6 +413,8 @@ public class Player : MonoBehaviour
         QuestManager.Instance.OnUnlockQuest += UnlockQuest;
         QuestManager.Instance.OnLockQuest += RemoveUnlockQuest;
         QuestManager.Instance.OnQuestFinished += RemoveCompleteQuests;
+        TrophyManager.Instance.OnTrophyComplete += TrophyCompleted;
+        TrophyManager.Instance.OnTrophyClaimed += ClaimTrophy;
 
         if (CheckFile())
         {
@@ -657,6 +658,17 @@ public class Player : MonoBehaviour
     public void UnlockEra(int era)
     {
         EraData[era].UnlockEra();
+    }
+
+    public void TrophyCompleted(TrophyManager.Trophy trophy)
+    {
+        AllTrophy[trophy.TrophySO.ID] = trophy;
+    }
+
+    public void ClaimTrophy(TrophyManager.Trophy trophy, int reward)
+    {
+        AllTrophy[trophy.TrophySO.ID] = trophy;
+        _mMoney += reward;
     }
 
 
