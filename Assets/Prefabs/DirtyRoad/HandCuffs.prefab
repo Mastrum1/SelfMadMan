@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 8174776102566398831}
   - component: {fileID: 4589578739732680453}
-  - component: {fileID: 7383905981977579444}
+  - component: {fileID: 8560656705517217070}
   - component: {fileID: 2726577322894070044}
   - component: {fileID: 642446615030249458}
-  - component: {fileID: 4091489196959674480}
+  - component: {fileID: 7593611153451205263}
   m_Layer: 9
-  m_Name: DirtyAd
+  m_Name: HandCuffs
   m_TagString: DirtyAd
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,19 +77,19 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4419da9fcef5f924885c462ba2649376, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a38725bf03b7942f5a164df22d20ef78, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 10, y: 10}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &7383905981977579444
-BoxCollider2D:
+--- !u!58 &8560656705517217070
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -103,7 +103,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -117,22 +117,12 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.029513836, y: 0.029513717}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.12, y: 5.12}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0.108202696, y: -0.7419652}
   serializedVersion: 2
-  m_Size: {x: 5.308981, y: 5.308982}
-  m_EdgeRadius: 0
+  m_Radius: 3.9334226
 --- !u!50 &2726577322894070044
 Rigidbody2D:
   serializedVersion: 4
@@ -173,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigid2d: {fileID: 2726577322894070044}
---- !u!114 &4091489196959674480
+--- !u!114 &7593611153451205263
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
