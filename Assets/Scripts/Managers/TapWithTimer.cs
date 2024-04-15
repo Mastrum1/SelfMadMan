@@ -60,8 +60,22 @@ public class TapWithTimer : MonoBehaviour
     {
         if (!StopTorus)
         {
-            
-            _mTorus.transform.localScale -= new Vector3(Time.deltaTime * _mDecreaseSpeed * GameManager.instance.FasterLevel, Time.deltaTime * _mDecreaseSpeed * GameManager.instance.FasterLevel, Time.deltaTime * _mDecreaseSpeed * GameManager.instance.FasterLevel);
+            switch (GameManager.instance.FasterLevel)
+            {
+                case 1:
+                    _mDecrease = GameManager.instance.FasterLevel;
+                    break;
+                case 2:
+                    _mDecrease = (GameManager.instance.FasterLevel / 1.25f);
+                    break;
+                case 3:
+                    _mDecrease = (GameManager.instance.FasterLevel / 1.45f);
+                    break;
+                default:
+                    break;
+            }
+
+            _mTorus.transform.localScale -= new Vector3(Time.deltaTime * _mDecreaseSpeed * _mDecrease, Time.deltaTime * _mDecreaseSpeed * _mDecrease, Time.deltaTime * _mDecreaseSpeed * _mDecrease);
             if (_mTorus.transform.localScale.x < _mMinTimeForClick)
             {
                 _StopTorus = true;
