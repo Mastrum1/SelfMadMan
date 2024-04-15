@@ -44,7 +44,7 @@ public class QuestContainer : MonoBehaviour
         QuestManager.Instance.OnChangeQuest(_mSelectedQuest, container);
     }
 
-    private void OnDisable()
+    public void DisableContainers()
     {
         QuestProgression.transform.position = new Vector3(_mStartPos - 0.176f, transform.position.y);
 

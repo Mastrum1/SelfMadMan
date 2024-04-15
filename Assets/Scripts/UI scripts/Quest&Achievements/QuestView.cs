@@ -32,8 +32,6 @@ public class QuestView : MonoBehaviour
         
         var questContainer = _quests[container];
         questContainer.SetActive(true);
-        
-        Debug.Log("CurrentAmount:" + quest.CurrentAmount);
 
         var replace = quest.QuestSO.questDescription.Replace("*", quest.Difficulty.amount.ToString());
         var questContainerScript = questContainer.GetComponent<QuestContainer>();

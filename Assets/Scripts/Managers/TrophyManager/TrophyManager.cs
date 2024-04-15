@@ -7,11 +7,10 @@ public class TrophyManager : MonoBehaviour
     public static TrophyManager Instance;
     
     public event Action<Trophy> OnTrophyComplete;
-
-    public event Action<int> OnReward;
+    public event Action<Trophy, int> OnTrophyClaimed;
     public enum CompletionState
     {
-        NotComplete, Complete
+        NotComplete, Complete, Claimed
     }
     
     [Serializable]
@@ -25,7 +24,7 @@ public class TrophyManager : MonoBehaviour
         
         private int _goal;
         public int Goal { get => _goal; set => _goal = value; }
-
+        
         private int _currentAmount;
         public int CurrentAmount { get => _currentAmount; set => _currentAmount = value; }
 
@@ -65,7 +64,8 @@ public class TrophyManager : MonoBehaviour
 
     public void ClaimReward(Trophy trophy)
     {
-        OnReward?.Invoke(trophy.TrophySO.reward);
+        trophy.TrophyCompletionState = CompletionState.Claimed;
+        OnTrophyClaimed?.Invoke(trophy, trophy.TrophySO.reward);
         //Add money to wallet;
     }
 }
