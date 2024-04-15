@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,9 +9,17 @@ public class Money : MonoBehaviour
     public int CurrentMoney { get => _mCurrentMoney; set => _mCurrentMoney = value; }
     [SerializeField] private int _mCurrentMoney;
 
+    [SerializeField] TMP_Text m_TextMeshPro;
+
     void Start()
     {
         LoadMoney(); // Load PlayerPrefs
+        UpdateMoney();
+    }
+
+    public void UpdateMoney()
+    {
+        m_TextMeshPro.text = GameManager.instance.GetComponent<Player>().Money.ToString();
     }
 
     public void AddMoney(int MoneyToAdd)

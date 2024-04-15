@@ -201,6 +201,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1759891334}
+    - target: {fileID: 1388595682447805601, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 70.24
+      objectReference: {fileID: 0}
     - target: {fileID: 1702616548624728975, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
       propertyPath: m_Name
       value: UI
@@ -280,6 +284,30 @@ PrefabInstance:
     - target: {fileID: 6882742642917054783, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
       propertyPath: m_LocalPosition.z
       value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731437104907751157, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+      propertyPath: m_text
+      value: CLOSE THE ADS!
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731437104907751157, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+      propertyPath: m_margin.z
+      value: -153.89227
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731437104907751157, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 3803c74790811ec4fb1ea2063a6e907b, type: 2}
+    - target: {fileID: 7731437104907751157, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -7929761794402918686, guid: 3803c74790811ec4fb1ea2063a6e907b, type: 2}
+    - target: {fileID: 7731437104907751157, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+      propertyPath: m_characterSpacing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731437104907751157, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -519,7 +547,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -400}
+  m_AnchoredPosition: {x: 0, y: -367.3}
   m_SizeDelta: {x: 38, y: 1.7458}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &543525055
@@ -542,9 +570,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Introduced to life in the fast lane through stockbroking, Jordan Belfort
-    takes a hit after a Wall Street crash. He teams up with Donnie Azoff, cheating
-    his way to the top as his relationships slide.
+  m_text: A wealthy New York City investment banking executive, James MadMan, hides
+    his alternate psychopathic ego from his co-workers and friends as he delves deeper
+    into his violent, hedonistic fantasies after discovering a video on TikTok.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 01c2b671c1eaf2747ac1a12b2ef70a77, type: 2}
   m_sharedMaterial: {fileID: -8190003602687165356, guid: 01c2b671c1eaf2747ac1a12b2ef70a77, type: 2}
@@ -900,7 +928,7 @@ Transform:
   m_GameObject: {fileID: 741319310}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -225.00003, y: 463.00006, z: 0}
+  m_LocalPosition: {x: -178.4, y: 660.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1040,7 +1068,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 14fad58df36cb3e41ba3ba9d71e39cc6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 87c094dab5cb58f41887287908f68d61, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1420,7 +1448,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 850}
+  m_AnchoredPosition: {x: 0, y: 822.98}
   m_SizeDelta: {x: 35.6, y: 8.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1294423479
@@ -1443,7 +1471,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: THE LAMB OF WALL STREET (2024)
+  m_text: CORPORATE PSYCHO (2024)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d428fe112562e07469098a4b52432d13, type: 2}
   m_sharedMaterial: {fileID: 8128442406342434213, guid: d428fe112562e07469098a4b52432d13, type: 2}
@@ -1719,8 +1747,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mPopUps:
-  - {fileID: 2722506638211667111, guid: 2e2625e41460dd943b5fb192acf09188, type: 3}
-  - {fileID: 2336781545738248334, guid: eb36c901e689e32419dc52875844c028, type: 3}
+  - {fileID: 150537517330529034, guid: 9e4ce92d43ffb114f89eb7183679834b, type: 3}
+  - {fileID: 3255400297944624475, guid: 7b6b5591818f5e5408fa5a171c54e98a, type: 3}
+  - {fileID: 7048331879377654516, guid: 9931a967dbe74434480ba35f778a0c68, type: 3}
+  - {fileID: 6061643771249818695, guid: c55c05c4e54535d46b9da1b7d9aa7779, type: 3}
+  - {fileID: 8580697176596297539, guid: d0bda48a0d17f29499d276b48ba75389, type: 3}
+  - {fileID: 2535355007492147164, guid: 390e71b6d645e3d4b90d79e9d078bdb5, type: 3}
+  - {fileID: 3171198728748413759, guid: 9144ac6384b528a458d7b5e54b075818, type: 3}
   _mSpawnPoints:
   - {fileID: 741319310}
   - {fileID: 1608967867}
@@ -1784,7 +1817,7 @@ Transform:
   m_GameObject: {fileID: 1546719514}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -225.00003, y: -492.76, z: 0}
+  m_LocalPosition: {x: -240.1, y: -663.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1815,7 +1848,7 @@ Transform:
   m_GameObject: {fileID: 1608967867}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 225.00003, y: 463.00006, z: 0}
+  m_LocalPosition: {x: 169.3, y: 651, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1951,11 +1984,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cbef796f168b13449123f8c0459b68d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _scenName: PopUpHell
   _mTimer: {fileID: 1532476827}
   _cash: {fileID: 1398139708}
   _sceneCamera: {fileID: 1759891334}
   _loosePanel: {fileID: 1438571919}
   spawner: {fileID: 1425359844}
+  _mAnimator: {fileID: 2064201135}
 --- !u!224 &1942289303 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2260425162558596221, guid: 0f7f0ba4cecccdd4b89a0013d14b5e21, type: 3}
@@ -1974,7 +2009,8 @@ GameObject:
   - component: {fileID: 2064201131}
   - component: {fileID: 2064201130}
   - component: {fileID: 2064201133}
-  - component: {fileID: 2064201134}
+  - component: {fileID: 2064201135}
+  - component: {fileID: 2064201136}
   m_Layer: 0
   m_Name: DownloadButton
   m_TagString: Untagged
@@ -1991,7 +2027,7 @@ Transform:
   m_GameObject: {fileID: 2064201128}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 53, y: -150, z: 0}
+  m_LocalPosition: {x: 53, y: -120, z: 0}
   m_LocalScale: {x: 300, y: 300, z: 300}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -2165,10 +2201,43 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2064201135}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: PopupPress
+          m_BoolArgument: 0
+        m_CallState: 2
   _mOnDeselected:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2064201134
+--- !u!95 &2064201135
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2064201128}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 50b828aba098a9048a4eca42b862f8bd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2064201136
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2177,27 +2246,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2064201128}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d9312d381f0eb94fa340b529733662e, type: 3}
+  m_Script: {fileID: 11500000, guid: 469946d855d091049bf81db02c8bbfe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mOnSelected:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2064201132}
-        m_TargetAssemblyTypeName: UnityEngine.SpriteRenderer, UnityEngine
-        m_MethodName: set_sprite
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 21300000, guid: 21c2d7ab33777cc4e95481ba4f11f8b5, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  _mOnDeselected:
-    m_PersistentCalls:
-      m_Calls: []
+  _Popups: {fileID: 578251077}
+  _mAnimator: {fileID: 2064201135}
 --- !u!1001 &2141231886
 PrefabInstance:
   m_ObjectHideFlags: 0

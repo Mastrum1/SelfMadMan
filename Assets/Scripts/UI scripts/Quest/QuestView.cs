@@ -32,6 +32,8 @@ public class QuestView : MonoBehaviour
         
         var questContainer = _quests[container];
         questContainer.SetActive(true);
+        
+        Debug.Log("CurrentAmount:" + quest.CurrentAmount);
 
         var replace = quest.QuestSO.questDescription.Replace("*", quest.Difficulty.amount.ToString());
         var questContainerScript = questContainer.GetComponent<QuestContainer>();
@@ -56,7 +58,14 @@ public class QuestView : MonoBehaviour
     {
         while (pos.position.x < startPos + 3 * (float)quest.CurrentAmount / quest.MaxAmount)
         {
-            pos.position += pos.right * ((float)quest.CurrentAmount / quest.MaxAmount * 3 * Time.deltaTime);
+            if (quest.CurrentAmount - quest.MaxAmount >= quest.MaxAmount)
+            {
+                pos.position += pos.right * (3 * Time.deltaTime);
+            }
+            else
+            {
+                pos.position += pos.right * ((float)quest.CurrentAmount / quest.MaxAmount * 3 * Time.deltaTime);
+            }
             yield return new WaitForSeconds(0.01f);
         }
     }

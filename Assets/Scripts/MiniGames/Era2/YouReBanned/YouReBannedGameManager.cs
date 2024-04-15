@@ -7,7 +7,7 @@ public class YouReBannedGameManager : MiniGameManager
     [SerializeField] private Transform _mSpawnPosition;
     private float _mAverageSpawnRate;
     private int _mCount;
-    void Start()
+    private void Start()
     {
         _mAverageSpawnRate = 1.0f;
         _mCount = 0;
@@ -42,14 +42,14 @@ public class YouReBannedGameManager : MiniGameManager
                 mComment.SetActive(true);
                 DisplayTikTokComment mDisplayComment = mComment.GetComponent<DisplayTikTokComment>();
                mComment.transform.position = _mSpawnPosition.position;
-               mDisplayComment.ResetComment();
+               //mDisplayComment.ResetComment();
                 mDisplayComment.DeleteComment += OnDeleteComment;
                 mDisplayComment.ExitScreen += OnScreenExited;
             }
         }
     }
 
-    public void OnDeleteComment(bool IsGood, GameObject Comment)
+    private void OnDeleteComment(bool IsGood, GameObject Comment)
     {
         Comment.SetActive(false);
         DisplayTikTokComment mDisplayTikTokComment = Comment.GetComponent<DisplayTikTokComment>();
@@ -57,9 +57,11 @@ public class YouReBannedGameManager : MiniGameManager
         mDisplayTikTokComment.ExitScreen -= OnScreenExited;
         if (IsGood)
             EndMiniGame(false, miniGameScore);
+        
+        else Amount++;
     }
 
-    public void OnScreenExited(bool IsGood, GameObject Comment)
+    private void OnScreenExited(bool IsGood, GameObject Comment)
     {
         Comment.SetActive(false);
         DisplayTikTokComment mDisplayTikTokComment = Comment.GetComponent<DisplayTikTokComment>();

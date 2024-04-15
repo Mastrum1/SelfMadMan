@@ -27,7 +27,7 @@ public class CryptoInteractableManager : InteractableManager
 
     private void DetectClick(PostIt postIt)
     {
-            OnPostItClicked.Invoke(postIt);
+        OnPostItClicked.Invoke(postIt);
     }
 
     private void OnDestroy()
