@@ -26,11 +26,11 @@ public class VFXKnockout : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        AdjustFloatParameter();
+        AdjustFloatParameter(floatValue);
     }
 
     // Function to adjust the "_Float" reference in the material
-    public void AdjustFloatParameter()
+    public void AdjustFloatParameter(float floatValue)
     {
         if (material != null)
         {
