@@ -12,10 +12,4 @@ public class CheckEraGamesTemplate : MonoBehaviour
 
     public Image EraGameBorder { get => _mEraGameBorder; private set => _mEraGameBorder = value; }
     [SerializeField] private Image _mEraGameBorder;
-
-    public Sprite EraGameBorderLocked { get => _mEraGameBorderLocked; }
-    [SerializeField] private Sprite _mEraGameBorderLocked;
-
-    public Sprite EraGameBorderUnlocked { get => _mEraGameBorderUnlocked; }
-    [SerializeField] private Sprite _mEraGameBorderUnlocked;
 }
