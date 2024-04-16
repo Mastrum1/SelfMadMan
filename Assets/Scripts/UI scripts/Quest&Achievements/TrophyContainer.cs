@@ -26,7 +26,7 @@ public class TrophyContainer : MonoBehaviour
     public float StartPosX => _mStartPos;
     private float _mStartPos;
 
-    private void Awake()
+    private void OnEnable()
     {
         _mStartPos = _mTrophyProgression.transform.position.x;
     }

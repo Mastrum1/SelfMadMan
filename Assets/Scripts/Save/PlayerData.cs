@@ -109,7 +109,7 @@ public class PlayerData
     {
         foreach (var item in AllTrophyToSave)
         {
-            AllTrophy.Add(new TrophySave(item.TrophySO.ID, item.TrophyCompletionState, item.Goal, item.CurrentAmount));
+            AllTrophy.Add(new TrophySave(item.TrophySO.ID, item.TrophyCompletionState, item.CurrentAmount));
         }
     }
 

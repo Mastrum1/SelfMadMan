@@ -40,7 +40,16 @@ public class TrophyView : MonoBehaviour
             switch (trophy.TrophyCompletionState)
             {
                 case TrophyManager.CompletionState.NotComplete:
-                    StartCoroutine(ShowCompletionBar(trophyContainerScript.TrophyProgression.gameObject.transform, trophy, trophyContainerScript.StartPosX));
+                    float destination;
+                    if (trophy.CurrentAmount >= trophy.TrophySO.goal)
+                    {
+                        destination = 1.383f;
+                    }
+                    else
+                    {
+                        destination = (float)trophy.CurrentAmount / trophy.TrophySO.goal * 1.383f;
+                    }
+                    StartCoroutine(ShowCompletionBar(trophyContainerScript.TrophyProgression.gameObject.transform, destination, trophyContainerScript.StartPosX));
                     break;
                 case TrophyManager.CompletionState.Complete:
                     trophyContainerScript.TrophyLock.SetActive(false);
@@ -58,18 +67,13 @@ public class TrophyView : MonoBehaviour
         }
     }
     
-    private static IEnumerator ShowCompletionBar(Transform pos, TrophyManager.Trophy trophy, float startPos)
+    private static IEnumerator ShowCompletionBar(Transform pos, float destination, float startPos)
     {
-        while (pos.position.x < startPos + 1.5f * (float)trophy.CurrentAmount / trophy.Goal)
+        
+        while (pos.position.x < startPos + destination)
         {
-            if (trophy.CurrentAmount - trophy.Goal >= trophy.Goal)
-            {
-                pos.position += pos.right * (1.5f * Time.deltaTime);
-            }
-            else
-            {
-                pos.position += pos.right * ((float)trophy.CurrentAmount / trophy.Goal * 1.5f * Time.deltaTime);
-            }
+            pos.position += pos.right * (destination * Time.deltaTime);
+            
             yield return new WaitForSeconds(0.01f);
         }
     }

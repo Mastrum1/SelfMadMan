@@ -28,11 +28,10 @@ public class Player : MonoBehaviour
         private int _currentAmount;
         public int CurrentAmount { get => _currentAmount; set => _currentAmount = value; }
 
-        public TrophySave(int TrophySOIndex, TrophyManager.CompletionState completionState, int goal, int currentAmount)
+        public TrophySave(int TrophySOIndex, TrophyManager.CompletionState completionState, int currentAmount)
         {
             _TrophySOIndex = TrophySOIndex;
             TrophyCompletionState = completionState;
-            Goal = goal;
             CurrentAmount = currentAmount;
         }
     }
@@ -363,7 +362,7 @@ public class Player : MonoBehaviour
         {
             foreach (var item in data.AllTrophy)
             {
-                AllTrophy[item.TrophySOIndex] = new TrophyManager.Trophy(AllTrophy[item.TrophySOIndex].TrophySO, item.TrophyCompletionState, item.Goal, item.CurrentAmount);
+                AllTrophy[item.TrophySOIndex] = new TrophyManager.Trophy(AllTrophy[item.TrophySOIndex].TrophySO, item.TrophyCompletionState, item.CurrentAmount);
             }
         }
         else
@@ -489,7 +488,7 @@ public class Player : MonoBehaviour
 
                 foreach (var item in data.AllTrophy)
                 {
-                    AllTrophy[item.TrophySOIndex] = new TrophyManager.Trophy(AllTrophy[item.TrophySOIndex].TrophySO, item.TrophyCompletionState, item.Goal, item.CurrentAmount);
+                    AllTrophy[item.TrophySOIndex] = new TrophyManager.Trophy(AllTrophy[item.TrophySOIndex].TrophySO, item.TrophyCompletionState, item.CurrentAmount);
                 }
 
                 if (_mLoadSaveMinigame)
