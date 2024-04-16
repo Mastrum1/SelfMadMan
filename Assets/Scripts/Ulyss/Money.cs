@@ -19,7 +19,7 @@ public class Money : MonoBehaviour
 
     public void UpdateMoney()
     {
-        m_TextMeshPro.text = GameManager.instance.GetComponent<Player>().Money.ToString();
+        m_TextMeshPro.text = GameManager.instance.Player.Money.ToString();
     }
 
     public void AddMoney(int MoneyToAdd)
