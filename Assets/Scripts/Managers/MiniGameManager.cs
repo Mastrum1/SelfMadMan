@@ -39,6 +39,8 @@ public class MiniGameManager : MonoBehaviour
 
     protected virtual void EndMiniGame(bool won, int score)
     {
+        Debug.Log("ENDGAME");
+
         _gameIsPlaying = false;
         _mTimer.MyTimer = false;
 
@@ -70,7 +72,7 @@ public class MiniGameManager : MonoBehaviour
 
     public virtual void Update()
     {
-        if (_mTimer.TimerValue == 0)
+        if (_mTimer.TimerValue == 0 && _gameIsPlaying)
             EndMiniGame(false, 0);
     }
 }
