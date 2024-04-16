@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4250786373854511064}
   - component: {fileID: 8033778001097723853}
+  - component: {fileID: 485992226678803944}
   m_Layer: 0
-  m_Name: QuestManager
+  m_Name: QuestTrophyManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,3 +46,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _questsList: []
+--- !u!114 &485992226678803944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1193818526797989426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8168e1fdbd2af4c96a233a7d35975d31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _trophyList: []

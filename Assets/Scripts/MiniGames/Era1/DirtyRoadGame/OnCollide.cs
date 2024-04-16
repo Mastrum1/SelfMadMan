@@ -8,9 +8,12 @@ public class OnCollide : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.CompareTag("Player"))
+        if (!col.gameObject.CompareTag("Player")) return;
+        
+        OnCollided?.Invoke(_win);
+        if (_win)
         {
-            OnCollided?.Invoke(_win);
+            col.gameObject.SetActive(false);
         }
     }
 }
