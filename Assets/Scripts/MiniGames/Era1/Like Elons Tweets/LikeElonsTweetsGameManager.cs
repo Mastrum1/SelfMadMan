@@ -26,7 +26,7 @@ public class LikeElonsTweetsGameManager : MiniGameManager
     public override void Update()
     {
         bool mStatus = true;
-        if (_mTimer.TimerValue == 0 || _mIsEnd) {
+        if (_mTimer.TimerValue == 0 && _gameIsPlaying || _mIsEnd) {
             TweetSpawner.SharedInstance.StopAllTweetes();
             List<GameObject> mTweets = TweetSpawner.SharedInstance.GetActiveTweets();
             for (int i = 0; i < mTweets.Count; i++) {
