@@ -1,4 +1,4 @@
-    using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,6 +23,8 @@ public class PumpTheIronManager : MiniGameManager
 
     void OnGameEnd(bool win)
     {
+        StopCoroutine("SpawnArrow");
+
         EndMiniGame(win, miniGameScore);
     }
 
@@ -40,8 +42,11 @@ public class PumpTheIronManager : MiniGameManager
 
     override public void Update()
     {
-        if (_mTimer.timerValue == 0)
+        if (_mTimer.TimerValue == 0 && _gameIsPlaying)
         {
+            StopCoroutine("SpawnArrow");
+            _mInteractableManager.DespawnObjects();
+            _mInteractableManager.DisableAllSwipe();
             Debug.Log("Time's up");
             OnGameEnd(true);
         }

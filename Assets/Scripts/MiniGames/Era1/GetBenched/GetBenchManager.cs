@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GetBenchManager : MiniGameManager
 {
-    [SerializeField] private PumpTheIronInteractableManager _mInteractableManager;
+    [SerializeField] private GetBenchedInteractableManager _mInteractableManager;
 
     [SerializeField] private List<GameObject> _mJamesState;
 

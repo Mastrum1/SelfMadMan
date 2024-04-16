@@ -8,13 +8,20 @@ public class SwipeDir : MonoBehaviour
     public event Action<string> OnSwipe;
     public event Action<bool> OnSwipeTooEarly;
 
+    private bool _mEndGame = false;
+    public bool EndGame { get => _mEndGame; set => _mEndGame = value; }
+
+    public void OnEnable()
+    {
+        _mEndGame = false;
+    }
     public void SwipeLeft()
     {
         if (OnSwipe != null)
         {
             OnSwipe.Invoke("Left");
         }
-        else
+        else if (!EndGame)
         {
             OnSwipeTooEarly?.Invoke(false);
         }
@@ -26,7 +33,7 @@ public class SwipeDir : MonoBehaviour
         {
             OnSwipe?.Invoke("Right");
         }
-        else
+        else if (!EndGame)
         {
             OnSwipeTooEarly?.Invoke(false);
         }
@@ -38,7 +45,7 @@ public class SwipeDir : MonoBehaviour
         {
             OnSwipe?.Invoke("Up");
         }
-        else
+        else if (!EndGame)
         {
             OnSwipeTooEarly?.Invoke(false);
         }
@@ -50,7 +57,7 @@ public class SwipeDir : MonoBehaviour
         {
             OnSwipe?.Invoke("Down");
         }
-        else
+        else if (!EndGame)
         {
             OnSwipeTooEarly?.Invoke(false);
         }

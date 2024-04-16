@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dadf4a02921cef4aa533cd563cb4925, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mParent: {fileID: 2606306467287057230}
+  _mParent: {fileID: 7101906083683753560}
 --- !u!1 &2606306467287057230
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,7 +219,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mDir: 
+  _mSwipeDir: {fileID: 0}
+  _mExitArea: {fileID: 3392912516752329306}
+  _mSpriteRenderer: {fileID: 2508465042924263651}
   _mEndZone: {fileID: 0}
+  _mMaxTimeFadeOut: 0.1
 --- !u!114 &1086331136673993449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,3 +237,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mSpeed: 3
+  _mSpriteRenderer: {fileID: 2508465042924263651}
