@@ -41,8 +41,8 @@ public class TrophyContainer : MonoBehaviour
         TrophyManager.Instance.ClaimReward(_trophy);
     }
 
-    /*private void OnDisable()
+    private void OnDestroy()
     {
-        _mTrophyProgression.transform.position = 
-    }*/
+        _mTrophyProgression.transform.position = new Vector3(_mStartPos, _mTrophyProgression.transform.position.y);
+    }
 }

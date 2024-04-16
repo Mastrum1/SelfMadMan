@@ -47,10 +47,8 @@ public class TrophyManager : MonoBehaviour
 
     public void LoadTrophies(List<Trophy> trophies)
     {
-        //_trophyList = trophies;
         for (var i = 0; i < trophies.Count; i++)
         {
-            trophies[i].CurrentAmount = 10;
             _trophyList.Add(trophies[i]);
             CheckTrophyCompletion(_trophyList[i]);
         }
