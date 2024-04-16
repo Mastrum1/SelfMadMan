@@ -11,6 +11,8 @@ public class Money : MonoBehaviour
 
     [SerializeField] TMP_Text m_TextMeshPro;
 
+    [SerializeField] private ContentManager _mContentManager;
+
     void Start()
     {
         LoadMoney(); // Load PlayerPrefs
@@ -40,6 +42,22 @@ public class Money : MonoBehaviour
         {
             _mCurrentMoney -= MoneyToRemove;
             GameManager.instance.GetComponent<Player>().NewCurrency(_mCurrentMoney);
+            UpdateMoney();
+        }
+    }
+
+    public void SubsEra(TMP_Text price)
+    {
+        if (_mCurrentMoney <= int.Parse(price.text))
+        {
+            Debug.Log("No Money");
+        }
+
+        else
+        {
+            _mCurrentMoney -= int.Parse(price.text);
+            GameManager.instance.Player.NewCurrency(_mCurrentMoney);
+            _mContentManager.UnlockEra();
             UpdateMoney();
         }
     }

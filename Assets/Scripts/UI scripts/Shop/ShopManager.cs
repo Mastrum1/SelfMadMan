@@ -103,8 +103,17 @@ public class ShopManager : MonoBehaviour
             {
                 Debug.Log(coin.Amount);
                 items.Obtain();
-                _mMoney.UpdateMoney();
             }
+        }
+
+        if (_mMoney.CurrentMoney <= _mItemBeingPurchased.Cost)
+        {
+            Debug.Log("Not enough money");
+        }
+        else
+        {
+            _mMoney.SubtractMoney(_mItemBeingPurchased.Cost);
+            Debug.Log(_mMoney.CurrentMoney);
         }
     }
 }
