@@ -148,7 +148,7 @@ public class GetBenchManager : MiniGameManager
             }
             else
             {
-                yield return null;
+                yield return new WaitForSeconds(_mCircleSpawnTime / GameManager.instance.FasterLevel);
             }
 
         }

@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    private float _mLostFocusTime;
+
     public int Level { get => _mLevelCount; private set => _mLevelCount = value; }
 
     private float _speed;
@@ -38,7 +40,7 @@ public class GameManager : MonoBehaviour
         }
     }
     private List<EraData> _mErasData = new List<EraData>();
-    public List<EraData> ErasData { get => _mErasData; }
+    public List<EraData> ErasData { get => _mErasData; private set => _mErasData = value; }
 
     private float _mScore;
     public float Score { get => _mScore; private set => _mScore = value; }
@@ -83,19 +85,12 @@ public class GameManager : MonoBehaviour
         _mScore = 0;
 
 
-        _mQuestManager = QuestManager.instance;
+        _mQuestManager = QuestManager.Instance;
         _mQuestManager.OnReward += AddStars;
         _mPlayer.LoadJson();
-        InitEras();
         _mScoring = new Scoring();
     }
 
-    private void InitEras()
-    {
-        _mErasData.Add(new EraData(true, 0));
-        _mErasData.Add(new EraData(false, 1000));
-        _mErasData.Add(new EraData(false, 2000));
-    }
     public void ResetGame()
     {
         _mScore = 0;
@@ -104,6 +99,11 @@ public class GameManager : MonoBehaviour
         FasterLevel = 1;
         _mGameOver = false;
         _mMinigameCount = 0;
+    }
+
+    public void LoadEraData(List<EraData> data)
+    {
+        _mErasData = data;
     }
 
     public void OnGameStart()
@@ -195,12 +195,28 @@ public class GameManager : MonoBehaviour
         if (!hasFocus)
         {
             _mPlayer.SaveJson();
+            _mLostFocusTime = System.DateTime.Now.Minute;
+        }
+        if (hasFocus)
+        {
+            Debug.Log(_mLostFocusTime);
+            if (System.DateTime.Now.Minute - _mLostFocusTime > 2)
+            {
+                for (int i = 0; i < SceneManager.sceneCount; i++)
+                {
+                    Debug.Log(SceneManager.GetSceneAt(i));
+                    SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(i));
+                }
+                SceneManager.LoadSceneAsync("LoadingScreen");
+
+            }
         }
     }
 
     void OnApplicationQuit()
     {
         _mPlayer.SaveJson();
+
     }
     private void OnDestroy()
     {
