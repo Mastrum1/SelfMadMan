@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ShopManager : MonoBehaviour
@@ -103,8 +104,31 @@ public class ShopManager : MonoBehaviour
             {
                 Debug.Log(coin.Amount);
                 items.Obtain();
-                _mMoney.UpdateMoney();
             }
+        }
+
+        if (_mMoney.CurrentMoney <= _mItemBeingPurchased.Cost)
+        {
+            Debug.Log("Not enough money");
+        }
+        else
+        {
+            _mMoney.SubtractMoney(_mItemBeingPurchased.Cost);
+            Debug.Log(_mMoney.CurrentMoney);
+        }
+    }
+
+    public void HeartPlus(TMP_Text price)
+    {
+
+        if (_mMoney.CurrentMoney <= int.Parse(price.text))
+        {
+            Debug.Log("No Money");
+        }
+        else
+        {
+            _mMoney.SubtractMoney(int.Parse(price.text));
+            GameManager.instance.Player.Hearts += 1;
         }
     }
 }

@@ -43,8 +43,6 @@ public class Spin : MonoBehaviour
     private float currentSpeed;
     private float _minigamesOnWheel;
 
-
-
     void Start()
     {
         InitSpin();

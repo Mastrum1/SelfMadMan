@@ -46,12 +46,14 @@ public class CheckEraGames : MonoBehaviour
             {
                 _mMinigameContainerList[i].EraGameBorder.color = _mBGIconColors[0];
                 _mMinigameContainerList[i].EraGameName.color = _mBGIconColors[2];
+                /*_mMinigameContainerList[i].EraGameIcon.sprite = minigame[i].Icon;*/
                 _mUnlockedMinigames++;
             }
             else
             {
                 _mMinigameContainerList[i].EraGameBorder.color = _mBGIconColors[1];
                 _mMinigameContainerList[i].EraGameName.color = _mBGIconColors[1];
+                /*_mMinigameContainerList[i].EraGameIcon.sprite = minigame[i].Icon;*/
             }  
         }
     }
