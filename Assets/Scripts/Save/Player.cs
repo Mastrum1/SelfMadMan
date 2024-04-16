@@ -13,6 +13,30 @@ public class Player : MonoBehaviour
         public int ID;
         public VideoClip clip;
     }
+    [System.Serializable]
+    public class TrophySave
+    {
+        [SerializeField] private int _TrophySOIndex;
+        public int TrophySOIndex { get => _TrophySOIndex; set => _TrophySOIndex = value; }
+
+        [SerializeField] private TrophyManager.CompletionState _trophyCompletionState;
+        public TrophyManager.CompletionState TrophyCompletionState { get => _trophyCompletionState; set => _trophyCompletionState = value; }
+
+        private int _goal;
+        public int Goal { get => _goal; set => _goal = value; }
+
+        private int _currentAmount;
+        public int CurrentAmount { get => _currentAmount; set => _currentAmount = value; }
+
+        public TrophySave(int TrophySOIndex, TrophyManager.CompletionState completionState, int goal, int currentAmount)
+        {
+            _TrophySOIndex = TrophySOIndex;
+            TrophyCompletionState = completionState;
+            Goal = goal;
+            CurrentAmount = currentAmount;
+        }
+    }
+
 
     [System.Serializable]
     public class QuestSave
@@ -64,8 +88,6 @@ public class Player : MonoBehaviour
     private readonly PlayerData playerData = new PlayerData();
 
     private readonly IDataService DataService = new JsonData();
-
-    private QuestManager _mQuestManagerInstance;
 
     public int BestScore { get => _mBestScore; private set => _mBestScore = value; }
 
@@ -135,6 +157,14 @@ public class Player : MonoBehaviour
 
     [SerializeField] private List<QuestManager.Quest> _mAllQuest;
 
+    public List<TrophyManager.Trophy> AllTrophy { get => _mAllTrophy; private set => _mAllTrophy = value; }
+
+    [SerializeField] private List<TrophyManager.Trophy> _mAllTrophy;
+
+    public List<GameManager.EraData> EraData { get => _EraData; private set => _EraData = value; }
+
+    private List<GameManager.EraData> _EraData = new List<GameManager.EraData>();
+
     public List<MinigameScene> AllEra1 { get => _mAllEra1; private set => _mAllEra1 = value; }
 
     [SerializeField] private List<MinigameScene> _mAllEra1;
@@ -169,10 +199,193 @@ public class Player : MonoBehaviour
                 LoadJson();
             }
         }
+    }
+
+    public void UpdateSaveFile(PlayerData data)
+    {
+        if (data.AllEra1.Count == 8 && data.AllEra1 != AllEra1)
+        {
+            AllEra1 = data.AllEra1;
+        }
         else
         {
-            Debug.LogError("Could not save file !");
+            data.AllEra1 = AllEra1;
         }
+
+        if (data.AllEra2.Count == 8 && data.AllEra2 != AllEra2)
+        {
+            AllEra2 = data.AllEra2;
+        }
+        else
+        {
+            data.AllEra2 = AllEra2;
+        }
+
+        if (data.AllEra3.Count == 8 && data.AllEra3 != AllEra3)
+        {
+            AllEra3 = data.AllEra3;
+        }
+        else
+        {
+            data.AllEra3 = AllEra3;
+        }
+
+        if (data.UnlockedCinematics.Count != 0)
+        {
+            foreach (var item in data.UnlockedCinematics)
+            {
+                UnlockedCinematics.Add(AllCinematics[item]);
+                AllCinematics.Remove(AllCinematics[item]);
+            }
+        }
+        else
+        {
+            data.SaveCinematics(UnlockedCinematics);
+        }
+
+        if (data.BestScore != BestScore)
+            BestScore = data.BestScore;
+        else
+            data.BestScore = BestScore;
+
+        if (data.Level != Level)
+            Level = data.Level;
+        else
+            data.Level = Level;
+
+        if (data.Xp != 0)
+        {
+            Xp = data.Xp;
+        }
+        else
+        {
+            data.Xp = Xp;
+        }
+
+        if (data.Money != Money)
+        {
+            Money = data.Money;
+        }
+        else
+        {
+            data.Money = Money;
+        }
+
+        if (data.VolumeMusic != VolumeMusic)
+        {
+            VolumeMusic = data.VolumeMusic;
+        }
+        else
+        {
+            data.VolumeMusic = VolumeMusic;
+        }
+
+        if (data.VolumeFX != VolumeFX)
+        {
+            VolumeFX = data.VolumeFX;
+        }
+        else
+        {
+            data.VolumeFX = VolumeFX;
+        }
+
+        if (data.Language != null)
+        {
+            Language = data.Language;
+        }
+        else
+        {
+            data.Language = Language;
+        }
+
+        if (data.Inventory != null && data.Inventory.Fournitures != null && data.Inventory.Fournitures.Count != 0 || data.Inventory != null && data.Inventory.UsableItems != null && data.Inventory.UsableItems.Count != 0)
+        {
+            Inventory = data.Inventory;
+        }
+        else
+        {
+            data.Inventory = Inventory;
+        }
+
+        if (data.ItemLocked.Count != 0 && data.ItemLocked != ItemLocked)
+        {
+            ItemLocked = data.ItemLocked;
+        }
+        else
+        {
+            data.ItemLocked = ItemLocked;
+        }
+
+
+        if (data.ActiveQuests.Count != 0)
+        {
+            foreach (var item in data.ActiveQuests)
+            {
+                AllQuest[item.QuestSOIndex] = new QuestManager.Quest(AllQuest[item.QuestSOIndex].QuestSO, item.QuestCompletionState, item.QuestDispo, item.Difficulty, item.MaxAmount, item.CurrentAmount);
+                ActiveQuests.Add(AllQuest[item.QuestSOIndex]);
+            }
+        }
+        else
+        {
+            data.SaveActiveQuest(ActiveQuests);
+        }
+
+        if (data.CompletedQuests.Count != 0)
+        {
+            foreach (var item in data.CompletedQuests)
+            {
+                AllQuest[item.QuestSOIndex] = new QuestManager.Quest(AllQuest[item.QuestSOIndex].QuestSO, item.QuestCompletionState, item.QuestDispo, item.Difficulty, item.MaxAmount, item.CurrentAmount);
+                CompletedQuests.Add(AllQuest[item.QuestSOIndex]);
+
+            }
+        }
+        else
+        {
+            data.SaveCompletedQuest(CompletedQuests);
+        }
+
+        if (data.QuestUnlocked.Count != 0)
+        {
+            foreach (var item in data.QuestUnlocked)
+            {
+                if (!QuestUnlocked.Contains(item))
+                    QuestUnlocked.Add(item);
+
+                AllQuest[item].QuestDispo = Quests.QuestBaseDispo.Unlocked;
+                AllQuest[item].QuestCompletionState = QuestManager.CompletionState.NotSelected;
+            }
+        }
+        else
+        {
+        }
+
+        if (data.AllTrophy.Count != 0)
+        {
+            foreach (var item in data.AllTrophy)
+            {
+                AllTrophy[item.TrophySOIndex] = new TrophyManager.Trophy(AllTrophy[item.TrophySOIndex].TrophySO, item.TrophyCompletionState, item.Goal, item.CurrentAmount);
+            }
+        }
+        else
+        {
+            data.SaveAllTrophyQuest(AllTrophy);
+        }
+
+        if (data.EraData.Count == 3)
+        {
+            if (data.EraData[2].Unlocked == true || data.EraData[3].Unlocked == true)
+            {
+                EraData = data.EraData;
+            }
+        }
+        else
+        {
+            data.InitEras();
+            EraData = data.EraData;
+        }
+        SaveJson();
+
+        LoadJson();
     }
 
     public void OnDisable()
@@ -183,7 +396,8 @@ public class Player : MonoBehaviour
         QuestManager.Instance.OnUnlockQuest -= UnlockQuest;
         QuestManager.Instance.OnLockQuest -= RemoveUnlockQuest;
         QuestManager.Instance.OnQuestFinished -= RemoveCompleteQuests;
-
+        TrophyManager.Instance.OnTrophyComplete -= TrophyCompleted;
+        TrophyManager.Instance.OnTrophyClaimed -= ClaimTrophy;
 
     }
 
@@ -195,64 +409,99 @@ public class Player : MonoBehaviour
         QuestManager.Instance.OnUnlockQuest += UnlockQuest;
         QuestManager.Instance.OnLockQuest += RemoveUnlockQuest;
         QuestManager.Instance.OnQuestFinished += RemoveCompleteQuests;
+        TrophyManager.Instance.OnTrophyComplete += TrophyCompleted;
+        TrophyManager.Instance.OnTrophyClaimed += ClaimTrophy;
 
         if (CheckFile())
         {
-            PlayerData data = DataService.LoadData<PlayerData>("/player-stats.json", false);
-            BestScore = data.BestScore;
-            Level = data.Level;
-            Xp = data.Xp;
-            Money = data.Money;
+            PlayerData data = DataService.LoadData<PlayerData>("/player-stats.json", true);
 
-            VolumeMusic = data.VolumeMusic;
-            VolumeFX = data.VolumeFX;
+            if (data == default)
+                data = DataService.LoadData<PlayerData>("/player-stats.json", false);
 
-            Language = data.Language;
 
-            foreach (var item in data.UnlockedCinematics)
+            if (data.EraData.Count == 0)
             {
-                UnlockedCinematics.Add(AllCinematics[item]);
-                AllCinematics.Remove(AllCinematics[item]);
+
+                UpdateSaveFile(data);
             }
-
-            AllEra1 = data.AllEra1;
-            AllEra2 = data.AllEra2;
-            AllEra3 = data.AllEra3;
-
-            Inventory = data.Inventory;
-
-            foreach (var item in data.ItemLocked)
+            else
             {
-                ItemLocked.Add(item);
-            }
+                BestScore = data.BestScore;
+                Level = data.Level;
+                Xp = data.Xp;
+                Money = data.Money;
 
-            ActiveQuests = new List<QuestManager.Quest>();
-            foreach (var item in data.ActiveQuests)
-            {
-                AllQuest[item.QuestSOIndex] = new QuestManager.Quest(AllQuest[item.QuestSOIndex].QuestSO, item.QuestCompletionState, item.QuestDispo, item.Difficulty, item.MaxAmount, item.CurrentAmount);
-                ActiveQuests.Add(AllQuest[item.QuestSOIndex]);
-            }
-            CompletedQuests = new List<QuestManager.Quest>();
-            foreach (var item in data.CompletedQuests)
-            {
-                AllQuest[item.QuestSOIndex] = new QuestManager.Quest(AllQuest[item.QuestSOIndex].QuestSO, item.QuestCompletionState, item.QuestDispo, item.Difficulty, item.MaxAmount, item.CurrentAmount);
-                CompletedQuests.Add(AllQuest[item.QuestSOIndex]);
+                VolumeMusic = data.VolumeMusic;
+                VolumeFX = data.VolumeFX;
+
+                Language = data.Language;
+
+                EraData = data.EraData;
+
+                foreach (var item in data.UnlockedCinematics)
+                {
+                    UnlockedCinematics.Add(AllCinematics[item]);
+                    AllCinematics.Remove(AllCinematics[item]);
+                }
+
+                AllEra1 = data.AllEra1;
+                AllEra2 = data.AllEra2;
+                AllEra3 = data.AllEra3;
+
+                Inventory = new InventoryClass();
+
+                Inventory.UsableItems = new List<UsableItem>();
+
+                Inventory.Fournitures = new List<FournituresClass>();
+
+                Inventory = data.Inventory;
+
+                Inventory.UsableItems = data.Inventory.UsableItems;
+                Inventory.Fournitures = data.Inventory.Fournitures;
+
+                foreach (var item in data.ItemLocked)
+                {
+                    ItemLocked.Add(item);
+                }
+
+                ActiveQuests = new List<QuestManager.Quest>();
+                foreach (var item in data.ActiveQuests)
+                {
+                    AllQuest[item.QuestSOIndex] = new QuestManager.Quest(AllQuest[item.QuestSOIndex].QuestSO, item.QuestCompletionState, item.QuestDispo, item.Difficulty, item.MaxAmount, item.CurrentAmount);
+                    ActiveQuests.Add(AllQuest[item.QuestSOIndex]);
+                }
+                CompletedQuests = new List<QuestManager.Quest>();
+                foreach (var item in data.CompletedQuests)
+                {
+                    AllQuest[item.QuestSOIndex] = new QuestManager.Quest(AllQuest[item.QuestSOIndex].QuestSO, item.QuestCompletionState, item.QuestDispo, item.Difficulty, item.MaxAmount, item.CurrentAmount);
+                    CompletedQuests.Add(AllQuest[item.QuestSOIndex]);
+
+                }
+                foreach (var item in data.QuestUnlocked)
+                {
+                    if (!QuestUnlocked.Contains(item))
+                        QuestUnlocked.Add(item);
+
+                    AllQuest[item].QuestDispo = Quests.QuestBaseDispo.Unlocked;
+                    AllQuest[item].QuestCompletionState = QuestManager.CompletionState.NotSelected;
+                }
+
+                foreach (var item in data.AllTrophy)
+                {
+                    AllTrophy[item.TrophySOIndex] = new TrophyManager.Trophy(AllTrophy[item.TrophySOIndex].TrophySO, item.TrophyCompletionState, item.Goal, item.CurrentAmount);
+                }
+
+                if (_mLoadSaveMinigame)
+                {
+                    MiniGameSelector.instance.LoadEra(AllEra1, AllEra2, AllEra3);
+                }
+                GameManager.instance.LoadEraData(EraData);
+
+                TrophyManager.Instance.LoadTrophies(AllTrophy);
+                QuestManager.Instance.LoadQuests(AllQuest, ActiveQuests);
 
             }
-            foreach (var item in data.QuestUnlocked)
-            {
-                if (!QuestUnlocked.Contains(item))
-                    QuestUnlocked.Add(item);
-
-                AllQuest[item].QuestDispo = Quests.QuestBaseDispo.Unlocked;
-                AllQuest[item].QuestCompletionState = QuestManager.CompletionState.NotSelected;
-            }
-
-            if (_mLoadSaveMinigame)
-            {
-                MiniGameSelector.instance.LoadEra(AllEra1, AllEra2, AllEra3);
-            }
-            QuestManager.Instance.LoadQuests(AllQuest, ActiveQuests);
         }
 
         else
@@ -404,6 +653,24 @@ public class Player : MonoBehaviour
 
         }
     }
+
+    public void UnlockEra(int era)
+    {
+        EraData[era].UnlockEra();
+    }
+
+    public void TrophyCompleted(TrophyManager.Trophy trophy)
+    {
+        AllTrophy[trophy.TrophySO.ID] = trophy;
+    }
+
+    public void ClaimTrophy(TrophyManager.Trophy trophy, int reward)
+    {
+        AllTrophy[trophy.TrophySO.ID] = trophy;
+        _mMoney += reward;
+    }
+
+
 
     public bool CheckFile()
     {
