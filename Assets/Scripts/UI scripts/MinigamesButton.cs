@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 
-public class MinigamesButton : MonoBehaviour
+public class MinigameButton : MonoBehaviour
 {
     [SerializeField] TMP_Dropdown _mEraChoice;
     public void GoToMinigame()
