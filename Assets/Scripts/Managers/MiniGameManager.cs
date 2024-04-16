@@ -51,7 +51,7 @@ public class MiniGameManager : MonoBehaviour
 
         float timeout = won ? 1.5f : 0.5f;
         
-        foreach (var quest in _questManager.SelectedQuests.Where(quest => quest.QuestSO.scene.SceneName == _scenName))
+        foreach (var quest in _questManager.SelectedQuests.Where(quest => quest.QuestSO.scene.SceneName == _scenName).ToArray())
         {
             quest.CurrentAmount += Amount;
             _questManager.CheckQuestCompletion(quest);

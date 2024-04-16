@@ -138,7 +138,7 @@ public class QuestManager : MonoBehaviour
 
     public void UnlockQuest(int time)
     {
-        foreach (var quest in _questsList.Where(quest => quest.QuestSO.time == time))
+        foreach (var quest in _questsList.Where(quest => quest.QuestSO.time == time).ToArray())
         {
             OnUnlockQuest?.Invoke(quest.QuestSO.ID);
             quest.QuestDispo = Quests.QuestBaseDispo.Unlocked;
@@ -147,7 +147,7 @@ public class QuestManager : MonoBehaviour
 
     public void LockQuest(int time)
     {
-        foreach (var quest in _questsList.Where(quest => quest.QuestSO.time == time))
+        foreach (var quest in _questsList.Where(quest => quest.QuestSO.time == time).ToArray())
         {
             OnLockQuest?.Invoke(quest.QuestSO.ID);
             quest.QuestDispo = Quests.QuestBaseDispo.Locked;
