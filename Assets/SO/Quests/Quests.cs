@@ -1,10 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
-using NaughtyAttributes;
-using Unity.VisualScripting;
-using UnityEngine.SceneManagement;
 
 [CreateAssetMenu(fileName = "Quests", menuName = "SO/NewQuest", order = 1)]
 public class Quests : ScriptableObject

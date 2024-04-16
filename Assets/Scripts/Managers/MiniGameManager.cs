@@ -34,11 +34,13 @@ public class MiniGameManager : MonoBehaviour
         _cash.targetCamera = _sceneCamera;
         _mTimer.ResetTimer(GameManager.instance.Speed);
         GameManager.instance.SelectNewMiniGame(this);
-        _questManager = QuestManager.instance;
+        _questManager = QuestManager.Instance;
     }
 
     protected virtual void EndMiniGame(bool won, int score)
     {
+        Debug.Log("ENDGAME");
+
         _gameIsPlaying = false;
         _mTimer.MyTimer = false;
 
@@ -70,7 +72,7 @@ public class MiniGameManager : MonoBehaviour
 
     public virtual void Update()
     {
-        if (_mTimer.TimerValue == 0)
+        if (_mTimer.TimerValue == 0 && _gameIsPlaying)
             EndMiniGame(false, 0);
     }
 }

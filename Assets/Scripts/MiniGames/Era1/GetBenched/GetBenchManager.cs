@@ -74,7 +74,7 @@ public class GetBenchManager : MiniGameManager
 
     override public void Update()
     {
-        if (_mTimer.TimerValue == 0)
+        if (_mTimer.TimerValue == 0 && _gameIsPlaying)
         {
             for (int i = 0; i < _mButtons.Count; i++)
             {
@@ -148,7 +148,7 @@ public class GetBenchManager : MiniGameManager
             }
             else
             {
-                yield return null;
+                yield return new WaitForSeconds(_mCircleSpawnTime / GameManager.instance.FasterLevel);
             }
 
         }
