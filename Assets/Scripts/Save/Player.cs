@@ -192,7 +192,7 @@ public class Player : MonoBehaviour
         {
             playerData.SaveData(this);
         }
-        if (DataService.SaveData("/player-stats.json", playerData, true))
+        if (DataService.SaveData("/player-stats.json", playerData, false))
         {
             if (firstSave)
             {
@@ -298,7 +298,7 @@ public class Player : MonoBehaviour
             data.Language = Language;
         }
 
-        if (data.Inventory.Fournitures.Count != 0 || data.Inventory.UsableItems.Count != 0  || data.Inventory != null)
+        if (data.Inventory != null && data.Inventory.Fournitures != null && data.Inventory.Fournitures.Count != 0 || data.Inventory != null && data.Inventory.UsableItems != null && data.Inventory.UsableItems.Count != 0)
         {
             Inventory = data.Inventory;
         }
@@ -486,8 +486,6 @@ public class Player : MonoBehaviour
                     AllQuest[item].QuestDispo = Quests.QuestBaseDispo.Unlocked;
                     AllQuest[item].QuestCompletionState = QuestManager.CompletionState.NotSelected;
                 }
-
-                AllTrophy = new List<TrophyManager.Trophy>();
 
                 foreach (var item in data.AllTrophy)
                 {

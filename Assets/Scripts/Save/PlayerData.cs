@@ -145,6 +145,7 @@ public class PlayerData
         Inventory.UsableItems = new List<UsableItem>();
 
         QuestUnlocked = player.FirstQuests;
+        SaveAllTrophyQuest(player.AllTrophy);
 
     }
 
