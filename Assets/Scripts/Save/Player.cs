@@ -177,24 +177,24 @@ public class Player : MonoBehaviour
 
     public void OnDisable()
     {
-        QuestManager.instance.OnAddActiveQuest -= AddActiveQuests;
-        QuestManager.instance.OnRemoveActiveQuest -= RemoveActiveQuests;
-        QuestManager.instance.OnQuestComplete -= QuestComplete;
-        QuestManager.instance.OnUnlockQuest -= UnlockQuest;
-        QuestManager.instance.OnLockQuest -= RemoveUnlockQuest;
-        QuestManager.instance.OnQuestFinished -= RemoveCompleteQuests;
+        QuestManager.Instance.OnAddActiveQuest -= AddActiveQuests;
+        QuestManager.Instance.OnRemoveActiveQuest -= RemoveActiveQuests;
+        QuestManager.Instance.OnQuestComplete -= QuestComplete;
+        QuestManager.Instance.OnUnlockQuest -= UnlockQuest;
+        QuestManager.Instance.OnLockQuest -= RemoveUnlockQuest;
+        QuestManager.Instance.OnQuestFinished -= RemoveCompleteQuests;
 
 
     }
 
     public void LoadJson()
     {
-        QuestManager.instance.OnAddActiveQuest += AddActiveQuests;
-        QuestManager.instance.OnRemoveActiveQuest += RemoveActiveQuests;
-        QuestManager.instance.OnQuestComplete += QuestComplete;
-        QuestManager.instance.OnUnlockQuest += UnlockQuest;
-        QuestManager.instance.OnLockQuest += RemoveUnlockQuest;
-        QuestManager.instance.OnQuestFinished += RemoveCompleteQuests;
+        QuestManager.Instance.OnAddActiveQuest += AddActiveQuests;
+        QuestManager.Instance.OnRemoveActiveQuest += RemoveActiveQuests;
+        QuestManager.Instance.OnQuestComplete += QuestComplete;
+        QuestManager.Instance.OnUnlockQuest += UnlockQuest;
+        QuestManager.Instance.OnLockQuest += RemoveUnlockQuest;
+        QuestManager.Instance.OnQuestFinished += RemoveCompleteQuests;
 
         if (CheckFile())
         {
@@ -252,7 +252,7 @@ public class Player : MonoBehaviour
             {
                 MiniGameSelector.instance.LoadEra(AllEra1, AllEra2, AllEra3);
             }
-            QuestManager.instance.LoadQuests(AllQuest, ActiveQuests);
+            QuestManager.Instance.LoadQuests(AllQuest, ActiveQuests);
         }
 
         else
