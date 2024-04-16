@@ -97,7 +97,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private int _mLevel;
 
-    [SerializeField]  private int _mAdditionalHearts;
+    [SerializeField] private int _mAdditionalHearts;
     public int Hearts { get => _mAdditionalHearts; set => _mAdditionalHearts = value; }
 
     public int Xp { get => _mXp; private set => _mXp = value; }
@@ -206,31 +206,56 @@ public class Player : MonoBehaviour
 
     public void UpdateSaveFile(PlayerData data)
     {
-        if (data.AllEra1.Count == 8 && data.AllEra1 != AllEra1)
+        if (data.AllEra1.Count != 0)
         {
-            AllEra1 = data.AllEra1;
+            foreach (var item in data.AllEra1)
+            {
+                AllEra1[item].Unlock();
+            }
+
+
         }
         else
         {
-            data.AllEra1 = AllEra1;
+            for (int i = 0; i < AllEra1.Count; i++)
+            {
+                if (AllEra1[i].Locked == false)
+                    data.AllEra1.Add(i);
+            }
         }
 
-        if (data.AllEra2.Count == 8 && data.AllEra2 != AllEra2)
+        if (data.AllEra2.Count != 0)
         {
-            AllEra2 = data.AllEra2;
+            foreach (var item in data.AllEra2)
+            {
+                AllEra2[item].Unlock();
+            }
+
+
         }
         else
         {
-            data.AllEra2 = AllEra2;
+            for (int i = 0; i < AllEra2.Count; i++)
+            {
+                if (AllEra2[i].Locked == false)
+                    data.AllEra2.Add(i);
+            }
         }
 
-        if (data.AllEra3.Count == 8 && data.AllEra3 != AllEra3)
+        if (data.AllEra3.Count != 0)
         {
-            AllEra3 = data.AllEra3;
+            foreach (var item in data.AllEra3)
+            {
+                AllEra3[item].Unlock();
+            }
         }
         else
         {
-            data.AllEra3 = AllEra3;
+            for (int i = 0; i < AllEra3.Count; i++)
+            {
+                if (AllEra3[i].Locked == false)
+                    data.AllEra3.Add(i);
+            }
         }
 
         if (data.UnlockedCinematics.Count != 0)
@@ -448,9 +473,20 @@ public class Player : MonoBehaviour
                     AllCinematics.Remove(AllCinematics[item]);
                 }
 
-                AllEra1 = data.AllEra1;
-                AllEra2 = data.AllEra2;
-                AllEra3 = data.AllEra3;
+                foreach (var item in data.AllEra1)
+                {
+                    AllEra1[item].Unlock();
+                }
+
+                foreach (var item in data.AllEra2)
+                {
+                    AllEra2[item].Unlock();
+                }
+
+                foreach (var item in data.AllEra3)
+                {
+                    AllEra3[item].Unlock();
+                }
 
                 Inventory = new InventoryClass();
 
