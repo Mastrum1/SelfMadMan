@@ -9,6 +9,7 @@ public class PlayerData
     public int Level;
 
     public int Xp;
+    public int Hearts;
 
     public int Money;
 
@@ -47,7 +48,7 @@ public class PlayerData
         Level = player.Level;
         Xp = player.Xp;
         Money = player.Money;
-
+        Hearts = player.Hearts;
         BestScore = player.BestScore;
 
         VolumeMusic = player.VolumeMusic;
