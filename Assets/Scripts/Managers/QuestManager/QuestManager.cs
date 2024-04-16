@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 public class QuestManager : MonoBehaviour
 {
-    public static QuestManager instance;
+    public static QuestManager Instance;
 
     public event Action<Quest> OnQuestComplete;
 
@@ -67,9 +67,9 @@ public class QuestManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)
-            instance = this;
-        else if (instance != this)
+        if (Instance == null)
+            Instance = this;
+        else if (Instance != this)
             Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
     }
@@ -122,15 +122,12 @@ public class QuestManager : MonoBehaviour
         OnQuestComplete?.Invoke(quest);
     }
     
-    public void OnQuestFinish()
+    public void OnQuestFinish(Quest quest)
     {
-        foreach (var quest in _selectedQuestsList.Where(quest => quest.QuestCompletionState == CompletionState.Complete))
-        {
-            quest.QuestCompletionState = CompletionState.NotSelected;
-            OnQuestFinished?.Invoke(quest);
-            OnReward?.Invoke(quest.Difficulty.reward);
-            RemoveActiveQuest(quest);
-        }
+        quest.QuestCompletionState = CompletionState.NotSelected;
+        OnQuestFinished?.Invoke(quest);
+        OnReward?.Invoke(quest.Difficulty.reward);
+        RemoveActiveQuest(quest);
     }
     public void OnChangeQuest(Quest quest, int container)
     {

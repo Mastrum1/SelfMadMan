@@ -115,6 +115,7 @@ public class ContentManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         _mLockAnimator.SetBool("UnlockEraAnim", false);
         GameManager.instance.ErasData[GameManager.instance.Era].UnlockEra();
+        GameManager.instance.GetComponent<Player>().UnlockEra(GameManager.instance.Era);
         _mHomePageUIManager.MenuUIDictionnary[_MenuGameObjects[(int)MENUS.EraMinigames]] = true;
         foreach (var go in _mLockObjects)
             go.SetActive(false);
