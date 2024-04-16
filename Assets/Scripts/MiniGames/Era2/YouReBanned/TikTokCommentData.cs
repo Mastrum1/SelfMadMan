@@ -7,6 +7,5 @@ using UnityEngine;
 public class TikTokCommentData : ScriptableObject
 {
     public string CommentContent;
-    public Sprite ProfilPicture;
     public bool IsGood;
 }

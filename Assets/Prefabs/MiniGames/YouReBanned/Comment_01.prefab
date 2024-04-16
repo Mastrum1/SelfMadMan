@@ -737,7 +737,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b21f5597c07174f498a1a70249b0558c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mSpeed: 0.5
+  _mNextComment: {fileID: 0}
+  _mCommentNextComment: {fileID: 0}
+  _mPreviousComment: {fileID: 0}
+  _mCommentPreviousComment: {fileID: 0}
+  _mActualComment: {fileID: 0}
 --- !u!114 &7605262698009810621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -750,15 +754,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ca58bcba93a6284bb6a23494d181de3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mData: {fileID: 11400000, guid: f4005c93767ad6f47a335c10da5ad5f1, type: 2}
+  _mData:
+  - {fileID: 11400000, guid: f4005c93767ad6f47a335c10da5ad5f1, type: 2}
+  - {fileID: 11400000, guid: 08b0e25e36540b242976d5b747322ccb, type: 2}
+  - {fileID: 11400000, guid: 45a03a40e09aa494ca3dd8eb467ada8b, type: 2}
+  - {fileID: 11400000, guid: f5734397a0f00b34c88f1e2faaf3f5a9, type: 2}
+  - {fileID: 11400000, guid: 934519c79f7bcf2419fd57515aa0b503, type: 2}
+  - {fileID: 11400000, guid: cf8d5f3364e1b9048bb9e84534c14920, type: 2}
+  _mProfileSO:
+  - {fileID: 11400000, guid: c186ee8ed5f7b0d45bb96a2dbd3d54ef, type: 2}
+  - {fileID: 11400000, guid: 9df7421cbe6587e4abb90dc3600a4d8c, type: 2}
+  - {fileID: 11400000, guid: 4fa39b624e1ae6a4fa40f43160dcf528, type: 2}
+  _mBackgroudPicture:
+  - {fileID: 21300000, guid: 48764bf63c8d0784fbe5dd5f9ba0ef38, type: 3}
+  - {fileID: 21300000, guid: 3de6185f8954495478440790d23ffc44, type: 3}
+  - {fileID: 21300000, guid: fede456a279d2e349bbed1bc3da66fbc, type: 3}
+  _mActualProfilPicture: {fileID: 1817562987906221436}
+  _mActualBackground: {fileID: 7660917645165825993}
+  _mProfileName: {fileID: 1903230294008199990}
   _mComment: {fileID: 5048268719657677737}
-  _mProfileSO: []
-  _mProfilPicture:
-  - {fileID: 0}
-  _mDeletePicture:
-  - {fileID: 0}
-  _actualProfilPicture: {fileID: 1817562987906221436}
-  _actualBack0g0round: {fileID: 7660917645165825993}
   _mBaseState: {fileID: 21300000, guid: 61e6e702c03f4e84897d91fc7b69578b, type: 3}
   _mDeleteState: {fileID: 21300000, guid: e23f797cf9663e64c8c8c88a49c94772, type: 3}
 --- !u!1 &8108918476108567145
@@ -772,7 +786,6 @@ GameObject:
   - component: {fileID: 3241755417514093551}
   - component: {fileID: 6363154943156500495}
   - component: {fileID: 5881696559557266772}
-  - component: {fileID: 1645070190955034890}
   m_Layer: 0
   m_Name: DeleteButton
   m_TagString: Untagged
@@ -892,50 +905,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.32, y: 0.32}
   m_EdgeRadius: 0
---- !u!114 &1645070190955034890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8108918476108567145}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83dcd8dace8b7fe449d796b980cb121d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selfSelected: 0
-  onSelected:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7605262698009810621}
-        m_TargetAssemblyTypeName: DisplayTikTokComment, Assembly-CSharp
-        m_MethodName: OnDeleteComment
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onDeselected:
-    m_PersistentCalls:
-      m_Calls: []
-  use: 0
-  onSelectedFinger:
-    m_PersistentCalls:
-      m_Calls: []
-  onSelectedFingerUp:
-    m_PersistentCalls:
-      m_Calls: []
-  onSelectedSelectFinger:
-    m_PersistentCalls:
-      m_Calls: []
-  onSelectedSelectFingerUp:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &8419425233437206968
 GameObject:
   m_ObjectHideFlags: 0

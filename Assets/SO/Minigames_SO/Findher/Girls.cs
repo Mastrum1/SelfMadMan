@@ -6,6 +6,7 @@ using UnityEngine;
 public class Girls : ScriptableObject
 {
     public Sprite ProfilePicture;
+    public string Pseudo;
     public string GirlName;
     public int Age;
 
