@@ -36,6 +36,7 @@ public class TrophyView : MonoBehaviour
             
             var trophyContainerScript = trophyContainer.GetComponent<TrophyContainer>();
             trophyContainerScript.TrophyDescription.text = trophy.TrophySO.trophyDescription;
+            trophyContainerScript.Trophy = trophy;
             
             switch (trophy.TrophyCompletionState)
             {

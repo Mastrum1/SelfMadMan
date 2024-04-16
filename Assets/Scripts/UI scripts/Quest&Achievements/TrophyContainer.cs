@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -5,6 +6,9 @@ using UnityEngine;
 
 public class TrophyContainer : MonoBehaviour
 {
+    public TrophyManager.Trophy Trophy { get => _trophy; set => _trophy = value; }
+    private TrophyManager.Trophy _trophy;
+    
     public TMP_Text TrophyDescription { get => _mTrophyDescription; set => _mTrophyDescription = value; }
     [SerializeField] private TMP_Text _mTrophyDescription;
 
@@ -26,7 +30,7 @@ public class TrophyContainer : MonoBehaviour
     public float StartPosX => _mStartPos;
     private float _mStartPos;
 
-    private void OnEnable()
+    private void Awake()
     {
         _mStartPos = _mTrophyProgression.transform.position.x;
     }
@@ -34,5 +38,11 @@ public class TrophyContainer : MonoBehaviour
     public void DisableRewardButton()
     {
         _mRewardButton.SetActive(false);
+        TrophyManager.Instance.ClaimReward(_trophy);
     }
+
+    /*private void OnDisable()
+    {
+        _mTrophyProgression.transform.position = 
+    }*/
 }
