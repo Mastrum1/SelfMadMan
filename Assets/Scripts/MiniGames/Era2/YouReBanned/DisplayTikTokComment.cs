@@ -31,6 +31,7 @@ public class DisplayTikTokComment : MonoBehaviour
     [SerializeField] TMP_Text _mComment;
 
     [Header("Divers")]
+    [SerializeField] Animator _mAnimator;
     [SerializeField] Sprite _mBaseState;
     [SerializeField] Sprite _mDeleteState;
 
@@ -47,9 +48,8 @@ public class DisplayTikTokComment : MonoBehaviour
 
     public void OnDeleteComment()
     {
-        Debug.Log("Aled");
-        DeleteComment?.Invoke(_mSelectedData.IsGood, gameObject);      
         Disable();
+        DeleteComment?.Invoke(_mSelectedData.IsGood, gameObject);      
     }
 
     [ContextMenu("ChangeProfile")]
@@ -66,20 +66,23 @@ public class DisplayTikTokComment : MonoBehaviour
         _mComment.text = _mSelectedData.CommentContent;
     }
 
-    public void UpdateComment()
-    {
-        _mComment.text = _mSelectedData.CommentContent;  
-        _mActualProfilPicture.sprite = _mSelectedProfile.ProfilePicture;
-        _mProfileName.text = _mSelectedProfile.Pseudo;
-    }
-
-    public void Disable()
-    {
-        gameObject.SetActive(false);
-    }
-
     public bool GetIsGood()
     {
         return _mSelectedData.IsGood;
+    }
+
+    IEnumerator Disable()
+    {
+        _mAnimator.SetTrigger("Delete");
+        yield return new WaitForSeconds(0.1f);
+        gameObject.SetActive(false);
+    }
+
+    public IEnumerator UpdateComment()
+    {
+        yield return new WaitForSeconds(0.15f);
+        _mComment.text = _mSelectedData.CommentContent;
+        _mActualProfilPicture.sprite = _mSelectedProfile.ProfilePicture;
+        _mProfileName.text = _mSelectedProfile.Pseudo;
     }
 }

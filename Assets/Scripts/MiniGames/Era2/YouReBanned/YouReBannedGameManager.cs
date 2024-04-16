@@ -30,7 +30,7 @@ public class YouReBannedGameManager : MiniGameManager
         if (_mTimer.TimerValue != 0)
             return;
 
-        EndMiniGame(mStatus, miniGameScore);
+        //EndMiniGame(mStatus, miniGameScore);
     }
 
     public void OnDeleteComment(bool IsGood, GameObject Comment)

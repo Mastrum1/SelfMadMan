@@ -11,6 +11,7 @@ public class CommentMovement : MonoBehaviour
     [SerializeField] GameObject _mPreviousComment;
     [SerializeField] DisplayTikTokComment _mCommentPreviousComment;
     [SerializeField] DisplayTikTokComment _mActualComment;
+    [SerializeField] Animator _mAnimator;
 
     public event Action<bool, GameObject> ExitScreen;
 
@@ -28,13 +29,13 @@ public class CommentMovement : MonoBehaviour
     {
         if (_mNextComment)
         {
-            if (!_mNextComment.activeSelf)
-                _mNextComment.SetActive(true);
+
+            _mAnimator.SetTrigger("Up");
+            StartCoroutine(MoveUpNext());
 
             _mCommentNextComment.ActualBackground = _mActualComment.ActualBackground;
             _mCommentNextComment.Girls = _mActualComment.Girls;
             _mCommentNextComment.SelectedData = _mActualComment.SelectedData;
-            _mCommentNextComment.UpdateComment();
         }
         else
         {
@@ -49,7 +50,20 @@ public class CommentMovement : MonoBehaviour
         _mCommentPreviousComment.ActualBackground = _mActualComment.ActualBackground;
         _mCommentPreviousComment.Girls = _mActualComment.Girls;
         _mCommentPreviousComment.SelectedData = _mActualComment.SelectedData;
-        _mCommentPreviousComment.UpdateComment();
+        StartCoroutine(MoveUpPrevious());
+    }
+
+    IEnumerator MoveUpNext()
+    {
+        yield return new WaitForSeconds(.15f);
+        if (!_mNextComment.activeSelf)
+            _mNextComment.SetActive(true);
+        _mCommentNextComment.StartCoroutine(_mCommentNextComment.UpdateComment());
+    }    
+    IEnumerator MoveUpPrevious()
+    {
+        yield return new WaitForSeconds(.15f);
+        _mCommentPreviousComment.StartCoroutine(_mCommentPreviousComment.UpdateComment());
     }
 
 }
