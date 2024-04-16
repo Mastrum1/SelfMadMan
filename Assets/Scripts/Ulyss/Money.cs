@@ -26,6 +26,7 @@ public class Money : MonoBehaviour
     {
         _mCurrentMoney += MoneyToAdd;
         GameManager.instance.GetComponent<Player>().NewCurrency(_mCurrentMoney);
+        UpdateMoney();
     }
 
     public void SubtractMoney(int MoneyToRemove)
@@ -39,6 +40,7 @@ public class Money : MonoBehaviour
         {
             _mCurrentMoney -= MoneyToRemove;
             GameManager.instance.GetComponent<Player>().NewCurrency(_mCurrentMoney);
+            UpdateMoney();
         }
     }
 
@@ -46,5 +48,6 @@ public class Money : MonoBehaviour
     {
         _mCurrentMoney = GameManager.instance.GetComponent<Player>().Money;
         Debug.Log("Money loaded: " + _mCurrentMoney);
+        UpdateMoney();
     }
 }
