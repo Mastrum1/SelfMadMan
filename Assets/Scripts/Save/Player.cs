@@ -97,6 +97,9 @@ public class Player : MonoBehaviour
 
     [SerializeField] private int _mLevel;
 
+    [SerializeField]  private int _mAdditionalHearts;
+    public int Hearts { get => _mAdditionalHearts; set => _mAdditionalHearts = value; }
+
     public int Xp { get => _mXp; private set => _mXp = value; }
 
     [SerializeField] private int _mXp;
@@ -431,7 +434,7 @@ public class Player : MonoBehaviour
                 Level = data.Level;
                 Xp = data.Xp;
                 Money = data.Money;
-
+                Hearts = data.Hearts;
                 VolumeMusic = data.VolumeMusic;
                 VolumeFX = data.VolumeFX;
 
