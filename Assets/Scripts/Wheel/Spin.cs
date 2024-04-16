@@ -52,6 +52,7 @@ public class Spin : MonoBehaviour
 
     public void StartSpinning()
     {
+        InitSpin();
         isSpnning = true;
         currentSpeed = initialSpeed;
     }
