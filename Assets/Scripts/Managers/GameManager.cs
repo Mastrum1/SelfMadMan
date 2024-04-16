@@ -55,7 +55,8 @@ public class GameManager : MonoBehaviour
     private QuestManager _mQuestManager;
 
     private int _mMinigameCount;
-    public int MinigameCount { get => _mMinigameCount; }
+    private int _mMinigameWon;
+    public int MinigamesWon { get => _mMinigameWon; private set => _mMinigameWon = value; }
     private int _mLevelCount;
     private int _mCurrentStars;
 
@@ -78,6 +79,7 @@ public class GameManager : MonoBehaviour
     {
         _mGameOver = false;
         _mMinigameCount = 0;
+        _mMinigameWon = 0;
         Era = 1;
         _mHearts = 3;
         Speed = 10;
@@ -97,8 +99,9 @@ public class GameManager : MonoBehaviour
         _mHearts = 3;
         Speed = 10;
         FasterLevel = 1;
-        _mGameOver = false;
         _mMinigameCount = 0;
+        _mGameOver = false;
+        _mMinigameWon = 0;
     }
 
     public void LoadEraData(List<EraData> data)
@@ -158,17 +161,23 @@ public class GameManager : MonoBehaviour
     {
 
         mySceneManager.instance.UnloadCurrentScene();
-
         _mHearts -= won ? 0 : 1;
         _mGameOver = _mHearts == 0 ? true : false;
+        MinigamesWon += won ? 1 : 0;
         score += won ? 100 : 0;
         _mScore = _mScoring.ChangeScore(Scoring.Param.Add, _mScore, score);
         WinScreenHandle?.Invoke(won, Era, _mHearts, _mGameOver);
         if (!_mGameOver)
-            StartCoroutine(ContinueMinigames(won));
+            StartCoroutine(ContinueMinigames());
     }
-
-    IEnumerator ContinueMinigames(bool won)
+    public void ContinueWithHeart()
+    {
+        _mGameOver = false;
+        _mHearts++;
+        _mMinigameCount = 1;
+        StartCoroutine(ContinueMinigames());
+    }
+    public IEnumerator ContinueMinigames()
     {
         yield return new WaitForSeconds(2f);
         if (_mMinigameCount % 3 == 0)
