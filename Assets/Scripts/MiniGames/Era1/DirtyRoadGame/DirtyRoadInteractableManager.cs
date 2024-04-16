@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -46,8 +47,15 @@ public class DirtyRoadInteractableManager : InteractableManager
     {
         _trashCan.SetActive(false);
         _trashFull.SetActive(true);
+        StartCoroutine(TrashAnim());
         
         OnGameEnd?.Invoke(win);
+    }
+
+    IEnumerator TrashAnim()
+    {
+        yield return new WaitForSeconds(0.2f);
+        _trashFull.transform.localScale = new Vector3(0.15f, 0.15f, 0.15f);
     }
 
     private void OnDestroy()

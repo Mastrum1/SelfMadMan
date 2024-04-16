@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections;
 
 public class OnCollide : MonoBehaviour
 {
@@ -12,7 +13,8 @@ public class OnCollide : MonoBehaviour
         
         if (gameObject.CompareTag("DirtyAd"))
         {
-            transform.localScale = new Vector3(0.15f, 0.15f, 0.15f); 
+            transform.localScale = new Vector3(0.14f, 0.14f, 0.14f);
+            StartCoroutine(ScaleBack());
         }
         
         OnCollided?.Invoke(_win);
@@ -21,5 +23,11 @@ public class OnCollide : MonoBehaviour
         {
             col.gameObject.SetActive(false);
         }
+    }
+
+    IEnumerator ScaleBack()
+    {
+        yield return new WaitForSeconds(0.2f);
+        transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
     }
 }
