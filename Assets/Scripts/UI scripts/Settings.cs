@@ -20,16 +20,35 @@ public class Settings : MonoBehaviour
         _mSound = true;
     }
 
-    public void ONOFF()
+    public void ONOFFMusic()
     {
         if (_mMusic == true)
         {
             _mMusic = false;
             _mMusicImage.sprite = _mOFFBG;
-            Debug.Log(_mMusicImage.sprite);
+            AudioManager.Instance.StopMusic();
         }
         else
+        {
             _mMusic = true;
             _mMusicImage.sprite = _mONBG;
+            //AudioManager.Instance.PlayMusic();
+        }
+    }
+
+    public void ONOFFSFX()
+    {
+        if (_mSound == true)
+        {
+            _mSound = false;
+            _mSoundImage.sprite = _mOFFBG;
+            AudioManager.Instance.StopSFX();
+        }
+        else
+        {
+            _mSound = true;
+            _mSoundImage.sprite = _mONBG;
+            //AudioManager.Instance.PlaySFX();
+        }
     }
 }

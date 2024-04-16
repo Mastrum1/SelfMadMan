@@ -84,7 +84,7 @@ public class ShopManager : MonoBehaviour
                 _mCoinsTemplates[i].ImageItem.sprite = item[i].Icon;
                 _mCoinsTemplates[i].Type = item[i].Type;
                 CoinsSO coinSO = (CoinsSO)item[i];
-                _mCoinsTemplates[i].Amount.text = coinSO.Amount.ToString();
+                _mCoinsTemplates[i].Amount.text = "x" + coinSO.Amount.ToString();
             }
         }
     }
