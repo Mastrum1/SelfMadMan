@@ -10,7 +10,13 @@ public class OnCollide : MonoBehaviour
     {
         if (!col.gameObject.CompareTag("Player")) return;
         
+        if (gameObject.CompareTag("DirtyAd"))
+        {
+            transform.localScale = new Vector3(0.15f, 0.15f, 0.15f); 
+        }
+        
         OnCollided?.Invoke(_win);
+        
         if (_win)
         {
             col.gameObject.SetActive(false);

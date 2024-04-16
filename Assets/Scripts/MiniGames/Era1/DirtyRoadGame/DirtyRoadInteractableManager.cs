@@ -9,6 +9,7 @@ public class DirtyRoadInteractableManager : InteractableManager
     
     [SerializeField] private List<GameObject> _dirtyAds;
     [SerializeField] private GameObject _trashCan;
+    [SerializeField] private GameObject _trashFull;
 
     private void Start()
     {
@@ -43,6 +44,9 @@ public class DirtyRoadInteractableManager : InteractableManager
 
     private void HandleEndGame(bool win)
     {
+        _trashCan.SetActive(false);
+        _trashFull.SetActive(true);
+        
         OnGameEnd?.Invoke(win);
     }
 
