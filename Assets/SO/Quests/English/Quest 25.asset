@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dc3ce7687a9342da8dc83dbd1e4d1bd, type: 3}
   m_Name: Quest 25
   m_EditorClassIdentifier: 
+  ID: 24
   questName: None
   time: 3
   questDescription: Remove * waste from your yacht.
+  questIcon: {fileID: 21300000, guid: 48f2d7a3e32ce40e3a1e0d561eaa1347, type: 3}
   difficulties:
   - difficulty: 0
     amount: 10
@@ -26,3 +28,6 @@ MonoBehaviour:
     amount: 30
     reward: 3
   disponibility: 0
+  scene:
+    _sceneName: LoadingScreen
+    _locked: 0

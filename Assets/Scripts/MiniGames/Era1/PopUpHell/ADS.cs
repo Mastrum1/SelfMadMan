@@ -7,6 +7,7 @@ using UnityEngine;
 public class ADS : MonoBehaviour
 {
     [SerializeField] private List<GameObject> _mSpawnPoints;
+    [SerializeField] Animator _animator;
 
     [SerializeField] private GameObject _mCloseButtonModel;
     private GameObject _mCloseButton;
@@ -25,6 +26,13 @@ public class ADS : MonoBehaviour
 
     private void OnDelete(LeanSelect arg0)
     {
-        this.transform.gameObject.SetActive(false);
+        _animator.SetTrigger("Depop");
+        StartCoroutine(CloseAd());
+    }
+
+    IEnumerator CloseAd()
+    {
+        yield return new WaitForSeconds(0.3f);
+        this.transform.gameObject.SetActive(false); 
     }
 }

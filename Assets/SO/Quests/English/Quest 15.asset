@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dc3ce7687a9342da8dc83dbd1e4d1bd, type: 3}
   m_Name: Quest 15
   m_EditorClassIdentifier: 
+  ID: 14
   questName: None
   time: 0
   questDescription: Finish * mini-games.
+  questIcon: {fileID: 21300000, guid: 525cf0984834f435b9d4a2f5a4fb7eb2, type: 3}
   difficulties:
   - difficulty: 0
     amount: 20
@@ -26,3 +28,6 @@ MonoBehaviour:
     amount: 60
     reward: 3
   disponibility: 1
+  scene:
+    _sceneName: LoadingScreen
+    _locked: 0

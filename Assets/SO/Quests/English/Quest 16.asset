@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dc3ce7687a9342da8dc83dbd1e4d1bd, type: 3}
   m_Name: Quest 16
   m_EditorClassIdentifier: 
+  ID: 15
   questName: None
   time: 0
   questDescription: Win * Madcoins.
+  questIcon: {fileID: 21300000, guid: 9ad244b4dffb848e8a03f32cf0d7c8de, type: 3}
   difficulties:
   - difficulty: 0
     amount: 200
@@ -26,3 +28,6 @@ MonoBehaviour:
     amount: 600
     reward: 3
   disponibility: 1
+  scene:
+    _sceneName: LoadingScreen
+    _locked: 0

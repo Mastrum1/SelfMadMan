@@ -7,7 +7,7 @@ public class CompletionBar : MonoBehaviour
 {
     float maxBarWidth = 725;
     public float maxBarValue = 2000;
-    public float depletionRate = 100f; // Rate at which the bar depletes per second
+    public float depletionRate = 200; // Rate at which the bar depletes per second
     public float barValue;
     [SerializeField] public RectTransform Panel;
     [SerializeField] int StartingValue;
@@ -22,10 +22,9 @@ public class CompletionBar : MonoBehaviour
 
     void Update()
     {
-
         if(barValue < maxBarValue)
         {
-            float depletion = depletionRate * Time.deltaTime;
+            float depletion = (depletionRate + (GameManager.instance.FasterLevel * 50)) * Time.deltaTime;
             barValue -= depletion;
             barValue = Mathf.Clamp(barValue, 0f, maxBarValue);
             UpdateUI();

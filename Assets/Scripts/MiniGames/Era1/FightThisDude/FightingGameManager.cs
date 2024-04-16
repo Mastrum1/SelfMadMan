@@ -9,23 +9,26 @@ public class FightingGame : MiniGameManager
 
     public void OnClicked()
     {
-        _UIManager.Bar.AddValue(150);
+        _UIManager.Bar.AddValue(150 - (GameManager.instance.FasterLevel * 20));
         Debug.Log("Clicked");
     }
 
     public override void Update()
     {
         base.Update();
-        if (_UIManager.Bar.barValue >= _UIManager.Bar.maxBarValue)
+        if(_gameIsPlaying)
         {
-            Debug.Log("Game finished");
-            EndMiniGame(true, miniGameScore);
+            if (_UIManager.Bar.barValue >= _UIManager.Bar.maxBarValue)
+            {
+                Amount++;
+                EndMiniGame(true, miniGameScore);
+            }
+            if (_UIManager.Bar.barValue == 0)
+            {
+                EndMiniGame(false, miniGameScore);
+            }
         }
-        if (_UIManager.Bar.barValue ==0)
-        {
-            Debug.Log("Game finished");
-            EndMiniGame(false, miniGameScore);
-        }
+
     }
 
 

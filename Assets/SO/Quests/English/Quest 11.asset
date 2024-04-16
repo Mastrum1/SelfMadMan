@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dc3ce7687a9342da8dc83dbd1e4d1bd, type: 3}
   m_Name: Quest 11
   m_EditorClassIdentifier: 
+  ID: 10
   questName: None
   time: 0
-  questDescription: Collect all bonuses in a single game.
+  questDescription: Recover * bonus(es) within one game.
+  questIcon: {fileID: 21300000, guid: cef2d01ebfb9d461ab303e605b14aaa1, type: 3}
   difficulties:
   - difficulty: 0
     amount: 0
@@ -26,3 +28,6 @@ MonoBehaviour:
     amount: 0
     reward: 3
   disponibility: 1
+  scene:
+    _sceneName: LoadingScreen
+    _locked: 0

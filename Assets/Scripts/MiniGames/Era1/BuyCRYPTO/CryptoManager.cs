@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -9,25 +10,32 @@ public class CryptoManager : MiniGameManager
     [SerializeField] private Sprite[] cryptoCharts;
     [SerializeField] private Image cryptoChartOutput;
     [SerializeField] private CryptoInteractableManager _cryptoIManager;
+    [SerializeField] private Material winMaterial;
+    [SerializeField] private Material loseMaterial;
+    [SerializeField] private GameObject winEffect;
     
     private int _activeChart;
 
-    void Start()
+    private void Start()
     {
         DrawGraph();
         _cryptoIManager.OnPostItClicked += CheckCryptoGraphPressed;
+
     }
-    
-    void DrawGraph()
+
+    private void DrawGraph()
     {
         _activeChart = Random.Range(0, cryptoCharts.Length);
         cryptoChartOutput.sprite = cryptoCharts[_activeChart];
     }
 
-    public void CheckCryptoGraphPressed(Sprite sprite)
+    private void CheckCryptoGraphPressed(PostIt postIt)
     {
-        if (cryptoChartOutput.sprite == sprite)
+
+        if (cryptoChartOutput.sprite == postIt.CorrespondingGraph)
         {
+            winEffect.transform.position = postIt.transform.position;
+            winEffect.SetActive(true);
             print("Win");
             EndMiniGame(true, miniGameScore);
         }
@@ -36,6 +44,12 @@ public class CryptoManager : MiniGameManager
             print("Loose");
             EndMiniGame(false, miniGameScore);
         }
+        foreach (var postIts in _cryptoIManager.PostIts)
+        {
+            Debug.Log(postIts);
+            postIts.SpriteRenderer.material = postIts.CorrespondingGraph == cryptoChartOutput.sprite ? winMaterial : loseMaterial;
+        }
+
     }
 
     private void OnDestroy()

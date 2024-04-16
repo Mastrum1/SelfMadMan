@@ -12,20 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dc3ce7687a9342da8dc83dbd1e4d1bd, type: 3}
   m_Name: Quest 1
   m_EditorClassIdentifier: 
+  ID: 0
   questName: None
   time: 0
   questDescription: Reach a score of * at the end of the game.
+  questIcon: {fileID: 21300000, guid: 7ee4d899cc9414e2398a7b48ea100d2a, type: 3}
   difficulties:
   - difficulty: 0
     amount: 1000
     reward: 1
+    RGB:
+    - 45
+    - 255
+    - 0
   - difficulty: 1
     amount: 2000
     reward: 2
+    RGB: []
   - difficulty: 2
     amount: 3000
     reward: 3
+    RGB: []
   disponibility: 1
   scene:
     _sceneName: LoadingScreen
-    _unlocked: 0
+    _locked: 0
