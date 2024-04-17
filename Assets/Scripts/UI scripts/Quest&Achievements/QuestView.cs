@@ -68,11 +68,20 @@ public class QuestView : MonoBehaviour
         }
     }
 
+    public void IsInQuestMenu()
+    {
+        foreach (var quest in _quests)
+        {
+            quest.GetComponent<QuestContainer>().IsInQuestMenu = true;
+        }
+    }
+
     private void OnDisable()
     {
         foreach (var quest in _quests)
         {
             quest.SetActive(false);
+            quest.GetComponent<QuestContainer>().ResetFillBar();
         }
     }
 }
