@@ -27,8 +27,8 @@ public class Coins : Items
 
     public override void Obtain()
     {
-        /*GameManager.instance.Player.NewCurrency(GameManager.instance.Player.Money + Amount);
-        Debug.Log(GameManager.instance.Player.Money + Amount);*/
+        /*_mPlayer = GameManager.instance.GetComponent<Player>();
+        _mPlayer.NewCurrency(_mPlayer.Money + Amount);*/  
     }
 }
 
