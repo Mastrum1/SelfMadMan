@@ -509,7 +509,9 @@ public class Player : MonoBehaviour
                     AllQuest[item.QuestSOIndex] = new QuestManager.Quest(AllQuest[item.QuestSOIndex].QuestSO, item.QuestCompletionState, item.QuestDispo, item.Difficulty, item.MaxAmount, item.CurrentAmount);
                     ActiveQuests.Add(AllQuest[item.QuestSOIndex]);
                 }
+
                 CompletedQuests = new List<QuestManager.Quest>();
+
                 foreach (var item in data.CompletedQuests)
                 {
                     AllQuest[item.QuestSOIndex] = new QuestManager.Quest(AllQuest[item.QuestSOIndex].QuestSO, item.QuestCompletionState, item.QuestDispo, item.Difficulty, item.MaxAmount, item.CurrentAmount);
@@ -571,13 +573,12 @@ public class Player : MonoBehaviour
     public void QuestComplete(QuestManager.Quest quest)
     {
         CompletedQuests.Add(quest);
-        ActiveQuests.Remove(quest);
     }
 
     public void RemoveCompleteQuests(QuestManager.Quest quest)
     {
         CompletedQuests.Remove(quest);
-        UnlockQuest(quest.QuestSO.ID);
+        RemoveActiveQuests(quest);
     }
 
     public void UnlockQuest(int ID)
