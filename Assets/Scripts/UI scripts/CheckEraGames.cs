@@ -16,13 +16,17 @@ public class CheckEraGames : MonoBehaviour
     [Header("Unlocked Minigames")]
     [SerializeField] private TMP_Text _mNumberUnlocked;
     [SerializeField] private int _mUnlockedMinigames;
+    [SerializeField] private List<Color> _mBGIconColors;
+
+    [Header("Current Era Minigames")]
+    [SerializeField] private TMP_Text _mEra;
 
     [Header("Minigame Container List")]
     [SerializeField] private List<CheckEraGamesTemplate> _mMinigameContainerList;
 
     private void OnEnable()
     {
-        CheckEra();
+        Checking();
     }
 
     public void Checking()
@@ -38,13 +42,19 @@ public class CheckEraGames : MonoBehaviour
         {
             _mMinigameContainerList[i].EraGameName.text = minigame[i].SceneName;
             //minigameContainerScript.EraGameIcon.sprite = minigame[i].Icon;
-            if (minigame[i].Locked)
+            if (!minigame[i].Locked)
             {
-                _mMinigameContainerList[i].EraGameBorder.sprite = _mMinigameContainerList[i].EraGameBorderUnlocked;
+                _mMinigameContainerList[i].EraGameBorder.color = _mBGIconColors[0];
+                _mMinigameContainerList[i].EraGameName.color = _mBGIconColors[2];
+                /*_mMinigameContainerList[i].EraGameIcon.sprite = minigame[i].Icon;*/
                 _mUnlockedMinigames++;
             }
             else
-                _mMinigameContainerList[i].EraGameBorder.sprite = _mMinigameContainerList[i].EraGameBorderLocked;
+            {
+                _mMinigameContainerList[i].EraGameBorder.color = _mBGIconColors[1];
+                _mMinigameContainerList[i].EraGameName.color = _mBGIconColors[1];
+                /*_mMinigameContainerList[i].EraGameIcon.sprite = minigame[i].Icon;*/
+            }  
         }
     }
 
@@ -63,6 +73,7 @@ public class CheckEraGames : MonoBehaviour
                 break;
         }
 
-        _mNumberUnlocked.text = _mUnlockedMinigames.ToString();
+        _mNumberUnlocked.text = $"<#4EF4F6>{_mUnlockedMinigames.ToString()}" + "<#F6F3D1>/8";
+        _mEra.text = "Era " + (_mCurrentEra + 1).ToString();
     }
 }

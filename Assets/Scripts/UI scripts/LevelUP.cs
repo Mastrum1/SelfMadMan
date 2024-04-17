@@ -11,18 +11,22 @@ public class LevelUP : MonoBehaviour
     [SerializeField] private TMPro.TextMeshProUGUI _mLevelText;
     [SerializeField] private TMPro.TextMeshProUGUI _mTitleText;
     [SerializeField] private TMPro.TextMeshProUGUI _mRewardText;
-    
+
+    private void OnEnable()
+    {
+        OnLevelUP();
+    }
+
+    public void OnLevelUP()
+    {
+        CheckLevelUP(GameManager.instance.Player.Level);
+        _mMoney.AddMoney(_mLevelSO[GameManager.instance.Player.Level].Reward);
+    }
+
     public void CheckLevelUP(int level)
     {
         _mLevelText.text = _mLevelSO[level].Level.ToString();
         _mTitleText.text = _mLevelSO[level].Title;
         _mRewardText.text = _mLevelSO[level].Reward.ToString();
-    }
-
-    public void OnLevelUP()
-    {
-        GameManager.instance.Player.LvlUp();
-        CheckLevelUP(GameManager.instance.Player.Level);
-        _mMoney.AddMoney(_mLevelSO[GameManager.instance.Player.Level].Reward);
     }
 }
