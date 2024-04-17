@@ -11,14 +11,14 @@ GameObject:
   - component: {fileID: 6582543164053057351}
   - component: {fileID: 6719685892548719974}
   - component: {fileID: 1728663009409810614}
-  - component: {fileID: 8168357786345617320}
+  - component: {fileID: 6510905468939653073}
   m_Layer: 0
   m_Name: ChadBike
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6582543164053057351
 Transform:
   m_ObjectHideFlags: 0
@@ -27,9 +27,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6856958919239943687}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.016011, y: 2.81, z: 10}
-  m_LocalScale: {x: 5.3288493, y: 12.445605, z: 8.500656}
+  m_LocalScale: {x: 8.34338, y: 19.486084, z: 13.309478}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -120,7 +120,7 @@ VideoPlayer:
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
---- !u!114 &8168357786345617320
+--- !u!114 &6510905468939653073
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,9 +129,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6856958919239943687}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef7457ab0fabd48479423e1e05da2f14, type: 3}
+  m_Script: {fileID: 11500000, guid: d8a7f9e6ab7db1b45b636b35b0a3cc89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lerpDuration: 1
-  distanceToMove: 76.5
-  waitingTime: 1.2

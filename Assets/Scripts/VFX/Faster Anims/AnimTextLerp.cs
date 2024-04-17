@@ -31,6 +31,7 @@ public class AnimTextLerp : MonoBehaviour
 
     IEnumerator MoveUpAndDown()
     {
+        yield return new WaitForSeconds(0.2f);
         yield return StartCoroutine(MoveObject(transform.position, transform.position + Vector3.up * upDistance, upSpeed));
         yield return new WaitForSeconds(waitForTime); // Delay for 1 second
         yield return StartCoroutine(MoveObject(transform.position, transform.position + Vector3.down * downDistance, downSpeed));
