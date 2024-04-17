@@ -58,7 +58,6 @@ public class UsableItem : Items
         //use item
         _mPlayer = GameManager.instance.GetComponent<Player>();
         _mPlayer.AddUsableItemInInventory(this);
-
     }
 
     public override void Use()
