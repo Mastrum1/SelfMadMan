@@ -2,6 +2,7 @@ using CW.Common;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -18,10 +19,12 @@ public class ScoreScreen : MonoBehaviour
     [SerializeField] private TMP_Text _mMnigameCountTexts;
     [SerializeField] private TMP_Text _mTimerTexts;
     [SerializeField] private TMP_Text _bestScore;
+    [SerializeField] private TMP_Text _coinsEarned;
     [SerializeField] private PanelOnClick _mPanelOnClick;
     [SerializeField] private GameObject _mPopup;
     [SerializeField] private GameObject _InputManager;
     [SerializeField] private GameObject _mQuestManager;
+    [SerializeField] private RectTransform _mCoin;
 
     private int Timer = 5;
 
@@ -74,7 +77,7 @@ public class ScoreScreen : MonoBehaviour
             _UIAnimator.SetBool("DisplayPopUp", false);
             StartCoroutine(OnContinueAnim());
             _HeartAnimator.SetInteger("Hearts", 1);
-            _HeartAnimator.SetBool("Revived", true); 
+            _HeartAnimator.SetBool("Revived", true);
             _InputManager.SetActive(false);
             StartCoroutine(ResetCharacter());
             GameManager.instance.ContinueWithHeart();
@@ -83,7 +86,7 @@ public class ScoreScreen : MonoBehaviour
     }
     IEnumerator OnContinueAnim()
     {
-      
+
         _mJamesAnimator.SetBool("Idle", true);
         _mJamesAnimator.SetBool("GameOver", false);
         yield return new WaitForSeconds(0.3f);
@@ -123,6 +126,11 @@ public class ScoreScreen : MonoBehaviour
         else
         {
             OnPanelClicked();
+            int amount = GameManager.instance.GainMoney();
+            if (amount / 10 >= 1)
+                _mCoin.anchoredPosition = new Vector2(103, _mCoin.anchoredPosition.y);
+            else
+                _mCoin.anchoredPosition = new Vector2(137, _mCoin.anchoredPosition.y);
             _UIAnimator.SetBool("EndGame", true);
             _mQuestManager.SetActive(true);
 
@@ -130,7 +138,11 @@ public class ScoreScreen : MonoBehaviour
             {
                 _mHighscoreTag.SetActive(true);
                 GameManager.instance.Player.UpdateBestScore((int)GameManager.instance.Score);
+               
+
             }
+
+            _coinsEarned.text = " +" + amount.ToString();
             _bestScore.text = "BEST : " + GameManager.instance.Player.BestScore.ToString();
         }
 
