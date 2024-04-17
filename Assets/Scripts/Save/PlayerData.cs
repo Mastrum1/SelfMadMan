@@ -9,6 +9,7 @@ public class PlayerData
     public int Level;
 
     public int Xp;
+    public int Hearts;
 
     public int Money;
 
@@ -36,18 +37,18 @@ public class PlayerData
 
     public List<GameManager.EraData> EraData = new List<GameManager.EraData>();
 
-    public List<MinigameScene> AllEra1 = new List<MinigameScene>();
+    public List<int> AllEra1 = new List<int>();
 
-    public List<MinigameScene> AllEra2 = new List<MinigameScene>();
+    public List<int> AllEra2 = new List<int>();
 
-    public List<MinigameScene> AllEra3 = new List<MinigameScene>();
+    public List<int> AllEra3 = new List<int>();
 
     public void SaveData(Player player)
     {
         Level = player.Level;
         Xp = player.Xp;
         Money = player.Money;
-
+        Hearts = player.Hearts;
         BestScore = player.BestScore;
 
         VolumeMusic = player.VolumeMusic;
@@ -59,9 +60,20 @@ public class PlayerData
 
         SaveCinematics(player.UnlockedCinematics);
 
-        AllEra1 = player.AllEra1;
-        AllEra2 = player.AllEra2;
-        AllEra3 = player.AllEra3;
+        for (int i = 0; i < player.AllEra1.Count; i++)
+        {
+            AllEra1.Add(i);
+        }
+
+        for (int i = 0; i < player.AllEra2.Count; i++)
+        {
+            AllEra2.Add(i);
+        }
+
+        for (int i = 0; i < player.AllEra3.Count; i++)
+        {
+            AllEra3.Add(i);
+        }
 
         Inventory = player.Inventory;
 
@@ -134,9 +146,23 @@ public class PlayerData
 
         Language = "fr";
 
-        AllEra1 = player.AllEra1;
-        AllEra2 = player.AllEra2;
-        AllEra3 = player.AllEra3;
+        for (int i = 0; i < player.AllEra1.Count; i++)
+        {
+            if (player.AllEra1[i].Locked == false)
+                AllEra1.Add(i);
+        }
+
+        for (int i = 0; i < player.AllEra2.Count; i++)
+        {
+            if (player.AllEra2[i].Locked == false)
+                AllEra2.Add(i);
+        }
+
+        for (int i = 0; i < player.AllEra3.Count; i++)
+        {
+            if (player.AllEra3[i].Locked == false)
+                AllEra3.Add(i);
+        }
 
         InitEras();
 
