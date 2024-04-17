@@ -1430,6 +1430,10 @@ PrefabInstance:
       value: LoadingScreen
       objectReference: {fileID: 0}
     - target: {fileID: 6542784465200720699, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mMoney
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6542784465200720699, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
       propertyPath: _mAdditionalHearts
       value: 1
       objectReference: {fileID: 0}
@@ -1796,11 +1800,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[0]._locked
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[1]._locked
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[2]._locked
@@ -1808,11 +1812,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[3]._locked
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[4]._locked
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[5]._locked
@@ -1820,31 +1824,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[6]._locked
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[7]._locked
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era2.Array.data[0]._locked
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era2.Array.data[1]._locked
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era2.Array.data[2]._locked
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era2.Array.data[3]._locked
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era2.Array.data[4]._locked
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
+      propertyPath: _era2.Array.data[5]._locked
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
+      propertyPath: _era2.Array.data[6]._locked
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[0]._unlocked
