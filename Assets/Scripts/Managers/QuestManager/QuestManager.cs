@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 public class QuestManager : MonoBehaviour
 {
-    public static QuestManager instance;
+    public static QuestManager Instance;
 
     public event Action<Quest> OnQuestComplete;
 
@@ -67,9 +67,9 @@ public class QuestManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)
-            instance = this;
-        else if (instance != this)
+        if (Instance == null)
+            Instance = this;
+        else if (Instance != this)
             Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
     }
@@ -87,7 +87,6 @@ public class QuestManager : MonoBehaviour
 
     private void RemoveActiveQuest(Quest quest)
     {
-        Debug.Log("NotSelected");
         _selectedQuestsList.Remove(quest);
         OnRemoveActiveQuest?.Invoke(quest);
         while (_selectedQuestsList.Count < 3)
@@ -115,15 +114,14 @@ public class QuestManager : MonoBehaviour
         OnAddActiveQuest?.Invoke(temp);
     }
 
-    public void CheckQuestCompletion()
+    public void CheckQuestCompletion(Quest quest)
     {
-        foreach (var quest in SelectedQuests.Where(item => item.CurrentAmount >= item.MaxAmount))
-        {
-            OnQuestComplete?.Invoke(quest);
-            quest.QuestCompletionState = CompletionState.Complete;
-        }
+        if (quest.CurrentAmount < quest.MaxAmount) return;
+        
+        quest.QuestCompletionState = CompletionState.Complete;
+        OnQuestComplete?.Invoke(quest);
     }
-
+    
     public void OnQuestFinish(Quest quest)
     {
         quest.QuestCompletionState = CompletionState.NotSelected;
@@ -140,7 +138,7 @@ public class QuestManager : MonoBehaviour
 
     public void UnlockQuest(int time)
     {
-        foreach (var quest in _questsList.Where(quest => quest.QuestSO.time == time))
+        foreach (var quest in _questsList.Where(quest => quest.QuestSO.time == time).ToArray())
         {
             OnUnlockQuest?.Invoke(quest.QuestSO.ID);
             quest.QuestDispo = Quests.QuestBaseDispo.Unlocked;
@@ -149,7 +147,7 @@ public class QuestManager : MonoBehaviour
 
     public void LockQuest(int time)
     {
-        foreach (var quest in _questsList.Where(quest => quest.QuestSO.time == time))
+        foreach (var quest in _questsList.Where(quest => quest.QuestSO.time == time).ToArray())
         {
             OnLockQuest?.Invoke(quest.QuestSO.ID);
             quest.QuestDispo = Quests.QuestBaseDispo.Locked;

@@ -18,10 +18,8 @@ public class CleanKitchenManager : MiniGameManager
 
     private void Start()
     {
-        Amount = 0;
         _roachRemainder.text = Amount.ToString();
         _roachAmount.text = "/" + _numOfCockroaches;
-        _interactableManager.OnRoachDeath += IncrementQuestAmount;
         _interactableManager.OnRoachDeath += OnGameEnd;
     }
 
@@ -41,6 +39,7 @@ public class CleanKitchenManager : MiniGameManager
 
     private void OnGameEnd()
     {
+        Amount++;
         if (Amount == _numOfCockroaches)
         {
             EndMiniGame(true, miniGameScore);
@@ -49,7 +48,6 @@ public class CleanKitchenManager : MiniGameManager
 
     private void OnDestroy()
     {
-        _interactableManager.OnRoachDeath -= IncrementQuestAmount;
-        _interactableManager.OnRoachDeath += OnGameEnd;
+        _interactableManager.OnRoachDeath -= OnGameEnd;
     }
 }

@@ -4,12 +4,15 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
+using NaughtyAttributes;
 
 public class MiniGameManager : MonoBehaviour
 {
     public delegate void MiniGameEndHandler(bool won, int score);
     public event MiniGameEndHandler OnMiniGameEnd;
 
+
+    [SerializeField] [Scene] private string _scenName;
     protected int Amount { get; set; }
 
     protected bool _gameIsPlaying;
@@ -26,15 +29,18 @@ public class MiniGameManager : MonoBehaviour
 
     public virtual void Awake()
     {
+        Amount = 0;
         _gameIsPlaying = true;
         _cash.targetCamera = _sceneCamera;
         _mTimer.ResetTimer(GameManager.instance.Speed);
         GameManager.instance.SelectNewMiniGame(this);
-        _questManager = QuestManager.instance;
+        _questManager = QuestManager.Instance;
     }
 
     protected virtual void EndMiniGame(bool won, int score)
     {
+        Debug.Log("ENDGAME");
+
         _gameIsPlaying = false;
         _mTimer.MyTimer = false;
 
@@ -44,11 +50,11 @@ public class MiniGameManager : MonoBehaviour
             _loosePanel.SetActive(true);
 
         float timeout = won ? 1.5f : 0.5f;
-
-        foreach (var quest in _questManager.SelectedQuests.Where(quest => quest.QuestSO.scene.SceneName == SceneManager.GetActiveScene().name))
+        
+        foreach (var quest in _questManager.SelectedQuests.Where(quest => quest.QuestSO.scene.SceneName == _scenName).ToArray())
         {
             quest.CurrentAmount += Amount;
-            _questManager.CheckQuestCompletion();
+            _questManager.CheckQuestCompletion(quest);
         }
 
         StartCoroutine(StartAnim(won, score, timeout));
@@ -66,11 +72,7 @@ public class MiniGameManager : MonoBehaviour
 
     public virtual void Update()
     {
-        if (_mTimer.TimerValue == 0)
+        if (_mTimer.TimerValue == 0 && _gameIsPlaying)
             EndMiniGame(false, 0);
-    }
-    protected void IncrementQuestAmount()
-    {
-        Amount++;
     }
 }

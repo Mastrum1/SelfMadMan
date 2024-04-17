@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ShopManager : MonoBehaviour
@@ -18,6 +19,10 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private List<ShopTemplate> _mCoinsTemplates;
     [SerializeField] private List<ShopTemplate> _mFurnituresTemplates;
 
+    [Header("Confirm Purchase")]
+    [SerializeField] private ConfirmPurchase _mConfirmPurchase;
+    [SerializeField] private ItemsSO _mItemBeingPurchased;
+
     private void Awake()
     {
         if (Instance == null)
@@ -28,6 +33,7 @@ public class ShopManager : MonoBehaviour
     {
         LoadAllPanels();
         CheckPurchasable();
+        _mConfirmPurchase._mItemPurchased += HandleItemPurchased;
     }
 
     public void CheckPurchasable()
@@ -56,6 +62,13 @@ public class ShopManager : MonoBehaviour
         }
     }
 
+    public void HandleItemPurchased(ItemsSO item)
+    {
+        _mItemBeingPurchased = item;
+        _mConfirmPurchase.SetItemInfo(item);
+        _mConfirmPurchase.OpenPopUP();
+    }
+
     public void LoadAllPanels()
     {
         LoadPanels(_mCoins);
@@ -72,17 +85,50 @@ public class ShopManager : MonoBehaviour
                 _mCoinsTemplates[i].ImageItem.sprite = item[i].Icon;
                 _mCoinsTemplates[i].Type = item[i].Type;
                 CoinsSO coinSO = (CoinsSO)item[i];
-                _mCoinsTemplates[i].Amount.text = coinSO.Amount.ToString();
+                _mCoinsTemplates[i].Amount.text = "x" + coinSO.Amount.ToString();
             }
         }
     }
 
-    public void PurchaseItem(ItemsSO item) 
+    public void PurchaseItem() 
     {
-        if (ItemsSO.TYPE.COINS == item.Type)
+        Debug.Log(_mItemBeingPurchased);
+        if (_mItemBeingPurchased.Type == ItemsSO.TYPE.COINS)
         {
-            CoinsSO coinSO = (CoinsSO)item;
-            _mMoney.AddMoney(coinSO.Amount);
+            Coins coin = new Coins();
+            CoinsSO coinSO = _mItemBeingPurchased as CoinsSO;
+            coin.Amount = coinSO.Amount;
+            Items items = coin;
+
+            if (items != null)
+            {
+                Debug.Log(coin.Amount);
+                items.Obtain();
+            }
+        }
+
+        if (_mMoney.CurrentMoney <= _mItemBeingPurchased.Cost)
+        {
+            Debug.Log("Not enough money");
+        }
+        else
+        {
+            _mMoney.SubtractMoney(_mItemBeingPurchased.Cost);
+            Debug.Log(_mMoney.CurrentMoney);
+        }
+    }
+
+    public void HeartPlus(TMP_Text price)
+    {
+
+        if (_mMoney.CurrentMoney <= int.Parse(price.text))
+        {
+            Debug.Log("No Money");
+        }
+        else
+        {
+            _mMoney.SubtractMoney(int.Parse(price.text));
+            GameManager.instance.Player.Hearts += 1;
         }
     }
 }

@@ -17,9 +17,7 @@ public class ContentManager : MonoBehaviour
 
     [Header("Content Viewport")]
     [SerializeField] private Image _mBaseImage;
-    [SerializeField] private Image _mJames;
     [SerializeField] private List<Sprite> _mSprites;
-    [SerializeField] private List<Sprite> _mJamesForms;
 
     [SerializeField] private List<Image> _mImagesToDeactivate;
     [SerializeField] private List<TMP_Text> _mTextsToDeactivate;
@@ -104,11 +102,6 @@ public class ContentManager : MonoBehaviour
             dotImage.color = isActive ? Color.white : Color.gray;
             dotImage.fillAmount = isActive ? 1f : 0f;
         }
-
-        for (int i = 0; i < _mJamesForms.Count; i++)
-        {
-            _mJames.sprite = _mJamesForms[_mCurrentIndex];
-        }
     }
     public void UnlockEra()
     {
@@ -122,6 +115,7 @@ public class ContentManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         _mLockAnimator.SetBool("UnlockEraAnim", false);
         GameManager.instance.ErasData[GameManager.instance.Era].UnlockEra();
+        GameManager.instance.GetComponent<Player>().UnlockEra(GameManager.instance.Era);
         _mHomePageUIManager.MenuUIDictionnary[_MenuGameObjects[(int)MENUS.EraMinigames]] = true;
         foreach (var go in _mLockObjects)
             go.SetActive(false);

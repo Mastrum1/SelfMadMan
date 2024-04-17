@@ -20,7 +20,7 @@ public class ISaidStopGameManager : MiniGameManager
     {
         if (_mIsEnd)
             return;
-        if (_mTimer.TimerValue == 0 && !_mIsEnd)
+        if (_mTimer.TimerValue == 0 && !_mIsEnd && _gameIsPlaying)
             EndGame(true);
     }
 
@@ -28,6 +28,7 @@ public class ISaidStopGameManager : MiniGameManager
     {
         if (!_mIsEnd) {
             _mHand.Stop();
+            Amount++;
             EndMiniGame(isWin, miniGameScore);
             _mIsEnd = true;
         }

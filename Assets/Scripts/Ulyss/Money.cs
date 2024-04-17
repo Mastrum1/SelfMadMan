@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,15 +9,28 @@ public class Money : MonoBehaviour
     public int CurrentMoney { get => _mCurrentMoney; set => _mCurrentMoney = value; }
     [SerializeField] private int _mCurrentMoney;
 
+    [SerializeField] TMP_Text m_TextMeshPro;
+
+    [SerializeField] private ContentManager _mContentManager;
+
+    [SerializeField] private Spin _mSpin;
+
     void Start()
     {
         LoadMoney(); // Load PlayerPrefs
+        UpdateMoney();
+    }
+
+    public void UpdateMoney()
+    {
+        m_TextMeshPro.text = GameManager.instance.Player.Money.ToString();
     }
 
     public void AddMoney(int MoneyToAdd)
     {
         _mCurrentMoney += MoneyToAdd;
         GameManager.instance.GetComponent<Player>().NewCurrency(_mCurrentMoney);
+        UpdateMoney();
     }
 
     public void SubtractMoney(int MoneyToRemove)
@@ -29,7 +43,41 @@ public class Money : MonoBehaviour
         else
         {
             _mCurrentMoney -= MoneyToRemove;
-            GameManager.instance.GetComponent<Player>().NewCurrency(_mCurrentMoney);
+            GameManager.instance.Player.NewCurrency(_mCurrentMoney);
+            UpdateMoney();
+        }
+    }
+
+    public void SubsEra(TMP_Text price)
+    {
+        if (_mCurrentMoney <= int.Parse(price.text))
+        {
+            Debug.Log("No Money");
+        }
+
+        else
+        {
+            _mCurrentMoney -= int.Parse(price.text);
+            Debug.Log(price.text);
+            GameManager.instance.Player.NewCurrency(_mCurrentMoney);
+            _mContentManager.UnlockEra();
+            UpdateMoney();
+        }
+    }
+
+    public void SubsSpin(TMP_Text price)
+    {
+        if (_mCurrentMoney <= int.Parse(price.text))
+        {
+            Debug.Log("No Money");
+        }
+
+        else
+        {
+            _mCurrentMoney -= int.Parse(price.text);
+            GameManager.instance.Player.NewCurrency(_mCurrentMoney);
+            _mSpin.StartSpinning();
+            UpdateMoney();
         }
     }
 
@@ -37,5 +85,6 @@ public class Money : MonoBehaviour
     {
         _mCurrentMoney = GameManager.instance.GetComponent<Player>().Money;
         Debug.Log("Money loaded: " + _mCurrentMoney);
+        UpdateMoney();
     }
 }

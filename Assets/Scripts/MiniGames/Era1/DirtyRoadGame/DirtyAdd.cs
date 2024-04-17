@@ -25,11 +25,11 @@ public class DirtyAdd : MonoBehaviour
 
     private void Update()
     {
-        if (Mathf.Abs(_rigid2d.velocity.x) <= 0.1)
+        if (Mathf.Abs(_rigid2d.velocity.x) <= 0.05)
         {
             _rigid2d.AddForce(new Vector2(_forceX, 0));
         }
-        if (Mathf.Abs(_rigid2d.velocity.x) <= 0.1)
+        if (Mathf.Abs(_rigid2d.velocity.x) <= 0.05)
         {
             _rigid2d.AddForce(new Vector2(_forceY, 0));
         }

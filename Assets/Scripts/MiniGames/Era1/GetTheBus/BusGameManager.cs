@@ -27,8 +27,10 @@ public class BusGameManager : MiniGameManager
         _mIsEnd  = false;
     }
 
-    void Update()
+    private void Update()
     {
+        base.Update();
+        
         if (_mIsEnd)
             return;
         if (_mIsPaused)
@@ -67,6 +69,7 @@ public class BusGameManager : MiniGameManager
     void BusStartOverride(Collider2D collider2D)
     {
         _mCatch = true;
+        Amount++;
     }
 
     void BusStopOverride(Collider2D collider2D)

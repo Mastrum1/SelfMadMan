@@ -13,6 +13,9 @@ public class MinigameScene
     [SerializeField] private bool _locked;
     public bool Locked { get => _locked; set => _locked = value; }
 
+/*    [SerializeField] private Sprite _icon;
+    public Sprite Icon { get => _icon; set => _icon = value; }*/
+
     public void Unlock()
     {
         Debug.Log("unlocking " + SceneName);

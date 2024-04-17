@@ -11,13 +11,14 @@ public class DisplayTweet : MonoBehaviour
     [SerializeField] TweetScriptableObject TweetData;
     [SerializeField] TMP_Text TweetContent;
     [SerializeField] TMP_Text ProfileName;
-    [SerializeField] TMP_Text Pseudo;
-    [SerializeField] TMP_Text Date;
-    [SerializeField] TMP_Text NumberOfLikes;
-    [SerializeField] SpriteRenderer ProfilPicture;
+    [SerializeField] public Transform Bottom;
+
+    [SerializeField] Image ProfilPicture;
     [SerializeField] SpriteRenderer Like;
-    [SerializeField] Sprite BaseState;
-    [SerializeField] Sprite LikeState;
+    [SerializeField] Sprite _mBaseState;
+    [SerializeField] Sprite _mGoodLikeState;
+    [SerializeField] Sprite _mBadLikeState;
+    [SerializeField] LikeButton _mLikeButton;
     bool mIsEnable;
     bool mIsLiked;
 
@@ -28,12 +29,9 @@ public class DisplayTweet : MonoBehaviour
     {
         mIsEnable = true;
         mIsLiked = false;
-        TweetContent.text = TweetData.TweetContent;
+        TweetContent.text = TweetData.TweetContent + "<line-height=125%>\n<size=0.7em><color=#687684>" + TweetData.Date + "</color></size>" ;
         ProfilPicture.sprite = TweetData.ProfilPicture;
-        ProfileName.text = TweetData.ProfileName;
-        Pseudo.text = TweetData.Pseudo;
-        NumberOfLikes.text = TweetData.NumberOfLikes;
-        Date.text = TweetData.Date;
+        ProfileName.text = TweetData.ProfileName + "<font-weight=\"300\"><color=#687684> " + TweetData.Pseudo + "</color></font-weight>";
     }
 
     void OnTriggerExit2D(Collider2D collider2D)
@@ -47,15 +45,16 @@ public class DisplayTweet : MonoBehaviour
     public void OnLikeTweet()
     {
         if (mIsEnable) {
+            _mLikeButton.OnClick();
             mIsLiked = true;
-            Like.sprite = LikeState;
+            Like.sprite = (TweetData.IsElon) ? _mGoodLikeState : _mBadLikeState;
             LikeTweet?.Invoke(TweetData.IsElon);
         }
     }
 
     public void ResetTweet()
     {
-        Like.sprite = BaseState;
+        Like.sprite = _mBaseState;
         mIsEnable = true;
         mIsLiked = false;
     }
@@ -70,6 +69,5 @@ public class DisplayTweet : MonoBehaviour
         if (TweetData.IsElon && !mIsLiked || !TweetData.IsElon && mIsLiked)
             return false;
         return true;
-    }
-    
+    }    
 }

@@ -16,20 +16,20 @@ public class CryptoManager : MiniGameManager
     
     private int _activeChart;
 
-    void Start()
+    private void Start()
     {
         DrawGraph();
         _cryptoIManager.OnPostItClicked += CheckCryptoGraphPressed;
 
     }
 
-    void DrawGraph()
+    private void DrawGraph()
     {
         _activeChart = Random.Range(0, cryptoCharts.Length);
         cryptoChartOutput.sprite = cryptoCharts[_activeChart];
     }
 
-    public void CheckCryptoGraphPressed(PostIt postIt)
+    private void CheckCryptoGraphPressed(PostIt postIt)
     {
 
         if (cryptoChartOutput.sprite == postIt.CorrespondingGraph)
