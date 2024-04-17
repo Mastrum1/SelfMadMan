@@ -65,13 +65,8 @@ public class TapWithTimer : MonoBehaviour
                 case 1:
                     _mDecrease = GameManager.instance.FasterLevel;
                     break;
-                case 2:
-                    _mDecrease = (GameManager.instance.FasterLevel / 1.25f);
-                    break;
-                case 3:
-                    _mDecrease = (GameManager.instance.FasterLevel / 1.45f);
-                    break;
                 default:
+                    _mDecrease = (GameManager.instance.FasterLevel / 1.45f);
                     break;
             }
 
