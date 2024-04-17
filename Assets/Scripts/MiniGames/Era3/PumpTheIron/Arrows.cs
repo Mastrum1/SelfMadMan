@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Arrows : MonoBehaviour
 {
-    public event Action<bool> OnAction;
+    public event Action<bool, string> OnAction;
 
     [SerializeField] private string _mDir;
     [SerializeField] private SwipeDir _mSwipeDir;
@@ -32,7 +32,7 @@ public class Arrows : MonoBehaviour
         if (Dir == _mDir)
         {
             StartCoroutine(FadeOut());
-            OnAction?.Invoke(true);
+            OnAction?.Invoke(true, Dir);
             _mExitArea.EndGame = true;
         }
     }

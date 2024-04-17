@@ -19,6 +19,7 @@ public class PumpTheIronManager : MiniGameManager
     private void Start()
     {
         _mInteractableManager.OnGameEnd += OnGameEnd;
+        _mInteractableManager.ChangePos += ChangePos;
     }
 
     void OnGameEnd(bool win)
@@ -52,21 +53,31 @@ public class PumpTheIronManager : MiniGameManager
         }
     }
 
-    public void LeftPose()
+    public void ChangePos(string Dir)
     {
-        Debug.Log("Pose");
-    }
-    public void UpPose()
-    {
-        Debug.Log("Pose");
-    }
-    public void RightPose()
-    {
-        Debug.Log("Pose");
-    }
-    public void DownPose()
-    {
-        Debug.Log("Pose");
+        switch (Dir)
+        {
+            case "Left":
+                _mJamesPoses[0].SetActive(false);
+                _mJamesPoses[1].SetActive(true);
+                _mJamesPoses[2].SetActive(false);
+                _mJamesPoses[3].SetActive(false);
+                break;
+            case "Up":
+                _mJamesPoses[0].SetActive(false);
+                _mJamesPoses[1].SetActive(false);
+                _mJamesPoses[2].SetActive(true);
+                _mJamesPoses[3].SetActive(false);
+                break;
+            case "Right":
+                _mJamesPoses[0].SetActive(false);
+                _mJamesPoses[1].SetActive(false);
+                _mJamesPoses[2].SetActive(false);
+                _mJamesPoses[3].SetActive(true);
+                break;
+            default:
+                break;
+        }
     }
 
     private IEnumerator SpawnArrow()

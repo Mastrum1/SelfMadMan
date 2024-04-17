@@ -8,6 +8,8 @@ public class PumpTheIronInteractableManager : InteractableManager
 {
     public event Action<bool> OnGameEnd;
 
+    public event Action<string> ChangePos;
+
     [SerializeField] private GameObject _mInteractablesParent;
 
     [SerializeField] private SwipeDir _mSwipe;
@@ -15,6 +17,8 @@ public class PumpTheIronInteractableManager : InteractableManager
     [SerializeField] private List<Arrows> _mChilds;
 
     [SerializeField] private List<ExitArea> _mChildsLeaveArea;
+
+
 
 
 
@@ -59,12 +63,16 @@ public class PumpTheIronInteractableManager : InteractableManager
         }
     }
 
-    void HandleSwipe(bool swipe)
+    void HandleSwipe(bool swipe,string Dir)
     {
         if (!swipe)
         {
             HandleEndGame(false);
             DespawnObjects();
+        }
+        else
+        {
+            ChangePos?.Invoke(Dir);
         }
     }
     private void OnDestroy()
