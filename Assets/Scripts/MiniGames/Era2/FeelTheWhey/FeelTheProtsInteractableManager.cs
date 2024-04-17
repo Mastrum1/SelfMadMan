@@ -13,29 +13,26 @@ public class FeelTheProtsInteractableManager : InteractableManager
     [SerializeField] private SuccessBar _successBar;
     [SerializeField] private FailBar _failBar;
 
+    private bool _lost;
+    private bool _win;
     private void Start()
     {
+        _lost = false;
         _successBar.OnParticleSuccess += HandleWin;
         _failBar.OnFail += HandleLose;
     }
 
     private void HandleWin()
     {
-        if (!IsHolding)
-        {
-            StartCoroutine(OnWin());
-        }
-    }
-
-    private IEnumerator OnWin()
-    {
-        yield return new WaitForSeconds(1f);
+        if (IsHolding || _lost || _win) return;
+        
+        _win = true;
         OnEndGame?.Invoke(true);
     }
 
     private void HandleLose()
     {
-        StopCoroutine(OnWin());
+        _lost = true;
         OnEndGame?.Invoke(false);
     }
 
