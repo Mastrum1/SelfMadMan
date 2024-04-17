@@ -22,17 +22,13 @@ public class TrophyManager : MonoBehaviour
         [SerializeField] private CompletionState _trophyCompletionState;
         public CompletionState TrophyCompletionState { get => _trophyCompletionState; set => _trophyCompletionState = value; }
         
-        private int _goal;
-        public int Goal { get => _goal; set => _goal = value; }
-        
         private int _currentAmount;
         public int CurrentAmount { get => _currentAmount; set => _currentAmount = value; }
 
-        public Trophy(Trophies trophies, CompletionState completionState, int goal, int currentAmount)
+        public Trophy(Trophies trophies, CompletionState completionState, int currentAmount)
         {
             TrophySO = trophies;
             TrophyCompletionState = completionState;
-            Goal = goal;
             CurrentAmount = currentAmount;
         }
     }
@@ -51,12 +47,19 @@ public class TrophyManager : MonoBehaviour
 
     public void LoadTrophies(List<Trophy> trophies)
     {
-        _trophyList = trophies;
+        for (var i = 0; i < trophies.Count; i++)
+        {
+            trophies[i].CurrentAmount = 10;
+            _trophyList.Add(trophies[i]);
+            CheckTrophyCompletion(_trophyList[i]);
+        }
     }
 
-    public void CheckTrophyCompletion(Trophy trophy)
+    private void CheckTrophyCompletion(Trophy trophy)
     {
-        if (trophy.CurrentAmount < trophy.Goal) return;
+        if (trophy.TrophyCompletionState != CompletionState.NotComplete) return;
+        
+        if (trophy.CurrentAmount < trophy.TrophySO.goal) return;
         
         trophy.TrophyCompletionState = CompletionState.Complete;
         OnTrophyComplete?.Invoke(trophy);
