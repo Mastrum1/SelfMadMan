@@ -41,7 +41,16 @@ public class QuestView : MonoBehaviour
         questContainerScript.QuestDescription.text = replace;
         questContainerScript.QuestIcon.sprite = quest.QuestSO.questIcon;
         questContainerScript.QuestColor.color = _difficultyColor[(int)quest.Difficulty.difficulty];
-        StartCoroutine(ShowCompletionBar(questContainerScript.QuestProgression.gameObject.transform, quest, questContainerScript.StartPosX));
+        float amount;
+        if (quest.CurrentAmount >= quest.MaxAmount)
+        {
+            amount = 1;
+        }
+        else
+        {
+            amount = (float)quest.CurrentAmount / quest.MaxAmount;
+        }
+        StartCoroutine(ShowCompletionBar(questContainerScript.QuestProgression.gameObject.transform, amount, questContainerScript.StartPosX));
 
             
         for (var j = 0; j < quest.Difficulty.reward; j++)
@@ -52,18 +61,11 @@ public class QuestView : MonoBehaviour
         }
     }
 
-    private static IEnumerator ShowCompletionBar(Transform pos, QuestManager.Quest quest, float startPos)
+    private static IEnumerator ShowCompletionBar(Transform pos, float amount, float startPos)
     {
-        while (pos.position.x < startPos + 3 * (float)quest.CurrentAmount / quest.MaxAmount)
+        while (pos.position.x < startPos + 3 * amount)
         {
-            if (quest.CurrentAmount - quest.MaxAmount >= quest.MaxAmount)
-            {
-                pos.position += pos.right * (3 * Time.deltaTime);
-            }
-            else
-            {
-                pos.position += pos.right * ((float)quest.CurrentAmount / quest.MaxAmount * 3 * Time.deltaTime);
-            }
+            pos.position += pos.right * (amount * 3 * Time.deltaTime);
             yield return new WaitForSeconds(0.01f);
         }
     }
