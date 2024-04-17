@@ -41,19 +41,19 @@ public class CheckEraGames : MonoBehaviour
         for (int i = 0; i < minigame.Count; i++)
         {
             _mMinigameContainerList[i].EraGameName.text = minigame[i].SceneName;
-            //minigameContainerScript.EraGameIcon.sprite = minigame[i].Icon;
+            _mMinigameContainerList[i].EraGameIcon.sprite = minigame[i].Icon;
             if (!minigame[i].Locked)
             {
                 _mMinigameContainerList[i].EraGameBorder.color = _mBGIconColors[0];
                 _mMinigameContainerList[i].EraGameName.color = _mBGIconColors[2];
-                /*_mMinigameContainerList[i].EraGameIcon.sprite = minigame[i].Icon;*/
+                _mMinigameContainerList[i].EraGameIcon.sprite = minigame[i].Icon;
                 _mUnlockedMinigames++;
             }
             else
             {
                 _mMinigameContainerList[i].EraGameBorder.color = _mBGIconColors[1];
                 _mMinigameContainerList[i].EraGameName.color = _mBGIconColors[1];
-                /*_mMinigameContainerList[i].EraGameIcon.sprite = minigame[i].Icon;*/
+                _mMinigameContainerList[i].EraGameIcon.sprite = minigame[i].Icon;
             }  
         }
     }
