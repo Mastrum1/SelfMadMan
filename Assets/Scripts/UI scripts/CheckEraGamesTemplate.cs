@@ -10,6 +10,6 @@ public class CheckEraGamesTemplate : MonoBehaviour
     public Image EraGameIcon { get => _mEraGameIcon; private set => _mEraGameIcon = value; }
     [SerializeField] private Image _mEraGameIcon;
 
-    public Image EraGameBorder { get => _mEraGameBorder; private set => _mEraGameBorder = value; }
-    [SerializeField] private Image _mEraGameBorder;
+    public Image QuestIconBG { get => _mQuestIconBG; private set => _mQuestIconBG = value; }
+    [SerializeField] private Image _mQuestIconBG;
 }

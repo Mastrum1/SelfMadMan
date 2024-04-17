@@ -7,9 +7,6 @@ public class CheckEraGames : MonoBehaviour
     [Header("Container info")]
     [SerializeField] private GameObject _mMinigameContainer;
 
-    [Header("Prefab container")]
-    [SerializeField] private GameObject _mGameContainerPrefab;
-
     [Header("Era Info")]
     [SerializeField] private int _mCurrentEra;
 
@@ -42,18 +39,20 @@ public class CheckEraGames : MonoBehaviour
         {
             _mMinigameContainerList[i].EraGameName.text = minigame[i].SceneName;
             _mMinigameContainerList[i].EraGameIcon.sprite = minigame[i].Icon;
+
             if (!minigame[i].Locked)
             {
-                _mMinigameContainerList[i].EraGameBorder.color = _mBGIconColors[0];
+                _mMinigameContainerList[i].QuestIconBG.color = _mBGIconColors[0];
                 _mMinigameContainerList[i].EraGameName.color = _mBGIconColors[2];
-                _mMinigameContainerList[i].EraGameIcon.sprite = minigame[i].Icon;
+                _mMinigameContainerList[i].EraGameIcon.color = _mBGIconColors[2];
                 _mUnlockedMinigames++;
             }
+
             else
             {
-                _mMinigameContainerList[i].EraGameBorder.color = _mBGIconColors[1];
+                _mMinigameContainerList[i].QuestIconBG.color = _mBGIconColors[1];
                 _mMinigameContainerList[i].EraGameName.color = _mBGIconColors[1];
-                _mMinigameContainerList[i].EraGameIcon.sprite = minigame[i].Icon;
+                _mMinigameContainerList[i].EraGameIcon.color = _mBGIconColors[1];
             }  
         }
     }
@@ -73,7 +72,7 @@ public class CheckEraGames : MonoBehaviour
                 break;
         }
 
-        _mNumberUnlocked.text = $"<#4EF4F6>{_mUnlockedMinigames.ToString()}" + "<#F6F3D1>/8";
+        _mNumberUnlocked.text = $"<#4EF4F6>{_mUnlockedMinigames}" + "<#F6F3D1>/8";
         _mEra.text = "Era " + (_mCurrentEra + 1).ToString();
     }
 }
