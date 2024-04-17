@@ -98,6 +98,7 @@ public class InputManager : MonoBehaviour
 
     private float _mStartTiming;
 
+    bool _mWaitingForRelease = false;
     void Start()
     {
 
@@ -143,9 +144,10 @@ public class InputManager : MonoBehaviour
                 _mIsDraging = true;
             }
 
-            if (touch.phase == TouchPhase.Began && _mEnableTapOnFingerDown)
+            if (touch.phase == TouchPhase.Began && _mEnableTapOnFingerDown && !_mWaitingForRelease)
             {
                 Tap(touch);
+                _mWaitingForRelease = true;
             }
 
             if (_mEnableSelectable && _mSelectedObject == null)
@@ -173,7 +175,7 @@ public class InputManager : MonoBehaviour
                     Slide();
                 }
 
-                if(_mEnableSelectable && _mSelectedObject != null)
+                if (_mEnableSelectable && _mSelectedObject != null)
                 {
                     SelectableObject script = _mSelectedObject.GetComponent<SelectableObject>();
                     script.GetDeselected();
@@ -190,6 +192,7 @@ public class InputManager : MonoBehaviour
                 _mHold = false;
                 _mIsDraging = false;
                 _mSelectedObject = null;
+                _mWaitingForRelease = false;
             }
         }
     }
@@ -291,7 +294,7 @@ public class InputManager : MonoBehaviour
 
     public void DragAndDrop(Vector3 pos, Touch touch)
     {
-        if(_mSelectedObject == null)
+        if (_mSelectedObject == null)
             SelectObject(touch);
 
         if (_mSelectedObject != null)
