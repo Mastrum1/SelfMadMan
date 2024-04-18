@@ -40,10 +40,10 @@ public class CleanKitchenManager : MiniGameManager
     private void OnGameEnd()
     {
         Amount++;
-        if (Amount == _numOfCockroaches)
-        {
-            EndMiniGame(true, miniGameScore);
-        }
+        if (Amount != _numOfCockroaches) return;
+        
+        _interactableManager.DisableRoaches();
+        EndMiniGame(true, miniGameScore);
     }
 
     private void OnDestroy()
