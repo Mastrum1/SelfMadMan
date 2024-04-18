@@ -86,7 +86,6 @@ public class ScoreScreen : MonoBehaviour
     }
     IEnumerator OnContinueAnim()
     {
-
         _mJamesAnimator.SetBool("Idle", true);
         _mJamesAnimator.SetBool("GameOver", false);
         yield return new WaitForSeconds(0.3f);

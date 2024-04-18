@@ -13,8 +13,6 @@ public class Money : MonoBehaviour
 
     [SerializeField] private ContentManager _mContentManager;
 
-    [SerializeField] private ShopManager _mShopManager;
-
     [SerializeField] private Spin _mSpin;
 
     void Start()
