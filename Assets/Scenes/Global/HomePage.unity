@@ -3320,6 +3320,10 @@ PrefabInstance:
       propertyPath: _mMoney
       value: 
       objectReference: {fileID: 1128004924}
+    - target: {fileID: 3490877950063511070, guid: 8f826a549491a3a41b1497dcb2ad4678, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: e4ac59e19226cd84f8aae244b3e14a16, type: 2}
     - target: {fileID: 3841391044178002945, guid: 8f826a549491a3a41b1497dcb2ad4678, type: 3}
       propertyPath: m_Name
       value: LevelUPPopUP
@@ -3328,8 +3332,13 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5716635088195082412, guid: 8f826a549491a3a41b1497dcb2ad4678, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 5267bed03ab9cac43a8ba3b50d766f19, type: 2}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7657448966337441436, guid: 8f826a549491a3a41b1497dcb2ad4678, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f826a549491a3a41b1497dcb2ad4678, type: 3}
@@ -3487,6 +3496,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5222078287547549792, guid: e98c403a46c7e184a98ef14c1cb94708, type: 3}
   m_PrefabInstance: {fileID: 561427296}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &561427301 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5036310888402263173, guid: e98c403a46c7e184a98ef14c1cb94708, type: 3}
+  m_PrefabInstance: {fileID: 561427296}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &588740054
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7045,7 +7065,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 440}
+  m_AnchoredPosition: {x: 0, y: 460}
   m_SizeDelta: {x: 0, y: -1850}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &869353271
@@ -8420,6 +8440,8 @@ MonoBehaviour:
   _mFurnituresTemplates: []
   _mConfirmPurchase: {fileID: 1791636002}
   _mItemBeingPurchased: {fileID: 0}
+  _mSpinButtonPulse: {fileID: 0}
+  _mConfirmReward: {fileID: 0}
 --- !u!1 &1036731440
 GameObject:
   m_ObjectHideFlags: 0
@@ -9156,8 +9178,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mCurrentMoney: 0
-  m_TextMeshPro: {fileID: 1183736281}
+  _mTextMeshPro: {fileID: 1183736281}
   _mContentManager: {fileID: 1128004927}
+  _mShopManager: {fileID: 1027901000}
   _mSpin: {fileID: 1551964561}
 --- !u!114 &1128004926
 MonoBehaviour:
@@ -10523,7 +10546,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -355.59998}
+  m_AnchoredPosition: {x: 0, y: -378}
   m_SizeDelta: {x: 0, y: -1697.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1273781076
@@ -11061,6 +11084,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mQuestView: {fileID: 1469360831}
   _mTrophyView: {fileID: 1558024768}
+  _mQuestButton: {fileID: 1941968855}
+  _mTrophyButton: {fileID: 561427301}
 --- !u!1001 &1334858750
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17613,6 +17638,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5222078287547549792, guid: e98c403a46c7e184a98ef14c1cb94708, type: 3}
   m_PrefabInstance: {fileID: 1941968850}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1941968855 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5036310888402263173, guid: e98c403a46c7e184a98ef14c1cb94708, type: 3}
+  m_PrefabInstance: {fileID: 1941968850}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1955527380
 GameObject:
   m_ObjectHideFlags: 0

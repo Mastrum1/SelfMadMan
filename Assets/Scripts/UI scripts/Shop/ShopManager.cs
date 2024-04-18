@@ -1,3 +1,4 @@
+using Lean.Touch;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -22,6 +23,10 @@ public class ShopManager : MonoBehaviour
     [Header("Confirm Purchase")]
     [SerializeField] private ConfirmPurchase _mConfirmPurchase;
     [SerializeField] private ItemsSO _mItemBeingPurchased;
+
+    [Header("Pulse of the buttons")]
+    [SerializeField] private LeanPulseScale _mSpinButtonPulse;
+    [SerializeField] private LeanPulseScale _mConfirmReward;
 
     private void Awake()
     {
@@ -129,6 +134,18 @@ public class ShopManager : MonoBehaviour
         {
             _mMoney.SubtractMoney(int.Parse(price.text));
             GameManager.instance.Player.Hearts += 1;
+        }
+    }
+
+    public void Pulse()
+    {
+        if (_mItemBeingPurchased.Cost >= _mMoney.CurrentMoney)
+        {
+            _mSpinButtonPulse.enabled = true;
+        }
+        else
+        {
+            _mConfirmReward.enabled = false;
         }
     }
 }
