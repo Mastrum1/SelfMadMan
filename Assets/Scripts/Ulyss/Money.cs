@@ -62,10 +62,8 @@ public class Money : MonoBehaviour
         else
         {
             _mCurrentMoney -= int.Parse(price.text);
-            Debug.Log(price.text);
             GameManager.instance.Player.NewCurrency(_mCurrentMoney);
             _mContentManager.UnlockEra();
-            StartCoroutine(MoveMoney(_mCoinAnim[2]));
             UpdateMoney();
         }
     }
