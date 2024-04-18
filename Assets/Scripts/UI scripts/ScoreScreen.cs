@@ -2,6 +2,7 @@ using CW.Common;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,23 +10,32 @@ using UnityEngine.UI;
 
 public class ScoreScreen : MonoBehaviour
 {
+    [Header("Animations")]
     [SerializeField] private Animator _mJamesAnimator;
     [SerializeField] private Animator _UIAnimator;
     [SerializeField] private Animator _HeartAnimator;
+
+    [Header("Images")]
     [SerializeField] private Image _jamesSprite;
     [SerializeField] private GameObject _mHighscoreTag;
+
+    [Header("Text Elements")]
     [SerializeField] private TMP_Text _mscoreTexts;
     [SerializeField] private TMP_Text _mHearts;
     [SerializeField] private TMP_Text _mMnigameCountTexts;
     [SerializeField] private TMP_Text _mTimerTexts;
     [SerializeField] private TMP_Text _bestScore;
     [SerializeField] private TMP_Text _coinsEarned;
+
+    [Header("Scripts")]
     [SerializeField] private PanelOnClick _mPanelOnClick;
+
+    [Header("GameObjects")]
     [SerializeField] private GameObject _mPopup;
     [SerializeField] private GameObject _InputManager;
     [SerializeField] private GameObject _mQuestManager;
     [SerializeField] private RectTransform _mCoin;
-    [SerializeField] private GameObject _mScoreGainCoin;
+    [SerializeField] private GameObject _mWinScreenBG;
 
     private int Timer = 5;
 
@@ -34,6 +44,7 @@ public class ScoreScreen : MonoBehaviour
     private void Awake()
     {
         _InputManager.SetActive(false);
+        _mWinScreenBG.SetActive(false);
         GameManager.instance.WinScreenHandle += OnWinScreenDisplay;
         _mPanelOnClick.OnClick += OnPanelClicked;
     }
@@ -42,7 +53,9 @@ public class ScoreScreen : MonoBehaviour
     void OnWinScreenDisplay(bool won, int era, int hearts, bool gameOver)
     {
         Debug.Log(hearts);
+
         _mscoreTexts.text = GameManager.instance.Score.ToString();
+        _mWinScreenBG.SetActive(true);
         _mMnigameCountTexts.text = "GAMES COMPLETED : " + GameManager.instance.MinigamesWon.ToString();
         _HeartAnimator.SetInteger("Hearts", hearts);
         _mJamesAnimator.SetBool("Idle", false);
@@ -99,6 +112,7 @@ public class ScoreScreen : MonoBehaviour
         yield return new WaitForSeconds(2f);
         _mJamesAnimator.SetBool("Idle", true);
         _mJamesAnimator.SetBool("GameOver", false);
+        _mWinScreenBG.SetActive(false);
 
     }
     IEnumerator OnGameOver()
