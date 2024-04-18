@@ -188,5 +188,4 @@ public class ScoreScreen : MonoBehaviour
     {
         GameManager.instance.WinScreenHandle -= OnWinScreenDisplay;
     }
-
 }
