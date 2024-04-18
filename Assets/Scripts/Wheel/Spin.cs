@@ -50,23 +50,75 @@ public class Spin : MonoBehaviour
 
     public void StartSpinning()
     {
-        InitSpin();
-        isSpnning = true;
-        currentSpeed = initialSpeed;
+        if (!isSpnning)
+        {
+            InitSpin();
+            isSpnning = true;
+            currentSpeed = initialSpeed;
+        }
+
+    }
+
+    private bool CheckIfAvailableMinigames()
+    {
+        int index = 0;
+        int numOfMinigames = 0;
+        foreach (var era in GameManager.instance.ErasData)
+        {
+            index += era.Unlocked ? 1 : 0;
+        }
+        for (int i = 0; i < index; i++)
+        {
+            foreach (var Minigame in MiniGameSelector.instance.AllMinigames[i])
+            {
+                numOfMinigames += Minigame.Locked ? 1 : 0;
+            }
+        }
+        return numOfMinigames != 0;
     }
     void InitSpin()
     {
         _minigamesOnWheel = 0;
         _quarters.Shuffle();
+        if (CheckIfAvailableMinigames())
+            FillWithMinigames();
+        else
+            FillWithoutMinigames();
+    }
+
+    private bool CheckIfMinigameUnlocked(MinigameSO minigameSO)
+    {
+        int index = 0;
+
+        foreach (var era in GameManager.instance.ErasData)
+        {
+            index += era.Unlocked ? 1 : 0;
+        }
+
+        for (int i = 0; i < index; i++)
+        {
+            foreach (var Minigame in MiniGameSelector.instance.AllMinigames[i])
+            {
+                if (Minigame.SceneName == minigameSO.MinigameScene)
+                {
+                    return !Minigame.Locked;
+                }
+            }
+        }
+        return false;
+    }
+
+    private void FillWithMinigames()
+    {
+        Debug.Log("With minigames");
+        MinigameSO temp;
         for (int i = 0; i < 2; i++)
         {
-            MinigameSO temp;
             do
             {
                 int randomIndex = UnityEngine.Random.Range(0, _MinigamesSO.Count);
                 temp = _MinigamesSO[randomIndex];
-
-            } while (!GameManager.instance.ErasData[temp.Era - 1].Unlocked);
+            } while (!GameManager.instance.ErasData[temp.Era - 1].Unlocked || CheckIfMinigameUnlocked(temp));
             _quarters[i].InitQuarter(temp);
         }
         for (int i = 2; i < 8; i++)
@@ -76,7 +128,15 @@ public class Spin : MonoBehaviour
         }
     }
 
-
+    private void FillWithoutMinigames()
+    {
+        Debug.Log("Without minigames");
+        for (int i = 0; i < 8; i++)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, _itemsSOs.Count);
+            _quarters[i].InitQuarter(_itemsSOs[randomIndex]);
+        }
+    }
 
     void Update()
     {
