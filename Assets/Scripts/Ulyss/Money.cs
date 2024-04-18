@@ -65,7 +65,6 @@ public class Money : MonoBehaviour
             GameManager.instance.Player.NewCurrency(_mCurrentMoney);
             _mContentManager.UnlockEra();
             UpdateMoney();
-            StartCoroutine(MoveMoney(_mCoinAnim[2]));
         }
     }
 
