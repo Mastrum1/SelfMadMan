@@ -118,8 +118,11 @@ public class QuestManager : MonoBehaviour
     {
         if (quest.CurrentAmount < quest.MaxAmount) return;
         
+        Debug.Log("QuestFinished: " + quest.QuestSO.questDescription);
+        Debug.Log("SelectedQuests: " + _selectedQuestsList.Count);
         quest.QuestCompletionState = CompletionState.Complete;
         OnQuestComplete?.Invoke(quest);
+        Debug.Log("SelectedQuests: " + _selectedQuestsList.Count);
     }
     
     public void OnQuestFinish(Quest quest)

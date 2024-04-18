@@ -566,6 +566,7 @@ MonoBehaviour:
   _mQuestIcon: {fileID: 5465443244480032605}
   _mQuestColor: {fileID: 3809457272348283373}
   _mQuestProgression: {fileID: 93417248606730357}
+  _mChangeButton: {fileID: 6504061723516233316}
   _mStars:
   - {fileID: 96908665083716685}
   - {fileID: 4964122937785153734}
@@ -1026,12 +1027,12 @@ GameObject:
   - component: {fileID: 456566882427514449}
   - component: {fileID: 3094392826492091958}
   m_Layer: 5
-  m_Name: RewardButton
+  m_Name: ChangeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3274487859164280819
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1293,7 +1294,7 @@ GameObject:
   - component: {fileID: 766736673065795835}
   - component: {fileID: 6613926115750593637}
   m_Layer: 5
-  m_Name: RewardAmount
+  m_Name: ChangeAmount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
