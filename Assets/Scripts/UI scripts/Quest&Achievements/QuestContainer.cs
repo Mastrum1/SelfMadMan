@@ -27,6 +27,11 @@ public class QuestContainer : MonoBehaviour
     public GameObject QuestProgression => _mQuestProgression;
     [SerializeField] private GameObject _mQuestProgression;
     
+    [SerializeField] private GameObject _mChangeButton;
+
+    public bool IsInQuestMenu { get => _mIsInQuestMenu; set => _mIsInQuestMenu = value; }
+    private bool _mIsInQuestMenu;
+    
     public float StartPosX => _mStartPos;
     private float _mStartPos;
     
@@ -38,19 +43,32 @@ public class QuestContainer : MonoBehaviour
         _mStartPos = QuestProgression.transform.position.x;
     }
 
+    private void Start()
+    {
+        _mChangeButton.SetActive(_mIsInQuestMenu);
+    }
+
     public void ChangeQuest(int container)
     {
         gameObject.SetActive(false);
         QuestManager.Instance.OnChangeQuest(_mSelectedQuest, container);
     }
 
-    public void DisableContainers()
+    public void ResetFillBar()
     {
         QuestProgression.transform.position = new Vector3(_mStartPos - 0.176f, transform.position.y);
+    }
 
+    private void OnDisable()
+    {
         foreach (var star in _mStars)
         {
             star.SetActive(false);
         }
+    }
+
+    private void OnDestroy()
+    {
+        _mIsInQuestMenu = false;
     }
 }
