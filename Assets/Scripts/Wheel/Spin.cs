@@ -36,6 +36,10 @@ public class Spin : MonoBehaviour
     [SerializeField] private GameObject _mPopupObtained;
     [SerializeField] private PopUpObtained _mPopupObtainedScript;
 
+    [SerializeField] private Money _mMoney;
+
+    [SerializeField] private GameObject _mSpinCoinsAnim;
+
     private Quarter _quarter;
     public bool isSpnning = false;
     public float initialSpeed = 500.0f;
@@ -182,8 +186,11 @@ public class Spin : MonoBehaviour
         if (item != null)
         {
             item.Obtain();
+
+            if (_quarter.Item is CoinsSO)
+            {
+                ShopManager.Instance.StartCoroutine(ShopManager.Instance.MoveMoney(_mSpinCoinsAnim));
+            }
         }
-
-
     }
 }
