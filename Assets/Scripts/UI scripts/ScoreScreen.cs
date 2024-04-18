@@ -25,6 +25,7 @@ public class ScoreScreen : MonoBehaviour
     [SerializeField] private GameObject _InputManager;
     [SerializeField] private GameObject _mQuestManager;
     [SerializeField] private RectTransform _mCoin;
+    [SerializeField] private GameObject _mScoreGainCoin;
 
     private int Timer = 5;
 
@@ -128,6 +129,7 @@ public class ScoreScreen : MonoBehaviour
             int amount = GameManager.instance.GainMoney();
             if (amount / 10 >= 1)
                 _mCoin.anchoredPosition = new Vector2(103, _mCoin.anchoredPosition.y);
+            /*ShopManager.Instance.StartCoroutine(ShopManager.Instance.MoveMoney());*/
             else
                 _mCoin.anchoredPosition = new Vector2(137, _mCoin.anchoredPosition.y);
             _UIAnimator.SetBool("EndGame", true);
@@ -137,8 +139,6 @@ public class ScoreScreen : MonoBehaviour
             {
                 _mHighscoreTag.SetActive(true);
                 GameManager.instance.Player.UpdateBestScore((int)GameManager.instance.Score);
-               
-
             }
 
             _coinsEarned.text = " +" + amount.ToString();
