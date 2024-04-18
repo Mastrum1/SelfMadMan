@@ -15,6 +15,7 @@ public class MaskSpawner : MonoBehaviour
     [SerializeField] float _mSpacing = 0.1f;
     [SerializeField] BrushMovement _mBrush;
     [SerializeField] TMP_Text _mPercentageText;
+    [SerializeField] Collider2D _mCollider;
     private int _mObjectRemain;
     private int _mObjectTotal;
     private int _mPercent;
@@ -22,8 +23,8 @@ public class MaskSpawner : MonoBehaviour
     void Start()
     {
         _mParent.gameObject.SetActive(true);
-        Vector3 spriteSize = _mStatue.bounds.size;
-        Vector3 startPos = _mStatue.bounds.min;
+        Vector3 spriteSize = _mCollider.bounds.size;  //_mStatue.bounds.size;
+        Vector3 startPos =  _mCollider.bounds.min; //_mStatue.bounds.min;
 
         int columns = Mathf.CeilToInt(spriteSize.x / _mSpacing);
         int rows = Mathf.CeilToInt(spriteSize.y / _mSpacing);
