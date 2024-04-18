@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class ConfirmPurchase : MonoBehaviour
 {
     public event Action<ItemsSO> _mItemPurchased;

@@ -98,6 +98,7 @@ public class InputManager : MonoBehaviour
 
     private float _mStartTiming;
 
+    bool _mWaitingForRelease = false;
     void Start()
     {
 
@@ -122,7 +123,6 @@ public class InputManager : MonoBehaviour
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
-            _mGetFingerPos?.Invoke(Camera.main.ScreenToWorldPoint(touch.position));
 
             if (_mStartTouchPos == Vector3.zero)
             {
@@ -135,21 +135,29 @@ public class InputManager : MonoBehaviour
             if (touch.phase == TouchPhase.Stationary && holdTiming >= _mHoldTiming && _mEnableHold && !_mIsDraging)
             {
                 Hold();
+                _mGetFingerPos?.Invoke(Camera.main.ScreenToWorldPoint(touch.position));
+
             }
 
             if (touch.phase == TouchPhase.Moved && holdTiming >= _mHoldTiming && _mEnableDragAndDrop && Vector3.Distance(_mStartTouchPos, Camera.main.ScreenToWorldPoint(touch.position)) >= _mDragAndDropMinimumDist || _mIsDraging)
             {
+                _mGetFingerPos?.Invoke(Camera.main.ScreenToWorldPoint(touch.position));
+
                 DragAndDrop(Camera.main.ScreenToWorldPoint(touch.position), touch);
                 _mIsDraging = true;
             }
 
-            if (touch.phase == TouchPhase.Began && _mEnableTapOnFingerDown)
+            if (touch.phase == TouchPhase.Began && _mEnableTapOnFingerDown && !_mWaitingForRelease)
             {
                 Tap(touch);
+                _mGetFingerPos?.Invoke(Camera.main.ScreenToWorldPoint(touch.position));
+                _mWaitingForRelease = true;
             }
 
             if (_mEnableSelectable && _mSelectedObject == null)
             {
+                _mGetFingerPos?.Invoke(Camera.main.ScreenToWorldPoint(touch.position));
+
                 SelectObject(touch);
             }
 
@@ -160,21 +168,28 @@ public class InputManager : MonoBehaviour
 
                 if (Vector3.Distance(_mStartTouchPos, _mEndTouchPos) >= _mMinimumDist && _mEnableSlide4Dir && !_mIsDraging || Vector3.Distance(_mStartTouchPos, _mEndTouchPos) >= _mMinimumDist && _mEnableSlide8Dir && !_mIsDraging)
                 {
+                    _mGetFingerPos?.Invoke(Camera.main.ScreenToWorldPoint(touch.position));
+
                     SlideDir();
                 }
 
                 else if (!_mHold && _mEnableTapOnFingerUp && !_mIsDraging)
                 {
+                    _mGetFingerPos?.Invoke(Camera.main.ScreenToWorldPoint(touch.position));
+
                     Tap(touch);
                 }
 
                 if (_mEnableSlide && Vector3.Distance(_mStartTouchPos, _mEndTouchPos) >= _mMinimumDist)
                 {
+                    _mGetFingerPos?.Invoke(Camera.main.ScreenToWorldPoint(touch.position));
+
                     Slide();
                 }
 
-                if(_mEnableSelectable && _mSelectedObject != null)
+                if (_mEnableSelectable && _mSelectedObject != null)
                 {
+                    _mGetFingerPos?.Invoke(Camera.main.ScreenToWorldPoint(touch.position));
                     SelectableObject script = _mSelectedObject.GetComponent<SelectableObject>();
                     script.GetDeselected();
                     _mSelectedObject = null;
@@ -182,6 +197,7 @@ public class InputManager : MonoBehaviour
 
                 if (_mHold)
                 {
+                    _mGetFingerPos?.Invoke(Camera.main.ScreenToWorldPoint(touch.position));
                     _mOnHoldRelease?.Invoke();
                 }
 
@@ -190,6 +206,7 @@ public class InputManager : MonoBehaviour
                 _mHold = false;
                 _mIsDraging = false;
                 _mSelectedObject = null;
+                _mWaitingForRelease = false;
             }
         }
     }
@@ -291,7 +308,7 @@ public class InputManager : MonoBehaviour
 
     public void DragAndDrop(Vector3 pos, Touch touch)
     {
-        if(_mSelectedObject == null)
+        if (_mSelectedObject == null)
             SelectObject(touch);
 
         if (_mSelectedObject != null)

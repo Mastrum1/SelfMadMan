@@ -80,6 +80,7 @@ public class Player : MonoBehaviour
     }
 
     [SerializeField] private bool _mLoadSaveMinigame = false;
+    public bool LoadSaveMinigame { get => _mLoadSaveMinigame; set => _mLoadSaveMinigame = value; }
 
 
     public event Action<PlayerData> OnDataLoad;
@@ -163,9 +164,9 @@ public class Player : MonoBehaviour
 
     [SerializeField] private List<TrophyManager.Trophy> _mAllTrophy;
 
-    public List<GameManager.EraData> EraData { get => _EraData; private set => _EraData = value; }
+    public List<GameManager.EraData> ErasData { get => _ErasData; private set => _ErasData = value; }
 
-    private List<GameManager.EraData> _EraData = new List<GameManager.EraData>();
+    private List<GameManager.EraData> _ErasData = new List<GameManager.EraData>();
 
     public List<MinigameScene> AllEra1 { get => _mAllEra1; private set => _mAllEra1 = value; }
 
@@ -178,7 +179,6 @@ public class Player : MonoBehaviour
     public List<MinigameScene> AllEra3 { get => _mAllEra3; private set => _mAllEra3 = value; }
 
     [SerializeField] private List<MinigameScene> _mAllEra3;
-
 
 
     public void SaveJson()
@@ -398,17 +398,17 @@ public class Player : MonoBehaviour
             data.SaveAllTrophyQuest(AllTrophy);
         }
 
-        if (data.EraData.Count == 3)
+        if (data.ErasData.Count == 3)
         {
-            if (data.EraData[2].Unlocked == true || data.EraData[3].Unlocked == true)
+            if (data.ErasData[2].Unlocked == true || data.ErasData[3].Unlocked == true)
             {
-                EraData = data.EraData;
+                ErasData = data.ErasData;
             }
         }
         else
         {
             data.InitEras();
-            EraData = data.EraData;
+            ErasData = data.ErasData;
         }
         SaveJson();
 
@@ -447,7 +447,7 @@ public class Player : MonoBehaviour
                 data = DataService.LoadData<PlayerData>("/player-stats.json", false);
 
 
-            if (data.EraData.Count == 0)
+            if (data.ErasData.Count == 0)
             {
 
                 UpdateSaveFile(data);
@@ -464,7 +464,7 @@ public class Player : MonoBehaviour
 
                 Language = data.Language;
 
-                EraData = data.EraData;
+                ErasData = data.ErasData;
 
                 foreach (var item in data.UnlockedCinematics)
                 {
@@ -509,7 +509,9 @@ public class Player : MonoBehaviour
                     AllQuest[item.QuestSOIndex] = new QuestManager.Quest(AllQuest[item.QuestSOIndex].QuestSO, item.QuestCompletionState, item.QuestDispo, item.Difficulty, item.MaxAmount, item.CurrentAmount);
                     ActiveQuests.Add(AllQuest[item.QuestSOIndex]);
                 }
+
                 CompletedQuests = new List<QuestManager.Quest>();
+
                 foreach (var item in data.CompletedQuests)
                 {
                     AllQuest[item.QuestSOIndex] = new QuestManager.Quest(AllQuest[item.QuestSOIndex].QuestSO, item.QuestCompletionState, item.QuestDispo, item.Difficulty, item.MaxAmount, item.CurrentAmount);
@@ -529,12 +531,8 @@ public class Player : MonoBehaviour
                 {
                     AllTrophy[item.TrophySOIndex] = new TrophyManager.Trophy(AllTrophy[item.TrophySOIndex].TrophySO, item.TrophyCompletionState, item.CurrentAmount);
                 }
-
-                if (_mLoadSaveMinigame)
-                {
-                    MiniGameSelector.instance.LoadEra(AllEra1, AllEra2, AllEra3);
-                }
-                GameManager.instance.LoadEraData(EraData);
+                
+                GameManager.instance.LoadEraData(ErasData);
 
                 TrophyManager.Instance.LoadTrophies(AllTrophy);
                 QuestManager.Instance.LoadQuests(AllQuest, ActiveQuests);
@@ -571,13 +569,12 @@ public class Player : MonoBehaviour
     public void QuestComplete(QuestManager.Quest quest)
     {
         CompletedQuests.Add(quest);
-        //ActiveQuests.Remove(quest);
     }
 
     public void RemoveCompleteQuests(QuestManager.Quest quest)
     {
         CompletedQuests.Remove(quest);
-        UnlockQuest(quest.QuestSO.ID);
+        RemoveActiveQuests(quest);
     }
 
     public void UnlockQuest(int ID)
@@ -694,7 +691,7 @@ public class Player : MonoBehaviour
 
     public void UnlockEra(int era)
     {
-        EraData[era].UnlockEra();
+        ErasData[era].UnlockEra();
     }
 
     public void TrophyCompleted(TrophyManager.Trophy trophy)
@@ -707,8 +704,6 @@ public class Player : MonoBehaviour
         AllTrophy[trophy.TrophySO.ID] = trophy;
         _mMoney += reward;
     }
-
-
 
     public bool CheckFile()
     {
