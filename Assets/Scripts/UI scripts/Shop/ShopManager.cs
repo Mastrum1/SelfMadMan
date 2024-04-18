@@ -24,7 +24,6 @@ public class ShopManager : MonoBehaviour
 
     [Header("Confirm Purchase")]
     [SerializeField] private ConfirmPurchase _mConfirmPurchase;
-    [SerializeField] private GameObject _mCoinsShop;
     [SerializeField] private ItemsSO _mItemBeingPurchased;
 
     [Header("Pulse of the buttons")]
@@ -95,7 +94,7 @@ public class ShopManager : MonoBehaviour
         else
         {
             _mMoney.SubtractMoney(_mItemBeingPurchased.Cost);
-            StartCoroutine(MoveMoney(_mCoinsShop));
+            StartCoroutine(_mMoney.MoveMoney(_mMoney.CoinAnim[0]));
             Debug.Log(_mMoney.CurrentMoney);
         }
     }
@@ -124,12 +123,5 @@ public class ShopManager : MonoBehaviour
         {
             _mConfirmReward.enabled = false;
         }
-    }
-
-    public IEnumerator MoveMoney(GameObject particule)
-    {
-        particule.SetActive(true);
-        yield return new WaitForSeconds(3f);
-        particule.SetActive(false);
     }
 }
