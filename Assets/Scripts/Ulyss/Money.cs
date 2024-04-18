@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,9 +14,10 @@ public class Money : MonoBehaviour
 
     [SerializeField] private ContentManager _mContentManager;
 
-    [SerializeField] private ShopManager _mShopManager;
-
     [SerializeField] private Spin _mSpin;
+
+    public GameObject[] CoinAnim { get => _mCoinAnim; set => _mCoinAnim = value; }
+    [SerializeField] private GameObject[] _mCoinAnim;
 
     void Start()
     {
@@ -63,6 +65,7 @@ public class Money : MonoBehaviour
             Debug.Log(price.text);
             GameManager.instance.Player.NewCurrency(_mCurrentMoney);
             _mContentManager.UnlockEra();
+            StartCoroutine(MoveMoney(_mCoinAnim[2]));
             UpdateMoney();
         }
     }
@@ -88,5 +91,12 @@ public class Money : MonoBehaviour
         _mCurrentMoney = GameManager.instance.GetComponent<Player>().Money;
         Debug.Log("Money loaded: " + _mCurrentMoney);
         UpdateMoney();
+    }
+
+    public IEnumerator MoveMoney(GameObject particule)
+    {
+        particule.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        particule.SetActive(false);
     }
 }

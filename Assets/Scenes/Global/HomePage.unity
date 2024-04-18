@@ -1024,7 +1024,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3784438257042972596, guid: 21f85f0c9f5486747aaf202fde4b708d, type: 3}
       propertyPath: m_Name
-      value: LerpMoney
+      value: ConfimPopupAnim
       objectReference: {fileID: 0}
     - target: {fileID: 3784438257042972596, guid: 21f85f0c9f5486747aaf202fde4b708d, type: 3}
       propertyPath: m_IsActive
@@ -4021,7 +4021,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 611963777}
   m_LocalRotation: {x: -0, y: -0, z: -0.14575927, w: 0.9893201}
-  m_LocalPosition: {x: 0, y: 0, z: 21411.6}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8513,7 +8513,6 @@ MonoBehaviour:
   - {fileID: 796249606}
   _mFurnituresTemplates: []
   _mConfirmPurchase: {fileID: 1791636002}
-  _mCoinsShop: {fileID: 137475233}
   _mItemBeingPurchased: {fileID: 0}
   _mSpinButtonPulse: {fileID: 0}
   _mConfirmReward: {fileID: 0}
@@ -9255,8 +9254,10 @@ MonoBehaviour:
   _mCurrentMoney: 0
   _mTextMeshPro: {fileID: 1183736281}
   _mContentManager: {fileID: 1128004927}
-  _mShopManager: {fileID: 1027901000}
   _mSpin: {fileID: 1551964561}
+  _mCoinAnim:
+  - {fileID: 137475233}
+  - {fileID: 1936425649}
 --- !u!114 &1128004926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14214,7 +14215,6 @@ MonoBehaviour:
   _mPopupObtained: {fileID: 675900956}
   _mPopupObtainedScript: {fileID: 675900958}
   _mMoney: {fileID: 1128004924}
-  _mSpinCoinsAnim: {fileID: 137475233}
   isSpnning: 0
   initialSpeed: 2000
   decelerationRate: 760
@@ -17631,7 +17631,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3784438257042972596, guid: 21f85f0c9f5486747aaf202fde4b708d, type: 3}
       propertyPath: m_Name
-      value: LerpMoney
+      value: SpinPopupAnim
       objectReference: {fileID: 0}
     - target: {fileID: 3784438257042972596, guid: 21f85f0c9f5486747aaf202fde4b708d, type: 3}
       propertyPath: m_IsActive
@@ -17693,6 +17693,11 @@ PrefabInstance:
 --- !u!4 &1936425648 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8983600393289484733, guid: 21f85f0c9f5486747aaf202fde4b708d, type: 3}
+  m_PrefabInstance: {fileID: 1936425647}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1936425649 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3784438257042972596, guid: 21f85f0c9f5486747aaf202fde4b708d, type: 3}
   m_PrefabInstance: {fileID: 1936425647}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1941968850
