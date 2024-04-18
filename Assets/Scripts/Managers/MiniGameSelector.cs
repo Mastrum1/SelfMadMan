@@ -18,6 +18,11 @@ public class MiniGameSelector : MonoBehaviour
     [SerializeField] private List<MinigameScene> _era2;
     [SerializeField] private List<MinigameScene> _era3;
 
+    [SerializeField] private List<MinigameScene> _SavedEra1;
+    [SerializeField] private List<MinigameScene> _SavedEra2;
+    [SerializeField] private List<MinigameScene> _SavedEra3;
+
+
     public List<MinigameScene> Era1 { get => _era1; set => _era1 = value; }
     public List<MinigameScene> Era2 { get => _era2; set => _era2 = value; }
     public List<MinigameScene> Era3 { get => _era3; set => _era3 = value; }
@@ -26,15 +31,6 @@ public class MiniGameSelector : MonoBehaviour
     public List<List<MinigameScene>> AllMinigames { get => _allMinigames; set => _allMinigames = value; }
 
     Regex regex = new Regex(@"([^/]*/)*([\w\d\-]*)\.unity");
-
-    public void LoadEra(List<MinigameScene> AllEra1, List<MinigameScene> AllEra2, List<MinigameScene> AllEra3) 
-    {
-
-        Era1 = AllEra1;
-        Era2 = AllEra2;
-        Era3 = AllEra3;
-
-    }
 
     private void Start()
     {
@@ -46,12 +42,19 @@ public class MiniGameSelector : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
+        if (GameManager.instance.Player.LoadSaveMinigame)
+        {
+            Era1 = GameManager.instance.Player.AllEra1;
+            Era2 = GameManager.instance.Player.AllEra2;
+            Era3 = GameManager.instance.Player.AllEra3;
+        }
+
         _allMinigames.Add(Era1);
         _allMinigames.Add(Era2);
         _allMinigames.Add(Era3);
     }
 
-  
+
     public static T GetRandomElement<T>(List<T> list)
     {
         int index = UnityEngine.Random.Range(0, list.Count);
@@ -62,7 +65,7 @@ public class MiniGameSelector : MonoBehaviour
     public void UnlockMinigame(string SceneName)
     {
 
-        for(int i = 0; i < AllMinigames.Count; i++)
+        for (int i = 0; i < AllMinigames.Count; i++)
         {
             for (int j = 0; j < AllMinigames[i].Count; j++)
             {
@@ -71,7 +74,7 @@ public class MiniGameSelector : MonoBehaviour
                     AllMinigames[i][j].Unlock();
                     //QuestManager.instance.OnUnlockQuest()
                     GameManager.instance.GetComponent<Player>().UnlockMinigame(i, j);
-                    break; 
+                    break;
                 }
 
             }
