@@ -26,8 +26,6 @@ public class Money : MonoBehaviour
     public void UpdateMoney()
     {
         _mTextMeshPro.text = GameManager.instance.Player.Money.ToString();
-        _mShopManager.CheckPurchasable();
-        
     }
 
     public void AddMoney(int MoneyToAdd)
