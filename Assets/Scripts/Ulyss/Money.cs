@@ -9,9 +9,11 @@ public class Money : MonoBehaviour
     public int CurrentMoney { get => _mCurrentMoney; set => _mCurrentMoney = value; }
     [SerializeField] private int _mCurrentMoney;
 
-    [SerializeField] TMP_Text m_TextMeshPro;
+    [SerializeField] TMP_Text _mTextMeshPro;
 
     [SerializeField] private ContentManager _mContentManager;
+
+    [SerializeField] private ShopManager _mShopManager;
 
     [SerializeField] private Spin _mSpin;
 
@@ -23,7 +25,7 @@ public class Money : MonoBehaviour
 
     public void UpdateMoney()
     {
-        m_TextMeshPro.text = GameManager.instance.Player.Money.ToString();
+        _mTextMeshPro.text = GameManager.instance.Player.Money.ToString();
     }
 
     public void AddMoney(int MoneyToAdd)
@@ -50,7 +52,7 @@ public class Money : MonoBehaviour
 
     public void SubsEra(TMP_Text price)
     {
-        if (_mCurrentMoney <= int.Parse(price.text))
+        if (_mCurrentMoney < int.Parse(price.text))
         {
             Debug.Log("No Money");
         }
@@ -67,7 +69,7 @@ public class Money : MonoBehaviour
 
     public void SubsSpin(TMP_Text price)
     {
-        if (_mCurrentMoney <= int.Parse(price.text))
+        if (_mCurrentMoney < int.Parse(price.text))
         {
             Debug.Log("No Money");
         }

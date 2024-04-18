@@ -1,3 +1,5 @@
+using Lean.Touch;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -6,6 +8,7 @@ public class ShopManager : MonoBehaviour
 {
     public static ShopManager Instance;
 
+    public Money MoneyScript { get => _mMoney; set => _mMoney = value;} 
     [Header("Money")]
     [SerializeField] private Money _mMoney;
 
@@ -21,7 +24,12 @@ public class ShopManager : MonoBehaviour
 
     [Header("Confirm Purchase")]
     [SerializeField] private ConfirmPurchase _mConfirmPurchase;
+    [SerializeField] private GameObject _mCoinsShop;
     [SerializeField] private ItemsSO _mItemBeingPurchased;
+
+    [Header("Pulse of the buttons")]
+    [SerializeField] private LeanPulseScale _mSpinButtonPulse;
+    [SerializeField] private LeanPulseScale _mConfirmReward;
 
     private void Awake()
     {
@@ -32,34 +40,7 @@ public class ShopManager : MonoBehaviour
     private void Start()
     {
         LoadAllPanels();
-        CheckPurchasable();
         _mConfirmPurchase._mItemPurchased += HandleItemPurchased;
-    }
-
-    public void CheckPurchasable()
-    {
-        CheckPurchasableCoins(_mCoins);
-    }
-
-    public void CheckPurchasableCoins(ItemsSO[] item)
-    {
-        for (int i = 0; i < item.Length; i++)
-        {
-            if (_mMoney.CurrentMoney >= item[i].Cost)
-            {
-                Color newColor = _mCoinsTemplates[i].PurchaseBox.color;
-                newColor.a = 1f;
-                _mCoinsTemplates[i].PurchaseBox.color = newColor;
-                _mCoinsTemplates[i].TemplateBox.enabled = true;
-            }
-            else
-            {
-                Color newColor = _mCoinsTemplates[i].PurchaseBox.color;
-                newColor.a = 0.5f;
-                _mCoinsTemplates[i].PurchaseBox.color = newColor;
-                _mCoinsTemplates[i].TemplateBox.enabled = false;
-            }
-        }
     }
 
     public void HandleItemPurchased(ItemsSO item)
@@ -103,7 +84,7 @@ public class ShopManager : MonoBehaviour
             if (items != null)
             {
                 Debug.Log(coin.Amount);
-                items.Obtain();
+                _mMoney.AddMoney(coin.Amount);
             }
         }
 
@@ -114,6 +95,7 @@ public class ShopManager : MonoBehaviour
         else
         {
             _mMoney.SubtractMoney(_mItemBeingPurchased.Cost);
+            StartCoroutine(MoveMoney(_mCoinsShop));
             Debug.Log(_mMoney.CurrentMoney);
         }
     }
@@ -130,5 +112,24 @@ public class ShopManager : MonoBehaviour
             _mMoney.SubtractMoney(int.Parse(price.text));
             GameManager.instance.Player.Hearts += 1;
         }
+    }
+
+    public void Pulse()
+    {
+        if (_mItemBeingPurchased.Cost >= _mMoney.CurrentMoney)
+        {
+            _mSpinButtonPulse.enabled = true;
+        }
+        else
+        {
+            _mConfirmReward.enabled = false;
+        }
+    }
+
+    public IEnumerator MoveMoney(GameObject particule)
+    {
+        particule.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        particule.SetActive(false);
     }
 }

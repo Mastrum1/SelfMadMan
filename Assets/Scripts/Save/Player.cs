@@ -181,7 +181,6 @@ public class Player : MonoBehaviour
     [SerializeField] private List<MinigameScene> _mAllEra3;
 
 
-
     public void SaveJson()
     {
         bool firstSave = false;
@@ -705,8 +704,6 @@ public class Player : MonoBehaviour
         AllTrophy[trophy.TrophySO.ID] = trophy;
         _mMoney += reward;
     }
-
-
 
     public bool CheckFile()
     {

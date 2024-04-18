@@ -187,7 +187,12 @@ public class GameManager : MonoBehaviour
         }
         mySceneManager.instance.RandomGameChoice();
     }
-
+    public int GainMoney()
+    {
+        float amount = Score % 100 == 0 ? Score / 100 : (Score / 100) + 1;
+        Player.NewCurrency(Player.Money + (int)amount);
+        return (int)amount;
+    }
     void AddStars(int reward)
     {
         _mCurrentStars += reward;
