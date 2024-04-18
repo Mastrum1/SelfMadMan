@@ -99,7 +99,7 @@ public class FindherGameManager : MiniGameManager
         else {
             _mAd.SetActive(false);
             _mProfile.SetActive(false);
-
+            Amount++;
             _mNbSwipe++;
             if (_mNbSwipe < _mTotalNbSwipe)
                 ShowProfile();
