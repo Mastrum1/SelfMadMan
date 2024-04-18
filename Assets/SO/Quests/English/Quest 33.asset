@@ -12,13 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dc3ce7687a9342da8dc83dbd1e4d1bd, type: 3}
   m_Name: Quest 33
   m_EditorClassIdentifier: 
-  ID: 0
-  questName: 
-  time: 0
-  questDescription: 
+  ID: 32
+  questName: None
+  time: 2
+  questDescription: 'Get the perfect shot * times. '
   questIcon: {fileID: 0}
-  difficulties: []
+  difficulties:
+  - difficulty: 0
+    amount: 3
+    reward: 1
+  - difficulty: 0
+    amount: 6
+    reward: 2
+  - difficulty: 0
+    amount: 10
+    reward: 3
   disponibility: 0
   scene:
-    _sceneName: 
+    _sceneName: PerfectShot
     _locked: 0
