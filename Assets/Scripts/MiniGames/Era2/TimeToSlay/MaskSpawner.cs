@@ -34,9 +34,8 @@ public class MaskSpawner : MonoBehaviour
             for (int j = 0; j < rows; j++) {
                 Vector3 position = startPos + new Vector3(i * _mSpacing, j * _mSpacing, 0);
                 if (IsSuitableForSpawn(position)) {
-                        GameObject mObject = Instantiate(_mObjectMask, position, Quaternion.identity);
+                    GameObject mObject = Instantiate(_mObjectMask, position, Quaternion.identity);
                     mObject.transform.SetParent(_mParent.transform, true);
-                    mObject.GetComponent<Mask>().Remove += DeleteMask;
                     mObject.SetActive(true);
                     _mObjectsToClean.Add(mObject);
                 }
@@ -76,7 +75,6 @@ public class MaskSpawner : MonoBehaviour
     {
         _mObjectTotal--;
         _mObjectRemain--;
-        mObject.GetComponent<Mask>().Remove -= DeleteMask;
         mObject.SetActive(false);
     }
 }
