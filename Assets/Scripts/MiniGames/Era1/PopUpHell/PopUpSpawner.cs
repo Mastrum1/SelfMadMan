@@ -49,4 +49,10 @@ public class PopUpSpawner : MonoBehaviour
                 return true;
         return false;
     }
+
+    public void DisablePopUp()
+    {
+        for (int i = 0; i < _mPopUpList.Count; i++)
+            _mPopUpList[i].GetComponent<ADS>().DisablePopUp();
+    }
 }

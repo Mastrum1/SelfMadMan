@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Lean.Common;
 using Lean.Touch;
 using UnityEngine;
+using System;
 
 public class ADS : MonoBehaviour
 {
@@ -12,25 +13,29 @@ public class ADS : MonoBehaviour
     [SerializeField] private GameObject _mCloseButtonModel;
     [SerializeField] GameObject _mCloseButton;
     [SerializeField] SpriteRenderer  _mButtonRender;
+    [SerializeField] bool _mIsEnable = true;
 
     void Start()
     {
-        int i = Random.Range(0, _mSpawnPoints.Count);
-       // _mCloseButton = Instantiate(_mCloseButtonModel);
+        int i = UnityEngine.Random.Range(0, _mSpawnPoints.Count);
         _mCloseButton.transform.position = _mSpawnPoints[i].transform.position;
         _mCloseButton.transform.SetParent(this.transform, true);
         int _mOrder = this.gameObject.GetComponent<SpriteRenderer>().sortingOrder;
         _mCloseButton.GetComponent<SpriteRenderer>().sortingOrder = _mOrder + 1;
         _mButtonRender.sortingOrder = _mOrder + 2;
-        //_mCloseButton.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = _mOrder + 2;
-  //_mCloseButton.GetComponent<LeanSelectableByFinger>().OnSelected.AddListener(OnDelete);
-        //_mCloseButton.GetComponent<SelectableObject>().
     }
 
     public void OnDelete()
     {
+        if (!_mIsEnable)
+            return;
         _animator.SetTrigger("Depop");
         StartCoroutine(CloseAd());
+    }
+
+    public void DisablePopUp()
+    {
+        _mIsEnable = false;
     }
 
     IEnumerator CloseAd()
