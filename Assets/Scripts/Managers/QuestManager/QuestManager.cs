@@ -118,11 +118,8 @@ public class QuestManager : MonoBehaviour
     {
         if (quest.CurrentAmount < quest.MaxAmount) return;
         
-        Debug.Log("QuestFinished: " + quest.QuestSO.questDescription);
-        Debug.Log("SelectedQuests: " + _selectedQuestsList.Count);
         quest.QuestCompletionState = CompletionState.Complete;
         OnQuestComplete?.Invoke(quest);
-        Debug.Log("SelectedQuests: " + _selectedQuestsList.Count);
     }
     
     public void OnQuestFinish(Quest quest)
@@ -139,21 +136,21 @@ public class QuestManager : MonoBehaviour
         OnUpdateQuestUI?.Invoke(container, 2);
     }
 
-    public void UnlockQuest(int time)
+    public void UnlockQuest(string sceneName)
     {
-        foreach (var quest in _questsList.Where(quest => quest.QuestSO.time == time).ToArray())
+        foreach (var quest in _questsList.Where(quest => quest.QuestSO.scene.SceneName == sceneName).ToArray())
         {
-            OnUnlockQuest?.Invoke(quest.QuestSO.ID);
             quest.QuestDispo = Quests.QuestBaseDispo.Unlocked;
+            OnUnlockQuest?.Invoke(quest.QuestSO.ID);
         }
     }
 
-    public void LockQuest(int time)
+    public void LockQuest(string sceneName)
     {
-        foreach (var quest in _questsList.Where(quest => quest.QuestSO.time == time).ToArray())
+        foreach (var quest in _questsList.Where(quest => quest.QuestSO.scene.SceneName == sceneName).ToArray())
         {
-            OnLockQuest?.Invoke(quest.QuestSO.ID);
             quest.QuestDispo = Quests.QuestBaseDispo.Locked;
+            OnLockQuest?.Invoke(quest.QuestSO.ID);
         }
     }
 }
