@@ -89,6 +89,7 @@ public class ShopManager : MonoBehaviour
         if (_mMoney.CurrentMoney <= _mItemBeingPurchased.Cost)
         {
             Debug.Log("Not enough money");
+            //Play a invlid buzz sound
         }
         else
         {
@@ -104,6 +105,7 @@ public class ShopManager : MonoBehaviour
         if (_mMoney.CurrentMoney <= int.Parse(price.text))
         {
             Debug.Log("No Money");
+            //Play a invlid buzz sound
         }
         else
         {
