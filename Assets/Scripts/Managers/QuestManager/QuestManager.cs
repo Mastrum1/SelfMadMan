@@ -14,7 +14,7 @@ public class QuestManager : MonoBehaviour
 
     public event Action<Quest> OnAddActiveQuest;
 
-    public event Action<int, int?> OnUpdateQuestUI;
+    public event Action<int, Quest> OnUpdateQuestUI;
 
     public event Action<Quest> OnRemoveActiveQuest;
 
@@ -124,16 +124,17 @@ public class QuestManager : MonoBehaviour
 
     public void OnQuestFinish()
     {
-        List<Quest> list = new List<Quest>();
-        for (int i = 0; i < SelectedQuests.Count; i++)
+        var list = new List<Quest>();
+        
+        for (var i = 0; i < SelectedQuests.Count; i++)
         {
-            if (SelectedQuests[i].QuestCompletionState == CompletionState.Complete)
-            {
-                Debug.Log("Quest ,° " + i + "finished");
-                SelectedQuests[i].QuestCompletionState = CompletionState.NotSelected;
-                list.Add(SelectedQuests[i]);
-            }
+            if (SelectedQuests[i].QuestCompletionState != CompletionState.Complete) continue;
+            
+            Debug.Log("Quest ,ï¿½ " + i + "finished");
+            SelectedQuests[i].QuestCompletionState = CompletionState.NotSelected;
+            list.Add(SelectedQuests[i]);
         }
+        
         foreach(var quest in list)
         {
             OnReward?.Invoke(quest.Difficulty.reward);
@@ -145,7 +146,7 @@ public class QuestManager : MonoBehaviour
     {
         quest.QuestCompletionState = CompletionState.NotSelected;
         RemoveActiveQuest(quest);
-        OnUpdateQuestUI?.Invoke(container, 2);
+        OnUpdateQuestUI?.Invoke(container, _selectedQuestsList[2]);
     }
 
     public void UnlockQuest(string sceneName)

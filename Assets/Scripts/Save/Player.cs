@@ -574,7 +574,7 @@ public class Player : MonoBehaviour
     public void RemoveCompleteQuests(QuestManager.Quest quest)
     {
         CompletedQuests.Remove(quest);
-        RemoveActiveQuests(quest);
+        //RemoveActiveQuests(quest);
     }
 
     public void UnlockQuest(int ID)
