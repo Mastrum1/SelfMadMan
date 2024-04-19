@@ -39,7 +39,8 @@ public class QuestContainer : MonoBehaviour
     public void UpdateQuestUI()
     {
         if(!gameObject.activeSelf) gameObject.SetActive(true);
-
+        
+        ResetFillBar();
         var replace = _mSelectedQuest.QuestSO.questDescription.Replace("*", _mSelectedQuest.Difficulty.amount.ToString());
         _mReward.text = (25 * _mSelectedQuest.Difficulty.reward).ToString();
         _mQuestDescription.text = replace;
@@ -54,7 +55,6 @@ public class QuestContainer : MonoBehaviour
         {
             amount = (float)_mSelectedQuest.CurrentAmount / _mSelectedQuest.MaxAmount;
         }
-        ResetFillBar();
         StartCoroutine(ShowCompletionBar(_mQuestProgression.gameObject.transform, amount, _mStartPos));
 
             

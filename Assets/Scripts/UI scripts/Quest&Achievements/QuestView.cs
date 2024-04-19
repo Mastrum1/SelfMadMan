@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class QuestView : MonoBehaviour
@@ -7,8 +8,6 @@ public class QuestView : MonoBehaviour
     private QuestManager _mQuestManager;
 
     [SerializeField] private List<QuestContainer> _quests;
-
-    private bool _questAlreadyLoaded;
 
     private void OnEnable()
     {
@@ -22,23 +21,30 @@ public class QuestView : MonoBehaviour
     {
         for (var i = 0; i < _quests.Count; i++)
         {
-            if (!_questAlreadyLoaded)
-            {
-                _quests[i].SelectedQuest = _mQuestManager.SelectedQuests[i];
-            }
+            _quests[i].SelectedQuest = _mQuestManager.SelectedQuests[i];
             _quests[i].UpdateQuestUI();
-        }
-
-        if (!_questAlreadyLoaded)
-        {
-            _questAlreadyLoaded = true;
         }
     }
     
     private void UpdateContainer(int container, QuestManager.Quest quest)
     {
+        if (quest == null) return;
+        if (_quests[container] == null)
+        {
+            return;
+        }
         _quests[container].SelectedQuest = quest;
         _quests[container].UpdateQuestUI();
+    }
+    
+    public void CheckForCompletedQuests()
+    {
+        for (var i = 0; i < _quests.Count; i++)
+        {
+            if (_quests[i].SelectedQuest.QuestCompletionState != QuestManager.CompletionState.Complete) continue;
+            
+            _mQuestManager.OnQuestFinish(_quests[i].SelectedQuest, i);
+        }
     }
 
     public void IsInQuestMenu()

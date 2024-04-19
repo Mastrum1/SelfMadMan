@@ -89,21 +89,17 @@ public class QuestManager : MonoBehaviour
     {
         _selectedQuestsList.Remove(quest);
         OnRemoveActiveQuest?.Invoke(quest);
-        while (_selectedQuestsList.Count < 3)
-        {
-            SetNewActiveQuest();
-        }
     }
 
-    private void SetNewActiveQuest()
+    private Quest SetNewActiveQuest()
     {
-        if (_selectedQuestsList.Count >= 3) return;
+        if (_selectedQuestsList.Count >= 3) return null;
 
         var randomQuest = Random.Range(0, _questsList.Count);
         var randomDifficulty = Random.Range(0, 3);
 
         if (_questsList[randomQuest].QuestDispo != Quests.QuestBaseDispo.Unlocked ||
-            _questsList[randomQuest].QuestCompletionState != CompletionState.NotSelected) return;
+            _questsList[randomQuest].QuestCompletionState != CompletionState.NotSelected) return null;
 
         _questsList[randomQuest].QuestCompletionState = CompletionState.Selected;
         var temp = _questsList[randomQuest];
@@ -112,6 +108,7 @@ public class QuestManager : MonoBehaviour
         temp.CurrentAmount = 0;
         _selectedQuestsList.Add(temp);
         OnAddActiveQuest?.Invoke(temp);
+        return temp;
     }
 
     public void CheckQuestCompletion(Quest quest)
@@ -122,31 +119,26 @@ public class QuestManager : MonoBehaviour
         OnQuestComplete?.Invoke(quest);
     }
 
-    public void OnQuestFinish()
+    public void OnQuestFinish(Quest quest, int container)
     {
-        var list = new List<Quest>();
-        
-        for (var i = 0; i < SelectedQuests.Count; i++)
+        Debug.Log("Quest ,� " + quest.QuestSO.questDescription + " finished");
+        quest.QuestCompletionState = CompletionState.NotSelected;
+        OnReward?.Invoke(quest.Difficulty.reward);
+        OnQuestFinished?.Invoke(quest);
+        RemoveActiveQuest(quest);
+        while (_selectedQuestsList.Count < 3)
         {
-            if (SelectedQuests[i].QuestCompletionState != CompletionState.Complete) continue;
-            
-            Debug.Log("Quest ,� " + i + "finished");
-            SelectedQuests[i].QuestCompletionState = CompletionState.NotSelected;
-            list.Add(SelectedQuests[i]);
-        }
-        
-        foreach(var quest in list)
-        {
-            OnReward?.Invoke(quest.Difficulty.reward);
-            OnQuestFinished?.Invoke(quest);
-            RemoveActiveQuest(quest);
+            OnUpdateQuestUI?.Invoke(container, SetNewActiveQuest());
         }
     }
     public void OnChangeQuest(Quest quest, int container)
     {
         quest.QuestCompletionState = CompletionState.NotSelected;
         RemoveActiveQuest(quest);
-        OnUpdateQuestUI?.Invoke(container, _selectedQuestsList[2]);
+        while (_selectedQuestsList.Count < 3)
+        {
+            OnUpdateQuestUI?.Invoke(container, SetNewActiveQuest());
+        }
     }
 
     public void UnlockQuest(string sceneName)

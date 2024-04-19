@@ -155,11 +155,10 @@ public class ScoreScreen : MonoBehaviour
                 GameManager.instance.Player.UpdateBestScore((int)GameManager.instance.Score);
             }
 
-            _coinsEarned.text = " +" + amount.ToString();
-            _bestScore.text = "BEST : " + GameManager.instance.Player.BestScore.ToString();
-            QuestManager.Instance.OnQuestFinish();
-            _mQuestView.LoadQuestContainers();
-
+            _coinsEarned.text = " +" + amount;
+            _bestScore.text = "BEST : " + GameManager.instance.Player.BestScore;
+            
+            _mQuestView.CheckForCompletedQuests();
         }
 
     }
