@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,11 +10,14 @@ public class Money : MonoBehaviour
     public int CurrentMoney { get => _mCurrentMoney; set => _mCurrentMoney = value; }
     [SerializeField] private int _mCurrentMoney;
 
-    [SerializeField] TMP_Text m_TextMeshPro;
+    [SerializeField] TMP_Text _mTextMeshPro;
 
     [SerializeField] private ContentManager _mContentManager;
 
     [SerializeField] private Spin _mSpin;
+
+    public GameObject[] CoinAnim { get => _mCoinAnim; set => _mCoinAnim = value; }
+    [SerializeField] private GameObject[] _mCoinAnim;
 
     void Start()
     {
@@ -23,7 +27,7 @@ public class Money : MonoBehaviour
 
     public void UpdateMoney()
     {
-        m_TextMeshPro.text = GameManager.instance.Player.Money.ToString();
+        _mTextMeshPro.text = GameManager.instance.Player.Money.ToString();
     }
 
     public void AddMoney(int MoneyToAdd)
@@ -50,7 +54,7 @@ public class Money : MonoBehaviour
 
     public void SubsEra(TMP_Text price)
     {
-        if (_mCurrentMoney <= int.Parse(price.text))
+        if (_mCurrentMoney < int.Parse(price.text))
         {
             Debug.Log("No Money");
         }
@@ -58,7 +62,6 @@ public class Money : MonoBehaviour
         else
         {
             _mCurrentMoney -= int.Parse(price.text);
-            Debug.Log(price.text);
             GameManager.instance.Player.NewCurrency(_mCurrentMoney);
             _mContentManager.UnlockEra();
             UpdateMoney();
@@ -67,7 +70,7 @@ public class Money : MonoBehaviour
 
     public void SubsSpin(TMP_Text price)
     {
-        if (_mCurrentMoney <= int.Parse(price.text))
+        if (_mCurrentMoney < int.Parse(price.text))
         {
             Debug.Log("No Money");
         }
@@ -86,5 +89,12 @@ public class Money : MonoBehaviour
         _mCurrentMoney = GameManager.instance.GetComponent<Player>().Money;
         Debug.Log("Money loaded: " + _mCurrentMoney);
         UpdateMoney();
+    }
+
+    public IEnumerator MoveMoney(GameObject particule)
+    {
+        particule.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        particule.SetActive(false);
     }
 }

@@ -2,26 +2,39 @@ using CW.Common;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ScoreScreen : MonoBehaviour
 {
+    [Header("Animations")]
     [SerializeField] private Animator _mJamesAnimator;
     [SerializeField] private Animator _UIAnimator;
     [SerializeField] private Animator _HeartAnimator;
+
+    [Header("Images")]
     [SerializeField] private Image _jamesSprite;
     [SerializeField] private GameObject _mHighscoreTag;
+
+    [Header("Text Elements")]
     [SerializeField] private TMP_Text _mscoreTexts;
     [SerializeField] private TMP_Text _mHearts;
     [SerializeField] private TMP_Text _mMnigameCountTexts;
     [SerializeField] private TMP_Text _mTimerTexts;
     [SerializeField] private TMP_Text _bestScore;
+    [SerializeField] private TMP_Text _coinsEarned;
+
+    [Header("Scripts")]
     [SerializeField] private PanelOnClick _mPanelOnClick;
+
+    [Header("GameObjects")]
     [SerializeField] private GameObject _mPopup;
     [SerializeField] private GameObject _InputManager;
     [SerializeField] private GameObject _mQuestManager;
+    [SerializeField] private RectTransform _mCoin;
+    [SerializeField] private GameObject _mWinScreenBG;
 
     private int Timer = 5;
 
@@ -30,6 +43,7 @@ public class ScoreScreen : MonoBehaviour
     private void Awake()
     {
         _InputManager.SetActive(false);
+        _mWinScreenBG.SetActive(false);
         GameManager.instance.WinScreenHandle += OnWinScreenDisplay;
         _mPanelOnClick.OnClick += OnPanelClicked;
     }
@@ -38,7 +52,9 @@ public class ScoreScreen : MonoBehaviour
     void OnWinScreenDisplay(bool won, int era, int hearts, bool gameOver)
     {
         Debug.Log(hearts);
+
         _mscoreTexts.text = GameManager.instance.Score.ToString();
+        _mWinScreenBG.SetActive(true);
         _mMnigameCountTexts.text = "GAMES COMPLETED : " + GameManager.instance.MinigamesWon.ToString();
         _HeartAnimator.SetInteger("Hearts", hearts);
         _mJamesAnimator.SetBool("Idle", false);
@@ -74,7 +90,7 @@ public class ScoreScreen : MonoBehaviour
             _UIAnimator.SetBool("DisplayPopUp", false);
             StartCoroutine(OnContinueAnim());
             _HeartAnimator.SetInteger("Hearts", 1);
-            _HeartAnimator.SetBool("Revived", true); 
+            _HeartAnimator.SetBool("Revived", true);
             _InputManager.SetActive(false);
             StartCoroutine(ResetCharacter());
             GameManager.instance.ContinueWithHeart();
@@ -83,7 +99,6 @@ public class ScoreScreen : MonoBehaviour
     }
     IEnumerator OnContinueAnim()
     {
-      
         _mJamesAnimator.SetBool("Idle", true);
         _mJamesAnimator.SetBool("GameOver", false);
         yield return new WaitForSeconds(0.3f);
@@ -96,6 +111,7 @@ public class ScoreScreen : MonoBehaviour
         yield return new WaitForSeconds(2f);
         _mJamesAnimator.SetBool("Idle", true);
         _mJamesAnimator.SetBool("GameOver", false);
+        _mWinScreenBG.SetActive(false);
 
     }
     IEnumerator OnGameOver()
@@ -123,6 +139,12 @@ public class ScoreScreen : MonoBehaviour
         else
         {
             OnPanelClicked();
+            int amount = GameManager.instance.GainMoney();
+            if (amount / 10 >= 1)
+                _mCoin.anchoredPosition = new Vector2(103, _mCoin.anchoredPosition.y);
+            /*ShopManager.Instance.StartCoroutine(ShopManager.Instance.MoveMoney());*/
+            else
+                _mCoin.anchoredPosition = new Vector2(137, _mCoin.anchoredPosition.y);
             _UIAnimator.SetBool("EndGame", true);
             _mQuestManager.SetActive(true);
 
@@ -131,6 +153,8 @@ public class ScoreScreen : MonoBehaviour
                 _mHighscoreTag.SetActive(true);
                 GameManager.instance.Player.UpdateBestScore((int)GameManager.instance.Score);
             }
+
+            _coinsEarned.text = " +" + amount.ToString();
             _bestScore.text = "BEST : " + GameManager.instance.Player.BestScore.ToString();
         }
 
@@ -163,5 +187,4 @@ public class ScoreScreen : MonoBehaviour
     {
         GameManager.instance.WinScreenHandle -= OnWinScreenDisplay;
     }
-
 }

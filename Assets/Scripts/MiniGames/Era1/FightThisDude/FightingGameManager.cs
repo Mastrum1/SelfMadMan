@@ -12,7 +12,7 @@ public class FightingGame : MiniGameManager
 
     public void OnClicked()
     {
-        _UIManager.Bar.AddValue(150 - (GameManager.instance.FasterLevel * 20));
+        _UIManager.Bar.AddValue(150 - (GameManager.instance.FasterLevel * 10));
         _UIManager.OnFightImageChange();
         Debug.Log("Clicked");
         SpawnParticle();
