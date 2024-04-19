@@ -103,11 +103,6 @@ public class TapWithTimer : MonoBehaviour
             StartCoroutine(FadeOut());
 
         }
-        else
-        {
-            _mVFXScaleUp.OnObjectClicked();
-            OnLoose?.Invoke(false);
-        }
     }
 
     private IEnumerator FadeOut()
