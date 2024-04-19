@@ -32,7 +32,7 @@ public class MaskSpawner : MonoBehaviour
         _mObjectsToClean = GameObject.FindGameObjectsWithTag("ToClean").ToList<GameObject>();
         for (int i = 0; i < columns; i++) {
             for (int j = 0; j < rows; j++) {
-                Vector3 position = startPos + new Vector3(i * _mSpacing, j * _mSpacing, 0);
+                Vector3 position = startPos + new Vector3((i * _mSpacing), j * _mSpacing, 0);
                 if (IsSuitableForSpawn(position)) {
                     GameObject mObject = Instantiate(_mObjectMask, position, Quaternion.identity);
                     mObject.transform.SetParent(_mParent.transform, true);
@@ -49,7 +49,7 @@ public class MaskSpawner : MonoBehaviour
     private bool IsSuitableForSpawn(Vector3 position)
     {
         RaycastHit2D hit = Physics2D.Raycast(position, Vector2.zero, _mSpacing);
-        return hit.collider != null && hit.collider.CompareTag("Statue");
+        return hit.collider != null && !hit.collider.CompareTag("ToClean");
     }
 
     void Update()

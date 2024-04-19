@@ -5,7 +5,7 @@ using UnityEngine;
 public class BubblesLifeTime : MonoBehaviour
 {
     [SerializeField] float _mLifeTime = 0.25f;
-    public void InitBubble()
+    void OnEnable()
     {
         StartCoroutine(DestroyBubble());
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Unity.VisualScripting;
+using System.Linq;
 
 public class BrushMovement : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class BrushMovement : MonoBehaviour
     
     void Start()
     {
-        _mBrush.SetActive(false);
+       // _mBrush.SetActive(false);
         _mIsStop = false;
     }
 
@@ -21,13 +22,21 @@ public class BrushMovement : MonoBehaviour
         _mBrush.SetActive(false);
     }
 
+    public void OnFingerPressed()
+    {
+        if (!_mIsStop)
+            _mBrush.SetActive(true);
+    }
+
     public void OnFingerDown(Vector3 mPos)
     {
         if (_mIsStop)
             return;
         mPos.z = 0;
-        _mBrush.SetActive(true);
-        _mBrush.transform.position = mPos;
+        if (_mBrush.activeInHierarchy) {
+            _mBrush.transform.position = mPos;
+            CheckGarbage();
+        }
     }
 
     public void Stop()
@@ -35,20 +44,19 @@ public class BrushMovement : MonoBehaviour
         _mIsStop = true;
     }
 
-    void OnTriggerEnter2D(Collider2D mOther)
+    void CheckGarbage()
     {
-        if (_mIsStop)
-            return;
-        if (mOther.gameObject.CompareTag("ToClean")) {
-            if (UnityEngine.Random.value < 0.1f) {
+        Collider2D [] obj = Physics2D.OverlapBoxAll(this.transform.position,  new Vector2(0.6f, 0.3f), 0);
+        for (int i = 0; i < obj.Length; i++)
+            if(obj[i].gameObject.CompareTag("ToClean")) {
+                if (UnityEngine.Random.value < 0.1f) {
                 GameObject _mBubbles = BubblesPool.BubblesSharedInstance.GetBubbles();
-                _mBubbles.transform.position = mOther.transform.position;
+                _mBubbles.transform.position = obj[i].transform.position;
                 _mBubbles.transform.localScale = _mBubbles.transform.localScale * UnityEngine.Random.Range(1, 2);
                 _mBubbles.SetActive(true);
-                _mBubbles.GetComponent<BubblesLifeTime>().InitBubble();
+                }
+                obj[i].gameObject.SetActive(false);
+                OnDelete?.Invoke();
             }
-            mOther.gameObject.SetActive(false);
-            OnDelete?.Invoke();
-        }
     }
 }
