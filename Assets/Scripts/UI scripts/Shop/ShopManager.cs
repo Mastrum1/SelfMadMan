@@ -13,7 +13,6 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private Money _mMoney;
 
     [Header("Item Shop SO")]
-    [SerializeField] private Items[] _SpinWheel;
     [SerializeField] private CoinsSO[] _mCoins;
     [SerializeField] private ItemsSO[] _mFurnitures;
     [SerializeField] private ItemsSO[] _mPowerUp;
@@ -28,7 +27,6 @@ public class ShopManager : MonoBehaviour
 
     [Header("Pulse of the buttons")]
     [SerializeField] private LeanPulseScale _mSpinButtonPulse;
-    [SerializeField] private LeanPulseScale _mConfirmReward;
 
     private void Awake()
     {
@@ -39,6 +37,7 @@ public class ShopManager : MonoBehaviour
     private void Start()
     {
         LoadAllPanels();
+        Pulse();
         _mConfirmPurchase._mItemPurchased += HandleItemPurchased;
     }
 
@@ -60,7 +59,7 @@ public class ShopManager : MonoBehaviour
         {
             if (item[i].Type == ItemsSO.TYPE.COINS)
             {
-                _mCoinsTemplates[i].TitleText.text = item[i].name;
+                _mCoinsTemplates[i].TitleText.text = item[i].ItemName;
                 _mCoinsTemplates[i].CostText.text = item[i].Cost.ToString();
                 _mCoinsTemplates[i].ImageItem.sprite = item[i].Icon;
                 _mCoinsTemplates[i].Type = item[i].Type;
@@ -115,13 +114,14 @@ public class ShopManager : MonoBehaviour
 
     public void Pulse()
     {
-        if (_mItemBeingPurchased.Cost >= _mMoney.CurrentMoney)
+        if (_mMoney.CurrentMoney >= 100)
         {
             _mSpinButtonPulse.enabled = true;
+            Debug.Log("Pulse");
         }
         else
         {
-            _mConfirmReward.enabled = false;
+            _mSpinButtonPulse.enabled = false;
         }
     }
 }
