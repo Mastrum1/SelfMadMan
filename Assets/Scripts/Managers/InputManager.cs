@@ -56,6 +56,8 @@ public class InputManager : MonoBehaviour
 
     [SerializeField] public UnityEvent<Vector3> _mOnAccelerometer;
 
+    [SerializeField] public UnityEvent _mOnAccelerometerDisable;
+
     [SerializeField] public UnityEvent<Vector3> _mGetFingerPos;
 
     [SerializeField] public UnityEvent _mOnFingerReleased;
@@ -113,7 +115,17 @@ public class InputManager : MonoBehaviour
     {
         if (_mEnableAccelerometer)
         {
-            _mOnAccelerometer?.Invoke(Input.acceleration);
+            if (SystemInfo.supportsAccelerometer)
+            {
+                Debug.Log("Accelerometer supported" + Input.acceleration);
+                _mOnAccelerometer?.Invoke(Input.acceleration);
+            }
+            else
+            {
+                Debug.Log("Accelerometer not supported");
+                _mOnAccelerometerDisable?.Invoke();
+            }
+
         }
         if (_mEnableGiroscope)
         {
