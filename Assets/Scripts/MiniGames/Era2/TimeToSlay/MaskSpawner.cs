@@ -29,7 +29,7 @@ public class MaskSpawner : MonoBehaviour
         int columns = Mathf.CeilToInt(spriteSize.x / _mSpacing);
         int rows = Mathf.CeilToInt(spriteSize.y / _mSpacing);
         
-        _mObjectsToClean = GameObject.FindGameObjectsWithTag("ToClean").ToList<GameObject>();
+        _mObjectsToClean = new List<GameObject>();
         for (int i = 0; i < columns; i++) {
             for (int j = 0; j < rows; j++) {
                 Vector3 position = startPos + new Vector3(i * _mSpacing, j * _mSpacing, 0);
