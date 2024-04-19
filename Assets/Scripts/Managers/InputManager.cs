@@ -188,6 +188,11 @@ public class InputManager : MonoBehaviour
                 _mEndTouchPos = Camera.main.ScreenToWorldPoint(touch.position);
                 _mOnFingerReleased?.Invoke();
 
+                if(_mEnableRub)
+                {
+                    _mGetFingerPos?.Invoke(new Vector3(-1000,-1000,-1000));
+                }
+
                 if (Vector3.Distance(_mStartTouchPos, _mEndTouchPos) >= _mMinimumDist && _mEnableSlide4Dir && !_mIsDraging || Vector3.Distance(_mStartTouchPos, _mEndTouchPos) >= _mMinimumDist && _mEnableSlide8Dir && !_mIsDraging)
                 {
                     _mGetFingerPos?.Invoke(Camera.main.ScreenToWorldPoint(touch.position));
