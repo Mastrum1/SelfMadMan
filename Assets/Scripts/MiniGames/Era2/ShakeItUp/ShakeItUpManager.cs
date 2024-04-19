@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,9 +12,18 @@ public class ShakeItUpManager : MiniGameManager
     private Quaternion _defaultOrientation;
     private Vector2 _defaultGravityDirection;
     private bool _isAccelerometer;
+    private Vector3 _startPos;
+    private Vector3 _endPos;
+    private float _fingerDownTime;
+    private bool _hasStart;
+    private bool _hasEnd;
 
     private void Start()
     {
+        _startPos = Vector3.zero;
+        _endPos = Vector3.zero;
+        _fingerDownTime = 0;
+        
         _defaultOrientation = Input.gyro.attitude;
         _defaultGravityDirection = GetGravityDirection(_defaultOrientation);
         
@@ -33,10 +43,8 @@ public class ShakeItUpManager : MiniGameManager
     
     private void OnGameEnd(bool win)
     {
-        if (win)
-        {
-            Amount = _interactableManager.NumProteinDead;
-        }
+        Amount = _interactableManager.NumProteinDead;
+        
         EndMiniGame(win, miniGameScore);
     }
     
@@ -78,6 +86,50 @@ public class ShakeItUpManager : MiniGameManager
         {
             particle.AddForce(new Vector2(force.x * speed,force.y * speed));
         }
+    }
+
+    public void GetFingerSpeed(Vector3 pos)
+    {
+        _fingerDownTime += Time.deltaTime;
+        
+        if (pos.x == -1000)
+        {
+            _hasStart = true;
+            _hasEnd = true;
+            _fingerDownTime = 0;
+        }
+        
+        if (!_hasStart)
+        {
+            _hasStart = true;
+            _startPos = pos;
+        }
+
+        if (!_hasEnd && _fingerDownTime >= 0.2f)
+        {
+            _hasEnd = true;
+            _endPos = pos;
+        }
+
+        if (!_hasStart || !_hasEnd) return;
+        
+        ApplyRubForce(_startPos, _endPos);
+        _hasEnd = false;
+        _hasStart = false;
+        _fingerDownTime = 0;
+    }
+
+    private void ApplyRubForce(Vector3 startPos, Vector3 endPos)
+    {
+        var displacement = endPos - startPos;
+        var speed = displacement.magnitude / 0.2f;
+        
+        foreach (var particle in _waterParticle)
+        {
+            particle.AddForce(new Vector2(displacement.x * speed * 5,displacement.y* speed * 5));
+        }
+        
+        _interactableManager.ApplyForce(displacement);
     }
 
     private void OnDisable()
