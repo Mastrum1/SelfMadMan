@@ -40,9 +40,10 @@ public class BrushMovement : MonoBehaviour
         if (_mIsStop)
             return;
         if (mOther.gameObject.CompareTag("ToClean")) {
-            if (UnityEngine.Random.value < 0.5f) {
+            if (UnityEngine.Random.value < 0.1f) {
                 GameObject _mBubbles = BubblesPool.BubblesSharedInstance.GetBubbles();
                 _mBubbles.transform.position = mOther.transform.position;
+                _mBubbles.transform.localScale = _mBubbles.transform.localScale * UnityEngine.Random.Range(1, 2);
                 _mBubbles.SetActive(true);
                 _mBubbles.GetComponent<BubblesLifeTime>().InitBubble();
             }
