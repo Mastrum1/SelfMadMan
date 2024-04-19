@@ -44,6 +44,8 @@ public class InputManager : MonoBehaviour
 
     [SerializeField] private bool _mEnableAccelerometer = false;
 
+    [SerializeField] private bool _mEnableRub = false;
+
     [SerializeField] public UnityEvent _mOnTap;
 
     [SerializeField] public UnityEvent _mOnHold;
@@ -55,6 +57,8 @@ public class InputManager : MonoBehaviour
     [SerializeField] public UnityEvent<Quaternion> _mOnGiroscope;
 
     [SerializeField] public UnityEvent<Vector3> _mOnAccelerometer;
+
+    [SerializeField] public UnityEvent _mOnAccelerometerDisable;
 
     [SerializeField] public UnityEvent<Vector3> _mGetFingerPos;
 
@@ -113,7 +117,20 @@ public class InputManager : MonoBehaviour
     {
         if (_mEnableAccelerometer)
         {
-            _mOnAccelerometer?.Invoke(Input.acceleration);
+            if (SystemInfo.supportsAccelerometer)
+            {
+                Debug.Log("Accelerometer supported" + Input.acceleration);
+                _mOnAccelerometer?.Invoke(Input.acceleration);
+            }
+            else
+            {
+                //_mEnableAccelerometer = false;
+                //_mEnableGiroscope = false;
+                _mEnableRub = true;
+                Debug.Log("Accelerometer not supported");
+                _mOnAccelerometerDisable?.Invoke();
+            }
+
         }
         if (_mEnableGiroscope)
         {
@@ -123,6 +140,11 @@ public class InputManager : MonoBehaviour
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
+
+            if(_mEnableRub)
+            {
+                _mGetFingerPos?.Invoke(Camera.main.ScreenToWorldPoint(touch.position));
+            }
 
             if (_mStartTouchPos == Vector3.zero)
             {
@@ -165,6 +187,11 @@ public class InputManager : MonoBehaviour
             {
                 _mEndTouchPos = Camera.main.ScreenToWorldPoint(touch.position);
                 _mOnFingerReleased?.Invoke();
+
+                if(_mEnableRub)
+                {
+                    _mGetFingerPos?.Invoke(new Vector3(-1000,-1000,-1000));
+                }
 
                 if (Vector3.Distance(_mStartTouchPos, _mEndTouchPos) >= _mMinimumDist && _mEnableSlide4Dir && !_mIsDraging || Vector3.Distance(_mStartTouchPos, _mEndTouchPos) >= _mMinimumDist && _mEnableSlide8Dir && !_mIsDraging)
                 {

@@ -550,7 +550,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mBubbles: {fileID: 8952828429033348912, guid: 69e4d734bdd01c247810c3830a198cc9, type: 3}
   _mParent: {fileID: 374839100}
-  m_AmountToPool: 150
+  m_AmountToPool: 25
 --- !u!1001 &152634448
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1099,6 +1099,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
+      propertyPath: _mEnableRub
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: _mEnableDragAndDrop
       value: 0
       objectReference: {fileID: 0}
@@ -1112,7 +1116,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: _mOnTap.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: _mOnWorldFrom.m_PersistentCalls.m_Calls.Array.size
@@ -1248,7 +1252,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: _mOnHoldRelease.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnFingerReleased
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: _mOnFingerReleased.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -1284,7 +1288,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: _mOnHoldRelease.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: BrushMovement, Assembly-CSharp
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: _mOnFingerReleased.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1308,7 +1312,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: _mOnHoldRelease.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: _mOnFingerReleased.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
