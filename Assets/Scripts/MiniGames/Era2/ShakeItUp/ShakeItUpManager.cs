@@ -7,9 +7,10 @@ public class ShakeItUpManager : MiniGameManager
     [SerializeField] private ShakeItUpInteractableManager _interactableManager;
     [SerializeField] private GameObject _waterParticleParent;
     [SerializeField] private List<Rigidbody2D> _waterParticle;
-    
+     
     private Quaternion _defaultOrientation;
     private Vector2 _defaultGravityDirection;
+    private bool _isAccelerometer;
 
     private void Start()
     {
@@ -25,6 +26,11 @@ public class ShakeItUpManager : MiniGameManager
         _interactableManager.OnGameEnd += OnGameEnd;
     }
 
+    public void DisableShake()
+    {
+        _isAccelerometer = false;
+    }
+    
     private void OnGameEnd(bool win)
     {
         if (win)
