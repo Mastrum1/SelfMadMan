@@ -88,6 +88,7 @@ public class GetBenchManager : MiniGameManager
 
     public void ChangeJames()
     {
+        Amount++;
         if (_mJamesState[0].activeSelf == true)
         {
             _mJamesState[0].SetActive(false);

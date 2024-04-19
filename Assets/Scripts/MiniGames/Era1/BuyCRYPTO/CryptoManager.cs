@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -37,6 +35,7 @@ public class CryptoManager : MiniGameManager
             winEffect.transform.position = postIt.transform.position;
             winEffect.SetActive(true);
             print("Win");
+            Amount++;
             EndMiniGame(true, miniGameScore);
         }
         else

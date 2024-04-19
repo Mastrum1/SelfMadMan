@@ -9,7 +9,8 @@ public class ShakeItUpInteractableManager : InteractableManager
     
     [SerializeField] private int _numOfProteins;
     [SerializeField] private List<Protein> _proteins;
-    
+
+    public int NumProteinDead => _numProteinDead;
     private int _numProteinDead;
 
     private void Start()
