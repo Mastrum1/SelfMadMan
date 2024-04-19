@@ -65,7 +65,7 @@ public class YouReBannedGameManager : MiniGameManager
                 {
                     if (_mComments[i].activeSelf)
                     {
-                        _mCommentMovement[i].CommentMoveUp();
+                        _mCommentMovement[i].StartAnim();
                     }
                 }
                 _mTikTokComments[0].ChangeProfile();

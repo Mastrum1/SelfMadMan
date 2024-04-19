@@ -15,27 +15,15 @@ public class CommentMovement : MonoBehaviour
 
     public event Action<bool, GameObject> ExitScreen;
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-    }
-
     [ContextMenu("Move Up")]
     public void CommentMoveUp()
     {
         if (_mNextComment)
         {
+            if (!_mNextComment.activeSelf)
+                _mNextComment.SetActive(true);
 
-            _mAnimator.SetTrigger("Up");
-            StartCoroutine(MoveUpNext());
-
-            _mCommentNextComment.ActualBackground = _mActualComment.ActualBackground;
-            _mCommentNextComment.Girls = _mActualComment.Girls;
-            _mCommentNextComment.SelectedData = _mActualComment.SelectedData;
+            StartCoroutine(WaitAnim());
         }
         else
         {
@@ -50,20 +38,24 @@ public class CommentMovement : MonoBehaviour
         _mCommentPreviousComment.ActualBackground = _mActualComment.ActualBackground;
         _mCommentPreviousComment.Girls = _mActualComment.Girls;
         _mCommentPreviousComment.SelectedData = _mActualComment.SelectedData;
-        StartCoroutine(MoveUpPrevious());
+        _mCommentPreviousComment.UpdateComment();
     }
 
-    IEnumerator MoveUpNext()
+    public void StartAnim()
     {
-        yield return new WaitForSeconds(.15f);
-        if (!_mNextComment.activeSelf)
-            _mNextComment.SetActive(true);
-        _mCommentNextComment.StartCoroutine(_mCommentNextComment.UpdateComment());
-    }    
-    IEnumerator MoveUpPrevious()
-    {
-        yield return new WaitForSeconds(.15f);
-        _mCommentPreviousComment.StartCoroutine(_mCommentPreviousComment.UpdateComment());
+        _mCommentNextComment.ActualBackground = _mActualComment.ActualBackground;
+        _mCommentNextComment.Girls = _mActualComment.Girls;
+        _mCommentNextComment.SelectedData = _mActualComment.SelectedData;
+
+
+        _mAnimator.SetTrigger("Up");
     }
 
+    IEnumerator WaitAnim()
+    {
+        if (gameObject.name != "Comment_01_Anim")
+            yield return new WaitForSeconds(0.48f); 
+        _mCommentNextComment.UpdateComment();
+        StopCoroutine(WaitAnim());
+    }
 }

@@ -32,6 +32,8 @@ public class DisplayTikTokComment : MonoBehaviour
 
     [Header("Divers")]
     [SerializeField] Animator _mAnimator;
+    [SerializeField] GameObject _mDeleteCard;
+    [SerializeField] Animator _mAnimatorDelete;
     [SerializeField] Sprite _mBaseState;
     [SerializeField] Sprite _mDeleteState;
 
@@ -73,14 +75,15 @@ public class DisplayTikTokComment : MonoBehaviour
 
     IEnumerator Disable()
     {
-        _mAnimator.SetTrigger("Delete");
-        yield return new WaitForSeconds(0.1f);
+        _mDeleteCard.SetActive(true);
         gameObject.SetActive(false);
+        _mAnimatorDelete.SetTrigger("Delete");
+        yield return new WaitForSeconds(0.1f);
+        _mDeleteCard.SetActive(false); 
     }
 
-    public IEnumerator UpdateComment()
+    public void UpdateComment() 
     {
-        yield return new WaitForSeconds(0.15f);
         _mComment.text = _mSelectedData.CommentContent;
         _mActualProfilPicture.sprite = _mSelectedProfile.ProfilePicture;
         _mProfileName.text = _mSelectedProfile.Pseudo;
