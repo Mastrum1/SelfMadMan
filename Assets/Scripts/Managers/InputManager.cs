@@ -44,6 +44,8 @@ public class InputManager : MonoBehaviour
 
     [SerializeField] private bool _mEnableAccelerometer = false;
 
+    [SerializeField] private bool _mEnableRub = false;
+
     [SerializeField] public UnityEvent _mOnTap;
 
     [SerializeField] public UnityEvent _mOnHold;
@@ -122,6 +124,9 @@ public class InputManager : MonoBehaviour
             }
             else
             {
+                //_mEnableAccelerometer = false;
+                //_mEnableGiroscope = false;
+                _mEnableRub = true;
                 Debug.Log("Accelerometer not supported");
                 _mOnAccelerometerDisable?.Invoke();
             }
@@ -135,6 +140,11 @@ public class InputManager : MonoBehaviour
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
+
+            if(_mEnableRub)
+            {
+                _mGetFingerPos?.Invoke(Camera.main.ScreenToWorldPoint(touch.position));
+            }
 
             if (_mStartTouchPos == Vector3.zero)
             {
