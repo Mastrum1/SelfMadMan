@@ -18,6 +18,10 @@ public class DirtyRoadManager : MiniGameManager
 
     private void OnGameEnd(bool win)
     {
+        if (win)
+        {
+            Amount++;
+        }
         EndMiniGame(win, miniGameScore);
     }
 

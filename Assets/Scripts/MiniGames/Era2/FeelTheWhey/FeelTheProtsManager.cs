@@ -17,6 +17,10 @@ public class FeelTheProtsManager : MiniGameManager
 
     private void HandleEndGame(bool win)
     {
+        if (win)
+        {
+            Amount++;
+        }
         EndMiniGame(win, miniGameScore);
     }
 

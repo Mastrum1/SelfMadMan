@@ -18,8 +18,10 @@ public class PerfectShotManager : MiniGameManager
     public void HandleGameEnd(bool win)
     {
         EndMiniGame(win, 0);
-        if (win)
-            _UIManager.OnWin();
+        if (!win) return;
+        
+        Amount++;
+        _UIManager.OnWin();
     }
 
     private void OnDestroy()

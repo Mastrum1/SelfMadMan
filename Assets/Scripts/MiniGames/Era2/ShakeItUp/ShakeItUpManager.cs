@@ -27,6 +27,10 @@ public class ShakeItUpManager : MiniGameManager
 
     private void OnGameEnd(bool win)
     {
+        if (win)
+        {
+            Amount = _interactableManager.NumProteinDead;
+        }
         EndMiniGame(win, miniGameScore);
     }
     
