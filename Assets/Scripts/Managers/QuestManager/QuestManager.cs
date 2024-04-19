@@ -13,7 +13,7 @@ public class QuestManager : MonoBehaviour
     public event Action<int> OnReward;
 
     public event Action<Quest> OnAddActiveQuest;
-    
+
     public event Action<int, int?> OnUpdateQuestUI;
 
     public event Action<Quest> OnRemoveActiveQuest;
@@ -82,7 +82,7 @@ public class QuestManager : MonoBehaviour
         while (activeQuests.Count < 3)
         {
             SetNewActiveQuest();
-        } 
+        }
     }
 
     private void RemoveActiveQuest(Quest quest)
@@ -104,7 +104,7 @@ public class QuestManager : MonoBehaviour
 
         if (_questsList[randomQuest].QuestDispo != Quests.QuestBaseDispo.Unlocked ||
             _questsList[randomQuest].QuestCompletionState != CompletionState.NotSelected) return;
-        
+
         _questsList[randomQuest].QuestCompletionState = CompletionState.Selected;
         var temp = _questsList[randomQuest];
         temp.Difficulty = temp.QuestSO.difficulties[randomDifficulty];
@@ -117,17 +117,29 @@ public class QuestManager : MonoBehaviour
     public void CheckQuestCompletion(Quest quest)
     {
         if (quest.CurrentAmount < quest.MaxAmount) return;
-        
+
         quest.QuestCompletionState = CompletionState.Complete;
         OnQuestComplete?.Invoke(quest);
     }
-    
-    public void OnQuestFinish(Quest quest)
+
+    public void OnQuestFinish()
     {
-        quest.QuestCompletionState = CompletionState.NotSelected;
-        OnQuestFinished?.Invoke(quest);
-        OnReward?.Invoke(quest.Difficulty.reward);
-        RemoveActiveQuest(quest);
+        List<Quest> list = new List<Quest>();
+        for (int i = 0; i < SelectedQuests.Count; i++)
+        {
+            if (SelectedQuests[i].QuestCompletionState == CompletionState.Complete)
+            {
+                Debug.Log("Quest ,° " + i + "finished");
+                SelectedQuests[i].QuestCompletionState = CompletionState.NotSelected;
+                list.Add(SelectedQuests[i]);
+            }
+        }
+        foreach(var quest in list)
+        {
+            OnReward?.Invoke(quest.Difficulty.reward);
+            OnQuestFinished?.Invoke(quest);
+            RemoveActiveQuest(quest);
+        }
     }
     public void OnChangeQuest(Quest quest, int container)
     {

@@ -17,7 +17,7 @@ public class QuestView : MonoBehaviour
         LoadQuestContainers();
     }
 
-    private void LoadQuestContainers()
+    public void LoadQuestContainers()
     {
         var questCount = _mQuestManager.SelectedQuests.Count;
         for (var i = 0; i < questCount; i++)
@@ -25,6 +25,7 @@ public class QuestView : MonoBehaviour
             UpdateQuestUI(i, null);
         }
     }
+
 
     private void UpdateQuestUI(int container, int? questNum)
     {
