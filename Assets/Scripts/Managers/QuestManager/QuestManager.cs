@@ -121,7 +121,6 @@ public class QuestManager : MonoBehaviour
 
     public void OnQuestFinish(Quest quest, int container)
     {
-        Debug.Log("Quest ,� " + quest.QuestSO.questDescription + " finished");
         quest.QuestCompletionState = CompletionState.NotSelected;
         OnReward?.Invoke(quest.Difficulty.reward);
         OnQuestFinished?.Invoke(quest);
