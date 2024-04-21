@@ -28,6 +28,7 @@ public class ScoreScreen : MonoBehaviour
 
     [Header("Scripts")]
     [SerializeField] private PanelOnClick _mPanelOnClick;
+    [SerializeField] private QuestView _mQuestView;
 
     [Header("GameObjects")]
     [SerializeField] private GameObject _mPopup;
@@ -140,11 +141,11 @@ public class ScoreScreen : MonoBehaviour
         {
             OnPanelClicked();
             int amount = GameManager.instance.GainMoney();
-            if (amount / 10 >= 1)
+/*            if (amount / 10 >= 1)
                 _mCoin.anchoredPosition = new Vector2(103, _mCoin.anchoredPosition.y);
-            /*ShopManager.Instance.StartCoroutine(ShopManager.Instance.MoveMoney());*/
+            *//*ShopManager.Instance.StartCoroutine(ShopManager.Instance.MoveMoney());*//*
             else
-                _mCoin.anchoredPosition = new Vector2(137, _mCoin.anchoredPosition.y);
+                _mCoin.anchoredPosition = new Vector2(137, _mCoin.anchoredPosition.y);*/
             _UIAnimator.SetBool("EndGame", true);
             _mQuestManager.SetActive(true);
 
@@ -154,8 +155,10 @@ public class ScoreScreen : MonoBehaviour
                 GameManager.instance.Player.UpdateBestScore((int)GameManager.instance.Score);
             }
 
-            _coinsEarned.text = " +" + amount.ToString();
-            _bestScore.text = "BEST : " + GameManager.instance.Player.BestScore.ToString();
+            _coinsEarned.text = " +" + amount;
+            _bestScore.text = "BEST : " + GameManager.instance.Player.BestScore;
+            
+            _mQuestView.CheckForCompletedQuests();
         }
 
     }
