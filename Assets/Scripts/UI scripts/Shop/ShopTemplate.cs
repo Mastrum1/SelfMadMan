@@ -24,4 +24,25 @@ public class ShopTemplate : MonoBehaviour
 
     public BoxCollider2D TemplateBox { get => _mTemplateBox; private set => _mTemplateBox = value; }
     [SerializeField] private BoxCollider2D _mTemplateBox;
+
+    [SerializeField] private bool Purchasable;
+
+    private void OnEnable()
+    {
+        ONOFF();
+    }
+
+    public void ONOFF()
+    {
+        if (Purchasable)
+        {
+            _mPurchaseBox.color = new Color(1, 1, 1, 1f);
+            _mTemplateBox.enabled = true;
+        }
+        else
+        {
+            _mPurchaseBox.color = new Color(1, 1, 1, 0.5f);
+            _mTemplateBox.enabled = false;
+        }
+    }
 }

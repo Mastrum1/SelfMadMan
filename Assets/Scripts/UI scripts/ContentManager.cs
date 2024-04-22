@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Lean.Touch;
 
 public class ContentManager : MonoBehaviour
 {

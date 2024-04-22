@@ -12,7 +12,7 @@ public class WaterBottle : MonoBehaviour
         
         if (transform.eulerAngles.z <= 100)
         {
-            transform.Rotate(0,0,75 * Time.deltaTime);
+            transform.Rotate(0,0,95 * Time.deltaTime);
         }
     }
 
