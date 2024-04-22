@@ -30,14 +30,16 @@ public class UserInfos : MonoBehaviour
     {
         MoneyManager.Instance.OnUpdateMoney -= UpdateMoneyText;
         GameManager.instance.OnUpdateLevel -= UpdateLevel;
-        _mXpBar.OnLevelUp -= RestartPosition;
-        _mXpBar.OnLevelUp -= UpdateLevel;
+        //_mXpBar.OnLevelUp -= RestartPosition;
+        //_mXpBar.OnLevelUp -= UpdateLevel;
     }
 
     private void LoadLevel()
     {
         _mPlayerLevel.text = GameManager.instance.Player.Level.ToString();
         _mPlayerStars.text = GameManager.instance.Player.Xp.ToString();
+        _mProgressBar.transform.position += _mProgressBar.transform.right * ((float) GameManager.instance.Player.Xp/ 5 * 2.2f);
+
     }
 
     private void UpdateMoneyText()
@@ -52,7 +54,8 @@ public class UserInfos : MonoBehaviour
         _mPlayerStars.text = GameManager.instance.Player.Xp.ToString();
         _mPlayerLevel.text = GameManager.instance.Player.Level.ToString();
         
-        _mProgressBar.transform.position += _mProgressBar.transform.right * ((float) GameManager.instance.Player.Xp/ 5 * 3);
+        RestetPosition();
+        _mProgressBar.transform.position += _mProgressBar.transform.right * ((float) GameManager.instance.Player.Xp/ 5 * 2.2f);
         //StartCoroutine(MoveProgressBar());
     }
 
@@ -65,7 +68,7 @@ public class UserInfos : MonoBehaviour
         }
     }*/
 
-    private void RestartPosition()
+    private void RestetPosition()
     {
         _mProgressBar.transform.position = _mStartPosition;
     }
