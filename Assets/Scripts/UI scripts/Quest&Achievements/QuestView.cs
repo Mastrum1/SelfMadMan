@@ -38,7 +38,6 @@ public class QuestView : MonoBehaviour
     public IEnumerator CheckForCompletedQuests()
     {
         yield return new WaitForSeconds(2f);
-        Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         for (var i = 0; i < _quests.Count; i++)
         {
             if (_quests[i].SelectedQuest.QuestCompletionState != QuestManager.CompletionState.Complete) continue;
