@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using NaughtyAttributes;
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
 
 public class GameManager : MonoBehaviour
 {
@@ -62,6 +64,7 @@ public class GameManager : MonoBehaviour
 
     public event Action<bool, int, int, bool> WinScreenHandle;
 
+
     private void Awake()
     {
         Application.targetFrameRate = 60;
@@ -74,9 +77,26 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    public void SignIn()
+    {
+        PlayGamesPlatform.Instance.Authenticate(ProcessAuthentication);
+    }
+    internal void ProcessAuthentication(SignInStatus status)
+    {
+        if (status == SignInStatus.Success)
+        {
+            Debug.Log("Signed in");
+        }
+        else
+        {
+            Debug.Log("Sign in failed");
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        //SignIn();
         _mGameOver = false;
         _mMinigameCount = 0;
         _mMinigameWon = 0;
