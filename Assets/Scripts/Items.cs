@@ -27,8 +27,8 @@ public class Coins : Items
 
     public override void Obtain()
     {
-        ShopManager.Instance.MoneyScript.AddMoney(Amount);
-        ShopManager.Instance.MoneyScript.UpdateMoney();
+        MoneyManager.Instance.AddMoney(Amount);
+        MoneyManager.Instance.UpdateMoney();
     }
 }
 
@@ -41,6 +41,7 @@ public class MinigameItem : Items
     public override void Obtain()
     {
         MiniGameSelector.instance.UnlockMinigame(SceneName);
+        QuestManager.Instance.UnlockQuest(SceneName);
     }
 }
 

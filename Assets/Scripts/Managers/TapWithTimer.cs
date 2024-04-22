@@ -83,6 +83,7 @@ public class TapWithTimer : MonoBehaviour
 
     public void ObjectTaped()
     {
+        Debug.Log("Object taped"); 
         _StopTorus = true;
         _mTorus.SetActive(false);
 
@@ -97,7 +98,7 @@ public class TapWithTimer : MonoBehaviour
             StartCoroutine(FadeOut());
 
         }
-        else if (_mTorus.transform.localScale.x < _mImmondeTiming && _mTorus.transform.localScale.x > _mMidTiming)
+        else if (_mTorus.transform.localScale.x > _mMidTiming)
         {
             Debug.Log("Immonde click");
             StartCoroutine(FadeOut());

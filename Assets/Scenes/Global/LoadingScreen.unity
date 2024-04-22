@@ -217,6 +217,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &106571039 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7381208922485051564, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+  m_PrefabInstance: {fileID: 1840523861636629208}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 016ca88112d09184bb88685e15df48d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &380412382
 GameObject:
   m_ObjectHideFlags: 0
@@ -1205,6 +1216,10 @@ PrefabInstance:
       propertyPath: FasterScene
       value: Faster
       objectReference: {fileID: 0}
+    - target: {fileID: 3699729203737973389, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mMoneyManager
+      value: 
+      objectReference: {fileID: 106571039}
     - target: {fileID: 3783518028089879279, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -1442,6 +1457,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6542784465200720699, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _mLoadSaveMinigame
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6542784465200720699, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
       propertyPath: _mAllEra1.Array.size
       value: 8
       objectReference: {fileID: 0}
@@ -1467,7 +1486,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6542784465200720699, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
       propertyPath: _mFirstQuests.Array.size
-      value: 8
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6542784465200720699, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
       propertyPath: _mFirstQuests.Array.data[0]
@@ -1475,15 +1494,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6542784465200720699, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
       propertyPath: _mFirstQuests.Array.data[1]
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6542784465200720699, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
       propertyPath: _mFirstQuests.Array.data[2]
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6542784465200720699, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
       propertyPath: _mFirstQuests.Array.data[3]
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6542784465200720699, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
       propertyPath: _mFirstQuests.Array.data[4]
@@ -1567,7 +1586,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6542784465200720699, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
       propertyPath: _mAllEra1.Array.data[2]._locked
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6542784465200720699, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
       propertyPath: _mAllEra1.Array.data[3]._locked
@@ -1587,7 +1606,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6542784465200720699, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
       propertyPath: _mAllEra1.Array.data[7]._locked
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6542784465200720699, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
       propertyPath: _mAllEra2.Array.data[0]._locked
@@ -1599,15 +1618,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6542784465200720699, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
       propertyPath: _mAllEra2.Array.data[2]._locked
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6542784465200720699, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
       propertyPath: _mAllEra2.Array.data[3]._locked
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6542784465200720699, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
       propertyPath: _mAllEra2.Array.data[4]._locked
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6542784465200720699, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
       propertyPath: _mAllEra2.Array.data[5]._locked
@@ -2096,7 +2115,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[3]._sceneName
-      value: CleanYourKitchen
+      value: Bugmageddon
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[4]._sceneName

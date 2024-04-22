@@ -1,62 +1,99 @@
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
 
 public class QuestContainer : MonoBehaviour
 {
     public QuestManager.Quest SelectedQuest { get => _mSelectedQuest; set => _mSelectedQuest = value; }
     [SerializeField] private QuestManager.Quest _mSelectedQuest;
     
-    public Quests.Difficulty QuestDifficulty { set => _mQuestDifficulty = value; }
-    [SerializeField] private Quests.Difficulty _mQuestDifficulty;
-
-    public TMP_Text Reward => _mReward;
     [SerializeField] private TMP_Text _mReward;
-
-    public TMP_Text QuestDescription => _mQuestDescription;
     [SerializeField] private TMP_Text _mQuestDescription;
-
-    public Image QuestIcon => _mQuestIcon; 
     [SerializeField] private Image _mQuestIcon;
-    
-    public Image QuestColor => _mQuestColor;
     [SerializeField] private Image _mQuestColor;
-
-    public GameObject QuestProgression => _mQuestProgression;
     [SerializeField] private GameObject _mQuestProgression;
-    
     [SerializeField] private GameObject _mChangeButton;
 
-    public bool IsInQuestMenu { get => _mIsInQuestMenu; set => _mIsInQuestMenu = value; }
+    public bool IsInQuestMenu { set => _mIsInQuestMenu = value; }
     private bool _mIsInQuestMenu;
     
-    public float StartPosX => _mStartPos;
+    [SerializeField] private List<Color> _difficultyColor;
+    
     private float _mStartPos;
     
-    public List<GameObject> Stars => _mStars;
     [SerializeField] private List<GameObject> _mStars;
 
     private void Awake()
     {
-        _mStartPos = QuestProgression.transform.position.x;
+        _mStartPos = _mQuestProgression.transform.position.x;
     }
 
     private void Start()
     {
         _mChangeButton.SetActive(_mIsInQuestMenu);
     }
+    
+    public void UpdateQuestUI()
+    {
+        if(!gameObject.activeSelf) gameObject.SetActive(true);
+        
+        ResetFillBar();
+        var replace = _mSelectedQuest.QuestSO.questDescription.Replace("*", _mSelectedQuest.Difficulty.amount.ToString());
+        _mReward.text = (25 * _mSelectedQuest.Difficulty.reward).ToString();
+        _mQuestDescription.text = replace;
+        _mQuestIcon.sprite = _mSelectedQuest.QuestSO.questIcon;
+        _mQuestColor.color = _difficultyColor[(int)_mSelectedQuest.Difficulty.difficulty];
+        if(_mIsInQuestMenu)
+        {
+            StartCompletion();
+        }
+            
+        for (var j = 0; j < _mSelectedQuest.Difficulty.reward; j++)
+        {
+            var starObject = _mStars[j].gameObject;
+            if (!starObject.activeSelf)
+                starObject.SetActive(true);
+        }
+    }
+
+    public void StartCompletion()
+    {
+        float amount;
+        if (_mSelectedQuest.CurrentAmount >= _mSelectedQuest.MaxAmount)
+        {
+            amount = 1;
+        }
+        else
+        {
+            amount = (float)_mSelectedQuest.CurrentAmount / _mSelectedQuest.MaxAmount;
+        }
+        StartCoroutine(ShowCompletionBar(_mQuestProgression.gameObject.transform, amount, _mStartPos));
+
+    }
+    private static IEnumerator ShowCompletionBar(Transform pos, float amount, float startPos)
+    {
+        while (pos.position.x < startPos + 3 * amount)
+        {
+            pos.position += pos.right * (amount * 3 * Time.deltaTime);
+            yield return new WaitForSeconds(0.01f);
+        }
+    }
 
     public void ChangeQuest(int container)
     {
+        //if (GameManager.instance.Player.Money < 25 * _mSelectedQuest.Difficulty.reward) return;
+        
+        //Money.Instance.SubtractMoney(25 * _mSelectedQuest.Difficulty.reward);
         gameObject.SetActive(false);
         QuestManager.Instance.OnChangeQuest(_mSelectedQuest, container);
     }
 
     public void ResetFillBar()
     {
-        QuestProgression.transform.position = new Vector3(_mStartPos - 0.176f, transform.position.y);
+        _mQuestProgression.transform.position = new Vector3(_mStartPos - 0.176f, transform.position.y);
     }
 
     private void OnDisable()
