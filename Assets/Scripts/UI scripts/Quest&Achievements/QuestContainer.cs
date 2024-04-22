@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
 
 public class QuestContainer : MonoBehaviour
 {
@@ -45,6 +46,21 @@ public class QuestContainer : MonoBehaviour
         _mQuestDescription.text = replace;
         _mQuestIcon.sprite = _mSelectedQuest.QuestSO.questIcon;
         _mQuestColor.color = _difficultyColor[(int)_mSelectedQuest.Difficulty.difficulty];
+        if(_mIsInQuestMenu)
+        {
+            StartCompletion();
+        }
+            
+        for (var j = 0; j < _mSelectedQuest.Difficulty.reward; j++)
+        {
+            var starObject = _mStars[j].gameObject;
+            if (!starObject.activeSelf)
+                starObject.SetActive(true);
+        }
+    }
+
+    public void StartCompletion()
+    {
         float amount;
         if (_mSelectedQuest.CurrentAmount >= _mSelectedQuest.MaxAmount)
         {
@@ -56,15 +72,7 @@ public class QuestContainer : MonoBehaviour
         }
         StartCoroutine(ShowCompletionBar(_mQuestProgression.gameObject.transform, amount, _mStartPos));
 
-            
-        for (var j = 0; j < _mSelectedQuest.Difficulty.reward; j++)
-        {
-            var starObject = _mStars[j].gameObject;
-            if (!starObject.activeSelf)
-                starObject.SetActive(true);
-        }
     }
-
     private static IEnumerator ShowCompletionBar(Transform pos, float amount, float startPos)
     {
         while (pos.position.x < startPos + 3 * amount)

@@ -15,7 +15,8 @@ public class QuestAndAchievement : MonoBehaviour
     {
         _mTrophyView.SetActive(false);
         _mQuestView.SetActive(true);
-        _mQuestView.GetComponent<QuestView>().IsInQuestMenu();
+        _mQuestView.GetComponent<QuestView>().IsInQuestMenu(); //JIMMY CHANGE
+        
     }
 
     public void EnableTrophies()
