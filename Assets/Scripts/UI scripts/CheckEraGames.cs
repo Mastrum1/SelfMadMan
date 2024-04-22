@@ -51,7 +51,7 @@ public class CheckEraGames : MonoBehaviour
             else
             {
                 _mMinigameContainerList[i].QuestIconBG.color = _mBGIconColors[1];
-                _mMinigameContainerList[i].EraGameName.color = _mBGIconColors[1];
+                _mMinigameContainerList[i].EraGameName.color = _mBGIconColors[3];
                 _mMinigameContainerList[i].EraGameIcon.color = _mBGIconColors[3];
             }  
         }
