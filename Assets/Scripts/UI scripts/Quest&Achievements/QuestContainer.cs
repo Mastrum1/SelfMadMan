@@ -76,6 +76,8 @@ public class QuestContainer : MonoBehaviour
 
     public void ChangeQuest(int container)
     {
+        if (!Money.Instance.SubtractMoney(25 * _mSelectedQuest.Difficulty.reward)) return;
+        
         gameObject.SetActive(false);
         QuestManager.Instance.OnChangeQuest(_mSelectedQuest, container);
     }
