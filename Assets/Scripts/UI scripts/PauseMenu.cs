@@ -54,12 +54,8 @@ public class PauseMenu : MonoBehaviour
             _mElementsMenu.gameObject.transform.localScale = new Vector3(scale, scale, scale);
             yield return null;
         }
-
-        if (scale == 0)
-        {
-            _mpauseMenu.SetActive(false);
-            _mElementsMenu.SetActive(false);
-            Time.timeScale = 1;
-        }
+        _mpauseMenu.SetActive(false);
+        _mElementsMenu.SetActive(false);
+        Time.timeScale = 1;
     }
 }

@@ -8,8 +8,6 @@ public class MoneyManager : MonoBehaviour
     public static MoneyManager Instance;
 
     public event Action OnUpdateMoney;
-    public event Action Spin;
-    public event Action Era;
     
     // Private
     public int CurrentMoney { get => _mCurrentMoney; set => _mCurrentMoney = value; }
@@ -65,7 +63,6 @@ public class MoneyManager : MonoBehaviour
             _mCurrentMoney -= int.Parse(price.text);
             GameManager.instance.Player.NewCurrency(_mCurrentMoney);
             _mCurrentMoney = GameManager.instance.Player.Money;
-            Era?.Invoke();
         }
     }
 
@@ -81,7 +78,6 @@ public class MoneyManager : MonoBehaviour
             _mCurrentMoney -= int.Parse(price.text);
             GameManager.instance.Player.NewCurrency(_mCurrentMoney);
             _mCurrentMoney = GameManager.instance.Player.Money;
-            Spin?.Invoke();
         }
     }
 
