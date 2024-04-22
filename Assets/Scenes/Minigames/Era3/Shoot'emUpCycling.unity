@@ -768,9 +768,9 @@ GameObject:
   m_Component:
   - component: {fileID: 934633146}
   - component: {fileID: 934633147}
-  - component: {fileID: 934633145}
   - component: {fileID: 934633149}
   - component: {fileID: 934633150}
+  - component: {fileID: 934633151}
   m_Layer: 0
   m_Name: brique
   m_TagString: Untagged
@@ -778,25 +778,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &934633145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 934633144}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72e9b40f7acaedc4e9c039e0d96b802e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mSpeed: 10
-  _mSpawnBrick: {fileID: 153593259}
-  _mSpriteBrick: {fileID: 1492640714}
-  _mThrowLimit: {fileID: 1729821375}
-  _mScaleUpBrick: {fileID: 1492640717}
-  _mTrailEffect: {fileID: 726630611}
-  _mSelected: 0
 --- !u!4 &934633146
 Transform:
   m_ObjectHideFlags: 0
@@ -892,7 +873,7 @@ MonoBehaviour:
   _mOnDragAndDrop:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 934633145}
+      - m_Target: {fileID: 934633151}
         m_TargetAssemblyTypeName: MoveBrick, Assembly-CSharp
         m_MethodName: Move
         m_Mode: 0
@@ -907,7 +888,7 @@ MonoBehaviour:
   _mOnThrow:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 934633145}
+      - m_Target: {fileID: 934633151}
         m_TargetAssemblyTypeName: MoveBrick, Assembly-CSharp
         m_MethodName: OnSlide
         m_Mode: 0
@@ -919,6 +900,25 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &934633151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934633144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 021fbd8a07802984ab63f2bd886b9afe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mSpeed: 0
+  _mSpawnBrick: {fileID: 153593259}
+  _mSpriteBrick: {fileID: 1492640714}
+  _mThrowLimit: {fileID: 1729821375}
+  _mScaleUpBrick: {fileID: 1492640717}
+  _mTrailEffect: {fileID: 726630611}
+  _mSelected: 0
 --- !u!4 &980649179 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5904529072162459612, guid: 4ac052a98b8eb8f4aa83c006707bc14c, type: 3}
@@ -1418,7 +1418,7 @@ PrefabInstance:
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: _mOnDelta.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 934633145}
+      objectReference: {fileID: 0}
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: _mOnWorldTo.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 0
@@ -1442,7 +1442,7 @@ PrefabInstance:
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: _mOnWorldTo.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 934633145}
+      objectReference: {fileID: 0}
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: _mOnDelta.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -1450,7 +1450,7 @@ PrefabInstance:
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: _mOnDistance.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 934633145}
+      objectReference: {fileID: 0}
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: _mOnDelta.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnSlide
@@ -1458,7 +1458,7 @@ PrefabInstance:
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: _mOnTapObject.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1492640717}
+      objectReference: {fileID: 0}
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: _mOnWorldTo.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -1627,10 +1627,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1492640714}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9754c76f5e9e3b044b0d34ec57b206fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d535d406f3e00d4090411d37707827e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleUpDuration: 0.05
+  scaleUpDuration: 0.1
 --- !u!1001 &1503690209
 PrefabInstance:
   m_ObjectHideFlags: 0
