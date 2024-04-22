@@ -472,8 +472,6 @@ public class Player : MonoBehaviour
 
                 _DeleteOldSave = data.deleteOldSave;
 
-                //MoneyManager.Instance.UpdateMoney();
-
                 foreach (var item in data.UnlockedCinematics)
                 {
                     UnlockedCinematics.Add(AllCinematics[item]);
