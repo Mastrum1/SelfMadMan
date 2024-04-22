@@ -596,6 +596,7 @@ public class Player : MonoBehaviour
     public void NewCurrency(int NewCurrency)
     {
         Money = NewCurrency;
+        MoneyManager.Instance.UpdateMoney();
     }
 
     public void AddStars(int Reward)

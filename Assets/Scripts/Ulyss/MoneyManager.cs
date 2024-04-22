@@ -2,30 +2,23 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Money : MonoBehaviour
+public class MoneyManager : MonoBehaviour
 {
-    public static Money Instance;
+    public static MoneyManager Instance;
+
+    public event Action OnUpdateMoney;
+    public event Action Spin;
+    public event Action Era;
     
     // Private
     public int CurrentMoney { get => _mCurrentMoney; set => _mCurrentMoney = value; }
     [SerializeField] private int _mCurrentMoney;
 
-    [SerializeField] TMP_Text _mTextMeshPro;
-
-    [SerializeField] private ContentManager _mContentManager;
-
-    [SerializeField] private Spin _mSpin;
-
-    public GameObject[] CoinAnim { get => _mCoinAnim; set => _mCoinAnim = value; }
-    [SerializeField] private GameObject[] _mCoinAnim;
-
     private void Awake()
     {
         if (Instance == null)
             Instance = this;
-
     }
 
     void Start()
@@ -36,14 +29,14 @@ public class Money : MonoBehaviour
 
     public void UpdateMoney()
     {
-        _mTextMeshPro.text = GameManager.instance.Player.Money.ToString();
+        OnUpdateMoney?.Invoke();
     }
 
     public void AddMoney(int MoneyToAdd)
     {
         _mCurrentMoney += MoneyToAdd;
-        GameManager.instance.GetComponent<Player>().NewCurrency(_mCurrentMoney);
-        UpdateMoney();
+        GameManager.instance.Player.NewCurrency(_mCurrentMoney);
+        _mCurrentMoney = GameManager.instance.Player.Money;
     }
 
     public bool SubtractMoney(int MoneyToRemove)
@@ -56,7 +49,7 @@ public class Money : MonoBehaviour
         
         _mCurrentMoney -= MoneyToRemove;
         GameManager.instance.Player.NewCurrency(_mCurrentMoney);
-        UpdateMoney();
+        _mCurrentMoney = GameManager.instance.Player.Money;
         return true;
     }
 
@@ -71,8 +64,8 @@ public class Money : MonoBehaviour
         {
             _mCurrentMoney -= int.Parse(price.text);
             GameManager.instance.Player.NewCurrency(_mCurrentMoney);
-            _mContentManager.UnlockEra();
-            UpdateMoney();
+            _mCurrentMoney = GameManager.instance.Player.Money;
+            Era?.Invoke();
         }
     }
 
@@ -87,22 +80,14 @@ public class Money : MonoBehaviour
         {
             _mCurrentMoney -= int.Parse(price.text);
             GameManager.instance.Player.NewCurrency(_mCurrentMoney);
-            _mSpin.StartSpinning();
-            UpdateMoney();
+            _mCurrentMoney = GameManager.instance.Player.Money;
+            Spin?.Invoke();
         }
     }
 
     private void LoadMoney()
     {
-        _mCurrentMoney = GameManager.instance.GetComponent<Player>().Money;
+        _mCurrentMoney = GameManager.instance.Player.Money;
         Debug.Log("Money loaded: " + _mCurrentMoney);
-        UpdateMoney();
-    }
-
-    public IEnumerator MoveMoney(GameObject particule)
-    {
-        particule.SetActive(true);
-        yield return new WaitForSeconds(3f);
-        particule.SetActive(false);
     }
 }

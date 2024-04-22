@@ -42,6 +42,7 @@ public class ContentManager : MonoBehaviour
         _mLockEraPanel.SetActive(GameManager.instance.ErasData[GameManager.instance.Era].Unlocked ? false : true);
         InitializeDots();
         ShowContent();
+        MoneyManager.Instance.Era += UnlockEra;
     }
 
     void InitializeDots()
