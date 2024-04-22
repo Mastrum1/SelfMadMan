@@ -36,7 +36,7 @@ public class Spin : MonoBehaviour
     [SerializeField] private GameObject _mPopupObtained;
     [SerializeField] private PopUpObtained _mPopupObtainedScript;
 
-    [SerializeField] private Money _mMoney;
+    [SerializeField] private MoneyManager _mMoney;
 
     private Quarter _quarter;
     public bool isSpnning = false;

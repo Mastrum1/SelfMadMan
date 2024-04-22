@@ -8,9 +8,9 @@ public class ShopManager : MonoBehaviour
 {
     public static ShopManager Instance;
 
-    public Money MoneyScript { get => _mMoney; set => _mMoney = value;} 
+    public MoneyManager MoneyScript { get => _mMoney; set => _mMoney = value;} 
     [Header("Money")]
-    [SerializeField] private Money _mMoney;
+    [SerializeField] private MoneyManager _mMoney;
 
     [Header("Item Shop SO")]
     [SerializeField] private CoinsSO[] _mCoins;
