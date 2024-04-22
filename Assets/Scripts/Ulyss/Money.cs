@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class Money : MonoBehaviour
 {
+    public static Money Instance;
+    
     // Private
     public int CurrentMoney { get => _mCurrentMoney; set => _mCurrentMoney = value; }
     [SerializeField] private int _mCurrentMoney;
@@ -18,6 +20,14 @@ public class Money : MonoBehaviour
 
     public GameObject[] CoinAnim { get => _mCoinAnim; set => _mCoinAnim = value; }
     [SerializeField] private GameObject[] _mCoinAnim;
+
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else if (Instance != this)
+            Destroy(gameObject);
+    }
 
     void Start()
     {
@@ -37,19 +47,18 @@ public class Money : MonoBehaviour
         UpdateMoney();
     }
 
-    public void SubtractMoney(int MoneyToRemove)
+    public bool SubtractMoney(int MoneyToRemove)
     {
         if (_mCurrentMoney - MoneyToRemove < 0)
         {
             Debug.Log("No Money");
+            return false;
         }
-
-        else
-        {
-            _mCurrentMoney -= MoneyToRemove;
-            GameManager.instance.Player.NewCurrency(_mCurrentMoney);
-            UpdateMoney();
-        }
+        
+        _mCurrentMoney -= MoneyToRemove;
+        GameManager.instance.Player.NewCurrency(_mCurrentMoney);
+        UpdateMoney();
+        return true;
     }
 
     public void SubsEra(TMP_Text price)
