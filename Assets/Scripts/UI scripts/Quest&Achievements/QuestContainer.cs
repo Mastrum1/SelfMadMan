@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
 
 public class QuestContainer : MonoBehaviour
 {
