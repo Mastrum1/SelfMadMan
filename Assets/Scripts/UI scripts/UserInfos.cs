@@ -40,7 +40,7 @@ public class UserInfos : MonoBehaviour
         _mPlayerStars.text = GameManager.instance.Player.Xp.ToString();
         _mProgressBar.transform.position += _mProgressBar.transform.right * ((float) GameManager.instance.Player.Xp/ 5 * 2.2f);
 
-        UpdateName(GameManager.instance.Player.Level / 5);
+        UpdateName(GameManager.instance.Player.Level - 1);
     }
 
     private void UpdateMoneyText()
@@ -54,7 +54,7 @@ public class UserInfos : MonoBehaviour
     {
         _mPlayerStars.text = GameManager.instance.Player.Xp.ToString();
         _mPlayerLevel.text = GameManager.instance.Player.Level.ToString();
-        UpdateName(GameManager.instance.Player.Level / 5);
+        UpdateName(GameManager.instance.Player.Level - 1);
         
         RestetPosition();
         _mProgressBar.transform.position += _mProgressBar.transform.right * ((float) GameManager.instance.Player.Xp/ 5 * 2.2f);
