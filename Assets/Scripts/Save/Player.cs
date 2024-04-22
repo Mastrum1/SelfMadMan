@@ -198,7 +198,7 @@ public class Player : MonoBehaviour
         {
             playerData.SaveData(this);
         }
-        if (DataService.SaveData("/player-stats.json", playerData, false))
+        if (DataService.SaveData("/player-stats.json", playerData, true))
         {
             if (firstSave)
             {
