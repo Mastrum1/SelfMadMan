@@ -25,6 +25,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Player _mPlayer;
     public Player Player { get => _mPlayer; }
 
+    [SerializeField] private MoneyManager _mMoneyManager;
+    public MoneyManager MoneyManager { get => _mMoneyManager; }
+
     public class EraData
     {
         public bool Unlocked;

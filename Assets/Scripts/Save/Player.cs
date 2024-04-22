@@ -466,6 +466,8 @@ public class Player : MonoBehaviour
 
                 ErasData = data.ErasData;
 
+                MoneyManager.Instance.UpdateMoney();
+
                 foreach (var item in data.UnlockedCinematics)
                 {
                     UnlockedCinematics.Add(AllCinematics[item]);

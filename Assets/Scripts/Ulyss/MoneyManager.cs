@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class MoneyManager : MonoBehaviour
 {
@@ -36,7 +35,7 @@ public class MoneyManager : MonoBehaviour
     public void AddMoney(int MoneyToAdd)
     {
         _mCurrentMoney += MoneyToAdd;
-        GameManager.instance.GetComponent<Player>().NewCurrency(_mCurrentMoney);
+        GameManager.instance.Player.NewCurrency(_mCurrentMoney);
         _mCurrentMoney = GameManager.instance.Player.Money;
     }
 

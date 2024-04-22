@@ -10,6 +10,11 @@ public class UserInfos : MonoBehaviour
     [SerializeField] private TMP_Text _mPlayerLevel;
     [SerializeField] private TMP_Text _mPlayerName;
 
+    private void Start()
+    {
+        UpdateMoneyText();
+    }
+
     private void OnEnable()
     {
         MoneyManager.Instance.OnUpdateMoney += UpdateMoneyText;
@@ -22,6 +27,8 @@ public class UserInfos : MonoBehaviour
 
     private void UpdateMoneyText()
     {
-        _mMoneyText.text = GameManager.instance.Player.Money.ToString();
+        MoneyManager.Instance.CurrentMoney = GameManager.instance.Player.Money;
+        _mMoneyText.text = MoneyManager.Instance.CurrentMoney.ToString();
+        Debug.Log(GameManager.instance.Player.Money.ToString());
     }
 }
