@@ -36,8 +36,6 @@ public class Spin : MonoBehaviour
     [SerializeField] private GameObject _mPopupObtained;
     [SerializeField] private PopUpObtained _mPopupObtainedScript;
 
-    [SerializeField] private MoneyManager _mMoney;
-
     private Quarter _quarter;
     public bool isSpnning = false;
     public float initialSpeed = 500.0f;
@@ -48,6 +46,7 @@ public class Spin : MonoBehaviour
     void Start()
     {
         InitSpin();
+        MoneyManager.Instance.Spin += StartSpinning;
     }
 
     public void StartSpinning()
@@ -58,7 +57,6 @@ public class Spin : MonoBehaviour
             isSpnning = true;
             currentSpeed = initialSpeed;
         }
-
     }
 
     private bool CheckIfAvailableMinigames()
@@ -187,7 +185,7 @@ public class Spin : MonoBehaviour
 
             if (_quarter.Item is CoinsSO)
             {
-                StartCoroutine(_mMoney.MoveMoney(_mMoney.CoinAnim[1]));
+                StartCoroutine(ShopManager.Instance.MoveMoney(ShopManager.Instance.CoinAnim[1]));
             }
         }
     }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3699729203737973389}
   - component: {fileID: 2012955190311056230}
   - component: {fileID: 6542784465200720699}
+  - component: {fileID: 7381208922485051564}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -69,8 +70,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1fd27820466371439e0ddd51649555c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mLoadSaveMinigame: 0
   _mBestScore: 0
   _mLevel: 0
+  _mAdditionalHearts: 0
   _mXp: 0
   _mMoney: 0
   _mVolumeMusic: 0
@@ -78,6 +81,7 @@ MonoBehaviour:
   _mLanguage: 
   _mAllCinematics: []
   _mUnlockedCinematics: []
+  _mItemLocked: []
   _mFirstQuests: 050000000400000006000000
   _mActiveQuests: []
   _mCompletedQuests: []
@@ -161,6 +165,21 @@ MonoBehaviour:
   - _questSO: {fileID: 11400000, guid: 545dd826ef0a44d919d1d4c507b890da, type: 2}
     _questCompletionState: 0
     _questDispo: 0
+  _mAllTrophy: []
   _mAllEra1: []
   _mAllEra2: []
   _mAllEra3: []
+--- !u!114 &7381208922485051564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3783518028089879279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 016ca88112d09184bb88685e15df48d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mCurrentMoney: 0
+  _mCoinAnim: []

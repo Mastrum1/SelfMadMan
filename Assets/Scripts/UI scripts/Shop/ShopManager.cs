@@ -8,10 +8,6 @@ public class ShopManager : MonoBehaviour
 {
     public static ShopManager Instance;
 
-    public MoneyManager MoneyScript { get => _mMoney; set => _mMoney = value;} 
-    [Header("Money")]
-    [SerializeField] private MoneyManager _mMoney;
-
     [Header("Item Shop SO")]
     [SerializeField] private CoinsSO[] _mCoins;
     [SerializeField] private ItemsSO[] _mFurnitures;
@@ -27,6 +23,10 @@ public class ShopManager : MonoBehaviour
 
     [Header("Pulse of the buttons")]
     [SerializeField] private LeanPulseScale _mSpinButtonPulse;
+
+    public GameObject[] CoinAnim { get => _mCoinAnim; set => _mCoinAnim = value; }
+    [Header("Coin Animation")]
+    [SerializeField] private GameObject[] _mCoinAnim;
 
     private void Awake()
     {
@@ -82,41 +82,41 @@ public class ShopManager : MonoBehaviour
             if (items != null)
             {
                 Debug.Log(coin.Amount);
-                _mMoney.AddMoney(coin.Amount);
+                MoneyManager.Instance.AddMoney(coin.Amount);
             }
         }
 
-        if (_mMoney.CurrentMoney <= _mItemBeingPurchased.Cost)
+        if (MoneyManager.Instance.CurrentMoney <= _mItemBeingPurchased.Cost)
         {
             Debug.Log("Not enough money");
             //Play a invlid buzz sound
         }
         else
         {
-            _mMoney.SubtractMoney(_mItemBeingPurchased.Cost);
-            StartCoroutine(_mMoney.MoveMoney(_mMoney.CoinAnim[0]));
-            Debug.Log(_mMoney.CurrentMoney);
+            MoneyManager.Instance.SubtractMoney(_mItemBeingPurchased.Cost);
+            StartCoroutine(MoveMoney(_mCoinAnim[0]));
+            Debug.Log(MoneyManager.Instance.CurrentMoney);
         }
     }
 
     public void HeartPlus(TMP_Text price)
     {
 
-        if (_mMoney.CurrentMoney <= int.Parse(price.text))
+        if (MoneyManager.Instance.CurrentMoney <= int.Parse(price.text))
         {
             Debug.Log("No Money");
             //Play a invlid buzz sound
         }
         else
         {
-            _mMoney.SubtractMoney(int.Parse(price.text));
+            MoneyManager.Instance.SubtractMoney(int.Parse(price.text));
             GameManager.instance.Player.Hearts += 1;
         }
     }
 
     public void Pulse()
     {
-        if (_mMoney.CurrentMoney >= 100)
+        if (MoneyManager.Instance.CurrentMoney >= 100)
         {
             _mSpinButtonPulse.enabled = true;
             Debug.Log("Pulse");
@@ -125,5 +125,12 @@ public class ShopManager : MonoBehaviour
         {
             _mSpinButtonPulse.enabled = false;
         }
+    }
+
+    public IEnumerator MoveMoney(GameObject particule)
+    {
+        particule.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        particule.SetActive(false);
     }
 }
