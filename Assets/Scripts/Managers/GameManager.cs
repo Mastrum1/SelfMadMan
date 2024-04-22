@@ -60,9 +60,9 @@ public class GameManager : MonoBehaviour
     private int _mMinigameCount;
     private int _mMinigameWon;
     public int MinigamesWon { get => _mMinigameWon; private set => _mMinigameWon = value; }
-    public int Level { get => _mLevelCount; private set => _mLevelCount = value; }
-    private int _mLevelCount;
-    private int _mCurrentStars;
+
+    public string[] PlayerTitle => _mPlayerTitle;
+    [SerializeField] private string[] _mPlayerTitle;
 
     public event Action<bool, int, int, bool> WinScreenHandle;
 
