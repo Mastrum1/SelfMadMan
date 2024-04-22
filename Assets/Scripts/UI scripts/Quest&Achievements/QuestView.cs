@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +12,6 @@ public class QuestView : MonoBehaviour
     {
         _mQuestManager = QuestManager.Instance;
         _mQuestManager.OnUpdateQuestUI += UpdateContainer;
-        
         LoadQuestContainers();
     }
 
@@ -35,8 +35,10 @@ public class QuestView : MonoBehaviour
         _quests[container].UpdateQuestUI();
     }
     
-    public void CheckForCompletedQuests()
+    public IEnumerator CheckForCompletedQuests()
     {
+        yield return new WaitForSeconds(2f);
+        Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         for (var i = 0; i < _quests.Count; i++)
         {
             if (_quests[i].SelectedQuest.QuestCompletionState != QuestManager.CompletionState.Complete) continue;
@@ -44,7 +46,13 @@ public class QuestView : MonoBehaviour
             _mQuestManager.OnQuestFinish(_quests[i].SelectedQuest, i);
         }
     }
-
+    public void CompletetAllBars()
+    {
+        foreach (var item in _quests)
+        {
+            item.StartCompletion();  
+        }
+    }
     public void IsInQuestMenu()
     {
         foreach (var quest in _quests)

@@ -16,8 +16,8 @@ public class SlidersVolume : MonoBehaviour
         _mGameManager = GameManager.instance;
         _mPlayer = _mGameManager.GetComponent<Player>();
 
-        AudioManager.Instance.MusicSource.volume = _mPlayer.VolumeMusic;
-        AudioManager.Instance.SFXSource.volume = _mPlayer.VolumeMusic;
+        //AudioManager.Instance.MusicSource.volume = _mPlayer.VolumeMusic;
+        //AudioManager.Instance.SFXSource.volume = _mPlayer.VolumeMusic;
 
 
     }
@@ -25,13 +25,13 @@ public class SlidersVolume : MonoBehaviour
     public void SetVolumeMusic()
     {
         AudioManager.Instance.MusicSource.volume = _mMusicVolumeSlider.value;
-        _mPlayer.ChangeMusicVolume(_mMusicVolumeSlider.value);
+        //_mPlayer.ChangeMusicVolume(_mMusicVolumeSlider.value);
     }
 
     public void SetVolumeSFX()
     {
         AudioManager.Instance.SFXSource.volume = _mSFXVolumeSlider.value;
-        _mPlayer.ChangeSFXVolume(_mSFXVolumeSlider.value);
+        //_mPlayer.ChangeSFXVolume(_mSFXVolumeSlider.value);
 
     }
 }

@@ -7,6 +7,10 @@ using UnityEngine.Video;
 [System.Serializable]
 public class Player : MonoBehaviour
 {
+
+    [SerializeField] bool _DeleteOldSave = true;
+    public bool DeleteOldSave { get => _DeleteOldSave; set => _DeleteOldSave = value; }
+
     [System.Serializable]
     public class Cinematics
     {
@@ -108,13 +112,13 @@ public class Player : MonoBehaviour
 
     [SerializeField] private int _mMoney;
 
-    public int VolumeMusic { get => _mVolumeMusic; private set => _mVolumeMusic = value; }
+    public bool VolumeMusic { get => _mVolumeMusic; private set => _mVolumeMusic = value; }
 
-    [SerializeField] private int _mVolumeMusic;
+    [SerializeField] private bool _mVolumeMusic;
 
-    public int VolumeFX { get => _mVolumeFX; private set => _mVolumeFX = value; }
+    public bool VolumeFX { get => _mVolumeFX; private set => _mVolumeFX = value; }
 
-    [SerializeField] private int _mVolumeFX;
+    [SerializeField] private bool _mVolumeFX;
 
     public string Language { get => _mLanguage; private set => _mLanguage = value; }
 
@@ -184,7 +188,7 @@ public class Player : MonoBehaviour
     public void SaveJson()
     {
         bool firstSave = false;
-        if (!CheckFile())
+        if (!CheckFile() || _DeleteOldSave)
         {
             firstSave = true;
             playerData.FirstSaveData(this);
@@ -194,7 +198,7 @@ public class Player : MonoBehaviour
         {
             playerData.SaveData(this);
         }
-        if (DataService.SaveData("/player-stats.json", playerData, false))
+        if (DataService.SaveData("/player-stats.json", playerData, true))
         {
             if (firstSave)
             {
@@ -439,7 +443,7 @@ public class Player : MonoBehaviour
         TrophyManager.Instance.OnTrophyComplete += TrophyCompleted;
         TrophyManager.Instance.OnTrophyClaimed += ClaimTrophy;
 
-        if (CheckFile())
+        if (CheckFile() || !_DeleteOldSave)
         {
             PlayerData data = DataService.LoadData<PlayerData>("/player-stats.json", true);
 
@@ -450,7 +454,7 @@ public class Player : MonoBehaviour
             if (data.ErasData.Count == 0)
             {
 
-                UpdateSaveFile(data);
+                SaveJson();
             }
             else
             {
@@ -466,7 +470,9 @@ public class Player : MonoBehaviour
 
                 ErasData = data.ErasData;
 
-                MoneyManager.Instance.UpdateMoney();
+                _DeleteOldSave = data.deleteOldSave;
+
+                //MoneyManager.Instance.UpdateMoney();
 
                 foreach (var item in data.UnlockedCinematics)
                 {
@@ -610,15 +616,15 @@ public class Player : MonoBehaviour
         Level++;
     }
 
-    public void ChangeMusicVolume(float Value)
+    public void ChangeMusicVolume(bool Value)
     {
-        VolumeMusic = (int)Value; ;
+        VolumeMusic = Value; ;
     }
 
-    public void ChangeSFXVolume(float Value)
+    public void ChangeSFXVolume(bool Value)
     {
 
-        VolumeFX = (int)Value;
+        VolumeFX = Value;
     }
 
     public void AddFournitureInInventory(FournituresClassSO Item)

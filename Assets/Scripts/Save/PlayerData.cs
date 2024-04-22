@@ -5,6 +5,7 @@ using static Player;
 [System.Serializable]
 public class PlayerData
 {
+    public bool deleteOldSave;
 
     public int Level;
 
@@ -13,9 +14,9 @@ public class PlayerData
 
     public int Money;
 
-    public int VolumeMusic;
+    public bool VolumeMusic;
 
-    public int VolumeFX;
+    public bool VolumeFX;
 
     public string Language;
 
@@ -57,6 +58,8 @@ public class PlayerData
         Language = player.Language;
 
         ErasData = player.ErasData;
+
+        deleteOldSave = player.DeleteOldSave;
 
         SaveCinematics(player.UnlockedCinematics);
 
@@ -144,10 +147,12 @@ public class PlayerData
         Money = 0;
         BestScore = 0;
 
-        VolumeMusic = 100;
-        VolumeFX = 100;
+        VolumeMusic = true;
+        VolumeFX = true;
 
         Language = "fr";
+
+        deleteOldSave = false;
 
         for (int i = 0; i < player.AllEra1.Count; i++)
         {

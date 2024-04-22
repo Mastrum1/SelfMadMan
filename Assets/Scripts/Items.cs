@@ -41,6 +41,7 @@ public class MinigameItem : Items
     public override void Obtain()
     {
         MiniGameSelector.instance.UnlockMinigame(SceneName);
+        QuestManager.Instance.UnlockQuest(SceneName);
     }
 }
 

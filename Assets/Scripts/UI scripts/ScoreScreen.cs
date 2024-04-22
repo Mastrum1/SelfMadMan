@@ -49,6 +49,13 @@ public class ScoreScreen : MonoBehaviour
         _mPanelOnClick.OnClick += OnPanelClicked;
     }
 
+    public void CompleteQuests()
+    {
+        Debug.Log("completed quests");
+
+        _mQuestView.CompletetAllBars();
+        StartCoroutine(_mQuestView.CheckForCompletedQuests());
+    }
 
     void OnWinScreenDisplay(bool won, int era, int hearts, bool gameOver)
     {
@@ -158,7 +165,6 @@ public class ScoreScreen : MonoBehaviour
             _coinsEarned.text = " +" + amount;
             _bestScore.text = "BEST : " + GameManager.instance.Player.BestScore;
             
-            _mQuestView.CheckForCompletedQuests();
         }
 
     }
