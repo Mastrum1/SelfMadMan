@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -578.5, y: 34.4}
+  m_AnchoredPosition: {x: -573, y: 7}
   m_SizeDelta: {x: 580, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3916535094206457134
@@ -563,6 +563,8 @@ MonoBehaviour:
   _mQuestColor: {fileID: 3809457272348283373}
   _mQuestProgression: {fileID: 93417248606730357}
   _mChangeButton: {fileID: 6504061723516233316}
+  _mFillBarStartPos: {fileID: 4952403118057318664}
+  _mFillBarEndPos: {fileID: 4186292431852455072}
   _difficultyColor:
   - {r: 0.28932858, g: 1, b: 0, a: 1}
   - {r: 0.6166129, g: 0, b: 1, a: 1}
@@ -661,6 +663,76 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!1 &4186292431852455072
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 825951553152250433}
+  m_Layer: 0
+  m_Name: FillBarEndPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &825951553152250433
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4186292431852455072}
+  m_LocalRotation: {x: -0, y: -0, z: 0.047978126, w: 0.99884844}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1.2000003, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 146510654383382049}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 36.547863, y: 86.903}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &4952403118057318664
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6491242206772734552}
+  m_Layer: 0
+  m_Name: FillBarStartPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6491242206772734552
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4952403118057318664}
+  m_LocalRotation: {x: -0, y: -0, z: 0.047978126, w: 0.99884844}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1.2000003, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 146510654383382049}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -530.828, y: 32.270958}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4964122937785153734
 GameObject:
   m_ObjectHideFlags: 0
@@ -1521,6 +1593,8 @@ RectTransform:
   m_Children:
   - {fileID: 506495971938786868}
   - {fileID: 1922814693122742256}
+  - {fileID: 825951553152250433}
+  - {fileID: 6491242206772734552}
   m_Father: {fileID: 3924866873584833688}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 2.053}
   m_AnchorMin: {x: 0.5, y: 0.5}
