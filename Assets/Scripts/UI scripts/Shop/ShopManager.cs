@@ -1,3 +1,5 @@
+using Lean.Touch;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -6,11 +8,7 @@ public class ShopManager : MonoBehaviour
 {
     public static ShopManager Instance;
 
-    [Header("Money")]
-    [SerializeField] private Money _mMoney;
-
     [Header("Item Shop SO")]
-    [SerializeField] private Items[] _SpinWheel;
     [SerializeField] private CoinsSO[] _mCoins;
     [SerializeField] private ItemsSO[] _mFurnitures;
     [SerializeField] private ItemsSO[] _mPowerUp;
@@ -23,6 +21,13 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private ConfirmPurchase _mConfirmPurchase;
     [SerializeField] private ItemsSO _mItemBeingPurchased;
 
+    [Header("Pulse of the buttons")]
+    [SerializeField] private LeanPulseScale _mSpinButtonPulse;
+
+    public GameObject[] CoinAnim { get => _mCoinAnim; set => _mCoinAnim = value; }
+    [Header("Coin Animation")]
+    [SerializeField] private GameObject[] _mCoinAnim;
+
     private void Awake()
     {
         if (Instance == null)
@@ -32,34 +37,8 @@ public class ShopManager : MonoBehaviour
     private void Start()
     {
         LoadAllPanels();
-        CheckPurchasable();
+        Pulse();
         _mConfirmPurchase._mItemPurchased += HandleItemPurchased;
-    }
-
-    public void CheckPurchasable()
-    {
-        CheckPurchasableCoins(_mCoins);
-    }
-
-    public void CheckPurchasableCoins(ItemsSO[] item)
-    {
-        for (int i = 0; i < item.Length; i++)
-        {
-            if (_mMoney.CurrentMoney >= item[i].Cost)
-            {
-                Color newColor = _mCoinsTemplates[i].PurchaseBox.color;
-                newColor.a = 1f;
-                _mCoinsTemplates[i].PurchaseBox.color = newColor;
-                _mCoinsTemplates[i].TemplateBox.enabled = true;
-            }
-            else
-            {
-                Color newColor = _mCoinsTemplates[i].PurchaseBox.color;
-                newColor.a = 0.5f;
-                _mCoinsTemplates[i].PurchaseBox.color = newColor;
-                _mCoinsTemplates[i].TemplateBox.enabled = false;
-            }
-        }
     }
 
     public void HandleItemPurchased(ItemsSO item)
@@ -80,7 +59,7 @@ public class ShopManager : MonoBehaviour
         {
             if (item[i].Type == ItemsSO.TYPE.COINS)
             {
-                _mCoinsTemplates[i].TitleText.text = item[i].name;
+                _mCoinsTemplates[i].TitleText.text = item[i].ItemName;
                 _mCoinsTemplates[i].CostText.text = item[i].Cost.ToString();
                 _mCoinsTemplates[i].ImageItem.sprite = item[i].Icon;
                 _mCoinsTemplates[i].Type = item[i].Type;
@@ -103,32 +82,55 @@ public class ShopManager : MonoBehaviour
             if (items != null)
             {
                 Debug.Log(coin.Amount);
-                items.Obtain();
+                MoneyManager.Instance.AddMoney(coin.Amount);
             }
         }
 
-        if (_mMoney.CurrentMoney <= _mItemBeingPurchased.Cost)
+        if (MoneyManager.Instance.CurrentMoney <= _mItemBeingPurchased.Cost)
         {
             Debug.Log("Not enough money");
+            //Play a invlid buzz sound
         }
         else
         {
-            _mMoney.SubtractMoney(_mItemBeingPurchased.Cost);
-            Debug.Log(_mMoney.CurrentMoney);
+            MoneyManager.Instance.SubtractMoney(_mItemBeingPurchased.Cost);
+            StartCoroutine(MoveMoney(_mCoinAnim[0]));
+            Debug.Log(MoneyManager.Instance.CurrentMoney);
         }
     }
 
     public void HeartPlus(TMP_Text price)
     {
 
-        if (_mMoney.CurrentMoney <= int.Parse(price.text))
+        if (MoneyManager.Instance.CurrentMoney <= int.Parse(price.text))
         {
             Debug.Log("No Money");
+            //Play a invlid buzz sound
         }
         else
         {
-            _mMoney.SubtractMoney(int.Parse(price.text));
+            MoneyManager.Instance.SubtractMoney(int.Parse(price.text));
             GameManager.instance.Player.Hearts += 1;
         }
+    }
+
+    public void Pulse()
+    {
+        if (MoneyManager.Instance.CurrentMoney >= 100)
+        {
+            _mSpinButtonPulse.enabled = true;
+            Debug.Log("Pulse");
+        }
+        else
+        {
+            _mSpinButtonPulse.enabled = false;
+        }
+    }
+
+    public IEnumerator MoveMoney(GameObject particule)
+    {
+        particule.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        particule.SetActive(false);
     }
 }

@@ -29,6 +29,7 @@ public class TimeToSlayGameManager : MiniGameManager
         if (!_mIsEnd) {
             _mIsEnd = true;
             _mBrushMovement.Stop();
+            if (status) Amount++;
             EndMiniGame(status, miniGameScore);
         }
     }

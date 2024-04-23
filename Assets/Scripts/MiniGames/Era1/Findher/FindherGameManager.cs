@@ -9,6 +9,7 @@ public class FindherGameManager : MiniGameManager
 {
     [SerializeField] int _mTotalNbSwipe = 10;
     [SerializeField] private GameObject _mInteractables;
+    [SerializeField] private GameObject _mChad;
     [SerializeField] private GameObject _mCanvas;
 
     //Girls Variables
@@ -79,8 +80,10 @@ public class FindherGameManager : MiniGameManager
             _mNbSwipe++;
             if (_mNbSwipe < _mTotalNbSwipe)
                 ShowProfile();
-            else
+            else {
+                _mChad.SetActive(true);
                 EndGame(true);
+            }
         }
     }
 
@@ -96,12 +99,14 @@ public class FindherGameManager : MiniGameManager
         else {
             _mAd.SetActive(false);
             _mProfile.SetActive(false);
-
+            Amount++;
             _mNbSwipe++;
             if (_mNbSwipe < _mTotalNbSwipe)
                 ShowProfile();
-            else
+            else {
+                _mChad.SetActive(true);
                 EndGame(true);
+            }
         }
     }
 

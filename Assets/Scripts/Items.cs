@@ -27,9 +27,8 @@ public class Coins : Items
 
     public override void Obtain()
     {
-        _mPlayer = GameManager.instance.GetComponent<Player>();
-        _mPlayer.NewCurrency(_mPlayer.Money + Amount);
-        //put amount in money
+        MoneyManager.Instance.AddMoney(Amount);
+        MoneyManager.Instance.UpdateMoney();
     }
 }
 
@@ -42,6 +41,7 @@ public class MinigameItem : Items
     public override void Obtain()
     {
         MiniGameSelector.instance.UnlockMinigame(SceneName);
+        QuestManager.Instance.UnlockQuest(SceneName);
     }
 }
 
@@ -59,7 +59,6 @@ public class UsableItem : Items
         //use item
         _mPlayer = GameManager.instance.GetComponent<Player>();
         _mPlayer.AddUsableItemInInventory(this);
-
     }
 
     public override void Use()

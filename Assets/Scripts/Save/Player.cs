@@ -7,6 +7,10 @@ using UnityEngine.Video;
 [System.Serializable]
 public class Player : MonoBehaviour
 {
+
+    [SerializeField] bool _DeleteOldSave = true;
+    public bool DeleteOldSave { get => _DeleteOldSave; set => _DeleteOldSave = value; }
+
     [System.Serializable]
     public class Cinematics
     {
@@ -28,11 +32,10 @@ public class Player : MonoBehaviour
         private int _currentAmount;
         public int CurrentAmount { get => _currentAmount; set => _currentAmount = value; }
 
-        public TrophySave(int TrophySOIndex, TrophyManager.CompletionState completionState, int goal, int currentAmount)
+        public TrophySave(int TrophySOIndex, TrophyManager.CompletionState completionState, int currentAmount)
         {
             _TrophySOIndex = TrophySOIndex;
             TrophyCompletionState = completionState;
-            Goal = goal;
             CurrentAmount = currentAmount;
         }
     }
@@ -81,6 +84,7 @@ public class Player : MonoBehaviour
     }
 
     [SerializeField] private bool _mLoadSaveMinigame = false;
+    public bool LoadSaveMinigame { get => _mLoadSaveMinigame; set => _mLoadSaveMinigame = value; }
 
 
     public event Action<PlayerData> OnDataLoad;
@@ -108,13 +112,13 @@ public class Player : MonoBehaviour
 
     [SerializeField] private int _mMoney;
 
-    public int VolumeMusic { get => _mVolumeMusic; private set => _mVolumeMusic = value; }
+    public bool VolumeMusic { get => _mVolumeMusic; private set => _mVolumeMusic = value; }
 
-    [SerializeField] private int _mVolumeMusic;
+    [SerializeField] private bool _mVolumeMusic;
 
-    public int VolumeFX { get => _mVolumeFX; private set => _mVolumeFX = value; }
+    public bool VolumeFX { get => _mVolumeFX; private set => _mVolumeFX = value; }
 
-    [SerializeField] private int _mVolumeFX;
+    [SerializeField] private bool _mVolumeFX;
 
     public string Language { get => _mLanguage; private set => _mLanguage = value; }
 
@@ -164,9 +168,9 @@ public class Player : MonoBehaviour
 
     [SerializeField] private List<TrophyManager.Trophy> _mAllTrophy;
 
-    public List<GameManager.EraData> EraData { get => _EraData; private set => _EraData = value; }
+    public List<GameManager.EraData> ErasData { get => _ErasData; private set => _ErasData = value; }
 
-    private List<GameManager.EraData> _EraData = new List<GameManager.EraData>();
+    private List<GameManager.EraData> _ErasData = new List<GameManager.EraData>();
 
     public List<MinigameScene> AllEra1 { get => _mAllEra1; private set => _mAllEra1 = value; }
 
@@ -181,11 +185,10 @@ public class Player : MonoBehaviour
     [SerializeField] private List<MinigameScene> _mAllEra3;
 
 
-
     public void SaveJson()
     {
         bool firstSave = false;
-        if (!CheckFile())
+        if (!CheckFile() || _DeleteOldSave)
         {
             firstSave = true;
             playerData.FirstSaveData(this);
@@ -195,7 +198,7 @@ public class Player : MonoBehaviour
         {
             playerData.SaveData(this);
         }
-        if (DataService.SaveData("/player-stats.json", playerData, false))
+        if (DataService.SaveData("/player-stats.json", playerData, true))
         {
             if (firstSave)
             {
@@ -391,7 +394,7 @@ public class Player : MonoBehaviour
         {
             foreach (var item in data.AllTrophy)
             {
-                AllTrophy[item.TrophySOIndex] = new TrophyManager.Trophy(AllTrophy[item.TrophySOIndex].TrophySO, item.TrophyCompletionState, item.Goal, item.CurrentAmount);
+                AllTrophy[item.TrophySOIndex] = new TrophyManager.Trophy(AllTrophy[item.TrophySOIndex].TrophySO, item.TrophyCompletionState, item.CurrentAmount);
             }
         }
         else
@@ -399,17 +402,17 @@ public class Player : MonoBehaviour
             data.SaveAllTrophyQuest(AllTrophy);
         }
 
-        if (data.EraData.Count == 3)
+        if (data.ErasData.Count == 3)
         {
-            if (data.EraData[2].Unlocked == true || data.EraData[3].Unlocked == true)
+            if (data.ErasData[2].Unlocked == true || data.ErasData[3].Unlocked == true)
             {
-                EraData = data.EraData;
+                ErasData = data.ErasData;
             }
         }
         else
         {
             data.InitEras();
-            EraData = data.EraData;
+            ErasData = data.ErasData;
         }
         SaveJson();
 
@@ -440,7 +443,7 @@ public class Player : MonoBehaviour
         TrophyManager.Instance.OnTrophyComplete += TrophyCompleted;
         TrophyManager.Instance.OnTrophyClaimed += ClaimTrophy;
 
-        if (CheckFile())
+        if (CheckFile() || !_DeleteOldSave)
         {
             PlayerData data = DataService.LoadData<PlayerData>("/player-stats.json", true);
 
@@ -448,10 +451,10 @@ public class Player : MonoBehaviour
                 data = DataService.LoadData<PlayerData>("/player-stats.json", false);
 
 
-            if (data.EraData.Count == 0)
+            if (data.ErasData.Count == 0)
             {
 
-                UpdateSaveFile(data);
+                SaveJson();
             }
             else
             {
@@ -465,7 +468,9 @@ public class Player : MonoBehaviour
 
                 Language = data.Language;
 
-                EraData = data.EraData;
+                ErasData = data.ErasData;
+
+                _DeleteOldSave = data.deleteOldSave;
 
                 foreach (var item in data.UnlockedCinematics)
                 {
@@ -510,7 +515,9 @@ public class Player : MonoBehaviour
                     AllQuest[item.QuestSOIndex] = new QuestManager.Quest(AllQuest[item.QuestSOIndex].QuestSO, item.QuestCompletionState, item.QuestDispo, item.Difficulty, item.MaxAmount, item.CurrentAmount);
                     ActiveQuests.Add(AllQuest[item.QuestSOIndex]);
                 }
+
                 CompletedQuests = new List<QuestManager.Quest>();
+
                 foreach (var item in data.CompletedQuests)
                 {
                     AllQuest[item.QuestSOIndex] = new QuestManager.Quest(AllQuest[item.QuestSOIndex].QuestSO, item.QuestCompletionState, item.QuestDispo, item.Difficulty, item.MaxAmount, item.CurrentAmount);
@@ -528,14 +535,10 @@ public class Player : MonoBehaviour
 
                 foreach (var item in data.AllTrophy)
                 {
-                    AllTrophy[item.TrophySOIndex] = new TrophyManager.Trophy(AllTrophy[item.TrophySOIndex].TrophySO, item.TrophyCompletionState, item.Goal, item.CurrentAmount);
+                    AllTrophy[item.TrophySOIndex] = new TrophyManager.Trophy(AllTrophy[item.TrophySOIndex].TrophySO, item.TrophyCompletionState, item.CurrentAmount);
                 }
-
-                if (_mLoadSaveMinigame)
-                {
-                    MiniGameSelector.instance.LoadEra(AllEra1, AllEra2, AllEra3);
-                }
-                GameManager.instance.LoadEraData(EraData);
+                
+                GameManager.instance.LoadEraData(ErasData);
 
                 TrophyManager.Instance.LoadTrophies(AllTrophy);
                 QuestManager.Instance.LoadQuests(AllQuest, ActiveQuests);
@@ -572,13 +575,17 @@ public class Player : MonoBehaviour
     public void QuestComplete(QuestManager.Quest quest)
     {
         CompletedQuests.Add(quest);
-        ActiveQuests.Remove(quest);
+    }
+
+    public void AddXp(int reward)
+    {
+        
     }
 
     public void RemoveCompleteQuests(QuestManager.Quest quest)
     {
         CompletedQuests.Remove(quest);
-        UnlockQuest(quest.QuestSO.ID);
+        //RemoveActiveQuests(quest);
     }
 
     public void UnlockQuest(int ID)
@@ -594,11 +601,19 @@ public class Player : MonoBehaviour
     public void NewCurrency(int NewCurrency)
     {
         Money = NewCurrency;
+        MoneyManager.Instance.UpdateMoney();
     }
 
-    public void AddStars(int Reward)
+    public int AddStars(int reward)
     {
-        Xp += Reward;
+        _mXp += reward;
+        return _mXp;
+    }
+
+    public void LevelUp()
+    {
+        _mLevel++;
+        _mXp -= 5;
     }
 
     public void ResetStars()
@@ -611,15 +626,15 @@ public class Player : MonoBehaviour
         Level++;
     }
 
-    public void ChangeMusicVolume(float Value)
+    public void ChangeMusicVolume(bool Value)
     {
-        VolumeMusic = (int)Value; ;
+        VolumeMusic = Value; ;
     }
 
-    public void ChangeSFXVolume(float Value)
+    public void ChangeSFXVolume(bool Value)
     {
 
-        VolumeFX = (int)Value;
+        VolumeFX = Value;
     }
 
     public void AddFournitureInInventory(FournituresClassSO Item)
@@ -695,7 +710,7 @@ public class Player : MonoBehaviour
 
     public void UnlockEra(int era)
     {
-        EraData[era].UnlockEra();
+        ErasData[era].UnlockEra();
     }
 
     public void TrophyCompleted(TrophyManager.Trophy trophy)
@@ -708,8 +723,6 @@ public class Player : MonoBehaviour
         AllTrophy[trophy.TrophySO.ID] = trophy;
         _mMoney += reward;
     }
-
-
 
     public bool CheckFile()
     {

@@ -26,7 +26,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 85cbaa79ea1698d4eb70cb4f2d6534ee, type: 3}
+        m_Texture: {fileID: 2800000, guid: e51c62e0feb70b64d9377fb40ef3a6b4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainText:
@@ -34,7 +34,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _None:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: e51c62e0feb70b64d9377fb40ef3a6b4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Over_Text:
@@ -42,6 +42,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_c3cb535bc7d746d78d949be03f20cb20_Texture_1_Texture2D:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -56,9 +60,9 @@ Material:
     - _BUILTIN_SrcBlend: 5
     - _BUILTIN_Surface: 1
     - _BUILTIN_ZTest: 4
-    - _BUILTIN_ZWrite: 1
-    - _BUILTIN_ZWriteControl: 1
-    - _TimeSpeed: -4.77
+    - _BUILTIN_ZWrite: 0
+    - _BUILTIN_ZWriteControl: 0
+    - _TimeSpeed: -1.03
     m_Colors:
     - _Direction: {r: 1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

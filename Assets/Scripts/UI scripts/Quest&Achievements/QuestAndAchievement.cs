@@ -8,21 +8,15 @@ public class QuestAndAchievement : MonoBehaviour
 
     private void OnEnable()
     {
-        if (!_mQuestView.activeSelf)
-        {
-            _mQuestView.SetActive(true);
-        }
-
-        if (_mTrophyView.activeSelf)
-        {
-            _mTrophyView.SetActive(false);
-        }
+        EnableQuests();
     }
 
     public void EnableQuests()
     {
         _mTrophyView.SetActive(false);
         _mQuestView.SetActive(true);
+        _mQuestView.GetComponent<QuestView>().IsInQuestMenu(); //JIMMY CHANGE
+        
     }
 
     public void EnableTrophies()

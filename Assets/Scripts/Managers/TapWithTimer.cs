@@ -65,13 +65,8 @@ public class TapWithTimer : MonoBehaviour
                 case 1:
                     _mDecrease = GameManager.instance.FasterLevel;
                     break;
-                case 2:
-                    _mDecrease = (GameManager.instance.FasterLevel / 1.25f);
-                    break;
-                case 3:
-                    _mDecrease = (GameManager.instance.FasterLevel / 1.45f);
-                    break;
                 default:
+                    _mDecrease = (GameManager.instance.FasterLevel / 1.45f);
                     break;
             }
 
@@ -88,6 +83,7 @@ public class TapWithTimer : MonoBehaviour
 
     public void ObjectTaped()
     {
+        Debug.Log("Object taped"); 
         _StopTorus = true;
         _mTorus.SetActive(false);
 
@@ -102,16 +98,11 @@ public class TapWithTimer : MonoBehaviour
             StartCoroutine(FadeOut());
 
         }
-        else if (_mTorus.transform.localScale.x < _mImmondeTiming && _mTorus.transform.localScale.x > _mMidTiming)
+        else if (_mTorus.transform.localScale.x > _mMidTiming)
         {
             Debug.Log("Immonde click");
             StartCoroutine(FadeOut());
 
-        }
-        else
-        {
-            _mVFXScaleUp.OnObjectClicked();
-            OnLoose?.Invoke(false);
         }
     }
 

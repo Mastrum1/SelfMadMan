@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Lean.Touch;
 
 public class ContentManager : MonoBehaviour
 {
@@ -105,9 +104,19 @@ public class ContentManager : MonoBehaviour
     }
     public void UnlockEra()
     {
-        IsUnlocking = true;
-        _mLockAnimator.SetBool("UnlockEraAnim", true);
-        StartCoroutine(Unlocking());
+        
+        if (MoneyManager.Instance.CurrentMoney < GameManager.instance.ErasData[GameManager.instance.Era]._price)
+        {
+            Debug.Log("No Money");
+            return;
+        }
+        else
+        {
+            MoneyManager.Instance.SubsEra(_mLockPrice);
+            IsUnlocking = true;
+            _mLockAnimator.SetBool("UnlockEraAnim", true);
+            StartCoroutine(Unlocking());
+        }
     }
 
     IEnumerator Unlocking()

@@ -5,18 +5,17 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject _mpauseMenu;
-    [SerializeField] Animator _mPauseAnim;
+    [SerializeField] GameObject _mElementsMenu;
 
     public void Pause()
     {
-        _mPauseAnim.SetBool("OpenPause", true);
+        Time.timeScale = 0;
         StartCoroutine(CheckOpenPause());
     }
 
     public void Resume()
     {
-        Time.timeScale = 1;
-        _mPauseAnim.SetBool("OpenPause", false);
+        StartCoroutine(ResumePause());
     }
 
     public void Restart()
@@ -33,14 +32,30 @@ public class PauseMenu : MonoBehaviour
 
     IEnumerator CheckOpenPause()
     {
-        yield return new WaitForSeconds(0.3f);
-        if (_mPauseAnim.GetBool("OpenPause") == true)
+        _mpauseMenu.SetActive(true);
+        _mElementsMenu.SetActive(true);
+        float scale = 0f;
+        while (scale != 1)
         {
-            if (_mPauseAnim.GetCurrentAnimatorStateInfo(0).IsName("OpenPause"))
-            {
-                Time.timeScale = 0;
-                Debug.Log("Paused");
-            }
+            scale += Time.unscaledDeltaTime;
+            scale = Mathf.Clamp01(scale);
+            _mElementsMenu.gameObject.transform.localScale = new Vector3(scale, scale, scale);
+            yield return null;
         }
+    }
+
+    IEnumerator ResumePause()
+    {
+        float scale = 1f;
+        while (scale != 0)
+        {
+            scale -= Time.unscaledDeltaTime;
+            scale = Mathf.Clamp01(scale);
+            _mElementsMenu.gameObject.transform.localScale = new Vector3(scale, scale, scale);
+            yield return null;
+        }
+        _mpauseMenu.SetActive(false);
+        _mElementsMenu.SetActive(false);
+        Time.timeScale = 1;
     }
 }
