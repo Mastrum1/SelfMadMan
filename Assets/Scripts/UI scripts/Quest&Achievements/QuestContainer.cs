@@ -41,10 +41,8 @@ public class QuestContainer : MonoBehaviour
         _mQuestDescription.text = replace;
         _mQuestIcon.sprite = _mSelectedQuest.QuestSO.questIcon;
         _mQuestColor.color = _difficultyColor[(int)_mSelectedQuest.Difficulty.difficulty];
-        if(_mIsInQuestMenu)
-        {
-            StartCompletion();
-        }
+        
+        StartCompletion();
             
         for (var j = 0; j < _mSelectedQuest.Difficulty.reward; j++)
         {
@@ -88,6 +86,7 @@ public class QuestContainer : MonoBehaviour
     public void ResetFillBar()
     {
         _mQuestProgression.transform.position = _mFillBarStartPos.transform.position;
+        Debug.Log("Restted Fill Bar");
     }
 
     private void OnDisable()
