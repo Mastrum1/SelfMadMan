@@ -10,7 +10,7 @@ public class Tower : MonoBehaviour
     private bool _rotating = true;
     public bool Rotating { get => _rotating; set => _rotating = value; }
 
-    private float _rotationSpeed = 50;
+    private float _rotationSpeed = 25;
     private float _ClockrotationSpeed;
 
     private float _minRotation = -15f;

@@ -5,6 +5,7 @@ using static Player;
 [System.Serializable]
 public class PlayerData
 {
+    public bool deleteOldSave;
 
     public int Level;
 
@@ -13,9 +14,9 @@ public class PlayerData
 
     public int Money;
 
-    public int VolumeMusic;
+    public bool VolumeMusic;
 
-    public int VolumeFX;
+    public bool VolumeFX;
 
     public string Language;
 
@@ -35,7 +36,7 @@ public class PlayerData
 
     public List<int> QuestUnlocked = new List<int>();
 
-    public List<GameManager.EraData> EraData = new List<GameManager.EraData>();
+    public List<GameManager.EraData> ErasData = new List<GameManager.EraData>();
 
     public List<int> AllEra1 = new List<int>();
 
@@ -56,23 +57,28 @@ public class PlayerData
 
         Language = player.Language;
 
-        EraData = player.EraData;
+        ErasData = player.ErasData;
+
+        deleteOldSave = player.DeleteOldSave;
 
         SaveCinematics(player.UnlockedCinematics);
 
         for (int i = 0; i < player.AllEra1.Count; i++)
         {
-            AllEra1.Add(i);
+            if (player.AllEra1[i].Locked == false && !AllEra1.Contains(i))
+                AllEra1.Add(i);
         }
 
         for (int i = 0; i < player.AllEra2.Count; i++)
         {
-            AllEra2.Add(i);
+            if (player.AllEra2[i].Locked == false && !AllEra2.Contains(i))
+                AllEra2.Add(i);
         }
 
         for (int i = 0; i < player.AllEra3.Count; i++)
         {
-            AllEra3.Add(i);
+            if (player.AllEra3[i].Locked == false && !AllEra3.Contains(i))
+                AllEra3.Add(i);
         }
 
         Inventory = player.Inventory;
@@ -129,9 +135,9 @@ public class PlayerData
 
     public void InitEras()
     {
-        EraData.Add(new EraData(true, 0));
-        EraData.Add(new EraData(false, 1000));
-        EraData.Add(new EraData(false, 2000));
+        ErasData.Add(new EraData(true, 0));
+        ErasData.Add(new EraData(false, 1000));
+        ErasData.Add(new EraData(false, 2000));
     }
 
     public void FirstSaveData(Player player)
@@ -141,10 +147,12 @@ public class PlayerData
         Money = 0;
         BestScore = 0;
 
-        VolumeMusic = 100;
-        VolumeFX = 100;
+        VolumeMusic = true;
+        VolumeFX = true;
 
         Language = "fr";
+
+        deleteOldSave = false;
 
         for (int i = 0; i < player.AllEra1.Count; i++)
         {

@@ -14,6 +14,7 @@ public class ChangeSpawn : MonoBehaviour
     [SerializeField] private TapWithTimer _mTapWithTimer;
     [SerializeField] private TextMeshProUGUI _mText;
     [SerializeField] private GameObject _Parent;
+    [SerializeField] private CircleCollider2D _mTapCollider;
 
     Coroutine _mRespawnCoroutine;
 
@@ -35,6 +36,8 @@ public class ChangeSpawn : MonoBehaviour
     }
     private void OnEnable()
     {
+        _mTapCollider.enabled = false;
+
         GetComponent<CircleCollider2D>().enabled = true;
         _mRespawnCoroutine = StartCoroutine(RespawnButton());
 
@@ -69,6 +72,7 @@ public class ChangeSpawn : MonoBehaviour
         {
             StopCoroutine(_mRespawnCoroutine);
             ChangeSpawnState?.Invoke(this);
+            _mTapCollider.enabled = true;
             _mColliderCount = 0;
             _mTapWithTimer.StopTorus = false;
             GetComponent<CircleCollider2D>().enabled = false;
