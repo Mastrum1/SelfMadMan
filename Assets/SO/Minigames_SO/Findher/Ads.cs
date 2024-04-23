@@ -6,6 +6,4 @@ using UnityEngine;
 public class Ads : ScriptableObject
 {
     public Sprite ProfilePicture;
-    public string Name;
-    public string Description;
 }

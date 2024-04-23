@@ -4,39 +4,20 @@ using UnityEngine;
 
 public class PopUpGameManager : MiniGameManager
 {
-    [SerializeField] PopUpSpawner _mSpawner;
-    [SerializeField] Animator _mAnimator;
-    bool _enabled = false;
-    bool _mIsEnd = false;
+    [SerializeField] PopUpSpawner spawner;
 
     // Update is called once per frame
-    public void OnDownload(GameObject button)
+    void Update()
     {
-        if (!_mSpawner.IsActivePopUp() && !_mIsEnd) {
-            _mAnimator.SetTrigger("PopupPress");
-            EndGame(true);
-        }
+        if (_mTimer.timerValue == 0)
+            EndMiniGame(false, miniGameScore);
     }
 
-    void EndGame(bool status)
+    public void  OnDownload(GameObject button)
     {
-        if (!_mIsEnd) {
-            _mIsEnd = true;
-            _mSpawner.DisablePopUp();
-            EndMiniGame(status, miniGameScore);
-        }
-    }
-
-    public override void Update()
-    {
-        if (_mTimer.TimerValue == 0 && !_mIsEnd) {
-            _mIsEnd = true;
-            _mSpawner.DisablePopUp();
-        }
-        base.Update();
-        if (!_mSpawner.IsActivePopUp()) {
-            if (!_enabled) _mAnimator.SetTrigger("NoPopup");
-            _enabled = true;
+        if (!spawner.IsActivePopUp()) {
+            button.SetActive(false);
+            EndMiniGame(true, miniGameScore);
         }
     }
 }

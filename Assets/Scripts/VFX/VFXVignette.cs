@@ -8,7 +8,7 @@ public class VignetteLerper : MonoBehaviour
     [SerializeField] private float startValue = 1.7f; // 1.7f to 0f for closing vignette / 0f to 1.7f for opening vignette
     [SerializeField] private float endValue = 0f;
 
-    private void OnEnable()
+    private void Start()
     {
         StartCoroutine(LerpVignetteSize());
     }

@@ -8,7 +8,7 @@ public class LocalSelector : MonoBehaviour
     static LocalSelector _mInstance;
 
     private bool active = false;
-    
+
     public static LocalSelector Instance { get =>_mInstance; } 
 
     private void Start()

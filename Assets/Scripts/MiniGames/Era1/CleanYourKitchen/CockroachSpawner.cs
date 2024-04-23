@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -22,51 +21,38 @@ public class CockroachSpawner : MonoBehaviour
     private int _numActivated;
     public IEnumerator EnableCockroaches(int amount)
     {
-        for (var i = 0; i < amount; i++)
-        {
-            CheckActive(i);
+        CheckActive(amount);
 
-            yield return new WaitForSeconds(Random.Range(0.1f, 0.5f));
+        yield return new WaitForSeconds(Random.Range(0.1f, 0.5f));
         
-            ActivateRoach(i);
-        }
+        ActivateRoach(amount);
     }
 
     private void CheckActive(int amount)
     {
         var numActive = _cockroaches.Count(cockroach => cockroach.gameObject.activeSelf);
 
-        if (numActive == _cockroaches.Count && _numActivated < amount + 1)
+        if (numActive == _cockroaches.Count && _numActivated < amount)
         {
             OnSpawnMore?.Invoke(1, this);
         }
     }
 
-    private void ActivateRoach(int i)
+    private void ActivateRoach(int amount)
     {
-        _cockroaches[i].gameObject.SetActive(true);
-        _cockroaches[i].transform.position = transform.position;
-        _cockroaches[i].transform.rotation = Quaternion.Euler(new Vector3(0, 0, 
-            Random.Range(0, 360)));
-
-        if (_cockroaches[i].gameObject.layer == LayerMask.NameToLayer("Default"))
+        for (var i = 0; i < amount; i++)
         {
-            if (gameObject.layer == LayerMask.NameToLayer("BottomKitchen"))
+            _cockroaches[i].gameObject.SetActive(true);
+            _cockroaches[i].transform.position = transform.position;
+            _cockroaches[i].transform.rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(0, 360)));
+            if (_cockroaches[i].gameObject.layer == LayerMask.NameToLayer("Default"))
             {
-                _cockroaches[i].Body.GetComponent<SpriteRenderer>().sortingOrder = -5;
-                _cockroaches[i].Squish.GetComponent<SpriteRenderer>().sortingOrder = -6;
+                _cockroaches[i].gameObject.layer = gameObject.layer;
+                _cockroaches[i].transform.localScale = transform.localScale;
             }
-            else
-            {
-                _cockroaches[i].Body.GetComponent<SpriteRenderer>().sortingOrder = -3;
-                _cockroaches[i].Squish.GetComponent<SpriteRenderer>().sortingOrder = -4;
-            }
+            _numActivated++;
+            OnActivated?.Invoke(_cockroaches[i]);
+            
         }
-        
-        _cockroaches[i].gameObject.layer = gameObject.layer;
-        _cockroaches[i].transform.localScale = transform.localScale;
-        
-        _numActivated++;
-        OnActivated?.Invoke(_cockroaches[i]);
     }
 }

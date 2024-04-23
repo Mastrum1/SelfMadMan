@@ -20,24 +20,20 @@ public class ISaidStopGameManager : MiniGameManager
     {
         if (_mIsEnd)
             return;
-        if (_mTimer.TimerValue == 0 && !_mIsEnd && _gameIsPlaying)
+        if (_mTimer.timerValue == 0)
             EndGame(true);
     }
 
     void EndGame(bool isWin) 
     {
-        if (!_mIsEnd) {
-            _mHand.Stop();
-            Amount++;
-            EndMiniGame(isWin, miniGameScore);
-            _mIsEnd = true;
-        }
+        _mHand.Stop();
+        EndMiniGame(isWin, miniGameScore);
+        _mIsEnd = true;
     }
 
     void OnPackCaught()
     {
-        if (!_mIsEnd)
-            EndGame(false);
+        EndGame(false);
     }
 
     void OnDestroy()

@@ -4,18 +4,15 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
-using NaughtyAttributes;
 
 public class MiniGameManager : MonoBehaviour
 {
     public delegate void MiniGameEndHandler(bool won, int score);
     public event MiniGameEndHandler OnMiniGameEnd;
 
-
-    [SerializeField] [Scene] private string _scenName;
     protected int Amount { get; set; }
-
-    protected bool _gameIsPlaying;
+    
+    private bool _gameIsPlaying;
 
     [SerializeField] public Timer _mTimer;
     [SerializeField] private VideoPlayer _cash;
@@ -24,23 +21,20 @@ public class MiniGameManager : MonoBehaviour
     [SerializeField] private GameObject _loosePanel;
 
     [NonSerialized] public int miniGameScore;
-
+    
     private QuestManager _questManager;
 
     public virtual void Awake()
     {
-        Amount = 0;
         _gameIsPlaying = true;
-        _cash.targetCamera = _sceneCamera;
+        //_cash.targetCamera = _sceneCamera;
         _mTimer.ResetTimer(GameManager.instance.Speed);
         GameManager.instance.SelectNewMiniGame(this);
-        _questManager = QuestManager.Instance;
+        _questManager = QuestManager.instance;
     }
 
     protected virtual void EndMiniGame(bool won, int score)
     {
-        Debug.Log("ENDGAME");
-
         _gameIsPlaying = false;
         _mTimer.MyTimer = false;
 
@@ -51,12 +45,12 @@ public class MiniGameManager : MonoBehaviour
 
         float timeout = won ? 1.5f : 0.5f;
         
-        foreach (var quest in _questManager.SelectedQuests.Where(quest => quest.QuestSO.scene.SceneName == _scenName).ToArray())
+        foreach (var quest in _questManager.SelectedQuests.Where(quest => quest.QuestSO.scene.SceneName == SceneManager.GetActiveScene().name))
         {
             quest.CurrentAmount += Amount;
-            _questManager.CheckQuestCompletion(quest);
+            _questManager.CheckQuestCompletion();
         }
-
+        
         StartCoroutine(StartAnim(won, score, timeout));
     }
 
@@ -72,7 +66,15 @@ public class MiniGameManager : MonoBehaviour
 
     public virtual void Update()
     {
-        if (_mTimer.TimerValue == 0 && _gameIsPlaying)
-            EndMiniGame(false, 0);
+        if (_mTimer.timerValue == 0)
+        {
+            Debug.Log("Time's up");
+            EndMiniGame(false, miniGameScore);
+        }
+    }
+
+    protected void IncrementQuestAmount()
+    {
+        Amount++;
     }
 }

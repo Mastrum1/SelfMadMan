@@ -676,6 +676,7 @@ GameObject:
   - component: {fileID: 285153445}
   - component: {fileID: 285153444}
   - component: {fileID: 285153443}
+  - component: {fileID: 285153442}
   - component: {fileID: 285153446}
   m_Layer: 5
   m_Name: Button (1)
@@ -704,6 +705,18 @@ RectTransform:
   m_AnchoredPosition: {x: 133, y: 416}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &285153442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285153440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6a7e166481b3ef4bb252de234aef339, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &285153443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -749,7 +762,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 285153446}
-        m_TargetAssemblyTypeName: MinigameButton, Assembly-CSharp
+        m_TargetAssemblyTypeName: MinigamesButton, Assembly-CSharp
         m_MethodName: GoToMinigame
         m_Mode: 1
         m_Arguments:
@@ -823,7 +836,7 @@ GameObject:
   - component: {fileID: 294137560}
   - component: {fileID: 294137559}
   - component: {fileID: 294137558}
-  - component: {fileID: 294137561}
+  - component: {fileID: 294137557}
   m_Layer: 5
   m_Name: Button (2)
   m_TagString: Untagged
@@ -851,6 +864,18 @@ RectTransform:
   m_AnchoredPosition: {x: 133, y: 98}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &294137557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294137555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6a7e166481b3ef4bb252de234aef339, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &294137558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -895,8 +920,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 294137561}
-        m_TargetAssemblyTypeName: MinigameButton, Assembly-CSharp
+      - m_Target: {fileID: 294137557}
+        m_TargetAssemblyTypeName: MinigamesButton, Assembly-CSharp
         m_MethodName: GoToMinigame
         m_Mode: 1
         m_Arguments:
@@ -945,19 +970,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 294137555}
   m_CullTransparentMesh: 1
---- !u!114 &294137561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 294137555}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d13507db86a58124ea40d8bcac2f52cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mEraChoice: {fileID: 2133994320}
 --- !u!1 &348490794
 GameObject:
   m_ObjectHideFlags: 0
@@ -2160,7 +2172,7 @@ GameObject:
   - component: {fileID: 700539405}
   - component: {fileID: 700539404}
   - component: {fileID: 700539403}
-  - component: {fileID: 700539406}
+  - component: {fileID: 700539402}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -2188,6 +2200,18 @@ RectTransform:
   m_AnchoredPosition: {x: 133, y: 697}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &700539402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700539400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6a7e166481b3ef4bb252de234aef339, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &700539403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2232,8 +2256,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 700539406}
-        m_TargetAssemblyTypeName: MinigameButton, Assembly-CSharp
+      - m_Target: {fileID: 700539402}
+        m_TargetAssemblyTypeName: MinigamesButton, Assembly-CSharp
         m_MethodName: GoToMinigame
         m_Mode: 1
         m_Arguments:
@@ -2282,19 +2306,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 700539400}
   m_CullTransparentMesh: 1
---- !u!114 &700539406
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 700539400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d13507db86a58124ea40d8bcac2f52cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mEraChoice: {fileID: 1628624458}
 --- !u!1 &705149075
 GameObject:
   m_ObjectHideFlags: 0
@@ -2749,11 +2760,9 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: LikeElonsTweets
-      m_Image: {fileID: 0}
-    - m_Text: TimeToSlay
-      m_Image: {fileID: 0}
     - m_Text: YouReBanned
+      m_Image: {fileID: 0}
+    - m_Text: LikeElonsTweets
       m_Image: {fileID: 0}
     - m_Text: CleanYourYatch
       m_Image: {fileID: 0}
@@ -3610,7 +3619,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: LikeElonsTweets
+  m_text: YouReBanned
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4471,17 +4480,15 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: DirtyRoad
       m_Image: {fileID: 0}
-    - m_Text: FIghtThisDude
+    - m_Text: FightingGame
       m_Image: {fileID: 0}
     - m_Text: Findher
       m_Image: {fileID: 0}
-    - m_Text: GetBenched
+    - m_Text: BlockOutClick
       m_Image: {fileID: 0}
     - m_Text: PerfectShot
       m_Image: {fileID: 0}
     - m_Text: PopUpHell
-      m_Image: {fileID: 0}
-    - m_Text: Bugmageddon
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4885,7 +4892,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f3f228cf55bcdb4790883e4d2a66b0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneName: MinigameScene
+  SceneName: HomePage
+  _mEra: 0
 --- !u!1 &1969503175
 GameObject:
   m_ObjectHideFlags: 0
@@ -5355,10 +5363,6 @@ PrefabInstance:
     - target: {fileID: 3783518028089879279, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
       propertyPath: m_Name
       value: GameManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 4838021411539081621, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
-      propertyPath: _mAllEra1.Array.data[0]._sceneName
-      value: LoadingScreen
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

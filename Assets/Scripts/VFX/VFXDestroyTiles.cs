@@ -12,7 +12,7 @@ public class VFXDestroyTiles : MonoBehaviour
         // Check if the collision is with an object tagged "ToClean"
         if (collision.gameObject.CompareTag("ToClean"))
         {
-            //Debug.Log("Destroying " + collision.gameObject.name);
+            Debug.Log("Destroying " + collision.gameObject.name);
 
             if (Random.value < 0.02f && Foam != null)
             {
@@ -24,7 +24,8 @@ public class VFXDestroyTiles : MonoBehaviour
                     Instantiate(Bubbles, collision.transform.position, Quaternion.identity);
                 }
             }
-            //Destroy(collision.gameObject);
+
+            Destroy(collision.gameObject);
         }
     }
 }

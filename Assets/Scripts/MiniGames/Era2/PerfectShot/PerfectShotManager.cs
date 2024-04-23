@@ -6,8 +6,7 @@ public class PerfectShotManager : MiniGameManager
 {
 
     [SerializeField] private PerfectShotInteractableManager _interactableManager;
-    [SerializeField] private PerfectShotUIManager _UIManager;
-
+    // Start is called before the first frame update
     void Start()
     {
         Debug.Log("yo");
@@ -18,10 +17,6 @@ public class PerfectShotManager : MiniGameManager
     public void HandleGameEnd(bool win)
     {
         EndMiniGame(win, 0);
-        if (!win) return;
-        
-        Amount++;
-        _UIManager.OnWin();
     }
 
     private void OnDestroy()

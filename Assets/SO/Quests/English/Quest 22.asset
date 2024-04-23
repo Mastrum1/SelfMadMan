@@ -12,11 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dc3ce7687a9342da8dc83dbd1e4d1bd, type: 3}
   m_Name: Quest 22
   m_EditorClassIdentifier: 
-  ID: 21
   questName: None
   time: 0
   questDescription: Become invincible * times.
-  questIcon: {fileID: 0}
   difficulties:
   - difficulty: 0
     amount: 5
@@ -27,8 +25,4 @@ MonoBehaviour:
   - difficulty: 2
     amount: 15
     reward: 3
-  disponibility: 0
-  scene:
-    _sceneName: WinScreen
-    _locked: 0
-    _icon: {fileID: 0}
+  disponibility: 1

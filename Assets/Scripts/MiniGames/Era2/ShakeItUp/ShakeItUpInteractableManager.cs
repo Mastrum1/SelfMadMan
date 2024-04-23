@@ -1,38 +1,38 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class ShakeItUpInteractableManager : InteractableManager
 {
     public event Action<bool> OnGameEnd;
     
+    [SerializeField] private GameObject _proteinParent;
     [SerializeField] private int _numOfProteins;
-    [SerializeField] private List<Protein> _proteins;
 
-    public int NumProteinDead => _numProteinDead;
+    private readonly List<Protein> _proteins = new List<Protein>();
     private int _numProteinDead;
-
-    private void Start()
+    void Start()
     {
-        _numProteinDead = 0;
-        
-        EnableProteins();
-        
-        foreach (var protein in _proteins.Where(protein => protein.gameObject.activeSelf))
+        for (int i = 0; i < _proteinParent.transform.childCount; i++)
         {
-            protein.OnDeath += IncreaseNumDead;
+            var proteinChild = _proteinParent.transform.GetChild(i).GetComponent<Protein>();
+            _proteins.Add(proteinChild);
+            if (proteinChild is null) break;
+            
+            proteinChild.OnDeath += IncreaseNumDead;
         }
+        
+        SpawnProteins();
     }
-
-    private void EnableProteins()
+    
+    void SpawnProteins()
     {
         for (var i = 0; i < _numOfProteins; i++)
         {
             if ( i > _proteins.Count) return;
             var randScale = UnityEngine.Random.Range(0.2f, 0.4f);
             _proteins[i].transform.localScale = new Vector3(randScale, randScale, 1);
-            _proteins[i].Resistance = 0.1f + (float)GameManager.instance.FasterLevel / 100;
+            _proteins[i].Resistance = 0.1f; // Change with difficulty
             _proteins[i].gameObject.SetActive(true);
         }
     }
@@ -46,19 +46,32 @@ public class ShakeItUpInteractableManager : InteractableManager
         }
     }
 
-    private void IncreaseNumDead()
+    void IncreaseNumDead()
     {
-        if (++_numProteinDead >= _numOfProteins)
+        _numProteinDead++;
+    }
+
+    private void Update()
+    {
+        if (_numProteinDead >= 4)
         {
-            OnGameEnd?.Invoke(true);
+            HandleEndGame();
         }
     }
 
-    private void OnDisable()
+    void HandleEndGame()
     {
-        foreach (var protein in _proteins.Where(protein => protein.gameObject.activeSelf))
+        OnGameEnd?.Invoke(true);
+    }
+
+    private void OnDestroy()
+    {
+        for (int i = 0; i < _proteinParent.transform.childCount; i++)
         {
-            protein.OnDeath -= IncreaseNumDead;
+            var proteinChild = _proteinParent.transform.GetChild(i).GetComponent<Protein>();
+            if (proteinChild is null) return;
+            
+            proteinChild.OnDeath -= IncreaseNumDead;
         }
     }
 }

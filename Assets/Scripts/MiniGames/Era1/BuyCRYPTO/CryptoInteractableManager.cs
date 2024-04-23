@@ -9,10 +9,9 @@ public class CryptoInteractableManager : InteractableManager
 {
     // Start is called before the first frame update
     [SerializeField] private PostIt[] postIts;
-    [SerializeField] public PostIt[] PostIts { get => postIts; }
     [SerializeField] private Transform[] placeHolders;
 
-    public event Action<PostIt> OnPostItClicked;
+    public event Action<Sprite> OnPostItClicked;
 
     private void Awake()
     {
@@ -27,7 +26,7 @@ public class CryptoInteractableManager : InteractableManager
 
     private void DetectClick(PostIt postIt)
     {
-        OnPostItClicked.Invoke(postIt);
+            OnPostItClicked.Invoke(postIt.CorrespondingGraph);
     }
 
     private void OnDestroy()

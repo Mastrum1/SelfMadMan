@@ -12,11 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dc3ce7687a9342da8dc83dbd1e4d1bd, type: 3}
   m_Name: Quest 12
   m_EditorClassIdentifier: 
-  ID: 11
   questName: None
   time: 0
-  questDescription: Catch * power-ups within a game.
-  questIcon: {fileID: 21300000, guid: c925494b9b3b14f08946b1160efb2390, type: 3}
+  questDescription: Catch * power-ups during a game.
   difficulties:
   - difficulty: 0
     amount: 2
@@ -27,7 +25,4 @@ MonoBehaviour:
   - difficulty: 2
     amount: 6
     reward: 3
-  disponibility: 0
-  scene:
-    _sceneName: WinScreen
-    _locked: 0
+  disponibility: 1

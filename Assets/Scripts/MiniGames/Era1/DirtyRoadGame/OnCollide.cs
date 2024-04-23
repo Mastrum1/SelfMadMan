@@ -1,6 +1,5 @@
 using UnityEngine;
 using System;
-using JetBrains.Annotations;
 
 public class OnCollide : MonoBehaviour
 {
@@ -9,18 +8,9 @@ public class OnCollide : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (!col.gameObject.CompareTag("Player")) return;
-        
-        if (gameObject.CompareTag("DirtyAd"))
+        if (col.gameObject.CompareTag("Player"))
         {
-            gameObject.GetComponent<VFXScaleUp>().OnObjectClicked();
-        }
-        
-        OnCollided?.Invoke(_win);
-        
-        if (_win)
-        {
-            col.gameObject.SetActive(false);
+            OnCollided?.Invoke(_win);
         }
     }
 }

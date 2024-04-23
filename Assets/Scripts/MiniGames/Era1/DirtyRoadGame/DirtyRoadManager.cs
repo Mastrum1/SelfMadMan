@@ -3,25 +3,24 @@ using UnityEngine;
 public class DirtyRoadManager : MiniGameManager
 {
     [SerializeField] private DirtyRoadInteractableManager _interactableManager;
-
-    private int _numOfAds;
+    [SerializeField] private GameObject _dirtyAd;
+    [SerializeField] private int _numOfAds;
 
     private void Start()
     {
         _interactableManager.OnGameEnd += OnGameEnd;
-        
-        _numOfAds = GameManager.instance.FasterLevel + 2;
-        if (_numOfAds > 8) _numOfAds = 8;
-        
+        _interactableManager.OnSpawnMoreAds += SpawnAds;
+        if (_numOfAds <= 0) _numOfAds = 4;
         _interactableManager.EnableAds(_numOfAds);
     }
 
-    private void OnGameEnd(bool win)
+    private void SpawnAds(int numToSpawn)
     {
-        if (win)
-        {
-            Amount++;
-        }
+        Instantiate(_dirtyAd);
+    }
+
+    void OnGameEnd(bool win)
+    {
         EndMiniGame(win, miniGameScore);
     }
 

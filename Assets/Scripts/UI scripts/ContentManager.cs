@@ -3,51 +3,39 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Lean.Touch;
 
 public class ContentManager : MonoBehaviour
 {
-    public enum MENUS
-    {
-        MainMenu, Shop, QuestAndAchievements, Settings, Furnitures, EraMinigames
-    }
-
-    [SerializeField] private HomePageUIManager _mHomePageUIManager;
-    [SerializeField] private GameObject[] _MenuGameObjects;
-
     [Header("Content Viewport")]
     [SerializeField] private Image _mBaseImage;
-    [SerializeField] private List<Sprite> _mSprites;
-
-    [SerializeField] private List<Image> _mImagesToDeactivate;
-    [SerializeField] private List<TMP_Text> _mTextsToDeactivate;
+    [SerializeField] private Image _mEraBGContent;
+    [SerializeField] private Image _mJames;
+    [SerializeField] private List<Sprite> _mImages;
+    [SerializeField] private List<Sprite> _mEraBGPanel;
+    [SerializeField] private List<Sprite> _mJamesForms;
 
     [Header("Navigation Dots")]
     [SerializeField] private GameObject _mDotsContainer;
     [SerializeField] private GameObject _mDotPrefab;
     [SerializeField] private TMP_Text _mText;
 
-    public int CurrentIndex { get => _mCurrentIndex; set => _mCurrentIndex = value; }
     [Header("Page Settings")]
     [SerializeField] private int _mCurrentIndex = 0;
-    [SerializeField] private GameObject _mLockEraPanel;
-    [SerializeField] private TMP_Text _mLockPrice;
-    [SerializeField] private Animator _mLockAnimator;
-    [SerializeField] private List<GameObject> _mLockObjects;
-
-    private bool IsUnlocking = false;
 
     void Start()
     {
-        _mCurrentIndex = GameManager.instance.Era;
-        _mLockEraPanel.SetActive(GameManager.instance.ErasData[GameManager.instance.Era].Unlocked ? false : true);
+        // Initialize dots
         InitializeDots();
+
+        // Display initial content
         ShowContent();
     }
 
     void InitializeDots()
     {
         // Create dots based on the number of content panels
-        for (int i = 0; i < _mSprites.Count; i++)
+        for (int i = 0; i < _mImages.Count; i++)
         {
             GameObject dot = Instantiate(_mDotPrefab, _mDotsContainer.transform);
             Image dotImage = dot.GetComponent<Image>();
@@ -65,71 +53,44 @@ public class ContentManager : MonoBehaviour
         {
             Image dotImage = _mDotsContainer.transform.GetChild(i).GetComponent<Image>();
             dotImage.color = (i == _mCurrentIndex) ? Color.white : Color.gray;
-            _mText.text = "ERA " + (_mCurrentIndex + 1);
+
+            _mText.text = "Ere " + (_mCurrentIndex + 1);
         }
     }
 
     public void SwapContent(int i)
     {
-        if (!IsUnlocking)
-        {
-            _mCurrentIndex = (_mCurrentIndex + i + _mSprites.Count) % _mSprites.Count;
-            GameManager.instance.Era = _mCurrentIndex + 1;
-            bool eraunlocked = GameManager.instance.ErasData[GameManager.instance.Era].Unlocked ? true : false;
-            _mLockEraPanel.SetActive(!eraunlocked);
-            _mLockPrice.text = GameManager.instance.ErasData[GameManager.instance.Era]._price.ToString();
-            _mHomePageUIManager.MenuUIDictionnary[_MenuGameObjects[(int)MENUS.EraMinigames]] = eraunlocked;
-
-            foreach (var go in _mLockObjects)
-                go.SetActive(!eraunlocked);
-
-            ShowContent();
-            UpdateDots();
-        }
+        _mCurrentIndex = (_mCurrentIndex + i + _mImages.Count) % _mImages.Count;
+        GameManager.instance.Era = _mCurrentIndex + 1;
+        ShowContent();
+        UpdateDots();
+        Debug.Log(_mCurrentIndex);
     }
 
     void ShowContent()
     {
         // Activate the current panel and deactivate others
-        for (int i = 0; i < _mSprites.Count; i++)
+        for (int i = 0; i < _mImages.Count; i++)
         {
             bool isActive = i == _mCurrentIndex;
-            _mBaseImage.sprite = _mSprites[_mCurrentIndex];
+            _mBaseImage.sprite = _mImages[_mCurrentIndex];
 
             // Update dot visibility and color based on the current active content
             Image dotImage = _mDotsContainer.transform.GetChild(i).GetComponent<Image>();
             dotImage.color = isActive ? Color.white : Color.gray;
             dotImage.fillAmount = isActive ? 1f : 0f;
         }
-    }
-    public void UnlockEra()
-    {
-        
-        if (MoneyManager.Instance.CurrentMoney < GameManager.instance.ErasData[GameManager.instance.Era]._price)
-        {
-            Debug.Log("No Money");
-            return;
-        }
-        else
-        {
-            MoneyManager.Instance.SubsEra(_mLockPrice);
-            IsUnlocking = true;
-            _mLockAnimator.SetBool("UnlockEraAnim", true);
-            StartCoroutine(Unlocking());
-        }
-    }
 
-    IEnumerator Unlocking()
-    {
-        yield return new WaitForSeconds(2f);
-        _mLockAnimator.SetBool("UnlockEraAnim", false);
-        GameManager.instance.ErasData[GameManager.instance.Era].UnlockEra();
-        GameManager.instance.GetComponent<Player>().UnlockEra(GameManager.instance.Era);
-        _mHomePageUIManager.MenuUIDictionnary[_MenuGameObjects[(int)MENUS.EraMinigames]] = true;
-        foreach (var go in _mLockObjects)
-            go.SetActive(false);
-        _mLockEraPanel.SetActive(false);
-        IsUnlocking = false;
+        for (int i = 0; i < _mEraBGPanel.Count; i++)
+        {
+            _mEraBGContent.sprite = _mEraBGPanel[_mCurrentIndex];
+  
+        }
+
+        for (int i = 0; i < _mJamesForms.Count; i++) 
+        {
+            _mJames.sprite = _mJamesForms[_mCurrentIndex];
+        }
 
     }
 }

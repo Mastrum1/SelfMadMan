@@ -1,6 +1,10 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
+using NaughtyAttributes;
+using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 [CreateAssetMenu(fileName = "Quests", menuName = "SO/NewQuest", order = 1)]
 public class Quests : ScriptableObject
@@ -22,14 +26,13 @@ public class Quests : ScriptableObject
     public class Difficulty
     {
         public Difficulties difficulty;
-        public int amount;
+        public  int amount;
         public int reward;
     }
-    public int ID;
+    
     public string questName;
     public int time;
     public string questDescription;
-    public Sprite questIcon;
 
     public List<Difficulty> difficulties;
 

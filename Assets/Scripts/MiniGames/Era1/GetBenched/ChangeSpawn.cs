@@ -1,106 +1,24 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class ChangeSpawn : MonoBehaviour
 {
-    public event Action<ChangeSpawn> ChangeSpawnState;
 
     [SerializeField] private BoxCollider2D _mSpawnBounds;
-    [SerializeField] private SpriteRenderer _mObjectSpriteRenderer;
-    [SerializeField] private SpriteRenderer _mTorusSpriteRenderer;
-    [SerializeField] private TapWithTimer _mTapWithTimer;
-    [SerializeField] private TextMeshProUGUI _mText;
-    [SerializeField] private GameObject _Parent;
-    [SerializeField] private CircleCollider2D _mTapCollider;
-
-    Coroutine _mRespawnCoroutine;
-
-    private int _mIndex;
-
-    private float _mMinX;
-    private float _mMinY;
-    private float _mMaxX;
-    private float _mMaxY;
-
-    private int _mColliderCount = 0;
-
-    private void Start()
+    private void OnTriggerEnter(Collider other)
     {
-        _mMinX = _mSpawnBounds.bounds.min.x;
-        _mMinY = _mSpawnBounds.bounds.min.y;
-        _mMaxX = _mSpawnBounds.bounds.max.x;
-        _mMaxY = _mSpawnBounds.bounds.max.y;
-    }
-    private void OnEnable()
-    {
-        _mTapCollider.enabled = false;
-
-        GetComponent<CircleCollider2D>().enabled = true;
-        _mRespawnCoroutine = StartCoroutine(RespawnButton());
-
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Buttons") && collision.gameObject != _Parent)
+        if (other.gameObject.CompareTag("Buttons"))
         {
-            _mColliderCount++;
-            _Parent.transform.position = new Vector3(
-                   UnityEngine.Random.Range(_mMinX, _mMaxX),
-                   UnityEngine.Random.Range(_mMinY, _mMaxY),
-                   -2
+            gameObject.transform.position = new Vector3(
+                   Random.Range(_mSpawnBounds.bounds.min.x, _mSpawnBounds.bounds.max.x),
+                   Random.Range(_mSpawnBounds.bounds.min.y, _mSpawnBounds.bounds.max.y),
+                   gameObject.transform.position.z
                    );
         }
-
-
     }
-
-    private void OnTriggerExit2D(Collider2D collision)
+    private void Update()
     {
-        if (collision.gameObject.CompareTag("Buttons") && collision.gameObject != _Parent)
-        {
-            _mColliderCount--;
-        }
+        this.enabled = false;
     }
-
-
-    public void CheckCollision()
-    {
-        if (_mColliderCount == 0)
-        {
-            StopCoroutine(_mRespawnCoroutine);
-            ChangeSpawnState?.Invoke(this);
-            _mTapCollider.enabled = true;
-            _mColliderCount = 0;
-            _mTapWithTimer.StopTorus = false;
-            GetComponent<CircleCollider2D>().enabled = false;
-        }
-    }
-
-    public void EnableObject()
-    {
-        _mTorusSpriteRenderer.enabled = true;
-        _mObjectSpriteRenderer.enabled = true;
-        _mTapWithTimer.Number.enabled = true;
-        _mTorusSpriteRenderer.gameObject.SetActive(true);
-    }
-
-    private void OnDisable()
-    {
-        StopCoroutine(_mRespawnCoroutine);
-    }
-
-    private IEnumerator RespawnButton()
-    {
-        yield return new WaitForSeconds(0.05f);
-        while (true)
-        {
-            CheckCollision();
-            yield return null;
-
-        }
-    }
-
 }
