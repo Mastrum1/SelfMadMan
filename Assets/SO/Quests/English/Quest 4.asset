@@ -12,20 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dc3ce7687a9342da8dc83dbd1e4d1bd, type: 3}
   m_Name: Quest 4
   m_EditorClassIdentifier: 
+  ID: 3
   questName: None
   time: 1
-  questDescription: Crush * cockroaches in "Clean your kitchen" during a game.
+  questDescription: Swipe * girls.
+  questIcon: {fileID: 21300000, guid: c58e7eed5832342ee8f8bcbd2af5497c, type: 3}
   difficulties:
   - difficulty: 0
-    amount: 5
+    amount: 10
     reward: 1
   - difficulty: 1
-    amount: 10
+    amount: 15
     reward: 2
   - difficulty: 2
-    amount: 15
+    amount: 30
     reward: 3
   disponibility: 0
   scene:
-    _sceneName: CleanYourKitchen
-    _unlocked: 0
+    _sceneName: Findher
+    _locked: 0
+    _icon: {fileID: 0}

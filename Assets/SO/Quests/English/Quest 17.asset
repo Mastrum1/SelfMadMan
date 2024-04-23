@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dc3ce7687a9342da8dc83dbd1e4d1bd, type: 3}
   m_Name: Quest 17
   m_EditorClassIdentifier: 
+  ID: 16
   questName: None
   time: 1
-  questDescription: Like * women in "Findher".
+  questDescription: Successfully lift the bar * times.
+  questIcon: {fileID: 21300000, guid: 9d2a64ee3b3e94db193f28007da8b479, type: 3}
   difficulties:
   - difficulty: 0
     amount: 10
@@ -26,3 +28,7 @@ MonoBehaviour:
     amount: 30
     reward: 3
   disponibility: 0
+  scene:
+    _sceneName: GetBenched
+    _locked: 0
+    _icon: {fileID: 0}
