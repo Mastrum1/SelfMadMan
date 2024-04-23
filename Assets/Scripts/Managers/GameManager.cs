@@ -9,9 +9,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    private float _mLostFocusTime;
+    public event Action OnUpdateLevel;
 
-    public int Level { get => _mLevelCount; private set => _mLevelCount = value; }
+    private float _mLostFocusTime;
 
     private float _speed;
     public float Speed { get => _speed; private set => _speed = value; }
@@ -60,8 +60,9 @@ public class GameManager : MonoBehaviour
     private int _mMinigameCount;
     private int _mMinigameWon;
     public int MinigamesWon { get => _mMinigameWon; private set => _mMinigameWon = value; }
-    private int _mLevelCount;
-    private int _mCurrentStars;
+
+    public string[] PlayerTitle => _mPlayerTitle;
+    [SerializeField] private string[] _mPlayerTitle;
 
     public event Action<bool, int, int, bool> WinScreenHandle;
 
@@ -89,9 +90,7 @@ public class GameManager : MonoBehaviour
         FasterLevel = 1;
         _mScore = 0;
 
-
-        _mQuestManager = QuestManager.Instance;
-        _mQuestManager.OnReward += AddStars;
+        QuestManager.Instance.OnReward += AddStars;
         _mPlayer.LoadJson();
         _mScoring = new Scoring();
     }
@@ -196,16 +195,16 @@ public class GameManager : MonoBehaviour
         Player.NewCurrency(Player.Money + (int)amount);
         return (int)amount;
     }
-    void AddStars(int reward)
-    {
-        _mCurrentStars += reward;
-        if (_mCurrentStars >= 5)
-        {
-            Level++;
-            _mCurrentStars -= 5;
-        }
-    }
 
+    private void AddStars(int reward)
+    {
+        Player.AddStars(reward);
+        if (Player.Xp >= 5)
+        {
+            Player.LevelUp();
+        }
+        OnUpdateLevel?.Invoke();
+    }
 
     void OnApplicationFocus(bool hasFocus)
     {

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
 
 public class QuestContainer : MonoBehaviour
 {
@@ -84,9 +83,8 @@ public class QuestContainer : MonoBehaviour
 
     public void ChangeQuest(int container)
     {
-        //if (GameManager.instance.Player.Money < 25 * _mSelectedQuest.Difficulty.reward) return;
+        if (!MoneyManager.Instance.SubtractMoney(25 * _mSelectedQuest.Difficulty.reward)) return;
         
-        //Money.Instance.SubtractMoney(25 * _mSelectedQuest.Difficulty.reward);
         gameObject.SetActive(false);
         QuestManager.Instance.OnChangeQuest(_mSelectedQuest, container);
     }

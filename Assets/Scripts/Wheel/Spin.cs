@@ -46,16 +46,23 @@ public class Spin : MonoBehaviour
     void Start()
     {
         InitSpin();
-        MoneyManager.Instance.Spin += StartSpinning;
     }
 
     public void StartSpinning()
     {
         if (!isSpnning)
         {
-            InitSpin();
-            isSpnning = true;
-            currentSpeed = initialSpeed;
+            if (MoneyManager.Instance.CurrentMoney < 100)
+            {
+                Debug.Log("No Money");
+            }
+            else
+            {
+                MoneyManager.Instance.SubtractMoney(100);
+                InitSpin();
+                isSpnning = true;
+                currentSpeed = initialSpeed;
+            }
         }
     }
 
