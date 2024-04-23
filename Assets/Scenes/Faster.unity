@@ -898,6 +898,7 @@ GameObject:
   - component: {fileID: 2111592339}
   - component: {fileID: 2111592338}
   - component: {fileID: 2111592342}
+  - component: {fileID: 2111592343}
   - component: {fileID: 2111592344}
   m_Layer: 5
   m_Name: Canvas
@@ -1004,6 +1005,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentScene: Faster
   _delay: 2
+--- !u!114 &2111592343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2111592337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f86b7476b169cf49b2beaeff2f205fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Prefab: {fileID: 1702167493}
+  m_Bike: {fileID: 0}
+  m_Prefab1: {fileID: 1802407410902479771}
+  m_Prefab2: {fileID: 99891067116043664}
 --- !u!328 &2111592344
 VideoPlayer:
   m_ObjectHideFlags: 0

@@ -19,9 +19,6 @@ public class CasinoInteractableManager : MonoBehaviour
     [SerializeField] private List<CheckCollision> _mMiddleCollisionObjects;
     [SerializeField] private List<CheckCollision> _mRightCollisionObjects;
 
-    private bool _GameIsFinished = false;
-    public bool GameIsFinished { get => _GameIsFinished; set => _GameIsFinished = value; }
-
     [SerializeField] private List<GameObject> _mLeftUpArrows;
     [SerializeField] private List<GameObject> _mLeftDownArrows;
 
@@ -158,8 +155,6 @@ public class CasinoInteractableManager : MonoBehaviour
 
     public void OnTap()
     {
-        if (GameIsFinished)
-            return;
         switch (_mIndex)
         {
             case 0:

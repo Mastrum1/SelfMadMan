@@ -15,7 +15,6 @@ public class CasinoManager : MiniGameManager
 
     void OnGameEnd(bool win)
     {
-        _mInteractableManager.GameIsFinished = true;
         EndMiniGame(win, miniGameScore);
     }
 
