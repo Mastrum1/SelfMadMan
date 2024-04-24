@@ -1652,6 +1652,10 @@ PrefabInstance:
       value: Click(Kitchen)
       objectReference: {fileID: 0}
     - target: {fileID: 4432653982864567789, guid: 6967cbf162c2327429e5f4eb843e09a8, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432653982864567789, guid: 6967cbf162c2327429e5f4eb843e09a8, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -1662,6 +1666,10 @@ PrefabInstance:
     - target: {fileID: 6871243738733512323, guid: 6967cbf162c2327429e5f4eb843e09a8, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7099601131132089354, guid: 6967cbf162c2327429e5f4eb843e09a8, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7254019329409541378, guid: 6967cbf162c2327429e5f4eb843e09a8, type: 3}
       propertyPath: m_LocalScale.x
@@ -2843,7 +2851,7 @@ GameObject:
   - component: {fileID: 1448830958}
   - component: {fileID: 1448830960}
   - component: {fileID: 1448830959}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3898,6 +3906,7 @@ MonoBehaviour:
   _mMoneyManager: {fileID: 0}
   _mHearts: 0
   FasterScene: LoadingScreen
+  _mPlayerTitle: []
 --- !u!4 &1991706799
 Transform:
   m_ObjectHideFlags: 0
@@ -4163,7 +4172,7 @@ GameObject:
   - component: {fileID: 2131665268}
   - component: {fileID: 2131665267}
   - component: {fileID: 2131665266}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Shadows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
