@@ -6,7 +6,6 @@ using UnityEngine;
 public class ShakeItUpManager : MiniGameManager
 {
     [SerializeField] private ShakeItUpInteractableManager _interactableManager;
-    [SerializeField] private GameObject _waterParticleParent;
     [SerializeField] private List<Rigidbody2D> _waterParticle;
      
     private Quaternion _defaultOrientation;
@@ -24,14 +23,7 @@ public class ShakeItUpManager : MiniGameManager
         _endPos = Vector3.zero;
         _fingerDownTime = 0;
         
-        _defaultOrientation = Input.gyro.attitude;
-        _defaultGravityDirection = GetGravityDirection(_defaultOrientation);
-        
-        for (var i = 0; i < _waterParticleParent.transform.childCount; i++)
-        {
-            var particleChild = _waterParticleParent.transform.GetChild(i).GetComponent<Rigidbody2D>();
-            _waterParticle.Add(particleChild);
-        }
+        _defaultGravityDirection = Physics2D.gravity.normalized;
 
         _interactableManager.OnGameEnd += OnGameEnd;
     }
@@ -62,20 +54,6 @@ public class ShakeItUpManager : MiniGameManager
         var newGravityDirection = new Vector2(Mathf.Cos(radians), Mathf.Sin(radians));
 
         Physics2D.gravity = newGravityDirection.normalized * Physics2D.gravity.magnitude;
-    }
-    
-    private Vector2 GetGravityDirection(Quaternion orientation)
-    {
-        var euler = orientation.eulerAngles;
-        euler.z = 0;
-        var flattenedQuaternion = Quaternion.Euler(euler);
-
-        var angle = Mathf.Atan2(flattenedQuaternion.y, flattenedQuaternion.x) * Mathf.Rad2Deg;
-        angle = (angle + 360) % 360;
-
-        var radians = angle * Mathf.Deg2Rad;
-
-        return new Vector2(Mathf.Cos(radians), Mathf.Sin(radians));
     }
 
     public void ApplyAccelerometerForce(Vector3 force)
@@ -134,7 +112,7 @@ public class ShakeItUpManager : MiniGameManager
 
     private void OnDisable()
     {
-        Physics2D.gravity = _defaultGravityDirection.normalized * Physics2D.gravity.magnitude;
+        Physics2D.gravity = _defaultGravityDirection * Physics2D.gravity.magnitude;
     }
 }
 
