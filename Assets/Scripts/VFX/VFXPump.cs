@@ -1,53 +1,47 @@
-using System.Collections;
 using UnityEngine;
+using System.Collections;
 
 public class VFXPump : MonoBehaviour
 {
-    [SerializeField] private float scaleFactor = 1.5f;
-    [SerializeField] private float fadeDuration = 1f;
-    [SerializeField] private GameObject prefabToInstantiate;
-
-    private SpriteRenderer spriteRenderer;
-    private bool hasStartedCoroutine = false;
-
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        // Get the parent transform
+        Transform parentTransform = transform.parent;
 
-        // Check if the coroutine hasn't started yet
-        if (!hasStartedCoroutine)
+        if (parentTransform != null)
         {
-            // Start the coroutine
-            StartCoroutine(SpawnAndAnimate());
-            hasStartedCoroutine = true;
+            // Set the local scale of this object to match the parent's local scale
+            transform.localScale = parentTransform.localScale;
+
+            // Set this object's scale to (1, 1, 1)
+            transform.localScale = Vector3.one;
+
+            // Get the parent's SpriteRenderer component
+            SpriteRenderer parentSpriteRenderer = parentTransform.GetComponent<SpriteRenderer>();
+
+            if (parentSpriteRenderer != null)
+            {
+                // Get the SpriteRenderer component of this object
+                SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+
+                if (spriteRenderer != null)
+                {
+                    // Apply the parent's color to this object's SpriteRenderer
+                    spriteRenderer.color = parentSpriteRenderer.color;
+                }
+                else
+                {
+                    Debug.LogWarning("SpriteRenderer component not found on object: " + name);
+                }
+            }
+            else
+            {
+                Debug.LogWarning("SpriteRenderer component not found on parent object: " + parentTransform.name);
+            }
         }
-    }
-
-    private IEnumerator SpawnAndAnimate()
-    {
-        // Instantiate a new object at the same position
-        GameObject newObject = Instantiate(prefabToInstantiate, transform.position, Quaternion.identity);
-        SpriteRenderer newSpriteRenderer = newObject.GetComponent<SpriteRenderer>();
-
-        // Set the sprite to be the same as the original
-        newSpriteRenderer.sprite = spriteRenderer.sprite;
-
-        // Fade out and scale up
-        float timer = 0f;
-        while (timer < fadeDuration)
+        else
         {
-            float scaleFactorThisFrame = Mathf.Lerp(1f, scaleFactor, timer / fadeDuration);
-            newObject.transform.localScale = Vector3.one * scaleFactorThisFrame;
-
-            Color newColor = newSpriteRenderer.color;
-            newColor.a = Mathf.Lerp(1f, 0f, timer / fadeDuration);
-            newSpriteRenderer.color = newColor;
-
-            timer += Time.deltaTime;
-            yield return null;
+            Debug.LogWarning("No parent object found for: " + name);
         }
-
-        // Clean up
-        Destroy(newObject);
     }
 }

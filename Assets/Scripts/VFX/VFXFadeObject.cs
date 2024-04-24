@@ -10,6 +10,7 @@ public class VFXFadeObject : MonoBehaviour
     {
         if (rend == null)
             rend = GetComponent<Renderer>();
+            FadeOut();
     }
 
     public void FadeOut()
