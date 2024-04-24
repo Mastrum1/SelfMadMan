@@ -1,15 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PopUpGameManager : MiniGameManager
 {
-    [SerializeField] PopUpSpawner _mSpawner;
-    [SerializeField] Animator _mAnimator;
+    [SerializeField] private PopUpSpawner _mSpawner;
+    [SerializeField] private Animator _mAnimator;
     bool _enabled = false;
     bool _mIsEnd = false;
 
-    // Update is called once per frame
+    private void Start()
+    {
+        _mSpawner.OnClosePopUp += PopUpClosed;
+    }
+
+    private void PopUpClosed()
+    {
+        Amount++;
+    }
+
     public void OnDownload(GameObject button)
     {
         if (!_mSpawner.IsActivePopUp() && !_mIsEnd) {

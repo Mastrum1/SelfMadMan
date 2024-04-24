@@ -577,6 +577,11 @@ public class Player : MonoBehaviour
         CompletedQuests.Add(quest);
     }
 
+    public void AddXp(int reward)
+    {
+        
+    }
+
     public void RemoveCompleteQuests(QuestManager.Quest quest)
     {
         CompletedQuests.Remove(quest);
@@ -599,9 +604,16 @@ public class Player : MonoBehaviour
         MoneyManager.Instance.UpdateMoney();
     }
 
-    public void AddStars(int Reward)
+    public int AddStars(int reward)
     {
-        Xp += Reward;
+        _mXp += reward;
+        return _mXp;
+    }
+
+    public void LevelUp()
+    {
+        _mLevel++;
+        _mXp -= 5;
     }
 
     public void ResetStars()

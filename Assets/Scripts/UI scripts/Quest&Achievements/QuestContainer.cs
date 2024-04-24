@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
 
 public class QuestContainer : MonoBehaviour
 {
@@ -16,23 +15,19 @@ public class QuestContainer : MonoBehaviour
     [SerializeField] private Image _mQuestColor;
     [SerializeField] private GameObject _mQuestProgression;
     [SerializeField] private GameObject _mChangeButton;
-
+    [SerializeField] private GameObject _mFillBarStartPos;
+    [SerializeField] private GameObject _mFillBarEndPos;
+    [SerializeField] private List<Color> _difficultyColor;
+    [SerializeField] private List<GameObject> _mStars;
+    
     public bool IsInQuestMenu { set => _mIsInQuestMenu = value; }
     private bool _mIsInQuestMenu;
-    
-    [SerializeField] private List<Color> _difficultyColor;
-    
-    private float _mStartPos;
-    
-    [SerializeField] private List<GameObject> _mStars;
 
-    private void Awake()
-    {
-        _mStartPos = _mQuestProgression.transform.position.x;
-    }
+    private Vector3 _mMaxDistance;
 
     private void Start()
     {
+        _mMaxDistance = _mFillBarEndPos.transform.position - _mFillBarStartPos.transform.position;
         _mChangeButton.SetActive(_mIsInQuestMenu);
     }
     
@@ -46,10 +41,8 @@ public class QuestContainer : MonoBehaviour
         _mQuestDescription.text = replace;
         _mQuestIcon.sprite = _mSelectedQuest.QuestSO.questIcon;
         _mQuestColor.color = _difficultyColor[(int)_mSelectedQuest.Difficulty.difficulty];
-        if(_mIsInQuestMenu)
-        {
-            StartCompletion();
-        }
+        
+        StartCompletion();
             
         for (var j = 0; j < _mSelectedQuest.Difficulty.reward; j++)
         {
@@ -70,30 +63,30 @@ public class QuestContainer : MonoBehaviour
         {
             amount = (float)_mSelectedQuest.CurrentAmount / _mSelectedQuest.MaxAmount;
         }
-        StartCoroutine(ShowCompletionBar(_mQuestProgression.gameObject.transform, amount, _mStartPos));
+        StartCoroutine(ShowCompletionBar(_mQuestProgression.gameObject.transform, amount, _mFillBarStartPos.transform.position.x, _mMaxDistance.x));
 
     }
-    private static IEnumerator ShowCompletionBar(Transform pos, float amount, float startPos)
+    private static IEnumerator ShowCompletionBar(Transform pos, float amount, float startPos, float maxDistance)
     {
-        while (pos.position.x < startPos + 3 * amount)
+        while (pos.position.x < startPos + maxDistance * amount)
         {
-            pos.position += pos.right * (amount * 3 * Time.deltaTime);
+            pos.position += pos.right * (amount * maxDistance * Time.deltaTime);
             yield return new WaitForSeconds(0.01f);
         }
     }
 
     public void ChangeQuest(int container)
     {
-        //if (GameManager.instance.Player.Money < 25 * _mSelectedQuest.Difficulty.reward) return;
+        if (!MoneyManager.Instance.SubtractMoney(25 * _mSelectedQuest.Difficulty.reward)) return;
         
-        //Money.Instance.SubtractMoney(25 * _mSelectedQuest.Difficulty.reward);
         gameObject.SetActive(false);
         QuestManager.Instance.OnChangeQuest(_mSelectedQuest, container);
     }
 
     public void ResetFillBar()
     {
-        _mQuestProgression.transform.position = new Vector3(_mStartPos - 0.176f, transform.position.y);
+        _mQuestProgression.transform.position = _mFillBarStartPos.transform.position;
+        Debug.Log("Restted Fill Bar");
     }
 
     private void OnDisable()

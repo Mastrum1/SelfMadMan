@@ -15,7 +15,7 @@ public class QuestView : MonoBehaviour
         LoadQuestContainers();
     }
 
-    public void LoadQuestContainers()
+    private void LoadQuestContainers()
     {
         for (var i = 0; i < _quests.Count; i++)
         {
@@ -38,7 +38,6 @@ public class QuestView : MonoBehaviour
     public IEnumerator CheckForCompletedQuests()
     {
         yield return new WaitForSeconds(2f);
-        Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         for (var i = 0; i < _quests.Count; i++)
         {
             if (_quests[i].SelectedQuest.QuestCompletionState != QuestManager.CompletionState.Complete) continue;
@@ -46,7 +45,7 @@ public class QuestView : MonoBehaviour
             _mQuestManager.OnQuestFinish(_quests[i].SelectedQuest, i);
         }
     }
-    public void CompletetAllBars()
+    public void CompleteAllBars()
     {
         foreach (var item in _quests)
         {
