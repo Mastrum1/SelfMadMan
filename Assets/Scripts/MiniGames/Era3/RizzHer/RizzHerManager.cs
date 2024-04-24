@@ -8,8 +8,6 @@ public class RizzHerManager : MiniGameManager
 {
     [SerializeField] private RizzHerInteractableManager _mInteractableManager;
 
-    private float _Space = 1.78f;
-
     [SerializeField] private List<GameObject> _leftObj;
     [SerializeField] private List<GameObject> _midObj;
     [SerializeField] private List<GameObject> _rightObj;
@@ -28,4 +26,5 @@ public class RizzHerManager : MiniGameManager
     {
         _mInteractableManager.GameEnd -= OnGameEnd;
     }
+
 }

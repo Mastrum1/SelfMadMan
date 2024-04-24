@@ -4,69 +4,181 @@ using UnityEngine;
 
 public class RizzHerInteractableManager : MonoBehaviour
 {
-
+    [SerializeField] private RizzHerHand _hand;
     [SerializeField] private List<GameObject> _leftObj;
 
     [SerializeField] private List<GameObject> _midObj;
 
     [SerializeField] private List<GameObject> _rightObj;
 
-    public event Action<bool> GameEnd;
-    [SerializeField] private float _mSpace = 1.5f;
+    [SerializeField] private List<ObstacleMovement> _ScrollingParents;
 
-    [SerializeField] private int NbObjToSpawn = 2;
+    public event Action<bool> GameEnd;
 
     private void Start()
     {
-        //Vector3 pos = new Vector3(_mObj[0].transform.position.x, 0, _mObj[0].transform.position.z);
-        //switch (GameManager.instance.FasterLevel)
-        //{
-        //    case 1:
-        //        NbObjToSpawn = 2;
-        //        pos.y -= _mSpace / 2;
-        //        break;
-        //    case 2:
-        //        NbObjToSpawn = 3;
-        //        pos.y -= _mSpace;
-
-        //        break;
-        //    case 3:
-        //        NbObjToSpawn = 5;
-        //        pos.y -= _mSpace * 2;
-        //        break;
-        //    default:
-        //        break;
-        //}
-
-        //int Random = UnityEngine.Random.Range(0, NbObjToSpawn);
-        //_mObj[Random].Different = true;
-        //_mObj[Random].ChangeText();
-        //for (int id = 0; id < NbObjToSpawn; id++)
-        //{
-        //    _mObj[id].OnGameEnd += EndGame;
-        //    if (id != 0)
-        //    {
-        //        _mObj[id].transform.position = new Vector3(pos.x, _mObj[id - 1].transform.position.y + _mSpace, pos.z);
-        //    }
-        //    else
-        //    {
-        //        _mObj[id].transform.position = pos;
-        //    }
-        //    _mObj[id].gameObject.SetActive(true);
-        //}
+        _hand.OnGameEnd += EndGame;
+        SpawnNewObj();
     }
 
     private void OnDisable()
     {
-        //for (int id = 0; id < _leftObj.Count; id++)
-        //{
-        //    _leftObj[id].OnGameEnd -= EndGame;
-        //}
+        _hand.OnGameEnd -= EndGame;
+    }
+
+    public void SpawnNewObj()
+    {
+        int OldSpawn = -1;
+        int NbSpawn = UnityEngine.Random.Range(1, 3);
+        int Value;
+        GameObject TempObj = new GameObject();
+        int idToActivate = -1;
+        for (int i = 0; i < NbSpawn; i++)
+        {
+
+            do
+            {
+                Value = UnityEngine.Random.Range(0, 3);
+            } while (Value == OldSpawn);
+            OldSpawn = Value;
+            switch (Value)
+            {
+                case 0:
+                    if (_leftObj[0].activeSelf == true)
+                    {
+                        _leftObj[1].transform.position = new Vector3(-1.85f, 3.15f, 0);
+                        _leftObj[1].SetActive(true);
+                        TempObj = _leftObj[1];
+                    }
+                    else if (_leftObj[1].activeSelf == true)
+                    {
+                        _leftObj[2].transform.position = new Vector3(-1.85f, 3.15f, 0);
+                        _leftObj[2].SetActive(true);
+                        TempObj = _leftObj[2];
+
+                    }
+                    else if (_leftObj[2].activeSelf == true)
+                    {
+                        _leftObj[3].transform.position = new Vector3(-1.85f, 3.15f, 0);
+                        _leftObj[3].SetActive(true);
+                        TempObj = _leftObj[3];
+
+                    }
+                    else
+                    {
+                        _leftObj[0].transform.position = new Vector3(-1.85f, 3.15f, 0);
+                        _leftObj[0].SetActive(true);
+                        TempObj = _leftObj[0];
+
+                    }
+                    break;
+                case 1:
+                    if (_midObj[0].activeSelf == true)
+                    {
+                        _midObj[1].transform.position = new Vector3(0, 3.15f, 0);
+                        _midObj[1].SetActive(true);
+                        TempObj = _midObj[1];
+                    }
+                    else if (_midObj[1].activeSelf == true)
+                    {
+                        _midObj[2].transform.position = new Vector3(0, 3.15f, 0);
+                        _midObj[2].SetActive(true);
+                        TempObj = _midObj[2];
+                    }
+                    else if (_midObj[2].activeSelf == true)
+                    {
+                        _midObj[3].transform.position = new Vector3(0, 3.15f, 0);
+                        _midObj[3].SetActive(true);
+                        TempObj = _midObj[3];
+                    }
+                    else
+                    {
+                        _midObj[0].transform.position = new Vector3(0, 3.15f, 0);
+                        _midObj[0].SetActive(true);
+                        TempObj = _midObj[0];
+                    }
+
+                    break;
+                case 2:
+                    if (_rightObj[0].activeSelf == true)
+                    {
+                        _rightObj[1].transform.position = new Vector3(1.85f, 3.15f, 0);
+                        _rightObj[1].SetActive(true);
+                        TempObj = _rightObj[1];
+                    }
+                    else if (_rightObj[1].activeSelf == true)
+                    {
+                        _rightObj[2].transform.position = new Vector3(1.85f, 3.15f, 0);
+                        _rightObj[2].SetActive(true);
+                        TempObj = _rightObj[2];
+                    }
+                    else if (_rightObj[2].activeSelf == true)
+                    {
+                        _rightObj[3].transform.position = new Vector3(1.85f, 3.15f, 0);
+                        _rightObj[3].SetActive(true);
+                        TempObj = _rightObj[3];
+                    }
+                    else
+                    {
+                        _rightObj[0].transform.position = new Vector3(1.85f, 3.15f, 0);
+                        _rightObj[0].SetActive(true);
+                        TempObj = _rightObj[0];
+
+                    }
+                    break;
+            }
+
+            if (_ScrollingParents[0].gameObject.activeSelf == false)
+            {
+                TempObj.transform.SetParent(_ScrollingParents[0].transform);
+                idToActivate = 0;
+            }
+            else if (_ScrollingParents[1].gameObject.activeSelf == false)
+            {
+                TempObj.transform.SetParent(_ScrollingParents[1].transform);
+                idToActivate = 1;
+            }
+            else if (_ScrollingParents[2].gameObject.activeSelf == false)
+            {
+                TempObj.transform.SetParent(_ScrollingParents[2].transform);
+                idToActivate = 2;
+            }
+            else
+            {
+                TempObj.transform.SetParent(_ScrollingParents[3].transform);
+                idToActivate = 3;
+
+            }
+
+
+
+        }
+        if (idToActivate != -1)
+            _ScrollingParents[idToActivate].gameObject.SetActive(true);
+
+
     }
 
 
     private void EndGame(bool win)
     {
+
+        //for (int i = 0; i < _leftObj.Count; i++)
+        //{
+        //    _leftObj[i].SetActive(false);
+        //}
+        //for (int i = 0; i < _midObj.Count; i++)
+        //{
+        //    _midObj[i].SetActive(false);
+        //}
+        //for (int i = 0; i < _rightObj.Count; i++)
+        //{
+        //    _rightObj[i].SetActive(false);
+        //}
+        for (int i = 0; i < _ScrollingParents.Count; i++)
+        {
+            _ScrollingParents[i].enabled = false;
+        }
         GameEnd?.Invoke(win);
     }
 }
