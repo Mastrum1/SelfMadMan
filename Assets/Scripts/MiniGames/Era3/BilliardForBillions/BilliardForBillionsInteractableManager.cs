@@ -17,7 +17,7 @@ public class BilliardForBillionsInteractableManager : InteractableManager
 
     private void Update()
     {
-        _cueBall.transform.rotation = _james.transform.rotation;
+        //_cueBall.transform.rotation = _james.transform.rotation;
     }
 
     private void GenerateRandomHolePos()
