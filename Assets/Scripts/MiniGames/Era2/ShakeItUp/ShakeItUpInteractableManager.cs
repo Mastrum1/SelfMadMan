@@ -32,7 +32,7 @@ public class ShakeItUpInteractableManager : InteractableManager
             if ( i > _proteins.Count) return;
             var randScale = UnityEngine.Random.Range(0.2f, 0.4f);
             _proteins[i].transform.localScale = new Vector3(randScale, randScale, 1);
-            _proteins[i].Resistance = 0.1f + (float)GameManager.instance.FasterLevel / 100;
+            _proteins[i].Resistance = 0.5f + (float)GameManager.instance.FasterLevel/10;
             _proteins[i].gameObject.SetActive(true);
         }
     }
