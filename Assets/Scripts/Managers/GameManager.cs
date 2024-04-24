@@ -82,7 +82,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _mGameOver = false;
-        _mMinigameCount = 0;
         _mMinigameWon = 0;
         Era = 1;
         _mHearts = 3;

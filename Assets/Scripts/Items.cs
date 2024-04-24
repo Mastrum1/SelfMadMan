@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Items
 {
-    protected Player _mPlayer;
+    protected Player _mPlayer; //TO DELETE
     private Sprite _sprite;
     public Sprite Sprite { get => _sprite; set => _sprite = value; }
 
@@ -45,8 +45,20 @@ public class MinigameItem : Items
     }
 }
 
+public class FurnitureItem : Items
+{
+
+    private string _prefabName;
+    public string PrefabName { get => _prefabName; set => _prefabName = value; }
+
+    public override void Obtain()
+    {
+        //FurnitureManager.instance.UnlockFurniture(PrefabName);
+    }
+}
+
 [System.Serializable]
-public class UsableItem : Items
+public class UsableItem : Items //TO DELETE
 {
     int ID;
     public int _ID { get => ID; set => ID = value; }
@@ -69,7 +81,7 @@ public class UsableItem : Items
 }
 
 [System.Serializable]
-public class FournituresClass : Items
+public class FournituresClass : Items // TO DELETE
 {
     int ID;
     public int _ID { get => ID; set => ID = value; }
@@ -80,7 +92,7 @@ public class FournituresClass : Items
     }
 }
 
-public class FournituresClassSO : Items
+public class FournituresClassSO : Items //TO DELETE
 {
     ItemsSO _ItemsSO;
 
@@ -90,8 +102,8 @@ public class FournituresClassSO : Items
     }
     public override void Obtain()
     {
-        _mPlayer = GameManager.instance.GetComponent<Player>();
-        _mPlayer.AddFournitureInInventory(this);
+       /* _mPlayer = GameManager.instance.GetComponent<Player>();
+        _mPlayer.AddFournitureInInventory(this);*/
 
     }
 }
