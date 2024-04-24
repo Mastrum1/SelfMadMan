@@ -7,6 +7,8 @@ using System;
 
 public class ADS : MonoBehaviour
 {
+    public event Action OnCloseAd;
+    
     [SerializeField] private List<GameObject> _mSpawnPoints;
     [SerializeField] Animator _animator;
 
@@ -30,6 +32,7 @@ public class ADS : MonoBehaviour
         if (!_mIsEnable)
             return;
         _animator.SetTrigger("Depop");
+        OnCloseAd?.Invoke();
         StartCoroutine(CloseAd());
     }
 
