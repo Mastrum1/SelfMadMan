@@ -12,9 +12,15 @@ public class ScaleUpBrick : MonoBehaviour
         StartCoroutine(ScaleBrick());
     }
 
+    public void BrickUnselected()
+    {
+        StartCoroutine(ScaleBrickDown());
+    }
+
     public void StopTheCoroutine()
     {
         StopCoroutine(ScaleBrick());
+        StopCoroutine(ScaleBrickDown());
     }
 
     public void SetScale()
@@ -27,6 +33,20 @@ public class ScaleUpBrick : MonoBehaviour
         // Scale up to 1.3
         float timer = 0;
         Vector3 targetScale = gameObject.transform.localScale * 1.2f;
+
+        while (timer < scaleUpDuration)
+        {
+            transform.localScale = Vector3.Lerp(gameObject.transform.localScale, targetScale, timer / scaleUpDuration);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    public IEnumerator ScaleBrickDown()
+    {
+        // Scale up to 1.3
+        float timer = 0;
+        Vector3 targetScale = new Vector3(1,1,1);
 
         while (timer < scaleUpDuration)
         {

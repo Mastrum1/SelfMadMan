@@ -12,7 +12,6 @@ public class MoveBrick : MonoBehaviour
     [SerializeField] private GameObject _mThrowLimit;
     [SerializeField] private ScaleUpBrick _mScaleUpBrick;
     [SerializeField] private TrailRenderer _mTrailEffect;
-    [SerializeField] bool _mSelected;
     private bool _mIsThrowing = false;
 
     private Vector2 _mDelta;
@@ -29,12 +28,6 @@ public class MoveBrick : MonoBehaviour
 
     public void Move(Vector3 pos)
     {
-        if (!_mSelected)
-        {
-            _mScaleUpBrick.BrickSelected();
-            _mSelected = true;
-        }
-
         if (pos.y < _mThrowLimit.transform.position.y)
             transform.position = pos;
     }
@@ -53,8 +46,6 @@ public class MoveBrick : MonoBehaviour
 
     private void RespawnBrick()
     {
-        _mSelected = false;
-
         StopCoroutine("ThrowBrick");
         gameObject.transform.localScale = _mSpawnBrick.transform.localScale;
         _mSpriteBrick.transform.localScale = _mSpawnBrick.transform.localScale;
