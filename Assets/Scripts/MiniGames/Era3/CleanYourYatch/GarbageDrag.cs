@@ -10,15 +10,15 @@ public class GarbageDrag : MonoBehaviour
     bool _mIsEnable = true;
     public void OnDrag(Vector3 pos)
     {
-        if (!_mIsEnable)
-            return;
+       // if (!_mIsEnable)
+         //   return;
         transform.position = new Vector3(pos.x, pos.y, 0);
     }
 
     public void OnSeleted()
     {
-        if (!_mIsEnable)
-            return;
+       // if (!_mIsEnable)
+         //   return;
         if (!_mIsSelected) {
             transform.localScale = transform.localScale * _mScaleFactor;
             _mIsSelected = true;
