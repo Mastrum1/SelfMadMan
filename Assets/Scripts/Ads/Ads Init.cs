@@ -14,6 +14,8 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
     void Awake()
     {
         InitializeAds();
+        _adsCoins.LoadAd();
+
     }
 
     public void InitializeAds()
@@ -34,11 +36,8 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
 
     public void OnInitializationComplete()
     {
+
         Debug.Log("Unity Ads initialization complete.");
-        if (_adsCoins)
-            _adsCoins.LoadAd();
-        if (_adsContinue)
-            _adsContinue.LoadAd();
     }
 
     public void OnInitializationFailed(UnityAdsInitializationError error, string message)

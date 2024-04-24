@@ -19,7 +19,7 @@ public class RewardedAdsButtonCoins : MonoBehaviour, IUnityAdsLoadListener, IUni
 #endif
 
         // Disable the button until the ad is ready to show:
-        _showAdButton.SetActive(false);
+        //_showAdButton.SetActive(false);
     }
 
     // Call this public method when you want to get an ad ready to show.
