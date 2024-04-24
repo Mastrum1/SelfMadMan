@@ -16,7 +16,9 @@ public class ContentManager : MonoBehaviour
 
     [Header("Content Viewport")]
     [SerializeField] private Image _mBaseImage;
-    [SerializeField] private List<Sprite> _mSprites;
+    [SerializeField] private Image _mJames;
+    [SerializeField] private List<Sprite> _mBackgrounds;
+    [SerializeField] private List<Sprite> _mJamesSprites;
 
     [SerializeField] private List<Image> _mImagesToDeactivate;
     [SerializeField] private List<TMP_Text> _mTextsToDeactivate;
@@ -47,7 +49,7 @@ public class ContentManager : MonoBehaviour
     void InitializeDots()
     {
         // Create dots based on the number of content panels
-        for (int i = 0; i < _mSprites.Count; i++)
+        for (int i = 0; i < _mBackgrounds.Count; i++)
         {
             GameObject dot = Instantiate(_mDotPrefab, _mDotsContainer.transform);
             Image dotImage = dot.GetComponent<Image>();
@@ -73,7 +75,7 @@ public class ContentManager : MonoBehaviour
     {
         if (!IsUnlocking)
         {
-            _mCurrentIndex = (_mCurrentIndex + i + _mSprites.Count) % _mSprites.Count;
+            _mCurrentIndex = (_mCurrentIndex + i + _mBackgrounds.Count) % _mBackgrounds.Count;
             GameManager.instance.Era = _mCurrentIndex + 1;
             bool eraunlocked = GameManager.instance.ErasData[GameManager.instance.Era].Unlocked ? true : false;
             _mLockEraPanel.SetActive(!eraunlocked);
@@ -91,10 +93,11 @@ public class ContentManager : MonoBehaviour
     void ShowContent()
     {
         // Activate the current panel and deactivate others
-        for (int i = 0; i < _mSprites.Count; i++)
+        for (int i = 0; i < _mBackgrounds.Count; i++)
         {
             bool isActive = i == _mCurrentIndex;
-            _mBaseImage.sprite = _mSprites[_mCurrentIndex];
+            _mBaseImage.sprite = _mBackgrounds[_mCurrentIndex];
+            _mJames.sprite = _mJamesSprites[_mCurrentIndex];
 
             // Update dot visibility and color based on the current active content
             Image dotImage = _mDotsContainer.transform.GetChild(i).GetComponent<Image>();
@@ -102,6 +105,7 @@ public class ContentManager : MonoBehaviour
             dotImage.fillAmount = isActive ? 1f : 0f;
         }
     }
+
     public void UnlockEra()
     {
         
