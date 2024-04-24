@@ -1273,10 +1273,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mCurrentMoney: 0
-  _mTextMeshPro: {fileID: 1856493266}
-  _mContentManager: {fileID: 0}
-  _mSpin: {fileID: 0}
-  _mCoinAnim: []
 --- !u!1 &694256028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1363,6 +1359,9 @@ GameObject:
   - component: {fileID: 695855932}
   - component: {fileID: 695855934}
   - component: {fileID: 695855933}
+  - component: {fileID: 695855937}
+  - component: {fileID: 695855936}
+  - component: {fileID: 695855935}
   m_Layer: 5
   m_Name: AdButton
   m_TagString: Untagged
@@ -1427,6 +1426,69 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 695855931}
   m_CullTransparentMesh: 1
+--- !u!114 &695855935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 695855931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f9f6055f219b1043a0cfd8dd8c22011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _showAdButton: {fileID: 695855931}
+  _androidAdUnitId: Rewarded_Android
+  _iOSAdUnitId: Rewarded_iOS
+  _scoreScreen: {fileID: 665581811}
+--- !u!114 &695855936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 695855931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b3274c990eff9541b9e107b0829e239, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _androidGameId: 5602979
+  _iOSGameId: 5602978
+  _testMode: 1
+  _adsCoins: {fileID: 0}
+  _adsContinue: {fileID: 695855935}
+--- !u!114 &695855937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 695855931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d9312d381f0eb94fa340b529733662e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mOnSelected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 695855935}
+        m_TargetAssemblyTypeName: RewardedAdsButtonContinue, Assembly-CSharp
+        m_MethodName: ShowAd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _mOnDeselected:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &770392698
 GameObject:
   m_ObjectHideFlags: 0
@@ -4048,17 +4110,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6986560320436964235, guid: be4be3317c0da7243872c078fbae9e83, type: 3}
   m_PrefabInstance: {fileID: 1856493264}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1856493266 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5054748802483141368, guid: be4be3317c0da7243872c078fbae9e83, type: 3}
-  m_PrefabInstance: {fileID: 1856493264}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2022886311
 GameObject:
   m_ObjectHideFlags: 0
