@@ -11,7 +11,6 @@ public class PauseMenu : MonoBehaviour
     public void Pause()
     {
         Time.timeScale = 0;
-        DisableInput();
         StartCoroutine(CheckOpenPause());
     }
 
