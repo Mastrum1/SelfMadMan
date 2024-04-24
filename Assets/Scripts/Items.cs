@@ -2,13 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Items
 {
+    protected Player _mPlayer;
     private Sprite _sprite;
     public Sprite Sprite { get => _sprite; set => _sprite = value; }
 
     public virtual void Obtain()
     {
+
+    }
+
+    public virtual void Use()
+    {
+
     }
 }
 
@@ -19,7 +27,8 @@ public class Coins : Items
 
     public override void Obtain()
     {
-        //put amount in money
+        MoneyManager.Instance.AddMoney(Amount);
+        MoneyManager.Instance.UpdateMoney();
     }
 }
 
@@ -31,7 +40,58 @@ public class MinigameItem : Items
 
     public override void Obtain()
     {
-        Debug.Log("ta race" + SceneName);
         MiniGameSelector.instance.UnlockMinigame(SceneName);
+        QuestManager.Instance.UnlockQuest(SceneName);
+    }
+}
+
+[System.Serializable]
+public class UsableItem : Items
+{
+    int ID;
+    public int _ID { get => ID; set => ID = value; }
+
+    int _Quantity;
+    public int Quantity { get => _Quantity; set => _Quantity = value; }
+
+    public override void Obtain()
+    {
+        //use item
+        _mPlayer = GameManager.instance.GetComponent<Player>();
+        _mPlayer.AddUsableItemInInventory(this);
+    }
+
+    public override void Use()
+    {
+        _mPlayer = GameManager.instance.GetComponent<Player>();
+        _mPlayer.UseUsableItem(this);
+    }
+}
+
+[System.Serializable]
+public class FournituresClass : Items
+{
+    int ID;
+    public int _ID { get => ID; set => ID = value; }
+
+    public FournituresClass(int iD)
+    {
+        _ID = iD;
+    }
+}
+
+public class FournituresClassSO : Items
+{
+    ItemsSO _ItemsSO;
+
+    public int GetItemSOID()
+    {
+        return _ItemsSO.ID;
+    }
+    public override void Obtain()
+    {
+        _mPlayer = GameManager.instance.GetComponent<Player>();
+        _mPlayer.AddFournitureInInventory(this);
+
     }
 }

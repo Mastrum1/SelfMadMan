@@ -52,6 +52,14 @@ public class CleanYourKitchenInteractableManager : InteractableManager
         roach.OnTouched += HandleRoachDeath;
     }
 
+    public void DisableRoaches()
+    {
+        foreach (var cockroach in _cockroaches.Where(cockroach => cockroach.gameObject.activeSelf))
+        {
+            cockroach.GetComponent<CapsuleCollider2D>().enabled = false;
+        }
+    }
+    
     private void HandleRoachDeath()
     {
         OnRoachDeath?.Invoke();

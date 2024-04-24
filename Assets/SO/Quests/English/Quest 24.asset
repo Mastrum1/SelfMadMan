@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dc3ce7687a9342da8dc83dbd1e4d1bd, type: 3}
   m_Name: Quest 24
   m_EditorClassIdentifier: 
+  ID: 23
   questName: None
   time: 3
   questDescription: Throw bricks at * environmentalists.
+  questIcon: {fileID: 21300000, guid: f4dcf46b328cd494285566097f3a0461, type: 3}
   difficulties:
   - difficulty: 0
     amount: 10
@@ -26,3 +28,7 @@ MonoBehaviour:
     amount: 30
     reward: 3
   disponibility: 0
+  scene:
+    _sceneName: LoadingScreen
+    _locked: 0
+    _icon: {fileID: 0}

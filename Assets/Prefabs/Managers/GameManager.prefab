@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1010335928497963446}
   - component: {fileID: 3699729203737973389}
   - component: {fileID: 2012955190311056230}
+  - component: {fileID: 6542784465200720699}
+  - component: {fileID: 7381208922485051564}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -45,8 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa9b56807f438c149b7f83a5829750a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mScore: 0
+  _mPlayer: {fileID: 6542784465200720699}
   _mHearts: 0
+  FasterScene: Faster
 --- !u!81 &2012955190311056230
 AudioListener:
   m_ObjectHideFlags: 0
@@ -55,3 +58,128 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3783518028089879279}
   m_Enabled: 1
+--- !u!114 &6542784465200720699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3783518028089879279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1fd27820466371439e0ddd51649555c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mLoadSaveMinigame: 0
+  _mBestScore: 0
+  _mLevel: 0
+  _mAdditionalHearts: 0
+  _mXp: 0
+  _mMoney: 0
+  _mVolumeMusic: 0
+  _mVolumeFX: 0
+  _mLanguage: 
+  _mAllCinematics: []
+  _mUnlockedCinematics: []
+  _mItemLocked: []
+  _mFirstQuests: 050000000400000006000000
+  _mActiveQuests: []
+  _mCompletedQuests: []
+  _mQuestUnlocked: 
+  _mAllQuest:
+  - _questSO: {fileID: 11400000, guid: 1a1cb03d88e9843bdbfe3bd1cae1b00c, type: 2}
+    _questCompletionState: 0
+    _questDispo: 0
+  - _questSO: {fileID: 11400000, guid: 10f880fc2183544ac905b0ef2388b579, type: 2}
+    _questCompletionState: 0
+    _questDispo: 0
+  - _questSO: {fileID: 11400000, guid: 33a3c840c8e254fd8a9942e62e38e9df, type: 2}
+    _questCompletionState: 0
+    _questDispo: 0
+  - _questSO: {fileID: 11400000, guid: c7ac2ff421f5a4a619b34325e7943770, type: 2}
+    _questCompletionState: 0
+    _questDispo: 0
+  - _questSO: {fileID: 11400000, guid: de512e7f8ac164f5e9dee139269e9646, type: 2}
+    _questCompletionState: 0
+    _questDispo: 0
+  - _questSO: {fileID: 11400000, guid: db785997e104743eea0962948e45f9fa, type: 2}
+    _questCompletionState: 0
+    _questDispo: 0
+  - _questSO: {fileID: 11400000, guid: b56128cb9b5ad465b801e82e29096e9c, type: 2}
+    _questCompletionState: 0
+    _questDispo: 0
+  - _questSO: {fileID: 11400000, guid: 0327a4195be4942e1a4790e167aeb921, type: 2}
+    _questCompletionState: 0
+    _questDispo: 0
+  - _questSO: {fileID: 11400000, guid: 520372329a21947f397223bb4e71608f, type: 2}
+    _questCompletionState: 0
+    _questDispo: 0
+  - _questSO: {fileID: 11400000, guid: d04747e61b1c242d198063ffe1f537c8, type: 2}
+    _questCompletionState: 0
+    _questDispo: 0
+  - _questSO: {fileID: 11400000, guid: 7602bc47e1fa749d1adbfcc648903309, type: 2}
+    _questCompletionState: 0
+    _questDispo: 0
+  - _questSO: {fileID: 11400000, guid: c4929144fbd3d4b0c8f5ce50c58b1420, type: 2}
+    _questCompletionState: 0
+    _questDispo: 0
+  - _questSO: {fileID: 11400000, guid: c7e9d67365e834b9891a6e73edbbc3cc, type: 2}
+    _questCompletionState: 0
+    _questDispo: 0
+  - _questSO: {fileID: 11400000, guid: 6fab7b093b8c0400db2ee809d32eb8dc, type: 2}
+    _questCompletionState: 0
+    _questDispo: 0
+  - _questSO: {fileID: 11400000, guid: 6be89ee0a501044f3b066acb32f1af7d, type: 2}
+    _questCompletionState: 0
+    _questDispo: 0
+  - _questSO: {fileID: 11400000, guid: 82c8c3a4de1fe41668dd5e17162b581a, type: 2}
+    _questCompletionState: 0
+    _questDispo: 0
+  - _questSO: {fileID: 11400000, guid: 6fb9d1d10c9a144baa9669d42ca324f7, type: 2}
+    _questCompletionState: 0
+    _questDispo: 0
+  - _questSO: {fileID: 11400000, guid: 04daad50b03fc4ff3b17523ee621fa3a, type: 2}
+    _questCompletionState: 0
+    _questDispo: 0
+  - _questSO: {fileID: 11400000, guid: 84a3d3c2f8b4a404283afb6dc1bc2760, type: 2}
+    _questCompletionState: 0
+    _questDispo: 0
+  - _questSO: {fileID: 11400000, guid: a5152501a86744ee29430c3d1dbb5671, type: 2}
+    _questCompletionState: 0
+    _questDispo: 0
+  - _questSO: {fileID: 11400000, guid: aa80ef714f2c64fa78fb6c61a1071d84, type: 2}
+    _questCompletionState: 0
+    _questDispo: 0
+  - _questSO: {fileID: 11400000, guid: 19e3340152c634aac91085bbe14aedfd, type: 2}
+    _questCompletionState: 0
+    _questDispo: 0
+  - _questSO: {fileID: 11400000, guid: 67b57a5e98d4a4a8aaf894d507f39d2e, type: 2}
+    _questCompletionState: 0
+    _questDispo: 0
+  - _questSO: {fileID: 11400000, guid: 313b34780e68547fdaace57df8fcfce8, type: 2}
+    _questCompletionState: 0
+    _questDispo: 0
+  - _questSO: {fileID: 11400000, guid: f654601edc6d5469298953992b7cf8a4, type: 2}
+    _questCompletionState: 0
+    _questDispo: 0
+  - _questSO: {fileID: 11400000, guid: 545dd826ef0a44d919d1d4c507b890da, type: 2}
+    _questCompletionState: 0
+    _questDispo: 0
+  _mAllTrophy: []
+  _mAllEra1: []
+  _mAllEra2: []
+  _mAllEra3: []
+--- !u!114 &7381208922485051564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3783518028089879279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 016ca88112d09184bb88685e15df48d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mCurrentMoney: 0
+  _mCoinAnim: []

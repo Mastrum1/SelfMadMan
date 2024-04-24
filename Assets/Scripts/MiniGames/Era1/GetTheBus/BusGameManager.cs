@@ -27,27 +27,27 @@ public class BusGameManager : MiniGameManager
         _mIsEnd  = false;
     }
 
-    void Update()
+    private void Update()
     {
+        base.Update();
+        
         if (_mIsEnd)
             return;
         if (_mIsPaused)
             EndGame(_mCatch);
-        if (_mTimer.timerValue == 0)
-            EndGame(false);
     }
 
     void EndGame(bool isWin)
     {
         _mIsEnd = true;
+        //BusPool.SharedInstance.HideAllBuses();
         EndMiniGame(isWin, miniGameScore);
-        BusPool.SharedInstance.HideAllBuses();
     }
 
     public void OnClicked()
     {
         _mIsPaused = true;
-       // BusPool.SharedInstance.HideAllBuses();
+        //BusPool.SharedInstance.HideAllBuses();
         BusPool.SharedInstance.StopAllBuses();
         StopCoroutine(SpawnBus());
     }
@@ -55,7 +55,7 @@ public class BusGameManager : MiniGameManager
     IEnumerator  SpawnBus()
     {
         while (!_mIsPaused && _mBusNumber < 4) {
-            float nextDelay = Random.Range(0, _mAverageSpawnRate);
+            float nextDelay = Random.Range(_mAverageSpawnRate / 2, _mAverageSpawnRate);
             yield return new WaitForSeconds(nextDelay);
             GameObject bus = BusPool.SharedInstance.GetPooledBus(); 
             if (bus != null) {
@@ -69,6 +69,7 @@ public class BusGameManager : MiniGameManager
     void BusStartOverride(Collider2D collider2D)
     {
         _mCatch = true;
+        Amount++;
     }
 
     void BusStopOverride(Collider2D collider2D)
