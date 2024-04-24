@@ -18,13 +18,8 @@ public class ArrowMovement : MonoBehaviour
             case 1:
                 _mFasterLevel = GameManager.instance.FasterLevel;
                 break;
-            case 2:
-                _mFasterLevel = (GameManager.instance.FasterLevel / 1.25f);
-                break;
-            case 3:
-                _mFasterLevel = (GameManager.instance.FasterLevel / 1.45f);
-                break;
             default:
+                _mFasterLevel = (GameManager.instance.FasterLevel / 1.75f);
                 break;
         }
         transform.Translate(Vector3.down * _mSpeed * Time.deltaTime * GameManager.instance.FasterLevel);
