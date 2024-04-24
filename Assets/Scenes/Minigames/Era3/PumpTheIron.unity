@@ -401,6 +401,7 @@ MonoBehaviour:
   - {fileID: 1248389206}
   - {fileID: 1979623136}
   - {fileID: 1956798587}
+  _ArrowMove: []
   _mChildsLeaveArea:
   - {fileID: 456826973768233600}
   - {fileID: 983614731}
@@ -1207,8 +1208,8 @@ Transform:
   m_GameObject: {fileID: 906036640}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0318, y: -3.55, z: -0.066601515}
-  m_LocalScale: {x: 0.31987375, y: 0.365069, z: 1}
+  m_LocalPosition: {x: 0.0318, y: -2.966, z: -0.066601515}
+  m_LocalScale: {x: 0.31987375, y: 0.6563006, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 54613993}
@@ -1245,7 +1246,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.5731542}
+  m_Offset: {x: 0, y: 0.06600797}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1256,7 +1257,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 17.184307, y: 8.342463}
+  m_Size: {x: 17.184307, y: 4.3807316}
   m_EdgeRadius: 0
 --- !u!212 &906036643
 SpriteRenderer:
@@ -3009,6 +3010,14 @@ PrefabInstance:
     - target: {fileID: 2794903922509128144, guid: e3c65356842fa82449d825350de90158, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2811226111351310926, guid: e3c65356842fa82449d825350de90158, type: 3}
+      propertyPath: scaleUpDuration
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2811226111351310926, guid: e3c65356842fa82449d825350de90158, type: 3}
+      propertyPath: scaleDownDuration
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 4536759220671138326, guid: e3c65356842fa82449d825350de90158, type: 3}
       propertyPath: m_Size.x

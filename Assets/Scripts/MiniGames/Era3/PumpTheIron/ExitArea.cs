@@ -8,6 +8,7 @@ public class ExitArea : MonoBehaviour
     public event Action<bool> OnLoose;
 
     [SerializeField] private Arrows _mParent;
+    [SerializeField] private VFXScaleUp _Pulse;
 
     private bool _mEndGame = false;
     public bool EndGame { get => _mEndGame; set => _mEndGame = value; }
@@ -25,7 +26,7 @@ public class ExitArea : MonoBehaviour
     {
         if (!_mEndGame)
         {
-            _mParent.gameObject.SetActive(false);
+            _Pulse.OnObjectClicked();
             _mParent.enabled = false;
             OnLoose?.Invoke(false);
         }

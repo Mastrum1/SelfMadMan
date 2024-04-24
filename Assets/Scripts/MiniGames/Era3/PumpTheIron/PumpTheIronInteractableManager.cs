@@ -16,6 +16,8 @@ public class PumpTheIronInteractableManager : InteractableManager
 
     [SerializeField] private List<Arrows> _mChilds;
 
+    [SerializeField] private List<ArrowMovement> _ArrowMove;
+
     [SerializeField] private List<ExitArea> _mChildsLeaveArea;
 
 
@@ -40,7 +42,14 @@ public class PumpTheIronInteractableManager : InteractableManager
 
     void HandleEndGame(bool win)
     {
-        DespawnObjects();
+        if (!win)
+        {
+            StopAllArrows();
+        }
+        else
+        {
+            DespawnObjects();
+        }
         _mSwipe.EndGame = true;
         OnGameEnd?.Invoke(win);
     }
@@ -48,6 +57,14 @@ public class PumpTheIronInteractableManager : InteractableManager
     public void DisableAllSwipe()
     {
         _mSwipe.EndGame = true;
+    }
+
+    public void StopAllArrows()
+    {
+        for (int i = 0; i < _ArrowMove.Count; i++)
+        {
+            _ArrowMove[i].enabled = false;
+        }
     }
 
     public void DespawnObjects()
@@ -63,7 +80,7 @@ public class PumpTheIronInteractableManager : InteractableManager
         }
     }
 
-    void HandleSwipe(bool swipe,string Dir)
+    void HandleSwipe(bool swipe, string Dir)
     {
         if (!swipe)
         {

@@ -172,6 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mParent: {fileID: 7101906083683753560}
+  _Pulse: {fileID: 2811226111351310926}
 --- !u!1 &2606306467287057230
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,6 +184,7 @@ GameObject:
   - component: {fileID: 7446732218781961139}
   - component: {fileID: 7101906083683753560}
   - component: {fileID: 1086331136673993449}
+  - component: {fileID: 2811226111351310926}
   m_Layer: 0
   m_Name: Arrows
   m_TagString: Untagged
@@ -238,3 +240,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mSpeed: 3
   _mSpriteRenderer: {fileID: 2508465042924263651}
+--- !u!114 &2811226111351310926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2606306467287057230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b51b89ad8563c2b4788e7b87281d2bb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleUpDuration: 0.3
+  scaleDownDuration: 0.3
+  scaleUpFactor: 1.5
