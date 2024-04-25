@@ -24,7 +24,6 @@ public class GarbagePool : MonoBehaviour
         {
             tmp = Instantiate(m_ObjectPool);
             tmp.SetActive(false);
-          //  _mInputManager.
             m_PooledObjects.Add(tmp);
         }
     }
