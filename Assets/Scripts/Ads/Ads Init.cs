@@ -14,7 +14,10 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
     void Awake()
     {
         InitializeAds();
-        _adsCoins.LoadAd();
+        if (_adsCoins)
+            _adsCoins.LoadAd();
+        if (_adsContinue)
+            _adsContinue.LoadAd();
 
     }
 

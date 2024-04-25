@@ -1,4 +1,5 @@
 using CW.Common;
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -38,6 +39,9 @@ public class ScoreScreen : MonoBehaviour
     [SerializeField] private GameObject _mWinScreenBG;
 
     private int Timer = 5;
+
+    public bool Pub { get => _mPub; set => _mPub = value;}
+    bool _mPub = false;
 
     private bool _mPopupClosed = true;
     private bool _mContinue = false;
@@ -87,6 +91,7 @@ public class ScoreScreen : MonoBehaviour
         _UIAnimator.SetBool("DisplayPopUp", false);
     }
 
+    [ContextMenu("Continue")]
     public void OnContinue()
     {
         if (GameManager.instance.Player.Hearts > 0 && Timer > 0)
@@ -103,8 +108,25 @@ public class ScoreScreen : MonoBehaviour
             StartCoroutine(ResetCharacter());
             GameManager.instance.ContinueWithHeart();
         }
-
     }
+
+    public void OnContinueAd()
+    {
+        if (Timer > 0)
+        {
+            _mContinue = true;
+            Timer = 5;
+            _mPopupClosed = true;
+            _UIAnimator.SetBool("DisplayPopUp", false);
+            StartCoroutine(OnContinueAnim());
+            _HeartAnimator.SetInteger("Hearts", 1);
+            _HeartAnimator.SetBool("Revived", true);
+            _InputManager.SetActive(false);
+            StartCoroutine(ResetCharacter());
+            GameManager.instance.ContinueWithHeart();
+        }
+    }
+
     IEnumerator OnContinueAnim()
     {
         _mJamesAnimator.SetBool("Idle", true);
@@ -135,7 +157,8 @@ public class ScoreScreen : MonoBehaviour
         while ((!_mPopupClosed && Timer > 0) && !_mContinue)
         {
             Debug.Log(Timer.ToString());
-            Timer--;
+            if (!_mPub)
+                Timer--;
             _mTimerTexts.text = Timer.ToString();
             yield return new WaitForSeconds(1f);
         }

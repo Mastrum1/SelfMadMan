@@ -20,7 +20,6 @@ public class RewardedAdsButtonContinue : MonoBehaviour, IUnityAdsLoadListener, I
 #endif
 
         // Disable the button until the ad is ready to show:
-        _showAdButton.SetActive(false);
     }
 
     // Call this public method when you want to get an ad ready to show.
@@ -52,6 +51,7 @@ public class RewardedAdsButtonContinue : MonoBehaviour, IUnityAdsLoadListener, I
         _showAdButton.SetActive(false);
         // Then show the ad:
         Advertisement.Show(_adUnitId, this);
+        _scoreScreen.Pub = true;
     }
 
     // Implement the Show Listener's OnUnityAdsShowComplete callback method to determine if the user gets a reward:
@@ -62,8 +62,8 @@ public class RewardedAdsButtonContinue : MonoBehaviour, IUnityAdsLoadListener, I
             Debug.Log("Unity Ads Rewarded Ad Completed");
 
             // Grant a reward.
-            _scoreScreen.OnContinue();
-
+            _scoreScreen.OnContinueAd();
+            _scoreScreen.Pub = false;
             LoadAd();
         }
     }
