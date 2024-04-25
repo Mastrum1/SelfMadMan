@@ -12,6 +12,7 @@ public class ContentManager : MonoBehaviour
     }
 
     [SerializeField] private HomePageUIManager _mHomePageUIManager;
+    [SerializeField] private FurnitureManager _mFurnitureManager;
     [SerializeField] private GameObject[] _MenuGameObjects;
 
     [Header("Content Viewport")]
@@ -43,6 +44,12 @@ public class ContentManager : MonoBehaviour
         _mLockEraPanel.SetActive(GameManager.instance.ErasData[GameManager.instance.Era].Unlocked ? false : true);
         InitializeDots();
         ShowContent();
+
+
+        _mFurnitureManager.PickFurniture("AlphaMale");
+        _mFurnitureManager.PickFurniture("ChadStatue");
+        _mFurnitureManager.PickFurniture("Dog");
+
     }
 
     void InitializeDots()
