@@ -45,13 +45,15 @@ public class ContentManager : MonoBehaviour
         InitializeDots();
         ShowContent();
 
-
-        _mFurnitureManager.PickFurniture("AlphaMale");
-        _mFurnitureManager.PickFurniture("ChadStatue");
-        _mFurnitureManager.PickFurniture("Dog");
-
+     //   StartCoroutine(Change());
     }
 
+    IEnumerator Change()
+    {
+        yield return new WaitForSeconds(5);
+        _mFurnitureManager.UnlockFurniture("ChadStatue");
+        _mFurnitureManager.PickFurniture("ChadStatue");
+    }
     void InitializeDots()
     {
         // Create dots based on the number of content panels
