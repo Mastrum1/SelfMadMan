@@ -5,6 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Furniture", menuName = "Furniture")]
 public class FurnitureSO : ItemsSO
 {
-    public FurnitureManager.FurnitureType Type;
+    public FurnitureManager.FurnitureType FurnitureType;
     public GameObject FurniturePrefab;
 }
