@@ -36,5 +36,10 @@ public class RizzHerHand : MonoBehaviour
             collision.gameObject.GetComponent<VFXScaleUp>().OnObjectClicked();
             OnGameEnd?.Invoke(false);
         }
+
+        if(collision.gameObject.CompareTag("OtherHand"))
+        {
+            OnGameEnd?.Invoke(true);
+        }
     }
 }

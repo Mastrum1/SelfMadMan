@@ -18,6 +18,17 @@ public class RizzHerManager : MiniGameManager
         EndMiniGame(win, miniGameScore);
     }
 
+    public override void Update()
+    {
+        if(_mTimer.TimerValue <= GameManager.instance.Speed/2.5)
+            _mInteractableManager.EndGame();
+
+        if (_mTimer.TimerValue == 0 && _gameIsPlaying)
+            EndMiniGame(false, 0);
+
+
+    }
+
     private void OnDisable()
     {
         _mInteractableManager.GameEnd -= OnGameEnd;

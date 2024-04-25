@@ -35,7 +35,7 @@ public class ObstacleMovement : MonoBehaviour
     private IEnumerator FadeOutCoroutine()
     {
         float counter = 0;
-        while (counter < 0.5f)
+        while (counter < 1f)
         {
             counter += Time.deltaTime;
             yield return null;
