@@ -8,5 +8,4 @@ public class Trophies : ScriptableObject
     public string trophyDescription;
     public int goal;
     public int reward;
-    public MinigameScene scene;
 }

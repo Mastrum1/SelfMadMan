@@ -203,6 +203,8 @@ public class GameManager : MonoBehaviour
         if (Player.Xp >= 5)
         {
             Player.LevelUp();
+            TrophyManager.Instance.AddTrophyAmount(5,1);
+            TrophyManager.Instance.AddTrophyAmount(7,1);
         }
         OnUpdateLevel?.Invoke();
     }

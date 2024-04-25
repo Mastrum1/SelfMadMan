@@ -45,7 +45,10 @@ public class MiniGameManager : MonoBehaviour
         _mTimer.MyTimer = false;
 
         if (won)
+        {
             _cash.Play();
+            TrophyManager.Instance.AddTrophyAmount(6,1);
+        }
         else
             _loosePanel.SetActive(true);
 

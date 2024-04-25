@@ -66,7 +66,14 @@ public class TrophyManager : MonoBehaviour
 
     public void AddTrophyAmount(int id, int amount)
     {
+        if (_trophyList[id].TrophyCompletionState != CompletionState.NotComplete) return;
+        
         _trophyList[id].CurrentAmount += amount;
+
+        if (id == 3 && amount != _trophyList[id].TrophySO.goal)
+        {
+            _trophyList[id].CurrentAmount = 0;
+        }
     }
 
     public void ClaimReward(Trophy trophy)

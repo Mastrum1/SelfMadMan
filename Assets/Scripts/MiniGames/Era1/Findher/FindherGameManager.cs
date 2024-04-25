@@ -95,7 +95,10 @@ public class FindherGameManager : MiniGameManager
         _mRightButton.OnClick();
         SwipeAnimation(false);
         if (_mIsAd)
+        {
             EndGame(false);
+            TrophyManager.Instance.AddTrophyAmount(9,1);
+        }
         else {
             _mAd.SetActive(false);
             _mProfile.SetActive(false);
