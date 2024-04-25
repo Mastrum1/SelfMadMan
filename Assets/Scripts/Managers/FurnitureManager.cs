@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Unity.Collections.AllocatorManager;
 
 public class FurnitureManager : MonoBehaviour
 {
@@ -21,12 +23,12 @@ public class FurnitureManager : MonoBehaviour
         public List<GameObject> GOPerEra { get => _GOPerEra; set => _GOPerEra = value; }
 
         public bool Picked;
-        public bool Unlock;
-        public FurnitureType Type;
+        public bool Unlocked;
+        [SerializeField] public FurnitureType Type;
 
         public void UnlockFunriture()
         {
-            Unlock = true;
+            Unlocked = true;
         }
 
         public void PickFurniture(int era)
@@ -61,7 +63,7 @@ public class FurnitureManager : MonoBehaviour
         if (instance == null)
             _instance = this;
 
-        //Player
+        //Player -> load data into FurnitureList and ActiveFurnitures
         
     }
 
@@ -82,12 +84,20 @@ public class FurnitureManager : MonoBehaviour
         {
             if (furniture.PrefabParent.name == name)
             {
-                foreach (int index in ActiveFurnitures)
+                int tempIndex = 0;
+                for(int i = 0; i < ActiveFurnitures.Count; i++)
                 {
+                    int index = ActiveFurnitures[i];
                     if (FurnitureList[index].Type == furniture.Type)
+                    {
                         FurnitureList[index].UnPick();
+                        tempIndex = index;
+                        break;
+                    }
                 }
+                ActiveFurnitures.Remove(tempIndex);
                 furniture.PickFurniture(GameManager.instance.Era);
+                ActiveFurnitures.Add(FurnitureList.IndexOf(furniture));
                 return;
             }
         }
