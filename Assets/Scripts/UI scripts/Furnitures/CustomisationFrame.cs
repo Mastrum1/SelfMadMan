@@ -17,4 +17,15 @@ public class CustomisationFrame : MonoBehaviour
 
     public BoxCollider2D BoxCollider { get => _mBoxCollider; set => _mBoxCollider = value; }
     [SerializeField] private BoxCollider2D _mBoxCollider;
+
+    public FurnitureSO FurnitureSO;
+
+    public void OnClick()
+    {
+        if (FurnitureSO != null)
+        {
+            FurnitureManager.instance.PickFurniture(FurnitureSO.FurniturePrefab.name);
+            CustomisationManager.instance.LoadFur(CustomisationManager.instance.FrameFurnitures);
+        }
+    }
 }

@@ -5,145 +5,69 @@ using static FurnitureManager;
 
 public class CustomisationManager : MonoBehaviour
 {
+    public static CustomisationManager instance;
+
     [Header("FurnitureManager")]
     [SerializeField] private FurnitureManager _mFurnitureManager;
 
+    public FurnitureSO[] FrameFurnitures { get => _mFrameFurnitures; set => _mFrameFurnitures = value; }
     [Header("FurnituresSO")]
     [SerializeField] private FurnitureSO[] _mFrameFurnitures;
-    [SerializeField] private FurnitureSO[] _mStatuesFurnitures;
-    [SerializeField] private FurnitureSO[] _mObjectsFurnitures;
 
     [Header("TemplatesGO")]
     [SerializeField] private List<CustomisationFrame> _mFrameTemplates;
-    [SerializeField] private List<CustomisationFrame> _mStatueTemplates;
-    [SerializeField] private List<CustomisationFrame> _mObjectTemplates;
 
     [SerializeField] private List<Sprite> _mBGButtons;
 
     private void Start()
     {
-        LoadFur(_mFrameFurnitures);
-        LoadFur(_mStatuesFurnitures);
-        LoadFur(_mObjectsFurnitures);
+        if (instance == null)
+            instance = this;
     }
 
-    private void LoadFur(ItemsSO[] items)
+    private void OnEnable()
+    {
+        LoadFur(_mFrameFurnitures);
+    }
+
+    public void LoadFur(FurnitureSO[] items)
     {
         for (int i = 0; i < items.Length; i++) 
-        { 
-            if (items[i].Type == ItemsSO.TYPE.FURNITURE)
-            {
-                FurnitureSO fur = items[i] as FurnitureSO;
-
-                CheckLocked(items);
-
-                if (fur.FurnitureType == FurnitureManager.FurnitureType.FRAME)
-                {
-                    _mFrameTemplates[i].FurnitureImage.sprite = fur.Icon;
-                }
-
-                else if (fur.FurnitureType == FurnitureManager.FurnitureType.STATUE)
-                {
-                    _mStatueTemplates[i].FurnitureImage.sprite = fur.Icon;
-                }
-
-                else if (fur.FurnitureType == FurnitureManager.FurnitureType.OBJECT)
-                {
-                    _mObjectTemplates[i].FurnitureImage.sprite = fur.Icon;
-                }
-
-            }
-        }
-    }
-
-    private void CheckLocked(ItemsSO[] items)
-    {
-        for (int i = 0; i < items.Length; i++)
         {
-            Furniture furniture = _mFurnitureManager.FurnitureList[i];
-
-            FurnitureSO fur = items[i] as FurnitureSO;
-
-            if (furniture.Unlocked)
+            foreach (var fur in _mFurnitureManager.FurnitureList)
             {
-                if (furniture.Picked)
+                if (items[i].FurniturePrefab.name == fur.PrefabParent.name)
                 {
-                    _mFrameTemplates[i].BoxCollider.enabled = true;
-                    _mStatueTemplates[i].BoxCollider.enabled = true;
-                    _mObjectTemplates[i].BoxCollider.enabled = true;
+                    _mFrameTemplates[i].FurnitureSO = items[i];
 
-                    if (fur.FurnitureType == FurnitureManager.FurnitureType.FRAME)
+                    if (!fur.Locked)
                     {
-                        _mFrameTemplates[i].BGButton.sprite = _mBGButtons[0];
-                        _mFrameTemplates[i].ButtonText.text = "Picked";
+                        _mFrameTemplates[i].FurnitureImage.sprite = items[i].Icon;
+                        _mFrameTemplates[i].BoxCollider.enabled = true;
+
+                        if (fur.Picked)
+                        {
+                            _mFrameTemplates[i].BGButton.sprite = _mBGButtons[0];
+                            _mFrameTemplates[i].ButtonText.text = "Picked";
+                        }
+
+                        else if (!fur.Picked)
+                        {
+                            _mFrameTemplates[i].BGButton.sprite = _mBGButtons[1];
+                            _mFrameTemplates[i].ButtonText.text = "Pick";
+                        }
                     }
 
-                    else if (fur.FurnitureType == FurnitureManager.FurnitureType.STATUE)
+                    else if (fur.Locked)
                     {
-                        _mStatueTemplates[i].BGButton.sprite = _mBGButtons[0];
-                        _mStatueTemplates[i].ButtonText.text = "Picked";
-                    }
-
-                    else if (fur.FurnitureType == FurnitureManager.FurnitureType.OBJECT)
-                    {
-                        _mObjectTemplates[i].BGButton.sprite = _mBGButtons[0];
-                        _mObjectTemplates[i].ButtonText.text = "Picked";
-                    }
-                }
-                else if (!furniture.Picked)
-                {
-                    if (fur.FurnitureType == FurnitureManager.FurnitureType.FRAME)
-                    {
-                        _mFrameTemplates[i].BGButton.sprite = _mBGButtons[1];
-                        _mFrameTemplates[i].ButtonText.text = "Pick";
-                    }
-
-                    else if (fur.FurnitureType == FurnitureManager.FurnitureType.STATUE)
-                    {
-                        _mStatueTemplates[i].BGButton.sprite = _mBGButtons[1];
-                        _mStatueTemplates[i].ButtonText.text = "Pick";
-                    }
-
-                    else if (fur.FurnitureType == FurnitureManager.FurnitureType.OBJECT)
-                    {
-                        _mObjectTemplates[i].BGButton.sprite = _mBGButtons[1];
-                        _mObjectTemplates[i].ButtonText.text = "Pick";
-                    }
-                }
-            }
-            else if (!furniture.Unlocked)
-            {
-                _mFrameTemplates[i].BoxCollider.enabled = false;
-                _mStatueTemplates[i].BoxCollider.enabled = false;
-                _mObjectTemplates[i].BoxCollider.enabled = false;
-
-                if (items[i].Type == ItemsSO.TYPE.FURNITURE)
-                {
-
-                    if (fur.FurnitureType == FurnitureManager.FurnitureType.FRAME)
-                    {
-                        Debug.Log(_mFrameTemplates[i].FurnitureImage.sprite);
+                        _mFrameTemplates[i].BoxCollider.enabled = false;
                         _mFrameTemplates[i].BGButton.sprite = _mBGButtons[2];
                         _mFrameTemplates[i].FurnitureImage.sprite = _mBGButtons[3];
                         _mFrameTemplates[i].ButtonText.text = "Locked";
                     }
-
-                    else if (fur.FurnitureType == FurnitureManager.FurnitureType.STATUE)
-                    {
-                        _mStatueTemplates[i].BGButton.sprite = _mBGButtons[2];
-                        _mStatueTemplates[i].FurnitureImage.sprite = _mBGButtons[3];
-                        _mStatueTemplates[i].ButtonText.text = "Locked";
-                    }
-
-                    else if (fur.FurnitureType == FurnitureManager.FurnitureType.OBJECT)
-                    {
-                        _mObjectTemplates[i].BGButton.sprite = _mBGButtons[2];
-                        _mObjectTemplates[i].FurnitureImage.sprite = _mBGButtons[3];
-                        _mObjectTemplates[i].ButtonText.text = "Locked";
-                    }
-                } 
+                }
             }
-        }   
+        }
     }
 }
 

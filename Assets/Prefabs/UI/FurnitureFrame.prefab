@@ -52,6 +52,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pick
       objectReference: {fileID: 0}
+    - target: {fileID: 8467517846905399256, guid: 5b758abffbf4f1541985e639cb43d79d, type: 3}
+      propertyPath: _mOnSelected.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467517846905399256, guid: 5b758abffbf4f1541985e639cb43d79d, type: 3}
+      propertyPath: _mOnSelected.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467517846905399256, guid: 5b758abffbf4f1541985e639cb43d79d, type: 3}
+      propertyPath: _mOnSelected.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 7672881102374492855}
+    - target: {fileID: 8467517846905399256, guid: 5b758abffbf4f1541985e639cb43d79d, type: 3}
+      propertyPath: _mOnSelected.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467517846905399256, guid: 5b758abffbf4f1541985e639cb43d79d, type: 3}
+      propertyPath: _mOnSelected.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: OnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467517846905399256, guid: 5b758abffbf4f1541985e639cb43d79d, type: 3}
+      propertyPath: _mOnSelected.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: CustomisationFrame, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467517846905399256, guid: 5b758abffbf4f1541985e639cb43d79d, type: 3}
+      propertyPath: _mOnSelected.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8526614118352613302, guid: 5b758abffbf4f1541985e639cb43d79d, type: 3}
       propertyPath: m_Name
       value: FurnitureFrame
@@ -194,6 +222,7 @@ MonoBehaviour:
   _mBGButton: {fileID: 984515621762488565}
   _mButtonText: {fileID: 6372021359624964554}
   _mBoxCollider: {fileID: 7937995975874781216}
+  FurnitureSO: {fileID: 0}
 --- !u!61 &7937995975874781216 stripped
 BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 9210817288746152768, guid: 5b758abffbf4f1541985e639cb43d79d, type: 3}
