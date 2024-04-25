@@ -22,8 +22,6 @@ public class PlayerData
 
     public int BestScore;
 
-    public InventoryClass Inventory;
-
     public List<int> UnlockedCinematics = new List<int>();
 
     public List<Player.QuestSave> ActiveQuests = new List<Player.QuestSave>();
@@ -32,7 +30,9 @@ public class PlayerData
 
     public List<Player.QuestSave> CompletedQuests = new List<Player.QuestSave>();
 
-    public List<FournituresClass> ItemLocked = new List<FournituresClass>();
+    public List<int> ActivesFurnitures = new List<int>();
+
+    public List<Player.AllFurnituresSaveClass> allFurnituresSave = new List<Player.AllFurnituresSaveClass>();
 
     public List<int> QuestUnlocked = new List<int>();
 
@@ -81,9 +81,8 @@ public class PlayerData
                 AllEra3.Add(i);
         }
 
-        Inventory = player.Inventory;
-
-        ItemLocked = player.ItemLocked;
+        allFurnituresSave = player.AllFurnituresSave;
+        ActivesFurnitures = player.ActivesFurnitures;
 
         ActiveQuests = new List<Player.QuestSave>();
 
@@ -174,9 +173,7 @@ public class PlayerData
 
         InitEras();
 
-        Inventory = new InventoryClass();
-        Inventory.Fournitures = new List<FournituresClass>();
-        Inventory.UsableItems = new List<UsableItem>();
+        allFurnituresSave = player.AllFurnituresSave;
 
         QuestUnlocked = player.FirstQuests;
         SaveAllTrophyQuest(player.AllTrophy);

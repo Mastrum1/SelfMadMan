@@ -23,12 +23,12 @@ public class FurnitureManager : MonoBehaviour
         public List<GameObject> GOPerEra { get => _GOPerEra; set => _GOPerEra = value; }
 
         public bool Picked;
-        public bool Unlocked;
+        public bool Locked;
         [SerializeField] public FurnitureType Type;
 
         public void UnlockFunriture()
         {
-            Unlocked = true;
+            Locked = true;
         }
 
         public void PickFurniture(int era)
