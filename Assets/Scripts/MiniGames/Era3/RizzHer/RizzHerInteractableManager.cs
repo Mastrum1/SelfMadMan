@@ -33,6 +33,8 @@ public class RizzHerInteractableManager : MonoBehaviour
         int Value;
         GameObject TempObj = new GameObject();
         int idToActivate = -1;
+        int RandomObj;
+
         for (int i = 0; i < NbSpawn; i++)
         {
 
@@ -44,87 +46,38 @@ public class RizzHerInteractableManager : MonoBehaviour
             switch (Value)
             {
                 case 0:
-                    if (_leftObj[0].activeSelf == true)
+                    do
                     {
-                        _leftObj[1].transform.position = new Vector3(-1.85f, 3.15f, 0);
-                        _leftObj[1].SetActive(true);
-                        TempObj = _leftObj[1];
-                    }
-                    else if (_leftObj[1].activeSelf == true)
-                    {
-                        _leftObj[2].transform.position = new Vector3(-1.85f, 3.15f, 0);
-                        _leftObj[2].SetActive(true);
-                        TempObj = _leftObj[2];
+                        RandomObj = UnityEngine.Random.Range(0, _leftObj.Count);
+                    } while (_leftObj[RandomObj].activeSelf == true);
 
-                    }
-                    else if (_leftObj[2].activeSelf == true)
-                    {
-                        _leftObj[3].transform.position = new Vector3(-1.85f, 3.15f, 0);
-                        _leftObj[3].SetActive(true);
-                        TempObj = _leftObj[3];
+                    _leftObj[RandomObj].transform.position = new Vector3(-1.85f, 3.15f, 0);
+                    _leftObj[RandomObj].SetActive(true);
 
-                    }
-                    else
-                    {
-                        _leftObj[0].transform.position = new Vector3(-1.85f, 3.15f, 0);
-                        _leftObj[0].SetActive(true);
-                        TempObj = _leftObj[0];
+                    TempObj = _leftObj[RandomObj];
 
-                    }
                     break;
                 case 1:
-                    if (_midObj[0].activeSelf == true)
+                    do
                     {
-                        _midObj[1].transform.position = new Vector3(0, 3.15f, 0);
-                        _midObj[1].SetActive(true);
-                        TempObj = _midObj[1];
-                    }
-                    else if (_midObj[1].activeSelf == true)
-                    {
-                        _midObj[2].transform.position = new Vector3(0, 3.15f, 0);
-                        _midObj[2].SetActive(true);
-                        TempObj = _midObj[2];
-                    }
-                    else if (_midObj[2].activeSelf == true)
-                    {
-                        _midObj[3].transform.position = new Vector3(0, 3.15f, 0);
-                        _midObj[3].SetActive(true);
-                        TempObj = _midObj[3];
-                    }
-                    else
-                    {
-                        _midObj[0].transform.position = new Vector3(0, 3.15f, 0);
-                        _midObj[0].SetActive(true);
-                        TempObj = _midObj[0];
-                    }
+                        RandomObj = UnityEngine.Random.Range(0, _midObj.Count);
+                    } while (_midObj[RandomObj].activeSelf == true);
+
+                    _midObj[RandomObj].transform.position = new Vector3(0, 3.15f, 0);
+                    _midObj[RandomObj].SetActive(true);
+                    TempObj = _midObj[RandomObj];
 
                     break;
                 case 2:
-                    if (_rightObj[0].activeSelf == true)
+                    do
                     {
-                        _rightObj[1].transform.position = new Vector3(1.85f, 3.15f, 0);
-                        _rightObj[1].SetActive(true);
-                        TempObj = _rightObj[1];
-                    }
-                    else if (_rightObj[1].activeSelf == true)
-                    {
-                        _rightObj[2].transform.position = new Vector3(1.85f, 3.15f, 0);
-                        _rightObj[2].SetActive(true);
-                        TempObj = _rightObj[2];
-                    }
-                    else if (_rightObj[2].activeSelf == true)
-                    {
-                        _rightObj[3].transform.position = new Vector3(1.85f, 3.15f, 0);
-                        _rightObj[3].SetActive(true);
-                        TempObj = _rightObj[3];
-                    }
-                    else
-                    {
-                        _rightObj[0].transform.position = new Vector3(1.85f, 3.15f, 0);
-                        _rightObj[0].SetActive(true);
-                        TempObj = _rightObj[0];
+                        RandomObj = UnityEngine.Random.Range(0, _rightObj.Count);
+                    } while (_rightObj[RandomObj].activeSelf == true);
 
-                    }
+                    _rightObj[RandomObj].transform.position = new Vector3(1.85f, 3.15f, 0);
+                    _rightObj[RandomObj].SetActive(true);
+                    TempObj = _rightObj[RandomObj];
+
                     break;
             }
 
