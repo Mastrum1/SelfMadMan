@@ -6,9 +6,9 @@ public class ActivePump : MonoBehaviour
 {
     public GameObject Pump;
     // Start is called before the first frame update
-    private void OnEnable()
+
+    public void ActivePumpObj()
     {
-        if(!Pump.activeSelf)
-            Pump.SetActive(true);
+        Pump.SetActive(true);
     }
 }
