@@ -222,7 +222,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7381208922485051564, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
   m_PrefabInstance: {fileID: 1840523861636629208}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1840523861636629209}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 016ca88112d09184bb88685e15df48d8, type: 3}
@@ -1973,54 +1973,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 1fc9843fc12f44702a517809e36fffbb, type: 2}
     - target: {fileID: 6542784465200720699, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _AllFurnituresSave.Array.data[0].Locked
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6542784465200720699, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
+      propertyPath: _AllFurnituresSave.Array.data[0].Picked
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6542784465200720699, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
       propertyPath: _AllFurnituresSave.Array.data[0].Unlocked
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3783518028089879279, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1840523861636629210}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
---- !u!1 &1840523861636629209 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3783518028089879279, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
-  m_PrefabInstance: {fileID: 1840523861636629208}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1840523861636629210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1840523861636629209}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e05d96b8cbf5fa47b0b8fdfbd984bde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FurnitureList:
-  - _prefabParent: {fileID: 0}
-    _GOPerEra:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    Picked: 0
-    Locked: 0
-    Type: 0
-  - _prefabParent: {fileID: 0}
-    _GOPerEra: []
-    Picked: 0
-    Locked: 0
-    Type: 0
-  - _prefabParent: {fileID: 0}
-    _GOPerEra: []
-    Picked: 0
-    Locked: 0
-    Type: 0
-  ActiveFurnitures: 00000000
 --- !u!1001 &7911446559097213416
 PrefabInstance:
   m_ObjectHideFlags: 0

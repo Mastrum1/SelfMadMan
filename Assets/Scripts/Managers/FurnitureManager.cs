@@ -63,6 +63,11 @@ public class FurnitureManager : MonoBehaviour
         if (instance == null)
             _instance = this;
 
+        foreach (var furniture in GameManager.instance.Player.AllFurnituresSave)
+        {
+            
+        }
+        ActiveFurnitures = GameManager.instance.Player.ActivesFurnitures;
         //Player -> load data into FurnitureList and ActiveFurnitures
         
     }
@@ -74,6 +79,7 @@ public class FurnitureManager : MonoBehaviour
             if (furniture.PrefabParent.name == name)
             {
                 furniture.UnlockFunriture();
+                GameManager.instance.Player.UnlockFurniture(furniture.GetIdInList(FurnitureList))
             }
         }
     }
@@ -96,8 +102,10 @@ public class FurnitureManager : MonoBehaviour
                     }
                 }
                 ActiveFurnitures.Remove(tempIndex);
+                GameManager.instance.Player.UnPickFurniture(ActiveFurnitures.IndexOf(tempIndex));
                 furniture.PickFurniture(GameManager.instance.Era);
                 ActiveFurnitures.Add(FurnitureList.IndexOf(furniture));
+                GameManager.instance.Player.PickFurniture(FurnitureList.IndexOf(furniture));
                 return;
             }
         }
