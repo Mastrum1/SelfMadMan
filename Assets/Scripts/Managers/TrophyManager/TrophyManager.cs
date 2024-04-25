@@ -49,7 +49,9 @@ public class TrophyManager : MonoBehaviour
     {
         for (var i = 0; i < trophies.Count; i++)
         {
+
             _trophyList.Add(trophies[i]);
+            //_trophyList[i].CurrentAmount = 8;
             CheckTrophyCompletion(_trophyList[i]);
         }
     }
@@ -74,6 +76,7 @@ public class TrophyManager : MonoBehaviour
         {
             _trophyList[id].CurrentAmount = 0;
         }
+        CheckTrophyCompletion(_trophyList[id]);
     }
 
     public void ClaimReward(Trophy trophy)

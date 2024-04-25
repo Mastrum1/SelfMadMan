@@ -28,6 +28,7 @@ public class FurnitureManager : MonoBehaviour
 
         public void UnlockFunriture()
         {
+            TrophyManager.Instance.AddTrophyAmount(4, 1);
             Locked = false;
         }
 
@@ -88,6 +89,7 @@ public class FurnitureManager : MonoBehaviour
             {
                 furniture.UnlockFunriture();
                 GameManager.instance.Player.UnlockFurniture(furniture.GetIdInList(FurnitureList));
+                
             }
         }
     }
