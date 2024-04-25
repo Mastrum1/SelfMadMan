@@ -64,10 +64,16 @@ public class TrophyManager : MonoBehaviour
         OnTrophyComplete?.Invoke(trophy);
     }
 
+    public void AddTrophyAmount(int id, int amount)
+    {
+        _trophyList[id].CurrentAmount += amount;
+    }
+
     public void ClaimReward(Trophy trophy)
     {
         trophy.TrophyCompletionState = CompletionState.Claimed;
         OnTrophyClaimed?.Invoke(trophy, trophy.TrophySO.reward);
-        //Add money to wallet;
+        MoneyManager.Instance.AddMoney(trophy.TrophySO.reward);
+        MoneyManager.Instance.UpdateMoney();
     }
 }
