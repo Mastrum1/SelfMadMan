@@ -28,7 +28,7 @@ public class FurnitureManager : MonoBehaviour
 
         public void UnlockFunriture()
         {
-            Locked = true;
+            Locked = false;
         }
 
         public void PickFurniture(int era)
@@ -63,13 +63,21 @@ public class FurnitureManager : MonoBehaviour
         if (instance == null)
             _instance = this;
 
-        foreach (var furniture in GameManager.instance.Player.AllFurnituresSave)
-        {
-            
-        }
         ActiveFurnitures = GameManager.instance.Player.ActivesFurnitures;
-        //Player -> load data into FurnitureList and ActiveFurnitures
-        
+
+        for (int i = 0; i < GameManager.instance.Player.AllFurnituresSave.Count; i++)
+        {
+            if (!GameManager.instance.Player.AllFurnituresSave[i].Locked)
+                FurnitureList[i].UnlockFunriture();
+        }
+        foreach (int furnitureIndex in ActiveFurnitures)
+        {
+            FurnitureList[furnitureIndex].PickFurniture(GameManager.instance.Era);
+        }
+
+
+
+
     }
 
     public void UnlockFurniture(string name)
@@ -79,33 +87,37 @@ public class FurnitureManager : MonoBehaviour
             if (furniture.PrefabParent.name == name)
             {
                 furniture.UnlockFunriture();
-                GameManager.instance.Player.UnlockFurniture(furniture.GetIdInList(FurnitureList))
+                GameManager.instance.Player.UnlockFurniture(furniture.GetIdInList(FurnitureList));
             }
         }
     }
 
     public void PickFurniture(string name)
     {
+        Debug.Log(ActiveFurnitures);
+        Debug.Log("GOT " + FurnitureList.Count + " FURNITURES");
         foreach (var furniture in FurnitureList)
         {
             if (furniture.PrefabParent.name == name)
             {
-                int tempIndex = 0;
-                for(int i = 0; i < ActiveFurnitures.Count; i++)
+                Debug.Log(furniture.PrefabParent.name + " IS PIC    KING ");
+                int tempIndex = -1;
+                for (int i = 0; i < ActiveFurnitures.Count; i++)
                 {
                     int index = ActiveFurnitures[i];
-                    if (FurnitureList[index].Type == furniture.Type)
+                    if (FurnitureList[index].Type == furniture.Type && FurnitureList[index].PrefabParent.name != name)
                     {
                         FurnitureList[index].UnPick();
                         tempIndex = index;
                         break;
                     }
                 }
-                ActiveFurnitures.Remove(tempIndex);
-                GameManager.instance.Player.UnPickFurniture(ActiveFurnitures.IndexOf(tempIndex));
+                if (tempIndex != -1)
+                {
+                    ActiveFurnitures.Remove(tempIndex);
+                }
                 furniture.PickFurniture(GameManager.instance.Era);
                 ActiveFurnitures.Add(FurnitureList.IndexOf(furniture));
-                GameManager.instance.Player.PickFurniture(FurnitureList.IndexOf(furniture));
                 return;
             }
         }
@@ -115,11 +127,6 @@ public class FurnitureManager : MonoBehaviour
     {
         foreach (int index in ActiveFurnitures)
             FurnitureList[index].PickFurniture(era);
-    }
-
-    private void OnDestroy()
-    {
-        //Player -> SaveData
     }
 
 }
