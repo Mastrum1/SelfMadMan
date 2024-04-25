@@ -8,14 +8,22 @@ public class FightingGame : MiniGameManager
     [SerializeField] private FightingUIManager _UIManager;
     [SerializeField] private ParticleSystem particlePrefab;
     [SerializeField] private GameObject targetParticle;
+    [SerializeField] private GameObject _mPauseMenu;
 
 
     public void OnClicked()
     {
-        _UIManager.Bar.AddValue(150 - (GameManager.instance.FasterLevel * 10));
-        _UIManager.OnFightImageChange();
-        Debug.Log("Clicked");
-        SpawnParticle();
+        if (_mPauseMenu.activeSelf == true)
+        {
+            Debug.Log("Nop");
+        }
+        else
+        {
+            _UIManager.Bar.AddValue(150 - (GameManager.instance.FasterLevel * 10));
+            _UIManager.OnFightImageChange();
+            Debug.Log("Clicked");
+            SpawnParticle();
+        }
     }
 
     private void SpawnParticle()

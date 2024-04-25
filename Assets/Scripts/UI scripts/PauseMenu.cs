@@ -6,6 +6,7 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject _mpauseMenu;
     [SerializeField] GameObject _mElementsMenu;
+    [SerializeField] InputManager _mInputManager;
 
     public void Pause()
     {
@@ -28,6 +29,16 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1;
         mySceneManager.instance.SetScene("HomePage", mySceneManager.LoadMode.SINGLE);
+    }
+
+    public void DisableInput()
+    {
+        _mInputManager.enabled = false;
+    }
+
+    public void EnableInput() 
+    {
+        _mInputManager.enabled = true;
     }
 
     IEnumerator CheckOpenPause()
