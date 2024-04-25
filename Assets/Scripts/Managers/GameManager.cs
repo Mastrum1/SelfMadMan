@@ -81,8 +81,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //NSUserTrackingUsageDescription
         _mGameOver = false;
-        _mMinigameCount = 0;
         _mMinigameWon = 0;
         Era = 1;
         _mHearts = 3;

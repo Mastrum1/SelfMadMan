@@ -53,7 +53,7 @@ public class ScoreScreen : MonoBehaviour
     {
         Debug.Log("completed quests");
 
-        _mQuestView.CompletetAllBars();
+        _mQuestView.CompleteAllBars();
         StartCoroutine(_mQuestView.CheckForCompletedQuests());
     }
 

@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PopUpSpawner : MonoBehaviour
 {
+    public event Action OnClosePopUp;
+    
     [SerializeField] private List<GameObject> _mPopUps;
     [SerializeField] private List<GameObject> _mSpawnPoints;
     [SerializeField] private GameObject _mParent;
@@ -30,7 +34,13 @@ public class PopUpSpawner : MonoBehaviour
         mTmp.GetComponent<SpriteRenderer>().sortingOrder = order;
         mTmp.transform.position = position;
         mTmp.transform.SetParent(_mParent.transform, true);
+        mTmp.GetComponent<ADS>().OnCloseAd += AdClosed;
         _mPopUpList.Add(mTmp);
+    }
+
+    private void AdClosed()
+    {
+        OnClosePopUp?.Invoke();
     }
 
     private Vector3 RandomPointInBox()
