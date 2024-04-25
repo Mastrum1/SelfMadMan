@@ -83,6 +83,7 @@ public class ContentManager : MonoBehaviour
         {
             _mCurrentIndex = (_mCurrentIndex + i + _mBackgrounds.Count) % _mBackgrounds.Count;
             GameManager.instance.Era = _mCurrentIndex + 1;
+            _mFurnitureManager.SetEra(GameManager.instance.Era);
             bool eraunlocked = GameManager.instance.ErasData[GameManager.instance.Era].Unlocked ? true : false;
             _mLockEraPanel.SetActive(!eraunlocked);
             _mLockPrice.text = GameManager.instance.ErasData[GameManager.instance.Era]._price.ToString();
