@@ -53,7 +53,7 @@ public class ScoreScreen : MonoBehaviour
     {
         Debug.Log("completed quests");
 
-        _mQuestView.CompletetAllBars();
+        _mQuestView.CompleteAllBars();
         StartCoroutine(_mQuestView.CheckForCompletedQuests());
     }
 
@@ -164,6 +164,9 @@ public class ScoreScreen : MonoBehaviour
 
             _coinsEarned.text = " +" + amount;
             _bestScore.text = "BEST : " + GameManager.instance.Player.BestScore;
+            
+            TrophyManager.Instance.AddTrophyAmount(3, (int)GameManager.instance.Score);
+            TrophyManager.Instance.AddTrophyAmount(8, (int)GameManager.instance.Score);
             
         }
 

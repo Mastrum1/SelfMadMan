@@ -49,7 +49,9 @@ public class TrophyManager : MonoBehaviour
     {
         for (var i = 0; i < trophies.Count; i++)
         {
+
             _trophyList.Add(trophies[i]);
+            //_trophyList[i].CurrentAmount = 8;
             CheckTrophyCompletion(_trophyList[i]);
         }
     }
@@ -64,10 +66,24 @@ public class TrophyManager : MonoBehaviour
         OnTrophyComplete?.Invoke(trophy);
     }
 
+    public void AddTrophyAmount(int id, int amount)
+    {
+        if (_trophyList[id].TrophyCompletionState != CompletionState.NotComplete) return;
+        
+        _trophyList[id].CurrentAmount += amount;
+
+        if (id == 3 && amount != _trophyList[id].TrophySO.goal)
+        {
+            _trophyList[id].CurrentAmount = 0;
+        }
+        CheckTrophyCompletion(_trophyList[id]);
+    }
+
     public void ClaimReward(Trophy trophy)
     {
         trophy.TrophyCompletionState = CompletionState.Claimed;
         OnTrophyClaimed?.Invoke(trophy, trophy.TrophySO.reward);
-        //Add money to wallet;
+        MoneyManager.Instance.AddMoney(trophy.TrophySO.reward);
+        MoneyManager.Instance.UpdateMoney();
     }
 }
