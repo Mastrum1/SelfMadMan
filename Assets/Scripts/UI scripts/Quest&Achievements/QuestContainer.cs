@@ -8,7 +8,8 @@ public class QuestContainer : MonoBehaviour
 {
     public QuestManager.Quest SelectedQuest { get => _mSelectedQuest; set => _mSelectedQuest = value; }
     [SerializeField] private QuestManager.Quest _mSelectedQuest;
-    
+
+    [SerializeField] private int _iD;
     [SerializeField] private TMP_Text _mReward;
     [SerializeField] private TMP_Text _mQuestDescription;
     [SerializeField] private Image _mQuestIcon;
@@ -35,7 +36,8 @@ public class QuestContainer : MonoBehaviour
     {
         if(!gameObject.activeSelf) gameObject.SetActive(true);
         
-        ResetFillBar();
+        if (_mQuestProgression.transform.position != _mFillBarStartPos.transform.position) ResetFillBar();
+        
         var replace = _mSelectedQuest.QuestSO.questDescription.Replace("*", _mSelectedQuest.Difficulty.amount.ToString());
         _mReward.text = (25 * _mSelectedQuest.Difficulty.reward).ToString();
         _mQuestDescription.text = replace;
@@ -68,25 +70,24 @@ public class QuestContainer : MonoBehaviour
     }
     private static IEnumerator ShowCompletionBar(Transform pos, float amount, float startPos, float maxDistance)
     {
-        while (pos.position.x < startPos + maxDistance * amount)
+        while (pos.position.x < startPos + (maxDistance * amount))
         {
             pos.position += pos.right * (amount * maxDistance * Time.deltaTime);
             yield return new WaitForSeconds(0.01f);
         }
     }
 
-    public void ChangeQuest(int container)
+    public void ChangeQuest()
     {
         if (!MoneyManager.Instance.SubtractMoney(25 * _mSelectedQuest.Difficulty.reward)) return;
         
         gameObject.SetActive(false);
-        QuestManager.Instance.OnChangeQuest(_mSelectedQuest, container);
+        QuestManager.Instance.OnChangeQuest(_mSelectedQuest, _iD);
     }
 
     public void ResetFillBar()
     {
         _mQuestProgression.transform.position = _mFillBarStartPos.transform.position;
-        Debug.Log("Restted Fill Bar");
     }
 
     private void OnDisable()
