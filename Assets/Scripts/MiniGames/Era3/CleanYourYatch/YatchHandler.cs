@@ -9,15 +9,24 @@ public class YatchHandler : MonoBehaviour
     public  event Action GarbageDeleted;
 
     [SerializeField] List<VideoPlayer> _mPloufVideos;
+    [SerializeField] List<ParticleSystem> _mParticles;
 
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("GameInteractable")) {
-            VideoPlayer videoPlayerplayer = GetVideoPlayer();
+            /*VideoPlayer videoPlayerplayer = GetVideoPlayer();
             videoPlayerplayer.gameObject.SetActive(true);
             videoPlayerplayer.gameObject.transform.position = other.gameObject.transform.position;
             videoPlayerplayer.Play();
             StartCoroutine(ResetVideo(videoPlayerplayer));
+            other.gameObject.SetActive(false);
+            GarbageDeleted?.Invoke();*/
+
+            ParticleSystem mParticle = GetParticle();
+            mParticle.gameObject.SetActive(true);
+            mParticle.gameObject.transform.position = other.gameObject.transform.position;
+            mParticle.Play();
+            StartCoroutine(ResetParticle(mParticle));
             other.gameObject.SetActive(false);
             GarbageDeleted?.Invoke();
         }
@@ -30,11 +39,25 @@ public class YatchHandler : MonoBehaviour
         video.gameObject.SetActive(false);
     }
 
+    IEnumerator ResetParticle(ParticleSystem particle)
+    {
+        yield return new WaitForSeconds(0.25f);
+        particle.gameObject.SetActive(false);
+    }
+
     VideoPlayer GetVideoPlayer()
     {
         for (int i = 0; i < _mPloufVideos.Count; i++)
             if (!_mPloufVideos[i].gameObject.activeInHierarchy)
                 return _mPloufVideos[i];
+        return null;
+    }
+
+    ParticleSystem GetParticle()
+    {
+        for (int i = 0; i < _mPloufVideos.Count; i++)
+            if (!_mPloufVideos[i].gameObject.activeInHierarchy)
+                return _mParticles[i];
         return null;
     }
 
