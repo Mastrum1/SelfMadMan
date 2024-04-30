@@ -73,6 +73,6 @@ public class CheckEraGames : MonoBehaviour
         }
 
         _mNumberUnlocked.text = $"<#4EF4F6>{_mUnlockedMinigames}" + "<#F6F3D1>/8";
-        _mEra.text = "Era " + (_mCurrentEra + 1).ToString();
+        _mEra.text = "ERA " + (_mCurrentEra + 1).ToString();
     }
 }
