@@ -4,16 +4,29 @@ using UnityEngine;
 
 public class Loading : MonoBehaviour
 {
-    // Start is called before the first frame update
-    private void Awake()
+
+    [SerializeField] public RectTransform fill;
+    [SerializeField]  public float duration = 3f;
+    private float startTime;
+    private Vector2 startPosition;
+    private Vector2 targetPosition;
+
+    void Start()
     {
-        StartCoroutine(Load());   
+        targetPosition = new Vector2(0,0) ;
+        startPosition = fill.anchoredPosition;
+        startTime = Time.time;
     }
 
-    IEnumerator Load()
+    void Update()
     {
-        yield return new WaitForSeconds(3f);
-        mySceneManager.instance.LoadWinScreen();
-        mySceneManager.instance.SetScene("HomePage", mySceneManager.LoadMode.ADDITIVE);
+        float t = (Time.time - startTime) / duration;
+        fill.anchoredPosition = Vector2.Lerp(startPosition, targetPosition, t);
+
+        if (t >= 1.0f)
+        {
+            mySceneManager.instance.LoadWinScreen();
+            mySceneManager.instance.SetScene("HomePage", mySceneManager.LoadMode.ADDITIVE);
+        }
     }
 }
