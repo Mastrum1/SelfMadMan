@@ -16,6 +16,9 @@ public class Arrows : MonoBehaviour
     [SerializeField] private BoxCollider2D _mEndZone;
     [SerializeField] private float _mMaxTimeFadeOut = 0.1f;
 
+    [SerializeField] private float scaleUpDuration = 0.5f;
+    [SerializeField] private float scaleUpFactor = 1.3f;
+
     private void OnEnable()
     {
         _mSwipeDir.OnSwipe += OnSwipe;
@@ -31,13 +34,30 @@ public class Arrows : MonoBehaviour
     {
         if (Dir == _mDir)
         {
+            StartCoroutine(ScaleObject());
             StartCoroutine(FadeOut());
             OnAction?.Invoke(true, Dir);
             _mExitArea.EndGame = true;
+           
         }
     }
 
-    private IEnumerator FadeOut()
+    private IEnumerator ScaleObject()
+    {
+        // Scale up to 1.3
+        float timer = 0f;
+        Vector3 targetScale = gameObject.transform.localScale * scaleUpFactor;
+
+        while (timer < scaleUpDuration)
+        {
+            transform.localScale = Vector3.Lerp(gameObject.transform.localScale, targetScale, timer / scaleUpDuration);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        StopCoroutine(ScaleObject());
+    }
+
+        private IEnumerator FadeOut()
     {
         float counter = 0;
         while (counter < _mMaxTimeFadeOut)

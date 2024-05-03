@@ -10,6 +10,7 @@ public class ArrowMovement : MonoBehaviour
     private void OnEnable()
     {
         _mSpriteRenderer.color = new Color(_mSpriteRenderer.color.r, _mSpriteRenderer.color.g, _mSpriteRenderer.color.b, 255);
+        gameObject.transform.localScale = new Vector3(0.35f, 0.35f, 0.35f);
     }
     void Update()
     {
