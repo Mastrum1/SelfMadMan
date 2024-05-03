@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using static FurnitureManager;
 
 public class CustomisationManager : MonoBehaviour
@@ -49,7 +50,6 @@ public class CustomisationManager : MonoBehaviour
                         {
                             _mFrameTemplates[i].BGButton.sprite = _mBGButtons[0];
                             _mFrameTemplates[i].ButtonText.text = "Picked";
-
                         }
 
                         else if (!fur.Picked)
