@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-4525848078097256427
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 639247ca83abc874e893eb93af2b5e44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 0
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -20,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Yes
-  m_Shader: {fileID: -6465566751694194690, guid: 43c447013583a2c49bf21216cdc19a74, type: 3}
+  m_Name: Table
+  m_Shader: {fileID: -6465566751694194690, guid: a9d2edbbd6a4e434482211dffb15be7b, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
@@ -32,7 +19,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap:
     RenderType: Transparent
   disabledShaderPasses: []
@@ -43,9 +30,9 @@ Material:
     - _FirstTex:
         m_Texture: {fileID: 2800000, guid: 7a50f2ad8b9856f46b136f3150249038, type: 3}
         m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: -1.2}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 7a50f2ad8b9856f46b136f3150249038, type: 3}
+        m_Texture: {fileID: 2800000, guid: acc73d9fcd4c1f1418c2e41248a0bc6b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
@@ -61,7 +48,20 @@ Material:
     - _BUILTIN_ZTest: 4
     - _BUILTIN_ZWrite: 0
     - _BUILTIN_ZWriteControl: 0
-    - _TimeSpeed: 10
+    - _TimeSpeed: 0.6
     m_Colors:
-    - _Direction: {r: 0, g: 2.78, b: 0, a: 0}
+    - _Direction: {r: 0, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
+--- !u!114 &708822888802009833
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 639247ca83abc874e893eb93af2b5e44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 0
