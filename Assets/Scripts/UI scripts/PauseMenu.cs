@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -21,14 +22,12 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart()
     {
-        Time.timeScale = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        StartCoroutine(RestartLevel());
     }
 
     public void Quit()
     {
-        Time.timeScale = 1;
-        mySceneManager.instance.SetScene("HomePage", mySceneManager.LoadMode.SINGLE);
+        StartCoroutine(QuitLevel());
     }
 
     public void DisableInput()
@@ -48,7 +47,7 @@ public class PauseMenu : MonoBehaviour
         float scale = 0f;
         while (scale != 1)
         {
-            scale += Time.unscaledDeltaTime;
+            scale += Time.unscaledDeltaTime * 5;
             scale = Mathf.Clamp01(scale);
             _mElementsMenu.gameObject.transform.localScale = new Vector3(scale, scale, scale);
             yield return null;
@@ -60,7 +59,7 @@ public class PauseMenu : MonoBehaviour
         float scale = 1f;
         while (scale != 0)
         {
-            scale -= Time.unscaledDeltaTime;
+            scale -= Time.unscaledDeltaTime * 5;
             scale = Mathf.Clamp01(scale);
             _mElementsMenu.gameObject.transform.localScale = new Vector3(scale, scale, scale);
             yield return null;
@@ -68,5 +67,80 @@ public class PauseMenu : MonoBehaviour
         _mpauseMenu.SetActive(false);
         _mElementsMenu.SetActive(false);
         Time.timeScale = 1;
+    }
+
+    IEnumerator RestartLevel()
+    {
+        Time.timeScale = 1;
+        yield return new WaitForSeconds(0.1f);
+
+        // Keep track of active scenes
+        List<Scene> activeScenes = new List<Scene>();
+
+        // Iterate through all loaded scenes
+        for (int i = 0; i < SceneManager.sceneCount; i++)
+        {
+            Scene scene = SceneManager.GetSceneAt(i);
+
+            // Check if the scene is active
+            if (scene.isLoaded && scene.isLoaded && scene.IsValid())
+            {
+                activeScenes.Add(scene);
+            }
+        }
+
+        // Check if there are at least two active scenes
+        if (activeScenes.Count >= 2)
+        {
+            // Get the first and second active scenes
+            Scene firstScene = activeScenes[0];
+            Scene secondScene = activeScenes[1];
+
+            // Load the first and second active scenes
+            SceneManager.LoadScene(firstScene.buildIndex);
+            SceneManager.LoadScene(secondScene.buildIndex, LoadSceneMode.Additive);
+        }
+        else
+        {
+            // Handle the case where there are not enough active scenes
+            Debug.Log("Not enough active scenes found.");
+        }
+    }
+
+    IEnumerator QuitLevel()
+    {
+        Time.timeScale = 1;
+        yield return new WaitForSeconds(0.1f);
+
+        // Keep track of active scenes
+        List<Scene> activeScenes = new List<Scene>();
+
+        // Iterate through all loaded scenes
+        for (int i = 0; i < SceneManager.sceneCount; i++)
+        {
+            Scene scene = SceneManager.GetSceneAt(i);
+
+            // Check if the scene is active
+            if (scene.isLoaded && scene.isLoaded && scene.IsValid())
+            {
+                activeScenes.Add(scene);
+            }
+        }
+
+        // Check if there are at least two active scenes
+        if (activeScenes.Count >= 1)
+        {
+            // Get the first and second active scenes
+            Scene firstScene = activeScenes[0];
+
+            // Set the first and second active scenes to "HomePage" and load them in single mode
+            SceneManager.LoadScene(firstScene.buildIndex);
+            mySceneManager.instance.SetScene("HomePage", mySceneManager.LoadMode.ADDITIVE);
+        }
+        else
+        {
+            // Handle the case where there are not enough active scenes
+            Debug.Log("Not enough active scenes found.");
+        }
     }
 }
