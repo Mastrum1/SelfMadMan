@@ -47,7 +47,7 @@ public class PauseMenu : MonoBehaviour
         float scale = 0f;
         while (scale != 1)
         {
-            scale += Time.unscaledDeltaTime * 5;
+            scale += Time.unscaledDeltaTime * 10;
             scale = Mathf.Clamp01(scale);
             _mElementsMenu.gameObject.transform.localScale = new Vector3(scale, scale, scale);
             yield return null;
@@ -59,7 +59,7 @@ public class PauseMenu : MonoBehaviour
         float scale = 1f;
         while (scale != 0)
         {
-            scale -= Time.unscaledDeltaTime * 5;
+            scale -= Time.unscaledDeltaTime * 10;
             scale = Mathf.Clamp01(scale);
             _mElementsMenu.gameObject.transform.localScale = new Vector3(scale, scale, scale);
             yield return null;
