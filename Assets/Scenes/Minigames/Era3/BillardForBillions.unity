@@ -229,7 +229,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hole: {fileID: 241254217}
-  _cueBall: {fileID: 1193024918}
   _james: {fileID: 1911450327}
   _leftPos: {fileID: 593365510}
   _rightPos: {fileID: 1254118501}
@@ -480,7 +479,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -5
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -942,13 +941,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 504509567}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.590319, y: 5.142537, z: -0.04685227}
-  m_LocalScale: {x: 0.7300001, y: 0.7300001, z: 0.7300001}
-  m_ConstrainProportionsScale: 0
+  m_LocalRotation: {x: 0, y: 0, z: 0.2164396, w: 0.97629607}
+  m_LocalPosition: {x: -0.16, y: 0.29, z: -0.04685227}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 237811485}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 25}
 --- !u!1 &593365510
 GameObject:
   m_ObjectHideFlags: 0
@@ -1015,13 +1014,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 813713562}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.22449581, w: 0.9744751}
-  m_LocalPosition: {x: -1.9447193, y: 5.8708916, z: -0.04685227}
-  m_LocalScale: {x: 0.7300001, y: 0.7300001, z: 0.7300001}
+  m_LocalRotation: {x: 0, y: 0, z: 0.2164396, w: 0.97629607}
+  m_LocalPosition: {x: -0.45, y: 0.92, z: -0.04685227}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 237811485}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 25}
 --- !u!212 &813713564
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1063,7 +1062,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 773f2817c08d04a4ca473fc23269088c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4df052e9a9a826b42be024ab79a903da, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1329,13 +1328,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1007556314}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.9447192, y: 5.8708916, z: -0.04685227}
-  m_LocalScale: {x: 0.7300001, y: 0.7300001, z: 0.7300001}
-  m_ConstrainProportionsScale: 0
+  m_LocalRotation: {x: 0, y: 0, z: 0.2164396, w: 0.97629607}
+  m_LocalPosition: {x: -0.46, y: 0.92, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 237811485}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 25}
 --- !u!1 &1022922446
 GameObject:
   m_ObjectHideFlags: 0
@@ -2522,6 +2521,7 @@ MonoBehaviour:
   _queueEndPos: {fileID: 504509567}
   _fillBarStartPos: {fileID: 244815943}
   _fillBarMaxPos: {fileID: 1642932924}
+  _shootLine: {fileID: 417183437}
 --- !u!61 &1911450332
 BoxCollider2D:
   m_ObjectHideFlags: 0
