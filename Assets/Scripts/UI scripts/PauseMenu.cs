@@ -90,15 +90,15 @@ public class PauseMenu : MonoBehaviour
         }
 
         // Check if there are at least two active scenes
-        if (activeScenes.Count >= 2)
+        if (activeScenes.Count >= 1)
         {
             // Get the first and second active scenes
             Scene firstScene = activeScenes[0];
-            Scene secondScene = activeScenes[1];
 
             // Load the first and second active scenes
             SceneManager.LoadScene(firstScene.buildIndex);
-            SceneManager.LoadScene(secondScene.buildIndex, LoadSceneMode.Additive);
+            GameManager.instance.OnRestart();
+            Debug.Log("I'm in");
         }
         else
         {
