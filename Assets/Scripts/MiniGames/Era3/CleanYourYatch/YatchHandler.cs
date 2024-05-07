@@ -18,18 +18,35 @@ public class YatchHandler : MonoBehaviour
             videoPlayerplayer.gameObject.SetActive(true);
             videoPlayerplayer.gameObject.transform.position = other.gameObject.transform.position;
             videoPlayerplayer.Play();
-            StartCoroutine(ResetVideo(videoPlayerplayer));
-            other.gameObject.SetActive(false);
-            GarbageDeleted?.Invoke();*/
+            StartCoroutine(ResetVideo(videoPlayerplayer));*/
+            StartCoroutine(ScaleDown(other.gameObject));
+            //other.gameObject.SetActive(false);
+            GarbageDeleted?.Invoke();
 
-            ParticleSystem mParticle = GetParticle();
+            /*ParticleSystem mParticle = GetParticle();
             mParticle.gameObject.SetActive(true);
             mParticle.gameObject.transform.position = other.gameObject.transform.position;
             mParticle.Play();
             StartCoroutine(ResetParticle(mParticle));
             other.gameObject.SetActive(false);
-            GarbageDeleted?.Invoke();
+            GarbageDeleted?.Invoke();*/
         }
+    }
+
+    IEnumerator ScaleDown(GameObject obj)
+    {
+        int i = 0;
+        while (i < 3) {
+            obj.transform.localScale /= 1.5f;
+            i++;
+            yield return new WaitForSeconds(0.15f);
+        }
+        VideoPlayer videoPlayerplayer = GetVideoPlayer();
+        videoPlayerplayer.gameObject.SetActive(true);
+        videoPlayerplayer.gameObject.transform.position = obj.gameObject.transform.position;
+        videoPlayerplayer.Play();
+        StartCoroutine(ResetVideo(videoPlayerplayer));
+        obj.SetActive(false);
     }
 
     IEnumerator ResetVideo(VideoPlayer video)
