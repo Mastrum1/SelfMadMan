@@ -31,10 +31,13 @@ public class Loading : MonoBehaviour
 
         if (t >= 1.0f && !_videoPlayin)
         {
-           _cinematicHandler.PlayVideo();
-            _videoPlayin = true;
-            Debug.Log("playing");
-          
+
+            /* _cinematicHandler.PlayVideo();
+              _videoPlayin = true;
+              Debug.Log("playing");*/
+            StartGame();
+
+
         }
     }
     private void DisplayPanel()
