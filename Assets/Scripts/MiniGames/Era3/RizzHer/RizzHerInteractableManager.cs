@@ -68,7 +68,7 @@ public class RizzHerInteractableManager : MonoBehaviour
                             RandomObj = UnityEngine.Random.Range(0, _leftObj.Count);
                         } while (_leftObj[RandomObj].activeSelf == true);
 
-                        _leftObj[RandomObj].transform.position = new Vector3(-1.85f, 3.15f, 0);
+                        _leftObj[RandomObj].transform.position = new Vector3(-1.85f, 5.68f, 0);
                         _leftObj[RandomObj].SetActive(true);
 
                         TempObj = _leftObj[RandomObj];
@@ -80,7 +80,7 @@ public class RizzHerInteractableManager : MonoBehaviour
                             RandomObj = UnityEngine.Random.Range(0, _midObj.Count);
                         } while (_midObj[RandomObj].activeSelf == true);
 
-                        _midObj[RandomObj].transform.position = new Vector3(0, 3.15f, 0);
+                        _midObj[RandomObj].transform.position = new Vector3(0, 5.68f, 0);
                         _midObj[RandomObj].SetActive(true);
                         TempObj = _midObj[RandomObj];
 
@@ -91,7 +91,7 @@ public class RizzHerInteractableManager : MonoBehaviour
                             RandomObj = UnityEngine.Random.Range(0, _rightObj.Count);
                         } while (_rightObj[RandomObj].activeSelf == true);
 
-                        _rightObj[RandomObj].transform.position = new Vector3(1.85f, 3.15f, 0);
+                        _rightObj[RandomObj].transform.position = new Vector3(1.85f, 5.68f, 0);
                         _rightObj[RandomObj].SetActive(true);
                         TempObj = _rightObj[RandomObj];
 

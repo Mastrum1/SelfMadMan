@@ -8,6 +8,10 @@ public class RizzHerManager : MiniGameManager
 {
     [SerializeField] private RizzHerInteractableManager _mInteractableManager;
 
+    [SerializeField] private GameObject _mTableMaterial;
+
+    private Renderer _mRenderer;
+
     private void Start()
     {
         _mInteractableManager.GameEnd += OnGameEnd;
@@ -15,6 +19,9 @@ public class RizzHerManager : MiniGameManager
 
     void OnGameEnd(bool win)
     {
+        _mRenderer = _mTableMaterial.GetComponent<Renderer>();
+        _mRenderer.material.SetVector("_Direction", new Vector2(0, 0));
+        //_mRenderer.material.SetFloat("_TimeSpeed", 0);
         EndMiniGame(win, miniGameScore);
     }
 
