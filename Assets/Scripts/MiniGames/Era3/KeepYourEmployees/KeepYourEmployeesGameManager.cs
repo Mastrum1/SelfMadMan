@@ -65,7 +65,7 @@ public class KeepYourEmployeesGameManager : MiniGameManager
                 mEmployee.SetActive(true);
 
                 int i =  Random.Range(0, 3);
-                int x =  (Random.value < 0.5) ? -3 : 3;
+                int x =  (Random.value < 0.5) ? -4 : 5;
                 float y =  mSpawnPoints[i][0];
                 float scale = mSpawnPoints[i][1];
                 mEmployee.GetComponent<SpriteRenderer>().sortingOrder = (int)mSpawnPoints[i][2];
