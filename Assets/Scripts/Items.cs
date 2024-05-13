@@ -53,6 +53,6 @@ public class FurnitureItem : Items
 
     public override void Obtain()
     {
-        //FurnitureManager.instance.UnlockFurniture(PrefabName);
+        FurnitureManager.instance.UnlockFurniture(PrefabName);
     }
 }

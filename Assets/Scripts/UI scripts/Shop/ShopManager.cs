@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class ShopManager : MonoBehaviour
 {
@@ -19,10 +20,13 @@ public class ShopManager : MonoBehaviour
 
     [Header("Confirm Purchase")]
     [SerializeField] private ConfirmPurchase _mConfirmPurchase;
-    [SerializeField] private ItemsSO _mItemBeingPurchased;
+    [SerializeField] private ShopTemplate _mItemBeingPurchased;
 
     [Header("Pulse of the buttons")]
     [SerializeField] private LeanPulseScale _mSpinButtonPulse;
+
+    [Header("FurnitureManager")]
+    [SerializeField] private FurnitureManager _mFurnitureManager;
 
     public GameObject[] CoinAnim { get => _mCoinAnim; set => _mCoinAnim = value; }
     [Header("Coin Animation")]
@@ -41,7 +45,7 @@ public class ShopManager : MonoBehaviour
         _mConfirmPurchase._mItemPurchased += HandleItemPurchased;
     }
 
-    public void HandleItemPurchased(ItemsSO item)
+    public void HandleItemPurchased(ShopTemplate item)
     {
         _mItemBeingPurchased = item;
         _mConfirmPurchase.SetItemInfo(item);
@@ -51,6 +55,7 @@ public class ShopManager : MonoBehaviour
     public void LoadAllPanels()
     {
         LoadPanels(_mCoins);
+        LoadFurniture(_mFurnitures);
     }
 
     public void LoadPanels(ItemsSO[] item)
@@ -59,6 +64,7 @@ public class ShopManager : MonoBehaviour
         {
             if (item[i].Type == ItemsSO.TYPE.COINS)
             {
+                _mCoinsTemplates[i].ItemInfo = item[i];
                 _mCoinsTemplates[i].TitleText.text = item[i].ItemName;
                 _mCoinsTemplates[i].CostText.text = item[i].Cost.ToString();
                 _mCoinsTemplates[i].ImageItem.sprite = item[i].Icon;
@@ -69,13 +75,69 @@ public class ShopManager : MonoBehaviour
         }
     }
 
+    public void LoadFurniture(ItemsSO[] items)
+    {
+        List<ItemsSO> availableItems = new List<ItemsSO>(items);
+
+        for (int i = 0; i < _mFurnituresTemplates.Count; i++)
+        {
+            // Check if there are any available items left
+            if (availableItems.Count > 0)
+            {
+                // Randomly select an item from the available items list
+                int randomIndex = Random.Range(0, availableItems.Count);
+                ItemsSO selectedItem = availableItems[randomIndex];
+
+                // Check if the selected item is furniture
+                if (selectedItem.Type == ItemsSO.TYPE.FURNITURE)
+                {
+                    FurnitureSO furnitureSO = selectedItem as FurnitureSO;
+
+                    foreach (var fur in _mFurnitureManager.FurnitureList)
+                    {
+                        if (furnitureSO.FurniturePrefab.name == fur.PrefabParent.name)
+                        {
+                            if (fur.Locked)
+                            {
+                                // Assign item info to the furniture template
+                                _mFurnituresTemplates[i].ItemInfo = selectedItem;
+                                _mFurnituresTemplates[i].TitleText.text = selectedItem.ItemName;
+                                _mFurnituresTemplates[i].CostText.text = selectedItem.Cost.ToString();
+                                _mFurnituresTemplates[i].ImageItem.sprite = selectedItem.Icon;
+                                _mFurnituresTemplates[i].Type = selectedItem.Type;
+
+                                // Remove the selected item from the available items list
+                                availableItems.RemoveAt(randomIndex);
+                            }
+                            else if (!fur.Locked)
+                            {
+                                do
+                                {
+                                    randomIndex = Random.Range(0, availableItems.Count);
+                                    selectedItem = availableItems[randomIndex];
+                                }
+                                while (CheckIfFurnitureUnlocked(selectedItem as FurnitureSO));
+
+                                _mFurnituresTemplates[i].TitleText.text = "";
+                                _mFurnituresTemplates[i].ImageItem.sprite = _mFurnituresTemplates[i].Nothing;
+                                _mFurnituresTemplates[i].Purchasable = false;
+                                _mFurnituresTemplates[i].ONOFF();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
     public void PurchaseItem() 
     {
         Debug.Log(_mItemBeingPurchased);
         if (_mItemBeingPurchased.Type == ItemsSO.TYPE.COINS)
         {
             Coins coin = new Coins();
-            CoinsSO coinSO = _mItemBeingPurchased as CoinsSO;
+            CoinsSO coinSO = _mItemBeingPurchased.ItemInfo as CoinsSO;
             coin.Amount = coinSO.Amount;
             Items items = coin;
 
@@ -86,23 +148,33 @@ public class ShopManager : MonoBehaviour
             }
         }
 
-        if (MoneyManager.Instance.CurrentMoney <= _mItemBeingPurchased.Cost)
+        if (MoneyManager.Instance.CurrentMoney < _mItemBeingPurchased.ItemInfo.Cost)
         {
             Debug.Log("Not enough money");
             //Play a invlid buzz sound
         }
-        else
+        else if (_mItemBeingPurchased.Type == ItemsSO.TYPE.FURNITURE) 
         {
-            MoneyManager.Instance.SubtractMoney(_mItemBeingPurchased.Cost);
-            StartCoroutine(MoveMoney(_mCoinAnim[0]));
-            Debug.Log(MoneyManager.Instance.CurrentMoney);
+            FurnitureItem fur = new FurnitureItem();
+            FurnitureSO furSO = _mItemBeingPurchased.ItemInfo as FurnitureSO;
+            fur.PrefabName = furSO.FurniturePrefab.name;
+            Debug.Log(fur.PrefabName);
+            Items items = fur;
+
+            if (items != null) 
+            {
+                fur.Obtain();
+                SubsMoney();
+                _mItemBeingPurchased.Purchasable = false;
+                _mItemBeingPurchased.ONOFF();
+            }
         }
     }
 
     public void HeartPlus(TMP_Text price)
     {
 
-        if (MoneyManager.Instance.CurrentMoney <= int.Parse(price.text))
+        if (MoneyManager.Instance.CurrentMoney < int.Parse(price.text))
         {
             Debug.Log("No Money");
             //Play a invlid buzz sound
@@ -125,6 +197,25 @@ public class ShopManager : MonoBehaviour
         {
             _mSpinButtonPulse.enabled = false;
         }
+    }
+
+    private bool CheckIfFurnitureUnlocked(FurnitureSO furnitureSO)
+    {
+        foreach (var fur in _mFurnitureManager.FurnitureList)
+        {
+            if (furnitureSO.FurniturePrefab.name == fur.PrefabParent.name)
+            {
+                return fur.Locked;
+            }
+        }
+        return false;
+    }
+
+    private void SubsMoney()
+    {
+        MoneyManager.Instance.SubtractMoney(_mItemBeingPurchased.ItemInfo.Cost);
+        StartCoroutine(MoveMoney(_mCoinAnim[0]));
+        Debug.Log(MoneyManager.Instance.CurrentMoney);
     }
 
     public IEnumerator MoveMoney(GameObject particule)

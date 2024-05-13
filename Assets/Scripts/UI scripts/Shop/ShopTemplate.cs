@@ -16,6 +16,9 @@ public class ShopTemplate : MonoBehaviour
     public Image ImageItem { get => _mImageItem; private set => _mImageItem = value; }
     [SerializeField] private Image _mImageItem;
 
+    public Sprite Nothing { get => _mNothingImage; private set => _mNothingImage = value; }
+    [SerializeField] private Sprite _mNothingImage;
+
     public Image PurchaseBox { get => _mPurchaseBox; private set => _mPurchaseBox = value; }
     [SerializeField] private Image _mPurchaseBox;
 
@@ -25,10 +28,22 @@ public class ShopTemplate : MonoBehaviour
     public BoxCollider2D TemplateBox { get => _mTemplateBox; private set => _mTemplateBox = value; }
     [SerializeField] private BoxCollider2D _mTemplateBox;
 
-    [SerializeField] private bool Purchasable;
+    public ItemsSO ItemInfo { get => _mItemSO; set => _mItemSO = value; }
+    [SerializeField] private ItemsSO _mItemSO;
+
+    public bool Purchasable;
 
     private void OnEnable()
     {
+        if (MoneyManager.Instance.CurrentMoney <= TextToInt(Amount))
+        {
+            Purchasable = false;
+        }
+        else
+        {
+            Purchasable = true;
+        }
+
         ONOFF();
     }
 
@@ -39,10 +54,20 @@ public class ShopTemplate : MonoBehaviour
             _mPurchaseBox.color = new Color(1, 1, 1, 1f);
             _mTemplateBox.enabled = true;
         }
-        else
+        else if (!Purchasable)
         {
             _mPurchaseBox.color = new Color(1, 1, 1, 0.5f);
             _mTemplateBox.enabled = false;
         }
+    }
+
+    private int TextToInt(TMP_Text tmpText)
+    {
+        int result = 0;
+        if (tmpText != null)
+        {
+            int.TryParse(tmpText.text, out result);
+        }
+        return result;
     }
 }
