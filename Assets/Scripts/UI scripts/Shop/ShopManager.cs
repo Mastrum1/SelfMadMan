@@ -11,11 +11,15 @@ public class ShopManager : MonoBehaviour
 
     [Header("Item Shop SO")]
     [SerializeField] private CoinsSO[] _mCoins;
+
+    public ItemsSO[] Furnitures { get => _mFurnitures; }
     [SerializeField] private ItemsSO[] _mFurnitures;
     [SerializeField] private ItemsSO[] _mPowerUp;
 
     [Header("Shop Template")]
     [SerializeField] private List<ShopTemplate> _mCoinsTemplates;
+
+    public List<ShopTemplate> FurnituresTemplates { get => _mFurnituresTemplates; }
     [SerializeField] private List<ShopTemplate> _mFurnituresTemplates;
 
     [Header("Confirm Purchase")]
@@ -76,7 +80,7 @@ public class ShopManager : MonoBehaviour
     }
 
     public void LoadFurniture(ItemsSO[] items)
-    {
+    { 
         List<ItemsSO> availableItems = new List<ItemsSO>(items);
 
         for (int i = 0; i < _mFurnituresTemplates.Count; i++)
@@ -130,6 +134,31 @@ public class ShopManager : MonoBehaviour
         }
     }
 
+    public void CheckUnlocked()
+    {
+        for (int i = 0; i < _mFurnituresTemplates.Count; i++)
+        {
+            FurnitureSO item = _mFurnituresTemplates[i].ItemInfo as FurnitureSO;
+
+            foreach (var fur in _mFurnitureManager.FurnitureList)
+            {
+                if (fur.PrefabParent.name == item.FurniturePrefab.name && item != null)
+                {
+                    Debug.Log("I'M WORKINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
+                    if (fur.Locked)
+                    {
+                        _mFurnituresTemplates[i].Purchasable = true;
+                        _mFurnituresTemplates[i].ONOFF();
+                    }
+                    if (!fur.Locked)
+                    {
+                        _mFurnituresTemplates[i].Purchasable = false;
+                        _mFurnituresTemplates[i].ONOFF();
+                    }
+                }
+            }
+        }
+    }
 
     public void PurchaseItem() 
     {
@@ -188,7 +217,7 @@ public class ShopManager : MonoBehaviour
 
     public void Pulse()
     {
-        if (MoneyManager.Instance.CurrentMoney >= 100)
+        if (MoneyManager.Instance.CurrentMoney > 100)
         {
             _mSpinButtonPulse.enabled = true;
             Debug.Log("Pulse");

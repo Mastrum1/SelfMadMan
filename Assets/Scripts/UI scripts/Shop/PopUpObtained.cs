@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class PopUpObtained : MonoBehaviour
 {
@@ -60,6 +61,7 @@ public class PopUpObtained : MonoBehaviour
                 _mObtainedObject.color = _mTextColor[(int)Type.MINIGAME];
                 _mUnlocked.color = _mUnlockedColor[(int)Type.MINIGAME];
                 break;
+
             case ItemsSO.TYPE.FURNITURE:
                 _mMinigameImage.enabled = true;
                 _mSoftMaskMinigame.enabled = true;
@@ -83,9 +85,7 @@ public class PopUpObtained : MonoBehaviour
     IEnumerator Close()
     {
         yield return new WaitForSeconds(0.5f);
+        ShopManager.Instance.CheckUnlocked();
         gameObject.SetActive(false);
     }
-
-
-
 }
