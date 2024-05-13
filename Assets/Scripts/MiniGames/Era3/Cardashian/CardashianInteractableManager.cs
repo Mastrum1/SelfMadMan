@@ -6,10 +6,11 @@ public class CardashianInteractableManager : MonoBehaviour
 {
 
     [SerializeField] private List<cardashianCard> _mObj;
-
+    private float _spawnDistance = 2f;
+    private float _minDistanceBetweenObjects = 1.5f;
     public event Action<bool> GameEnd;
     [SerializeField] private float _mSpace = 1.5f;
-
+    private Vector3 _lastObjPos = Vector3.zero;
     [SerializeField] private int NbObjToSpawn = 2;
 
     private void Start()
@@ -18,37 +19,40 @@ public class CardashianInteractableManager : MonoBehaviour
         switch (GameManager.instance.FasterLevel)
         {
             case 1:
-                NbObjToSpawn = 2;
-                pos.y -= _mSpace / 2;
+                NbObjToSpawn = 8;
+                //pos.y -= _mSpace / 2;
                 break;
             case 2:
-                NbObjToSpawn = 3;
-                pos.y -= _mSpace;
+                NbObjToSpawn = 10;
+                //pos.y -= _mSpace;
 
                 break;
             case 3:
-                NbObjToSpawn = 5;
-                pos.y -= _mSpace * 2;
+                NbObjToSpawn = 12;
+                //pos.y -= _mSpace * 2;
                 break;
             default:
                 break;
         }
 
         int Random = UnityEngine.Random.Range(0, NbObjToSpawn);
-        _mObj[Random].Different = true;
-        _mObj[Random].ChangeText();
+        _mObj[Random].Real = true;
         for (int id = 0; id < NbObjToSpawn; id++)
         {
-            _mObj[id].OnGameEnd += EndGame;
-            if (id != 0)
+            if(id == Random)
             {
-                _mObj[id].transform.position = new Vector3(pos.x, _mObj[id - 1].transform.position.y + _mSpace, pos.z);
+                _mObj[id].OnGameEnd += EndGame;
+                _mObj[id].gameObject.SetActive(true);
+
+                continue;
             }
             else
             {
-                _mObj[id].transform.position = pos;
+                _mObj[id].Real = false;
+                _mObj[id].OnGameEnd += EndGame;
+                _mObj[id].gameObject.SetActive(true);
             }
-            _mObj[id].gameObject.SetActive(true);
+           
         }
     }
 
@@ -59,6 +63,7 @@ public class CardashianInteractableManager : MonoBehaviour
             _mObj[id].OnGameEnd -= EndGame;
         }
     }
+
 
 
     private void EndGame(bool win)
