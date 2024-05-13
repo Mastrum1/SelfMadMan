@@ -69,6 +69,8 @@ public class RizzHerInteractableManager : MonoBehaviour
                         } while (_leftObj[RandomObj].activeSelf == true);
 
                         _leftObj[RandomObj].transform.position = new Vector3(-1.85f, 5.68f, 0);
+                        if(RandomObj != 4 && RandomObj != 5)
+                            _leftObj[RandomObj].transform.rotation = new Quaternion(0, 0, UnityEngine.Random.Range(0,360),0);
                         _leftObj[RandomObj].SetActive(true);
 
                         TempObj = _leftObj[RandomObj];
@@ -81,6 +83,9 @@ public class RizzHerInteractableManager : MonoBehaviour
                         } while (_midObj[RandomObj].activeSelf == true);
 
                         _midObj[RandomObj].transform.position = new Vector3(0, 5.68f, 0);
+                        if (RandomObj != 4 && RandomObj != 5)
+                            _midObj[RandomObj].transform.rotation = new Quaternion(0, 0, UnityEngine.Random.Range(0, 360), 0);
+
                         _midObj[RandomObj].SetActive(true);
                         TempObj = _midObj[RandomObj];
 
@@ -92,6 +97,9 @@ public class RizzHerInteractableManager : MonoBehaviour
                         } while (_rightObj[RandomObj].activeSelf == true);
 
                         _rightObj[RandomObj].transform.position = new Vector3(1.85f, 5.68f, 0);
+                        if (RandomObj != 4 && RandomObj != 5)
+                            _rightObj[RandomObj].transform.rotation = new Quaternion(0, 0, UnityEngine.Random.Range(0, 360), 0);
+
                         _rightObj[RandomObj].SetActive(true);
                         TempObj = _rightObj[RandomObj];
 
