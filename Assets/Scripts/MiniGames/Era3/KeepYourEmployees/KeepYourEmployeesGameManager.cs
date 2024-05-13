@@ -16,6 +16,7 @@ public class KeepYourEmployeesGameManager : MiniGameManager
     private float _mAverageSpawnRate;
     private int _mNbRemain;
     private bool _mIsEnd = false;
+    int _mHit = 0;
     Dictionary<int, List<float>> mSpawnPoints;
 
     void Start()
@@ -26,18 +27,18 @@ public class KeepYourEmployeesGameManager : MiniGameManager
         mSpawnPoints.Add(2, new List<float>());
         //mSpawnPoints[0].Add(0.8f);
         //mSpawnPoints[0].Add(0.2f);
-        mSpawnPoints[0].Add(0.7f);
-        mSpawnPoints[0].Add(0.35f);
-        mSpawnPoints[0].Add(1);
-        mSpawnPoints[1].Add(0.25f);
-        mSpawnPoints[1].Add(0.45f);
-        mSpawnPoints[1].Add(2);
-        mSpawnPoints[2].Add(-0.9f);
+        mSpawnPoints[0].Add(0.6f);
+        mSpawnPoints[0].Add(0.2f);
+        mSpawnPoints[0].Add(-9);
+        mSpawnPoints[1].Add(0.75f);
+        mSpawnPoints[1].Add(0.35f);
+        mSpawnPoints[1].Add(-8);
+        mSpawnPoints[2].Add(-0.3f);
         mSpawnPoints[2].Add(0.5f);
-        mSpawnPoints[2].Add(3);
+        mSpawnPoints[2].Add(-7);
 
         _mEmployees = new List<GameObject>();
-        _mAverageSpawnRate = _mTimer.TimerValue / (1.5f * _mNbEmployees);
+        _mAverageSpawnRate = _mTimer.TimerValue / (2 * _mNbEmployees);
         for (int i = 0; i < _mNbEmployees; i++) {
             Vector3 _mPos = new Vector3(0, 0, 0);
             GameObject tmp = Instantiate(_employeesPrefab, _mPos, Quaternion.identity, _mParent.transform);
@@ -52,7 +53,7 @@ public class KeepYourEmployeesGameManager : MiniGameManager
     void Update()
     {
         base.Update();
-        _mNb.text =  (_mEmployees.Count - _mNbRemain).ToString() + "/" + _mEmployees.Count.ToString();
+        _mNb.text =  (_mHit).ToString() + "/" + _mEmployees.Count.ToString();
     }
 
     IEnumerator EmployeeSpawner()
@@ -60,7 +61,7 @@ public class KeepYourEmployeesGameManager : MiniGameManager
         while (!_mIsEnd) {
             yield return new WaitForSeconds(  _mAverageSpawnRate);
             GameObject mEmployee = GetEmployee();
-            if (mEmployee != null && !_mIsEnd) {
+            if (mEmployee != null && !_mIsEnd && _gameIsPlaying) {
                 Employee mEmp = mEmployee.GetComponent<Employee>();
                 mEmployee.SetActive(true);
 
@@ -95,10 +96,13 @@ public class KeepYourEmployeesGameManager : MiniGameManager
         return null;
     }
 
-    void OnEmployeeCaught()
+    void OnEmployeeCaught(GameObject employee)
     {
         _mNbRemain--;
-        if (_mNbRemain == 0) {
+        _mHit++;
+        employee.SetActive(false);
+            employee.GetComponent<Employee>().OnTap -= OnEmployeeCaught;
+        if (_mHit == _mEmployees.Count) {   
             _mIsEnd = true;
             EndMiniGame(true, miniGameScore);
         }
@@ -107,6 +111,7 @@ public class KeepYourEmployeesGameManager : MiniGameManager
     void OnDestroy()
     {
         for (int i = 0; i < _mNbEmployees; i++)
-            _mEmployees[i].GetComponent<Employee>().OnTap -= OnEmployeeCaught;
+            if (_mEmployees[i].activeInHierarchy)
+                _mEmployees[i].GetComponent<Employee>().OnTap -= OnEmployeeCaught;
     }
 }

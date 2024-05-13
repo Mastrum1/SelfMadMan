@@ -5,9 +5,10 @@ using System;
 
 public class Employee : MonoBehaviour
 {
-    public Action OnTap;
+    public Action<GameObject> OnTap;
     [SerializeField] private float _mSpeed;
     private Vector3 _mDirection = Vector3.left;
+    private bool _mSelected = false;
 
     // Start is called before the first frame update
     void Start()
@@ -26,8 +27,15 @@ public class Employee : MonoBehaviour
 
     public void OnSelected()
     {
-        Debug.Log("Selected");
-        OnTap?.Invoke();
-        this.gameObject.SetActive(false);
+        if (!_mSelected) {
+            OnTap?.Invoke(this.gameObject);
+         //   this.gameObject.SetActive(false);
+            _mSelected = true;
+        }
+    }
+
+    private void OnEnable()
+    {
+        _mSelected = false;
     }
 }
