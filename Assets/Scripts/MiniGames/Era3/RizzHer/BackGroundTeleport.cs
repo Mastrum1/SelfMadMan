@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BackGroundTeleport : MonoBehaviour
 {
-    [SerializeField] private GameObject _previous;
 
     // Start is called before the first frame update
     void Start()
@@ -22,8 +21,8 @@ public class BackGroundTeleport : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("BackGround"))
         {
-            Vector3 pos = collision.GetComponent<BackGroundScrolling>().Previous.transform.position;
-            collision.gameObject.transform.position = new Vector3(collision.gameObject.transform.position.x, pos.y + 2686, collision.gameObject.transform.position.z);
+            Vector3 pos = collision.GetComponent<BackGroundScrolling>().Previous.transform.localPosition;
+            collision.gameObject.transform.localPosition = new Vector3(collision.gameObject.transform.localPosition.x, pos.y + 2686, collision.gameObject.transform.localPosition.z);
         }
     }
 }
