@@ -8,9 +8,8 @@ public class RizzHerManager : MiniGameManager
 {
     [SerializeField] private RizzHerInteractableManager _mInteractableManager;
 
-    [SerializeField] private GameObject _mTableMaterial;
+    [SerializeField] private List<BackGroundScrolling> _scrollingBackground;
 
-    private Renderer _mRenderer;
 
     private void Start()
     {
@@ -19,15 +18,16 @@ public class RizzHerManager : MiniGameManager
 
     void OnGameEnd(bool win)
     {
-        _mRenderer = _mTableMaterial.GetComponent<Renderer>();
-        _mRenderer.material.SetVector("_Direction", new Vector2(0, 0));
-        //_mRenderer.material.SetFloat("_TimeSpeed", 0);
+        for (int i = 0; i < _scrollingBackground.Count; i++)
+        {
+            _scrollingBackground[i].Speed = 0;
+        }
         EndMiniGame(win, miniGameScore);
     }
 
     public override void Update()
     {
-        if(_mTimer.TimerValue <= GameManager.instance.Speed/2.5)
+        if (_mTimer.TimerValue <= GameManager.instance.Speed / 2.5)
             _mInteractableManager.EndGame();
 
         if (_mTimer.TimerValue == 0 && _gameIsPlaying)
