@@ -60,6 +60,17 @@ public class PopUpObtained : MonoBehaviour
                 _mObtainedObject.color = _mTextColor[(int)Type.MINIGAME];
                 _mUnlocked.color = _mUnlockedColor[(int)Type.MINIGAME];
                 break;
+            case ItemsSO.TYPE.FURNITURE:
+                _mMinigameImage.enabled = true;
+                _mSoftMaskMinigame.enabled = true;
+                _ObtainImage.overrideSprite = item.Icon;
+                _PopUpImage.overrideSprite = _mTypeOfPopup[(int)Type.DECORATION];
+                _mTypeOfObtainable.text = "FURNITURE";
+                _mUnlocked.text = "UNLOCKED!";
+                _mObtainedObject.text = item.ItemName;
+                _mObtainedObject.color = _mTextColor[(int)Type.DECORATION];
+                _mUnlocked.color = _mUnlockedColor[(int)Type.DECORATION];
+                break;
         }
     }
 
