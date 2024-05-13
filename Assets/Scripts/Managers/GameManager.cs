@@ -140,7 +140,7 @@ public class GameManager : MonoBehaviour
 
     private void Faster()
     {
-        mySceneManager.instance.SetScene(FasterScene, mySceneManager.LoadMode.ADDITIVE);
+        mySceneManager.instance.LoadFasterScreen();
         FasterLevel++;
         Speed *= 0.8f;
     }
