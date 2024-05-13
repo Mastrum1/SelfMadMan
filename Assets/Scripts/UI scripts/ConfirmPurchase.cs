@@ -6,20 +6,21 @@ using UnityEngine.UI;
 
 public class ConfirmPurchase : MonoBehaviour
 {
-    public event Action<ItemsSO> _mItemPurchased;
+    public event Action<ShopTemplate> _mItemPurchased;
     [SerializeField] private TMPro.TMP_Text _mItemPrice;
     [SerializeField] private Image _mItemIcon;
     [SerializeField] private Animator _mConfirmAnim;
 
+    private ShopTemplate _mShopTemplate;
     private ItemsSO _mItem;
 
-    public void SetItemInfo(ItemsSO item)
+    public void SetItemInfo(ShopTemplate item)
     {
-        _mItem = item;
-        _mItemPrice.text = item.Cost.ToString();
-        _mItemIcon.sprite = item.Icon;
+        _mItem = item.ItemInfo;
+        _mItemPrice.text = item.ItemInfo.Cost.ToString();
+        _mItemIcon.sprite = item.ItemInfo.Icon;
 
-        if (item.Icon == null)
+        if (item.ItemInfo.Icon == null)
             _mItemIcon.gameObject.SetActive(false);
         else
             _mItemIcon.gameObject.SetActive(true);
@@ -27,7 +28,7 @@ public class ConfirmPurchase : MonoBehaviour
 
     public void OnPurchaseConfirmed()
     {
-        _mItemPurchased.Invoke(_mItem);
+        _mItemPurchased.Invoke(_mShopTemplate);
     }
 
     public void OpenPopUP()
