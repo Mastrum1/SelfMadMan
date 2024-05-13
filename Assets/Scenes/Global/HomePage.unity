@@ -10150,15 +10150,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mCoins:
-  - {fileID: 11400000, guid: c479ef42130d468428a54855af6cf801, type: 2}
   - {fileID: 11400000, guid: 0cc793702111feb4d95df550be5c5cee, type: 2}
   - {fileID: 11400000, guid: 62a7570edb35fd54eb6e086b4a227a37, type: 2}
   - {fileID: 11400000, guid: 5f80f9eb501c7dd4eba7f9fa50c52a89, type: 2}
   - {fileID: 11400000, guid: 8a9fbfa0d44547f4aaa0337913dab5a4, type: 2}
-  _mFurnitures: []
+  _mFurnitures:
+  - {fileID: 11400000, guid: 42d1ef02e8b59bf4e8d877d417fe6eb3, type: 2}
+  - {fileID: 11400000, guid: 9904b50c1aed6a945bd7a74d4faed965, type: 2}
+  - {fileID: 11400000, guid: 57fb3ffcfc182744a8961071112c91d1, type: 2}
   _mPowerUp: []
   _mCoinsTemplates:
-  - {fileID: 1844521051}
   - {fileID: 1518712329}
   - {fileID: 1928094357}
   - {fileID: 2097022684}
@@ -11006,7 +11007,7 @@ MonoBehaviour:
     - {fileID: 8238189630624218241}
     - {fileID: 8238189630624218240}
     Picked: 0
-    Locked: 0
+    Locked: 1
     Type: 0
   - _prefabParent: {fileID: 1284518446914198090}
     _GOPerEra:
@@ -11014,7 +11015,7 @@ MonoBehaviour:
     - {fileID: 1284518446914198088}
     - {fileID: 1284518446914198087}
     Picked: 0
-    Locked: 0
+    Locked: 1
     Type: 0
   - _prefabParent: {fileID: 4116377551061907798}
     _GOPerEra:
@@ -11022,7 +11023,7 @@ MonoBehaviour:
     - {fileID: 4116377551061907796}
     - {fileID: 4116377551061907795}
     Picked: 0
-    Locked: 0
+    Locked: 1
     Type: 0
   - _prefabParent: {fileID: 7121338157705013709}
     _GOPerEra:
@@ -11030,7 +11031,7 @@ MonoBehaviour:
     - {fileID: 7121338157705013707}
     - {fileID: 7121338157705013706}
     Picked: 0
-    Locked: 0
+    Locked: 1
     Type: 1
   - _prefabParent: {fileID: 2371290457595912943}
     _GOPerEra:
@@ -11038,7 +11039,7 @@ MonoBehaviour:
     - {fileID: 2371290457595912941}
     - {fileID: 2371290457595912940}
     Picked: 0
-    Locked: 0
+    Locked: 1
     Type: 1
   - _prefabParent: {fileID: 4098382537016057024}
     _GOPerEra:
@@ -11046,7 +11047,7 @@ MonoBehaviour:
     - {fileID: 4098382537016057022}
     - {fileID: 4098382537016057021}
     Picked: 0
-    Locked: 0
+    Locked: 1
     Type: 1
   - _prefabParent: {fileID: 8992334619990322311}
     _GOPerEra:
@@ -11054,7 +11055,7 @@ MonoBehaviour:
     - {fileID: 8992334619990322309}
     - {fileID: 8992334619990322308}
     Picked: 0
-    Locked: 0
+    Locked: 1
     Type: 2
   - _prefabParent: {fileID: 8930751582593772081}
     _GOPerEra:
@@ -15747,6 +15748,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ItemFrame
       objectReference: {fileID: 0}
+    - target: {fileID: 8526614118352613302, guid: 5b758abffbf4f1541985e639cb43d79d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8617750617492856592, guid: 5b758abffbf4f1541985e639cb43d79d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -16061,6 +16066,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 84ae8f0b360de3a4abf22dbc96e2c860, type: 2}
   - {fileID: 11400000, guid: 7887f95bcaf689d45b8593839ebad16e, type: 2}
   - {fileID: 11400000, guid: f1761bfa59cd6a444a4108ac68539888, type: 2}
+  _FurnituresSO:
+  - {fileID: 11400000, guid: 32eb12526a4d5db42a91352be086efd6, type: 2}
+  - {fileID: 11400000, guid: 342cc7dd49e37cd48b82195488510065, type: 2}
+  - {fileID: 11400000, guid: 883803e8485eff048b75e1662dfb6ba5, type: 2}
+  - {fileID: 11400000, guid: 6434b38a560f67540b0f6ea7698fd213, type: 2}
+  - {fileID: 11400000, guid: c66f341920aa8ae40b257ba95c496046, type: 2}
+  - {fileID: 11400000, guid: 57fb3ffcfc182744a8961071112c91d1, type: 2}
+  - {fileID: 11400000, guid: 9904b50c1aed6a945bd7a74d4faed965, type: 2}
+  - {fileID: 11400000, guid: 42d1ef02e8b59bf4e8d877d417fe6eb3, type: 2}
   _quarters:
   - {fileID: 589621484}
   - {fileID: 869198350}
@@ -17336,7 +17350,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 490, y: -157.55}
+  m_AnchoredPosition: {x: 490, y: -157.54999}
   m_SizeDelta: {x: 200, y: 315.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1669725433
@@ -19408,17 +19422,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1844521051 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3933986883571788510, guid: 5b758abffbf4f1541985e639cb43d79d, type: 3}
-  m_PrefabInstance: {fileID: 1526810301}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a793af7890bdac4091485affbad756a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1845773150 stripped
