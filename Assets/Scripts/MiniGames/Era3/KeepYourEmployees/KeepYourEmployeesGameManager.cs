@@ -12,15 +12,18 @@ public class KeepYourEmployeesGameManager : MiniGameManager
     [SerializeField] GameObject _employeesPrefab;
     [SerializeField] GameObject _mParent;
     [SerializeField] TMP_Text _mNb;
+    [SerializeField] GameObject _mClickAnim;
     private List<GameObject> _mEmployees;
     private float _mAverageSpawnRate;
     private int _mNbRemain;
     private bool _mIsEnd = false;
     int _mHit = 0;
     Dictionary<int, List<float>> mSpawnPoints;
+    private Vector3 _mHandPos;
 
     void Start()
     {
+        _mHandPos = new Vector3(0, 0, 0);
         mSpawnPoints = new Dictionary<int, List<float>>();
         mSpawnPoints.Add(0, new List<float>());
         mSpawnPoints.Add(1, new List<float>());
@@ -47,6 +50,19 @@ public class KeepYourEmployeesGameManager : MiniGameManager
         }
         _mNbRemain = _mEmployees.Count;
         StartCoroutine(EmployeeSpawner());
+    }
+
+    public void UpdatePos(Vector3 pos)
+    {
+        pos.z = 0;
+        _mHandPos = pos;
+    }
+
+    public void PlayTapAnim(Vector3 pos)
+    {
+        if (_mClickAnim.activeSelf) _mClickAnim.SetActive(false); 
+        _mClickAnim.transform.position = _mHandPos; //new Vector3(pos.x, pos.y, 0);
+        _mClickAnim.SetActive(true);
     }
 
     // Update is called once per frame
@@ -100,10 +116,16 @@ public class KeepYourEmployeesGameManager : MiniGameManager
     {
         _mNbRemain--;
         _mHit++;
+        PlayTapAnim(employee.transform.position);
         employee.SetActive(false);
             employee.GetComponent<Employee>().OnTap -= OnEmployeeCaught;
         if (_mHit == _mEmployees.Count) {   
             _mIsEnd = true;
+            for (int i = 0; i < _mNbEmployees; i++)
+                if (_mEmployees[i].activeInHierarchy) {
+                    _mEmployees[i].GetComponent<Employee>().OnTap -= OnEmployeeCaught;
+                    _mEmployees[i].SetActive(false);
+                    }
             EndMiniGame(true, miniGameScore);
         }
     }
