@@ -1582,7 +1582,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6542784465200720699, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
       propertyPath: _mLoadSaveMinigame
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6542784465200720699, guid: 0b2a6e47b8439c74eaf5d01de28006f3, type: 3}
       propertyPath: _mAllEra1.Array.size
@@ -2079,7 +2079,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.size
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era2.Array.size
@@ -2138,6 +2138,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: a5c44524f732b48469a354b4f2024aec, type: 3}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
+      propertyPath: _era1.Array.data[8]._icon
+      value: 
+      objectReference: {fileID: 21300000, guid: a5c44524f732b48469a354b4f2024aec, type: 3}
+    - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era2.Array.data[0]._icon
       value: 
       objectReference: {fileID: 21300000, guid: eb073c9f86925b14197d78cdb4e476eb, type: 3}
@@ -2171,7 +2175,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 41e8ca68cd1f11941a5c36dac164a8fe, type: 3}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[0]._locked
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[1]._locked
@@ -2179,11 +2183,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[2]._locked
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[3]._locked
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[4]._locked
@@ -2199,7 +2203,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[7]._locked
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era2.Array.data[0]._locked
@@ -2315,7 +2319,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era1.Array.data[8]._sceneName
-      value: TimeToSlay
+      value: CleanYourYatch
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era2.Array.data[0]._sceneName
@@ -2351,7 +2355,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1582220345771968293, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: _era3.Array.data[0]._sceneName
-      value: FightThisDude
+      value: Cardashian
       objectReference: {fileID: 0}
     - target: {fileID: 5661505165497571510, guid: 2b5b11d477c55a34b90371bb5ed0ad7b, type: 3}
       propertyPath: m_Name
