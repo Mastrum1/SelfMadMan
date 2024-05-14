@@ -144,7 +144,6 @@ public class ShopManager : MonoBehaviour
             {
                 if (fur.PrefabParent.name == item.FurniturePrefab.name && item != null)
                 {
-                    Debug.Log("I'M WORKINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
                     if (fur.Locked)
                     {
                         _mFurnituresTemplates[i].Purchasable = true;
