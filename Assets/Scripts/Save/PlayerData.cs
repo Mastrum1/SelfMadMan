@@ -161,7 +161,7 @@ public class PlayerData
 
         deleteOldSave = false;
 
-        TutorialPlayed = false;
+        TutorialPlayed = true;
 
         for (int i = 0; i < player.AllEra1.Count; i++)
         {
