@@ -464,7 +464,7 @@ public class Player : MonoBehaviour
 
             _IntroPlayed = data.IntroPlayed;
 
-            //_TutorialPlayed = data.TutorialPlayed;
+            _TutorialPlayed = data.TutorialPlayed;
 
             foreach (var item in data.UnlockedCinematics)
             {

@@ -18,7 +18,10 @@ public class TutorialManager : MonoBehaviour
             Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
+
+       
     }
+
 
     private void Start()
     {
@@ -61,7 +64,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private Canvas _canvas;
     [SerializeField] private TextMeshProUGUI _text;
     public int StepNbr;
-    public bool InTutorial;
+    public bool InTutorial = false;
     public bool FinalStepBool = false;
 
     public void NextStep()
@@ -93,8 +96,9 @@ public class TutorialManager : MonoBehaviour
     public void EndTutorial()
     {
         InTutorial = false;
-        panel.SetActive(false);
         GameManager.instance.Player.TutorialPlayed = true;
+        panel.SetActive(false);
+
     }
 
     public void SetCamera(Camera camera)
