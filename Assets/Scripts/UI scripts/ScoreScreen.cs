@@ -36,6 +36,7 @@ public class ScoreScreen : MonoBehaviour
     [SerializeField] private GameObject _mQuestManager;
     [SerializeField] private RectTransform _mCoin;
     [SerializeField] private GameObject _mWinScreenBG;
+    [SerializeField] private Camera _camera;
 
     private int Timer = 5;
 
@@ -155,7 +156,13 @@ public class ScoreScreen : MonoBehaviour
                 _mCoin.anchoredPosition = new Vector2(137, _mCoin.anchoredPosition.y);*/
             _UIAnimator.SetBool("EndGame", true);
             _mQuestManager.SetActive(true);
+            if(TutorialManager.instance.InTutorial)
+            {  
+                TutorialManager.instance.StepInit();
+                TutorialManager.instance.SetCamera(_camera);
 
+            }
+             
             if (GameManager.instance.Score > GameManager.instance.Player.BestScore)
             {
                 _mHighscoreTag.SetActive(true);

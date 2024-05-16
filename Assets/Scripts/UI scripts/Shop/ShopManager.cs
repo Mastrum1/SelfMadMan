@@ -54,6 +54,10 @@ public class ShopManager : MonoBehaviour
 
     public void LoadAllPanels()
     {
+        if (TutorialManager.instance.InTutorial && (TutorialManager.instance.StepNbr == 3))
+        {
+            TutorialManager.instance.StepInit();
+        }
         LoadPanels(_mCoins);
         LoadFurniture(_mFurnitures);
     }
