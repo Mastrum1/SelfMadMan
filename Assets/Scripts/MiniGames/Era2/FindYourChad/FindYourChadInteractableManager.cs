@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardashianInteractableManager : MonoBehaviour
+public class FindYourChadInteractableManager : MonoBehaviour
 {
 
-    [SerializeField] private List<cardashianCard> _mObj;
+    [SerializeField] private List<FindYourChadObj> _mObj;
     private float _spawnDistance = 2f;
     private float _minDistanceBetweenObjects = 1.5f;
     public event Action<bool> GameEnd;
@@ -19,24 +19,47 @@ public class CardashianInteractableManager : MonoBehaviour
         switch (GameManager.instance.FasterLevel)
         {
             case 1:
-                NbObjToSpawn = 8;
+                NbObjToSpawn = 11;
                 //pos.y -= _mSpace / 2;
                 break;
             case 2:
-                NbObjToSpawn = 10;
+                NbObjToSpawn = 17;
                 //pos.y -= _mSpace;
 
                 break;
             case 3:
-                NbObjToSpawn = 12;
+                NbObjToSpawn = 26;
                 //pos.y -= _mSpace * 2;
                 break;
             default:
                 break;
         }
 
-        int Random = UnityEngine.Random.Range(0, NbObjToSpawn);
+        int Random = UnityEngine.Random.Range(5, NbObjToSpawn);
         _mObj[Random].Real = true;
+
+        var objColliderOffset = _mObj[Random].Collider.offset;
+        var objColliderSize = _mObj[8].Collider.size;
+
+        var tempChadColliderOffset = _mObj[8].Collider.offset;
+        var tempChadColliderSize = _mObj[8].Collider.size;
+
+        var tempSprite = _mObj[Random].SpriteRenderer.sprite;
+        _mObj[Random].SpriteRenderer.sprite = _mObj[8].SpriteRenderer.sprite;
+        _mObj[8].SpriteRenderer.sprite = tempSprite;
+
+
+
+        var tempsScale = _mObj[Random].transform.localScale;
+        _mObj[Random].transform.localScale = _mObj[8].transform.localScale;
+        _mObj[8].transform.localScale = tempsScale;
+
+        _mObj[Random].Collider.offset = tempChadColliderOffset;
+        _mObj[Random].Collider.size = tempChadColliderSize;
+
+        _mObj[8].Collider.offset = objColliderOffset;
+        _mObj[8].Collider.size = objColliderSize;
+
         for (int id = 0; id < NbObjToSpawn; id++)
         {
             if(id == Random)

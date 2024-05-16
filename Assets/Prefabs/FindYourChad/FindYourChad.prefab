@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 9162418724448358889}
   - component: {fileID: 334488515559283063}
   - component: {fileID: 716898251654746665}
+  - component: {fileID: 8577627261382417404}
   m_Layer: 0
-  m_Name: Card
+  m_Name: FindYourChad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -119,7 +120,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.024831772, y: -0.029797673}
+  m_Offset: {x: 0.16051081, y: 0.9598591}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -130,7 +131,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.0031948, y: 3.4235613}
+  m_Size: {x: 0.9975769, y: 1.4442478}
   m_EdgeRadius: 0
 --- !u!114 &334488515559283063
 MonoBehaviour:
@@ -174,12 +175,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9ae6e9720a6053489588ba7d419e367, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _vfxScaleUp: {fileID: 8577627261382417404}
   _mIsReal: 0
-  _mCanvas: {fileID: 0}
-  _mTexts:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  _mLogo: {fileID: 0}
-  _mNbErreur: 3
+  _SpriteRenderer: {fileID: 4345545789108407263}
+  _collider: {fileID: 9162418724448358889}
+--- !u!114 &8577627261382417404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7152770988748570438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b51b89ad8563c2b4788e7b87281d2bb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleUpDuration: 0.3
+  scaleDownDuration: 0.3
+  scaleUpFactor: 1.3
