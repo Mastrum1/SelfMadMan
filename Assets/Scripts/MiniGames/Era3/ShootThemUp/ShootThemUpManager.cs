@@ -24,6 +24,7 @@ public class ShootThemUpManager : MiniGameManager
 
     void OnGameEnd(bool win)
     {
+        StopCoroutine("SpawnEcolo");
         EndMiniGame(win, miniGameScore);
     }
 

@@ -8,6 +8,9 @@ public class MoveParachutistes : MonoBehaviour
     [SerializeField] private Transform _mCar;
     [SerializeField] private float _mSpeed;
     [SerializeField] private ParticleSystem _mParticleSystem;
+    [SerializeField] private VFXScaleUp _vfxScaleUp;
+    [SerializeField] private Animator _animator;
+
     private bool _mGotHit = false;
 
     public event Action<bool> OnLoose;
@@ -19,11 +22,19 @@ public class MoveParachutistes : MonoBehaviour
         }
     }
 
+    public void StopAllEcolo()
+    {
+        _mGotHit = true;
+        _animator.speed = 0;
+
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "car")
         {
-            //gameObject.GetComponent<Animator>().SetBool("EndGame", true);
+            _vfxScaleUp.OnObjectClicked();
+            _animator.SetBool("EndGame", true);
             OnLoose?.Invoke(false);
             Debug.Log("endGame");
         }
@@ -32,7 +43,7 @@ public class MoveParachutistes : MonoBehaviour
     public void DisableObject()
     {
         _mGotHit = false;
-        gameObject.GetComponent<Animator>().SetBool("GetHit", false);
+        _animator.SetBool("EndGame", false);
         gameObject.SetActive(false);
         _mParticleSystem.gameObject.SetActive(false);
 
@@ -42,6 +53,6 @@ public class MoveParachutistes : MonoBehaviour
     {
         _mGotHit = true;
         _mParticleSystem.gameObject.SetActive(true);
-        gameObject.GetComponent<Animator>().SetBool("GetHit", true);
+        _animator.SetBool("EndGame", true);
     }
 }

@@ -25,6 +25,14 @@ public class ShootThemUpInteractableManager : InteractableManager
 
     void HandleEndGame(bool win)
     {
+        for(int i = 0; i < _Ecolo.Count; i++)
+        {
+            _Ecolo[i].StopAllEcolo();
+        }
+        for (int i = 0; i < _Parachutistes.Count; i++)
+        {
+            _Parachutistes[i].StopAllEcolo();
+        }
         OnGameEnd?.Invoke(win);
     }
 
