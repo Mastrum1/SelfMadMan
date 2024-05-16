@@ -1,10 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-public class MoveEcolo : MonoBehaviour
+public class MoveParachutistes : MonoBehaviour
 {
     [SerializeField] private Transform _mCar;
     [SerializeField] private float _mSpeed;
@@ -12,8 +11,6 @@ public class MoveEcolo : MonoBehaviour
     private bool _mGotHit = false;
 
     public event Action<bool> OnLoose;
-
-    // Update is called once per frame
     void Update()
     {
         if (!_mGotHit)

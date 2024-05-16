@@ -10,7 +10,9 @@ public class ShootThemUpManager : MiniGameManager
 
     [SerializeField] private List<Transform> _mSpawn;
 
-    [SerializeField] private GameObject _mParents;
+    [SerializeField] private List<GameObject> _Ecolo;
+
+    [SerializeField] private List<GameObject> _Parachutistes;
 
     [SerializeField] private float _mEcoloSpawnTime = 1f;
 
@@ -27,13 +29,13 @@ public class ShootThemUpManager : MiniGameManager
 
     private void OnEnable()
     {
-        StartCoroutine("SpawnButtons");
+        StartCoroutine("SpawnEcolo");
     }
 
     private void OnDisable()
     {
         _mInteractableManager.OnGameEnd -= OnGameEnd;
-        StopCoroutine("SpawnButtons");
+        StopCoroutine("SpawnEcolo");
     }
 
     public override void Update()
@@ -45,31 +47,42 @@ public class ShootThemUpManager : MiniGameManager
         }
     }
 
-    private IEnumerator SpawnButtons()
+    private IEnumerator SpawnEcolo()
     {
         while (true)
         {
             int index = Random.Range(0, _mSpawn.Count);
-            for (int i = 0; i < _mParents.transform.childCount; i++)
+            Debug.Log(index + "index");
+            if (index == 2)
             {
-                var addChild = _mParents.transform.GetChild(i);
-                if (addChild.gameObject.activeSelf == true)
+                for (int i = 0; i < _Parachutistes.Count; i++)
                 {
-                    continue;
+                    if (_Parachutistes[i].gameObject.activeSelf != true)
+                    {
+                        _Parachutistes[i].transform.position = _mSpawn[index].position;
+                        _Parachutistes[i].gameObject.SetActive(true);
+                        break;
+                    }
                 }
-                else
+            }
+            else
+            {
+                for (int i = 0; i < _Ecolo.Count; i++)
                 {
-                    addChild.transform.position = _mSpawn[index].position;
-                    if(index == 1)
+                    if (_Ecolo[i].gameObject.activeSelf != true)
                     {
-                        addChild.transform.rotation = Quaternion.Euler(0, 0, 0);
+                        _Ecolo[i].transform.position = _mSpawn[index].position;
+                        if (index == 1)
+                        {
+                            _Ecolo[i].transform.rotation = Quaternion.Euler(0, 0, 0);
+                        }
+                        else
+                        {
+                            _Ecolo[i].transform.rotation = Quaternion.Euler(0, 180, 0);
+                        }
+                        _Ecolo[i].gameObject.SetActive(true);
+                        break;
                     }
-                    else
-                    {
-                        addChild.transform.rotation = Quaternion.Euler(0, 180, 0);
-                    }
-                    addChild.gameObject.SetActive(true);
-                    break;
                 }
             }
             yield return new WaitForSeconds(_mEcoloSpawnTime);

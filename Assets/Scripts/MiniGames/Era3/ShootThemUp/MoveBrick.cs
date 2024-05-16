@@ -80,7 +80,7 @@ public class MoveBrick : MonoBehaviour
             _mSpriteBrick.transform.Rotate(Vector3.forward, 10);
 
             // Vérifier si l'objet est sorti de l'écran
-            if (transform.position.y > 0.5f || transform.position.x > 3 || transform.position.x < -3)
+            if (transform.position.y > 0.5f && transform.position.x < -1 || transform.position.y > 0.5f && transform.position.x > 1 || transform.position.x > 3 || transform.position.x < -3 || transform.position.y > 2)
             {
                 _mTrailEffect.enabled = false;
                 _mSpriteBrick.SetActive(false);

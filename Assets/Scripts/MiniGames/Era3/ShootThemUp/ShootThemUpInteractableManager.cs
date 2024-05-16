@@ -7,17 +7,13 @@ using UnityEngine;
 public class ShootThemUpInteractableManager : InteractableManager
 {
     public event Action<bool> OnGameEnd;
-    [SerializeField] private GameObject _mParents;
+    [SerializeField] private List<MoveEcolo> _AllEcolo;
 
     private void Start()
     {
-        for (int i = 0; i < _mParents.transform.childCount; i++)
+        for (int i = 0; i < _AllEcolo.Count; i++)
         {
-            var addChild = _mParents.transform.GetChild(i).GetComponent<MoveEcolo>();
-            if (addChild != null)
-            {
-                addChild.OnLoose += HandleEndGame;
-            }
+            _AllEcolo[i].OnLoose += HandleEndGame;
         }
     }
 
@@ -28,13 +24,9 @@ public class ShootThemUpInteractableManager : InteractableManager
 
     private void OnDestroy()
     {
-        for (int i = 0; i < _mParents.transform.childCount; i++)
+        for (int i = 0; i < _AllEcolo.Count; i++)
         {
-            var addChild = _mParents.transform.GetChild(i).GetComponent<MoveEcolo>();
-            if (addChild != null)
-            {
-                addChild.OnLoose -= HandleEndGame;
-            }
+            _AllEcolo[i].OnLoose -= HandleEndGame;
         }
     }
 
