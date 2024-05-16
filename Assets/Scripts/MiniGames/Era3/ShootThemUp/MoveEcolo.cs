@@ -40,7 +40,6 @@ public class MoveEcolo : MonoBehaviour
             _vfxScaleUp.OnObjectClicked();
             _animator.SetBool("EndGame", true);
             OnLoose?.Invoke(false);
-            Debug.Log("endGame");
         }
     }
 
@@ -57,6 +56,6 @@ public class MoveEcolo : MonoBehaviour
     {
         _mGotHit = true;
         _mParticleSystem.gameObject.SetActive(true);
-        _animator.SetBool("EndGame", true);
+        _animator.SetBool("GetHit", true);
     }
 }
