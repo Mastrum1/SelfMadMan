@@ -74,13 +74,11 @@ public class Player : MonoBehaviour
     }
 
     [System.Serializable]
-    public class InventoryClass
-    {
-        private List<UsableItem> _usableItems;
-        public List<UsableItem> UsableItems { get => _usableItems; set => _usableItems = value; }
 
-        private List<FournituresClass> _fournitures;
-        public List<FournituresClass> Fournitures { get => _fournitures; set => _fournitures = value; }
+    public class AllFurnituresSaveClass
+    {
+        public bool Picked;
+        public bool Locked;
     }
 
     [SerializeField] private bool _mLoadSaveMinigame = false;
@@ -132,18 +130,13 @@ public class Player : MonoBehaviour
 
     [SerializeField] private List<Cinematics> _mUnlockedCinematics;
 
+    public List<int> ActivesFurnitures { get => _ActivesFurnitures; private set => _ActivesFurnitures = value; }
 
-    public InventoryClass Inventory { get => _mInventory; private set => _mInventory = value; }
+    [SerializeField] private List<int> _ActivesFurnitures;
 
-    [SerializeField] private InventoryClass _mInventory;
+    public List<AllFurnituresSaveClass> AllFurnituresSave { get => _AllFurnituresSave; private set => _AllFurnituresSave = value; }
 
-    public List<FournituresClass> ItemLocked { get => _mItemLocked; private set => _mItemLocked = value; }
-
-    [SerializeField] private List<FournituresClass> _mItemLocked;
-
-    public List<FournituresClassSO> AllFournituresSO { get => _mAllFournituresSO; private set => _mAllFournituresSO = value; }
-
-    [SerializeField] private List<FournituresClassSO> _mAllFournituresSO;
+    [SerializeField] private List<AllFurnituresSaveClass> _AllFurnituresSave;
 
     public List<int> FirstQuests { get => _mFirstQuests; private set => _mFirstQuests = value; }
 
@@ -329,23 +322,23 @@ public class Player : MonoBehaviour
             data.Language = Language;
         }
 
-        if (data.Inventory != null && data.Inventory.Fournitures != null && data.Inventory.Fournitures.Count != 0 || data.Inventory != null && data.Inventory.UsableItems != null && data.Inventory.UsableItems.Count != 0)
-        {
-            Inventory = data.Inventory;
-        }
-        else
-        {
-            data.Inventory = Inventory;
-        }
+        //if (data.Inventory != null && data.Inventory.Fournitures != null && data.Inventory.Fournitures.Count != 0 || data.Inventory != null && data.Inventory.UsableItems != null && data.Inventory.UsableItems.Count != 0)
+        //{
+        //    Inventory = data.Inventory;
+        //}
+        //else
+        //{
+        //    data.Inventory = Inventory;
+        //}
 
-        if (data.ItemLocked.Count != 0 && data.ItemLocked != ItemLocked)
-        {
-            ItemLocked = data.ItemLocked;
-        }
-        else
-        {
-            data.ItemLocked = ItemLocked;
-        }
+        //if (data.ItemLocked.Count != 0 && data.ItemLocked != ItemLocked)
+        //{
+        //    ItemLocked = data.ItemLocked;
+        //}
+        //else
+        //{
+        //    data.ItemLocked = ItemLocked;
+        //}
 
 
         if (data.ActiveQuests.Count != 0)
@@ -451,7 +444,7 @@ public class Player : MonoBehaviour
                 data = DataService.LoadData<PlayerData>("/player-stats.json", false);
 
 
-            if (data.ErasData.Count == 0)
+            if (data.allFurnituresSave.Count == 0 || data.allFurnituresSave == null)
             {
 
                 SaveJson();
@@ -493,21 +486,8 @@ public class Player : MonoBehaviour
                     AllEra3[item].Unlock();
                 }
 
-                Inventory = new InventoryClass();
-
-                Inventory.UsableItems = new List<UsableItem>();
-
-                Inventory.Fournitures = new List<FournituresClass>();
-
-                Inventory = data.Inventory;
-
-                Inventory.UsableItems = data.Inventory.UsableItems;
-                Inventory.Fournitures = data.Inventory.Fournitures;
-
-                foreach (var item in data.ItemLocked)
-                {
-                    ItemLocked.Add(item);
-                }
+                AllFurnituresSave = data.allFurnituresSave;
+                ActivesFurnitures = data.ActivesFurnitures;
 
                 ActiveQuests = new List<QuestManager.Quest>();
                 foreach (var item in data.ActiveQuests)
@@ -537,7 +517,7 @@ public class Player : MonoBehaviour
                 {
                     AllTrophy[item.TrophySOIndex] = new TrophyManager.Trophy(AllTrophy[item.TrophySOIndex].TrophySO, item.TrophyCompletionState, item.CurrentAmount);
                 }
-                
+
                 GameManager.instance.LoadEraData(ErasData);
 
                 TrophyManager.Instance.LoadTrophies(AllTrophy);
@@ -579,7 +559,7 @@ public class Player : MonoBehaviour
 
     public void AddXp(int reward)
     {
-        
+
     }
 
     public void RemoveCompleteQuests(QuestManager.Quest quest)
@@ -637,46 +617,32 @@ public class Player : MonoBehaviour
         VolumeFX = Value;
     }
 
-    public void AddFournitureInInventory(FournituresClassSO Item)
+    public void AddActiveFurniture(int Item)
     {
-        Inventory.Fournitures.Add(new FournituresClass(Item.GetItemSOID()));
-        ItemLocked.Remove(new FournituresClass(Item.GetItemSOID()));
+        _ActivesFurnitures.Add(Item);
     }
 
-    public void RemoveFournitureInInventory(FournituresClassSO Item)
+    public void RemoveActiveFurniture(int Item)
     {
-        Inventory.Fournitures.Remove(Inventory.Fournitures[Inventory.Fournitures.IndexOf(new FournituresClass(Item.GetItemSOID()))]);
-        ItemLocked.Add(new FournituresClass(Item.GetItemSOID()));
+        _ActivesFurnitures.Remove(Item);
     }
 
-    public void AddUsableItemInInventory(UsableItem item)
+    public void UnlockFurniture(int index)
     {
-        if (Inventory.UsableItems.Contains(item))
-        {
-            Inventory.UsableItems[Inventory.UsableItems.IndexOf(item)].Quantity += 1;
-            return;
-        }
-        Inventory.UsableItems.Add(item);
+        _AllFurnituresSave[index].Locked = false;
+    }
+    public void lockFurniture(int index)
+    {
+        _AllFurnituresSave[index].Locked = true;
     }
 
-    public void UseUsableItem(UsableItem item)
+    public void PickFurniture(int index)
     {
-        Inventory.UsableItems[Inventory.UsableItems.IndexOf(item)].Quantity -= 1;
-
-        if (Inventory.UsableItems[Inventory.UsableItems.IndexOf(item)].Quantity == 0)
-        {
-            Inventory.UsableItems.Remove(Inventory.UsableItems[Inventory.UsableItems.IndexOf(item)]);
-        }
+        _AllFurnituresSave[index].Picked = true;
     }
-
-    public bool SearchForUsableItem(UsableItem item)
+    public void UnPickFurniture(int index)
     {
-        return Inventory.UsableItems.Contains(item);
-    }
-
-    public bool SearchForFournitureItem(FournituresClass item)
-    {
-        return Inventory.Fournitures.Contains(item);
+        _AllFurnituresSave[index].Picked = false;
     }
 
     public void AddUnlockedCinematics(Cinematics cinematics)

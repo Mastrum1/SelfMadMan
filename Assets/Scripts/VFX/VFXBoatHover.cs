@@ -6,6 +6,7 @@ public class VFXBo : MonoBehaviour
 {
     public float slideAmount = 0.1f; // Adjust the amount of sliding
     public float slideSpeed = 2f; // Adjust the speed of sliding
+  //  [SerializeField] bool _mIsBoat;
 
     private Vector3 startPosition;
 
@@ -24,9 +25,15 @@ public class VFXBo : MonoBehaviour
         float verticalMovement = Mathf.Cos(Time.time * slideSpeed) * slideAmount;
 
         // Update the position of the object
-        transform.position = startPosition + new Vector3(horizontalMovement, verticalMovement, 0f);
+        transform.position =  startPosition + new Vector3(horizontalMovement, verticalMovement, 0f);
 
         yield return new WaitForSeconds(0.01f);
         }
+    }
+
+    public void ReStart()
+    {
+        startPosition = transform.position;
+        StartCoroutine(Hover());
     }
 }
