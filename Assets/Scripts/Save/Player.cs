@@ -87,9 +87,6 @@ public class Player : MonoBehaviour
     public bool IntroPlayed { get => _IntroPlayed; set => _IntroPlayed = value; }
     private bool _IntroPlayed = false;
 
-    private bool _TutorialPlayed = false;
-    public bool TutorialPlayed { get => _TutorialPlayed; set => _TutorialPlayed = value; }
-
     public event Action<PlayerData> OnDataLoad;
 
     private readonly PlayerData playerData = new PlayerData();
@@ -327,6 +324,24 @@ public class Player : MonoBehaviour
             data.Language = Language;
         }
 
+        //if (data.Inventory != null && data.Inventory.Fournitures != null && data.Inventory.Fournitures.Count != 0 || data.Inventory != null && data.Inventory.UsableItems != null && data.Inventory.UsableItems.Count != 0)
+        //{
+        //    Inventory = data.Inventory;
+        //}
+        //else
+        //{
+        //    data.Inventory = Inventory;
+        //}
+
+        //if (data.ItemLocked.Count != 0 && data.ItemLocked != ItemLocked)
+        //{
+        //    ItemLocked = data.ItemLocked;
+        //}
+        //else
+        //{
+        //    data.ItemLocked = ItemLocked;
+        //}
+
 
         if (data.ActiveQuests.Count != 0)
         {
@@ -555,6 +570,7 @@ public class Player : MonoBehaviour
     public void RemoveCompleteQuests(QuestManager.Quest quest)
     {
         CompletedQuests.Remove(quest);
+        //RemoveActiveQuests(quest);
     }
 
     public void UnlockQuest(int ID)

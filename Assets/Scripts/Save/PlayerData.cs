@@ -10,7 +10,6 @@ public class PlayerData
     public int Level;
 
     public int Xp;
-
     public int Hearts;
 
     public int Money;
@@ -46,8 +45,6 @@ public class PlayerData
     public List<int> AllEra3 = new List<int>();
 
     public bool IntroPlayed = false;
-
-    public bool TutorialPlayed = false;
     public void SaveData(Player player)
     {
         Level = player.Level;
@@ -66,8 +63,6 @@ public class PlayerData
         IntroPlayed = player.IntroPlayed;
 
         deleteOldSave = player.DeleteOldSave;
-
-        TutorialPlayed = player.TutorialPlayed;
 
         SaveCinematics(player.UnlockedCinematics);
 
@@ -160,8 +155,6 @@ public class PlayerData
         Language = "fr";
 
         deleteOldSave = false;
-
-        TutorialPlayed = false;
 
         for (int i = 0; i < player.AllEra1.Count; i++)
         {
