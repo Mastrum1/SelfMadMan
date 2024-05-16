@@ -23,6 +23,6 @@ public class ArrowMovement : MonoBehaviour
                 _mFasterLevel = (GameManager.instance.FasterLevel / 1.75f);
                 break;
         }
-        transform.Translate(Vector3.down * _mSpeed * Time.deltaTime * GameManager.instance.FasterLevel);
+        transform.Translate(Vector3.down * _mSpeed * Time.deltaTime * _mFasterLevel);
     }
 }
