@@ -7,10 +7,11 @@ public class TutorielInteractable : MonoBehaviour
 
     [SerializeField] private int _StepNumber;
     [SerializeField] private Canvas _Canvas;
+    [SerializeField] private RectTransform _RectTransform;
     // Start is called before the first frame update
     void Awake()
     {
-        TutorialManager.instance.StepAddCanvas(_Canvas, _StepNumber);
+        TutorialManager.instance.StepAddDataButton(_Canvas, _RectTransform, _StepNumber);
         _Canvas.sortingOrder = 1;
     }
 

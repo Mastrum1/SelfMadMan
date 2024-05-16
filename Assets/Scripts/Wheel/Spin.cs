@@ -33,6 +33,7 @@ public class Spin : MonoBehaviour
     [SerializeField] private List<FurnitureSO> _FurnituresSO;
 
     [SerializeField] private List<Quarter> _quarters;
+    [SerializeField] private ItemsSO[] _tutorialFill;
 
     [SerializeField] private GameObject _mPopupObtained;
     [SerializeField] private PopUpObtained _mPopupObtainedScript;
@@ -86,9 +87,14 @@ public class Spin : MonoBehaviour
     }
     void InitSpin()
     {
-        _minigamesOnWheel = 0;
-        _quarters.Shuffle();
-        FillWithMinigames();
+        if (TutorialManager.instance.InTutorial)
+            TutorialFill();
+        else
+        {
+            _quarters.Shuffle();
+            FillWithMinigames();
+        }
+
     }
 
     private bool CheckIfMinigameUnlocked(MinigameSO minigameSO)
@@ -139,7 +145,13 @@ public class Spin : MonoBehaviour
         return numOfFurnitures != 0;
     }
 
-
+    private void TutorialFill()
+    { 
+        for(int i = 0; i < _tutorialFill.Length; i++)
+        {
+            _quarters[i].InitQuarter(_tutorialFill[i]);
+        }
+    }
     private void FillWithMinigames()
     {
         Debug.Log("With minigames");
@@ -215,7 +227,10 @@ public class Spin : MonoBehaviour
 
     void ClaimObject()
     {
+
         _quarter = _arrow.FetchQuarterData();
+        Debug.Log(_quarter.gameObject.name);
+
         isSpnning = false;
 
         _mPopupObtained.SetActive(true);

@@ -40,6 +40,7 @@ public class ShopManager : MonoBehaviour
 
     private void Start()
     {
+        LoadFurniture(_mFurnitures);
         LoadAllPanels();
         Pulse();
         _mConfirmPurchase._mItemPurchased += HandleItemPurchased;
@@ -56,10 +57,12 @@ public class ShopManager : MonoBehaviour
     {
         if (TutorialManager.instance.InTutorial && (TutorialManager.instance.StepNbr == 3))
         {
+            MoneyManager.Instance.AddMoney(100);
+            StartCoroutine(ShopManager.Instance.MoveMoney(ShopManager.Instance.CoinAnim[2]));
             TutorialManager.instance.StepInit();
         }
         LoadPanels(_mCoins);
-        LoadFurniture(_mFurnitures);
+        //
     }
 
     public void LoadPanels(ItemsSO[] item)

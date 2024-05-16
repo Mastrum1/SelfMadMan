@@ -7,6 +7,9 @@ using UnityEngine;
 public class TutorialManager : MonoBehaviour
 {
     public static TutorialManager instance;
+
+    public Vector3[] ChadPos;
+
     void Awake()
     {
         if (instance == null)
@@ -21,29 +24,38 @@ public class TutorialManager : MonoBehaviour
     public class Step
     {
         private Canvas canvas;
+        private RectTransform _rectTransform;
         [SerializeField] public string _instruction;
-        [SerializeField] private int _ChadPos;
+        [SerializeField] public int _ChadPos;
 
         public void Init()
         {
             canvas.sortingOrder = 10;
+            _rectTransform.anchoredPosition3D = new Vector3(_rectTransform.anchoredPosition.x, _rectTransform.anchoredPosition.y, -2);
         }
         public void Reset()
         {
             canvas.sortingOrder = 1;
+            _rectTransform.anchoredPosition3D = new Vector3(_rectTransform.anchoredPosition.x, _rectTransform.anchoredPosition.y, 1);
         }
-        public void SetCanvas(Canvas canvas)
-        { this.canvas = canvas; }
+        public void SetButton(Canvas canvas, RectTransform rectTransform)
+        { 
+            this.canvas = canvas;
+            this._rectTransform = rectTransform;
+        }
     }
     // Start is called before the first frame update
 
     
     [SerializeField] public List<Step> Steps;
     [SerializeField] private GameObject panel;
+    [SerializeField] private GameObject TapToStartGO;
+    [SerializeField] private RectTransform _popup;
     [SerializeField] private Canvas _canvas;
     [SerializeField] private TextMeshProUGUI _text;
     public int StepNbr;
-    public bool InTutorial = true;
+    public bool InTutorial;
+    public bool FinalStepBool = false;
 
     public void NextStep()
     {
@@ -55,6 +67,7 @@ public class TutorialManager : MonoBehaviour
     public void StepInit()
     {
         Debug.Log("Step : " + StepNbr);
+        _popup.anchoredPosition3D = ChadPos[Steps[StepNbr]._ChadPos];
         _text.text = Steps[StepNbr]._instruction;
         Steps[StepNbr].Init();
         panel.SetActive(true);
@@ -63,8 +76,17 @@ public class TutorialManager : MonoBehaviour
 
     public void FinalStep()
     {
+        FinalStepBool = true;
+        TapToStartGO.SetActive(true);
+        _popup.anchoredPosition3D = ChadPos[Steps[StepNbr]._ChadPos];
         _text.text = Steps[StepNbr]._instruction;
         panel.SetActive(true);
+    }
+
+    public void EndTutorial()
+    {
+        InTutorial = false;
+        panel.SetActive(false);
     }
 
     public void SetCamera(Camera camera)
@@ -72,18 +94,8 @@ public class TutorialManager : MonoBehaviour
         _canvas.worldCamera = camera;
     }
 
-    public void StepAddCanvas(Canvas canvas, int Step)
+    public void StepAddDataButton(Canvas canvas, RectTransform rectTransform, int Step)
     {
-        Steps[Step].SetCanvas(canvas);
-    }
-    void Start()
-    {
-       InTutorial = true;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        Steps[Step].SetButton(canvas, rectTransform); 
     }
 }

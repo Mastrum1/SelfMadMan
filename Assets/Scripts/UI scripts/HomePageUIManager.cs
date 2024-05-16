@@ -10,6 +10,7 @@ public class HomePageUIManager : MonoBehaviour
     {
         if (TutorialManager.instance.InTutorial && (TutorialManager.instance.StepNbr == 0 || TutorialManager.instance.StepNbr == 2))
         {
+
             TutorialManager.instance.SetCamera(Camera);
             TutorialManager.instance.StepInit();
         }

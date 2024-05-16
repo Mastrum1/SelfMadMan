@@ -157,7 +157,8 @@ public class ScoreScreen : MonoBehaviour
             _UIAnimator.SetBool("EndGame", true);
             _mQuestManager.SetActive(true);
             if(TutorialManager.instance.InTutorial)
-            {  
+            {
+
                 TutorialManager.instance.StepInit();
                 TutorialManager.instance.SetCamera(_camera);
 
