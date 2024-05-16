@@ -20,6 +20,13 @@ public class TutorialManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    private void Start()
+    {
+        if (!GameManager.instance.Player.TutorialPlayed)
+            InTutorial = true;
+        else
+            InTutorial = false;
+    }
     [System.Serializable]
     public class Step
     {
@@ -87,6 +94,7 @@ public class TutorialManager : MonoBehaviour
     {
         InTutorial = false;
         panel.SetActive(false);
+        GameManager.instance.Player.TutorialPlayed = true;
     }
 
     public void SetCamera(Camera camera)
