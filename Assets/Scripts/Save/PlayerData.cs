@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor.Localization.Plugins.XLIFF.V20;
 using static GameManager;
 using static Player;
 
@@ -21,6 +22,8 @@ public class PlayerData
     public string Language;
 
     public int BestScore;
+
+    public bool TutorialPlayed;
 
     public List<int> UnlockedCinematics = new List<int>();
 
@@ -63,6 +66,8 @@ public class PlayerData
         IntroPlayed = player.IntroPlayed;
 
         deleteOldSave = player.DeleteOldSave;
+
+        TutorialPlayed = player.TutorialPlayed;
 
         SaveCinematics(player.UnlockedCinematics);
 
@@ -155,6 +160,8 @@ public class PlayerData
         Language = "fr";
 
         deleteOldSave = false;
+
+        TutorialPlayed = false;
 
         for (int i = 0; i < player.AllEra1.Count; i++)
         {

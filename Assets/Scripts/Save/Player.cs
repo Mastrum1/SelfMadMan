@@ -11,6 +11,9 @@ public class Player : MonoBehaviour
     [SerializeField] bool _DeleteOldSave = true;
     public bool DeleteOldSave { get => _DeleteOldSave; set => _DeleteOldSave = value; }
 
+    [SerializeField] bool _TutorialPlayed = false;
+    public bool TutorialPlayed { get => _TutorialPlayed; set => _TutorialPlayed = value; }
+
     [System.Serializable]
     public class Cinematics
     {
@@ -445,90 +448,82 @@ public class Player : MonoBehaviour
             if (data == default)
                 data = DataService.LoadData<PlayerData>("/player-stats.json", false);
 
+            BestScore = data.BestScore;
+            Level = data.Level;
+            Xp = data.Xp;
+            Money = data.Money;
+            Hearts = data.Hearts;
+            VolumeMusic = data.VolumeMusic;
+            VolumeFX = data.VolumeFX;
 
-            if (!data.IntroPlayed)
+            Language = data.Language;
+
+            ErasData = data.ErasData;
+
+            _DeleteOldSave = data.deleteOldSave;
+
+            _IntroPlayed = data.IntroPlayed;
+
+            //_TutorialPlayed = data.TutorialPlayed;
+
+            foreach (var item in data.UnlockedCinematics)
             {
-                SaveJson();
+                UnlockedCinematics.Add(AllCinematics[item]);
+                AllCinematics.Remove(AllCinematics[item]);
             }
-            else
+
+            foreach (var item in data.AllEra1)
             {
-                BestScore = data.BestScore;
-                Level = data.Level;
-                Xp = data.Xp;
-                Money = data.Money;
-                Hearts = data.Hearts;
-                VolumeMusic = data.VolumeMusic;
-                VolumeFX = data.VolumeFX;
+                AllEra1[item].Unlock();
+            }
 
-                Language = data.Language;
+            foreach (var item in data.AllEra2)
+            {
+                AllEra2[item].Unlock();
+            }
 
-                ErasData = data.ErasData;
+            foreach (var item in data.AllEra3)
+            {
+                AllEra3[item].Unlock();
+            }
 
-                _DeleteOldSave = data.deleteOldSave;
+            AllFurnituresSave = data.allFurnituresSave;
+            ActivesFurnitures = data.ActivesFurnitures;
 
-                _IntroPlayed = data.IntroPlayed;
+            ActiveQuests = new List<QuestManager.Quest>();
+            foreach (var item in data.ActiveQuests)
+            {
+                AllQuest[item.QuestSOIndex] = new QuestManager.Quest(AllQuest[item.QuestSOIndex].QuestSO, item.QuestCompletionState, item.QuestDispo, item.Difficulty, item.MaxAmount, item.CurrentAmount);
+                ActiveQuests.Add(AllQuest[item.QuestSOIndex]);
+            }
 
-                _TutorialPlayed = data.TutorialPlayed;
+            CompletedQuests = new List<QuestManager.Quest>();
 
-                foreach (var item in data.UnlockedCinematics)
-                {
-                    UnlockedCinematics.Add(AllCinematics[item]);
-                    AllCinematics.Remove(AllCinematics[item]);
-                }
-
-                foreach (var item in data.AllEra1)
-                {
-                    AllEra1[item].Unlock();
-                }
-
-                foreach (var item in data.AllEra2)
-                {
-                    AllEra2[item].Unlock();
-                }
-
-                foreach (var item in data.AllEra3)
-                {
-                    AllEra3[item].Unlock();
-                }
-
-                AllFurnituresSave = data.allFurnituresSave;
-                ActivesFurnitures = data.ActivesFurnitures;
-
-                ActiveQuests = new List<QuestManager.Quest>();
-                foreach (var item in data.ActiveQuests)
-                {
-                    AllQuest[item.QuestSOIndex] = new QuestManager.Quest(AllQuest[item.QuestSOIndex].QuestSO, item.QuestCompletionState, item.QuestDispo, item.Difficulty, item.MaxAmount, item.CurrentAmount);
-                    ActiveQuests.Add(AllQuest[item.QuestSOIndex]);
-                }
-
-                CompletedQuests = new List<QuestManager.Quest>();
-
-                foreach (var item in data.CompletedQuests)
-                {
-                    AllQuest[item.QuestSOIndex] = new QuestManager.Quest(AllQuest[item.QuestSOIndex].QuestSO, item.QuestCompletionState, item.QuestDispo, item.Difficulty, item.MaxAmount, item.CurrentAmount);
-                    CompletedQuests.Add(AllQuest[item.QuestSOIndex]);
-
-                }
-                foreach (var item in data.QuestUnlocked)
-                {
-                    if (!QuestUnlocked.Contains(item))
-                        QuestUnlocked.Add(item);
-
-                    AllQuest[item].QuestDispo = Quests.QuestBaseDispo.Unlocked;
-                    AllQuest[item].QuestCompletionState = QuestManager.CompletionState.NotSelected;
-                }
-
-                foreach (var item in data.AllTrophy)
-                {
-                    AllTrophy[item.TrophySOIndex] = new TrophyManager.Trophy(AllTrophy[item.TrophySOIndex].TrophySO, item.TrophyCompletionState, item.CurrentAmount);
-                }
-
-                GameManager.instance.LoadEraData(ErasData);
-
-                TrophyManager.Instance.LoadTrophies(AllTrophy);
-                QuestManager.Instance.LoadQuests(AllQuest, ActiveQuests);
+            foreach (var item in data.CompletedQuests)
+            {
+                AllQuest[item.QuestSOIndex] = new QuestManager.Quest(AllQuest[item.QuestSOIndex].QuestSO, item.QuestCompletionState, item.QuestDispo, item.Difficulty, item.MaxAmount, item.CurrentAmount);
+                CompletedQuests.Add(AllQuest[item.QuestSOIndex]);
 
             }
+            foreach (var item in data.QuestUnlocked)
+            {
+                if (!QuestUnlocked.Contains(item))
+                    QuestUnlocked.Add(item);
+
+                AllQuest[item].QuestDispo = Quests.QuestBaseDispo.Unlocked;
+                AllQuest[item].QuestCompletionState = QuestManager.CompletionState.NotSelected;
+            }
+
+            foreach (var item in data.AllTrophy)
+            {
+                AllTrophy[item.TrophySOIndex] = new TrophyManager.Trophy(AllTrophy[item.TrophySOIndex].TrophySO, item.TrophyCompletionState, item.CurrentAmount);
+            }
+
+            GameManager.instance.LoadEraData(ErasData);
+
+            TrophyManager.Instance.LoadTrophies(AllTrophy);
+            QuestManager.Instance.LoadQuests(AllQuest, ActiveQuests);
+
         }
 
         else

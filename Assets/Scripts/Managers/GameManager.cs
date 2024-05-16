@@ -235,7 +235,6 @@ public class GameManager : MonoBehaviour
     {
         if (_mPlayer.TutorialPlayed)
         {
-
             _mPlayer.SaveJson();
         }
 
