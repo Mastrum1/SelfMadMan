@@ -44,6 +44,7 @@ public class PlayerData
 
     public List<int> AllEra3 = new List<int>();
 
+    public bool IntroPlayed = false;
     public void SaveData(Player player)
     {
         Level = player.Level;
@@ -58,6 +59,8 @@ public class PlayerData
         Language = player.Language;
 
         ErasData = player.ErasData;
+
+        IntroPlayed = player.IntroPlayed;
 
         deleteOldSave = player.DeleteOldSave;
 

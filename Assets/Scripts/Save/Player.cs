@@ -84,6 +84,8 @@ public class Player : MonoBehaviour
     [SerializeField] private bool _mLoadSaveMinigame = false;
     public bool LoadSaveMinigame { get => _mLoadSaveMinigame; set => _mLoadSaveMinigame = value; }
 
+    public bool IntroPlayed { get => _IntroPlayed; set => _IntroPlayed = value; }
+    private bool _IntroPlayed = false;
 
     public event Action<PlayerData> OnDataLoad;
 
@@ -444,9 +446,8 @@ public class Player : MonoBehaviour
                 data = DataService.LoadData<PlayerData>("/player-stats.json", false);
 
 
-            if (data.allFurnituresSave.Count == 0 || data.allFurnituresSave == null)
+            if (!data.IntroPlayed)
             {
-
                 SaveJson();
             }
             else
@@ -464,6 +465,8 @@ public class Player : MonoBehaviour
                 ErasData = data.ErasData;
 
                 _DeleteOldSave = data.deleteOldSave;
+
+                _IntroPlayed = data.IntroPlayed;
 
                 foreach (var item in data.UnlockedCinematics)
                 {
