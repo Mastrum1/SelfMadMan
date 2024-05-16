@@ -185,26 +185,22 @@ public class Player : MonoBehaviour
 
     public void SaveJson()
     {
-        if (TutorialPlayed)
+        bool firstSave = false;
+        if (!CheckFile() || _DeleteOldSave)
         {
+            firstSave = true;
+            playerData.FirstSaveData(this);
 
-            bool firstSave = false;
-            if (!CheckFile() || _DeleteOldSave)
+        }
+        else
+        {
+            playerData.SaveData(this);
+        }
+        if (DataService.SaveData("/player-stats.json", playerData, true))
+        {
+            if (firstSave)
             {
-                firstSave = true;
-                playerData.FirstSaveData(this);
-
-            }
-            else
-            {
-                playerData.SaveData(this);
-            }
-            if (DataService.SaveData("/player-stats.json", playerData, true))
-            {
-                if (firstSave)
-                {
-                    LoadJson();
-                }
+                LoadJson();
             }
         }
     }
