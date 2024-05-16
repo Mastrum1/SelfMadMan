@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor.Localization.Plugins.XLIFF.V20;
 using static GameManager;
 using static Player;
 
@@ -10,7 +11,6 @@ public class PlayerData
     public int Level;
 
     public int Xp;
-
     public int Hearts;
 
     public int Money;
@@ -22,6 +22,8 @@ public class PlayerData
     public string Language;
 
     public int BestScore;
+
+    public bool TutorialPlayed;
 
     public List<int> UnlockedCinematics = new List<int>();
 
@@ -46,8 +48,6 @@ public class PlayerData
     public List<int> AllEra3 = new List<int>();
 
     public bool IntroPlayed = false;
-
-    public bool TutorialPlayed = false;
     public void SaveData(Player player)
     {
         Level = player.Level;
