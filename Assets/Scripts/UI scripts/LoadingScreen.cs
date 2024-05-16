@@ -31,9 +31,15 @@ public class Loading : MonoBehaviour
 
         if (t >= 1.0f && !_videoPlayin)
         {
-            if(GameManager.instance.Player.)
-            _cinematicHandler.PlayVideo();
-            _videoPlayin = true;
+            if (GameManager.instance.Player.IntroPlayed)
+                StartGame();
+            else
+            {
+                GameManager.instance.Player.IntroPlayed = true;
+                _cinematicHandler.PlayVideo();
+                _videoPlayin = true;
+            }
+
         }
     }
     private void DisplayPanel()
