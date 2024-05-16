@@ -23,6 +23,11 @@ public class ScaleUpBrick : MonoBehaviour
         StopCoroutine(ScaleBrickDown());
     }
 
+    public void OnDisable()
+    {
+        StopTheCoroutine();
+    }
+
     public void SetScale()
     {
         gameObject.transform.localScale = new Vector3(1, 1, 1);

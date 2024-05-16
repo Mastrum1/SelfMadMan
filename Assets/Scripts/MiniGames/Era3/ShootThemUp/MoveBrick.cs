@@ -38,7 +38,15 @@ public class MoveBrick : MonoBehaviour
         {
             _mTrailEffect.time = 0f;
             _mTrailEffect.enabled = false;
-            collision.gameObject.GetComponent<MoveEcolo>().EcoloGetHit();
+            collision.GetComponent<MoveEcolo>().EcoloGetHit();
+            _mSpriteBrick.SetActive(false);
+            StartCoroutine(waitBeforeRespawn());
+        }
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("Parachutistes"))
+        {
+            _mTrailEffect.time = 0f;
+            _mTrailEffect.enabled = false;
+            collision.GetComponent<MoveParachutistes>().EcoloGetHit();
             _mSpriteBrick.SetActive(false);
             StartCoroutine(waitBeforeRespawn());
         }
@@ -66,7 +74,8 @@ public class MoveBrick : MonoBehaviour
 
         // Récupérer la position du centre de l'écran
         Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
-
+        Debug.Log(screenCenter);
+        //screenCenter.y += 10;
         while (true)
         {
             // Calculer la distance de l'objet au centre de l'écran
@@ -80,7 +89,7 @@ public class MoveBrick : MonoBehaviour
             _mSpriteBrick.transform.Rotate(Vector3.forward, 10);
 
             // Vérifier si l'objet est sorti de l'écran
-            if (transform.position.y > 0.5f && transform.position.x < -1 || transform.position.y > 0.5f && transform.position.x > 1 || transform.position.x > 3 || transform.position.x < -3 || transform.position.y > 2)
+            if (transform.position.y > 0.5f && transform.position.x < -1 || transform.position.y > 0.5f && transform.position.x > 1 || transform.position.x > 3 || transform.position.x < -3 || transform.position.y > 3)
             {
                 _mTrailEffect.enabled = false;
                 _mSpriteBrick.SetActive(false);

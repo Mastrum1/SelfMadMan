@@ -7,13 +7,19 @@ using UnityEngine;
 public class ShootThemUpInteractableManager : InteractableManager
 {
     public event Action<bool> OnGameEnd;
-    [SerializeField] private List<MoveEcolo> _AllEcolo;
+    [SerializeField] private List<MoveParachutistes> _Parachutistes;
+    [SerializeField] private List<MoveEcolo> _Ecolo;
 
     private void Start()
     {
-        for (int i = 0; i < _AllEcolo.Count; i++)
+        for (int i = 0; i < _Ecolo.Count; i++)
         {
-            _AllEcolo[i].OnLoose += HandleEndGame;
+            _Ecolo[i].OnLoose += HandleEndGame;
+        }
+        for (int i = 0; i < _Parachutistes.Count; i++)
+        {
+            Debug.Log("Parachutistes");
+            _Parachutistes[i].OnLoose += HandleEndGame;
         }
     }
 
@@ -24,9 +30,13 @@ public class ShootThemUpInteractableManager : InteractableManager
 
     private void OnDestroy()
     {
-        for (int i = 0; i < _AllEcolo.Count; i++)
+        for (int i = 0; i < _Ecolo.Count; i++)
         {
-            _AllEcolo[i].OnLoose -= HandleEndGame;
+            _Ecolo[i].OnLoose -= HandleEndGame;
+        }
+        for (int i = 0; i < _Parachutistes.Count; i++)
+        {
+            _Parachutistes[i].OnLoose -= HandleEndGame;
         }
     }
 

@@ -15,9 +15,7 @@ public class MoveParachutistes : MonoBehaviour
     {
         if (!_mGotHit)
         {
-            var step = _mSpeed * Time.deltaTime; // calculate distance to move
-            transform.position = new Vector3(Vector3.MoveTowards(transform.position, _mCar.position, step).x, transform.position.y, transform.position.z);
-
+            transform.Translate(Vector3.down * _mSpeed * Time.deltaTime);
         }
     }
 
@@ -25,7 +23,7 @@ public class MoveParachutistes : MonoBehaviour
     {
         if (collision.gameObject.tag == "car")
         {
-            gameObject.GetComponent<Animator>().SetBool("EndGame", true);
+            //gameObject.GetComponent<Animator>().SetBool("EndGame", true);
             OnLoose?.Invoke(false);
             Debug.Log("endGame");
         }
