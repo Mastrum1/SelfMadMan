@@ -7,7 +7,7 @@ public class Loading : MonoBehaviour
 {
 
     [SerializeField] public RectTransform fill;
-    [SerializeField]  public float duration = 3f;
+    [SerializeField] public float duration = 3f;
     private float startTime;
     private Vector2 startPosition;
     private Vector2 targetPosition;
@@ -17,7 +17,7 @@ public class Loading : MonoBehaviour
 
     void Start()
     {
-        targetPosition = new Vector2(0,0) ;
+        targetPosition = new Vector2(0, 0);
         startPosition = fill.anchoredPosition;
         startTime = Time.time;
 
@@ -31,13 +31,9 @@ public class Loading : MonoBehaviour
 
         if (t >= 1.0f && !_videoPlayin)
         {
-
-            /* _cinematicHandler.PlayVideo();
-              _videoPlayin = true;
-              Debug.Log("playing");*/
-            StartGame();
-
-
+            if(GameManager.instance.Player.)
+            _cinematicHandler.PlayVideo();
+            _videoPlayin = true;
         }
     }
     private void DisplayPanel()
