@@ -4902,7 +4902,6 @@ GameObject:
   - component: {fileID: 7622218182691358169}
   - component: {fileID: 5000613652881901984}
   - component: {fileID: 393154005136896371}
-  - component: {fileID: 6327691293007528417}
   m_Layer: 13
   m_Name: parachute1
   m_TagString: Untagged
@@ -5065,8 +5064,11 @@ MonoBehaviour:
   _mCar: {fileID: 0}
   _mSpeed: 1
   _mParticleSystem: {fileID: 2749115433126718385}
-  _vfxScaleUp: {fileID: 6327691293007528417}
+  _vfxScaleUp: {fileID: 0}
   _animator: {fileID: 393154005136896371}
+  scaleUpDuration: 0.2
+  scaleDownDuration: 0.2
+  scaleUpFactor: 1.2
 --- !u!95 &393154005136896371
 Animator:
   serializedVersion: 5
@@ -5088,18 +5090,3 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6327691293007528417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8563070472221433019}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b51b89ad8563c2b4788e7b87281d2bb8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scaleUpDuration: 0.25
-  scaleDownDuration: 0.25
-  scaleUpFactor: 1.3
