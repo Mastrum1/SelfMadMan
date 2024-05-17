@@ -81,8 +81,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //NSUserTrackingUsageDescription
         _mGameOver = false;
-        _mMinigameCount = 0;
         _mMinigameWon = 0;
         Era = 1;
         _mHearts = 3;
@@ -202,6 +202,8 @@ public class GameManager : MonoBehaviour
         if (Player.Xp >= 5)
         {
             Player.LevelUp();
+            TrophyManager.Instance.AddTrophyAmount(5,1);
+            TrophyManager.Instance.AddTrophyAmount(7,1);
         }
         OnUpdateLevel?.Invoke();
     }

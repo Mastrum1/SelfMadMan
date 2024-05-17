@@ -12,11 +12,14 @@ public class ContentManager : MonoBehaviour
     }
 
     [SerializeField] private HomePageUIManager _mHomePageUIManager;
+    [SerializeField] private FurnitureManager _mFurnitureManager;
     [SerializeField] private GameObject[] _MenuGameObjects;
 
     [Header("Content Viewport")]
     [SerializeField] private Image _mBaseImage;
-    [SerializeField] private List<Sprite> _mSprites;
+    [SerializeField] private Image _mJames;
+    [SerializeField] private List<Sprite> _mBackgrounds;
+    [SerializeField] private List<Sprite> _mJamesSprites;
 
     [SerializeField] private List<Image> _mImagesToDeactivate;
     [SerializeField] private List<TMP_Text> _mTextsToDeactivate;
@@ -26,7 +29,6 @@ public class ContentManager : MonoBehaviour
     [SerializeField] private GameObject _mDotPrefab;
     [SerializeField] private TMP_Text _mText;
 
-    public int CurrentIndex { get => _mCurrentIndex; set => _mCurrentIndex = value; }
     [Header("Page Settings")]
     [SerializeField] private int _mCurrentIndex = 0;
     [SerializeField] private GameObject _mLockEraPanel;
@@ -42,12 +44,20 @@ public class ContentManager : MonoBehaviour
         _mLockEraPanel.SetActive(GameManager.instance.ErasData[GameManager.instance.Era].Unlocked ? false : true);
         InitializeDots();
         ShowContent();
+
+     //   StartCoroutine(Change());
     }
 
+    IEnumerator Change()
+    {
+        yield return new WaitForSeconds(5);
+        _mFurnitureManager.UnlockFurniture("ChadStatue");
+        _mFurnitureManager.PickFurniture("ChadStatue");
+    }
     void InitializeDots()
     {
         // Create dots based on the number of content panels
-        for (int i = 0; i < _mSprites.Count; i++)
+        for (int i = 0; i < _mBackgrounds.Count; i++)
         {
             GameObject dot = Instantiate(_mDotPrefab, _mDotsContainer.transform);
             Image dotImage = dot.GetComponent<Image>();
@@ -73,8 +83,9 @@ public class ContentManager : MonoBehaviour
     {
         if (!IsUnlocking)
         {
-            _mCurrentIndex = (_mCurrentIndex + i + _mSprites.Count) % _mSprites.Count;
+            _mCurrentIndex = (_mCurrentIndex + i + _mBackgrounds.Count) % _mBackgrounds.Count;
             GameManager.instance.Era = _mCurrentIndex + 1;
+            _mFurnitureManager.SetEra(GameManager.instance.Era);
             bool eraunlocked = GameManager.instance.ErasData[GameManager.instance.Era].Unlocked ? true : false;
             _mLockEraPanel.SetActive(!eraunlocked);
             _mLockPrice.text = GameManager.instance.ErasData[GameManager.instance.Era]._price.ToString();
@@ -91,10 +102,11 @@ public class ContentManager : MonoBehaviour
     void ShowContent()
     {
         // Activate the current panel and deactivate others
-        for (int i = 0; i < _mSprites.Count; i++)
+        for (int i = 0; i < _mBackgrounds.Count; i++)
         {
             bool isActive = i == _mCurrentIndex;
-            _mBaseImage.sprite = _mSprites[_mCurrentIndex];
+            _mBaseImage.sprite = _mBackgrounds[_mCurrentIndex];
+            _mJames.sprite = _mJamesSprites[_mCurrentIndex];
 
             // Update dot visibility and color based on the current active content
             Image dotImage = _mDotsContainer.transform.GetChild(i).GetComponent<Image>();
@@ -102,6 +114,7 @@ public class ContentManager : MonoBehaviour
             dotImage.fillAmount = isActive ? 1f : 0f;
         }
     }
+
     public void UnlockEra()
     {
         
