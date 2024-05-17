@@ -8,11 +8,13 @@ public class BusGameManager : MiniGameManager
     bool _mIsPaused = false;
     bool _mCatch = false;
     bool _mIsEnd;
-
+    
     // bus Spawn
     [SerializeField] Vector3 _mSpawnPosition;
     private float _mAverageSpawnRate;
     private float _mBusNumber;
+
+    [SerializeField] private RectTransform _PauseButton;
 
     [SerializeField] EnterScreen _mEnterScreen;
     [SerializeField] ExitScreen _mExitScreen;
@@ -44,12 +46,20 @@ public class BusGameManager : MiniGameManager
         EndMiniGame(isWin, miniGameScore);
     }
 
-    public void OnClicked()
+    public void OnClicked(Vector3 fingerPos)
     {
-        _mIsPaused = true;
-        //BusPool.SharedInstance.HideAllBuses();
-        BusPool.SharedInstance.StopAllBuses();
-        StopCoroutine(SpawnBus());
+
+        Vector3 PauseButtonPos = RectTransformUtility.WorldToScreenPoint(Camera.main, _PauseButton.position);
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(new Vector3(PauseButtonPos.x, PauseButtonPos.y, 0));
+        if (fingerPos.x > worldPos.x - 0.6f && fingerPos.x < worldPos.x + 0.6f && fingerPos.y < worldPos.y + 0.6f && fingerPos.y > worldPos.y - 0.6f)
+            return;
+        else
+        {
+            _mIsPaused = true;
+            //BusPool.SharedInstance.HideAllBuses();
+            BusPool.SharedInstance.StopAllBuses();
+            StopCoroutine(SpawnBus());
+        }
     }
 
     IEnumerator  SpawnBus()

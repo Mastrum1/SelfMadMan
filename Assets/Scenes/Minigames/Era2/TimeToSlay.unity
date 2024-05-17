@@ -1999,7 +1999,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: -2
+  m_SortingOrder: 1567
   m_TargetDisplay: 0
 --- !u!1 &439198040
 GameObject:
@@ -4838,6 +4838,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 317677618860054022, guid: 32c7e4ce4a13b314f804c624bea8fa11, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 446551610}
+    - target: {fileID: 317677618860054022, guid: 32c7e4ce4a13b314f804c624bea8fa11, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 446551610}
@@ -4847,11 +4851,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 317677618860054022, guid: 32c7e4ce4a13b314f804c624bea8fa11, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: DisableInput
+      value: Pause
       objectReference: {fileID: 0}
     - target: {fileID: 317677618860054022, guid: 32c7e4ce4a13b314f804c624bea8fa11, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: Pause
+      value: DisableInput
       objectReference: {fileID: 0}
     - target: {fileID: 317677618860054022, guid: 32c7e4ce4a13b314f804c624bea8fa11, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -4887,23 +4891,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2150208642442793606, guid: 32c7e4ce4a13b314f804c624bea8fa11, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -4.6153564
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2150208642442793606, guid: 32c7e4ce4a13b314f804c624bea8fa11, type: 3}
       propertyPath: m_SizeDelta.y
-      value: -10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2150208642442793606, guid: 32c7e4ce4a13b314f804c624bea8fa11, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.0042733
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2150208642442793606, guid: 32c7e4ce4a13b314f804c624bea8fa11, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.0042733
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2150208642442793606, guid: 32c7e4ce4a13b314f804c624bea8fa11, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.0042733
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2150208642442793606, guid: 32c7e4ce4a13b314f804c624bea8fa11, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5001,11 +5005,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 6600942341652926902, guid: 32c7e4ce4a13b314f804c624bea8fa11, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 155.2002
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32c7e4ce4a13b314f804c624bea8fa11, type: 3}
+--- !u!224 &1271071343 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5604797328414153298, guid: 32c7e4ce4a13b314f804c624bea8fa11, type: 3}
+  m_PrefabInstance: {fileID: 1271071342}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1307437768
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5181,7 +5194,7 @@ PrefabInstance:
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: _mGetFingerPos.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1927644444}
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: _mOnWorldDelta.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -7680,6 +7693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mBrush: {fileID: 855401018450832416}
+  _PauseButton: {fileID: 1271071343}
 --- !u!60 &1927644449
 PolygonCollider2D:
   m_ObjectHideFlags: 0
