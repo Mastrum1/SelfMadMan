@@ -15,7 +15,7 @@ public class QuestView : MonoBehaviour
         LoadQuestContainers();
     }
 
-    public void LoadQuestContainers()
+    private void LoadQuestContainers()
     {
         for (var i = 0; i < _quests.Count; i++)
         {
@@ -45,7 +45,7 @@ public class QuestView : MonoBehaviour
             _mQuestManager.OnQuestFinish(_quests[i].SelectedQuest, i);
         }
     }
-    public void CompletetAllBars()
+    public void CompleteAllBars()
     {
         foreach (var item in _quests)
         {
