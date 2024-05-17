@@ -5,132 +5,194 @@ using UnityEngine;
 public class FindYourChadInteractableManager : MonoBehaviour
 {
 
-    [SerializeField] private List<FindYourChadObj> _mObj;
     public event Action<bool> GameEnd;
     [SerializeField] private int NbObjToSpawn = 2;
+
+    [SerializeField] private List<FindYourChadObj> _mObjfirstFaster;
+    [SerializeField] private int _firstChadPos = 11;
+
+    [SerializeField] private List<FindYourChadObj> _mObjsecondFaster;
+    [SerializeField] private int _secondChadPos = 11;
+
+    [SerializeField] private List<FindYourChadObj> _mObjOthersFaster;
+    [SerializeField] private int _OthersChadPos = 14;
 
     private void Start()
     {
         int Random = 0;
-        Vector3 pos = new Vector3(_mObj[0].transform.position.x, 0, _mObj[0].transform.position.z);
-        switch (GameManager.instance.FasterLevel)
-        {
-            case 1:
-                NbObjToSpawn = 20;
-                Random = UnityEngine.Random.Range(10, NbObjToSpawn);
-
-                //pos.y -= _mSpace / 2;
-                break;
-            case 2:
-                NbObjToSpawn = 25;
-                Random = UnityEngine.Random.Range(5, NbObjToSpawn);
-
-                //pos.y -= _mSpace;
-
-                break;
-            case 3:
-                NbObjToSpawn = 33;
-                Random = UnityEngine.Random.Range(5, NbObjToSpawn);
-                //pos.y -= _mSpace * 2;
-                break;
-            default:
-                break;
-        }
-
-        _mObj[Random].Real = true;
-
-        var objColliderOffset = _mObj[Random].Collider.offset;
-        var objColliderSize = _mObj[8].Collider.size;
-
-        var tempChadColliderOffset = _mObj[8].Collider.offset;
-        var tempChadColliderSize = _mObj[8].Collider.size;
-
-        var tempSprite = _mObj[Random].SpriteRenderer.sprite;
-        _mObj[Random].SpriteRenderer.sprite = _mObj[8].SpriteRenderer.sprite;
-        _mObj[8].SpriteRenderer.sprite = tempSprite;
-
-
-
-        var tempsScale = _mObj[Random].transform.localScale;
-        _mObj[Random].transform.localScale = _mObj[8].transform.localScale;
-        _mObj[8].transform.localScale = tempsScale;
-
-        _mObj[Random].Collider.offset = tempChadColliderOffset;
-        _mObj[Random].Collider.size = tempChadColliderSize;
-
-        _mObj[8].Collider.offset = objColliderOffset;
-        _mObj[8].Collider.size = objColliderSize;
+        Vector2 objColliderOffset = Vector2.zero;
+        Vector2 objColliderSize = Vector2.zero;
+        Vector2 tempChadColliderOffset = Vector2.zero;
+        Vector2 tempChadColliderSize = Vector2.zero;
+        Sprite tempSprite;
+        Vector3 tempScale = Vector3.zero;
 
         switch (GameManager.instance.FasterLevel)
         {
             case 1:
-                for (int id = 5; id < NbObjToSpawn + 5; id++)
+                Random = UnityEngine.Random.Range(9, _mObjfirstFaster.Count);
+
+                _mObjfirstFaster[Random].Real = true;
+
+                objColliderOffset = _mObjfirstFaster[Random].Collider.offset;
+                objColliderSize = _mObjfirstFaster[_firstChadPos].Collider.size;
+
+                tempChadColliderOffset = _mObjfirstFaster[_firstChadPos].Collider.offset;
+                tempChadColliderSize = _mObjfirstFaster[_firstChadPos].Collider.size;
+
+                tempSprite = _mObjfirstFaster[Random].SpriteRenderer.sprite;
+                _mObjfirstFaster[Random].SpriteRenderer.sprite = _mObjfirstFaster[_firstChadPos].SpriteRenderer.sprite;
+                _mObjfirstFaster[_firstChadPos].SpriteRenderer.sprite = tempSprite;
+
+
+
+                tempScale = _mObjfirstFaster[Random].transform.localScale;
+                _mObjfirstFaster[Random].transform.localScale = _mObjfirstFaster[_firstChadPos].transform.localScale;
+                _mObjfirstFaster[_firstChadPos].transform.localScale = tempScale;
+
+                _mObjfirstFaster[Random].Collider.offset = tempChadColliderOffset;
+                _mObjfirstFaster[Random].Collider.size = tempChadColliderSize;
+
+                _mObjfirstFaster[_firstChadPos].Collider.offset = objColliderOffset;
+                _mObjfirstFaster[_firstChadPos].Collider.size = objColliderSize;
+
+                for (int id = 0; id < _mObjfirstFaster.Count; id++)
                 {
                     if (id == Random)
                     {
-                        _mObj[id].OnGameEnd += EndGame;
-                        _mObj[id].gameObject.SetActive(true);
+                        _mObjfirstFaster[id].OnGameEnd += EndGame;
+                        _mObjfirstFaster[id].gameObject.SetActive(true);
 
                         continue;
                     }
                     else
                     {
-                        _mObj[id].Real = false;
-                        _mObj[id].OnGameEnd += EndGame;
-                        _mObj[id].gameObject.SetActive(true);
+                        _mObjfirstFaster[id].Real = false;
+                        _mObjfirstFaster[id].OnGameEnd += EndGame;
+                        _mObjfirstFaster[id].gameObject.SetActive(true);
                     }
 
                 }
+
                 break;
             case 2:
-                for (int id = 0; id < NbObjToSpawn; id++)
+                Random = UnityEngine.Random.Range(5, _mObjsecondFaster.Count);
+
+                _mObjsecondFaster[Random].Real = true;
+
+                objColliderOffset = _mObjsecondFaster[Random].Collider.offset;
+                objColliderSize = _mObjsecondFaster[_secondChadPos].Collider.size;
+
+                tempChadColliderOffset = _mObjsecondFaster[_secondChadPos].Collider.offset;
+                tempChadColliderSize = _mObjsecondFaster[_secondChadPos].Collider.size;
+
+                tempSprite = _mObjsecondFaster[Random].SpriteRenderer.sprite;
+                _mObjsecondFaster[Random].SpriteRenderer.sprite = _mObjsecondFaster[_secondChadPos].SpriteRenderer.sprite;
+                _mObjsecondFaster[_secondChadPos].SpriteRenderer.sprite = tempSprite;
+
+
+
+                tempScale = _mObjsecondFaster[Random].transform.localScale;
+                _mObjsecondFaster[Random].transform.localScale = _mObjsecondFaster[_secondChadPos].transform.localScale;
+                _mObjsecondFaster[_secondChadPos].transform.localScale = tempScale;
+
+                _mObjsecondFaster[Random].Collider.offset = tempChadColliderOffset;
+                _mObjsecondFaster[Random].Collider.size = tempChadColliderSize;
+
+                _mObjsecondFaster[_secondChadPos].Collider.offset = objColliderOffset;
+                _mObjsecondFaster[_secondChadPos].Collider.size = objColliderSize;
+
+                for (int id = 0; id < _mObjsecondFaster.Count; id++)
                 {
                     if (id == Random)
                     {
-                        _mObj[id].OnGameEnd += EndGame;
-                        _mObj[id].gameObject.SetActive(true);
+                        _mObjsecondFaster[id].OnGameEnd += EndGame;
+                        _mObjsecondFaster[id].gameObject.SetActive(true);
 
                         continue;
                     }
                     else
                     {
-                        _mObj[id].Real = false;
-                        _mObj[id].OnGameEnd += EndGame;
-                        _mObj[id].gameObject.SetActive(true);
+                        _mObjsecondFaster[id].Real = false;
+                        _mObjsecondFaster[id].OnGameEnd += EndGame;
+                        _mObjsecondFaster[id].gameObject.SetActive(true);
                     }
 
                 }
-                break;
-            case 3:
-                for (int id = 0; id < NbObjToSpawn; id++)
-                {
-                    if (id == Random)
-                    {
-                        _mObj[id].OnGameEnd += EndGame;
-                        _mObj[id].gameObject.SetActive(true);
 
-                        continue;
-                    }
-                    else
-                    {
-                        _mObj[id].Real = false;
-                        _mObj[id].OnGameEnd += EndGame;
-                        _mObj[id].gameObject.SetActive(true);
-                    }
-
-                }
                 break;
             default:
+                Random = UnityEngine.Random.Range(5, _mObjOthersFaster.Count);
+
+                _mObjOthersFaster[Random].Real = true;
+
+                objColliderOffset = _mObjOthersFaster[Random].Collider.offset;
+                objColliderSize = _mObjOthersFaster[_OthersChadPos].Collider.size;
+
+                tempChadColliderOffset = _mObjOthersFaster[_OthersChadPos].Collider.offset;
+                tempChadColliderSize = _mObjOthersFaster[_OthersChadPos].Collider.size;
+
+                tempSprite = _mObjOthersFaster[Random].SpriteRenderer.sprite;
+                _mObjOthersFaster[Random].SpriteRenderer.sprite = _mObjOthersFaster[_OthersChadPos].SpriteRenderer.sprite;
+                _mObjOthersFaster[_OthersChadPos].SpriteRenderer.sprite = tempSprite;
+
+
+
+                tempScale = _mObjOthersFaster[Random].transform.localScale;
+                _mObjOthersFaster[Random].transform.localScale = _mObjOthersFaster[_OthersChadPos].transform.localScale;
+                _mObjOthersFaster[_OthersChadPos].transform.localScale = tempScale;
+
+                _mObjOthersFaster[Random].Collider.offset = tempChadColliderOffset;
+                _mObjOthersFaster[Random].Collider.size = tempChadColliderSize;
+
+                _mObjOthersFaster[_OthersChadPos].Collider.offset = objColliderOffset;
+                _mObjOthersFaster[_OthersChadPos].Collider.size = objColliderSize;
+
+                for (int id = 0; id < _mObjOthersFaster.Count; id++)
+                {
+                    if (id == Random)
+                    {
+                        _mObjOthersFaster[id].OnGameEnd += EndGame;
+                        _mObjOthersFaster[id].gameObject.SetActive(true);
+
+                        continue;
+                    }
+                    else
+                    {
+                        _mObjOthersFaster[id].Real = false;
+                        _mObjOthersFaster[id].OnGameEnd += EndGame;
+                        _mObjOthersFaster[id].gameObject.SetActive(true);
+                    }
+
+                }
+
                 break;
         }
-        
+
     }
 
     private void OnDisable()
     {
-        for (int id = 0; id < _mObj.Count; id++)
+        switch (GameManager.instance.FasterLevel)
         {
-            _mObj[id].OnGameEnd -= EndGame;
+            case 1:
+                for (int id = 0; id < _mObjfirstFaster.Count; id++)
+                {
+                    _mObjOthersFaster[id].OnGameEnd -= EndGame;
+                }
+                break;
+            case 2:
+                for (int id = 0; id < _mObjsecondFaster.Count; id++)
+                {
+                    _mObjOthersFaster[id].OnGameEnd -= EndGame;
+                }
+                break;
+            default:
+                for (int id = 0; id < _mObjOthersFaster.Count; id++)
+                {
+                    _mObjOthersFaster[id].OnGameEnd -= EndGame;
+                }
+                break;
         }
     }
 
