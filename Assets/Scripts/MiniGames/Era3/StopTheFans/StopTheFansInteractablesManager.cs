@@ -10,7 +10,11 @@ public class StopTheFansInteractablesManager : MonoBehaviour
 
     [SerializeField] private List<FansHand> _hands;
 
+    [SerializeField] private List<ChangeHandsSpawn> _handsSpawn;
+
     [SerializeField] private List<BoxCollider2D> _spawners;
+
+    private bool _isSpawning = false;
 
     [SerializeField] private float _timeToWait = 1f;
     // Start is called before the first frame update
@@ -19,6 +23,10 @@ public class StopTheFansInteractablesManager : MonoBehaviour
         for (int i = 0; i < _hands.Count; i++)
         {
             _hands[i].JamesTouched += EndGame;
+        }
+        for (int i = 0; i < _handsSpawn.Count; i++)
+        {
+            _handsSpawn[i].ChangeSpawnState += HandleChangeSpawn;
         }
         StartCoroutine(SpawnHands());
     }
@@ -43,7 +51,18 @@ public class StopTheFansInteractablesManager : MonoBehaviour
         {
             _hands[i].JamesTouched -= EndGame;
         }
+        for (int i = 0; i < _handsSpawn.Count; i++)
+        {
+            _handsSpawn[i].ChangeSpawnState -= HandleChangeSpawn;
+        }
         StopCoroutine(SpawnHands());
+    }
+
+    void HandleChangeSpawn(ChangeHandsSpawn script)
+    {
+        _isSpawning = false;
+
+        script.EnableObject();
     }
 
     IEnumerator SpawnHands()
@@ -51,22 +70,32 @@ public class StopTheFansInteractablesManager : MonoBehaviour
         int random;
         while (true)
         {
-            do
+            if (!_isSpawning)
             {
-                random = UnityEngine.Random.Range(0, _hands.Count);
-            } while (_hands[random].gameObject.activeSelf == true);
+                do
+                {
+                    random = UnityEngine.Random.Range(0, _hands.Count);
+                } while (_hands[random].gameObject.activeSelf == true);
 
-            FansHand fanHand = _hands[random];
-            Bounds bounds = _spawners[UnityEngine.Random.Range(0, _spawners.Count)].bounds;
+                FansHand fanHand = _hands[random];
+                BoxCollider2D collider = _spawners[UnityEngine.Random.Range(0, _spawners.Count)];
+                Bounds bounds = _spawners[UnityEngine.Random.Range(0, _spawners.Count)].bounds;
 
-            float randomX = UnityEngine.Random.Range(bounds.min.x, bounds.max.x);
-            float randomY = UnityEngine.Random.Range(bounds.min.y, bounds.max.y);
+                float randomX = UnityEngine.Random.Range(bounds.min.x, bounds.max.x);
+                float randomY = UnityEngine.Random.Range(bounds.min.y, bounds.max.y);
 
-            Vector3 randomPoint = new Vector3(randomX, randomY, 0);
-            fanHand.gameObject.transform.position = randomPoint;
-            fanHand.gameObject.SetActive(true);
+                Vector3 randomPoint = new Vector3(randomX, randomY, -2);
+                fanHand.gameObject.transform.position = randomPoint;
+                _handsSpawn[random].SpawnBounds = collider;
+                fanHand.gameObject.SetActive(true);
 
-            yield return new WaitForSeconds(_timeToWait);
+                _isSpawning = true;
+                yield return new WaitForSeconds(_timeToWait / GameManager.instance.FasterLevel);
+            }
+            else
+            {
+                yield return new WaitForSeconds(_timeToWait/ GameManager.instance.FasterLevel);
+            }
 
         }
     }
