@@ -72,29 +72,32 @@ public class StopTheFansInteractablesManager : MonoBehaviour
         {
             if (!_isSpawning)
             {
-                do
+
+                random = UnityEngine.Random.Range(0, _hands.Count);
+                if (_hands[random].gameObject.activeSelf == true)
+                    yield return new WaitForSeconds(_timeToWait / GameManager.instance.FasterLevel);
+                else
                 {
-                    random = UnityEngine.Random.Range(0, _hands.Count);
-                } while (_hands[random].gameObject.activeSelf == true);
 
-                FansHand fanHand = _hands[random];
-                BoxCollider2D collider = _spawners[UnityEngine.Random.Range(0, _spawners.Count)];
-                Bounds bounds = _spawners[UnityEngine.Random.Range(0, _spawners.Count)].bounds;
+                    FansHand fanHand = _hands[random];
+                    BoxCollider2D collider = _spawners[UnityEngine.Random.Range(0, _spawners.Count)];
+                    Bounds bounds = _spawners[UnityEngine.Random.Range(0, _spawners.Count)].bounds;
 
-                float randomX = UnityEngine.Random.Range(bounds.min.x, bounds.max.x);
-                float randomY = UnityEngine.Random.Range(bounds.min.y, bounds.max.y);
+                    float randomX = UnityEngine.Random.Range(bounds.min.x, bounds.max.x);
+                    float randomY = UnityEngine.Random.Range(bounds.min.y, bounds.max.y);
 
-                Vector3 randomPoint = new Vector3(randomX, randomY, -2);
-                fanHand.gameObject.transform.position = randomPoint;
-                _handsSpawn[random].SpawnBounds = collider;
-                fanHand.gameObject.SetActive(true);
+                    Vector3 randomPoint = new Vector3(randomX, randomY, -2);
+                    fanHand.gameObject.transform.position = randomPoint;
+                    _handsSpawn[random].SpawnBounds = collider;
+                    fanHand.gameObject.SetActive(true);
 
-                _isSpawning = true;
-                yield return new WaitForSeconds(_timeToWait / GameManager.instance.FasterLevel);
+                    _isSpawning = true;
+                    yield return new WaitForSeconds(_timeToWait / GameManager.instance.FasterLevel);
+                }
             }
             else
             {
-                yield return new WaitForSeconds(_timeToWait/ GameManager.instance.FasterLevel);
+                yield return new WaitForSeconds(_timeToWait / GameManager.instance.FasterLevel);
             }
 
         }

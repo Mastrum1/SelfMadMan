@@ -14,6 +14,8 @@ public class FansHand : MonoBehaviour
     private bool _taped = false;
     [SerializeField] private float _timeToWaitBeforeDespawn = 0.5f;
 
+    [SerializeField] private ParticleSystem _particleSystem;
+
     [SerializeField] private float scaleUpDuration = 0.5f;
     [SerializeField] private float scaleDownDuration = 0.5f;
     [SerializeField] private float scaleUpFactor = 1.3f;
@@ -26,8 +28,11 @@ public class FansHand : MonoBehaviour
         originalScale = transform.localScale;
     }
 
+
     public void ActiveObject()
     {
+        _taped = false;
+        _particleSystem.gameObject.SetActive(false);
         Vector3 direction = _james.transform.position - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         angle -= 90f; // Ajustez cette valeur selon l'orientation de votre sprite
@@ -41,6 +46,7 @@ public class FansHand : MonoBehaviour
     public void OnObjectClicked()
     {
         _taped = true;
+        _particleSystem.gameObject.SetActive(true);
         StartCoroutine(AwaitBeforDespawn());
     }
 
