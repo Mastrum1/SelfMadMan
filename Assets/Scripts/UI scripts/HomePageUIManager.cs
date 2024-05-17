@@ -83,13 +83,8 @@ public class HomePageUIManager : MonoBehaviour
         }
     }
 
-    public void ChangeLanguage(Toggle toggle)
+    public void DataReset()
     {
-        if (toggle.isOn)
-            LocalSelector.Instance.ChangeLocale(1);
-        else if (!toggle.isOn)
-            LocalSelector.Instance.ChangeLocale(0);
+        
     }
-
-
 }

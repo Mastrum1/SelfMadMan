@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Notif : MonoBehaviour
 {
+    [SerializeField] GameObject _mNotif;
+
+    private void Start()
+    {
+        ONOFF();
+    }
+
     public void ONOFF()
     {
         if (MoneyManager.Instance.CurrentMoney >= 100)
