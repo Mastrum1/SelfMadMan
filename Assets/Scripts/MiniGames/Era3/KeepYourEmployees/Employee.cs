@@ -8,6 +8,7 @@ public class Employee : MonoBehaviour
     public Action<GameObject> OnTap;
     [SerializeField] private float _mSpeed;
     private Vector3 _mDirection = Vector3.left;
+    [SerializeField] private Animator _mAnim;
     private bool _mSelected = false;
 
     // Start is called before the first frame update
@@ -22,16 +23,24 @@ public class Employee : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(_mDirection * _mSpeed * Time.deltaTime);
+        if (!_mSelected)
+            transform.Translate(_mDirection * _mSpeed * Time.deltaTime);
     }
 
     public void OnSelected()
     {
         if (!_mSelected) {
-            OnTap?.Invoke(this.gameObject);
-         //   this.gameObject.SetActive(false);
             _mSelected = true;
+            _mAnim.Play("Base Layer.EmployeeDead", 0, 0.25f);
+            StartCoroutine(DisableEmployee());
+            OnTap?.Invoke(this.gameObject);
         }
+    }
+
+    IEnumerator DisableEmployee()
+    {
+        yield return new WaitForSeconds(0.30f);
+        this.gameObject.SetActive(false);
     }
 
     private void OnEnable()

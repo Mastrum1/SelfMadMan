@@ -28,8 +28,6 @@ public class KeepYourEmployeesGameManager : MiniGameManager
         mSpawnPoints.Add(0, new List<float>());
         mSpawnPoints.Add(1, new List<float>());
         mSpawnPoints.Add(2, new List<float>());
-        //mSpawnPoints[0].Add(0.8f);
-        //mSpawnPoints[0].Add(0.2f);
         mSpawnPoints[0].Add(0.6f);
         mSpawnPoints[0].Add(0.2f);
         mSpawnPoints[0].Add(-9);
@@ -117,15 +115,15 @@ public class KeepYourEmployeesGameManager : MiniGameManager
         _mNbRemain--;
         _mHit++;
         PlayTapAnim(employee.transform.position);
-        employee.SetActive(false);
-            employee.GetComponent<Employee>().OnTap -= OnEmployeeCaught;
+        //employee.SetActive(false);
+        employee.GetComponent<Employee>().OnTap -= OnEmployeeCaught;
         if (_mHit == _mEmployees.Count) {   
             _mIsEnd = true;
             for (int i = 0; i < _mNbEmployees; i++)
-                if (_mEmployees[i].activeInHierarchy) {
+                if (_mEmployees[i].activeInHierarchy && _mEmployees[i] != employee ) {
                     _mEmployees[i].GetComponent<Employee>().OnTap -= OnEmployeeCaught;
                     _mEmployees[i].SetActive(false);
-                    }
+                }
             EndMiniGame(true, miniGameScore);
         }
     }
