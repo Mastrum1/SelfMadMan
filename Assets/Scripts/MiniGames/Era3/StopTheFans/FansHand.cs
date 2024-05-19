@@ -6,6 +6,11 @@ using UnityEngine;
 public class FansHand : MonoBehaviour
 {
     [SerializeField] private GameObject _james;
+
+    [SerializeField] private GameObject _hitEffect;
+
+    private Vector3 _spawnPos;
+    public Vector3 SpawnPos { get => _spawnPos; set => _spawnPos = value; }
     // Start is called before the first frame update
     [SerializeField] private float _speed = 1f;
     private bool _startMoving = false;
@@ -21,6 +26,9 @@ public class FansHand : MonoBehaviour
     [SerializeField] private float scaleUpFactor = 1.3f;
     private bool isScaling = false;
 
+    private int _SpawnerIndex;
+    public int SpawnerIndex { get => _SpawnerIndex; set => _SpawnerIndex = value; }
+
     private Vector3 originalScale;
     public event Action JamesTouched;
     void Start()
@@ -33,18 +41,17 @@ public class FansHand : MonoBehaviour
     {
         _taped = false;
         _particleSystem.gameObject.SetActive(false);
+        _hitEffect.SetActive(false);
         Vector3 direction = _james.transform.position - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         angle -= 90f; // Ajustez cette valeur selon l'orientation de votre sprite
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-
-        transform.Translate(Vector3.up * 0.2f);
-        StartCoroutine(AwaitBeforeMoving());
-
+        StartCoroutine(FirstMovement());
     }
 
     public void OnObjectClicked()
     {
+        _hitEffect.SetActive(true);
         _taped = true;
         _particleSystem.gameObject.SetActive(true);
         StartCoroutine(AwaitBeforDespawn());
@@ -75,7 +82,7 @@ public class FansHand : MonoBehaviour
 
     IEnumerator AwaitBeforeMoving()
     {
-        yield return new WaitForSeconds(_timeToWait);
+        yield return new WaitForSeconds(1f);
         if (!_taped)
             _startMoving = true;
     }
@@ -83,7 +90,89 @@ public class FansHand : MonoBehaviour
     IEnumerator AwaitBeforDespawn()
     {
         yield return new WaitForSeconds(_timeToWaitBeforeDespawn);
-        gameObject.SetActive(false);
+        switch (_SpawnerIndex)
+        {
+            case 0:
+                while (transform.position.x >= _spawnPos.x)
+                {
+                    transform.Translate(Vector3.down * Time.deltaTime * _speed);
+                    yield return null;
+                }
+                gameObject.SetActive(false);
+                break;
+            case 1:
+                while (transform.position.x <= _spawnPos.x)
+                {
+                    transform.Translate(Vector3.down * Time.deltaTime * _speed);
+                    yield return null;
+                }
+                gameObject.SetActive(false);
+                break;
+            case 2:
+                while (transform.position.y >= _spawnPos.y)
+                {
+                    transform.Translate(Vector3.down * Time.deltaTime * _speed);
+                    yield return null;
+                }
+                gameObject.SetActive(false);
+                break;
+            case 3:
+                while (transform.position.y <= _spawnPos.y)
+                {
+                    transform.Translate(Vector3.down * Time.deltaTime * _speed);
+                    yield return null;
+                }
+                gameObject.SetActive(false);
+                break;
+        }
+
+    }
+
+    IEnumerator FirstMovement()
+    {
+
+        switch (_SpawnerIndex)
+        {
+            case 0:
+                while (transform.position.x <= -3f)
+                {
+                    transform.Translate(Vector3.up * Time.deltaTime * _speed);
+                    yield return null;
+                }
+                StartCoroutine(AwaitBeforeMoving());
+
+                break;
+            case 1:
+                while (transform.position.x >= 3f)
+                {
+                    transform.Translate(Vector3.up * Time.deltaTime * _speed);
+                    yield return null;
+                }
+                StartCoroutine(AwaitBeforeMoving());
+
+                break;
+            case 2:
+                while (transform.position.y <= -5.5f)
+                {
+                    transform.Translate(Vector3.up * Time.deltaTime * _speed);
+                    yield return null;
+                }
+                StartCoroutine(AwaitBeforeMoving());
+
+                break;
+            case 3:
+                while (transform.position.y >= 5.5)
+                {
+                    transform.Translate(Vector3.up * Time.deltaTime * _speed);
+                    yield return null;
+                }
+                StartCoroutine(AwaitBeforeMoving());
+
+                break;
+        }
+
+
+
 
     }
 

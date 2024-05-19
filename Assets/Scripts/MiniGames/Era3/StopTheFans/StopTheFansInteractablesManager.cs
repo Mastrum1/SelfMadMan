@@ -80,14 +80,17 @@ public class StopTheFansInteractablesManager : MonoBehaviour
                 {
 
                     FansHand fanHand = _hands[random];
-                    BoxCollider2D collider = _spawners[UnityEngine.Random.Range(0, _spawners.Count)];
-                    Bounds bounds = _spawners[UnityEngine.Random.Range(0, _spawners.Count)].bounds;
+                    int randomSpawner = UnityEngine.Random.Range(0, _spawners.Count);
+                    BoxCollider2D collider = _spawners[randomSpawner];
+                    Bounds bounds = _spawners[randomSpawner].bounds;
 
                     float randomX = UnityEngine.Random.Range(bounds.min.x, bounds.max.x);
                     float randomY = UnityEngine.Random.Range(bounds.min.y, bounds.max.y);
 
                     Vector3 randomPoint = new Vector3(randomX, randomY, -2);
                     fanHand.gameObject.transform.position = randomPoint;
+                    fanHand.SpawnerIndex = randomSpawner;
+                    fanHand.SpawnPos = _spawners[randomSpawner].gameObject.transform.position;
                     _handsSpawn[random].SpawnBounds = collider;
                     fanHand.gameObject.SetActive(true);
 
