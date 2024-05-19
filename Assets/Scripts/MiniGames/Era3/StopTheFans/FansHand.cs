@@ -21,6 +21,11 @@ public class FansHand : MonoBehaviour
 
     [SerializeField] private ParticleSystem _particleSystem;
 
+    private float _tempSpeed = 0;
+    [SerializeField] private float _SlowSpeed = 0.3f;
+
+    [SerializeField] private float _runOutSpeed = 4f;
+
     [SerializeField] private float scaleUpDuration = 0.5f;
     [SerializeField] private float scaleDownDuration = 0.5f;
     [SerializeField] private float scaleUpFactor = 1.3f;
@@ -74,7 +79,7 @@ public class FansHand : MonoBehaviour
             // Scale the object smoothly
             transform.localScale = Vector3.Lerp(transform.localScale, originalScale, Time.deltaTime * 2f);
         }
-        if (_startMoving && !_taped)
+        if (!_taped)
         {
             transform.Translate(Vector3.up * Time.deltaTime * _speed);
         }
@@ -82,9 +87,10 @@ public class FansHand : MonoBehaviour
 
     IEnumerator AwaitBeforeMoving()
     {
-        yield return new WaitForSeconds(1f);
-        if (!_taped)
-            _startMoving = true;
+        _tempSpeed = _speed;
+        _speed = _SlowSpeed;
+        yield return new WaitForSeconds(_timeToWait);
+        _speed = _tempSpeed;
     }
 
     IEnumerator AwaitBeforDespawn()
@@ -95,7 +101,7 @@ public class FansHand : MonoBehaviour
             case 0:
                 while (transform.position.x >= _spawnPos.x)
                 {
-                    transform.Translate(Vector3.down * Time.deltaTime * _speed);
+                    transform.Translate(Vector3.down * Time.deltaTime * _runOutSpeed);
                     yield return null;
                 }
                 gameObject.SetActive(false);
@@ -103,7 +109,7 @@ public class FansHand : MonoBehaviour
             case 1:
                 while (transform.position.x <= _spawnPos.x)
                 {
-                    transform.Translate(Vector3.down * Time.deltaTime * _speed);
+                    transform.Translate(Vector3.down * Time.deltaTime * _runOutSpeed);
                     yield return null;
                 }
                 gameObject.SetActive(false);
@@ -111,7 +117,7 @@ public class FansHand : MonoBehaviour
             case 2:
                 while (transform.position.y >= _spawnPos.y)
                 {
-                    transform.Translate(Vector3.down * Time.deltaTime * _speed);
+                    transform.Translate(Vector3.down * Time.deltaTime * _runOutSpeed);
                     yield return null;
                 }
                 gameObject.SetActive(false);
@@ -119,7 +125,7 @@ public class FansHand : MonoBehaviour
             case 3:
                 while (transform.position.y <= _spawnPos.y)
                 {
-                    transform.Translate(Vector3.down * Time.deltaTime * _speed);
+                    transform.Translate(Vector3.down * Time.deltaTime * _runOutSpeed);
                     yield return null;
                 }
                 gameObject.SetActive(false);
