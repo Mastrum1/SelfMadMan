@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -14,10 +15,18 @@ public class JamesPool : MonoBehaviour
     [SerializeField] private GameObject _fillBarStartPos;
     [SerializeField] private GameObject _fillBarMaxPos;
     [SerializeField] private GameObject _shootLine;
-
+    [SerializeField] private Material _shootLineMat;
+        
     private bool _hasShot;
     private bool _isHolding;
     private bool _isPulling;
+    private static readonly int FadeDistance = Shader.PropertyToID("_Fade_DIstance");
+
+    private void Awake()
+    {
+        _shootLineMat.SetVector(FadeDistance, new Vector4(-0.4f, -18 - GameManager.instance.FasterLevel));
+    }
+
     private void Update()
     {
         if (!_isHolding) return;
