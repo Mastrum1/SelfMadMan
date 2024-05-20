@@ -9,7 +9,8 @@ using Random = UnityEngine.Random;
 public class Cockroach : MonoBehaviour
 {
     public event Action OnTouched;
-    
+    private AudioManager _audioManager;
+
     [SerializeField] private Rigidbody2D _rigid2d;
     [SerializeField] private CapsuleCollider2D _collider2D;
     [SerializeField] private GameObject _body;
@@ -21,6 +22,7 @@ public class Cockroach : MonoBehaviour
 
     private void Start()
     {
+        _audioManager = AudioManager.Instance;
         _speed = Random.Range(30f, 50f);
         Move();
     }
@@ -50,6 +52,7 @@ public class Cockroach : MonoBehaviour
     
     public void Touched()
     {
+        _audioManager.PlaySFX(0);
         OnTouched?.Invoke();
         _speed = 0;
         _rigid2d.velocity = new Vector2(0, 0);

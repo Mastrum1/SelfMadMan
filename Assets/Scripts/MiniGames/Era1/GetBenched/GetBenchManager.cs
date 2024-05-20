@@ -27,6 +27,7 @@ public class GetBenchManager : MiniGameManager
     private float _mMaxX;
     private float _mMaxY;
 
+    private AudioManager _audioManager;
 
     private bool _mIsSpawning = false;
 
@@ -52,6 +53,8 @@ public class GetBenchManager : MiniGameManager
         _mMinY = _mSpawnBounds.bounds.min.y;
         _mMaxX = _mSpawnBounds.bounds.max.x;
         _mMaxY = _mSpawnBounds.bounds.max.y;
+        _audioManager = AudioManager.Instance;
+
     }
 
     void OnGameEnd(bool win)

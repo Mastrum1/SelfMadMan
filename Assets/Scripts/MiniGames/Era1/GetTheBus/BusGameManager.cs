@@ -9,6 +9,8 @@ public class BusGameManager : MiniGameManager
     bool _mCatch = false;
     bool _mIsEnd;
 
+    private AudioManager _audioManager;
+
     // bus Spawn
     [SerializeField] Vector3 _mSpawnPosition;
     private float _mAverageSpawnRate;
@@ -19,6 +21,8 @@ public class BusGameManager : MiniGameManager
 
     void Start()
     {
+        _audioManager = AudioManager.Instance;
+
         _mAverageSpawnRate = GameManager.instance.Speed / 2;
         StartCoroutine(SpawnBus());
         _mEnterScreen.triggerEnter = BusStartOverride;
@@ -46,6 +50,8 @@ public class BusGameManager : MiniGameManager
 
     public void OnClicked()
     {
+        _audioManager.StopSFX();
+        _audioManager.PlaySFX(1);
         _mIsPaused = true;
         //BusPool.SharedInstance.HideAllBuses();
         BusPool.SharedInstance.StopAllBuses();
@@ -54,6 +60,7 @@ public class BusGameManager : MiniGameManager
 
     IEnumerator  SpawnBus()
     {
+        _audioManager.PlaySFX(0);
         while (!_mIsPaused && _mBusNumber < 4) {
             float nextDelay = Random.Range(_mAverageSpawnRate / 2, _mAverageSpawnRate);
             yield return new WaitForSeconds(nextDelay);
