@@ -9356,6 +9356,7 @@ GameObject:
   - component: {fileID: 908012809}
   - component: {fileID: 908012812}
   - component: {fileID: 908012813}
+  - component: {fileID: 908012814}
   m_Layer: 0
   m_Name: Video
   m_TagString: Untagged
@@ -9433,7 +9434,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 908012808}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -9471,6 +9472,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.6126075, y: 9.996649}
   m_EdgeRadius: 0
+--- !u!114 &908012814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908012808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b21fdd197d722a459d4fec6dd358fb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Video: {fileID: 0}
+  _Collider: {fileID: 0}
 --- !u!1 &927607919 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4365884649094112013, guid: be4be3317c0da7243872c078fbae9e83, type: 3}
@@ -18622,7 +18637,7 @@ PrefabInstance:
     - target: {fileID: 3185597446257307848, guid: e98c403a46c7e184a98ef14c1cb94708, type: 3}
       propertyPath: _mOnSelected.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1697820677}
+      objectReference: {fileID: 0}
     - target: {fileID: 3185597446257307848, guid: e98c403a46c7e184a98ef14c1cb94708, type: 3}
       propertyPath: _mOnSelected.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
@@ -18633,7 +18648,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3185597446257307848, guid: e98c403a46c7e184a98ef14c1cb94708, type: 3}
       propertyPath: _mOnSelected.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: CinematicHandler, Assembly-CSharp
+      value: CinematicReplay, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3185597446257307848, guid: e98c403a46c7e184a98ef14c1cb94708, type: 3}
       propertyPath: _mOnSelected.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -18737,35 +18752,13 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5222078287547549792, guid: e98c403a46c7e184a98ef14c1cb94708, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1486577545}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6553317688049974072, guid: e98c403a46c7e184a98ef14c1cb94708, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1697820677}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e98c403a46c7e184a98ef14c1cb94708, type: 3}
 --- !u!224 &1697820663 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5222078287547549792, guid: e98c403a46c7e184a98ef14c1cb94708, type: 3}
   m_PrefabInstance: {fileID: 1697820662}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1697820664 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6553317688049974072, guid: e98c403a46c7e184a98ef14c1cb94708, type: 3}
-  m_PrefabInstance: {fileID: 1697820662}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1697820677
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1697820664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb6e8eb65aead354b9651898c472b021, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 908012809}
-  BoxCollider2D: {fileID: 908012813}
 --- !u!1001 &1713507326
 PrefabInstance:
   m_ObjectHideFlags: 0
