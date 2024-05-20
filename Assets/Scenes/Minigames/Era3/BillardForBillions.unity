@@ -2296,6 +2296,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!212 &1647027977 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 6535212048801293143, guid: ba8c7b78f9738e24c9d7d85b0ff59b39, type: 3}
+  m_PrefabInstance: {fileID: 116930643}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1663150291
 GameObject:
   m_ObjectHideFlags: 0
@@ -2660,6 +2665,7 @@ MonoBehaviour:
   _fillBarStartPos: {fileID: 244815943}
   _fillBarMaxPos: {fileID: 1642932924}
   _shootLine: {fileID: 417183437}
+  _shootLineSpriteRenderer: {fileID: 1647027977}
 --- !u!61 &1911450332
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -15,16 +15,16 @@ public class JamesPool : MonoBehaviour
     [SerializeField] private GameObject _fillBarStartPos;
     [SerializeField] private GameObject _fillBarMaxPos;
     [SerializeField] private GameObject _shootLine;
-    [SerializeField] private Material _shootLineMat;
+    [SerializeField] private SpriteRenderer _shootLineSpriteRenderer;
         
     private bool _hasShot;
     private bool _isHolding;
     private bool _isPulling;
-    private static readonly int FadeDistance = Shader.PropertyToID("_Fade_DIstance");
 
-    private void Awake()
+    private void Start()
     {
-        _shootLineMat.SetVector(FadeDistance, new Vector4(-0.4f, -18 - GameManager.instance.FasterLevel));
+        _shootLineSpriteRenderer.material.SetVector("_Fade_Distance", 
+            new Vector4(4.6f, -23 + GameManager.instance.FasterLevel));
     }
 
     private void Update()
