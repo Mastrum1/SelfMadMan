@@ -1809,7 +1809,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7860777472461906637, guid: 28079cd0ebb2d7d42a678e67e975a1f6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8119440228386016364, guid: 28079cd0ebb2d7d42a678e67e975a1f6, type: 3}
       propertyPath: m_AnchorMax.y
@@ -10397,7 +10397,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1128004928}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MoneyProxy, Assembly-CSharp
         m_MethodName: AddMoney
         m_Mode: 3
@@ -11009,7 +11009,6 @@ GameObject:
   - component: {fileID: 1128004922}
   - component: {fileID: 1128004926}
   - component: {fileID: 1128004927}
-  - component: {fileID: 1128004928}
   - component: {fileID: 1128004929}
   m_Layer: 5
   m_Name: UI
@@ -11047,6 +11046,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SceneName: MinigamesChoice
+  _RatingPopup: {fileID: 193223320}
 --- !u!114 &1128004926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11119,19 +11119,6 @@ MonoBehaviour:
   _mLockObjects:
   - {fileID: 1996572323}
   - {fileID: 779964731}
---- !u!114 &1128004928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1128004920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8763ace050c5fda4381bf9d4977af69f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _notif: {fileID: 0}
 --- !u!114 &1128004929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18496,6 +18483,26 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 47
       objectReference: {fileID: 0}
+    - target: {fileID: 3185597446257307848, guid: e98c403a46c7e184a98ef14c1cb94708, type: 3}
+      propertyPath: _mOnSelected.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3185597446257307848, guid: e98c403a46c7e184a98ef14c1cb94708, type: 3}
+      propertyPath: _mOnSelected.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3185597446257307848, guid: e98c403a46c7e184a98ef14c1cb94708, type: 3}
+      propertyPath: _mOnSelected.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1697820664}
+    - target: {fileID: 3185597446257307848, guid: e98c403a46c7e184a98ef14c1cb94708, type: 3}
+      propertyPath: _mOnSelected.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3185597446257307848, guid: e98c403a46c7e184a98ef14c1cb94708, type: 3}
+      propertyPath: _mOnSelected.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UIButton, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 5036310888402263173, guid: e98c403a46c7e184a98ef14c1cb94708, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -18594,13 +18601,33 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5222078287547549792, guid: e98c403a46c7e184a98ef14c1cb94708, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1486577545}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6553317688049974072, guid: e98c403a46c7e184a98ef14c1cb94708, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1697820665}
   m_SourcePrefab: {fileID: 100100000, guid: e98c403a46c7e184a98ef14c1cb94708, type: 3}
 --- !u!224 &1697820663 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5222078287547549792, guid: e98c403a46c7e184a98ef14c1cb94708, type: 3}
   m_PrefabInstance: {fileID: 1697820662}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1697820664 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6553317688049974072, guid: e98c403a46c7e184a98ef14c1cb94708, type: 3}
+  m_PrefabInstance: {fileID: 1697820662}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1697820665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697820664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b21fdd197d722a459d4fec6dd358fb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1713507326
 PrefabInstance:
   m_ObjectHideFlags: 0

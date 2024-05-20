@@ -5,9 +5,6 @@ using AYellowpaper.SerializedCollections;
 
 public class HomePageUIManager : MonoBehaviour
 {
-
-
-
     [SerializeField] private SerializedDictionary<GameObject, bool> _mMenuUI;
     public SerializedDictionary<GameObject, bool> MenuUIDictionnary { get => _mMenuUI; set => _mMenuUI = value; }
 

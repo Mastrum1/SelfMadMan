@@ -66,6 +66,9 @@ public class GameManager : MonoBehaviour
 
     public event Action<bool, int, int, bool> WinScreenHandle;
 
+    public bool FirstGamePlayed = false;
+    public bool Rated = false;
+
     private void Awake()
     {
         Application.targetFrameRate = 60;

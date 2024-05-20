@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class Notif : MonoBehaviour
 {
+    public static Notif Instance;
+
     [SerializeField] GameObject _mNotif;
 
     private void Start()
     {
+        if (Instance == null)
+            Instance = this;
         ONOFF();
     }
 
@@ -15,11 +19,11 @@ public class Notif : MonoBehaviour
     {
         if (MoneyManager.Instance.CurrentMoney >= 100)
         {
-            gameObject.SetActive(true);
+            _mNotif.SetActive(true);
         }
-        else
+        else if (MoneyManager.Instance.CurrentMoney < 100)
         {
-            gameObject.SetActive(false);
+            _mNotif.SetActive(false);
         }
     }
 }
