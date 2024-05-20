@@ -6,7 +6,7 @@ public class Hole : MonoBehaviour
 {
     public event Action<bool> OnCueBall;
 
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("8Ball")) return;
         //if (other.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude >= 2) return;
@@ -14,6 +14,8 @@ public class Hole : MonoBehaviour
         GameObject o;
         (o = other.gameObject).transform.position = transform.position;
         o.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        o.transform.GetChild(0).gameObject.SetActive(false);
+        o.transform.GetChild(1).gameObject.SetActive(false);
         StartCoroutine(CueBallAnim(o));
         
         OnCueBall?.Invoke(true);

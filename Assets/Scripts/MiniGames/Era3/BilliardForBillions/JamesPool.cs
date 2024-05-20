@@ -94,6 +94,7 @@ public class JamesPool : MonoBehaviour
         var force = Vector3.Distance(_queueStartPos.transform.position, _queue.transform.position);
         _shootLine.SetActive(false);
         _cueBall.GetComponent<Rigidbody2D>().AddForce(transform.up * (force * 1000));
+        _cueBall.transform.GetChild(0).gameObject.SetActive(true);
         _queue.transform.position = _queueStartPos.transform.position;
         _hasShot = true;
     }
