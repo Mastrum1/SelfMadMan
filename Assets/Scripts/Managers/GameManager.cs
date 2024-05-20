@@ -182,6 +182,14 @@ public class GameManager : MonoBehaviour
         _mMinigameCount = 1;
         StartCoroutine(ContinueMinigames());
     }
+
+    public void ContinueWithMoney()
+    {
+        _mGameOver = false;
+        _mMinigameCount = 1;
+        StartCoroutine(ContinueMinigames());
+    }
+
     public IEnumerator ContinueMinigames()
     {
         yield return new WaitForSeconds(2f);
