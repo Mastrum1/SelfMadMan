@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using System.Collections;
 
 [System.Serializable]
 
@@ -15,6 +16,18 @@ public class InputManager : MonoBehaviour
     [SerializeField] private float _mDragAndDropMinimumDist = .15f;
 
     [SerializeField] private float _mHoldTiming = 0.35f;
+
+    [SerializeField] private float _mThrowDist = 0.35f;
+
+    [SerializeField] private float _mUpdateDistTime = 0.3f;
+
+    [SerializeField, Range(0f, 1f)] private float _mThrowTreshHold = 0.5f;
+
+    private Vector3 _NewStartPos;
+
+    private bool _mThrown;
+
+    private Coroutine _mThrowCoroutine;
 
     private bool _mHold;
 
@@ -45,6 +58,9 @@ public class InputManager : MonoBehaviour
     [SerializeField] private bool _mEnableAccelerometer = false;
 
     [SerializeField] private bool _mEnableRub = false;
+
+    [SerializeField] private bool _mEnableThrow = false;
+
 
     [SerializeField] public UnityEvent _mOnTap;
 
@@ -141,7 +157,7 @@ public class InputManager : MonoBehaviour
         {
             Touch touch = Input.GetTouch(0);
 
-            if(_mEnableRub)
+            if (_mEnableRub)
             {
                 _mGetFingerPos?.Invoke(Camera.main.ScreenToWorldPoint(touch.position));
             }
@@ -160,14 +176,28 @@ public class InputManager : MonoBehaviour
                 _mGetFingerPos?.Invoke(Camera.main.ScreenToWorldPoint(touch.position));
 
             }
+            if (touch.phase == TouchPhase.Moved && holdTiming >= _mHoldTiming && _mEnableThrow && Vector3.Distance(_mStartTouchPos, Camera.main.ScreenToWorldPoint(touch.position)) >= _mDragAndDropMinimumDist && !_mThrown || _mEnableThrow && _mIsDraging)
+            {
+                _mIsDraging = true;
+                _NewStartPos = Camera.main.ScreenToWorldPoint(touch.position);
+                if (_mThrowCoroutine == null)
+                {
+                    _mThrowCoroutine = StartCoroutine("ChangeStartDist");
 
-            if (touch.phase == TouchPhase.Moved && holdTiming >= _mHoldTiming && _mEnableDragAndDrop && Vector3.Distance(_mStartTouchPos, Camera.main.ScreenToWorldPoint(touch.position)) >= _mDragAndDropMinimumDist || _mIsDraging)
+                }
+                ThrowDragAndDrop(Camera.main.ScreenToWorldPoint(touch.position), touch);
+
+            }
+
+            if (touch.phase == TouchPhase.Moved && holdTiming >= _mHoldTiming && _mEnableDragAndDrop &&  Vector3.Distance(_mStartTouchPos, Camera.main.ScreenToWorldPoint(touch.position)) >= _mDragAndDropMinimumDist || _mIsDraging && !_mEnableThrow)
             {
                 _mGetFingerPos?.Invoke(Camera.main.ScreenToWorldPoint(touch.position));
 
                 DragAndDrop(Camera.main.ScreenToWorldPoint(touch.position), touch);
                 _mIsDraging = true;
             }
+
+            
 
             if (touch.phase == TouchPhase.Began && _mEnableTapOnFingerDown && !_mWaitingForRelease)
             {
@@ -188,9 +218,9 @@ public class InputManager : MonoBehaviour
                 _mEndTouchPos = Camera.main.ScreenToWorldPoint(touch.position);
                 _mOnFingerReleased?.Invoke();
 
-                if(_mEnableRub)
+                if (_mEnableRub)
                 {
-                    _mGetFingerPos?.Invoke(new Vector3(-1000,-1000,-1000));
+                    _mGetFingerPos?.Invoke(new Vector3(-1000, -1000, -1000));
                 }
 
                 if (Vector3.Distance(_mStartTouchPos, _mEndTouchPos) >= _mMinimumDist && _mEnableSlide4Dir && !_mIsDraging || Vector3.Distance(_mStartTouchPos, _mEndTouchPos) >= _mMinimumDist && _mEnableSlide8Dir && !_mIsDraging)
@@ -234,9 +264,51 @@ public class InputManager : MonoBehaviour
                 _mIsDraging = false;
                 _mSelectedObject = null;
                 _mWaitingForRelease = false;
+                _mThrown = false;
+                _mIsDraging = false;
             }
         }
     }
+
+    public void Throw()
+    {
+        if (_mSelectedObject != null)
+        {
+            var finalDelta = _mEndTouchPos - _mStartTouchPos;
+
+            finalDelta = finalDelta.normalized;
+            _mSelectedObject.GetComponent<ThrowDragAndDropManager>()._mOnThrow?.Invoke(finalDelta);
+            StopCoroutine("ChangeStartDist");
+            _mThrowCoroutine = null;
+            _mSelectedObject = null;
+            _mStartTouchPos = Vector3.zero;
+            _mEndTouchPos = Vector3.zero;
+            _NewStartPos = Vector3.zero;
+        }
+    }
+
+    private IEnumerator ChangeStartDist()
+    {
+        while (true)
+        {
+            if (Vector3.Distance(_mStartTouchPos, _NewStartPos) >= _mThrowDist && _NewStartPos.y > _mStartTouchPos.y && (_NewStartPos - _mStartTouchPos).y >= _mThrowTreshHold && _mSelectedObject != null)
+            {
+                _mThrown = true;
+                _mEndTouchPos = _NewStartPos;
+                Throw();
+                _mSelectedObject = null;
+                _mIsDraging = false;
+            }
+            else
+            {
+                _mStartTouchPos = _NewStartPos;
+            }
+            yield return new WaitForSeconds(_mUpdateDistTime);
+
+        }
+
+    }
+
 
     public void Slide()
     {
@@ -331,6 +403,19 @@ public class InputManager : MonoBehaviour
     {
         _mHold = true;
         _mOnHold?.Invoke();
+    }
+
+    public void ThrowDragAndDrop(Vector3 pos, Touch touch)
+    {
+        if (_mSelectedObject == null)
+            SelectObject(touch);
+
+        if (_mSelectedObject != null)
+        {
+            ThrowDragAndDropManager dragScript = _mSelectedObject.GetComponent<ThrowDragAndDropManager>();
+            pos.z = 0;
+            dragScript._mOnDragAndDrop?.Invoke(pos);
+        }
     }
 
     public void DragAndDrop(Vector3 pos, Touch touch)

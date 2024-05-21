@@ -41,7 +41,7 @@ public class ObstacleMovement : MonoBehaviour
             yield return null;
         }
         gameObject.SetActive(false);
-        gameObject.transform.position = new Vector3(0, 3.15f, 0);
+        gameObject.transform.position = new Vector3(0, 5.68f, 0);
         StopCoroutine(FadeOutCoroutine());
     }
 
