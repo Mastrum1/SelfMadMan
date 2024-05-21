@@ -82,6 +82,6 @@ public class HomePageUIManager : MonoBehaviour
 
     public void DataReset()
     {
-        
+        GameManager.instance.Player.DataPlayer.FirstSaveData(GameManager.instance.Player);
     }
 }
