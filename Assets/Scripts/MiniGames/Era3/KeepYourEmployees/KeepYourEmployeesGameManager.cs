@@ -67,7 +67,7 @@ public class KeepYourEmployeesGameManager : MiniGameManager
     void Update()
     {
         base.Update();
-        _mNb.text =  (_mHit).ToString() + "/" + _mEmployees.Count.ToString();
+        _mNb.text = "<size=1.5em>" + (_mHit).ToString() + "</size>/" + _mEmployees.Count.ToString();
     }
 
     IEnumerator EmployeeSpawner()
