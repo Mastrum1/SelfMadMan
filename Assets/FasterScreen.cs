@@ -6,7 +6,6 @@ using UnityEngine.Video;
 public class FasterScreen : MonoBehaviour
 {
     [SerializeField] private GameObject m_Prefab;
-    [SerializeField] private VideoPlayer m_Bike;
     [SerializeField] private GameObject m_Prefab1;
     [SerializeField] private GameObject m_Prefab2;
 
@@ -18,7 +17,6 @@ public class FasterScreen : MonoBehaviour
         switch (GameManager.instance.Era)
         {
             case 0:
-
                 StartCoroutine(ChadAnimation(m_Prefab));
                 break;
             case 1:
@@ -32,26 +30,12 @@ public class FasterScreen : MonoBehaviour
     }
     IEnumerator ChadAnimation(GameObject go)
     {
-        if (go == m_Prefab)
-        {
-            StartCoroutine(PrepareVideoCoroutine());
-        }
-        else
-            go.SetActive(true);
 
+        go.SetActive(true);
         yield return new WaitForSeconds(2.0f);
         mySceneManager.instance.UnloadPreciseScene(mySceneManager.instance.FasterScreen);
 
     }
 
-    IEnumerator PrepareVideoCoroutine()
-    {
-        while (!m_Bike.isPrepared)
-        {
-            m_Bike.Prepare();
-            yield return new WaitForEndOfFrame();
-        }
-        m_Bike.Play();
-        m_Prefab.SetActive(true );
-    }
+
 }
