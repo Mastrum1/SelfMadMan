@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class PopUpObtained : MonoBehaviour
 {
@@ -60,6 +61,7 @@ public class PopUpObtained : MonoBehaviour
                 _mObtainedObject.color = _mTextColor[(int)Type.MINIGAME];
                 _mUnlocked.color = _mUnlockedColor[(int)Type.MINIGAME];
                 break;
+
             case ItemsSO.TYPE.FURNITURE:
                 _mMinigameImage.enabled = true;
                 _mSoftMaskMinigame.enabled = true;
@@ -70,6 +72,7 @@ public class PopUpObtained : MonoBehaviour
                 _mObtainedObject.text = item.ItemName;
                 _mObtainedObject.color = _mTextColor[(int)Type.DECORATION];
                 _mUnlocked.color = _mUnlockedColor[(int)Type.DECORATION];
+                ShopManager.Instance.CheckUnlocked(item);
                 break;
         }
     }
@@ -87,7 +90,4 @@ public class PopUpObtained : MonoBehaviour
         gameObject.SetActive(false);
         if(TutorialManager.instance.InTutorial) { TutorialManager.instance.StepInit(); }
     }
-
-
-
 }
