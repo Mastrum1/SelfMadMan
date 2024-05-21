@@ -10,10 +10,13 @@ public class RizzHerInteractableManager : MonoBehaviour
     [SerializeField] private ObstacleMovement _OtherHand;
 
     [SerializeField] private List<GameObject> _leftObj;
+    [SerializeField] private List<GameObject> _leftChildObj;
 
     [SerializeField] private List<GameObject> _midObj;
+    [SerializeField] private List<GameObject> _midChildObj;
 
     [SerializeField] private List<GameObject> _rightObj;
+    [SerializeField] private List<GameObject> _rightChildObj;
 
     [SerializeField] private List<ObstacleMovement> _ScrollingParents;
 
@@ -54,7 +57,6 @@ public class RizzHerInteractableManager : MonoBehaviour
 
             for (int i = 0; i < NbSpawn; i++)
             {
-
                 do
                 {
                     Value = UnityEngine.Random.Range(0, 3);
@@ -68,7 +70,44 @@ public class RizzHerInteractableManager : MonoBehaviour
                             RandomObj = UnityEngine.Random.Range(0, _leftObj.Count);
                         } while (_leftObj[RandomObj].activeSelf == true);
 
-                        _leftObj[RandomObj].transform.position = new Vector3(-1.85f, 3.15f, 0);
+                        _leftObj[RandomObj].transform.position = new Vector3(-1.58f, 5.68f, 0);
+                        if (RandomObj != 4 && RandomObj != 5)
+                        {
+                            float random = UnityEngine.Random.Range(0, 8);
+                            float rotation = 0;
+
+                            switch (random)
+                            {
+                                case 0:
+                                    rotation = 45;
+                                    break;
+                                case 1:
+                                    rotation = 90;
+                                    break;
+                                case 2:
+                                    rotation = 135;
+                                    break;
+                                case 3:
+                                    rotation = 180;
+                                    break;
+                                case 4:
+                                    rotation = 225;
+                                    break;
+                                case 5:
+                                    rotation = 270;
+                                    break;
+                                case 6:
+                                    rotation = 315;
+                                    break;
+                                case 7:
+                                    rotation = 360;
+                                    break;
+                            }
+                            _leftChildObj[RandomObj].transform.rotation = Quaternion.Euler(0, 0, rotation);
+                            Debug.Log(rotation);
+
+                        }
+
                         _leftObj[RandomObj].SetActive(true);
 
                         TempObj = _leftObj[RandomObj];
@@ -80,7 +119,42 @@ public class RizzHerInteractableManager : MonoBehaviour
                             RandomObj = UnityEngine.Random.Range(0, _midObj.Count);
                         } while (_midObj[RandomObj].activeSelf == true);
 
-                        _midObj[RandomObj].transform.position = new Vector3(0, 3.15f, 0);
+                        _midObj[RandomObj].transform.position = new Vector3(0, 5.68f, 0);
+                        if (RandomObj != 4 && RandomObj != 5)
+                        {
+                            float random = UnityEngine.Random.Range(0, 8);
+                            float rotation = 0;
+                            switch (random)
+                            {
+                                case 0:
+                                    rotation = 45;
+                                    break;
+                                case 1:
+                                    rotation = 90;
+                                    break;
+                                case 2:
+                                    rotation = 135;
+                                    break;
+                                case 3:
+                                    rotation = 180;
+                                    break;
+                                case 4:
+                                    rotation = 225;
+                                    break;
+                                case 5:
+                                    rotation = 270;
+                                    break;
+                                case 6:
+                                    rotation = 315;
+                                    break;
+                                case 7:
+                                    rotation = 360;
+                                    break;
+                            }
+                            Debug.Log(rotation);
+
+                            _midChildObj[RandomObj].transform.rotation = Quaternion.Euler(0, 0, rotation);
+                        }
                         _midObj[RandomObj].SetActive(true);
                         TempObj = _midObj[RandomObj];
 
@@ -91,7 +165,41 @@ public class RizzHerInteractableManager : MonoBehaviour
                             RandomObj = UnityEngine.Random.Range(0, _rightObj.Count);
                         } while (_rightObj[RandomObj].activeSelf == true);
 
-                        _rightObj[RandomObj].transform.position = new Vector3(1.85f, 3.15f, 0);
+                        _rightObj[RandomObj].transform.position = new Vector3(1.58f, 5.68f, 0);
+                        if (RandomObj != 4 && RandomObj != 5)
+                        {
+                            float random = UnityEngine.Random.Range(0, 8);
+                            float rotation = 0;
+                            switch (random)
+                            {
+                                case 0:
+                                    rotation = 45;
+                                    break;
+                                case 1:
+                                    rotation = 90;
+                                    break;
+                                case 2:
+                                    rotation = 135;
+                                    break;
+                                case 3:
+                                    rotation = 180;
+                                    break;
+                                case 4:
+                                    rotation = 225;
+                                    break;
+                                case 5:
+                                    rotation = 270;
+                                    break;
+                                case 6:
+                                    rotation = 315;
+                                    break;
+                                case 7:
+                                    rotation = 360;
+                                    break;
+                            }
+                            _rightChildObj[RandomObj].transform.rotation = Quaternion.Euler(0, 0, rotation);
+                        }
+
                         _rightObj[RandomObj].SetActive(true);
                         TempObj = _rightObj[RandomObj];
 
@@ -117,10 +225,7 @@ public class RizzHerInteractableManager : MonoBehaviour
                 {
                     TempObj.transform.SetParent(_ScrollingParents[3].transform);
                     idToActivate = 3;
-
                 }
-
-
 
             }
             if (idToActivate != -1)

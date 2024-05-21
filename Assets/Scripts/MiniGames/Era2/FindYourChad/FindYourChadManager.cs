@@ -4,13 +4,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class CardiashianManager : MiniGameManager
+public class FindYourChadManager : MiniGameManager
 {
-    [SerializeField] private CardashianInteractableManager _mInteractableManager;
-
-    private float _Space = 1.78f;
-
-    [SerializeField] private List<cardashianCard> _mObj;
+    [SerializeField] private FindYourChadInteractableManager _mInteractableManager;
 
     private void Start()
     {
