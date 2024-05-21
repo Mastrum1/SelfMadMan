@@ -18,6 +18,7 @@ public class MiniGameManager : MonoBehaviour
     protected bool _gameIsPlaying;
 
     [SerializeField] public Timer _mTimer;
+    [SerializeField] private GameObject _cashGO;
     [SerializeField] private Animator _cash;
     [SerializeField] private GameObject _loosePanel;
 
@@ -43,6 +44,7 @@ public class MiniGameManager : MonoBehaviour
 
         if (won)
         {
+            _cashGO.SetActive(true);
             _cash.SetBool("Won", true);
             TrophyManager.Instance.AddTrophyAmount(6,1);
         }
