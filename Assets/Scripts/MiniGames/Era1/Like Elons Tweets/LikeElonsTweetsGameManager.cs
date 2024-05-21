@@ -13,10 +13,12 @@ public class LikeElonsTweetsGameManager : MiniGameManager
 
     bool _mIsEnd;
     int _mCount = 0;
-    
+    private AudioManager _audioManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        _audioManager = AudioManager.Instance;
         _mAverageSpawnRate = 0.8f;
         _mIsEnd = false;
         StartCoroutine(SpawnTweet());
@@ -72,6 +74,8 @@ public class LikeElonsTweetsGameManager : MiniGameManager
 
     void OnLikeTweet(bool IsElon)
     {
+
+        _audioManager.PlaySFX(0);
         if (!IsElon && !_mIsEnd)
             EndGame(false);
         

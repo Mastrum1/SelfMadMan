@@ -7,7 +7,8 @@ using Random = UnityEngine.Random;
 public class PopUpSpawner : MonoBehaviour
 {
     public event Action OnClosePopUp;
-    
+    private AudioManager _audioManager;
+
     [SerializeField] private List<GameObject> _mPopUps;
     [SerializeField] private List<GameObject> _mSpawnPoints;
     [SerializeField] private GameObject _mParent;
@@ -19,6 +20,7 @@ public class PopUpSpawner : MonoBehaviour
 
     void Start()
     {
+        _audioManager = AudioManager.Instance;
         _mPopUpList = new List<GameObject> ();
         SpawnPopUp(_mPopUps[Random.Range(0, _mPopUps.Count)], _mButtonToHide.transform.position, 6);
         for (int i = 0; i < _mNumberToSpawn - 1; i++) {
@@ -40,6 +42,7 @@ public class PopUpSpawner : MonoBehaviour
 
     private void AdClosed()
     {
+        _audioManager.PlaySFX(1);
         OnClosePopUp?.Invoke();
     }
 

@@ -5,9 +5,12 @@ public class DirtyRoadManager : MiniGameManager
     [SerializeField] private DirtyRoadInteractableManager _interactableManager;
 
     private int _numOfAds;
+    private AudioManager _audioManager;
 
     private void Start()
     {
+        _audioManager = AudioManager.Instance;
+
         _interactableManager.OnGameEnd += OnGameEnd;
         
         _numOfAds = GameManager.instance.FasterLevel + 2;
