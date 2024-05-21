@@ -50,7 +50,6 @@ public class CustomisationManager : MonoBehaviour
                         {
                             _mFrameTemplates[i].BGButton.sprite = _mBGButtons[0];
                             _mFrameTemplates[i].ButtonText.text = "Picked";
-                            _mFrameTemplates[i].BoxCollider.enabled = false;
                         }
 
                         else if (!fur.Picked)

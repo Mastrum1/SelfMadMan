@@ -10,13 +10,10 @@ public class BrushMovement : MonoBehaviour
     [SerializeField] GameObject _mBrush;
     public Action OnDelete;
     bool _mIsStop;
-    private AudioManager _audioManager;
-
-
+    
     void Start()
     {
-        _audioManager = AudioManager.Instance;
-        // _mBrush.SetActive(false);
+       // _mBrush.SetActive(false);
         _mIsStop = false;
     }
 
@@ -59,7 +56,6 @@ public class BrushMovement : MonoBehaviour
                 _mBubbles.SetActive(true);
                 }
                 obj[i].gameObject.SetActive(false);
-                _audioManager.PlaySFX(0);
                 OnDelete?.Invoke();
             }
     }

@@ -58,23 +58,14 @@ public class FindherGameManager : MiniGameManager
     private bool _mIsEnd = false;
     private int _index = 0;
 
-    private AudioManager _audioManager;
-
     public override void Awake()
     {
         base.Awake();
         ShowProfile();
     }
 
-    public void Start()
-    {
-        _audioManager = AudioManager.Instance;
-    }
-
     public void SwipeLeft()
     {
-        _audioManager.PlaySFX(0);
-
         if (_mIsEnd)
             return;
         Debug.Log(_mIsEnd);
@@ -98,8 +89,6 @@ public class FindherGameManager : MiniGameManager
 
     public void SwipeRight()
     {
-        _audioManager.PlaySFX(0);
-
         if (_mIsEnd)
             return;
         Debug.Log(_mIsEnd);

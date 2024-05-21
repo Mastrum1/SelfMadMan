@@ -8,6 +8,7 @@ public class BilliardForBillionsInteractableManager : InteractableManager
     public event Action<bool> OnWin; 
     
     [SerializeField] private Hole _hole;
+    [SerializeField] private GameObject _cueBall;
     [SerializeField] private GameObject _james;
     [SerializeField] private GameObject _leftPos;
     [SerializeField] private GameObject _rightPos;
@@ -51,11 +52,26 @@ public class BilliardForBillionsInteractableManager : InteractableManager
         _hole.OnCueBall += HandleEndGame;
     }
 
-    private void HandleEndGame(bool win)
+    private void HandleEndGame()
     {
-        _onWin = win;
-        
-        OnWin?.Invoke(win);
+        _onWin = true;
+        _cueBall.transform.position = _hole.transform.position;
+        _cueBall.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        StartCoroutine(CueBallAnim());
+        OnWin?.Invoke(true);
+    }
+
+    private IEnumerator CueBallAnim()
+    {
+        while (_cueBall.activeSelf)
+        {
+            _cueBall.transform.localScale -= new Vector3(0.2f * Time.deltaTime, 0.2f * Time.deltaTime);
+            if (_cueBall.transform.localScale.x < 0.01f)
+            {
+                _cueBall.SetActive(false);
+            }
+            yield return null;
+        }
     }
 
     private void OnDestroy()

@@ -22,12 +22,6 @@ public class ShopTemplate : MonoBehaviour
     public Image PurchaseBox { get => _mPurchaseBox; private set => _mPurchaseBox = value; }
     [SerializeField] private Image _mPurchaseBox;
 
-    public Sprite PurchaseBoxON { get => _mPurchaseBoxON; private set => _mPurchaseBoxON = value; }
-    [SerializeField] private Sprite _mPurchaseBoxON;
-
-    public Sprite PurchaseBoxOFF { get => _mPurchaseBoxOff; private set => _mPurchaseBoxOff = value; }
-    [SerializeField] private Sprite _mPurchaseBoxOff;
-
     public ItemsSO.TYPE Type { get => _mType; set => _mType = value; }
     [SerializeField] private ItemsSO.TYPE _mType;
 
@@ -41,6 +35,15 @@ public class ShopTemplate : MonoBehaviour
 
     private void OnEnable()
     {
+        if (MoneyManager.Instance.CurrentMoney <= TextToInt(Amount))
+        {
+            Purchasable = false;
+        }
+        else
+        {
+            Purchasable = true;
+        }
+
         ONOFF();
     }
 
@@ -48,15 +51,13 @@ public class ShopTemplate : MonoBehaviour
     {
         if (Purchasable)
         {
-            _mPurchaseBox.sprite = PurchaseBoxON;
+            _mPurchaseBox.color = new Color(1, 1, 1, 1f);
             _mTemplateBox.enabled = true;
-            _mCostText.color = new Color(246, 243, 209, 255);
         }
         else if (!Purchasable)
         {
-            _mPurchaseBox.sprite = PurchaseBoxOFF;
+            _mPurchaseBox.color = new Color(1, 1, 1, 0.5f);
             _mTemplateBox.enabled = false;
-            _mCostText.color = new Color(171, 170, 165, 255);
         }
     }
 

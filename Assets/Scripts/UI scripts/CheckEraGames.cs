@@ -72,7 +72,7 @@ public class CheckEraGames : MonoBehaviour
                 break;
         }
 
-        _mNumberUnlocked.text = $"<#4EF4F6><size=150%>{_mUnlockedMinigames}" + "<#F6F3D1><size=100%>/8";
+        _mNumberUnlocked.text = $"<#4EF4F6>{_mUnlockedMinigames}" + "<#F6F3D1>/8";
         _mEra.text = "ERA " + (_mCurrentEra + 1).ToString();
     }
 }

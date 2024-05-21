@@ -10,12 +10,6 @@ public class FightingGame : MiniGameManager
     [SerializeField] private GameObject targetParticle;
     [SerializeField] private GameObject _mPauseMenu;
 
-    private AudioManager _audioManager;
-
-    public void Start()
-    {
-        _audioManager = AudioManager.Instance;
-    }
 
     public void OnClicked()
     {
@@ -30,11 +24,6 @@ public class FightingGame : MiniGameManager
             Debug.Log("Clicked");
             SpawnParticle();
         }
-
-        int randomIndex = UnityEngine.Random.Range(0, 4);
-
-        _audioManager.PlaySFX(randomIndex);
-
     }
 
     private void SpawnParticle()

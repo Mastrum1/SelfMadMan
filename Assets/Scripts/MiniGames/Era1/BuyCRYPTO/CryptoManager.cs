@@ -11,15 +11,14 @@ public class CryptoManager : MiniGameManager
     [SerializeField] private Material winMaterial;
     [SerializeField] private Material loseMaterial;
     [SerializeField] private GameObject winEffect;
-    private AudioManager _audioManager;
-
+    
     private int _activeChart;
 
     private void Start()
     {
         DrawGraph();
         _cryptoIManager.OnPostItClicked += CheckCryptoGraphPressed;
-        _audioManager = AudioManager.Instance;
+
     }
 
     private void DrawGraph()
@@ -30,7 +29,7 @@ public class CryptoManager : MiniGameManager
 
     private void CheckCryptoGraphPressed(PostIt postIt)
     {
-        _audioManager.PlaySFX(0);
+
         if (cryptoChartOutput.sprite == postIt.CorrespondingGraph)
         {
             winEffect.transform.position = postIt.transform.position;

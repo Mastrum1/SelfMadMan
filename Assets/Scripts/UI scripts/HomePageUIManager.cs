@@ -2,10 +2,22 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using AYellowpaper.SerializedCollections;
-using UnityEngine.SceneManagement;
 
 public class HomePageUIManager : MonoBehaviour
 {
+
+    private void Start()
+    {
+        if (TutorialManager.instance.InTutorial && (TutorialManager.instance.StepNbr == 0 || TutorialManager.instance.StepNbr == 2))
+        {
+
+            TutorialManager.instance.SetCamera(Camera);
+            TutorialManager.instance.StepInit();
+        }
+
+    }
+
+    [SerializeField] private Camera Camera;
     [SerializeField] private SerializedDictionary<GameObject, bool> _mMenuUI;
     public SerializedDictionary<GameObject, bool> MenuUIDictionnary { get => _mMenuUI; set => _mMenuUI = value; }
 
@@ -21,6 +33,12 @@ public class HomePageUIManager : MonoBehaviour
 
     public void SetOnOff(GameObject GameObject)
     {
+
+        if (TutorialManager.instance.InTutorial && (TutorialManager.instance.StepNbr == 5))
+        {
+            Debug.Log("Haha");
+            TutorialManager.instance.FinalStep();
+        }
         if (_mMenuUI[GameObject])
         {
             if (!GameObject)
@@ -81,9 +99,13 @@ public class HomePageUIManager : MonoBehaviour
         }
     }
 
-    public void DataReset()
+    public void ChangeLanguage(Toggle toggle)
     {
-        GameManager.instance.Player.DataPlayer.FirstSaveData(GameManager.instance.Player);
-        SceneManager.LoadScene(1);
+        if (toggle.isOn)
+            LocalSelector.Instance.ChangeLocale(1);
+        else if (!toggle.isOn)
+            LocalSelector.Instance.ChangeLocale(0);
     }
+
+
 }

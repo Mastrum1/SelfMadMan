@@ -5,7 +5,6 @@ using UnityEngine;
 public class Folder : MonoBehaviour
 {
     private bool _wasTouched;
-
     private void Awake()
     {
         _wasTouched = false;

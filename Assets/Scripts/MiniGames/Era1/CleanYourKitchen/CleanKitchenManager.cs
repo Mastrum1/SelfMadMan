@@ -1,4 +1,3 @@
-using System.Threading;
 using TMPro;
 using UnityEngine;
 
@@ -9,7 +8,6 @@ public class CleanKitchenManager : MiniGameManager
     [SerializeField] private TextMeshProUGUI _roachAmount;
     [SerializeField] private GameObject _clickAnim;
     private int _numOfCockroaches;
-    private AudioManager _audioManager;
 
     public override void Awake()
     {
@@ -20,7 +18,6 @@ public class CleanKitchenManager : MiniGameManager
 
     private void Start()
     {
-        _audioManager = AudioManager.Instance;
         _roachRemainder.text = Amount.ToString();
         _roachAmount.text = "/" + _numOfCockroaches;
         _interactableManager.OnRoachDeath += OnGameEnd;
@@ -35,7 +32,6 @@ public class CleanKitchenManager : MiniGameManager
 
     public void PlayTapAnim(Vector3 pos)
     {
-        _audioManager.PlaySFX(1);
         if (_clickAnim.activeSelf) _clickAnim.SetActive(false); 
         _clickAnim.transform.position = new Vector3(pos.x, pos.y, 0);
         _clickAnim.SetActive(true);

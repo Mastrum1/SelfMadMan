@@ -42,12 +42,7 @@ public class TapWithTimer : MonoBehaviour
     private float _mDecrease;
 
     [SerializeField] private float _mDecreaseSpeed;
-    private AudioManager _audioManager;
 
-    private void Start()
-    {
-        _audioManager = AudioManager.Instance;
-    }
     void OnEnable()
     {
         _mTorus.transform.localScale = new Vector3(_mMaxScale, _mMaxScale, _mMaxScale);
@@ -88,7 +83,6 @@ public class TapWithTimer : MonoBehaviour
 
     public void ObjectTaped()
     {
-
         Debug.Log("Object taped"); 
         _StopTorus = true;
         _mTorus.SetActive(false);
@@ -96,20 +90,17 @@ public class TapWithTimer : MonoBehaviour
         if (_mTorus.transform.localScale.x < _mPerfectTiming && _mTorus.transform.localScale.x > _mMinTimeForClick)
         {
             Debug.Log("Perfect click");
-            _audioManager.PlaySFX(0);
             StartCoroutine(FadeOut());
         }
         else if (_mTorus.transform.localScale.x < _mMidTiming && _mTorus.transform.localScale.x > _mPerfectTiming)
         {
             Debug.Log("mid click");
-            _audioManager.PlaySFX(0);
             StartCoroutine(FadeOut());
 
         }
         else if (_mTorus.transform.localScale.x > _mMidTiming)
         {
             Debug.Log("Immonde click");
-            _audioManager.PlaySFX(0);
             StartCoroutine(FadeOut());
 
         }

@@ -35,7 +35,6 @@ public class MoneyManager : MonoBehaviour
         _mCurrentMoney += MoneyToAdd;
         GameManager.instance.Player.NewCurrency(_mCurrentMoney);
         _mCurrentMoney = GameManager.instance.Player.Money;
-        Notif.Instance.ONOFF();
     }
 
     public bool SubtractMoney(int MoneyToRemove)
@@ -49,7 +48,6 @@ public class MoneyManager : MonoBehaviour
         _mCurrentMoney -= MoneyToRemove;
         GameManager.instance.Player.NewCurrency(_mCurrentMoney);
         _mCurrentMoney = GameManager.instance.Player.Money;
-        Notif.Instance.ONOFF();
         return true;
     }
 
@@ -65,7 +63,6 @@ public class MoneyManager : MonoBehaviour
             _mCurrentMoney -= int.Parse(price.text);
             GameManager.instance.Player.NewCurrency(_mCurrentMoney);
             _mCurrentMoney = GameManager.instance.Player.Money;
-            Notif.Instance.ONOFF();
         }
     }
 
@@ -81,7 +78,6 @@ public class MoneyManager : MonoBehaviour
             _mCurrentMoney -= int.Parse(price.text);
             GameManager.instance.Player.NewCurrency(_mCurrentMoney);
             _mCurrentMoney = GameManager.instance.Player.Money;
-            Notif.Instance.ONOFF();
         }
     }
 

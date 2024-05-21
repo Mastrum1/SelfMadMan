@@ -106,24 +106,6 @@ public class ScoreScreen : MonoBehaviour
         }
 
     }
-
-    public void OnPayMoney()
-    {
-        if (GameManager.instance.Player.Money >= 50)
-        {
-            _mContinue = true;
-            Timer = 5;
-            _mPopupClosed = true;
-            _UIAnimator.SetBool("DisplayPopUp", false);
-            StartCoroutine(OnContinueAnim());
-            _HeartAnimator.SetInteger("Hearts", 1);
-            _HeartAnimator.SetBool("Revived", true);
-            _InputManager.SetActive(false);
-            StartCoroutine(ResetCharacter());
-            MoneyManager.Instance.SubtractMoney(50);
-            GameManager.instance.ContinueWithMoney();
-        }
-    }
     IEnumerator OnContinueAnim()
     {
         _mJamesAnimator.SetBool("Idle", true);

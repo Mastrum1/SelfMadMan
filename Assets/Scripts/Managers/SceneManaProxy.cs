@@ -11,8 +11,6 @@ public class SceneManaProxy : MonoBehaviour
 
     [Scene] public string SceneName;
 
-    [SerializeField] private RatingPopup _RatingPopup;
-
     public void ChangeScene()
     {
         if (!mySceneManager.instance)
@@ -25,7 +23,6 @@ public class SceneManaProxy : MonoBehaviour
     public void StartGame()
     {
         GameManager.instance.OnGameStart();
-        GameManager.instance.FirstGamePlayed = true;
     }
 
     public void RestartGame()
