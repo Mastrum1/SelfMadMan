@@ -25,8 +25,6 @@ public class ContentManager : MonoBehaviour
     [SerializeField] private List<TMP_Text> _mTextsToDeactivate;
 
     [Header("Navigation Dots")]
-    [SerializeField] private GameObject _mDotsContainer;
-    [SerializeField] private GameObject _mDotPrefab;
     [SerializeField] private TMP_Text _mText;
 
     [Header("Page Settings")]
@@ -42,7 +40,6 @@ public class ContentManager : MonoBehaviour
     {
         _mCurrentIndex = GameManager.instance.Era;
         _mLockEraPanel.SetActive(GameManager.instance.ErasData[GameManager.instance.Era].Unlocked ? false : true);
-        InitializeDots();
         ShowContent();
 
      //   StartCoroutine(Change());
@@ -53,30 +50,6 @@ public class ContentManager : MonoBehaviour
         yield return new WaitForSeconds(5);
         _mFurnitureManager.UnlockFurniture("ChadStatue");
         _mFurnitureManager.PickFurniture("ChadStatue");
-    }
-    void InitializeDots()
-    {
-        // Create dots based on the number of content panels
-        for (int i = 0; i < _mBackgrounds.Count; i++)
-        {
-            GameObject dot = Instantiate(_mDotPrefab, _mDotsContainer.transform);
-            Image dotImage = dot.GetComponent<Image>();
-            dotImage.color = (i == _mCurrentIndex) ? Color.white : Color.gray;
-            dotImage.fillAmount = 0f; // Initial fill amount
-            // You may want to customize the dot appearance and layout here
-            _mText.text = "Ere " + (_mCurrentIndex + 1);
-        }
-    }
-
-    void UpdateDots()
-    {
-        // Update the appearance of dots based on the current index
-        for (int i = 0; i < _mDotsContainer.transform.childCount; i++)
-        {
-            Image dotImage = _mDotsContainer.transform.GetChild(i).GetComponent<Image>();
-            dotImage.color = (i == _mCurrentIndex) ? Color.white : Color.gray;
-            _mText.text = "ERA " + (_mCurrentIndex + 1);
-        }
     }
 
     public void SwapContent(int i)
@@ -95,7 +68,6 @@ public class ContentManager : MonoBehaviour
                 go.SetActive(!eraunlocked);
 
             ShowContent();
-            UpdateDots();
         }
     }
 
@@ -107,11 +79,6 @@ public class ContentManager : MonoBehaviour
             bool isActive = i == _mCurrentIndex;
             _mBaseImage.sprite = _mBackgrounds[_mCurrentIndex];
             _mJames.sprite = _mJamesSprites[_mCurrentIndex];
-
-            // Update dot visibility and color based on the current active content
-            Image dotImage = _mDotsContainer.transform.GetChild(i).GetComponent<Image>();
-            dotImage.color = isActive ? Color.white : Color.gray;
-            dotImage.fillAmount = isActive ? 1f : 0f;
         }
     }
 
@@ -143,6 +110,5 @@ public class ContentManager : MonoBehaviour
             go.SetActive(false);
         _mLockEraPanel.SetActive(false);
         IsUnlocking = false;
-
     }
 }
