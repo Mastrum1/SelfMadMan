@@ -6,10 +6,12 @@ public class PopUpGameManager : MiniGameManager
     [SerializeField] private Animator _mAnimator;
     bool _enabled = false;
     bool _mIsEnd = false;
+    private AudioManager _audioManager;
 
     private void Start()
     {
         _mSpawner.OnClosePopUp += PopUpClosed;
+        _audioManager = AudioManager.Instance;
     }
 
     private void PopUpClosed()
@@ -20,6 +22,7 @@ public class PopUpGameManager : MiniGameManager
     public void OnDownload(GameObject button)
     {
         if (!_mSpawner.IsActivePopUp() && !_mIsEnd) {
+            _audioManager.PlaySFX(0);
             _mAnimator.SetTrigger("PopupPress");
             EndGame(true);
         }
