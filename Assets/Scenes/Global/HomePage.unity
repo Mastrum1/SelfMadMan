@@ -11095,7 +11095,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SceneName: MinigamesChoice
-  _RatingPopup: {fileID: 0}
 --- !u!114 &1128004926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11108,6 +11107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5930ae2403cc6d43ac0def6a853805a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Camera: {fileID: 1413889385}
   _mMenuUI:
     _serializedList:
     - Key: {fileID: 951567082}
@@ -11158,6 +11158,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 137dd9b4650f43943a352d6b3539920b, type: 3}
   _mImagesToDeactivate: []
   _mTextsToDeactivate: []
+  _mDotsContainer: {fileID: 0}
+  _mDotPrefab: {fileID: 0}
   _mText: {fileID: 1777915613}
   _mCurrentIndex: 0
   _mLockEraPanel: {fileID: 1968315908}
@@ -11178,7 +11180,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8763ace050c5fda4381bf9d4977af69f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _notif: {fileID: 0}
 --- !u!114 &1128004929
 MonoBehaviour:
   m_ObjectHideFlags: 0
