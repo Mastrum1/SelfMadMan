@@ -6,6 +6,7 @@ public class GarbageDrag : MonoBehaviour
 {
     //public void OnSeleted
     [SerializeField] float _mScaleFactor = 1.5f;
+    [SerializeField] SpriteRenderer _mSpriteRenderer;
     bool _mIsSelected = false;
     bool _mIsEnable = true;
     public void OnDrag(Vector3 pos)
@@ -20,6 +21,7 @@ public class GarbageDrag : MonoBehaviour
         if (!_mIsEnable)
             return;
         if (!_mIsSelected) {
+            _mSpriteRenderer.sortingOrder = 3;
             transform.localScale = transform.localScale * _mScaleFactor;
             _mIsSelected = true;
         }
@@ -28,6 +30,7 @@ public class GarbageDrag : MonoBehaviour
     public void OnRealesed()
     {
         if (_mIsSelected) {
+            _mSpriteRenderer.sortingOrder = 1;
             transform.localScale = transform.localScale / _mScaleFactor;
             _mIsSelected = false;
         }
