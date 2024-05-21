@@ -72,6 +72,7 @@ public class PopUpObtained : MonoBehaviour
                 _mObtainedObject.text = item.ItemName;
                 _mObtainedObject.color = _mTextColor[(int)Type.DECORATION];
                 _mUnlocked.color = _mUnlockedColor[(int)Type.DECORATION];
+                ShopManager.Instance.CheckUnlocked(item);
                 break;
         }
     }
@@ -85,7 +86,6 @@ public class PopUpObtained : MonoBehaviour
     IEnumerator Close()
     {
         yield return new WaitForSeconds(0.5f);
-        ShopManager.Instance.CheckUnlocked();
         gameObject.SetActive(false);
     }
 }

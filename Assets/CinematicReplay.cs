@@ -22,6 +22,7 @@ public class CinematicReplay : MonoBehaviour
         {
             HasReachedPoint = true;
             _Collider.enabled = false;
+            gameObject.SetActive(false);
             _Video.time = loopTime;
         }
     }
@@ -33,6 +34,7 @@ public class CinematicReplay : MonoBehaviour
 
     public void PlayVideo()
     {
+        gameObject.SetActive(true);
         _Video.Play();
         _Collider.enabled = true;
     }

@@ -24,6 +24,7 @@ public class ShopManager : MonoBehaviour
 
     [Header("Confirm Purchase")]
     [SerializeField] private ConfirmPurchase _mConfirmPurchase;
+    public ShopTemplate ItemBeingPurchased {  get => _mItemBeingPurchased; }
     [SerializeField] private ShopTemplate _mItemBeingPurchased;
 
     [Header("Pulse of the buttons")]
@@ -109,6 +110,7 @@ public class ShopManager : MonoBehaviour
                                 _mFurnituresTemplates[i].CostText.text = selectedItem.Cost.ToString();
                                 _mFurnituresTemplates[i].ImageItem.sprite = selectedItem.Icon;
                                 _mFurnituresTemplates[i].Type = selectedItem.Type;
+                                _mFurnituresTemplates[i].ONOFF();
 
                                 // Remove the selected item from the available items list
                                 availableItems.RemoveAt(randomIndex);
@@ -134,25 +136,28 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    public void CheckUnlocked()
+    public void CheckUnlocked(ItemsSO item)
     {
-        for (int i = 0; i < _mFurnituresTemplates.Count; i++)
+        if (item.Type == ItemsSO.TYPE.FURNITURE)
         {
-            FurnitureSO item = _mFurnituresTemplates[i].ItemInfo as FurnitureSO;
-
-            foreach (var fur in _mFurnitureManager.FurnitureList)
+            for (int i = 0; i < _mFurnituresTemplates.Count; i++)
             {
-                if (fur.PrefabParent.name == item.FurniturePrefab.name && item != null)
+                FurnitureSO furni = _mFurnituresTemplates[i].ItemInfo as FurnitureSO;
+
+                foreach (var fur in _mFurnitureManager.FurnitureList)
                 {
-                    if (fur.Locked)
+                    if (fur.PrefabParent.name == furni.FurniturePrefab.name && item != null)
                     {
-                        _mFurnituresTemplates[i].Purchasable = true;
-                        _mFurnituresTemplates[i].ONOFF();
-                    }
-                    if (!fur.Locked)
-                    {
-                        _mFurnituresTemplates[i].Purchasable = false;
-                        _mFurnituresTemplates[i].ONOFF();
+                        if (fur.Locked)
+                        {
+                            _mFurnituresTemplates[i].Purchasable = true;
+                            _mFurnituresTemplates[i].ONOFF();
+                        }
+                        if (!fur.Locked)
+                        {
+                            _mFurnituresTemplates[i].Purchasable = false;
+                            _mFurnituresTemplates[i].ONOFF();
+                        }
                     }
                 }
             }
@@ -193,6 +198,7 @@ public class ShopManager : MonoBehaviour
             {
                 fur.Obtain();
                 SubsMoney();
+                _mItemBeingPurchased.ImageItem.sprite = _mItemBeingPurchased.Nothing;
                 _mItemBeingPurchased.Purchasable = false;
                 _mItemBeingPurchased.ONOFF();
             }
@@ -216,10 +222,9 @@ public class ShopManager : MonoBehaviour
 
     public void Pulse()
     {
-        if (MoneyManager.Instance.CurrentMoney > 100)
+        if (MoneyManager.Instance.CurrentMoney >= 100)
         {
             _mSpinButtonPulse.enabled = true;
-            Debug.Log("Pulse");
         }
         else
         {

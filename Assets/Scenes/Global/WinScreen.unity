@@ -1368,7 +1368,7 @@ GameObject:
   - component: {fileID: 695855934}
   - component: {fileID: 695855933}
   - component: {fileID: 695855936}
-  - component: {fileID: 695855935}
+  - component: {fileID: 695855937}
   m_Layer: 5
   m_Name: ContinueButton
   m_TagString: Untagged
@@ -1435,7 +1435,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 695855931}
   m_CullTransparentMesh: 1
---- !u!60 &695855935
+--- !u!114 &695855936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 695855931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d9312d381f0eb94fa340b529733662e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mOnSelected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 665581811}
+        m_TargetAssemblyTypeName: ScoreScreen, Assembly-CSharp
+        m_MethodName: OnPayMoney
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _mOnDeselected:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!60 &695855937
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1479,44 +1509,15 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 15.811887, y: 161.18124}
-      - {x: -138.18208, y: 99.99613}
-      - {x: -133.41031, y: -92.01439}
-      - {x: -11.58735, y: -155.49046}
-      - {x: 114.7083, y: -114.929535}
-      - {x: 146.6029, y: 72.25296}
-      - {x: 12.3122635, y: 153.2286}
+    - - {x: 92.57326, y: 119.36041}
+      - {x: 11.0745325, y: 168.3034}
+      - {x: -157.41608, y: 99.38466}
+      - {x: -156.97096, y: 0.93335104}
+      - {x: -147.1079, y: -102.46766}
+      - {x: -11.917051, y: -177.14828}
+      - {x: 123.9991, y: -120.63381}
+      - {x: 157.11862, y: 77.17395}
   m_UseDelaunayMesh: 0
---- !u!114 &695855936
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 695855931}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d9312d381f0eb94fa340b529733662e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mOnSelected:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 665581811}
-        m_TargetAssemblyTypeName: ScoreScreen, Assembly-CSharp
-        m_MethodName: OnPayMoney
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  _mOnDeselected:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &770392698
 GameObject:
   m_ObjectHideFlags: 0
@@ -2743,7 +2744,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0f2d3466ff289aa45abcfb91757d9c6b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 553f46fcf5f51d14aac40daf6b71840e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
