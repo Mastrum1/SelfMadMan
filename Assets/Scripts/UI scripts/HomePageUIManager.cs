@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using AYellowpaper.SerializedCollections;
+using UnityEngine.SceneManagement;
 
 public class HomePageUIManager : MonoBehaviour
 {
@@ -83,5 +84,6 @@ public class HomePageUIManager : MonoBehaviour
     public void DataReset()
     {
         GameManager.instance.Player.DataPlayer.FirstSaveData(GameManager.instance.Player);
+        SceneManager.LoadScene(1);
     }
 }
