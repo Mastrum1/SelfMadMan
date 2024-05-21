@@ -1450,6 +1450,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc9c532f4f12cc84c8844d8c27e5affb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1212587588 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1510358503319939074, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+  m_PrefabInstance: {fileID: 1212587585}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1226963186
 GameObject:
   m_ObjectHideFlags: 0
@@ -2589,11 +2594,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0b12d9535975834db5b9f709e875327, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!328 &2095829754 stripped
-VideoPlayer:
-  m_CorrespondingSourceObject: {fileID: 924866330210954065, guid: 430bcba3b905dce4bafa57219b220e16, type: 3}
-  m_PrefabInstance: {fileID: 1298335060}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2117172997
 GameObject:
   m_ObjectHideFlags: 0
@@ -2643,8 +2643,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scenName: CRYPTO
   _mTimer: {fileID: 1212587587}
-  _cash: {fileID: 2095829754}
-  _sceneCamera: {fileID: 1226963187}
+  _cash: {fileID: 1212587588}
   _loosePanel: {fileID: 1212587586}
   miniGameTime: 10
   cryptoCharts:
