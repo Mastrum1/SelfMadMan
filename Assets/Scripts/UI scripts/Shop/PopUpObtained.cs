@@ -79,6 +79,7 @@ public class PopUpObtained : MonoBehaviour
 
     public void ClosePopup()
     {
+
         _popupObtainedAnimator.SetBool("Open", false);
         StartCoroutine(Close());
     }
@@ -87,5 +88,6 @@ public class PopUpObtained : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         gameObject.SetActive(false);
+        if(TutorialManager.instance.InTutorial) { TutorialManager.instance.StepInit(); }
     }
 }

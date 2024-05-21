@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class ShopManager : MonoBehaviour
 {
@@ -45,6 +44,7 @@ public class ShopManager : MonoBehaviour
 
     private void Start()
     {
+        LoadFurniture(_mFurnitures);
         LoadAllPanels();
         Pulse();
         _mConfirmPurchase._mItemPurchased += HandleItemPurchased;
@@ -59,8 +59,14 @@ public class ShopManager : MonoBehaviour
 
     public void LoadAllPanels()
     {
+        if (TutorialManager.instance.InTutorial && (TutorialManager.instance.StepNbr == 3))
+        {
+            MoneyManager.Instance.AddMoney(100);
+            StartCoroutine(ShopManager.Instance.MoveMoney(ShopManager.Instance.CoinAnim[2]));
+            TutorialManager.instance.StepInit();
+        }
         LoadPanels(_mCoins);
-        LoadFurniture(_mFurnitures);
+        //
     }
 
     public void LoadPanels(ItemsSO[] item)

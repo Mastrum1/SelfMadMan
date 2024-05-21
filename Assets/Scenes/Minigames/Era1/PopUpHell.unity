@@ -346,6 +346,16 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6805509144928125002, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
   m_PrefabInstance: {fileID: 76589270}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &76589272 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6472728062389791406, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+  m_PrefabInstance: {fileID: 76589270}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &76589273 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1510358503319939074, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+  m_PrefabInstance: {fileID: 76589270}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &123656728
 GameObject:
   m_ObjectHideFlags: 0
@@ -1696,11 +1706,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4016385370795344495, guid: 430bcba3b905dce4bafa57219b220e16, type: 3}
   m_PrefabInstance: {fileID: 1398139706}
   m_PrefabAsset: {fileID: 0}
---- !u!328 &1398139708 stripped
-VideoPlayer:
-  m_CorrespondingSourceObject: {fileID: 924866330210954065, guid: 430bcba3b905dce4bafa57219b220e16, type: 3}
-  m_PrefabInstance: {fileID: 1398139706}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1425359843
 GameObject:
   m_ObjectHideFlags: 0
@@ -2152,8 +2157,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scenName: PopUpHell
   _mTimer: {fileID: 1532476827}
-  _cash: {fileID: 1398139708}
-  _sceneCamera: {fileID: 1759891334}
+  _cashGO: {fileID: 76589272}
+  _cash: {fileID: 76589273}
   _loosePanel: {fileID: 1438571919}
   _mSpawner: {fileID: 1425359844}
   _mAnimator: {fileID: 2064201135}
