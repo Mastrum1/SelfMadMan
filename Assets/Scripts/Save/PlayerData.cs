@@ -22,7 +22,7 @@ public class PlayerData
 
     public int BestScore;
 
-    public bool TutorialPlayed;
+    public bool TutorialPlayed = false;
 
     public List<int> UnlockedCinematics = new List<int>();
 
