@@ -19,6 +19,7 @@ public class BusGameManager : MiniGameManager
 
     void Start()
     {
+        Debug.Log("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
         _mAverageSpawnRate = GameManager.instance.Speed / 2;
         StartCoroutine(SpawnBus());
         _mEnterScreen.triggerEnter = BusStartOverride;
