@@ -12,6 +12,13 @@ public class UserInfos : MonoBehaviour
     [SerializeField] private XpBar _mXpBar;
     [SerializeField] private Vector3 _mStartPosition;
 
+    [Header("Money Animation")]
+    [SerializeField] private float _animDuration = 1.0f; // Durée de l'animation en secondes
+
+
+    private int _currentMoney = 0; // Le score actuel affiché
+    public int CurrentMoney { get => _currentMoney; set => _currentMoney = value; }
+    private Coroutine _moneyCoroutine;
     private void Start()
     {
         UpdateMoneyText();
@@ -45,9 +52,39 @@ public class UserInfos : MonoBehaviour
 
     private void UpdateMoneyText()
     {
+        _currentMoney = MoneyManager.Instance.CurrentMoney;
         MoneyManager.Instance.CurrentMoney = GameManager.instance.Player.Money;
+        UpdateMoney(GameManager.instance.Player.Money);
         _mMoneyText.text = MoneyManager.Instance.CurrentMoney.ToString();
         Debug.Log(GameManager.instance.Player.Money.ToString());
+    }
+
+    public void UpdateMoney(float newScore)
+    {
+        if (_moneyCoroutine != null)
+        {
+            StopCoroutine(_moneyCoroutine);
+        }
+        _moneyCoroutine = StartCoroutine(AnimateMoney(_currentMoney, newScore));
+    }
+
+    private IEnumerator AnimateMoney(int startScore, float endScore)
+    {
+        float duration = _animDuration; // Durée de l'animation en secondes
+        float elapsed = 0.0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+            int displayScore = (int)Mathf.Lerp(startScore, endScore, t);
+            _mMoneyText.text = displayScore.ToString();
+            yield return null;
+        }
+
+        _currentMoney = (int)endScore;
+        _mMoneyText.text = _currentMoney.ToString();
+        GameManager.instance.TempMinigameScore = (int)endScore;
     }
 
     private void UpdateLevel()

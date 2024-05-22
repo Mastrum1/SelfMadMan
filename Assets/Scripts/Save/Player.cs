@@ -92,7 +92,8 @@ public class Player : MonoBehaviour
 
     public event Action<PlayerData> OnDataLoad;
 
-    private readonly PlayerData playerData = new PlayerData();
+    private readonly PlayerData _playerData = new PlayerData();
+    public PlayerData PlayerData { get => _playerData; }
 
     private readonly IDataService DataService = new JsonData();
 
@@ -174,7 +175,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private List<MinigameScene> _mAllEra1;
 
-    public PlayerData DataPlayer { get => playerData; }
+    public PlayerData DataPlayer { get => _playerData; }
 
     public List<MinigameScene> AllEra2 { get => _mAllEra2; private set => _mAllEra2 = value; }
 
@@ -191,14 +192,14 @@ public class Player : MonoBehaviour
         if (!CheckFile() || _DeleteOldSave)
         {
             firstSave = true;
-            playerData.FirstSaveData(this);
+            _playerData.FirstSaveData(this);
 
         }
         else
         {
-            playerData.SaveData(this);
+            _playerData.SaveData(this);
         }
-        if (DataService.SaveData("/player-stats.json", playerData, true))
+        if (DataService.SaveData("/player-stats.json", _playerData, true))
         {
             if (firstSave)
             {
