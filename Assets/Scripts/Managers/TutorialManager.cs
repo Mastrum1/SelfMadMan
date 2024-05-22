@@ -98,9 +98,6 @@ public class TutorialManager : MonoBehaviour
         InTutorial = false;
         GameManager.instance.Player.TutorialPlayed = true;
         panel.SetActive(false);
-        mySceneManager.instance.LoadWinScreen();
-        mySceneManager.instance.SetScene("HomePage", mySceneManager.LoadMode.ADDITIVE);
-
     }
 
     public void SetCamera(Camera camera)

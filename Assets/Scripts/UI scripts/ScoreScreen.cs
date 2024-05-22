@@ -99,11 +99,12 @@ public class ScoreScreen : MonoBehaviour
         {
             StopCoroutine(_scoreCoroutine);
         }
-        _scoreCoroutine = StartCoroutine(AnimateScore(_currentScore, newScore));
+        _scoreCoroutine = StartCoroutine(AnimateScore(GameManager.instance.TempMinigameScore, newScore));
     }
 
     private IEnumerator AnimateScore(int startScore, float endScore)
     {
+        Debug.Log(startScore + "start score");
         float duration = _animDuration; // Durée de l'animation en secondes
         float elapsed = 0.0f;
         
@@ -239,6 +240,7 @@ public class ScoreScreen : MonoBehaviour
     }
     public void ResetScreen()
     {
+        _mPauseButton.SetActive(false);
         _UIAnimator.SetBool("EndGame", false);
         _mQuestManager.SetActive(false);
         _mJamesAnimator.SetBool("Idle", true);

@@ -23,7 +23,7 @@ public class RizzHerHand : MonoBehaviour
 
     public void SwipeLeft()
     {
-        if(!_isMoving)
+        if (!_isMoving)
             StartCoroutine(Movement(-340));
     }
 
@@ -35,17 +35,23 @@ public class RizzHerHand : MonoBehaviour
 
     private IEnumerator Movement(int dist)
     {
-        _isMoving = true;
-        Vector3 targetPos = new Vector3(transform.localPosition.x + dist, transform.localPosition.y, transform.localPosition.z);
-        Debug.Log(targetPos);
-        while (transform.localPosition != targetPos)
-        {
-
-            transform.localPosition = Vector3.MoveTowards(transform.localPosition, targetPos, moveSpeed * Time.deltaTime);
-
+        if (transform.localPosition.x + dist >= 341 || transform.localPosition.x + dist < -341)
             yield return null;
+        else
+        {
+            _isMoving = true;
+            Vector3 targetPos = new Vector3(transform.localPosition.x + dist, transform.localPosition.y, transform.localPosition.z);
+            Debug.Log(targetPos);
+            while (transform.localPosition != targetPos)
+            {
+
+                transform.localPosition = Vector3.MoveTowards(transform.localPosition, targetPos, moveSpeed * Time.deltaTime);
+
+                yield return null;
+            }
+            _isMoving = false;
         }
-        _isMoving = false;
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

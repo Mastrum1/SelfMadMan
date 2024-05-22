@@ -84,7 +84,7 @@ public class UserInfos : MonoBehaviour
 
         _currentMoney = (int)endScore;
         _mMoneyText.text = _currentMoney.ToString();
-        GameManager.instance.TempMinigameScore = (int)endScore;
+//GameManager.instance.TempMinigameScore = (int)endScore;
     }
 
     private void UpdateLevel()

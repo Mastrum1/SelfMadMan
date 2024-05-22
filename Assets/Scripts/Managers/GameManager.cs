@@ -121,6 +121,7 @@ public class GameManager : MonoBehaviour
 
     public void OnGameStart()
     {
+        _TempMinigameScore = 0;
         if (_mErasData[Era].Unlocked)
         {
             ResetGame();
