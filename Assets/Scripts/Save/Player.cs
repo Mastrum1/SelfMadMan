@@ -92,7 +92,8 @@ public class Player : MonoBehaviour
 
     public event Action<PlayerData> OnDataLoad;
 
-    private readonly PlayerData playerData = new PlayerData();
+    private readonly PlayerData _playerData = new PlayerData();
+    public PlayerData PlayerData { get => _playerData; }
 
     private readonly IDataService DataService = new JsonData();
 
@@ -191,14 +192,14 @@ public class Player : MonoBehaviour
         if (!CheckFile() || _DeleteOldSave)
         {
             firstSave = true;
-            playerData.FirstSaveData(this);
+            _playerData.FirstSaveData(this);
 
         }
         else
         {
-            playerData.SaveData(this);
+            _playerData.SaveData(this);
         }
-        if (DataService.SaveData("/player-stats.json", playerData, true))
+        if (DataService.SaveData("/player-stats.json", _playerData, true))
         {
             if (firstSave)
             {
