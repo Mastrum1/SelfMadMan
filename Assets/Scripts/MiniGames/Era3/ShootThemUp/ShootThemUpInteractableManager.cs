@@ -10,8 +10,8 @@ public class ShootThemUpInteractableManager : InteractableManager
     [SerializeField] private List<MoveParachutistes> _Parachutistes;
     [SerializeField] private List<MoveEcolo> _Ecolo;
 
-    public int NumOfEcoloHit => _numOfEcoloHit;
-    private int _numOfEcoloHit;
+    public int Score => _score;
+    private int _score;
     private void Start()
     {
         for (int i = 0; i < _Ecolo.Count; i++)
@@ -29,7 +29,7 @@ public class ShootThemUpInteractableManager : InteractableManager
 
     private void IncrementHit()
     {
-        _numOfEcoloHit++;
+        _score += 10;
     }
 
     void HandleEndGame(bool win)

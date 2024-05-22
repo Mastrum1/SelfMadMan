@@ -9,6 +9,9 @@ public class GetTheFlourInteractablemanager : InteractableManager
     [SerializeField] private List<FlourBag> _flourBags;
 
     private int _numBagsToSpawn;
+
+    public int Score => _score;
+    private int _score;
     private void Start()
     {
         _numBagsToSpawn = 4 + GameManager.instance.FasterLevel;
@@ -21,7 +24,13 @@ public class GetTheFlourInteractablemanager : InteractableManager
         {
             _flourBags[i].gameObject.SetActive(true);
             _flourBags[i].OnLose += HandleLose;
+            _flourBags[i].OnBagGrabbed += IncrementNumBagsGrabbed;
         }
+    }
+
+    private void IncrementNumBagsGrabbed()
+    {
+        _score += 5;
     }
 
     private void HandleLose()

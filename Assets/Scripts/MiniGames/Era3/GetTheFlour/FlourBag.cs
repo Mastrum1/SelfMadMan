@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 public class FlourBag : MonoBehaviour
 {
     public event Action OnLose;
+    public event Action OnBagGrabbed;
     
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private GameObject _leftMaxSpawn;
@@ -20,6 +21,7 @@ public class FlourBag : MonoBehaviour
     {
         if (other.CompareTag("James"))
         {
+            OnBagGrabbed?.Invoke();
             _James.GetComponent<VFXScaleUp>().OnObjectClicked();
             _rigidbody.velocity = Vector2.zero;
             _rigidbody.angularVelocity = 0f;

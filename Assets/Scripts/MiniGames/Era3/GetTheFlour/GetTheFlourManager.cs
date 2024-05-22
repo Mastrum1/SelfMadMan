@@ -12,7 +12,7 @@ public class GetTheFlourGameManager : MiniGameManager
     public override void Update()
     {
         if (_mTimer.TimerValue == 0 && _gameIsPlaying)
-            EndMiniGame(true, 0);
+            EndMiniGame(true, miniGameScore + _interactablemanager.Score);
     }
     
     private void EndGame(bool win)
