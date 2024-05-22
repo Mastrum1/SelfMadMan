@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEditor.Rendering.LookDev;
 
 public class ContentManager : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class ContentManager : MonoBehaviour
     [SerializeField] private HomePageUIManager _mHomePageUIManager;
     [SerializeField] private FurnitureManager _mFurnitureManager;
     [SerializeField] private GameObject[] _MenuGameObjects;
+    [SerializeField] private GameObject[] _SwapButtons;
 
     [Header("Content Viewport")]
     [SerializeField] private Image _mBaseImage;
@@ -56,18 +58,45 @@ public class ContentManager : MonoBehaviour
     {
         if (!IsUnlocking)
         {
-            _mCurrentIndex = (_mCurrentIndex + i + _mBackgrounds.Count) % _mBackgrounds.Count;
+            int newIndex = (_mCurrentIndex + i + _mBackgrounds.Count) % _mBackgrounds.Count;
+
+            if ((_mCurrentIndex == 0 && newIndex == 2) || ((_mCurrentIndex == 2 && newIndex == 0)))
+            {
+                Debug.Log("Direct swap between Era 1 and Era 3 is not allowed.");
+                return;
+            }
+
+            _mCurrentIndex = newIndex;
             GameManager.instance.Era = _mCurrentIndex + 1;
             _mFurnitureManager.SetEra(GameManager.instance.Era);
             bool eraunlocked = GameManager.instance.ErasData[GameManager.instance.Era].Unlocked ? true : false;
             _mLockEraPanel.SetActive(!eraunlocked);
             _mLockPrice.text = GameManager.instance.ErasData[GameManager.instance.Era]._price.ToString();
             _mHomePageUIManager.MenuUIDictionnary[_MenuGameObjects[(int)MENUS.EraMinigames]] = eraunlocked;
+            _mText.text = "Era " + (_mCurrentIndex + 1);
 
             foreach (var go in _mLockObjects)
                 go.SetActive(!eraunlocked);
 
             ShowContent();
+            EnableArrow();
+        }
+    }
+
+    public void EnableArrow()
+    {
+        if (_mCurrentIndex == 0)
+        {
+            _SwapButtons[0].SetActive(false);
+        }
+        else if ( _mCurrentIndex == 2) 
+        {
+            _SwapButtons[1].SetActive(false);
+        }
+        else
+        {
+            _SwapButtons[0].SetActive(true);
+            _SwapButtons[1].SetActive(true);
         }
     }
 

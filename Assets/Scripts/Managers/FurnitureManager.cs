@@ -75,10 +75,6 @@ public class FurnitureManager : MonoBehaviour
         {
             FurnitureList[furnitureIndex].PickFurniture(GameManager.instance.Era);
         }
-
-
-
-
     }
 
     public void UnlockFurniture(string name)
@@ -130,5 +126,4 @@ public class FurnitureManager : MonoBehaviour
         foreach (int index in ActiveFurnitures)
             FurnitureList[index].PickFurniture(era);
     }
-
 }
