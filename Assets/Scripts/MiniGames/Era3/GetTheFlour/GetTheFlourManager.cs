@@ -1,13 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class GetTheFlourGameManager : MiniGameManager
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GetTheFlourInteractablemanager _interactablemanager;
+
+    private void Start()
     {
-        
+        _interactablemanager.OnLoseGame += EndGame;
     }
     
+    private void EndGame(bool win)
+    {
+        EndMiniGame(win, miniGameScore);
+    }
+
+    private void OnDestroy()
+    {
+        _interactablemanager.OnLoseGame -= EndGame;
+    }
 }
