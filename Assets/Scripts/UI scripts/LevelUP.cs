@@ -5,7 +5,6 @@ using UnityEngine;
 public class LevelUP : MonoBehaviour
 {
     [SerializeField] private LevelSO[] _mLevelSO;
-    [SerializeField] private MoneyManager _mMoney;
 
     [Header("UI Elements")]
     [SerializeField] private TMPro.TextMeshProUGUI _mLevelText;
@@ -20,7 +19,7 @@ public class LevelUP : MonoBehaviour
     public void OnLevelUP()
     {
         CheckLevelUP(GameManager.instance.Player.Level);
-        _mMoney.AddMoney(_mLevelSO[GameManager.instance.Player.Level].Reward);
+        MoneyManager.Instance.AddMoney(_mLevelSO[GameManager.instance.Player.Level].Reward);
     }
 
     public void CheckLevelUP(int level)
