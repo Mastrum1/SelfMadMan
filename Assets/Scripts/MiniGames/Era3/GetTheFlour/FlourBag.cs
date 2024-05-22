@@ -21,17 +21,22 @@ public class FlourBag : MonoBehaviour
         if (other.CompareTag("James"))
         {
             _James.GetComponent<VFXScaleUp>().OnObjectClicked();
+            _rigidbody.velocity = Vector2.zero;
+            _rigidbody.angularVelocity = 0f;
             StartCoroutine(Respawn());
             return;
         }
-        
-        OnLose?.Invoke();
+
+        if (other.CompareTag("Ground"))
+        {
+            OnLose?.Invoke();
+        }
     }
 
     IEnumerator Respawn()
     {
         transform.position = new Vector3(Random.Range(_leftMaxSpawn.transform.position.x, _rightMaxSpawn.transform.position.x), _rightMaxSpawn.transform.position.y);
-        yield return new WaitForSeconds(Random.Range(0.2f, 3f));
+        yield return new WaitForSeconds(Random.Range(0.01f, 5f));
         _rigidbody.AddForce(new Vector2(0,-100 + -GameManager.instance.FasterLevel * 10)); 
     }
 

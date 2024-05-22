@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class GetTheFlourGameManager : MiniGameManager
@@ -8,6 +7,12 @@ public class GetTheFlourGameManager : MiniGameManager
     private void Start()
     {
         _interactablemanager.OnLoseGame += EndGame;
+    }
+    
+    public override void Update()
+    {
+        if (_mTimer.TimerValue == 0 && _gameIsPlaying)
+            EndMiniGame(true, 0);
     }
     
     private void EndGame(bool win)
