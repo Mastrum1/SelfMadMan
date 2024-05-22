@@ -11,7 +11,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
-        if(!TutorialManager.instance.InTutorial)
+        if (!TutorialManager.instance.InTutorial)
         {
             Time.timeScale = 0;
             StartCoroutine(CheckOpenPause());

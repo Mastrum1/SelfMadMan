@@ -24,16 +24,19 @@ public class MaskSpawner : MonoBehaviour
     {
         _mParent.gameObject.SetActive(true);
         Vector3 spriteSize = _mCollider.bounds.size;  //_mStatue.bounds.size;
-        Vector3 startPos =  _mCollider.bounds.min; //_mStatue.bounds.min;
+        Vector3 startPos = _mCollider.bounds.min; //_mStatue.bounds.min;
 
         int columns = Mathf.CeilToInt(spriteSize.x / _mSpacing);
         int rows = Mathf.CeilToInt(spriteSize.y / _mSpacing);
-        
+
         _mObjectsToClean = GameObject.FindGameObjectsWithTag("ToClean").ToList<GameObject>();
-        for (int i = 0; i < columns; i++) {
-            for (int j = 0; j < rows; j++) {
+        for (int i = 0; i < columns; i++)
+        {
+            for (int j = 0; j < rows; j++)
+            {
                 Vector3 position = startPos + new Vector3((i * _mSpacing), j * _mSpacing, 0);
-                if (IsSuitableForSpawn(position)) {
+                if (IsSuitableForSpawn(position))
+                {
                     GameObject mObject = Instantiate(_mObjectMask, position, Quaternion.identity);
                     mObject.transform.SetParent(_mParent.transform, true);
                     mObject.SetActive(true);
@@ -54,11 +57,15 @@ public class MaskSpawner : MonoBehaviour
 
     void Update()
     {
-        _mPercent = (_mObjectTotal - _mObjectRemain ) * 100 / _mObjectTotal;
+        _mPercent = (_mObjectTotal - _mObjectRemain) * 100 / _mObjectTotal;
         _mPercentageText.text = _mPercent.ToString() + "%";
-        
-        if (_mPercent == 100)
+
+        if (_mPercent == 99)
+        {
+            _mPercentageText.text = "100%";
             OnCompleted?.Invoke();
+        }
+
     }
 
     void OnRemove()
