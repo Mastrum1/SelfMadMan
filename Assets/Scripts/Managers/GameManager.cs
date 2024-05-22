@@ -175,17 +175,10 @@ public class GameManager : MonoBehaviour
         if (!_mGameOver)
             StartCoroutine(ContinueMinigames());
     }
-    public void ContinueWithHeart()
+    public void ContinueGame()
     {
         _mGameOver = false;
         _mHearts++;
-        _mMinigameCount = 1;
-        StartCoroutine(ContinueMinigames());
-    }
-
-    public void ContinueWithMoney()
-    {
-        _mGameOver = false;
         _mMinigameCount = 1;
         StartCoroutine(ContinueMinigames());
     }
