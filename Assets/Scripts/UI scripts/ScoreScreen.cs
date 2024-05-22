@@ -26,6 +26,11 @@ public class ScoreScreen : MonoBehaviour
     [SerializeField] private TMP_Text _bestScore;
     [SerializeField] private TMP_Text _coinsEarned;
 
+
+    [Header("Score Animation")]
+    [SerializeField] private float _animDuration = 1.0f; // Durée de l'animation en secondes
+
+
     [Header("Scripts")]
     [SerializeField] private PanelOnClick _mPanelOnClick;
     [SerializeField] private QuestView _mQuestView;
@@ -37,6 +42,10 @@ public class ScoreScreen : MonoBehaviour
     [SerializeField] private RectTransform _mCoin;
     [SerializeField] private GameObject _mWinScreenBG;
     [SerializeField] private Camera _camera;
+
+    private int _currentScore = 0; // Le score actuel affiché
+    public int CurrentScore { get => _currentScore; set => _currentScore = value; }
+    private Coroutine _scoreCoroutine;
 
     private int Timer = 5;
 
@@ -61,9 +70,9 @@ public class ScoreScreen : MonoBehaviour
     void OnWinScreenDisplay(bool won, int era, int hearts, bool gameOver)
     {
         Debug.Log(hearts);
-
-        _mscoreTexts.text = GameManager.instance.Score.ToString();
-        _mWinScreenBG.SetActive(true);
+        _currentScore = GameManager.instance.TempMinigameScore;
+        UpdateScore(GameManager.instance.Score);
+         _mWinScreenBG.SetActive(true);
         _mMnigameCountTexts.text = "GAMES COMPLETED : " + GameManager.instance.MinigamesWon.ToString();
         _HeartAnimator.SetInteger("Hearts", hearts);
         _mJamesAnimator.SetBool("Idle", false);
@@ -80,6 +89,34 @@ public class ScoreScreen : MonoBehaviour
         {
             StartCoroutine(ResetCharacter());
         }
+    }
+
+    public void UpdateScore(float newScore)
+    {
+        if (_scoreCoroutine != null)
+        {
+            StopCoroutine(_scoreCoroutine);
+        }
+        _scoreCoroutine = StartCoroutine(AnimateScore(_currentScore, newScore));
+    }
+
+    private IEnumerator AnimateScore(int startScore, float endScore)
+    {
+        float duration = _animDuration; // Durée de l'animation en secondes
+        float elapsed = 0.0f;
+        
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+            int displayScore = (int)Mathf.Lerp(startScore, endScore, t);
+            _mscoreTexts.text = displayScore.ToString();
+            yield return null;
+        }
+
+        _currentScore = (int)endScore;
+        _mscoreTexts.text = _currentScore.ToString();
+        GameManager.instance.TempMinigameScore = (int)endScore;
     }
 
     void OnPanelClicked()
