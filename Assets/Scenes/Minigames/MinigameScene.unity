@@ -269,6 +269,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7207566642935647617, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1759891334}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -277,6 +281,16 @@ PrefabInstance:
 --- !u!4 &76589271 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6805509144928125002, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+  m_PrefabInstance: {fileID: 76589270}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &76589272 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1510358503319939074, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+  m_PrefabInstance: {fileID: 76589270}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &76589273 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6472728062389791406, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
   m_PrefabInstance: {fileID: 76589270}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &620197490 stripped
@@ -548,8 +562,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scenName: Context Screen Sample
   _mTimer: {fileID: 1492443067}
-  _cashGO: {fileID: 0}
-  _cash: {fileID: 0}
+  _cashGO: {fileID: 76589273}
+  _cash: {fileID: 76589272}
   _loosePanel: {fileID: 1438571919}
 --- !u!4 &1940354303
 Transform:

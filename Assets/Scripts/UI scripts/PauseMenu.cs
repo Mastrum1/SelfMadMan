@@ -11,8 +11,11 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
-        Time.timeScale = 0;
-        StartCoroutine(CheckOpenPause());
+        if(!TutorialManager.instance.InTutorial)
+        {
+            Time.timeScale = 0;
+            StartCoroutine(CheckOpenPause());
+        }
     }
 
     public void Resume()
@@ -32,7 +35,10 @@ public class PauseMenu : MonoBehaviour
 
     public void DisableInput()
     {
-        _mInputManager.enabled = false;
+        if (!TutorialManager.instance.InTutorial)
+        {
+            _mInputManager.enabled = false;
+        }
     }
 
     public void EnableInput() 
