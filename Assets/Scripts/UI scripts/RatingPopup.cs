@@ -45,7 +45,7 @@ public class RatingPopup : MonoBehaviour
             GameManager.instance.Rated = true;
             CloseRateUs();
         }
-        else
+        else if ( _mCurrentRating <= 2)
         {
             Application.OpenURL("https://selfmadman.fr/");
             GameManager.instance.Rated = true;
