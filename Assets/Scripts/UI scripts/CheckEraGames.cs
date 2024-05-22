@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CheckEraGames : MonoBehaviour
@@ -22,9 +23,9 @@ public class CheckEraGames : MonoBehaviour
     [SerializeField] private List<CheckEraGamesTemplate> _mMinigameContainerList;
 
     [Header("Minigames SO")]
-    [SerializeField] private List<MinigameSO> _mEra1;
-    [SerializeField] private List<MinigameSO> _mEra2;
-    [SerializeField] private List<MinigameSO> _mEra3;
+    [SerializeField] private MinigameSO[] _mEra1;
+    [SerializeField] private MinigameSO[] _mEra2;
+    [SerializeField] private MinigameSO[] _mEra3;
 
     private void OnEnable()
     {
@@ -38,14 +39,90 @@ public class CheckEraGames : MonoBehaviour
         CheckEra();
     }
 
-    public void CheckUnlockedMinigames(List<MinigameSO> Era)
+    public void CheckUnlockedMinigames(MinigameSO[] Era)
     {
-        for (int i = 0; i < Era.Count; i++)
-        {
-            _mMinigameContainerList[i].EraGameName.text = Era[i].ItemName;
-            _mMinigameContainerList[i].EraGameIcon.sprite = Era[i].Icon;
+        for (int i = 0; i < Era.Length; i++) 
+        { 
+            if (Era == _mEra1)
+            {
+                foreach (var mini in MiniGameSelector.instance.Era1)
+                {
+                    if (_mEra1[i].MinigameScene == mini.SceneName)
+                    {
+                        _mMinigameContainerList[i].EraGameName.text = _mEra1[i].ItemName;
+                        _mMinigameContainerList[i].EraGameIcon.sprite = _mEra1[i].Icon;
 
-            
+                        if (!mini.Locked)
+                        {
+                            _mMinigameContainerList[i].QuestIconBG.color = _mBGIconColors[0];
+                            _mMinigameContainerList[i].EraGameName.color = _mBGIconColors[2];
+                            _mMinigameContainerList[i].EraGameIcon.color = _mBGIconColors[2];
+                            _mUnlockedMinigames++;
+                        }
+
+                        else if (mini.Locked)
+                        {
+                            _mMinigameContainerList[i].QuestIconBG.color = _mBGIconColors[1];
+                            _mMinigameContainerList[i].EraGameName.color = _mBGIconColors[3];
+                            _mMinigameContainerList[i].EraGameIcon.color = _mBGIconColors[3];
+                        }
+                    }
+                }
+            }
+
+            if (Era == _mEra2)
+            {
+                foreach (var mini in MiniGameSelector.instance.Era2)
+                {
+                    if (_mEra2[i].MinigameScene == mini.SceneName)
+                    {
+                        _mMinigameContainerList[i].EraGameName.text = _mEra2[i].ItemName;
+                        _mMinigameContainerList[i].EraGameIcon.sprite = _mEra2[i].Icon;
+
+                        if (!mini.Locked)
+                        {
+                            _mMinigameContainerList[i].QuestIconBG.color = _mBGIconColors[0];
+                            _mMinigameContainerList[i].EraGameName.color = _mBGIconColors[2];
+                            _mMinigameContainerList[i].EraGameIcon.color = _mBGIconColors[2];
+                            _mUnlockedMinigames++;
+                        }
+
+                        else if (mini.Locked)
+                        {
+                            _mMinigameContainerList[i].QuestIconBG.color = _mBGIconColors[1];
+                            _mMinigameContainerList[i].EraGameName.color = _mBGIconColors[3];
+                            _mMinigameContainerList[i].EraGameIcon.color = _mBGIconColors[3];
+                        }
+                    }
+                }
+            }
+
+            if (Era == _mEra3)
+            {
+                foreach (var mini in MiniGameSelector.instance.Era3)
+                {
+                    if (_mEra3[i].MinigameScene == mini.SceneName)
+                    {
+                        _mMinigameContainerList[i].EraGameName.text = _mEra3[i].ItemName;
+                        _mMinigameContainerList[i].EraGameIcon.sprite = _mEra3[i].Icon;
+                        
+                        if (!mini.Locked)
+                        {
+                            _mMinigameContainerList[i].QuestIconBG.color = _mBGIconColors[0];
+                            _mMinigameContainerList[i].EraGameName.color = _mBGIconColors[2];
+                            _mMinigameContainerList[i].EraGameIcon.color = _mBGIconColors[2];
+                            _mUnlockedMinigames++;
+                        }
+
+                        else if (mini.Locked)
+                        {
+                            _mMinigameContainerList[i].QuestIconBG.color = _mBGIconColors[1];
+                            _mMinigameContainerList[i].EraGameName.color = _mBGIconColors[3];
+                            _mMinigameContainerList[i].EraGameIcon.color = _mBGIconColors[3];
+                        }
+                    }
+                }
+            }
         }
     }
 
