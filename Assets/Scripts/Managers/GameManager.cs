@@ -22,6 +22,9 @@ public class GameManager : MonoBehaviour
     private int _fasterLevel;
     public int FasterLevel { get => _fasterLevel; set => _fasterLevel = value; }
 
+    private int _TempMinigameScore = 0;
+    public int TempMinigameScore { get => _TempMinigameScore; set => _TempMinigameScore = value; }
+
     [SerializeField] private Player _mPlayer;
     public Player Player { get => _mPlayer; }
 
@@ -71,6 +74,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        _TempMinigameScore = 0;
         Application.targetFrameRate = 60;
 
         if (instance == null)
@@ -100,6 +104,7 @@ public class GameManager : MonoBehaviour
 
     public void ResetGame()
     {
+        _TempMinigameScore = 0;
         _mScore = 0;
         _mHearts = 3;
         Speed = 10;
