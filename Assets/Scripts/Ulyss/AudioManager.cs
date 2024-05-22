@@ -125,4 +125,9 @@ public class AudioManager : MonoBehaviour
 
         _mSfxSource.volume = targetVolume;
     }
+
+    private void Start()
+    {
+        PlayMusic(0);
+    }
 }
