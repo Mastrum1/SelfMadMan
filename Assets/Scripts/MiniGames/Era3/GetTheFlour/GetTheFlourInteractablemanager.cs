@@ -8,16 +8,16 @@ public class GetTheFlourInteractablemanager : InteractableManager
     
     [SerializeField] private List<FlourBag> _flourBags;
 
-    private int numBagsToSpawn;
+    private int _numBagsToSpawn;
     private void Start()
     {
-        numBagsToSpawn = 4 + GameManager.instance.FasterLevel;
-        if (numBagsToSpawn >= 10)
+        _numBagsToSpawn = 4 + GameManager.instance.FasterLevel;
+        if (_numBagsToSpawn >= 10)
         {
-            numBagsToSpawn = 10;
+            _numBagsToSpawn = 10;
         }
         
-        for (var i = 0; i < numBagsToSpawn; i++)
+        for (var i = 0; i < _numBagsToSpawn; i++)
         {
             _flourBags[i].gameObject.SetActive(true);
             _flourBags[i].OnLose += HandleLose;
@@ -31,7 +31,7 @@ public class GetTheFlourInteractablemanager : InteractableManager
 
     private void OnDestroy()
     {
-        for (var i = 0; i < numBagsToSpawn; i++)
+        for (var i = 0; i < _numBagsToSpawn; i++)
         {
             _flourBags[i].OnLose -= HandleLose;
         }
