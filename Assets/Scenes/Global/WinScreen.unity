@@ -1247,6 +1247,7 @@ MonoBehaviour:
   _mPopup: {fileID: 1494979386}
   _InputManager: {fileID: 1123041865}
   _mQuestManager: {fileID: 652794128}
+  _mPauseButton: {fileID: 1882027590}
   _mCoin: {fileID: 1530345762}
   _mWinScreenBG: {fileID: 1099811292}
   _camera: {fileID: 1652736593}
@@ -2030,6 +2031,10 @@ PrefabInstance:
     - target: {fileID: 5990196176655351961, guid: 32c7e4ce4a13b314f804c624bea8fa11, type: 3}
       propertyPath: m_Name
       value: PauseMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 6600942341652926902, guid: 32c7e4ce4a13b314f804c624bea8fa11, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 155.19995
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4704,7 +4709,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1882027591
 RectTransform:
   m_ObjectHideFlags: 0
