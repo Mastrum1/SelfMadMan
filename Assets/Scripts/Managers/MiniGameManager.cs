@@ -59,8 +59,7 @@ public class MiniGameManager : MonoBehaviour
             _questManager.CheckQuestCompletion(quest);
         }
 
-        score += _mTimer.TimerValue * 10;
-        
+        score += won ? _mTimer.TimerValue * 10 : 0;
         StartCoroutine(StartAnim(won, score, timeout));
     }
 
