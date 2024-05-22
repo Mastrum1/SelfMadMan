@@ -36,7 +36,8 @@ public class BrushMovement : MonoBehaviour
         if (_mIsStop)
             return;
         mPos.z = 0;
-        if (_mBrush.activeInHierarchy) {
+        if (_mBrush.activeInHierarchy)
+        {
             _mBrush.transform.position = mPos;
             CheckGarbage();
         }
@@ -49,14 +50,16 @@ public class BrushMovement : MonoBehaviour
 
     void CheckGarbage()
     {
-        Collider2D [] obj = Physics2D.OverlapBoxAll(this.transform.position,  new Vector2(0.6f, 0.3f), 0);
+        Collider2D[] obj = Physics2D.OverlapBoxAll(this.transform.position, new Vector2(0.6f, 0.3f), 0);
         for (int i = 0; i < obj.Length; i++)
-            if(obj[i].gameObject.CompareTag("ToClean")) {
-                if (UnityEngine.Random.value < 0.1f) {
-                GameObject _mBubbles = BubblesPool.BubblesSharedInstance.GetBubbles();
-                _mBubbles.transform.position = obj[i].transform.position;
-                _mBubbles.transform.localScale = _mBubbles.transform.localScale * UnityEngine.Random.Range(1, 2);
-                _mBubbles.SetActive(true);
+            if (obj[i].gameObject.CompareTag("ToClean"))
+            {
+                if (UnityEngine.Random.value < 0.1f)
+                {
+                    GameObject _mBubbles = BubblesPool.BubblesSharedInstance.GetBubbles();
+                    _mBubbles.transform.position = obj[i].transform.position;
+                    _mBubbles.transform.localScale = _mBubbles.transform.localScale * UnityEngine.Random.Range(1, 2);
+                    _mBubbles.SetActive(true);
                 }
                 obj[i].gameObject.SetActive(false);
                 _audioManager.PlaySFX(0);
