@@ -16,8 +16,17 @@ public class ShopTemplate : MonoBehaviour
     public Image ImageItem { get => _mImageItem; private set => _mImageItem = value; }
     [SerializeField] private Image _mImageItem;
 
+    public Sprite Nothing { get => _mNothingImage; private set => _mNothingImage = value; }
+    [SerializeField] private Sprite _mNothingImage;
+
     public Image PurchaseBox { get => _mPurchaseBox; private set => _mPurchaseBox = value; }
     [SerializeField] private Image _mPurchaseBox;
+
+    public Sprite PurchaseBoxON { get => _mPurchaseBoxON; private set => _mPurchaseBoxON = value; }
+    [SerializeField] private Sprite _mPurchaseBoxON;
+
+    public Sprite PurchaseBoxOFF { get => _mPurchaseBoxOff; private set => _mPurchaseBoxOff = value; }
+    [SerializeField] private Sprite _mPurchaseBoxOff;
 
     public ItemsSO.TYPE Type { get => _mType; set => _mType = value; }
     [SerializeField] private ItemsSO.TYPE _mType;
@@ -25,7 +34,10 @@ public class ShopTemplate : MonoBehaviour
     public BoxCollider2D TemplateBox { get => _mTemplateBox; private set => _mTemplateBox = value; }
     [SerializeField] private BoxCollider2D _mTemplateBox;
 
-    [SerializeField] private bool Purchasable;
+    public ItemsSO ItemInfo { get => _mItemSO; set => _mItemSO = value; }
+    [SerializeField] private ItemsSO _mItemSO;
+
+    public bool Purchasable;
 
     private void OnEnable()
     {
@@ -36,13 +48,25 @@ public class ShopTemplate : MonoBehaviour
     {
         if (Purchasable)
         {
-            _mPurchaseBox.color = new Color(1, 1, 1, 1f);
+            _mPurchaseBox.sprite = PurchaseBoxON;
             _mTemplateBox.enabled = true;
+            _mCostText.color = new Color(246, 243, 209, 255);
         }
-        else
+        else if (!Purchasable)
         {
-            _mPurchaseBox.color = new Color(1, 1, 1, 0.5f);
+            _mPurchaseBox.sprite = PurchaseBoxOFF;
             _mTemplateBox.enabled = false;
+            _mCostText.color = new Color(171, 170, 165, 255);
         }
+    }
+
+    private int TextToInt(TMP_Text tmpText)
+    {
+        int result = 0;
+        if (tmpText != null)
+        {
+            int.TryParse(tmpText.text, out result);
+        }
+        return result;
     }
 }

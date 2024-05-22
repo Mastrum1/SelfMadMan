@@ -9,6 +9,12 @@ public class RatingPopup : MonoBehaviour
     [SerializeField] private Image[] _mStarIcons;
     [SerializeField] private Sprite _mStarIconFilled;
     [SerializeField] private Sprite _mStarIconEmpty;
+    [SerializeField] private Animator _mRatingAnim;
+
+    private void Start()
+    {
+        PopUP();
+    }
 
     public void Rating(int starIndex)
     {
@@ -35,11 +41,45 @@ public class RatingPopup : MonoBehaviour
     {
         if (_mCurrentRating >= 3)
         {
-            //Redirect to the store
+            Application.OpenURL("https://apps.apple.com/us/app/self-mad-man-become-a-chad/id6479361111?platform=iphone");
+            GameManager.instance.Rated = true;
+            CloseRateUs();
         }
         else
         {
             Application.OpenURL("https://selfmadman.fr/");
+            GameManager.instance.Rated = true;
+            CloseRateUs();
         }
+    }
+
+    public void PopUP()
+    {
+        int r = Random.Range(0, 10);
+        if (GameManager.instance.FirstGamePlayed == true)
+        {
+            if (r == 3)
+            {
+                if (GameManager.instance.Rated == false)
+                {
+                    OpenRateUs();
+                    
+                }
+                else
+                {
+                    return;
+                }
+            }
+        }
+    }
+
+    public void OpenRateUs()
+    {
+        _mRatingAnim.SetBool("Open", true);
+    }
+
+    public void CloseRateUs()
+    {
+        _mRatingAnim.SetBool("Open", false);
     }
 }

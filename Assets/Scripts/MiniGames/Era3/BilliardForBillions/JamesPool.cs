@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -13,10 +14,19 @@ public class JamesPool : MonoBehaviour
     [SerializeField] private GameObject _queueEndPos;
     [SerializeField] private GameObject _fillBarStartPos;
     [SerializeField] private GameObject _fillBarMaxPos;
-
+    [SerializeField] private GameObject _shootLine;
+    [SerializeField] private SpriteRenderer _shootLineSpriteRenderer;
+        
     private bool _hasShot;
     private bool _isHolding;
     private bool _isPulling;
+
+    private void Start()
+    {
+        _shootLineSpriteRenderer.material.SetVector("_Fade_Distance", 
+            new Vector4(4.6f, -23 + GameManager.instance.FasterLevel));
+    }
+
     private void Update()
     {
         if (!_isHolding) return;
@@ -91,7 +101,9 @@ public class JamesPool : MonoBehaviour
     {
         _isHolding = false;
         var force = Vector3.Distance(_queueStartPos.transform.position, _queue.transform.position);
+        _shootLine.SetActive(false);
         _cueBall.GetComponent<Rigidbody2D>().AddForce(transform.up * (force * 1000));
+        _cueBall.transform.GetChild(0).gameObject.SetActive(true);
         _queue.transform.position = _queueStartPos.transform.position;
         _hasShot = true;
     }

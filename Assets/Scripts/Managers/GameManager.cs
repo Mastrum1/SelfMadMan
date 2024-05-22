@@ -66,6 +66,9 @@ public class GameManager : MonoBehaviour
 
     public event Action<bool, int, int, bool> WinScreenHandle;
 
+    public bool FirstGamePlayed = false;
+    public bool Rated = false;
+
     private void Awake()
     {
         Application.targetFrameRate = 60;
@@ -140,7 +143,7 @@ public class GameManager : MonoBehaviour
 
     private void Faster()
     {
-        mySceneManager.instance.SetScene(FasterScene, mySceneManager.LoadMode.ADDITIVE);
+        mySceneManager.instance.LoadFasterScreen();
         FasterLevel++;
         Speed *= 0.8f;
     }
@@ -172,13 +175,14 @@ public class GameManager : MonoBehaviour
         if (!_mGameOver)
             StartCoroutine(ContinueMinigames());
     }
-    public void ContinueWithHeart()
+    public void ContinueGame()
     {
         _mGameOver = false;
         _mHearts++;
         _mMinigameCount = 1;
         StartCoroutine(ContinueMinigames());
     }
+
     public IEnumerator ContinueMinigames()
     {
         yield return new WaitForSeconds(2f);
@@ -212,8 +216,11 @@ public class GameManager : MonoBehaviour
     {
         if (!hasFocus)
         {
-            _mPlayer.SaveJson();
-            _mLostFocusTime = System.DateTime.Now.Minute;
+            if (_mPlayer.TutorialPlayed)
+            {
+                _mPlayer.SaveJson();
+                _mLostFocusTime = System.DateTime.Now.Minute;
+            }
         }
         if (hasFocus)
         {
@@ -233,7 +240,10 @@ public class GameManager : MonoBehaviour
 
     void OnApplicationQuit()
     {
-        _mPlayer.SaveJson();
+        if (_mPlayer.TutorialPlayed)
+        {
+            _mPlayer.SaveJson();
+        }
 
     }
     private void OnDestroy()

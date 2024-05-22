@@ -30,7 +30,7 @@ public class Timer : MonoBehaviour
     public void Start()
     {
         startPosition = Square.anchoredPosition;
-        targetPosition = new Vector2(-600f, Square.anchoredPosition.y);
+        targetPosition = new Vector2(-400f, Square.anchoredPosition.y);
     }
     public void ResetTimer(float time)
     {

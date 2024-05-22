@@ -22,7 +22,6 @@ public class BusGameManager : MiniGameManager
     void Start()
     {
         _audioManager = AudioManager.Instance;
-
         _mAverageSpawnRate = GameManager.instance.Speed / 2;
         StartCoroutine(SpawnBus());
         _mEnterScreen.triggerEnter = BusStartOverride;

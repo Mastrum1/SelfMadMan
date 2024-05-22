@@ -36,6 +36,7 @@ public class ScoreScreen : MonoBehaviour
     [SerializeField] private GameObject _mQuestManager;
     [SerializeField] private RectTransform _mCoin;
     [SerializeField] private GameObject _mWinScreenBG;
+    [SerializeField] private Camera _camera;
 
     private int Timer = 5;
 
@@ -101,9 +102,27 @@ public class ScoreScreen : MonoBehaviour
             _HeartAnimator.SetBool("Revived", true);
             _InputManager.SetActive(false);
             StartCoroutine(ResetCharacter());
-            GameManager.instance.ContinueWithHeart();
+            GameManager.instance.ContinueGame();
         }
 
+    }
+
+    public void OnPayMoney()
+    {
+        if (GameManager.instance.Player.Money >= 50)
+        {
+            _mContinue = true;
+            Timer = 5;
+            _mPopupClosed = true;
+            _UIAnimator.SetBool("DisplayPopUp", false);
+            StartCoroutine(OnContinueAnim());
+            _HeartAnimator.SetInteger("Hearts", 1);
+            _HeartAnimator.SetBool("Revived", true);
+            _InputManager.SetActive(false);
+            StartCoroutine(ResetCharacter());
+            MoneyManager.Instance.SubtractMoney(50);
+            GameManager.instance.ContinueGame();
+        }
     }
     IEnumerator OnContinueAnim()
     {
@@ -155,7 +174,14 @@ public class ScoreScreen : MonoBehaviour
                 _mCoin.anchoredPosition = new Vector2(137, _mCoin.anchoredPosition.y);*/
             _UIAnimator.SetBool("EndGame", true);
             _mQuestManager.SetActive(true);
+            if(TutorialManager.instance.InTutorial)
+            {
 
+                TutorialManager.instance.StepInit();
+                TutorialManager.instance.SetCamera(_camera);
+
+            }
+             
             if (GameManager.instance.Score > GameManager.instance.Player.BestScore)
             {
                 _mHighscoreTag.SetActive(true);
