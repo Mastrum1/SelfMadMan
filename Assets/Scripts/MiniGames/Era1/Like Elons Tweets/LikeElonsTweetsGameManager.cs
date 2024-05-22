@@ -74,12 +74,15 @@ public class LikeElonsTweetsGameManager : MiniGameManager
 
     void OnLikeTweet(bool IsElon)
     {
-
         _audioManager.PlaySFX(0);
         if (!IsElon && !_mIsEnd)
             EndGame(false);
-        
-        else Amount++;
+
+        else
+        {
+            Amount++;
+            miniGameScore += 10;
+        }
     }
 
     void OnScreenExited(bool IsElon, GameObject Tweet)

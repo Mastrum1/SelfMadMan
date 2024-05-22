@@ -36,6 +36,7 @@ public class FansHand : MonoBehaviour
 
     private Vector3 originalScale;
     public event Action JamesTouched;
+    public event Action OnClicked;
     void Start()
     {
         originalScale = transform.localScale;
@@ -56,6 +57,7 @@ public class FansHand : MonoBehaviour
 
     public void OnObjectClicked()
     {
+        OnClicked?.Invoke();
         _hitEffect.SetActive(true);
         _taped = true;
         _particleSystem.gameObject.SetActive(true);

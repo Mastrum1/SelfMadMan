@@ -31,7 +31,7 @@ public class StopTheFansManager : MiniGameManager
         {
             _interactableManager.StopAllHands();
             Amount++;
-            EndMiniGame(isWin, miniGameScore);
+            EndMiniGame(isWin, miniGameScore + _interactableManager.Score);
             _mIsEnd = true;
         }
     }

@@ -17,12 +17,17 @@ public class StopTheFansInteractablesManager : MonoBehaviour
     private bool _isSpawning = false;
 
     [SerializeField] private float _timeToWait = 1f;
+
+    public int Score => _score;
+    private int _score;
+    
     // Start is called before the first frame update
     void Start()
     {
         for (int i = 0; i < _hands.Count; i++)
         {
             _hands[i].JamesTouched += EndGame;
+            _hands[i].OnClicked += IncrementHandsClicked;
         }
         for (int i = 0; i < _handsSpawn.Count; i++)
         {
@@ -31,6 +36,11 @@ public class StopTheFansInteractablesManager : MonoBehaviour
         StartCoroutine(SpawnHands());
     }
 
+    private void IncrementHandsClicked()
+    {
+        _score += 10;
+    }
+    
     public void EndGame()
     {
         OnJamesTouched?.Invoke();
