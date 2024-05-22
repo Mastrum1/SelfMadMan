@@ -8,6 +8,7 @@ public class RizzHerHand : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 10;
     public event Action<bool> OnGameEnd;
+    private bool _isMoving = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,16 +23,19 @@ public class RizzHerHand : MonoBehaviour
 
     public void SwipeLeft()
     {
-        StartCoroutine(Movement(-340));
+        if(!_isMoving)
+            StartCoroutine(Movement(-340));
     }
 
     public void SwipeRight()
     {
-        StartCoroutine(Movement(340));
+        if (!_isMoving)
+            StartCoroutine(Movement(340));
     }
 
     private IEnumerator Movement(int dist)
     {
+        _isMoving = true;
         Vector3 targetPos = new Vector3(transform.localPosition.x + dist, transform.localPosition.y, transform.localPosition.z);
         Debug.Log(targetPos);
         while (transform.localPosition != targetPos)
@@ -41,8 +45,7 @@ public class RizzHerHand : MonoBehaviour
 
             yield return null;
         }
-        Debug.Log("test");
-
+        _isMoving = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

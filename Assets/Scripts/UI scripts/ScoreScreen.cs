@@ -102,7 +102,7 @@ public class ScoreScreen : MonoBehaviour
             _HeartAnimator.SetBool("Revived", true);
             _InputManager.SetActive(false);
             StartCoroutine(ResetCharacter());
-            GameManager.instance.ContinueWithHeart();
+            GameManager.instance.ContinueGame();
         }
 
     }
@@ -121,7 +121,7 @@ public class ScoreScreen : MonoBehaviour
             _InputManager.SetActive(false);
             StartCoroutine(ResetCharacter());
             MoneyManager.Instance.SubtractMoney(50);
-            GameManager.instance.ContinueWithMoney();
+            GameManager.instance.ContinueGame();
         }
     }
     IEnumerator OnContinueAnim()

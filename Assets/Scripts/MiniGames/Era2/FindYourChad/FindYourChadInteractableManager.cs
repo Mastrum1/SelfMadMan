@@ -20,11 +20,10 @@ public class FindYourChadInteractableManager : MonoBehaviour
     private void Start()
     {
         int Random = 0;
-        Vector2 objColliderOffset = Vector2.zero;
-        Vector2 objColliderSize = Vector2.zero;
-        Vector2 tempChadColliderOffset = Vector2.zero;
-        Vector2 tempChadColliderSize = Vector2.zero;
+
         Sprite tempSprite;
+        var objColliderPoints = new Vector2[0];
+        var tempChadColliderPoints = new Vector2[0];
         Vector3 tempScale = Vector3.zero;
 
         switch (GameManager.instance.FasterLevel)
@@ -34,11 +33,10 @@ public class FindYourChadInteractableManager : MonoBehaviour
 
                 _mObjfirstFaster[Random].Real = true;
 
-                objColliderOffset = _mObjfirstFaster[Random].Collider.offset;
-                objColliderSize = _mObjfirstFaster[_firstChadPos].Collider.size;
 
-                tempChadColliderOffset = _mObjfirstFaster[_firstChadPos].Collider.offset;
-                tempChadColliderSize = _mObjfirstFaster[_firstChadPos].Collider.size;
+                objColliderPoints = _mObjfirstFaster[Random].Collider.points;
+
+                tempChadColliderPoints = _mObjfirstFaster[_firstChadPos].Collider.points;
 
                 tempSprite = _mObjfirstFaster[Random].SpriteRenderer.sprite;
                 _mObjfirstFaster[Random].SpriteRenderer.sprite = _mObjfirstFaster[_firstChadPos].SpriteRenderer.sprite;
@@ -50,11 +48,9 @@ public class FindYourChadInteractableManager : MonoBehaviour
                 _mObjfirstFaster[Random].transform.localScale = _mObjfirstFaster[_firstChadPos].transform.localScale;
                 _mObjfirstFaster[_firstChadPos].transform.localScale = tempScale;
 
-                _mObjfirstFaster[Random].Collider.offset = tempChadColliderOffset;
-                _mObjfirstFaster[Random].Collider.size = tempChadColliderSize;
+                _mObjfirstFaster[Random].Collider.points = tempChadColliderPoints;
 
-                _mObjfirstFaster[_firstChadPos].Collider.offset = objColliderOffset;
-                _mObjfirstFaster[_firstChadPos].Collider.size = objColliderSize;
+                _mObjfirstFaster[_firstChadPos].Collider.points = objColliderPoints;
 
                 for (int id = 0; id < _mObjfirstFaster.Count; id++)
                 {
@@ -80,11 +76,9 @@ public class FindYourChadInteractableManager : MonoBehaviour
 
                 _mObjsecondFaster[Random].Real = true;
 
-                objColliderOffset = _mObjsecondFaster[Random].Collider.offset;
-                objColliderSize = _mObjsecondFaster[_secondChadPos].Collider.size;
+                objColliderPoints = _mObjsecondFaster[Random].Collider.points;
 
-                tempChadColliderOffset = _mObjsecondFaster[_secondChadPos].Collider.offset;
-                tempChadColliderSize = _mObjsecondFaster[_secondChadPos].Collider.size;
+                tempChadColliderPoints = _mObjsecondFaster[_firstChadPos].Collider.points;
 
                 tempSprite = _mObjsecondFaster[Random].SpriteRenderer.sprite;
                 _mObjsecondFaster[Random].SpriteRenderer.sprite = _mObjsecondFaster[_secondChadPos].SpriteRenderer.sprite;
@@ -96,11 +90,9 @@ public class FindYourChadInteractableManager : MonoBehaviour
                 _mObjsecondFaster[Random].transform.localScale = _mObjsecondFaster[_secondChadPos].transform.localScale;
                 _mObjsecondFaster[_secondChadPos].transform.localScale = tempScale;
 
-                _mObjsecondFaster[Random].Collider.offset = tempChadColliderOffset;
-                _mObjsecondFaster[Random].Collider.size = tempChadColliderSize;
+                _mObjsecondFaster[Random].Collider.points = tempChadColliderPoints;
 
-                _mObjsecondFaster[_secondChadPos].Collider.offset = objColliderOffset;
-                _mObjsecondFaster[_secondChadPos].Collider.size = objColliderSize;
+                _mObjsecondFaster[_firstChadPos].Collider.points = objColliderPoints;
 
                 for (int id = 0; id < _mObjsecondFaster.Count; id++)
                 {
@@ -126,11 +118,10 @@ public class FindYourChadInteractableManager : MonoBehaviour
 
                 _mObjOthersFaster[Random].Real = true;
 
-                objColliderOffset = _mObjOthersFaster[Random].Collider.offset;
-                objColliderSize = _mObjOthersFaster[_OthersChadPos].Collider.size;
 
-                tempChadColliderOffset = _mObjOthersFaster[_OthersChadPos].Collider.offset;
-                tempChadColliderSize = _mObjOthersFaster[_OthersChadPos].Collider.size;
+                objColliderPoints = _mObjOthersFaster[Random].Collider.points;
+
+                tempChadColliderPoints = _mObjOthersFaster[_firstChadPos].Collider.points;
 
                 tempSprite = _mObjOthersFaster[Random].SpriteRenderer.sprite;
                 _mObjOthersFaster[Random].SpriteRenderer.sprite = _mObjOthersFaster[_OthersChadPos].SpriteRenderer.sprite;
@@ -142,11 +133,9 @@ public class FindYourChadInteractableManager : MonoBehaviour
                 _mObjOthersFaster[Random].transform.localScale = _mObjOthersFaster[_OthersChadPos].transform.localScale;
                 _mObjOthersFaster[_OthersChadPos].transform.localScale = tempScale;
 
-                _mObjOthersFaster[Random].Collider.offset = tempChadColliderOffset;
-                _mObjOthersFaster[Random].Collider.size = tempChadColliderSize;
+                _mObjOthersFaster[Random].Collider.points = tempChadColliderPoints;
 
-                _mObjOthersFaster[_OthersChadPos].Collider.offset = objColliderOffset;
-                _mObjOthersFaster[_OthersChadPos].Collider.size = objColliderSize;
+                _mObjOthersFaster[_firstChadPos].Collider.points = objColliderPoints;
 
                 for (int id = 0; id < _mObjOthersFaster.Count; id++)
                 {

@@ -21,6 +21,11 @@ public class CheckEraGames : MonoBehaviour
     [Header("Minigame Container List")]
     [SerializeField] private List<CheckEraGamesTemplate> _mMinigameContainerList;
 
+    [Header("Minigames SO")]
+    [SerializeField] private List<MinigameSO> _mEra1;
+    [SerializeField] private List<MinigameSO> _mEra2;
+    [SerializeField] private List<MinigameSO> _mEra3;
+
     private void OnEnable()
     {
         Checking();
@@ -33,27 +38,14 @@ public class CheckEraGames : MonoBehaviour
         CheckEra();
     }
 
-    public void CheckUnlockedMinigames(List<MinigameScene> minigame)
+    public void CheckUnlockedMinigames(List<MinigameSO> Era)
     {
-        for (int i = 0; i < minigame.Count; i++)
+        for (int i = 0; i < Era.Count; i++)
         {
-            _mMinigameContainerList[i].EraGameName.text = minigame[i].SceneName;
-            _mMinigameContainerList[i].EraGameIcon.sprite = minigame[i].Icon;
+            _mMinigameContainerList[i].EraGameName.text = Era[i].ItemName;
+            _mMinigameContainerList[i].EraGameIcon.sprite = Era[i].Icon;
 
-            if (!minigame[i].Locked)
-            {
-                _mMinigameContainerList[i].QuestIconBG.color = _mBGIconColors[0];
-                _mMinigameContainerList[i].EraGameName.color = _mBGIconColors[2];
-                _mMinigameContainerList[i].EraGameIcon.color = _mBGIconColors[2];
-                _mUnlockedMinigames++;
-            }
-
-            else
-            {
-                _mMinigameContainerList[i].QuestIconBG.color = _mBGIconColors[1];
-                _mMinigameContainerList[i].EraGameName.color = _mBGIconColors[3];
-                _mMinigameContainerList[i].EraGameIcon.color = _mBGIconColors[3];
-            }  
+            
         }
     }
 
@@ -62,17 +54,18 @@ public class CheckEraGames : MonoBehaviour
         switch (_mCurrentEra)
         {
             case 0:
-                CheckUnlockedMinigames(MiniGameSelector.instance.Era1);
+                CheckUnlockedMinigames(_mEra1);
+                _mNumberUnlocked.text = $"<#4EF4F6><size=150%>{_mUnlockedMinigames}" + $"<#F6F3D1><size=100%>/{MiniGameSelector.instance.Era1.Count}";
                 break;
             case 1:
-                CheckUnlockedMinigames(MiniGameSelector.instance.Era2);
+                CheckUnlockedMinigames(_mEra2);
+                _mNumberUnlocked.text = $"<#4EF4F6><size=150%>{_mUnlockedMinigames}" + $"<#F6F3D1><size=100%>/{MiniGameSelector.instance.Era2.Count}";
                 break;
             case 2:
-                CheckUnlockedMinigames(MiniGameSelector.instance.Era3);
+                CheckUnlockedMinigames(_mEra3);
+                _mNumberUnlocked.text = $"<#4EF4F6><size=150%>{_mUnlockedMinigames}" + $"<#F6F3D1><size=100%>/{MiniGameSelector.instance.Era3.Count}";
                 break;
         }
-
-        _mNumberUnlocked.text = $"<#4EF4F6><size=150%>{_mUnlockedMinigames}" + "<#F6F3D1><size=100%>/8";
         _mEra.text = "ERA " + (_mCurrentEra + 1).ToString();
     }
 }
