@@ -85,7 +85,7 @@ public class FurnitureManager : MonoBehaviour
             {
                 furniture.UnlockFunriture();
                 GameManager.instance.Player.UnlockFurniture(furniture.GetIdInList(FurnitureList));
-                
+
             }
         }
     }
@@ -98,25 +98,35 @@ public class FurnitureManager : MonoBehaviour
         {
             if (furniture.PrefabParent.name == name)
             {
-                Debug.Log(furniture.PrefabParent.name + " IS PIC    KING ");
-                int tempIndex = -1;
-                for (int i = 0; i < ActiveFurnitures.Count; i++)
+                if (furniture.Picked)
                 {
-                    int index = ActiveFurnitures[i];
-                    if (FurnitureList[index].Type == furniture.Type && FurnitureList[index].PrefabParent.name != name)
+                    furniture.UnPick();
+                    Debug.Log(FurnitureList.IndexOf(furniture));
+                    ActiveFurnitures.Remove(FurnitureList.IndexOf(furniture));
+                }
+                else
+                {
+                    Debug.Log(furniture.PrefabParent.name + " IS PIC    KING ");
+                    int tempIndex = -1;
+                    for (int i = 0; i < ActiveFurnitures.Count; i++)
                     {
-                        FurnitureList[index].UnPick();
-                        tempIndex = index;
-                        break;
+                        int index = ActiveFurnitures[i];
+                        if (FurnitureList[index].Type == furniture.Type && FurnitureList[index].PrefabParent.name != name)
+                        {
+                            FurnitureList[index].UnPick();
+                            tempIndex = index;
+                            break;
+                        }
                     }
+                    if (tempIndex != -1)
+                    {
+                        ActiveFurnitures.Remove(tempIndex);
+                    }
+                    furniture.PickFurniture(GameManager.instance.Era);
+                    ActiveFurnitures.Add(FurnitureList.IndexOf(furniture));
+                    return;
                 }
-                if (tempIndex != -1)
-                {
-                    ActiveFurnitures.Remove(tempIndex);
-                }
-                furniture.PickFurniture(GameManager.instance.Era);
-                ActiveFurnitures.Add(FurnitureList.IndexOf(furniture));
-                return;
+
             }
         }
     }
