@@ -27,7 +27,7 @@ public class RizzHerManager : MiniGameManager
 
     public override void Update()
     {
-        if (_mTimer.TimerValue <= GameManager.instance.Speed / 2.5)
+        if (_mTimer.TimerValue <= GameManager.instance.Speed / 3.5)
             _mInteractableManager.EndGame();
 
         if (_mTimer.TimerValue == 0 && _gameIsPlaying)

@@ -28,8 +28,8 @@ public class FindYourChadObj : MonoBehaviour
         set { _SpriteRenderer = value; }
     }
 
-    [SerializeField] private BoxCollider2D _collider;
-   public BoxCollider2D Collider
+    [SerializeField] private EdgeCollider2D _collider;
+   public EdgeCollider2D Collider
     {
         get { return _collider; }
         set { _collider = value; }

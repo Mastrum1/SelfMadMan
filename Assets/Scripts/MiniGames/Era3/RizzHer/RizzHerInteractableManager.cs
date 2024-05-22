@@ -236,7 +236,7 @@ public class RizzHerInteractableManager : MonoBehaviour
 
     private IEnumerator waitBeforeSpawnHand()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         SpawnNewObj();
         StopCoroutine(waitBeforeSpawnHand());
     }
