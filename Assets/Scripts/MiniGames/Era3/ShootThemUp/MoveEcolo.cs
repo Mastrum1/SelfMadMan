@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class MoveEcolo : MonoBehaviour
 {
+    public event Action OnEcoloHit;
+    
     [SerializeField] private Transform _mCar;
     [SerializeField] private float _mSpeed;
     [SerializeField] private ParticleSystem _mParticleSystem;
@@ -75,6 +77,7 @@ public class MoveEcolo : MonoBehaviour
         _mGotHit = true;
         _mParticleSystem.gameObject.SetActive(true);
         _animator.SetBool("GetHit", true);
+        OnEcoloHit?.Invoke();
     }
 
     private IEnumerator ScaleObject()

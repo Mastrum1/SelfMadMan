@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class MoveParachutistes : MonoBehaviour
 {
+    public event Action OnEcoloHit;
+    
     [SerializeField] private Transform _mCar;
     [SerializeField] private float _mSpeed;
     [SerializeField] private ParticleSystem _mParticleSystem;
@@ -71,6 +73,7 @@ public class MoveParachutistes : MonoBehaviour
         _mGotHit = true;
         _mParticleSystem.gameObject.SetActive(true);
         _animator.SetBool("GetHit", true);
+        OnEcoloHit?.Invoke();
     }
 
     private IEnumerator ScaleObject()

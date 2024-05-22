@@ -10,17 +10,26 @@ public class ShootThemUpInteractableManager : InteractableManager
     [SerializeField] private List<MoveParachutistes> _Parachutistes;
     [SerializeField] private List<MoveEcolo> _Ecolo;
 
+    public int NumOfEcoloHit => _numOfEcoloHit;
+    private int _numOfEcoloHit;
     private void Start()
     {
         for (int i = 0; i < _Ecolo.Count; i++)
         {
             _Ecolo[i].OnLoose += HandleEndGame;
+            _Ecolo[i].OnEcoloHit += IncrementHit;
         }
         for (int i = 0; i < _Parachutistes.Count; i++)
         {
             Debug.Log("Parachutistes");
             _Parachutistes[i].OnLoose += HandleEndGame;
+            _Parachutistes[i].OnEcoloHit += IncrementHit;
         }
+    }
+
+    private void IncrementHit()
+    {
+        _numOfEcoloHit++;
     }
 
     void HandleEndGame(bool win)
