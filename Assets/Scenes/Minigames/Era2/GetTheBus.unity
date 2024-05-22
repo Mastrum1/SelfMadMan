@@ -355,6 +355,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6472728062389791406, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
   m_PrefabInstance: {fileID: 76589270}
   m_PrefabAsset: {fileID: 0}
+--- !u!224 &76589275 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7128891716460577423, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+  m_PrefabInstance: {fileID: 76589270}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &354213479
 GameObject:
   m_ObjectHideFlags: 0
@@ -1174,6 +1179,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: _mOnTap.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
+      propertyPath: _mGetFingerPos.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
@@ -1193,11 +1202,35 @@ PrefabInstance:
       value: OnClicked
       objectReference: {fileID: 0}
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
+      propertyPath: _mGetFingerPos.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
+      propertyPath: _mGetFingerPos.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1940354304}
+    - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
+      propertyPath: _mGetFingerPos.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
+      propertyPath: _mGetFingerPos.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: _mOnTap.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: BusGameManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
+      propertyPath: _mGetFingerPos.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BusGameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: _mOnTap.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
+      propertyPath: _mGetFingerPos.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1353,6 +1386,7 @@ MonoBehaviour:
   _cash: {fileID: 76589273}
   _loosePanel: {fileID: 1438571919}
   _mSpawnPosition: {x: -12.5, y: 0, z: 0}
+  _PauseButton: {fileID: 76589275}
   _mEnterScreen: {fileID: 1080967378}
   _mExitScreen: {fileID: 1080451001}
 --- !u!114 &1940354305

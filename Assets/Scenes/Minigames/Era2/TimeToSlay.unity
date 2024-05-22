@@ -674,6 +674,11 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 1510358503319939074, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
   m_PrefabInstance: {fileID: 76589270}
   m_PrefabAsset: {fileID: 0}
+--- !u!224 &76589275 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7128891716460577423, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+  m_PrefabInstance: {fileID: 76589270}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &93804814 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 79422935067397255, guid: 69fa8e5a61a6f704bb2a1c2108774f0e, type: 3}
@@ -5030,7 +5035,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: _mOnTap.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: _mOnWorldFrom.m_PersistentCalls.m_Calls.Array.size
@@ -5038,7 +5043,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: _mGetFingerPos.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: _mOnWorldDelta.m_PersistentCalls.m_Calls.Array.size
@@ -5094,7 +5099,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: _mGetFingerPos.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: _mGetFingerPos.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -5115,7 +5120,7 @@ PrefabInstance:
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: _mGetFingerPos.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1927644444}
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: _mOnWorldDelta.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -5146,7 +5151,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: _mGetFingerPos.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnFingerDown
+      value: OnFingerPressed
       objectReference: {fileID: 0}
     - target: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: _mGetFingerPos.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -7614,6 +7619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mBrush: {fileID: 855401018450832416}
+  _PauseButton: {fileID: 76589275}
 --- !u!60 &1927644449
 PolygonCollider2D:
   m_ObjectHideFlags: 0

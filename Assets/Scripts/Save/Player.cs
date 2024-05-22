@@ -175,7 +175,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private List<MinigameScene> _mAllEra1;
 
-    public PlayerData DataPlayer { get => playerData; }
+    public PlayerData DataPlayer { get => _playerData; }
 
     public List<MinigameScene> AllEra2 { get => _mAllEra2; private set => _mAllEra2 = value; }
 
