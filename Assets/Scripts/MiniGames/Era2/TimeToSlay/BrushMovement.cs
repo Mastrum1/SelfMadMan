@@ -11,13 +11,11 @@ public class BrushMovement : MonoBehaviour
     public Action OnDelete;
     bool _mIsStop;
     private AudioManager _audioManager;
-    [SerializeField] private RectTransform _PauseButton;
-    bool _ScreenPressed = false;
+
 
     void Start()
     {
         _audioManager = AudioManager.Instance;
-
         // _mBrush.SetActive(false);
         _mIsStop = false;
     }
@@ -25,42 +23,25 @@ public class BrushMovement : MonoBehaviour
     public void OnFingerReleased()
     {
         _mBrush.SetActive(false);
-        _ScreenPressed = false;
     }
 
     public void OnFingerPressed()
     {
         if (!_mIsStop)
-            _ScreenPressed = true;
-        //_mBrush.SetActive(true);
+            _mBrush.SetActive(true);
     }
 
     public void OnFingerDown(Vector3 mPos)
     {
-        if (_ScreenPressed)
+        if (_mIsStop)
+            return;
+        mPos.z = 0;
+        if (_mBrush.activeInHierarchy)
         {
-            Vector3 PauseButtonPos = RectTransformUtility.WorldToScreenPoint(Camera.main, _PauseButton.position);
-            Vector3 worldPos = Camera.main.ScreenToWorldPoint(new Vector3(PauseButtonPos.x, PauseButtonPos.y, 0));
-
-            if (mPos.x > worldPos.x - 0.6f && mPos.x < worldPos.x + 0.6f && mPos.y < worldPos.y + 0.6f && mPos.y > worldPos.y - 0.6f)
-                return;
-            else
-            {
-                if (!_mBrush.activeSelf)
-                    _mBrush.SetActive(true);
-
-                if (_mIsStop)
-                    return;
-                mPos.z = 0;
-                if (_mBrush.activeInHierarchy)
-                {
-                    _mBrush.transform.position = mPos;
-                    CheckGarbage();
-                }
-            }
+            _mBrush.transform.position = mPos;
+            CheckGarbage();
         }
     }
-
 
     public void Stop()
     {
