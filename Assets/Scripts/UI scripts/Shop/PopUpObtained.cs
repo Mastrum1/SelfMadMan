@@ -60,11 +60,25 @@ public class PopUpObtained : MonoBehaviour
                 _mObtainedObject.color = _mTextColor[(int)Type.MINIGAME];
                 _mUnlocked.color = _mUnlockedColor[(int)Type.MINIGAME];
                 break;
+
+            case ItemsSO.TYPE.FURNITURE:
+                _mMinigameImage.enabled = true;
+                _mSoftMaskMinigame.enabled = true;
+                _ObtainImage.overrideSprite = item.Icon;
+                _PopUpImage.overrideSprite = _mTypeOfPopup[(int)Type.DECORATION];
+                _mTypeOfObtainable.text = "FURNITURE";
+                _mUnlocked.text = "UNLOCKED!";
+                _mObtainedObject.text = item.ItemName;
+                _mObtainedObject.color = _mTextColor[(int)Type.DECORATION];
+                _mUnlocked.color = _mUnlockedColor[(int)Type.DECORATION];
+                ShopManager.Instance.CheckUnlocked(item);
+                break;
         }
     }
 
     public void ClosePopup()
     {
+
         _popupObtainedAnimator.SetBool("Open", false);
         StartCoroutine(Close());
     }
@@ -73,8 +87,6 @@ public class PopUpObtained : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         gameObject.SetActive(false);
+        if(TutorialManager.instance.InTutorial) { TutorialManager.instance.StepInit(); }
     }
-
-
-
 }

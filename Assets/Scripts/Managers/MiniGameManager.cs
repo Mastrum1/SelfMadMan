@@ -18,9 +18,8 @@ public class MiniGameManager : MonoBehaviour
     protected bool _gameIsPlaying;
 
     [SerializeField] public Timer _mTimer;
-    [SerializeField] private VideoPlayer _cash;
-    [SerializeField] private Camera _sceneCamera;
-
+    [SerializeField] private GameObject _cashGO;
+    [SerializeField] private Animator _cash;
     [SerializeField] private GameObject _loosePanel;
 
     [NonSerialized] public int miniGameScore;
@@ -31,7 +30,6 @@ public class MiniGameManager : MonoBehaviour
     {
         Amount = 0;
         _gameIsPlaying = true;
-        _cash.targetCamera = _sceneCamera;
         _mTimer.ResetTimer(GameManager.instance.Speed);
         GameManager.instance.SelectNewMiniGame(this);
         _questManager = QuestManager.Instance;
@@ -46,7 +44,8 @@ public class MiniGameManager : MonoBehaviour
 
         if (won)
         {
-            _cash.Play();
+            _cashGO.SetActive(true);
+            _cash.SetBool("Won", true);
             TrophyManager.Instance.AddTrophyAmount(6,1);
         }
         else

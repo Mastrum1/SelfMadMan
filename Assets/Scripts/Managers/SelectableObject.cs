@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public class SelectableObject : MonoBehaviour
 {
-
     [SerializeField] private UnityEvent _mOnSelected;
     [SerializeField] private UnityEvent _mOnDeselected;
 

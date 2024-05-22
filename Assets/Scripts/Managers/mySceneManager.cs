@@ -79,8 +79,8 @@ public class mySceneManager : MonoBehaviour
         do
         {
             _mMinigameScene = MiniGameSelector.GetRandomElement(MiniGameSelector.instance.AllMinigames[GameManager.instance.Era]);
-
-        } while (_mMinigameScene.Locked);
+            Debug.Log(_mSceneName + "previous minigamge" + _mMinigameScene.SceneName);
+        } while (_mMinigameScene.Locked || _mSceneName == _mMinigameScene.SceneName);
 
         SetScene(_mMinigameScene.SceneName, LoadMode.ADDITIVE);
     }

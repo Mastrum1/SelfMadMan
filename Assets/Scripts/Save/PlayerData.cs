@@ -22,6 +22,8 @@ public class PlayerData
 
     public int BestScore;
 
+    public bool TutorialPlayed = false;
+
     public List<int> UnlockedCinematics = new List<int>();
 
     public List<Player.QuestSave> ActiveQuests = new List<Player.QuestSave>();
@@ -44,6 +46,7 @@ public class PlayerData
 
     public List<int> AllEra3 = new List<int>();
 
+    public bool IntroPlayed = false;
     public void SaveData(Player player)
     {
         Level = player.Level;
@@ -59,7 +62,11 @@ public class PlayerData
 
         ErasData = player.ErasData;
 
+        IntroPlayed = player.IntroPlayed;
+
         deleteOldSave = player.DeleteOldSave;
+
+        TutorialPlayed = player.TutorialPlayed;
 
         SaveCinematics(player.UnlockedCinematics);
 
@@ -152,6 +159,8 @@ public class PlayerData
         Language = "fr";
 
         deleteOldSave = false;
+
+        TutorialPlayed = false;
 
         for (int i = 0; i < player.AllEra1.Count; i++)
         {

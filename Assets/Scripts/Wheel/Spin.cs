@@ -30,8 +30,10 @@ public class Spin : MonoBehaviour
 
     [SerializeField] private List<ItemsSO> _itemsSOs;
     [SerializeField] private List<MinigameSO> _MinigamesSO;
+    [SerializeField] private List<FurnitureSO> _FurnituresSO;
 
     [SerializeField] private List<Quarter> _quarters;
+    [SerializeField] private ItemsSO[] _tutorialFill;
 
     [SerializeField] private GameObject _mPopupObtained;
     [SerializeField] private PopUpObtained _mPopupObtainedScript;
@@ -85,12 +87,14 @@ public class Spin : MonoBehaviour
     }
     void InitSpin()
     {
-        _minigamesOnWheel = 0;
-        _quarters.Shuffle();
-        if (CheckIfAvailableMinigames())
-            FillWithMinigames();
+        if (TutorialManager.instance.InTutorial)
+            TutorialFill();
         else
-            FillWithoutMinigames();
+        {
+            _quarters.Shuffle();
+            FillWithMinigames();
+        }
+
     }
 
     private bool CheckIfMinigameUnlocked(MinigameSO minigameSO)
@@ -115,35 +119,74 @@ public class Spin : MonoBehaviour
         return false;
     }
 
+    private bool CheckIfFurnitureUnlocked(FurnitureSO furnitureSO)
+    {
+
+            foreach (var Furniture in FurnitureManager.instance.FurnitureList)
+            {
+                if (Furniture.PrefabParent.name == furnitureSO.FurniturePrefab.name)
+                {
+                    return !Furniture.Locked;
+                }
+            }
+        
+        return false;
+    }
+
+    private bool CheckIfAvailablFurnitures()
+    {
+        int numOfFurnitures = 0;
+
+        foreach (var Furniture in FurnitureManager.instance.FurnitureList)
+        {
+            numOfFurnitures += Furniture.Locked ? 1 : 0;
+        }
+
+        return numOfFurnitures != 0;
+    }
+
+    private void TutorialFill()
+    { 
+        for(int i = 0; i < _tutorialFill.Length; i++)
+        {
+            _quarters[i].InitQuarter(_tutorialFill[i]);
+        }
+    }
     private void FillWithMinigames()
     {
         Debug.Log("With minigames");
-        MinigameSO temp;
-        for (int i = 0; i < 2; i++)
+        int M = CheckIfAvailableMinigames() ? 2 : 0;
+        int F = CheckIfAvailablFurnitures() ? 2 : 0;
+
+        Debug.Log("MINIGAMES : " + M);
+        Debug.Log("FURNITURES : " + F);
+        MinigameSO tempMinigame;
+        FurnitureSO tempFunriture;
+        for (int i = 0; i < M; i++)
         {
             do
             {
                 int randomIndex = UnityEngine.Random.Range(0, _MinigamesSO.Count);
-                temp = _MinigamesSO[randomIndex];
-            } while (!GameManager.instance.ErasData[temp.Era - 1].Unlocked || CheckIfMinigameUnlocked(temp));
-            _quarters[i].InitQuarter(temp);
+                tempMinigame = _MinigamesSO[randomIndex];
+            } while (!GameManager.instance.ErasData[tempMinigame.Era - 1].Unlocked || CheckIfMinigameUnlocked(tempMinigame));
+            _quarters[i].InitQuarter(tempMinigame);
         }
-        for (int i = 2; i < 8; i++)
+        for (int i = M; i < F + M; i++)
+        {
+            do
+            {
+                int randomIndex = UnityEngine.Random.Range(0, _FurnituresSO.Count);
+                tempFunriture = _FurnituresSO[randomIndex];
+            } while (CheckIfFurnitureUnlocked(tempFunriture));
+            _quarters[i].InitQuarter(tempFunriture);
+        }
+        for (int i = M + F; i < 8; i++)
         {
             int randomIndex = UnityEngine.Random.Range(0, _itemsSOs.Count);
             _quarters[i].InitQuarter(_itemsSOs[randomIndex]);
         }
     }
 
-    private void FillWithoutMinigames()
-    {
-        Debug.Log("Without minigames");
-        for (int i = 0; i < 8; i++)
-        {
-            int randomIndex = UnityEngine.Random.Range(0, _itemsSOs.Count);
-            _quarters[i].InitQuarter(_itemsSOs[randomIndex]);
-        }
-    }
 
     void Update()
     {
@@ -172,6 +215,11 @@ public class Spin : MonoBehaviour
                 MinigameSO minigameSO = quarter.Item as MinigameSO;
                 minigame.SceneName = minigameSO.MinigameScene;
                 return minigame;
+            case ItemsSO.TYPE.FURNITURE:
+                FurnitureItem furniture = new FurnitureItem();
+                FurnitureSO furnitureSO = quarter.Item as FurnitureSO;
+                furniture.PrefabName = furnitureSO.FurniturePrefab.name;
+                return furniture;
             default:
                 return null;
         }
@@ -179,7 +227,10 @@ public class Spin : MonoBehaviour
 
     void ClaimObject()
     {
+
         _quarter = _arrow.FetchQuarterData();
+        Debug.Log(_quarter.gameObject.name);
+
         isSpnning = false;
 
         _mPopupObtained.SetActive(true);
