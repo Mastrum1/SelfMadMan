@@ -1687,6 +1687,30 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 125
       objectReference: {fileID: 0}
+    - target: {fileID: 7771753210694649276, guid: 28079cd0ebb2d7d42a678e67e975a1f6, type: 3}
+      propertyPath: _mOnSelected.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771753210694649276, guid: 28079cd0ebb2d7d42a678e67e975a1f6, type: 3}
+      propertyPath: _mOnSelected.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 193223320}
+    - target: {fileID: 7771753210694649276, guid: 28079cd0ebb2d7d42a678e67e975a1f6, type: 3}
+      propertyPath: _mOnSelected.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: CloseRateUs
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771753210694649276, guid: 28079cd0ebb2d7d42a678e67e975a1f6, type: 3}
+      propertyPath: _mOnSelected.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: RatingPopup, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771753210694649276, guid: 28079cd0ebb2d7d42a678e67e975a1f6, type: 3}
+      propertyPath: _mOnSelected.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771753210694649276, guid: 28079cd0ebb2d7d42a678e67e975a1f6, type: 3}
+      propertyPath: _mOnSelected.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7860777472461906637, guid: 28079cd0ebb2d7d42a678e67e975a1f6, type: 3}
       propertyPath: m_Name
       value: RateUs
@@ -1744,6 +1768,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3655290194154182162, guid: 28079cd0ebb2d7d42a678e67e975a1f6, type: 3}
   m_PrefabInstance: {fileID: 193223318}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &193223320 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8142025935038539755, guid: 28079cd0ebb2d7d42a678e67e975a1f6, type: 3}
+  m_PrefabInstance: {fileID: 193223318}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1845773150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7394e5b442a2104eab36c16c9eaab91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &196990303 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8302615082009656236, guid: 918a34f8b0d31fb45b2b320e21c3a88c, type: 3}
@@ -14440,7 +14475,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 13
+  m_SortingOrder: 9
   m_TargetDisplay: 0
 --- !u!1 &1361676256
 GameObject:
@@ -16076,7 +16111,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 13
+  m_SortingOrder: 9
   m_TargetDisplay: 0
 --- !u!1 &1484524615
 GameObject:
@@ -19441,7 +19476,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 12
+  m_SortingOrder: 8
   m_TargetDisplay: 0
 --- !u!1001 &1697820662
 PrefabInstance:
@@ -23930,6 +23965,10 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4650817417181749930, guid: 5ec65c9f5c1a2fe4cb748694b2d588ed, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5048834320862579333, guid: 5ec65c9f5c1a2fe4cb748694b2d588ed, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -24148,7 +24187,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8111351100111917161, guid: 5ec65c9f5c1a2fe4cb748694b2d588ed, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 997
+      value: -1345.4999
       objectReference: {fileID: 0}
     - target: {fileID: 8203856414613119826, guid: 5ec65c9f5c1a2fe4cb748694b2d588ed, type: 3}
       propertyPath: m_Elasticity

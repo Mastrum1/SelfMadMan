@@ -40,7 +40,7 @@ public class TutorialManager : MonoBehaviour
 
         public void Init()
         {
-            canvas.sortingOrder = 10;
+            canvas.sortingOrder = 11;
             _rectTransform.anchoredPosition3D = new Vector3(_rectTransform.anchoredPosition.x, _rectTransform.anchoredPosition.y, -2);
         }
         public void Reset()
@@ -98,6 +98,8 @@ public class TutorialManager : MonoBehaviour
         InTutorial = false;
         GameManager.instance.Player.TutorialPlayed = true;
         panel.SetActive(false);
+        mySceneManager.instance.LoadWinScreen();
+        mySceneManager.instance.SetScene("HomePage", mySceneManager.LoadMode.ADDITIVE);
 
     }
 
