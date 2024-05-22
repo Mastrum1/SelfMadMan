@@ -79,6 +79,9 @@ public class CheckEraGames : MonoBehaviour
                         _mMinigameContainerList[i].EraGameName.text = _mEra2[i].ItemName;
                         _mMinigameContainerList[i].EraGameIcon.sprite = _mEra2[i].Icon;
 
+                        _mMinigameContainerList[7].EraGameName.text = "Coming soon";
+                        _mMinigameContainerList[7].EraGameIcon.sprite = null;
+
                         if (!mini.Locked)
                         {
                             _mMinigameContainerList[i].QuestIconBG.color = _mBGIconColors[0];
