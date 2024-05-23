@@ -39,7 +39,6 @@ public class ScoreScreen : MonoBehaviour
     [SerializeField] private GameObject _mPopup;
     [SerializeField] private GameObject _InputManager;
     [SerializeField] private GameObject _mQuestManager;
-    [SerializeField] private GameObject _mPauseButton;
     [SerializeField] private RectTransform _mCoin;
     [SerializeField] private GameObject _mWinScreenBG;
     [SerializeField] private Camera _camera;
@@ -71,7 +70,6 @@ public class ScoreScreen : MonoBehaviour
     void OnWinScreenDisplay(bool won, int era, int hearts, bool gameOver)
     {
         Debug.Log(hearts);
-        _mPauseButton.SetActive(true);
         _currentScore = GameManager.instance.TempMinigameScore;
         UpdateScore(GameManager.instance.Score);
          _mWinScreenBG.SetActive(true);
@@ -176,7 +174,6 @@ public class ScoreScreen : MonoBehaviour
     IEnumerator ResetCharacter()
     {
         yield return new WaitForSeconds(2f);
-        _mPauseButton.SetActive(false);
         _mJamesAnimator.SetBool("Idle", true);
         _mJamesAnimator.SetBool("GameOver", false);
         _mWinScreenBG.SetActive(false);
@@ -240,7 +237,6 @@ public class ScoreScreen : MonoBehaviour
     }
     public void ResetScreen()
     {
-        _mPauseButton.SetActive(false);
         _UIAnimator.SetBool("EndGame", false);
         _mQuestManager.SetActive(false);
         _mJamesAnimator.SetBool("Idle", true);
