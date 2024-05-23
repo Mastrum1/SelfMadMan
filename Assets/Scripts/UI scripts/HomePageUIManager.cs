@@ -30,6 +30,7 @@ public class HomePageUIManager : MonoBehaviour
     private string _mTiktokURL = "https://www.tiktok.com/@selfmadman._?_t=8kpgaAFiNd2&_r=1";
     private string _mLinkedInURL = "https://www.linkedin.com/in/chad-motivation-1930ab2b7/";
     private string _mInternetSite = "https://selfmadman.fr/";
+    private string _mPrivacy = "https://docs.google.com/document/d/1LTWkqizBF5kEAEME7CjLzptCVs2C9IZOdS4WGvCig_w/";
 
     public void SetOnOff(GameObject GameObject)
     {
@@ -94,6 +95,9 @@ public class HomePageUIManager : MonoBehaviour
                 break;
             case "InternetSite":
                 Application.OpenURL(_mInternetSite);
+                break;
+            case "Privacy":
+                Application.OpenURL(_mPrivacy);
                 break;
             default:
                 return;
