@@ -7,9 +7,9 @@ using UnityEngine;
 public class TutorialManager : MonoBehaviour
 {
     public static TutorialManager instance;
-
+    private const string FirstLaunchKey = "FirstLaunch";
     public Vector3[] ChadPos;
-
+    public bool InTutorial = false;
     void Awake()
     {
         if (instance == null)
@@ -21,15 +21,27 @@ public class TutorialManager : MonoBehaviour
 
        
     }
+    private bool IsFirstLaunch()
+    {
+        // Check if the key exists
+        return !PlayerPrefs.HasKey(FirstLaunchKey);
+    }
 
 
     private void Start()
     {
-        if (!GameManager.instance.Player.alreadyPlayedTutorial)
+        if (IsFirstLaunch())
+        {
+
             InTutorial = true;
+        }
         else
+        {
             InTutorial = false;
+        }
     }
+
+
     [System.Serializable]
     public class Step
     {
@@ -64,7 +76,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private Canvas _canvas;
     [SerializeField] private TextMeshProUGUI _text;
     public int StepNbr;
-    public bool InTutorial = false;
+
     public bool FinalStepBool = false;
 
     public void NextStep()
@@ -96,6 +108,8 @@ public class TutorialManager : MonoBehaviour
     public void EndTutorial()
     {
         InTutorial = false;
+        PlayerPrefs.SetInt(FirstLaunchKey, 0);
+        PlayerPrefs.Save();
         GameManager.instance.Player.alreadyPlayedTutorial = true;
         panel.SetActive(false);
         GameManager.instance.Player.SaveJson();
