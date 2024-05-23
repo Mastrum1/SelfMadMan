@@ -8,11 +8,11 @@ using UnityEngine.Video;
 public class Player : MonoBehaviour
 {
 
-    [SerializeField] bool _DeleteOldSave = true;
-    public bool DeleteOldSave { get => _DeleteOldSave; set => _DeleteOldSave = value; }
+    [SerializeField] bool _clearAllSave = true;
+    public bool clearAllSave { get => _clearAllSave; set => _clearAllSave = value; }
 
-    [SerializeField] bool _TutorialPlayed = false;
-    public bool TutorialPlayed { get => _TutorialPlayed; set => _TutorialPlayed = value; }
+    [SerializeField] bool _alreadyPlayedTutorial = false;
+    public bool alreadyPlayedTutorial { get => _alreadyPlayedTutorial; set => _alreadyPlayedTutorial = value; }
 
     [System.Serializable]
     public class Cinematics
@@ -189,7 +189,7 @@ public class Player : MonoBehaviour
     public void SaveJson()
     {
         bool firstSave = false;
-        if (!CheckFile() || _DeleteOldSave)
+        if (!CheckFile() || _clearAllSave)
         {
             firstSave = true;
             _playerData.FirstSaveData(this);
@@ -444,7 +444,7 @@ public class Player : MonoBehaviour
         TrophyManager.Instance.OnTrophyComplete += TrophyCompleted;
         TrophyManager.Instance.OnTrophyClaimed += ClaimTrophy;
 
-        if (CheckFile() || !_DeleteOldSave)
+        if (CheckFile() || !_clearAllSave)
         {
             PlayerData data = DataService.LoadData<PlayerData>("/player-stats.json", true);
 
@@ -463,11 +463,11 @@ public class Player : MonoBehaviour
 
             ErasData = data.ErasData;
 
-            _DeleteOldSave = data.deleteOldSave;
+            _clearAllSave = data.clearAllSave;
 
             _IntroPlayed = data.IntroPlayed;
 
-            _TutorialPlayed = data.TutorialPlayed;
+            _alreadyPlayedTutorial = data.alreadyPlayedTutorial;
 
             foreach (var item in data.UnlockedCinematics)
             {

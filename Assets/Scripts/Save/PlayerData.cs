@@ -5,7 +5,7 @@ using static Player;
 [System.Serializable]
 public class PlayerData
 {
-    public bool deleteOldSave;
+    public bool clearAllSave;
 
     public int Level;
 
@@ -22,7 +22,7 @@ public class PlayerData
 
     public int BestScore;
 
-    public bool TutorialPlayed = false;
+    public bool alreadyPlayedTutorial = false;
 
     public List<int> UnlockedCinematics = new List<int>();
 
@@ -64,9 +64,9 @@ public class PlayerData
 
         IntroPlayed = player.IntroPlayed;
 
-        deleteOldSave = player.DeleteOldSave;
+        clearAllSave = player.clearAllSave;
 
-        TutorialPlayed = player.TutorialPlayed;
+        alreadyPlayedTutorial = player.alreadyPlayedTutorial;
 
         SaveCinematics(player.UnlockedCinematics);
 
@@ -158,7 +158,7 @@ public class PlayerData
 
         Language = "fr";
 
-        deleteOldSave = false;
+        clearAllSave = false;
 
         for (int i = 0; i < player.AllEra1.Count; i++)
         {
