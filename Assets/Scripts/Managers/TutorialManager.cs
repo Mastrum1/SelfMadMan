@@ -25,7 +25,7 @@ public class TutorialManager : MonoBehaviour
 
     private void Start()
     {
-        if (!GameManager.instance.Player.TutorialPlayed)
+        if (!GameManager.instance.Player.alreadyPlayedTutorial)
             InTutorial = true;
         else
             InTutorial = false;
@@ -96,7 +96,7 @@ public class TutorialManager : MonoBehaviour
     public void EndTutorial()
     {
         InTutorial = false;
-        GameManager.instance.Player.TutorialPlayed = true;
+        GameManager.instance.Player.alreadyPlayedTutorial = true;
         panel.SetActive(false);
         GameManager.instance.Player.SaveJson();
     }

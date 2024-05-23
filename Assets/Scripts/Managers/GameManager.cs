@@ -222,7 +222,7 @@ public class GameManager : MonoBehaviour
     {
         if (!hasFocus)
         {
-            if (_mPlayer.TutorialPlayed)
+            if (_mPlayer.alreadyPlayedTutorial)
             {
                 _mPlayer.SaveJson();
                 _mLostFocusTime = System.DateTime.Now.Minute;
@@ -246,7 +246,7 @@ public class GameManager : MonoBehaviour
 
     void OnApplicationQuit()
     {
-        if (_mPlayer.TutorialPlayed)
+        if (_mPlayer.alreadyPlayedTutorial)
         {
             _mPlayer.SaveJson();
         }
