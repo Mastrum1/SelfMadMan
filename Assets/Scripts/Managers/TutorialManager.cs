@@ -98,6 +98,7 @@ public class TutorialManager : MonoBehaviour
         InTutorial = false;
         GameManager.instance.Player.TutorialPlayed = true;
         panel.SetActive(false);
+        GameManager.instance.Player.SaveJson();
     }
 
     public void SetCamera(Camera camera)

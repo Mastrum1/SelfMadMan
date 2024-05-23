@@ -12,6 +12,7 @@ public class CinematicHandler : MonoBehaviour
     private double loopTime;
     private bool HasReachedPoint = false;
     public event Action OnReachedPoint;
+    public event Action OnVideoPrepared;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -33,9 +34,17 @@ public class CinematicHandler : MonoBehaviour
     
     public void PlayVideo()
     {
+        StartCoroutine(PrepareVideo());
+    }
+
+    public IEnumerator PrepareVideo()
+    {
+        player.Prepare();
+        while (!player.isPrepared)
+            yield return new WaitForEndOfFrame();
+        player.frame = 0;
         player.Play();
-        /*double startTime = (player.clip.length * 60) / 100.0f;
-        player.time = startTime;*/
+        OnVideoPrepared?.Invoke();
     }
     void OnVideoEnd(VideoPlayer vp)
     {

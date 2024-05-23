@@ -160,8 +160,6 @@ public class PlayerData
 
         deleteOldSave = false;
 
-        TutorialPlayed = false;
-
         for (int i = 0; i < player.AllEra1.Count; i++)
         {
             if (player.AllEra1[i].Locked == false)

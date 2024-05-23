@@ -14,6 +14,9 @@ public class Settings : MonoBehaviour
     [SerializeField] private Sprite _mONBG;
     [SerializeField] private Sprite _mOFFBG;
 
+    [SerializeField] private GameObject _Cinematic;
+
+
     private void Start()
     {
         _mMusic = true;
@@ -36,6 +39,10 @@ public class Settings : MonoBehaviour
         }
     }
 
+    public void OnCInematicPressed()
+    {
+        _Cinematic.SetActive(true);
+    }
     public void ONOFFSFX()
     {
         if (_mSound == true)

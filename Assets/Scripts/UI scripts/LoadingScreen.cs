@@ -13,6 +13,7 @@ public class Loading : MonoBehaviour
     private Vector2 targetPosition;
     [SerializeField] private CinematicHandler _cinematicHandler;
     [SerializeField] private GameObject _MyPanel;
+    [SerializeField] private GameObject _myBorders;
     private bool _videoPlayin = false;
 
     void Start()
@@ -22,6 +23,7 @@ public class Loading : MonoBehaviour
         startTime = Time.time;
 
         _cinematicHandler.OnReachedPoint += DisplayPanel;
+        _cinematicHandler.OnVideoPrepared += DisplayBorders;
     }
 
     void Update()
@@ -41,6 +43,11 @@ public class Loading : MonoBehaviour
             }
 
         }
+    }
+
+    private void DisplayBorders()
+    {
+        _myBorders.SetActive(true);
     }
     private void DisplayPanel()
     {
