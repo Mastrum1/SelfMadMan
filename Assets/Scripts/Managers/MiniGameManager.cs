@@ -21,6 +21,8 @@ public class MiniGameManager : MonoBehaviour
     [SerializeField] private GameObject _cashGO;
     [SerializeField] private Animator _cash;
     [SerializeField] private GameObject _loosePanel;
+    [SerializeField] private GameObject _inputManager;
+    [SerializeField] private GameObject PauseButtonn;
 
 
     [NonSerialized] public int miniGameScore;
@@ -34,6 +36,13 @@ public class MiniGameManager : MonoBehaviour
         _mTimer.ResetTimer(GameManager.instance.Speed);
         GameManager.instance.SelectNewMiniGame(this);
         _questManager = QuestManager.Instance;
+        StartCoroutine(StartInputManager());
+    }
+
+    public IEnumerator StartInputManager()
+    {
+        yield return new WaitForSeconds(0.4f);
+        _inputManager.SetActive(true);
     }
 
     protected virtual void EndMiniGame(bool won, int score)
@@ -66,6 +75,7 @@ public class MiniGameManager : MonoBehaviour
 
     IEnumerator StartAnim(bool won, int score, float timeout)
     {
+        PauseButtonn.SetActive(false);
         yield return new WaitForSeconds(timeout);
 
         if (_loosePanel.activeSelf)

@@ -45,10 +45,6 @@ public class FightingGame : MiniGameManager
 
             Instantiate(particlePrefab, targetPosition, Quaternion.identity);
         }
-        else
-        {
-            Debug.LogError("No prefab uWu!");
-        }
     }
 
     public override void Update()

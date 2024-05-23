@@ -779,7 +779,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1527802384342363840, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1548188670643521760, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -859,12 +859,17 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
   m_PrefabInstance: {fileID: 990087122}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 990087124}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd3752021fdc44c48bf13f5b74ee9118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &990087124 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1527802384342363840, guid: c782552722799074e8962dbd5e7574bf, type: 3}
+  m_PrefabInstance: {fileID: 990087122}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1168472118
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1257,6 +1262,11 @@ Animator:
 --- !u!1 &1212587589 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6472728062389791406, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+  m_PrefabInstance: {fileID: 1212587585}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1212587590 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8098714584188613079, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
   m_PrefabInstance: {fileID: 1212587585}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1226963186
@@ -2535,6 +2545,8 @@ MonoBehaviour:
   _cashGO: {fileID: 1212587589}
   _cash: {fileID: 1212587588}
   _loosePanel: {fileID: 1212587586}
+  _inputManager: {fileID: 990087124}
+  PauseButtonn: {fileID: 1212587590}
   miniGameTime: 10
   cryptoCharts:
   - {fileID: 21300000, guid: 9ef15bbafba2149d093466793a00ce00, type: 3}

@@ -624,6 +624,11 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 1510358503319939074, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
   m_PrefabInstance: {fileID: 76589270}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &76589275 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8098714584188613079, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+  m_PrefabInstance: {fileID: 76589270}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &112192423
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5073,6 +5078,8 @@ MonoBehaviour:
   _cashGO: {fileID: 76589273}
   _cash: {fileID: 76589274}
   _loosePanel: {fileID: 1438571919}
+  _inputManager: {fileID: 2111501362}
+  PauseButtonn: {fileID: 76589275}
   _interactableManager: {fileID: 1604077327}
   _milkParent: {fileID: 1934607048}
 --- !u!1001 &1952884668
@@ -5584,6 +5591,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InputManager
       objectReference: {fileID: 0}
+    - target: {fileID: 1527802384342363840, guid: c782552722799074e8962dbd5e7574bf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1548188670643521760, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.12191126
@@ -5854,12 +5865,17 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
   m_PrefabInstance: {fileID: 2111501360}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2111501362}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd3752021fdc44c48bf13f5b74ee9118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2111501362 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1527802384342363840, guid: c782552722799074e8962dbd5e7574bf, type: 3}
+  m_PrefabInstance: {fileID: 2111501360}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2146297759
 GameObject:
   m_ObjectHideFlags: 0

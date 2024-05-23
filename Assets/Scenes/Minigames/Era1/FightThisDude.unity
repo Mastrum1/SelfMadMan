@@ -1084,6 +1084,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0a5ff486216a56d45aadce88ae4a4c5c, type: 3}
   - {fileID: 21300000, guid: 6f6b9c860b530c146bff44046cd17166, type: 3}
   _fightImage: {fileID: 711118294}
+--- !u!1 &1076610171 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8098714584188613079, guid: 399dedd225428cc4499840ac6b56b216, type: 3}
+  m_PrefabInstance: {fileID: 1071410318}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1090518998
 GameObject:
   m_ObjectHideFlags: 0
@@ -1676,6 +1681,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InputManager
       objectReference: {fileID: 0}
+    - target: {fileID: 1527802384342363840, guid: c782552722799074e8962dbd5e7574bf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1548188670643521760, guid: c782552722799074e8962dbd5e7574bf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.12191126
@@ -1786,12 +1795,17 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8027851054952419813, guid: c782552722799074e8962dbd5e7574bf, type: 3}
   m_PrefabInstance: {fileID: 1968206750}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1968206752}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd3752021fdc44c48bf13f5b74ee9118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1968206752 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1527802384342363840, guid: c782552722799074e8962dbd5e7574bf, type: 3}
+  m_PrefabInstance: {fileID: 1968206750}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1970512965
 GameObject:
   m_ObjectHideFlags: 0
@@ -1988,6 +2002,8 @@ MonoBehaviour:
   _cashGO: {fileID: 1071410323}
   _cash: {fileID: 1071410321}
   _loosePanel: {fileID: 1071410319}
+  _inputManager: {fileID: 1968206752}
+  PauseButtonn: {fileID: 1076610171}
   _UIManager: {fileID: 1071410324}
   particlePrefab: {fileID: 2257703464127354179, guid: 450c3d27da459524ba5c3dbcaa0e4f99, type: 3}
   targetParticle: {fileID: 1090518998}
