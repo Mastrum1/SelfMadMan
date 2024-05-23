@@ -142,8 +142,8 @@ public class PlayerData
     public void InitEras()
     {
         ErasData.Add(new EraData(true, 0));
-        ErasData.Add(new EraData(false, 1000));
-        ErasData.Add(new EraData(false, 2000));
+        ErasData.Add(new EraData(false, 250));
+        ErasData.Add(new EraData(false, 500));
     }
 
     public void FirstSaveData(Player player)

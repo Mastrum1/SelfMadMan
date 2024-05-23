@@ -149,7 +149,7 @@ public class ScoreScreen : MonoBehaviour
 
     public void OnPayMoney()
     {
-        if (GameManager.instance.Player.Money >= 50)
+        if (GameManager.instance.Player.Money >= 75)
         {
             _mContinue = true;
             Timer = 5;
