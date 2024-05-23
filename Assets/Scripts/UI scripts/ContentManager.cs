@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEditor.Rendering.LookDev;
 
 public class ContentManager : MonoBehaviour
 {
@@ -43,8 +42,9 @@ public class ContentManager : MonoBehaviour
         _mCurrentIndex = GameManager.instance.Era;
         _mLockEraPanel.SetActive(GameManager.instance.ErasData[GameManager.instance.Era].Unlocked ? false : true);
         ShowContent();
+        EnableArrow();
 
-     //   StartCoroutine(Change());
+        //   StartCoroutine(Change());
     }
 
     IEnumerator Change()
