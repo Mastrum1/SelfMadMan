@@ -142,17 +142,15 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    public void CheckUnlocked(ItemsSO item)
+
+    public void CheckUnlocked()
     {
-        if (item.Type == ItemsSO.TYPE.FURNITURE)
-        {
             for (int i = 0; i < _mFurnituresTemplates.Count; i++)
             {
                 FurnitureSO furni = _mFurnituresTemplates[i].ItemInfo as FurnitureSO;
-
                 foreach (var fur in _mFurnitureManager.FurnitureList)
                 {
-                    if (fur.PrefabParent.name == furni.FurniturePrefab.name && item != null)
+                    if (fur.PrefabParent.name == furni.FurniturePrefab.name)
                     {
                         if (fur.Locked)
                         {
@@ -167,7 +165,7 @@ public class ShopManager : MonoBehaviour
                     }
                 }
             }
-        }
+        
     }
 
     public void PurchaseItem() 

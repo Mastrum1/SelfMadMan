@@ -71,9 +71,9 @@ public class PopUpObtained : MonoBehaviour
                 _mObtainedObject.text = item.ItemName;
                 _mObtainedObject.color = _mTextColor[(int)Type.DECORATION];
                 _mUnlocked.color = _mUnlockedColor[(int)Type.DECORATION];
-                ShopManager.Instance.CheckUnlocked(item);
                 break;
         }
+        ShopManager.Instance.CheckUnlocked();
     }
 
     public void ClosePopup()

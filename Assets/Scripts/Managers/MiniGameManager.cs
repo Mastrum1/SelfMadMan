@@ -22,6 +22,7 @@ public class MiniGameManager : MonoBehaviour
     [SerializeField] private Animator _cash;
     [SerializeField] private GameObject _loosePanel;
 
+
     [NonSerialized] public int miniGameScore;
 
     private QuestManager _questManager;
