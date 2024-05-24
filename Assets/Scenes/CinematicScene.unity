@@ -314,6 +314,7 @@ GameObject:
   - component: {fileID: 819944247}
   - component: {fileID: 819944246}
   - component: {fileID: 819944245}
+  - component: {fileID: 819944250}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -497,7 +498,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 0.01
 --- !u!222 &819944249
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -506,6 +507,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 819944243}
   m_CullTransparentMesh: 1
+--- !u!114 &819944250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 819944243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f761f1160ede2f44be2934e37973d75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mButton: {fileID: 0}
 --- !u!1 &1260041043
 GameObject:
   m_ObjectHideFlags: 0
@@ -561,7 +575,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1419970897
 RectTransform:
   m_ObjectHideFlags: 0
@@ -632,7 +646,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 1743736150}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -643,7 +657,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 23
   m_TargetDisplay: 0
 --- !u!1 &1743736148
 GameObject:
@@ -799,7 +813,7 @@ VideoPlayer:
   m_VideoClip: {fileID: 32900000, guid: 6b786a1bf1ba34444a8c89b8a73de810, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
-  m_TargetCamera: {fileID: 0}
+  m_TargetCamera: {fileID: 1743736150}
   m_TargetTexture: {fileID: 0}
   m_TimeReference: 0
   m_TargetMaterialRenderer: {fileID: 0}

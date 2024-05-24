@@ -21,16 +21,25 @@ public class CinematicHandler : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        asyncOperation = SceneManager.LoadSceneAsync("CinematicScene");
+        asyncOperation = SceneManager.LoadSceneAsync("HomePage");
         asyncOperation.allowSceneActivation = false;
+        PlayVideo();
+        StartCoroutine(WaitForSceneLoad());
     }
-
+    private IEnumerator WaitForSceneLoad()
+    {
+        while (!asyncOperation.isDone)
+        {
+            yield return null;
+        }
+    }
     public void Update()
     {
         if(player.time >=  loopTime && !HasReachedPoint)
         {
             HasReachedPoint = true;
             panel.SetActive(true);
+            OnVideoEnd(player);
         }
     }
     void Start()
@@ -54,12 +63,14 @@ public class CinematicHandler : MonoBehaviour
     }
     void OnVideoEnd(VideoPlayer vp)
     {
+        HasReachedPoint = false;
         player.Play();
         player.time = loopTime;
     }
 
     public void StartGame()
     {
+        Debug.Log("start games");
         asyncOperation.allowSceneActivation = true;
     }
 
