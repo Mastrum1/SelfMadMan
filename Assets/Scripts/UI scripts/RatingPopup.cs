@@ -41,7 +41,7 @@ public class RatingPopup : MonoBehaviour
     {
         if (_mCurrentRating >= 3)
         {
-            Application.OpenURL("https://apps.apple.com/us/app/self-mad-man-become-a-chad/id6479361111?platform=iphone");
+            Application.OpenURL("https://play.google.com/store/apps/details?id=com.selfmadman.chad.funnyminigames&pcampaignid=web_share");
             GameManager.instance.Rated = true;
             CloseRateUs();
         }

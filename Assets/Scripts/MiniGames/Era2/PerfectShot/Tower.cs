@@ -29,7 +29,7 @@ public class Tower : MonoBehaviour
 
     private void Start()
     {
-        if (GameManager.instance.FasterLevel < 5)
+        if (GameManager.instance.FasterLevel < 4)
         {
             _rotationSpeed += GameManager.instance.FasterLevel * 20;
             _ClockrotationSpeed = _rotationSpeed * 4.5f;
