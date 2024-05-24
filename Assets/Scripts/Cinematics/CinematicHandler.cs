@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 
 public class CinematicHandler : MonoBehaviour
@@ -11,12 +12,17 @@ public class CinematicHandler : MonoBehaviour
     private float loopPercentage = 72.15f;
     private double loopTime;
     private bool HasReachedPoint = false;
-    public event Action OnReachedPoint;
-    public event Action OnVideoPrepared;
+
+    [SerializeField] private GameObject panel;
+    [SerializeField] private GameObject borders;
+
+    private AsyncOperation asyncOperation;
+
     // Start is called before the first frame update
     private void Awake()
     {
-        player.loopPointReached += OnVideoEnd;
+        asyncOperation = SceneManager.LoadSceneAsync("CinematicScene");
+        asyncOperation.allowSceneActivation = false;
     }
 
     public void Update()
@@ -24,7 +30,7 @@ public class CinematicHandler : MonoBehaviour
         if(player.time >=  loopTime && !HasReachedPoint)
         {
             HasReachedPoint = true;
-            OnReachedPoint?.Invoke();
+            panel.SetActive(true);
         }
     }
     void Start()
@@ -44,11 +50,17 @@ public class CinematicHandler : MonoBehaviour
             yield return new WaitForEndOfFrame();
         player.frame = 0;
         player.Play();
-        OnVideoPrepared?.Invoke();
+        borders.SetActive(true);
     }
     void OnVideoEnd(VideoPlayer vp)
     {
         player.Play();
         player.time = loopTime;
     }
+
+    public void StartGame()
+    {
+        asyncOperation.allowSceneActivation = true;
+    }
+
 }

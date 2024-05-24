@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 
 public class Loading : MonoBehaviour
@@ -11,10 +12,11 @@ public class Loading : MonoBehaviour
     private float startTime;
     private Vector2 startPosition;
     private Vector2 targetPosition;
-    [SerializeField] private CinematicHandler _cinematicHandler;
     [SerializeField] private GameObject _MyPanel;
     [SerializeField] private GameObject _myBorders;
     private bool _videoPlayin = false;
+    private AsyncOperation asyncOperation;
+    private bool isLoading = false;
 
     void Start()
     {
@@ -22,40 +24,43 @@ public class Loading : MonoBehaviour
         startPosition = fill.anchoredPosition;
         startTime = Time.time;
 
-        _cinematicHandler.OnReachedPoint += DisplayPanel;
-        _cinematicHandler.OnVideoPrepared += DisplayBorders;
+        // Start the loading process
+        StartLoading();
     }
 
     void Update()
     {
-        float t = (Time.time - startTime) / duration;
-        fill.anchoredPosition = Vector2.Lerp(startPosition, targetPosition, t);
-
-        if (t >= 1.0f && !_videoPlayin)
+        if (isLoading)
         {
-            if (GameManager.instance.Player.IntroPlayed)
-                StartGame();
-            else
-            {
-                GameManager.instance.Player.IntroPlayed = true;
-                _cinematicHandler.PlayVideo();
-                _videoPlayin = true;
-            }
+            // Update fill anchored position based on asyncOperation progress
+            float t = asyncOperation.progress / 0.9f; // Normalize progress to be between 0 and 1
+            fill.anchoredPosition = Vector2.Lerp(startPosition, targetPosition, t);
 
+            // Check if loading is almost complete
+            if (asyncOperation.progress >= 0.9f)
+            {
+                asyncOperation.allowSceneActivation = true;
+            }
         }
     }
 
-    private void DisplayBorders()
+    private void StartLoading()
     {
-        _myBorders.SetActive(true);
+        
+        asyncOperation = GameManager.instance.Player.IntroPlayed ? SceneManager.LoadSceneAsync("HomePage") : SceneManager.LoadSceneAsync("CinematicScene");
+        asyncOperation.allowSceneActivation = false;
+        isLoading = true;
+
+        StartCoroutine(WaitForSceneLoad());
     }
-    private void DisplayPanel()
+
+    private IEnumerator WaitForSceneLoad()
     {
-        _MyPanel.SetActive(true);
+        while (!asyncOperation.isDone)
+        {
+            yield return null;
+        }
     }
-    public void StartGame()
-    {
-        mySceneManager.instance.LoadWinScreen();
-        mySceneManager.instance.SetScene("HomePage", mySceneManager.LoadMode.ADDITIVE);
-    }
+    
+
 }
