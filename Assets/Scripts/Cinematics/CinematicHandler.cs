@@ -61,12 +61,11 @@ public class CinematicHandler : MonoBehaviour
 
     public IEnumerator PrepareVideo()
     {
-        player.Prepare();
-        while (!player.isPrepared)
-            yield return new WaitForEndOfFrame();
+
         player.frame = 0;
         player.Play();
         borders.SetActive(true);
+        yield return null;
     }
    
 
