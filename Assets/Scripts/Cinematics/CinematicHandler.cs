@@ -72,6 +72,7 @@ public class CinematicHandler : MonoBehaviour
     public void StartGame()
     {
         Debug.Log("start games");
+        GameManager.instance.Player.IntroPlayed = true;
         asyncOperation.allowSceneActivation = true;
     }
 
