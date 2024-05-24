@@ -201,7 +201,7 @@ public class GameManager : MonoBehaviour
     }
     public int GainMoney()
     {
-        float amount = Score * 0.04f;
+        float amount = Score * 0.05f;
         Player.NewCurrency(Player.Money + (int)amount);
         return (int)amount;
     }

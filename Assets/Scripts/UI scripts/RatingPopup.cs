@@ -58,16 +58,12 @@ public class RatingPopup : MonoBehaviour
         int r = Random.Range(0, 10);
         if (GameManager.instance.FirstGamePlayed == true)
         {
-            if (r == 3)
+            if (r == 3 && !TutorialManager.instance.InTutorial)
             {
                 if (GameManager.instance.Rated == false)
                 {
                     OpenRateUs();
                     
-                }
-                else
-                {
-                    return;
                 }
             }
         }

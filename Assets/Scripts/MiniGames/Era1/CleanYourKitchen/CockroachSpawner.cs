@@ -53,12 +53,12 @@ public class CockroachSpawner : MonoBehaviour
         {
             if (gameObject.layer == LayerMask.NameToLayer("BottomKitchen"))
             {
-                _cockroaches[i].Body.GetComponent<SpriteRenderer>().sortingOrder = -5;
+                _cockroaches[i].SetLayer(-5);
                 _cockroaches[i].Squish.GetComponent<SpriteRenderer>().sortingOrder = -6;
             }
             else
             {
-                _cockroaches[i].Body.GetComponent<SpriteRenderer>().sortingOrder = -3;
+                _cockroaches[i].SetLayer(-3);
                 _cockroaches[i].Squish.GetComponent<SpriteRenderer>().sortingOrder = -4;
             }
         }
