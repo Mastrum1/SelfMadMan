@@ -25,6 +25,12 @@ public class Loading : MonoBehaviour
         startTime = Time.time;
 
         // Start the loading process
+        StartCoroutine(OnStart());
+    }
+
+    public IEnumerator OnStart()
+    {
+        yield return new WaitForSeconds(0.2f);
         StartLoading();
     }
 
