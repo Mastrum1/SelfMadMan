@@ -45,9 +45,8 @@ public class VFXUpwardLerp : MonoBehaviour
             // After 0.5 seconds delay, teleport back to the original position
             if (Time.time >= _startTime)
             {
-                transform.position = _initialPosition;
-                enabled = false; // Disable this script to stop further updates
-                gameObject.SetActive(enabled);
+               mySceneManager.instance.LoadWinScreen();
+               mySceneManager.instance.LoadHomeScreen();
             }
         }
     }

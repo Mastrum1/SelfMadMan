@@ -12,6 +12,7 @@ public class CinematicHandler : MonoBehaviour
     private float loopPercentage = 72.15f;
     private double loopTime;
     private bool HasReachedPoint = false;
+    private bool VideoIsPlaying = true;
 
     [SerializeField] private GameObject panel;
     [SerializeField] private GameObject borders;
@@ -21,13 +22,18 @@ public class CinematicHandler : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        
-        
         asyncOperation = SceneManager.LoadSceneAsync("HomePage");
         asyncOperation.allowSceneActivation = false;
         PlayVideo();
         StartCoroutine(WaitForSceneLoad());
     }
+
+    private void ChangeCinematicStyle(VideoPlayer source, string message)
+    {
+        source.enabled = false;
+        StartGame();
+    }
+
     private IEnumerator WaitForSceneLoad()
     {
         while (!asyncOperation.isDone)

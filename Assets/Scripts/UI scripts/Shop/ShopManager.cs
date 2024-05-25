@@ -1,6 +1,7 @@
 using Lean.Touch;
 using System.Collections;
 using System.Collections.Generic;
+using NaughtyAttributes;
 using TMPro;
 using UnityEngine;
 
@@ -11,6 +12,8 @@ public class ShopManager : MonoBehaviour
     [Header("Item Shop SO")]
     [SerializeField] private CoinsSO[] _mCoins;
 
+
+    [SerializeField, ReadOnly] private List<ItemsSO> availableItems;
     public ItemsSO[] Furnitures { get => _mFurnitures; }
     [SerializeField] private ItemsSO[] _mFurnitures;
     [SerializeField] private ItemsSO[] _mPowerUp;
@@ -87,17 +90,25 @@ public class ShopManager : MonoBehaviour
     }
 
     public void LoadFurniture(ItemsSO[] items)
-    { 
-        List<ItemsSO> availableItems = new List<ItemsSO>(items);
-
+    {
+        foreach (var item in _mFurnitures)
+        {
+            availableItems.Add(item);
+        }
         for (int i = 0; i < _mFurnituresTemplates.Count; i++)
         {
             // Check if there are any available items left
             if (availableItems.Count > 0)
             {
-                // Randomly select an item from the available items list
                 int randomIndex = Random.Range(0, availableItems.Count);
-                ItemsSO selectedItem = availableItems[randomIndex];
+                ItemsSO selectedItem;
+                // Randomly select an item from the available items list
+                do
+                {
+                   selectedItem = availableItems[randomIndex];
+                }
+                while (selectedItem == null) ;
+               
 
                 // Check if the selected item is furniture
                 if (selectedItem.Type == ItemsSO.TYPE.FURNITURE)
@@ -148,22 +159,26 @@ public class ShopManager : MonoBehaviour
             for (int i = 0; i < _mFurnituresTemplates.Count; i++)
             {
                 FurnitureSO furni = _mFurnituresTemplates[i].ItemInfo as FurnitureSO;
-                foreach (var fur in _mFurnitureManager.FurnitureList)
+                if (furni != null)
                 {
-                    if (fur.PrefabParent.name == furni.FurniturePrefab.name)
+                    foreach (var fur in _mFurnitureManager.FurnitureList)
                     {
-                        if (fur.Locked)
+                        if (fur.PrefabParent.name == furni.FurniturePrefab.name)
                         {
-                            _mFurnituresTemplates[i].Purchasable = true;
-                            _mFurnituresTemplates[i].ONOFF();
-                        }
-                        if (!fur.Locked)
-                        {
-                            _mFurnituresTemplates[i].Purchasable = false;
-                            _mFurnituresTemplates[i].ONOFF();
+                            if (fur.Locked)
+                            {
+                                _mFurnituresTemplates[i].Purchasable = true;
+                                _mFurnituresTemplates[i].ONOFF();
+                            }
+                            if (!fur.Locked)
+                            {
+                                _mFurnituresTemplates[i].Purchasable = false;
+                                _mFurnituresTemplates[i].ONOFF();
+                            }
                         }
                     }
                 }
+               
             }
         
     }

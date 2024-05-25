@@ -211,6 +211,7 @@ public class GameManager : MonoBehaviour
         Player.AddStars(reward);
         if (Player.Xp >= 5)
         {
+            MoneyManager.Instance.AddMoney(50);
             Player.LevelUp();
             TrophyManager.Instance.AddTrophyAmount(5,1);
             TrophyManager.Instance.AddTrophyAmount(7,1);

@@ -38,6 +38,9 @@ public class Spin : MonoBehaviour
     [SerializeField] private GameObject _mPopupObtained;
     [SerializeField] private PopUpObtained _mPopupObtainedScript;
 
+
+    [SerializeField] private BoxCollider2D _ButtonSpin;
+
     private Quarter _quarter;
     public bool isSpnning = false;
     public float initialSpeed = 500.0f;
@@ -60,6 +63,7 @@ public class Spin : MonoBehaviour
             }
             else
             {
+                _ButtonSpin.enabled = false;
                 MoneyManager.Instance.SubtractMoney(100);
                 InitSpin();
                 isSpnning = true;
@@ -246,5 +250,7 @@ public class Spin : MonoBehaviour
                 StartCoroutine(ShopManager.Instance.MoveMoney(ShopManager.Instance.CoinAnim[1]));
             }
         }
+        _ButtonSpin.enabled = true;
+
     }
 }

@@ -1246,7 +1246,6 @@ MonoBehaviour:
   _mPopup: {fileID: 1494979386}
   _InputManager: {fileID: 1123041865}
   _mQuestManager: {fileID: 652794128}
-  _mPauseButton: {fileID: 0}
   _mCoin: {fileID: 1530345762}
   _mWinScreenBG: {fileID: 1099811292}
   _camera: {fileID: 1652736593}
@@ -4377,6 +4376,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2036191260}
     m_Modifications:
+    - target: {fileID: 894558639210082564, guid: be4be3317c0da7243872c078fbae9e83, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2749898764803546053, guid: be4be3317c0da7243872c078fbae9e83, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -116
